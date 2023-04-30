@@ -6,7 +6,6 @@ import 'package:handygram/src/telegram/messages.dart';
 import 'package:handygram/src/telegram/session.dart';
 import 'package:handygram/src/widgets/message_tiles/wrapper.dart';
 import 'package:mutex/mutex.dart';
-import 'package:positioned_scroll_observer/positioned_scroll_observer.dart';
 import 'package:rotary_scrollbar/rotary_scrollbar.dart';
 
 // TODO: fix jumps on new messages
@@ -150,7 +149,6 @@ class _ChatPageState extends ConsumerState<ChatPage> {
               child: Stack(
                 children: [
                   ListView(
-                    physics: const PositionRetainedScrollPhysics(),
                     shrinkWrap: true,
                     reverse: true,
                     controller: _scrCont,
