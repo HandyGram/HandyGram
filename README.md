@@ -45,7 +45,7 @@ in Dart (still using the TDLib :p)
 * Samsung Galaxy Watch 4 (Wear OS 3)
   * Runs very good, but sometimes can stutter
 * Oppo Watch (Wear OS 2)
-  * Very strange unpredictable behaviour
+  * Very strange unpredictable behaviour *(on v0.1.0, idk what's happening on v0.2.0)*
 
 Feel free to test on other devices and post an issue if something wrong happens :p
 
