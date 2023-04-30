@@ -7,39 +7,39 @@ in Dart (still using the TDLib :p)
 
 ## Feature map
 
-- [v] **Authorization**
-    - [v] By QR
-    - [v] 2FA *(cloud password)*
-    - [x] By phone number **(won't be done due to Telegram restrictions for third-party clients)**
+- [x] **Authorization**
+    - [x] By QR
+    - [x] 2FA *(cloud password)*
+    - [ ] By phone number **(won't be done due to Telegram restrictions for third-party clients)**
 - [ ] **Chat list**
-    - [v] Main folder
-    - [v] Pinned chats
-    - [x] Archive
-    - [x] Folders **(not planned to be done)**
+    - [x] Main folder
+    - [x] Pinned chats
+    - [ ] Archive
+    - [ ] Folders **(not planned to be done)**
 - [ ] **Message rendering**
-    - [v] Text *(text formatting isn't supported)*
-    - [v] Photo *(with photo viewer! :p)*
-    - [v] Video *(thumbnail + video player)*
-    - [v] Stickers *(both video and photo ones. TGS stickers show up only thumbnail!)*
-    - [v] GIFs *(Not all previews are working)*
-    - [v] Voice notes
-    - [x] Video notes (working on it)
-- [x] **Calls**
-    - [x] Call menu
-    - [x] Call base logic
+    - [x] Text *(text formatting isn't supported)*
+    - [x] Photo *(with photo viewer! :p)*
+    - [x] Video *(thumbnail + video player)*
+    - [x] Stickers *(both video and photo ones. TGS stickers show up only thumbnail!)*
+    - [x] GIFs *(Not all previews are working)*
+    - [x] Voice notes
+    - [ ] Video notes (working on it)
+- [ ] **Calls**
+    - [ ] Call menu
+    - [ ] Call base logic
 - [ ] **Menus**
-    - [v] Home
-    - [v] Chat
-    - [v] Video player
-    - [v] Photo viewer
-    - [x] User info
-    - [x] Chat info
-    - [x] Call menu
-    - [v] Settings
+    - [x] Home
+    - [x] Chat
+    - [x] Video player
+    - [x] Photo viewer
+    - [ ] User info
+    - [ ] Chat info
+    - [ ] Call menu
+    - [x] Settings
 - **Misc**
-    - [v] Switch to `package:tdlib` rather than `package:telegram_client`
-    - [v] Data saving between app restarts
-    - [x] Notifications
+    - [x] Switch to `package:tdlib` rather than `package:telegram_client`
+    - [x] Data saving between app restarts
+    - [ ] Notifications
 
 ## Compatibility
 * Samsung Galaxy Watch 4 (Wear OS 3)
