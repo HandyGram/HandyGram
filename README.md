@@ -56,7 +56,7 @@ Feel free to test on other devices and post an issue if something wrong happens 
 * Install [Flutter SDK](https://docs.flutter.dev/get-started/install)
 * Download HandyGram
   ```sh
-  git clone https://github.com/tdrkDev/handygram.git
+  git clone https://github.com/HandyGram/app.git
   ```
 * Obtain API keys from [My Telegram](https://my.telegram.org)
 * Insert your keys in `lib/src/telegram/api_config.dart`
