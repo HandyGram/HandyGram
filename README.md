@@ -49,6 +49,9 @@ in Dart (still using the TDLib :p)
 
 Feel free to test on other devices and post an issue if something wrong happens :p
 
+## Download
+You can download the latest built version from [releases page](https://github.com/HandyGram/app/releases)
+
 ## Building
 * Install Git
 * Install [Android Studio](https://developer.android.com/studio)
