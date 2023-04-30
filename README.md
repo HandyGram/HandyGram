@@ -85,6 +85,12 @@ You can download the latest built version from [releases page](https://github.co
   adb install build/app/outputs/flutter-apk/app-release.apk
   ```
 
+## Contribution
+
+Feel free to leave pull requests and comments on commits. This is my
+second big Flutter project, so I may use wrong architecture, wrong tools
+and etc. This is the biggest help for me.
+
 ## Credits
 
 * [me](https://github.com/tdrkDev) for HandyGram
