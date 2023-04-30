@@ -59,7 +59,7 @@ You can download the latest built version from [releases page](https://github.co
 * Install [Flutter SDK](https://docs.flutter.dev/get-started/install)
 * Download HandyGram
   ```sh
-  git clone https://github.com/HandyGram/app.git
+  git clone https://github.com/HandyGram/HandyGram.git
   ```
 * Obtain API keys from [My Telegram](https://my.telegram.org)
 * Insert your keys in `lib/src/telegram/api_config.dart`
