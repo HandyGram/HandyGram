@@ -1,0 +1,41 @@
+name: handygram
+description: A light Wear OS Telegram client - HandyGram
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  wear:
+    git:
+      url: https://github.com/ju851zel/flutter_wear_plugin
+      ref: upgrade-versions
+  flutter_riverpod: ^2.3.0
+  carousel_slider: ^4.2.1
+  rotary_scrollbar: ^0.1.1
+  path_provider: ^2.0.11
+  device_info_plus: ^8.1.0
+  pretty_qr_code: ^2.0.3
+  video_player: ^2.5.1
+  scrollable_positioned_list: ^0.3.5
+  mutex: ^3.0.1
+  visibility_detector: ^0.3.3
+  hive: ^2.2.3
+  async: ^2.10.0
+  ffi: ^2.0.1
+  audioplayers: ^4.0.1
+  scrollview_observer: ^1.10.1
+  positioned_scroll_observer: ^2.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true

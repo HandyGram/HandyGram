@@ -1,0 +1,54 @@
+part of '../tdapi.dart';
+
+/// **SetPinnedChats** *(setPinnedChats)* - TDLib function
+  ///
+  /// Changes the order of pinned chats.
+  ///
+  /// * [chatList]: Chat list in which to change the order of pinned chats.
+  /// * [chatIds]: The new list of pinned chats.
+  ///
+  /// [Ok] is returned on completion.
+class SetPinnedChats extends TdFunction {
+  
+  /// **SetPinnedChats** *(setPinnedChats)* - TDLib function
+  ///
+  /// Changes the order of pinned chats.
+  ///
+  /// * [chatList]: Chat list in which to change the order of pinned chats.
+  /// * [chatIds]: The new list of pinned chats.
+  ///
+  /// [Ok] is returned on completion.
+  const SetPinnedChats({
+    required this.chatList,
+    required this.chatIds,
+  });
+  
+  /// Chat list in which to change the order of pinned chats 
+  final ChatList chatList;
+
+  /// The new list of pinned chats
+  final List<int> chatIds;
+  
+  @override
+  Map<String, dynamic> toJson([dynamic extra]) {
+    return {
+      "@type": constructor,
+      "chat_list": chatList.toJson(),
+      "chat_ids": chatIds.map((i) => i).toList(),
+      "@extra": extra,
+    };
+  }
+  
+  SetPinnedChats copyWith({
+    ChatList? chatList,
+    List<int>? chatIds,
+  }) => SetPinnedChats(
+    chatList: chatList ?? this.chatList,
+    chatIds: chatIds ?? this.chatIds,
+  );
+
+  static const String constructor = 'setPinnedChats';
+  
+  @override
+  String getConstructor() => constructor;
+}

@@ -1,0 +1,1 @@
+This is a bit modified version of [tdlib](https://github.com/i-Naji/tdlib) package.

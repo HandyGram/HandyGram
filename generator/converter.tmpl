@@ -1,0 +1,8 @@
+TdObject? convertToObject(String? query) {
+  if (query == null) return null;
+  final newJson = json.decode(query);
+  switch (newJson['@type']) {
+    CASES
+    default: return null;
+  }
+}
