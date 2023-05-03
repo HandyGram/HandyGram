@@ -1,6 +1,5 @@
-# HandyGram
+![HandyGram poster](https://i.imgur.com/KGJWaNo.png)
 
-![HandyGram Logo](https://i.imgur.com/wLuzqu6.png)
 
 A light Wear OS Telegram client written entirely
 in Dart (still using the TDLib :p)
