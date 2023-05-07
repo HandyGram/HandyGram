@@ -100,20 +100,22 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 10),
                 Row(
                   children: [
-                    TextField(
-                      controller: t,
-                      obscureText: true,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25),
+                    Expanded(
+                      child: TextField(
+                        controller: t,
+                        obscureText: true,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                          ),
                         ),
+                        focusNode: f,
+                        onEditingComplete: () {
+                          f.unfocus();
+                          session.functions.setAuthPassword(t.text);
+                        },
                       ),
-                      focusNode: f,
-                      onEditingComplete: () {
-                        f.unfocus();
-                        session.functions.setAuthPassword(t.text);
-                      },
                     ),
                     const SizedBox(width: 10),
                     IconButton(
