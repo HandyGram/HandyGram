@@ -61,7 +61,6 @@ class _HomePageState extends State<HomePage> {
                 }
                 int i = pi - 1;
                 var c = list.chats[i];
-                print("$i/${list.chats.length}");
                 return ChatTile(
                   id: c.id,
                   lastMsg: c.lastMessage,
