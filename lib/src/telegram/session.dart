@@ -137,6 +137,10 @@ class TgSession {
   static String appVersion = "0.2.0";
   static String cacheDir = "";
 
+  void kill() {
+    _glue.kill();
+  }
+
   static Future<TgSession> init() async {
     var path = (await getApplicationDocumentsDirectory()).path;
     var a = await DeviceInfoPlugin().androidInfo;

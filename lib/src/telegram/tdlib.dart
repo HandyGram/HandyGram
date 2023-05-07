@@ -13,6 +13,10 @@ class TdlibGlue {
     _stream.listen((e) => _notifyApp(e));
   }
 
+  void kill() {
+    _eventSubject.close();
+  }
+
   static Future<TdlibGlue> initialize() async {
     final eventSubject = await EventSubject.initialize();
     return TdlibGlue._(eventSubject);

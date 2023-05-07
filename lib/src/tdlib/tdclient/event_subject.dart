@@ -139,5 +139,6 @@ class EventSubject {
     _invokeIsolate.kill(priority: Isolate.immediate);
     _receivePort.close();
     _invokeReceivePort.close();
+    TdPlugin.instance?.tdJsonClientDestroy(clientId);
   }
 }
