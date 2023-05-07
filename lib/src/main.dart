@@ -3,6 +3,7 @@ import 'package:handygram/src/pages/chat.dart';
 import 'package:handygram/src/pages/greeting.dart';
 import 'package:handygram/src/pages/home.dart';
 import 'package:handygram/src/pages/login.dart';
+import 'package:handygram/src/pages/pre_settings.dart';
 import 'package:handygram/src/pages/settings.dart';
 import 'package:handygram/src/pages/tdlib_loader.dart';
 
@@ -40,6 +41,9 @@ class HandyGram extends StatelessWidget {
             break;
           case "/settings":
             page = const SettingsPage();
+            break;
+          case "/pre_settings":
+            page = const PreSettingsPage();
             break;
           default:
             page = const Scaffold(
