@@ -102,8 +102,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
         ref.watch<TgMessagesList>(session.messages.getProvider(chatId)!);
     int prevSenderId = 0;
     DateTime prevTime = DateTime.now();
-    final List<TgMessage> list = msgs.messages;
-    final List<TgMessage> rlist = msgs.messages.reversed.toList();
+    final List<TgMessage> list = msgs.messages.reversed.toList();
 
     if (list.isEmpty) {
       return Scaffold(
@@ -159,7 +158,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                       ),
                       // Why don't we use ListView.builder - it doesn't load
                       // messages in their order, so small messsages are broken
-                      ...rlist.map<Widget>((e) {
+                      ...list.map<Widget>((e) {
                         int senderId = e.senderId.getSenderId();
                         DateTime date = e.date;
 
