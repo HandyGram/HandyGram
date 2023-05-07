@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:handygram/src/misc/settings_db.dart';
 import 'package:handygram/src/telegram/session.dart';
@@ -57,7 +57,7 @@ final Map<String, TgMessageType> _stringToTypeMap = {
   "messageAnimation": TgMessageType.animation, // implemented
   "messageAudio": TgMessageType.audio,
   "messageDocument": TgMessageType.document,
-  "messageVideo": TgMessageType.video,
+  "messageVideo": TgMessageType.video, // implemented
   "messagePhoto": TgMessageType.photo, // implemented
   "messageSticker": TgMessageType.sticker, // implemented
 
@@ -75,7 +75,7 @@ final Map<String, TgMessageType> _stringToTypeMap = {
 
   // Notes.
   "messageVideoNote": TgMessageType.videoNote,
-  "messageVoiceNote": TgMessageType.voiceNote,
+  "messageVoiceNote": TgMessageType.voiceNote, // implemented
 
   // Extras.
   "messageUnsupported": TgMessageType.unsupportedTdlib,
@@ -650,75 +650,85 @@ class TgMessagesList extends ChangeNotifier {
   // Use map to quickly find messages by id
   final Map<int, TgMessage> _messages = {};
   final Mutex _m = Mutex();
-  bool _needUpdateSort = true;
-  final List<TgMessage> _lastSort = [];
+  List<TgMessage> _latestSort = [];
+
+  static List<int> _resortIsolated(List<int> toSort) {
+    return List.from(toSort)
+      ..sort(
+        (a, b) => a.compareTo(b),
+      );
+  }
 
   // Sort in descending order
-  List<TgMessage> get messages {
-    if (!_needUpdateSort) {
-      return _lastSort;
-    }
-
-    List<int> sortedKeys = _messages.keys.toList();
-    sortedKeys.sort(
-      (a, b) => a.compareTo(b),
+  Future<void> _resort() async {
+    List<int> sortedKeys = List<int>.from(_messages.keys);
+    sortedKeys = await compute(
+      _resortIsolated,
+      sortedKeys,
     );
-    _lastSort.clear();
-    for (var i in sortedKeys) {
-      _lastSort.add(_messages[i]!);
-    }
-    _needUpdateSort = false;
-    return _lastSort;
+    _latestSort = sortedKeys.map<TgMessage>((i) => _messages[i]!).toList();
   }
+
+  List<TgMessage> get messages => _latestSort;
 
   void insert(TgMessage? msg) async {
     if (msg == null) return;
     await _m.acquire();
     _messages[msg.id] = msg;
+    await _resort();
     _m.release();
-    _needUpdateSort = true;
     notifyListeners();
   }
 
   void insertAll(List<TgMessage?> messages) async {
     await _m.acquire();
-    for (var i in messages) {
-      if (i != null) _messages[i.id] = i;
+    try {
+      for (var i in messages) {
+        if (i != null) _messages[i.id] = i;
+      }
+      await _resort();
+    } finally {
+      _m.release();
     }
-    _m.release();
-    _needUpdateSort = true;
     notifyListeners();
   }
 
   void deleteAll(List<int> messageIds) async {
     await _m.acquire();
-    for (var i in messageIds) {
-      _messages.remove(i);
+    try {
+      for (var i in messageIds) {
+        _messages.remove(i);
+      }
+      await _resort();
+    } finally {
+      _m.release();
     }
-    _m.release();
-    _needUpdateSort = true;
     notifyListeners();
   }
 
   void clear() async {
     await _m.acquire();
     _messages.clear();
-    _needUpdateSort = true;
+    _latestSort = [];
     _m.release();
   }
 
   TgMessagesList.withHistory(int chatId) {
     _m.acquire();
-    session.functions.getChatHistory(chatId).then((value) {
+    session.functions.getChatHistory(chatId).then((value) async {
       if (value == null) {
         _m.release();
         return;
       }
-      for (var i in value) {
-        if (i == null) continue;
-        _messages[i.id] = i;
+      try {
+        for (var i in value) {
+          if (i == null) continue;
+          _messages[i.id] = i;
+        }
+        await _resort();
+      } finally {
+        _m.release();
       }
-      _m.release();
     });
   }
 
@@ -736,6 +746,7 @@ class TgMessagesList extends ChangeNotifier {
         _messages[i.id] = i;
       }
     }
+    _resort();
   }
 
   TgMessagesList();

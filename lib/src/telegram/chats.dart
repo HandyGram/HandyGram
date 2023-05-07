@@ -3,6 +3,7 @@ import 'package:handygram/src/misc/log.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:handygram/src/tdlib/td_api.dart' as tdlib;
+import 'package:mutex/mutex.dart';
 
 import "session.dart";
 
@@ -11,39 +12,15 @@ class TgChatListEntry {
   int id = 0;
   tdlib.Message? lastMessage;
   tdlib.DraftMessage? draftMessage;
+  bool pinned = false;
 
   TgChatListEntry(
     this.order,
     this.id,
     this.lastMessage,
     this.draftMessage,
+    this.pinned,
   );
-
-  TgChatListEntry.fromJson(Map<String, dynamic> raw) {
-    order = raw["order"];
-    id = raw["id"];
-    lastMessage = raw["lastMessage"] == null
-        ? null
-        : tdlib.Message.fromJson(
-            Map<String, dynamic>.from(raw["lastMessage"]),
-          );
-    draftMessage = raw["draftMessage"] == null
-        ? null
-        : tdlib.DraftMessage.fromJson(
-            Map<String, dynamic>.from(raw["draftMessage"]),
-          );
-  }
-
-  Map<String, dynamic> get json => {
-        "order": order,
-        "id": id,
-        "lastMessage": lastMessage != null
-            ? Map<String, dynamic>.from(lastMessage!.toJson())
-            : null,
-        "draftMessage": draftMessage != null
-            ? Map<String, dynamic>.from(draftMessage!.toJson())
-            : null,
-      };
 
   @override
   String toString() => "{ id: $id, order: $order }";
@@ -81,24 +58,39 @@ String chatTypeToString(TgChatListType type) {
 
 class TgChatList extends ChangeNotifier {
   late final TgChatListType type;
-  final Map<int, TgChatListEntry> _pinned = {};
+
+  // order -> id
+  Map<int, int> _ordersDefault = {};
+  Map<int, int> _ordersPinned = {};
+
+  // id -> chat
   final Map<int, TgChatListEntry> _chats = {};
+
   late final String? folderName;
-  final List<int> _loading = [];
+  final Mutex _m = Mutex();
 
   TgChatList._i(this.type, this.folderName);
 
-  Future<void> _asyncInit() async {
-    // _chats = await SuperBox.initialize<int, TgChatListEntry>(
-    //   "cache-chatinfo-${chatTypeToString(type)}",
-    //   (json) => TgChatListEntry.fromJson(json),
-    //   (value) => value.json,
-    // );
-    // _pinned = await SuperBox.initialize<int, TgChatListEntry>(
-    //   "cache-chatinfo-pinned-${chatTypeToString(type)}",
-    //   (json) => TgChatListEntry.fromJson(json),
-    //   (value) => value.json,
-    // );
+  void _reorder(
+    int id,
+    int order, [
+    bool? isPinned,
+  ]) async {
+    bool isPinnedReal = _ordersPinned.containsValue(id);
+    if (isPinnedReal) {
+      if (_ordersPinned.containsValue(id)) {
+        _ordersPinned.removeWhere((k, v) => v == id);
+      }
+      if (isPinned ?? false) {
+        _ordersPinned[order] = id;
+      }
+    }
+
+    if (_ordersDefault.containsValue(id)) {
+      _ordersDefault.removeWhere((k, v) => v == id);
+    }
+    _ordersDefault[order] = id;
+    _sortChats();
   }
 
   static Future<TgChatList> initialize(
@@ -106,7 +98,6 @@ class TgChatList extends ChangeNotifier {
     String? folderName,
   ]) async {
     TgChatList cache = TgChatList._i(type, folderName);
-    await cache._asyncInit();
     return cache;
   }
 
@@ -116,99 +107,78 @@ class TgChatList extends ChangeNotifier {
     tdlib.Message? lastMsg,
     tdlib.DraftMessage? lastDraft,
   }) async {
-    // Sth like a mutex for every chat
-    if (_loading.contains(i)) {
-      await Future.doWhile(
-        () => Future.delayed(
-          const Duration(seconds: 1),
-        ).then((_) => _loading.contains(i)),
-      );
-    }
-    _loading.add(i);
-
-    var map = _chats;
-    if (p.isPinned) {
-      map = _pinned;
-    }
-
+    await _m.acquire();
     TgChatListEntry entry = TgChatListEntry(
       p.order,
       i,
       lastMsg,
       lastDraft,
+      p.isPinned,
     );
-    if (map[p.order] != null) {
-      _chats.remove(i);
-      _pinned.remove(i);
-    }
-    map[p.order] = entry;
+    _chats[i] = entry;
+    _reorder(i, p.order, p.isPinned);
     if (lastMsg == null) {
       session.chatsInfoCache.get(i).then((info) {
-        map[p.order] = map[p.order]!..lastMessage = info?.lastMessage;
+        _chats[i]?.lastMessage = info?.lastMessage;
         notifyListeners();
       });
     } else {
       notifyListeners();
     }
-    _needUpdateSort = true;
-    _loading.remove(i);
+    _m.release();
   }
 
-  void remove(tdlib.ChatPosition p) {
-    _pinned.remove(p.order);
-    _chats.remove(p.order);
-    _needUpdateSort = true;
+  void remove(tdlib.ChatPosition p) async {
+    await _m.acquire();
+    _ordersPinned.remove(p.order);
+    _ordersPinned.remove(p.order);
+    _chats.removeWhere((k, v) => v.order == p.order);
+    _sortChats();
+    _m.release();
     notifyListeners();
   }
 
-  void removeById(int id) {
-    _pinned.removeWhere((key, element) => element.id == id);
-    _chats.removeWhere((key, element) => element.id == id);
-    _needUpdateSort = true;
+  void removeById(int id) async {
+    await _m.acquire();
+    _ordersPinned.removeWhere((k, v) => v == id);
+    _ordersDefault.removeWhere((k, v) => v == id);
+    _chats.remove(id);
+    _sortChats();
     notifyListeners();
+    _m.release();
   }
 
-  void clear() {
-    _pinned.clear();
+  void clear() async {
+    await _m.acquire();
     _chats.clear();
-    _lastSort = [];
+    _ordersDefault = {};
+    _ordersPinned = {};
+    _lastSortDefault = [];
+    _lastSortPinned = [];
+    _m.release();
   }
 
-  bool _needUpdateSort = true;
-  List<TgChatListEntry> _lastSort = [];
+  List<TgChatListEntry> _lastSortDefault = [], _lastSortPinned = [];
 
-  List<TgChatListEntry> _sortChats(Map<int, TgChatListEntry> map) {
-    List<int> sortedKeys = map.keys.toList();
+  List<TgChatListEntry> _sortChatsLl(Map<int, int> chatOrders) {
+    List<int> sortedKeys = chatOrders.keys.toList();
     sortedKeys.sort(
       (a, b) => -a.compareTo(b),
     );
     List<TgChatListEntry> entries = [];
     for (var i in sortedKeys) {
-      entries.add(map[i]!);
+      entries.add(_chats[chatOrders[i]]!);
     }
     return entries;
   }
 
-  Map<int, TgChatListEntry> get chatsInMap {
-    return Map.fromEntries(_pinned.entries.followedBy(_chats.entries));
+  void _sortChats() {
+    _lastSortDefault = _sortChatsLl(_ordersDefault);
+    _lastSortPinned = _sortChatsLl(_ordersPinned);
   }
 
-  List<TgChatListEntry> get chats {
-    if (!_needUpdateSort) {
-      return _lastSort;
-    }
-
-    _lastSort = _sortChats(_pinned);
-    _lastSort.addAll(
-      _sortChats(_chats),
-    );
-    _needUpdateSort = false;
-    return _lastSort;
-  }
-
-  List<TgChatListEntry> get pinnedChats {
-    return chats.sublist(0, _pinned.length);
-  }
+  List<TgChatListEntry> get chats => _lastSortPinned + _lastSortDefault;
+  List<TgChatListEntry> get pinnedChats => _lastSortPinned;
 }
 
 Future<void> getChatListImpl(TgSession session) async {
