@@ -24,6 +24,12 @@ class _MessageTileVideoContentState extends State<MessageTileVideoContent> {
   CancelableOperation? loadF;
 
   @override
+  void dispose() {
+    loadF?.cancel();
+    super.dispose();
+  }
+
+  @override
   void initState() {
     super.initState();
     var content = widget.msg.content as TgVideoMessageContent;
