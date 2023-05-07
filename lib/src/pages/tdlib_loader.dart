@@ -11,36 +11,48 @@ class TDLibLoader extends StatefulWidget {
 class _TDLibLoaderState extends State<TDLibLoader> {
   String msg = "Loading TDLib...";
 
+  void _loadSession() {
+    try {
+      TgSession.init().then(
+        (value) {
+          session = value;
+          setState(() {
+            msg = "Connecting...";
+          });
+          _checkLogin();
+        },
+      );
+    } catch (e) {
+      setState(() {
+        msg = e.toString();
+      });
+    }
+  }
+
+  void _checkLogin() {
+    session.isLoggedIn().then((value) {
+      if (value == true) {
+        Navigator.pushReplacementNamed(context, "/home");
+        session.functions.getChatList();
+      } else if (value == false) {
+        Navigator.pushReplacementNamed(context, "/greeting");
+      } else {
+        setState(() {
+          msg = "Error";
+        });
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) {
         try {
-          TgSession.init().then(
-            (value) {
-              session = value;
-              setState(() {
-                msg = "Connecting...";
-              });
-              session.isLoggedIn().then((value) {
-                if (value == true) {
-                  Navigator.pushReplacementNamed(context, "/home");
-                  session.functions.getChatList();
-                } else if (value == false) {
-                  Navigator.pushReplacementNamed(context, "/greeting");
-                } else {
-                  setState(() {
-                    msg = "Error";
-                  });
-                }
-              });
-            },
-          );
-        } catch (e) {
-          setState(() {
-            msg = e.toString();
-          });
+          _checkLogin();
+        } catch (_) {
+          _loadSession();
         }
       },
     );
