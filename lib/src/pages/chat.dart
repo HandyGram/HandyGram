@@ -60,7 +60,10 @@ class _ChatPageState extends ConsumerState<ChatPage> {
   void initState() {
     chatId = widget.args["id"];
     SchedulerBinding.instance.addPostFrameCallback(
-      (timeStamp) => _loadHistory(-10, 30),
+      (timeStamp) async {
+        await _loadHistory(-10, 30);
+        await _loadHistory(0, 20);
+      },
     );
     _scrCont.addListener(
       () async {
