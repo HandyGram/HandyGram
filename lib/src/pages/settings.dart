@@ -19,12 +19,13 @@ class _SettingsPageState extends State<SettingsPage> {
     return Scaffold(
       body: ScalingList(
         children: [
-          IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
+          if (!settingsStorage.backButtonDisabled)
+            IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
           if (settingsStorage.settingsLoadError != null)
             Container(
               decoration: BoxDecoration(
@@ -41,6 +42,18 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
             ),
+          SettingsSwitch(
+            onChanged: (v) {
+              setState(() {
+                settingsStorage.backButtonDisabled =
+                    !settingsStorage.backButtonDisabled;
+              });
+            },
+            title: "Disable back buttons",
+            description:
+                "Disable on-screen back buttons if you have hardware ones.",
+            value: settingsStorage.backButtonDisabled,
+          ),
           SettingsSwitch(
             onChanged: (v) {
               setState(() {

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:handygram/src/misc/settings_db.dart';
 import 'package:handygram/src/pages/photo_viewer.dart';
 import 'package:handygram/src/telegram/images.dart';
 import 'package:handygram/src/telegram/session.dart';
@@ -139,12 +140,13 @@ class _PreSettingsPageState extends State<PreSettingsPage> {
             title: "Settings",
             onPressed: () => Navigator.of(context).pushNamed("/settings"),
           ),
-          const SizedBox(height: 10),
-          PreSettingsButton(
-            icon: Icons.arrow_back,
-            title: "Go back",
-            onPressed: () => Navigator.of(context).pop(),
-          ),
+          if (!settingsStorage.backButtonDisabled) const SizedBox(height: 10),
+          if (!settingsStorage.backButtonDisabled)
+            PreSettingsButton(
+              icon: Icons.arrow_back,
+              title: "Go back",
+              onPressed: () => Navigator.of(context).pop(),
+            ),
           const SizedBox(height: 10),
           PreSettingsButton(
             icon: Icons.close,

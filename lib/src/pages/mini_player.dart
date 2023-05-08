@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:handygram/src/misc/settings_db.dart';
 import 'package:handygram/src/telegram/loadfile.dart';
 import 'package:handygram/src/widgets/message_tiles/base.dart';
 import 'package:video_player/video_player.dart';
@@ -103,20 +104,21 @@ class _MiniVideoPlayerControlsState extends State<_MiniVideoPlayerControls> {
                         ),
                       ),
                     ),
-                    SizedBox.expand(
-                      child: Align(
-                        alignment: Alignment.topCenter,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            IconButton(
-                              icon: const Icon(Icons.close),
-                              onPressed: () => Navigator.pop(context),
-                            ),
-                          ],
+                    if (!settingsStorage.backButtonDisabled)
+                      SizedBox.expand(
+                        child: Align(
+                          alignment: Alignment.topCenter,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                icon: const Icon(Icons.close),
+                                onPressed: () => Navigator.pop(context),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
                     SizedBox.expand(
                       child: Align(
                         alignment: Alignment.bottomCenter,
@@ -281,10 +283,11 @@ class _MiniVideoPlayerState extends State<MiniVideoPlayer> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const Text("Loading video..."),
-                  TextButton(
-                    child: const Text("Exit"),
-                    onPressed: () => Navigator.pop(context),
-                  ),
+                  if (!settingsStorage.backButtonDisabled)
+                    TextButton(
+                      child: const Text("Exit"),
+                      onPressed: () => Navigator.pop(context),
+                    ),
                 ],
               ),
             ),

@@ -19,6 +19,12 @@ class SettingsStorage {
     _settingsBox.put("settings", _raw);
   }
 
+  bool get backButtonDisabled => _raw["backButtonDisabled"] ?? false;
+  set backButtonDisabled(bool value) {
+    _raw["backButtonDisabled"] = value;
+    _settingsBox.put("settings", _raw);
+  }
+
   bool get debug => _raw["debug"] ?? false;
   set debug(bool value) {
     _raw["debug"] = value;

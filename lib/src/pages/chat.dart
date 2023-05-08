@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:handygram/src/misc/settings_db.dart';
 import 'package:handygram/src/misc/utils.dart';
 import 'package:handygram/src/telegram/messages.dart';
 import 'package:handygram/src/telegram/session.dart';
@@ -216,26 +217,27 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                         ),
                     ],
                   ),
-                  SizedBox.expand(
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: IconButton(
-                        padding: const EdgeInsets.all(2),
-                        icon: const Icon(
-                          Icons.navigate_before,
-                          shadows: [
-                            Shadow(
-                              blurRadius: 5,
-                            ),
-                          ],
+                  if (!settingsStorage.backButtonDisabled)
+                    SizedBox.expand(
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: IconButton(
+                          padding: const EdgeInsets.all(2),
+                          icon: const Icon(
+                            Icons.navigate_before,
+                            shadows: [
+                              Shadow(
+                                blurRadius: 5,
+                              ),
+                            ],
+                          ),
+                          color: Colors.white,
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
                         ),
-                        color: Colors.white,
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
                       ),
                     ),
-                  ),
                   SizedBox.expand(
                     child: Align(
                       alignment: Alignment.bottomCenter,
