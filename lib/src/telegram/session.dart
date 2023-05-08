@@ -139,7 +139,7 @@ class TgSession {
 
   // Init
   static late tdlib.SetTdlibParameters options;
-  static String appVersion = "0.2.0";
+  static String appVersion = "0.3.0";
   static String cacheDir = "";
 
   void kill() {
