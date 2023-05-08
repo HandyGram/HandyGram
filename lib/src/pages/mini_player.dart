@@ -211,7 +211,11 @@ class _MiniVideoPlayerState extends State<MiniVideoPlayer> {
     File? f = await loadTgFile(
       id,
       priority: 32,
-      type: const tdlib.FileTypeVideo(),
+      notifier: (done, total) {
+        setState(() {
+          dwProgress = done / total;
+        });
+      },
     );
     if (f == null) return null;
     controller = VideoPlayerController.file(
@@ -266,15 +270,6 @@ class _MiniVideoPlayerState extends State<MiniVideoPlayer> {
               child: video,
             ),
           ),
-          if (controller == null)
-            SizedBox(
-              width: 50,
-              height: 50,
-              child: CircularProgressIndicator(
-                strokeWidth: 8,
-                value: dwProgress,
-              ),
-            ),
           if (controller != null)
             _MiniVideoPlayerControls(controller: controller!)
           else
@@ -289,6 +284,18 @@ class _MiniVideoPlayerState extends State<MiniVideoPlayer> {
                       onPressed: () => Navigator.pop(context),
                     ),
                 ],
+              ),
+            ),
+          if (controller == null)
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: SizedBox(
+                width: 100,
+                height: 100,
+                child: CircularProgressIndicator(
+                  color: Colors.white.withOpacity(0.2),
+                  value: dwProgress,
+                ),
               ),
             ),
         ],
