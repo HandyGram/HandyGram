@@ -18,6 +18,7 @@ import 'login.dart';
 import 'chats.dart';
 import 'users.dart';
 import 'loadfile.dart';
+import 'package:wear/wear.dart';
 part 'functions.dart';
 
 class TgSession {
@@ -47,6 +48,8 @@ class TgSession {
   TgMessagesListCombine messages = TgMessagesListCombine();
   Map<int, Widget> chatPhotos = {};
   Map<String, Function(int, int)> fileDlNotifiers = {};
+
+  late final bool isSquareScreen;
 
   // Functions (codeless)
   Future<void> updateChatList(
@@ -130,6 +133,9 @@ class TgSession {
       }
     };
     functions = TelegramFunctions._(_glue);
+
+    String shape = await Wear.instance.getShape();
+    isSquareScreen = shape != "round";
   }
 
   // Init

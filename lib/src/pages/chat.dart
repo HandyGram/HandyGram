@@ -153,9 +153,10 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                     controller: _scrCont,
                     clipBehavior: Clip.antiAlias,
                     children: [
-                      const SizedBox(
-                        height: 100,
-                      ),
+                      if (!session.isSquareScreen)
+                        const SizedBox(
+                          height: 100,
+                        ),
                       // Why don't we use ListView.builder - it doesn't load
                       // messages in their order, so small messsages are broken
                       ...list.map<Widget>((e) {
@@ -182,9 +183,10 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                         prevTime = date;
                         return w;
                       }).toList(),
-                      const SizedBox(
-                        height: 100,
-                      ),
+                      if (!session.isSquareScreen)
+                        const SizedBox(
+                          height: 100,
+                        ),
                     ],
                   ),
                   SizedBox.expand(

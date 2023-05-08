@@ -33,45 +33,53 @@ class _HomePageState extends State<HomePage> {
         var chatsInfo = ref.watch(session.chatsInfoCacheP);
         ref.watch(session.usersInfoCacheP);
 
-        return Scaffold(
-          body: RotaryScrollWrapper(
-            rotaryScrollbar: RotaryScrollbar(
-              controller: _controller,
-              width: 3,
-            ),
-            child: ListView.builder(
-              padding: const EdgeInsets.all(10),
-              shrinkWrap: true,
-              physics: const BouncingScrollPhysics(),
-              controller: _controller,
-              itemCount: list.chats.length + 3, // 2 paddings + settings button
-              itemBuilder: (context, pi) {
-                if (pi == 0 || pi == list.chats.length + 2) {
-                  return const SizedBox(height: 50);
-                }
-                if (pi == 1) {
-                  return PreSettingsButton(
-                    title: "Profile",
-                    icon: Icons.person,
-                    isCentered: true,
-                    onPressed: () {
-                      Navigator.pushNamed(context, "/pre_settings");
-                    },
-                  );
-                }
-                int i = pi - 1;
-                var c = list.chats[i];
-                return ChatTile(
-                  id: c.id,
-                  lastMsg: c.lastMessage,
-                  lastDraft: c.draftMessage?.inputMessageText.getText(),
-                  title: chatsInfo[c.id]?.title,
-                  writers: getWritersList(acts.getTypersList(c.id)),
-                );
-              },
-            ),
-          ),
+        var lw = ListView.builder(
+          padding: const EdgeInsets.all(10),
+          shrinkWrap: true,
+          physics: const BouncingScrollPhysics(),
+          controller: _controller,
+          itemCount: list.chats.length + 3, // 2 paddings + settings button
+          itemBuilder: (context, pi) {
+            if (pi == 0 || pi == list.chats.length + 2) {
+              return const SizedBox(height: 50);
+            }
+            if (pi == 1) {
+              return PreSettingsButton(
+                title: "Profile",
+                icon: Icons.person,
+                isCentered: true,
+                onPressed: () {
+                  Navigator.pushNamed(context, "/pre_settings");
+                },
+              );
+            }
+            int i = pi - 1;
+            var c = list.chats[i];
+            return ChatTile(
+              id: c.id,
+              lastMsg: c.lastMessage,
+              lastDraft: c.draftMessage?.inputMessageText.getText(),
+              title: chatsInfo[c.id]?.title,
+              writers: getWritersList(acts.getTypersList(c.id)),
+            );
+          },
         );
+
+        if (session.isSquareScreen) {
+          return Scaffold(
+            body: lw,
+          );
+        } else {
+          return Scaffold(
+            body: RotaryScrollWrapper(
+              rotaryScrollbar: RotaryScrollbar(
+                controller: _controller,
+                width: 3,
+              ),
+              child: lw,
+            ),
+          );
+        }
       },
     );
   }

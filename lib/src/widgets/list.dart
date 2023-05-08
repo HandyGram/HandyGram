@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:handygram/src/telegram/session.dart';
 import 'package:rotary_scrollbar/rotary_scrollbar.dart';
 
 class ScalingList extends StatefulWidget {
@@ -21,7 +22,23 @@ class _ScalingListState extends State<ScalingList> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    if (session.isSquareScreen) {
+      return Padding(
+        padding: const EdgeInsets.all(10),
+        child: StretchingOverscrollIndicator(
+          axisDirection: scrollController.positions.isEmpty
+              ? AxisDirection.down
+              : scrollController.position.axisDirection,
+          child: ListView(
+            controller: scrollController,
+            padding: EdgeInsets.all(session.isSquareScreen ? 0 : 20),
+            // Center everything
+            children: widget.children.map((e) => Center(child: e)).toList(),
+          ),
+        ),
+      );
+    }
+    return Padding(
       padding: const EdgeInsets.all(10),
       child: RotaryScrollWrapper(
         rotaryScrollbar: RotaryScrollbar(
