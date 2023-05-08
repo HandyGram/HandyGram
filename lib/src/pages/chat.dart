@@ -28,6 +28,8 @@ class _ChatPageState extends ConsumerState<ChatPage> {
   Mutex loadMutex = Mutex();
   bool loadStatus = true;
 
+  bool _loadingHistory = true;
+
   Future<bool> _loadHistory(int offset, int count, [int? fromMsgId]) async {
     if (session.messages[chatId] == null) {
       await session.messages.tryToLoadChat(chatId);
@@ -63,6 +65,9 @@ class _ChatPageState extends ConsumerState<ChatPage> {
       (timeStamp) async {
         await _loadHistory(-10, 30);
         await _loadHistory(0, 20);
+        setState(() {
+          _loadingHistory = false;
+        });
       },
     );
     _scrCont.addListener(
@@ -76,11 +81,17 @@ class _ChatPageState extends ConsumerState<ChatPage> {
           loadMutex.release();
           return;
         }
+        setState(() {
+          _loadingHistory = true;
+        });
         try {
           loadStatus = await _loadHistory(
               0, 20, session.messages[chatId]!.messages.first.id);
         } finally {
           loadMutex.release();
+          setState(() {
+            _loadingHistory = false;
+          });
         }
       },
     );
@@ -160,6 +171,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                         const SizedBox(
                           height: 100,
                         ),
+
                       // Why don't we use ListView.builder - it doesn't load
                       // messages in their order, so small messsages are broken
                       ...list.map<Widget>((e) {
@@ -186,6 +198,18 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                         prevTime = date;
                         return w;
                       }).toList(),
+                      if (_loadingHistory) ...[
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Center(
+                          child: SizedBox(
+                            height: 30,
+                            width: 30,
+                            child: CircularProgressIndicator(),
+                          ),
+                        ),
+                      ],
                       if (!session.isSquareScreen)
                         const SizedBox(
                           height: 100,
