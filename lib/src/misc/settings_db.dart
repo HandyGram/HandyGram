@@ -1,9 +1,10 @@
+import 'package:handygram/src/misc/log.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
 class SettingsStorage {
   late final Box _settingsBox;
-  Map<String, dynamic> _raw = {};
+  Map _raw = {};
   String? settingsLoadError;
 
   bool get isAsyncInvokes => _raw["isAsyncInvokes"] ?? false;
@@ -31,16 +32,17 @@ class SettingsStorage {
   }
 
   Future<void> initialize() async {
-    _settingsBox = await Hive.openBox<Map<String, dynamic>>(
+    _settingsBox = await Hive.openBox<Map>(
       "handysettings",
       path: (await getApplicationDocumentsDirectory()).path,
     );
     try {
-      _raw = Map<String, dynamic>.from(_settingsBox.get("settings") ?? {});
-    } catch (e) {
+      _raw = Map.from(_settingsBox.get("settings") ?? {});
+    } catch (e, st) {
       settingsLoadError = e.toString();
+      l.e("SettingsDatabase", "$e\n$st");
       await _settingsBox.clear();
-      _raw = Map<String, dynamic>.from(_settingsBox.get("settings") ?? {});
+      _raw = Map.from(_settingsBox.get("settings") ?? {});
     }
   }
 }
