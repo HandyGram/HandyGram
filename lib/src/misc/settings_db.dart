@@ -4,6 +4,7 @@ import 'package:path_provider/path_provider.dart';
 class SettingsStorage {
   late final Box _settingsBox;
   Map<String, dynamic> _raw = {};
+  String? settingsLoadError;
 
   bool get isAsyncInvokes => _raw["isAsyncInvokes"] ?? false;
   set isAsyncInvokes(bool value) {
@@ -36,7 +37,8 @@ class SettingsStorage {
     );
     try {
       _raw = Map<String, dynamic>.from(_settingsBox.get("settings") ?? {});
-    } catch (_) {
+    } catch (e) {
+      settingsLoadError = e.toString();
       await _settingsBox.clear();
       _raw = Map<String, dynamic>.from(_settingsBox.get("settings") ?? {});
     }

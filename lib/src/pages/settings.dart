@@ -25,6 +25,22 @@ class _SettingsPageState extends State<SettingsPage> {
               Navigator.of(context).pop();
             },
           ),
+          if (settingsStorage.settingsLoadError != null)
+            Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.errorContainer,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              padding: const EdgeInsets.all(10),
+              width: double.infinity,
+              child: Text(
+                "Failed to restore settings database. Your settings were reset.",
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onErrorContainer,
+                  fontSize: 12,
+                ),
+              ),
+            ),
           SettingsSwitch(
             onChanged: (v) {
               setState(() {
