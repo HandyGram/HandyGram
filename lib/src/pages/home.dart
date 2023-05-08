@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                 },
               );
             }
-            int i = pi - 1;
+            int i = pi - 2;
             var c = list.chats[i];
             return ChatTile(
               id: c.id,
