@@ -84,6 +84,7 @@ class ChatTile extends StatelessWidget {
                   child: ChatImage(
                     key: ValueKey<int>(id),
                     id: id,
+                    isUser: false,
                   ),
                 ),
                 AnimatedSwitcher(

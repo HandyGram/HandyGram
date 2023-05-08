@@ -1,18 +1,17 @@
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:handygram/src/misc/log.dart';
 import 'package:handygram/src/misc/settings_db.dart';
 import 'package:handygram/src/telegram/images.dart';
 import 'package:handygram/src/telegram/session.dart';
 import 'package:handygram/src/tdlib/td_api.dart' as tdlib;
 
-class ChatImage extends ConsumerStatefulWidget {
+class ChatImage extends StatefulWidget {
   const ChatImage({
     super.key,
     required this.id,
     this.title,
     this.image,
+    required this.isUser,
   });
 
   final int id;
@@ -21,86 +20,95 @@ class ChatImage extends ConsumerStatefulWidget {
   // increase performance.
   final String? title;
   final Widget? image;
+  final bool isUser;
 
   @override
-  ConsumerState<ChatImage> createState() => _ChatImageState();
+  State<ChatImage> createState() => _ChatImageState();
 }
 
-Future<Map<String, dynamic>> getChatInfo(int id, [int retries = 0]) async {
-  tdlib.Chat? chat;
-  tdlib.User? user;
-  if (id == session.usersInfoCache.me?.id) {
-    user = session.usersInfoCache.me;
-  } else if (retries < 10) {
-    try {
-      chat = await session.chatsInfoCache.get(id);
-    } catch (e) {
-      try {
-        user = await session.usersInfoCache.get(id);
-      } catch (e) {
-        return Future.delayed(const Duration(seconds: 2)).then(
-          (_) => getChatInfo(id, retries + 1),
-        );
-      }
-    }
-    l.d("getChatInfo", "[$id] $chat | $user");
-    if (chat == null && user == null) {
-      return Future.delayed(const Duration(seconds: 2)).then(
-        (_) => getChatInfo(id, retries + 1),
-      );
-    }
+Future<Map<String, dynamic>> getChatInfoForUser(int id) async {
+  tdlib.ChatPhotos? photos;
+  try {
+    photos = await session.functions.getUserProfilePhotos(id);
+  } catch (_) {
+    return {
+      "title": "?",
+      "photo": null,
+    };
+  }
+  if (photos == null || photos.totalCount == 0) {
+    return {
+      "title": "?",
+      "photo": null,
+    };
   }
 
-  if (chat != null) {
-    Widget? image;
-    if (chat.photo != null && session.chatPhotos[id] == null) {
-      var provimage = await TgImage(
-        id: chat.photo!.small.remote.id,
-      ).load(priority: 1);
-      if (provimage != null) {
-        image = Image(
-          fit: BoxFit.cover,
-          image: provimage,
-        );
-        session.chatPhotos[id] = image;
-      }
-    }
-    return {
-      "title": chat.title,
-      "photo": image ?? session.chatPhotos[id],
-    };
-  } else if (user != null) {
-    Widget? image;
-    if (user.profilePhoto != null && session.chatPhotos[id] == null) {
-      var provimage = await TgImage(
-        id: user.profilePhoto!.small.remote.id,
-        type: const tdlib.FileTypeProfilePhoto(),
-      ).load(priority: 1);
-      if (provimage != null) {
-        image = Image(
-          fit: BoxFit.cover,
-          image: provimage,
-        );
-        session.chatPhotos[id] = image;
-      }
-    }
-    return {
-      "title": user.firstName.isNotEmpty
-          ? user.lastName.isNotEmpty
-              ? "${user.firstName} ${user.lastName}"
-              : user.firstName
-          : "Unnamed user",
-      "photo": image ?? session.chatPhotos[id],
-    };
+  var photo = photos.photos[0].sizes[0].photo;
+  var prov = await TgImage(id: photo.remote.id).load(priority: 20);
+  String title = "?";
+  if (prov != null) {
+    try {
+      title = (await session.usersInfoCache.get(id))?.firstName ?? "?";
+    } catch (_) {}
   }
 
   return {
-    "title": "?",
-    "photo": null,
+    "title": title,
+    "photo": prov,
+    "photo_id": photo.remote.id,
   };
 }
 
-class _ChatImageState extends ConsumerState<ChatImage> {
+Future<Map<String, dynamic>> getChatInfoForChat(int id) async {
+  tdlib.File? photo;
+  try {
+    photo = (await session.chatsInfoCache.get(id))?.photo?.small;
+  } catch (_) {
+    return {
+      "title": "?",
+      "photo": null,
+    };
+  }
+  if (photo == null) {
+    return {
+      "title": session.chatsInfoCache[id]?.title ?? "?",
+      "photo": null,
+    };
+  }
+
+  var prov = await TgImage(id: photo.remote.id).load(priority: 20);
+  String title = "?";
+  if (prov != null) {
+    try {
+      title = session.chatsInfoCache[id]?.title ?? "?";
+    } catch (_) {}
+  }
+
+  return {
+    "title": title,
+    "photo": prov,
+    "photo_id": photo.remote.id,
+  };
+}
+
+Future<Map<String, dynamic>> _getChatInfo(int id, bool isUser) async {
+  if (session.chatPhotos.containsKey(id)) {
+    return session.chatPhotos[id]!;
+  }
+
+  Map<String, dynamic> info;
+  if (isUser) {
+    info = await getChatInfoForUser(id);
+  } else {
+    info = await getChatInfoForChat(id);
+  }
+  if (info["title"] != "?" || info["photo"] != null) {
+    session.chatPhotos[id] = info;
+  }
+  return info;
+}
+
+class _ChatImageState extends State<ChatImage> {
   late final int id = widget.id;
   late String? title = widget.title;
   late Widget? image = widget.image;
@@ -132,10 +140,16 @@ class _ChatImageState extends ConsumerState<ChatImage> {
     super.initState();
     if (image == null) {
       loaderF = CancelableOperation.fromFuture(
-        getChatInfo(id).then(
+        _getChatInfo(id, widget.isUser).then(
           (val) => setState(() {
-            title = val["title"];
-            image = val["photo"];
+            title ??= val["title"];
+            image = val["photo"] != null
+                ? Image(
+                    image: val["photo"],
+                    fit: BoxFit.cover,
+                    key: ValueKey<String>(val["photo_id"]),
+                  )
+                : null;
             _isLoading = false;
           }),
         ),
@@ -150,7 +164,7 @@ class _ChatImageState extends ConsumerState<ChatImage> {
           shape: BoxShape.circle,
           color: image == null ? _colors[id % 10] : null,
         ),
-        key: UniqueKey(),
+        key: ValueKey<int>(id),
         clipBehavior: Clip.antiAlias,
         child: Stack(
           children: [

@@ -5,7 +5,6 @@ import 'package:handygram/src/misc/settings_db.dart';
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:handygram/src/telegram/actions.dart';
 import 'package:handygram/src/telegram/api_config.dart';
@@ -46,7 +45,7 @@ class TgSession {
   late ChangeNotifierProvider<TgChatActions> chatActionsP;
 
   TgMessagesListCombine messages = TgMessagesListCombine();
-  Map<int, Widget> chatPhotos = {};
+  Map<int, Map<String, dynamic>> chatPhotos = {};
   Map<String, Function(int, int)> fileDlNotifiers = {};
 
   late final bool isSquareScreen;

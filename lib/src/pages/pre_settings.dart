@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:handygram/src/pages/photo_viewer.dart';
 import 'package:handygram/src/telegram/images.dart';
 import 'package:handygram/src/telegram/session.dart';
@@ -22,78 +23,116 @@ class _PreSettingsPageState extends State<PreSettingsPage> {
     return Scaffold(
       body: ScalingList(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              GestureDetector(
-                child: SizedBox(
-                  height: 30,
-                  width: 30,
-                  child: session.usersInfoCache.me != null
-                      ? ChatImage(
-                          id: session.usersInfoCache.me!.id,
-                        )
-                      : Container(
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.grey,
+          Consumer(
+            builder: (context, ref, _) {
+              ref.watch(session.usersInfoCacheP);
+              return Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        child: SizedBox(
+                          height: 30,
+                          width: 30,
+                          child: session.usersInfoCache.me != null
+                              ? ChatImage(
+                                  id: session.usersInfoCache.me!.id,
+                                  isUser: true,
+                                )
+                              : Container(
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                        ),
+                        onTap: () async {
+                          if (session.usersInfoCache.me?.profilePhoto?.big ==
+                              null) {
+                            return;
+                          }
+
+                          TgImage(
+                            id: session
+                                .usersInfoCache.me!.profilePhoto!.big.remote.id,
+                          ).load().then((i) {
+                            if (i != null && context.mounted) {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => PhotoViewer(photo: i),
+                                ),
+                              );
+                            }
+                          });
+                        },
+                      ),
+                      const SizedBox(width: 10),
+                      Center(
+                        child: Text(
+                          session.usersInfoCache.me != null
+                              ? userToUsername(
+                                  session.usersInfoCache.me!,
+                                )
+                              : "Loading...",
+                          maxLines: 1,
+                          style: const TextStyle(
+                            fontSize: 12,
                           ),
                         ),
-                ),
-                onTap: () async {
-                  if (session.usersInfoCache.me?.profilePhoto?.big == null) {
-                    return;
-                  }
-
-                  TgImage(
-                    id: session.usersInfoCache.me!.profilePhoto!.big.remote.id,
-                  ).load().then((i) {
-                    if (i != null && context.mounted) {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => PhotoViewer(photo: i),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  if (session.usersInfoCache.me?.usernames?.activeUsernames
+                          .isNotEmpty ??
+                      false)
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.background,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      padding: const EdgeInsets.all(10),
+                      width: double.infinity,
+                      child: Text(
+                        "@${session.usersInfoCache.me?.usernames?.activeUsernames.first}",
+                        style: TextStyle(
+                          color: Theme.of(context).textTheme.bodyMedium?.color,
+                          fontSize: 12,
                         ),
-                      );
-                    }
-                  });
-                },
-              ),
-              const SizedBox(width: 10),
-              Center(
+                      ),
+                    ),
+                ],
+              );
+            },
+          ),
+          const SizedBox(height: 10),
+          Consumer(
+            builder: (context, ref, _) {
+              ref.watch(session.usersFullInfoCacheP);
+              if (session.usersInfoCache.me == null ||
+                  session.usersFullInfoCache[session.usersInfoCache.me!.id]?.bio
+                          ?.text ==
+                      null) {
+                return Container();
+              }
+              return Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.background,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                padding: const EdgeInsets.all(10),
                 child: Text(
-                  session.usersInfoCache.me != null
-                      ? userToUsername(
-                          session.usersInfoCache.me!,
-                        )
-                      : "Loading...",
-                  maxLines: 1,
-                  style: const TextStyle(
+                  session.usersFullInfoCache[session.usersInfoCache.me!.id]!
+                      .bio!.text,
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyMedium?.color,
                     fontSize: 12,
                   ),
                 ),
-              ),
-            ],
+              );
+            },
           ),
-          const SizedBox(height: 10),
-          if (session.usersInfoCache.me != null &&
-              session.usersFullInfoCache[session.usersInfoCache.me!.id]?.bio
-                      ?.text !=
-                  null)
-            Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.background,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              padding: const EdgeInsets.all(10),
-              child: Text(
-                session.usersFullInfoCache[session.usersInfoCache.me!.id]!.bio!
-                    .text,
-                style: TextStyle(
-                  color: Theme.of(context).textTheme.bodyMedium?.color,
-                  fontSize: 12,
-                ),
-              ),
-            ),
           const SizedBox(height: 10),
           PreSettingsButton(
             icon: Icons.settings,

@@ -277,4 +277,21 @@ class TelegramFunctions {
       throw TelegramError(obj, "object is not tdlib.Ok");
     }
   }
+
+  Future<tdlib.ChatPhotos?> getUserProfilePhotos(
+    int id, [
+    int offset = 0,
+    int limit = 1,
+  ]) async {
+    tdlib.TdObject? obj = await _invoke(tdlib.GetUserProfilePhotos(
+      userId: id,
+      offset: offset,
+      limit: limit,
+    ));
+    if (obj == null) return null;
+    if (obj.getConstructor() != tdlib.ChatPhotos.constructor) {
+      throw TelegramError(obj, "object is not tdlib.Ok");
+    }
+    return obj as tdlib.ChatPhotos;
+  }
 }

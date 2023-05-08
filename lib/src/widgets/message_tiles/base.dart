@@ -4,6 +4,7 @@ import 'package:handygram/src/telegram/messages.dart';
 import 'package:handygram/src/widgets/chat_image.dart';
 import 'package:handygram/src/telegram/session.dart';
 import 'package:handygram/src/misc/tdlib_utils.dart';
+import 'package:handygram/src/tdlib/td_api.dart' as tdlib;
 
 Size downscaleProperly(Size contentSize, Size screenSize, double factor) {
   if (contentSize.width > contentSize.height) {
@@ -238,6 +239,8 @@ class MessageBaseTile extends ConsumerWidget {
                 msg.senderId.getSenderId(),
               ),
               id: msg.senderId.getSenderId(),
+              isUser: msg.senderId.getConstructor() ==
+                  tdlib.MessageSenderUser.constructor,
             ),
           )
         else
@@ -334,6 +337,8 @@ class MessageBaseTile extends ConsumerWidget {
               key: ValueKey<int>(
                 msg.senderId.getSenderId(),
               ),
+              isUser: msg.senderId.getConstructor() ==
+                  tdlib.MessageSenderUser.constructor,
               id: msg.senderId.getSenderId(),
             ),
           )
