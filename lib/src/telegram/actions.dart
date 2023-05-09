@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:handygram/src/misc/utils.dart';
 import 'package:handygram/src/tdlib/tdapi/tdapi.dart' as tdlib;
@@ -10,6 +12,10 @@ class TgChatActions extends ChangeNotifier {
     _isTyping[event.chatId] ??= [];
     if (event.action.getConstructor() != "chatActionCancel") {
       _isTyping[event.chatId]!.add(event.senderId.getSenderId());
+      Timer(
+        const Duration(seconds: 30),
+        () => _isTyping[event.chatId]?.remove(event.senderId.getSenderId()),
+      );
     } else {
       _isTyping[event.chatId]!.remove(event.senderId.getSenderId());
     }
