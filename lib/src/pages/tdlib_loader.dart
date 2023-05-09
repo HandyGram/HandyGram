@@ -49,11 +49,7 @@ class _TDLibLoaderState extends State<TDLibLoader> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) {
-        try {
-          _checkLogin();
-        } catch (_) {
-          _loadSession();
-        }
+        _loadSession();
       },
     );
   }
