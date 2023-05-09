@@ -37,11 +37,7 @@ class SettingsStorage {
     _settingsBox.put("settings", _raw);
   }
 
-  int get lastClientId => _raw["lastClientId"] ?? -1;
-  set lastClientId(int value) {
-    _raw["lastClientId"] = value;
-    _settingsBox.put("settings", _raw);
-  }
+  int lastClientId = -1;
 
   Future<void> initialize() async {
     _settingsBox = await Hive.openBox<Map>(
