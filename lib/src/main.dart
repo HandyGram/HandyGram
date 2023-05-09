@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:handygram/src/misc/settings_db.dart';
 import 'package:handygram/src/pages/chat.dart';
 import 'package:handygram/src/pages/greeting.dart';
 import 'package:handygram/src/pages/home.dart';
@@ -32,7 +35,13 @@ class HandyGram extends StatelessWidget {
             page = const TDLibLoader();
             break;
           case "/home":
-            page = const HomePage();
+            page = WillPopScope(
+              child: const HomePage(),
+              onWillPop: () {
+                settingsStorage.lastClientId = -1;
+                exit(0);
+              },
+            );
             break;
           case "/chat":
             page = ChatPage(

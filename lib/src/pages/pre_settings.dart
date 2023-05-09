@@ -155,7 +155,10 @@ class _PreSettingsPageState extends State<PreSettingsPage> {
             title: "Exit HandyGram",
             background: Theme.of(context).colorScheme.errorContainer,
             foreground: Theme.of(context).colorScheme.onErrorContainer,
-            onPressed: () => exit(0),
+            onPressed: () {
+              settingsStorage.lastClientId = -1;
+              exit(0);
+            },
           ),
         ],
       ),

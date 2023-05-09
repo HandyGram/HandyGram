@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:isolate' show Isolate, ReceivePort, SendPort;
 import 'dart:math';
 import 'package:handygram/src/misc/log.dart';
+import 'package:handygram/src/misc/settings_db.dart';
 import 'package:handygram/src/tdlib/tdapi/tdapi.dart'
     show TdObject, convertToObject, TdFunction;
 import 'package:handygram/src/tdlib/tdclient/platform_interfaces/td_olugin.dart';
@@ -32,6 +33,7 @@ class EventSubject {
   static Future<EventSubject> initialize() async {
     await TdPlugin.initialize();
     final clientId = TdPlugin.instance!.tdJsonClientCreate();
+    settingsStorage.lastClientId = clientId;
     TdPlugin.instance!.tdJsonClientExecute(jsonEncode({
       "@type": "setLogVerbosityLevel",
       "clientId": clientId,
@@ -140,5 +142,6 @@ class EventSubject {
     _receivePort.close();
     _invokeReceivePort.close();
     TdPlugin.instance?.tdJsonClientDestroy(clientId);
+    settingsStorage.lastClientId = -1;
   }
 }

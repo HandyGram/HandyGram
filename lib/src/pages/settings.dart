@@ -112,6 +112,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 duration: Duration(hours: 1),
                 content: Center(child: Text("Please wait...")),
               ));
+              settingsStorage.lastClientId = -1;
               session.functions.logOut().then((_) => exit(0));
             },
           ),
