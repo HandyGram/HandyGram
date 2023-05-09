@@ -115,6 +115,8 @@ class _PreSettingsPageState extends State<PreSettingsPage> {
                   session.usersFullInfoCache[session.usersInfoCache.me!.id]?.bio
                           ?.text ==
                       null) {
+                // Request loading full info for current user
+                session.usersFullInfoCache.get(session.usersInfoCache.me!.id);
                 return Container();
               }
               return Container(
