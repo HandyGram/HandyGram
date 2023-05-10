@@ -94,10 +94,16 @@ class _TDLibLoaderState extends State<TDLibLoader> {
                   ),
                 ]
               : [
-                  const SizedBox(
-                    height: 50,
-                    width: 50,
-                    child: CircularProgressIndicator(),
+                  GestureDetector(
+                    onLongPress: () {
+                      session.kill();
+                      _loadSession();
+                    },
+                    child: const SizedBox(
+                      height: 50,
+                      width: 50,
+                      child: CircularProgressIndicator(),
+                    ),
                   ),
                   const SizedBox(height: 20),
                   Text(state == _State.connecting
