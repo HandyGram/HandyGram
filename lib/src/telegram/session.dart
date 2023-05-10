@@ -44,6 +44,18 @@ class TgSession {
   TgChatActions chatActions = TgChatActions();
   late ChangeNotifierProvider<TgChatActions> chatActionsP;
 
+  TgSupergroupCache supergroups = TgSupergroupCache();
+  late ChangeNotifierProvider<TgSupergroupCache> supergroupsP;
+
+  TgSupergroupFullInfoCache supergroupsFullInfo = TgSupergroupFullInfoCache();
+  late ChangeNotifierProvider<TgSupergroupFullInfoCache> supergroupsFullInfoP;
+
+  TgBasicGroupCache basicGroups = TgBasicGroupCache();
+  late ChangeNotifierProvider<TgBasicGroupCache> basicGroupsP;
+
+  TgBasicGroupFullInfoCache basicGroupsFullInfo = TgBasicGroupFullInfoCache();
+  late ChangeNotifierProvider<TgBasicGroupFullInfoCache> basicGroupsFullInfoP;
+
   TgMessagesListCombine messages = TgMessagesListCombine();
   Map<int, Map<String, dynamic>> chatPhotos = {};
   Map<String, Function(int, int)> fileDlNotifiers = {};
@@ -124,6 +136,10 @@ class TgSession {
     chatsInfoCacheP = ChangeNotifierProvider((_) => chatsInfoCache);
     usersInfoCacheP = ChangeNotifierProvider((_) => usersInfoCache);
     usersFullInfoCacheP = ChangeNotifierProvider((_) => usersFullInfoCache);
+    supergroupsP = ChangeNotifierProvider((_) => supergroups);
+    supergroupsFullInfoP = ChangeNotifierProvider((_) => supergroupsFullInfo);
+    basicGroupsP = ChangeNotifierProvider((_) => basicGroups);
+    basicGroupsFullInfoP = ChangeNotifierProvider((_) => basicGroupsFullInfo);
     _glue = await TdlibGlue.initialize();
     // Setup update loop with wrappers.
     _glue.notifier = (tdlib.TdObject object) {

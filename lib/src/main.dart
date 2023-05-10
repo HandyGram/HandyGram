@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:handygram/src/misc/settings_db.dart';
 import 'package:handygram/src/pages/chat.dart';
+import 'package:handygram/src/pages/chat_info.dart';
+import 'package:handygram/src/pages/chat_menu.dart';
 import 'package:handygram/src/pages/greeting.dart';
 import 'package:handygram/src/pages/home.dart';
 import 'package:handygram/src/pages/login.dart';
@@ -53,6 +55,16 @@ class HandyGram extends StatelessWidget {
             break;
           case "/pre_settings":
             page = const PreSettingsPage();
+            break;
+          case "/chat_menu":
+            page = ChatMenuPage(
+              args: settings.arguments as Map<String, dynamic>,
+            );
+            break;
+          case "/chat_info":
+            page = ChatInfoPage(
+              args: settings.arguments as Map<String, dynamic>,
+            );
             break;
           default:
             page = const Scaffold(

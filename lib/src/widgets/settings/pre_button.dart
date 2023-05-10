@@ -4,15 +4,15 @@ class PreSettingsButton extends StatefulWidget {
   const PreSettingsButton({
     super.key,
     required this.onPressed,
-    required this.title,
     required this.icon,
+    this.title,
     this.isCentered = false,
     this.mini = false,
     this.background,
     this.foreground,
   });
 
-  final String title;
+  final String? title;
   final IconData icon;
   final Function() onPressed;
 
@@ -52,15 +52,16 @@ class _PreSettingsButtonState extends State<PreSettingsButton> {
               color: widget.foreground ??
                   Theme.of(context).textTheme.bodyMedium!.color,
             ),
-            const SizedBox(width: 10),
-            Text(
-              widget.title,
-              style: TextStyle(
-                color: widget.foreground ??
-                    Theme.of(context).textTheme.bodyMedium!.color,
-                fontSize: 14,
+            if (widget.title != null) const SizedBox(width: 10),
+            if (widget.title != null)
+              Text(
+                widget.title!,
+                style: TextStyle(
+                  color: widget.foreground ??
+                      Theme.of(context).textTheme.bodyMedium!.color,
+                  fontSize: 14,
+                ),
               ),
-            ),
           ],
         ),
       ),

@@ -469,6 +469,260 @@ class TgChatInfoCache extends ChangeNotifier {
   }
 }
 
+class TgSupergroupCache extends ChangeNotifier {
+  final Map<int, tdlib.Supergroup> _supergroups = {};
+  final List<int> _loading = [];
+
+  TgSupergroupCache();
+
+  void add(tdlib.Supergroup supergroup) {
+    _supergroups[supergroup.id] = supergroup;
+    notifyListeners();
+  }
+
+  void update(tdlib.Supergroup supergroup) => add(supergroup);
+
+  Future<tdlib.Supergroup?> _get(int id) async {
+    _loading.add(id);
+    tdlib.Supergroup? tdsupergroup;
+    try {
+      tdsupergroup = await session.functions.getSupergroup(id);
+      if (tdsupergroup != null) {
+        add(tdsupergroup);
+      }
+    } catch (e, st) {
+      l.e("TgChatInfoCache._get", "$e $st");
+    } finally {
+      _loading.remove(id);
+    }
+
+    return tdsupergroup;
+  }
+
+  Future<tdlib.Supergroup?> get(int id) async {
+    // Sth like a mutex for every chat
+    if (_loading.contains(id)) {
+      await Future.doWhile(
+        () => Future.delayed(
+          const Duration(seconds: 1),
+        ).then((_) => _loading.contains(id)),
+      );
+    }
+
+    if (_supergroups[id] == null) {
+      return _get(id);
+    }
+    return _supergroups[id];
+  }
+
+  tdlib.Supergroup? maybeGet(int id) {
+    if (_supergroups[id] == null) {
+      get(id);
+      return null;
+    }
+    return _supergroups[id];
+  }
+
+  void clear() {
+    _supergroups.clear();
+  }
+
+  tdlib.Supergroup? operator [](int id) {
+    return maybeGet(id);
+  }
+}
+
+class TgSupergroupFullInfoCache extends ChangeNotifier {
+  final Map<int, tdlib.SupergroupFullInfo> _supergroupsFullInfo = {};
+  final List<int> _loading = [];
+
+  TgSupergroupFullInfoCache();
+
+  void add(tdlib.SupergroupFullInfo supergroupFullInfo, int id) {
+    _supergroupsFullInfo[id] = supergroupFullInfo;
+    notifyListeners();
+  }
+
+  void update(tdlib.SupergroupFullInfo supergroupFullInfo, int id) =>
+      _supergroupsFullInfo.containsKey(id) ? add(supergroupFullInfo, id) : null;
+
+  Future<tdlib.SupergroupFullInfo?> _get(int id) async {
+    _loading.add(id);
+    tdlib.SupergroupFullInfo? tdsupergroupFullInfo;
+    try {
+      tdsupergroupFullInfo = await session.functions.getSupergroupFullInfo(id);
+      if (tdsupergroupFullInfo != null) {
+        add(tdsupergroupFullInfo, id);
+      }
+    } catch (e, st) {
+      l.e("TgChatInfoCache._get", "$e $st");
+    } finally {
+      _loading.remove(id);
+    }
+
+    return tdsupergroupFullInfo;
+  }
+
+  Future<tdlib.SupergroupFullInfo?> get(int id) async {
+    // Sth like a mutex for every chat
+    if (_loading.contains(id)) {
+      await Future.doWhile(
+        () => Future.delayed(
+          const Duration(seconds: 1),
+        ).then((_) => _loading.contains(id)),
+      );
+    }
+
+    if (_supergroupsFullInfo[id] == null) {
+      return _get(id);
+    }
+    return _supergroupsFullInfo[id];
+  }
+
+  tdlib.SupergroupFullInfo? maybeGet(int id) {
+    if (_supergroupsFullInfo[id] == null) {
+      get(id);
+      return null;
+    }
+    return _supergroupsFullInfo[id];
+  }
+
+  void clear() {
+    _supergroupsFullInfo.clear();
+  }
+
+  tdlib.SupergroupFullInfo? operator [](int id) {
+    return maybeGet(id);
+  }
+}
+
+class TgBasicGroupCache extends ChangeNotifier {
+  final Map<int, tdlib.BasicGroup> _basicGroups = {};
+  final List<int> _loading = [];
+
+  TgBasicGroupCache();
+
+  void add(tdlib.BasicGroup basicGroup) {
+    _basicGroups[basicGroup.id] = basicGroup;
+    notifyListeners();
+  }
+
+  void update(tdlib.BasicGroup basicGroup) => add(basicGroup);
+
+  Future<tdlib.BasicGroup?> _get(int id) async {
+    _loading.add(id);
+    tdlib.BasicGroup? tdbasicGroup;
+    try {
+      tdbasicGroup = await session.functions.getBasicGroup(id);
+      if (tdbasicGroup != null) {
+        add(tdbasicGroup);
+      }
+    } catch (e, st) {
+      l.e("TgChatInfoCache._get", "$e $st");
+    } finally {
+      _loading.remove(id);
+    }
+
+    return tdbasicGroup;
+  }
+
+  Future<tdlib.BasicGroup?> get(int id) async {
+    // Sth like a mutex for every chat
+    if (_loading.contains(id)) {
+      await Future.doWhile(
+        () => Future.delayed(
+          const Duration(seconds: 1),
+        ).then((_) => _loading.contains(id)),
+      );
+    }
+
+    if (_basicGroups[id] == null) {
+      return _get(id);
+    }
+    return _basicGroups[id];
+  }
+
+  tdlib.BasicGroup? maybeGet(int id) {
+    if (_basicGroups[id] == null) {
+      get(id);
+      return null;
+    }
+    return _basicGroups[id];
+  }
+
+  void clear() {
+    _basicGroups.clear();
+  }
+
+  tdlib.BasicGroup? operator [](int id) {
+    return maybeGet(id);
+  }
+}
+
+class TgBasicGroupFullInfoCache extends ChangeNotifier {
+  final Map<int, tdlib.BasicGroupFullInfo> _basicGroupsFullInfo = {};
+  final List<int> _loading = [];
+
+  TgBasicGroupFullInfoCache();
+
+  void add(tdlib.BasicGroupFullInfo basicGroupFullInfo, int id) {
+    _basicGroupsFullInfo[id] = basicGroupFullInfo;
+    notifyListeners();
+  }
+
+  void update(tdlib.BasicGroupFullInfo basicGroupFullInfo, int id) =>
+      _basicGroupsFullInfo.containsKey(id) ? add(basicGroupFullInfo, id) : null;
+
+  Future<tdlib.BasicGroupFullInfo?> _get(int id) async {
+    _loading.add(id);
+    tdlib.BasicGroupFullInfo? tdbasicGroupFullInfo;
+    try {
+      tdbasicGroupFullInfo = await session.functions.getBasicGroupFullInfo(id);
+      if (tdbasicGroupFullInfo != null) {
+        add(tdbasicGroupFullInfo, id);
+      }
+    } catch (e, st) {
+      l.e("TgChatInfoCache._get", "$e $st");
+    } finally {
+      _loading.remove(id);
+    }
+
+    return tdbasicGroupFullInfo;
+  }
+
+  Future<tdlib.BasicGroupFullInfo?> get(int id) async {
+    // Sth like a mutex for every chat
+    if (_loading.contains(id)) {
+      await Future.doWhile(
+        () => Future.delayed(
+          const Duration(seconds: 1),
+        ).then((_) => _loading.contains(id)),
+      );
+    }
+
+    if (_basicGroupsFullInfo[id] == null) {
+      return _get(id);
+    }
+    return _basicGroupsFullInfo[id];
+  }
+
+  tdlib.BasicGroupFullInfo? maybeGet(int id) {
+    if (_basicGroupsFullInfo[id] == null) {
+      get(id);
+      return null;
+    }
+    return _basicGroupsFullInfo[id];
+  }
+
+  void clear() {
+    _basicGroupsFullInfo.clear();
+  }
+
+  tdlib.BasicGroupFullInfo? operator [](int id) {
+    return maybeGet(id);
+  }
+}
+
 void chatsHandler(tdlib.TdObject object, TgSession session) async {
   if (object.getConstructor() == tdlib.UpdateChatLastMessage.constructor) {
     object as tdlib.UpdateChatLastMessage;
@@ -536,6 +790,30 @@ void chatsHandler(tdlib.TdObject object, TgSession session) async {
     session.chatsInfoCache.update(
       object.chatId,
       photo: object.photo,
+    );
+  } else if (object.getConstructor() == tdlib.UpdateSupergroup.constructor) {
+    object as tdlib.UpdateSupergroup;
+    session.supergroups.update(
+      object.supergroup,
+    );
+  } else if (object.getConstructor() ==
+      tdlib.UpdateSupergroupFullInfo.constructor) {
+    object as tdlib.UpdateSupergroupFullInfo;
+    session.supergroupsFullInfo.update(
+      object.supergroupFullInfo,
+      object.supergroupId,
+    );
+  } else if (object.getConstructor() == tdlib.UpdateBasicGroup.constructor) {
+    object as tdlib.UpdateBasicGroup;
+    session.basicGroups.update(
+      object.basicGroup,
+    );
+  } else if (object.getConstructor() ==
+      tdlib.UpdateBasicGroupFullInfo.constructor) {
+    object as tdlib.UpdateBasicGroupFullInfo;
+    session.basicGroupsFullInfo.update(
+      object.basicGroupFullInfo,
+      object.basicGroupId,
     );
   }
 }

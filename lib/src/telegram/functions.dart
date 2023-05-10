@@ -290,8 +290,84 @@ class TelegramFunctions {
     ));
     if (obj == null) return null;
     if (obj.getConstructor() != tdlib.ChatPhotos.constructor) {
-      throw TelegramError(obj, "object is not tdlib.Ok");
+      throw TelegramError(obj, "object is not tdlib.ChatPhotos");
     }
     return obj as tdlib.ChatPhotos;
+  }
+
+  Future<tdlib.Supergroup?> getSupergroup(int id) async {
+    tdlib.TdObject? obj;
+    try {
+      obj = await _invoke(tdlib.GetSupergroup(
+        supergroupId: id,
+      ));
+    } catch (_) {}
+    if (obj == null) return null;
+    if (obj.getConstructor() != tdlib.Supergroup.constructor) {
+      throw TelegramError(obj, "object is not tdlib.Supergroup");
+    }
+    return obj as tdlib.Supergroup;
+  }
+
+  Future<tdlib.SupergroupFullInfo?> getSupergroupFullInfo(int id) async {
+    tdlib.TdObject? obj;
+    try {
+      obj = await _invoke(tdlib.GetSupergroupFullInfo(
+        supergroupId: id,
+      ));
+    } catch (_) {}
+    if (obj == null) return null;
+    if (obj.getConstructor() != tdlib.SupergroupFullInfo.constructor) {
+      throw TelegramError(obj, "object is not tdlib.SupergroupFullInfo");
+    }
+    return obj as tdlib.SupergroupFullInfo;
+  }
+
+  Future<tdlib.BasicGroup?> getBasicGroup(int id) async {
+    tdlib.TdObject? obj;
+    try {
+      obj = await _invoke(tdlib.GetBasicGroup(
+        basicGroupId: id,
+      ));
+    } catch (_) {}
+    if (obj == null) return null;
+    if (obj.getConstructor() != tdlib.BasicGroup.constructor) {
+      throw TelegramError(obj, "object is not tdlib.BasicGroup");
+    }
+    return obj as tdlib.BasicGroup;
+  }
+
+  Future<tdlib.BasicGroupFullInfo?> getBasicGroupFullInfo(int id) async {
+    tdlib.TdObject? obj;
+    try {
+      obj = await _invoke(tdlib.GetBasicGroupFullInfo(
+        basicGroupId: id,
+      ));
+    } catch (_) {}
+    if (obj == null) return null;
+    if (obj.getConstructor() != tdlib.BasicGroupFullInfo.constructor) {
+      throw TelegramError(obj, "object is not tdlib.BasicGroupFullInfo");
+    }
+    return obj as tdlib.BasicGroupFullInfo;
+  }
+
+  Future<List<tdlib.ChatMember>?> getSupergroupMembers(
+    int id, {
+    int? offset,
+    int? limit,
+  }) async {
+    tdlib.TdObject? obj;
+    try {
+      obj = await _invoke(tdlib.GetSupergroupMembers(
+        supergroupId: id,
+        offset: offset ?? 0,
+        limit: limit ?? 200,
+      ));
+    } catch (_) {}
+    if (obj == null) return null;
+    if (obj.getConstructor() != tdlib.ChatMembers.constructor) {
+      throw TelegramError(obj, "object is not tdlib.User");
+    }
+    return (obj as tdlib.ChatMembers).members;
   }
 }

@@ -253,12 +253,9 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                         ),
                         color: Colors.white,
                         onPressed: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Center(
-                                child: Text("TODO"),
-                              ),
-                            ),
+                          Navigator.of(context).pushNamed(
+                            "/chat_menu",
+                            arguments: widget.args,
                           );
                         },
                       ),
