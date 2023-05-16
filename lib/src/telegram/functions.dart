@@ -451,4 +451,20 @@ class TelegramFunctions {
       throw TelegramError(obj, "object is not tdlib.Ok");
     }
   }
+
+  Future<void> removeMessageReaction({
+    required int chatId,
+    required int messageId,
+    required tdlib.ReactionType type,
+  }) async {
+    tdlib.TdObject? obj = await _invoke(tdlib.RemoveMessageReaction(
+      chatId: chatId,
+      messageId: messageId,
+      reactionType: type,
+    ));
+    if (obj == null) return;
+    if (obj is! tdlib.Ok) {
+      throw TelegramError(obj, "object is not tdlib.Ok");
+    }
+  }
 }

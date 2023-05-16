@@ -290,14 +290,31 @@ class MessageBaseTile extends ConsumerWidget {
                   const SizedBox(
                     height: 1,
                   ),
-                if (msg.interactionInfo != null)
-                  Row(
-                    children: msg.interactionInfo!.reactions
-                        .map<Widget>(
-                          (e) => ReactionChip(reaction: e),
-                        )
-                        .toList(),
-                  ),
+                if (msg.interactionInfo?.reactions.isNotEmpty ?? false)
+                  LayoutBuilder(builder: (ctx, constraints) {
+                    var r = msg.interactionInfo!.reactions;
+                    return SizedBox(
+                      width: constraints.maxWidth,
+                      height: 30,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        reverse: !msg.isOutgoing,
+                        itemCount: r.length * 2,
+                        shrinkWrap: true,
+                        itemBuilder: (context, i) {
+                          if (i % 2 == (msg.isOutgoing ? 1 : 0)) {
+                            return const SizedBox(width: 5);
+                          }
+
+                          return ReactionChip(
+                            chatId: msg.chatId,
+                            messageId: msg.id,
+                            reaction: r[i ~/ 2],
+                          );
+                        },
+                      ),
+                    );
+                  }),
                 const SizedBox(height: 1),
                 if (!small)
                   Row(

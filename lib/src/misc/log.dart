@@ -57,7 +57,7 @@ class Log {
     );
 
     // ignore: avoid_print
-    print("[${_revAssocs[entry.level]}] [${entry.tag}] ${entry.message}");
+    //print("[${_revAssocs[entry.level]}] [${entry.tag}] ${entry.message}");
   }
 
   LogEntry _gen(LogEntryLevel level, String tag, String message) {
