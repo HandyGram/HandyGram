@@ -1,5 +1,6 @@
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
+import 'package:handygram/src/misc/utils.dart';
 import 'package:handygram/src/pages/photo_viewer.dart';
 import 'package:handygram/src/telegram/images.dart';
 import 'package:handygram/src/telegram/messages.dart';
@@ -110,8 +111,8 @@ class _MessageTilePhotoContentState extends State<MessageTilePhotoContent> {
         if (content.caption != null && content.caption!.text.isNotEmpty)
           Text(
             content.caption!.text,
-            style: const TextStyle(
-              fontSize: 12,
+            style: TextStyle(
+              fontSize: scaleText(12),
             ),
           ),
       ],

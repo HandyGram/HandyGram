@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:handygram/src/misc/settings_db.dart';
+import 'package:handygram/src/misc/utils.dart';
 import 'package:handygram/src/tdlib/tdclient/platform_interfaces/td_olugin.dart';
 import 'package:handygram/src/telegram/session.dart';
 
@@ -111,13 +112,13 @@ class _TDLibLoaderState extends State<TDLibLoader> {
                       : clientWasDestroyed
                           ? "Reloading TDLib..."
                           : "Loading TDLib..."),
-                  const Text(
+                  Text(
                     "Pro tip:\n"
                     "connect to a Wi-Fi\n"
                     "(even phone hotspot!)\n"
                     "on watch to speed up load",
                     style: TextStyle(
-                      fontSize: 8,
+                      fontSize: scaleText(8),
                       fontStyle: FontStyle.italic,
                       color: Colors.grey,
                     ),
@@ -126,8 +127,8 @@ class _TDLibLoaderState extends State<TDLibLoader> {
                   if (settingsStorage.debug)
                     Text(
                       "Last client id: $lastClientId",
-                      style: const TextStyle(
-                        fontSize: 8,
+                      style: TextStyle(
+                        fontSize: scaleText(8),
                         fontStyle: FontStyle.italic,
                         color: Colors.grey,
                       ),

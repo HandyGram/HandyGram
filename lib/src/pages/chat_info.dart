@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:handygram/src/misc/settings_db.dart';
+import 'package:handygram/src/misc/utils.dart';
 import 'package:handygram/src/pages/photo_viewer.dart';
 import 'package:handygram/src/telegram/images.dart';
 import 'package:handygram/src/telegram/session.dart';
@@ -39,7 +40,7 @@ class _ChatInfoPageState extends State<ChatInfoPage> {
         textAlign: align,
         style: TextStyle(
           color: Theme.of(context).textTheme.bodyMedium?.color,
-          fontSize: 12,
+          fontSize: scaleText(12),
         ),
       ),
     );

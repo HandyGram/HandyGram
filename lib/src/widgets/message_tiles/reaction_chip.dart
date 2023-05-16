@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:handygram/src/misc/utils.dart';
 import 'package:handygram/src/tdlib/td_api.dart' as tdlib;
 import 'package:handygram/src/telegram/session.dart';
 
@@ -86,8 +87,8 @@ class _ReactionChipState extends State<ReactionChip>
                     emoji,
                     maxLines: 1,
                     overflow: TextOverflow.clip,
-                    style: const TextStyle(
-                      fontSize: 12,
+                    style: TextStyle(
+                      fontSize: scaleText(12),
                     ),
                   ),
                   const SizedBox(width: 5),
@@ -95,8 +96,8 @@ class _ReactionChipState extends State<ReactionChip>
                     widget.reaction.totalCount.toString(),
                     maxLines: 1,
                     overflow: TextOverflow.clip,
-                    style: const TextStyle(
-                      fontSize: 12,
+                    style: TextStyle(
+                      fontSize: scaleText(12),
                     ),
                   ),
                 ],

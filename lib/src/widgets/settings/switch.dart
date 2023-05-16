@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:handygram/src/misc/utils.dart';
 
 class SettingsSwitch extends StatefulWidget {
   const SettingsSwitch({
@@ -36,7 +37,7 @@ class _SettingsSwitchState extends State<SettingsSwitch> {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  fontSize: 11,
+                  fontSize: scaleText(11),
                   fontWeight: FontWeight.bold,
                   color: !widget.active ? Colors.grey : null,
                 ),
@@ -53,7 +54,7 @@ class _SettingsSwitchState extends State<SettingsSwitch> {
                           maxLines: 10,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                            fontSize: 8,
+                            fontSize: scaleText(8),
                             color: !widget.active ? Colors.grey : null,
                           ),
                         )

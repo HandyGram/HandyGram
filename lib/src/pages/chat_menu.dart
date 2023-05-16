@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:handygram/src/misc/settings_db.dart';
+import 'package:handygram/src/misc/utils.dart';
 import 'package:handygram/src/telegram/session.dart';
 import 'package:handygram/src/widgets/chat_image.dart';
 import 'package:handygram/src/widgets/list.dart';
@@ -58,7 +59,7 @@ class _ChatMenuPageState extends State<ChatMenuPage> {
                           style: TextStyle(
                             color:
                                 Theme.of(context).textTheme.bodyMedium?.color,
-                            fontSize: 12,
+                            fontSize: scaleText(12),
                           ),
                         ),
                       ),

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
+import 'package:handygram/src/misc/utils.dart';
 import 'package:handygram/src/telegram/loadfile.dart';
 import 'package:handygram/src/widgets/loading_box.dart';
 import 'package:video_player/video_player.dart';
@@ -57,13 +58,13 @@ class _MicroPlayerState extends State<MicroPlayer> {
           preview = prov == null
               ? Container(
                   color: Colors.white.withOpacity(0.2),
-                  child: const SizedBox.expand(
+                  child: SizedBox.expand(
                     child: Align(
                       alignment: Alignment.bottomCenter,
                       child: Text(
                         "Error loading preview",
                         style: TextStyle(
-                          fontSize: 8,
+                          fontSize: scaleText(8),
                         ),
                       ),
                     ),

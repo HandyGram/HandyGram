@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:async/async.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:handygram/src/misc/utils.dart';
 import 'package:handygram/src/telegram/loadfile.dart';
 import 'package:handygram/src/telegram/messages.dart';
 import 'package:handygram/src/tdlib/td_api.dart' as tdlib;
@@ -183,8 +184,8 @@ class _MessageVoiceNoteContentState extends State<MessageVoiceNoteContent> {
                         seconds: content.voiceNote.duration,
                       ),
                     ),
-                    style: const TextStyle(
-                      fontSize: 10,
+                    style: TextStyle(
+                      fontSize: scaleText(10),
                     ),
                   ),
                 ],
@@ -195,8 +196,8 @@ class _MessageVoiceNoteContentState extends State<MessageVoiceNoteContent> {
         if (content.caption != null && content.caption!.text.isNotEmpty)
           Text(
             content.caption!.text,
-            style: const TextStyle(
-              fontSize: 12,
+            style: TextStyle(
+              fontSize: scaleText(12),
             ),
           ),
       ],

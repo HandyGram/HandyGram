@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:handygram/src/misc/utils.dart';
 
 class PreSettingsButton extends StatefulWidget {
   const PreSettingsButton({
@@ -54,12 +55,17 @@ class _PreSettingsButtonState extends State<PreSettingsButton> {
             ),
             if (widget.title != null) const SizedBox(width: 10),
             if (widget.title != null)
-              Text(
-                widget.title!,
-                style: TextStyle(
-                  color: widget.foreground ??
-                      Theme.of(context).textTheme.bodyMedium!.color,
-                  fontSize: 14,
+              Expanded(
+                child: Text(
+                  widget.title!,
+                  style: TextStyle(
+                    color: widget.foreground ??
+                        Theme.of(context).textTheme.bodyMedium!.color,
+                    fontSize: scaleText(14),
+                  ),
+                  overflow: TextOverflow.fade,
+                  maxLines: 1,
+                  softWrap: false,
                 ),
               ),
           ],

@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
+import 'package:handygram/src/misc/utils.dart';
 import 'package:handygram/src/telegram/images.dart';
 import 'package:handygram/src/telegram/messages.dart';
 import 'package:handygram/src/pages/mini_player.dart';
@@ -113,9 +114,9 @@ class _MessageTileVideoContentState extends State<MessageTileVideoContent> {
                                 dur.inHours == 0
                                     ? "  Video (${(dur.inMinutes % 60).toString().padLeft(2, '0')}:${(dur.inSeconds % 60).toString().padLeft(2, '0')})"
                                     : "  Video (${(dur.inHours % 60).toString().padLeft(2, '0')}:${(dur.inMinutes % 60).toString().padLeft(2, '0')}:${(dur.inSeconds % 60).toString().padLeft(2, '0')})",
-                                style: const TextStyle(
-                                  fontSize: 10,
-                                  shadows: [
+                                style: TextStyle(
+                                  fontSize: scaleText(10),
+                                  shadows: const [
                                     Shadow(
                                       blurRadius: 5,
                                     ),
@@ -152,8 +153,8 @@ class _MessageTileVideoContentState extends State<MessageTileVideoContent> {
         if (content.caption != null && content.caption!.text.isNotEmpty)
           Text(
             content.caption!.text,
-            style: const TextStyle(
-              fontSize: 12,
+            style: TextStyle(
+              fontSize: scaleText(12),
             ),
           ),
       ],

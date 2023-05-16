@@ -2,8 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:handygram/src/misc/settings_db.dart';
+import 'package:handygram/src/misc/utils.dart';
 import 'package:handygram/src/telegram/session.dart';
 import 'package:handygram/src/widgets/list.dart';
+import 'package:handygram/src/widgets/settings/error_box.dart';
+import 'package:handygram/src/widgets/settings/section.dart';
+import 'package:handygram/src/widgets/settings/slider.dart';
 import 'package:handygram/src/widgets/settings/switch.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -27,21 +31,11 @@ class _SettingsPageState extends State<SettingsPage> {
               },
             ),
           if (settingsStorage.settingsLoadError != null)
-            Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.errorContainer,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              padding: const EdgeInsets.all(10),
-              width: double.infinity,
-              child: Text(
-                "Failed to restore settings database. Your settings were reset.",
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onErrorContainer,
-                  fontSize: 12,
-                ),
-              ),
+            const SettingsErrorBox(
+              text:
+                  "Failed to restore settings database. Your settings were reset.",
             ),
+          const SettingsSection(title: "Interface", icon: Icons.visibility),
           SettingsSwitch(
             onChanged: (v) {
               setState(() {
@@ -54,6 +48,37 @@ class _SettingsPageState extends State<SettingsPage> {
                 "Disable on-screen back buttons if you have hardware ones.",
             value: settingsStorage.backButtonDisabled,
           ),
+          SettingsSwitch(
+            onChanged: (v) {
+              setState(() {
+                settingsStorage.noProfilePhotos =
+                    !settingsStorage.noProfilePhotos;
+              });
+            },
+            title: "Disable profile pictures",
+            description: "Disable profile pictures nearby messages",
+            value: settingsStorage.noProfilePhotos,
+          ),
+          if (settingsStorage.textScale > 1.25)
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: SettingsErrorBox(
+                text:
+                    "Consider disabling profile pictures with such big text size",
+              ),
+            ),
+          SettingsSlider(
+            onChanged: (v) {
+              setState(() {
+                v++;
+                settingsStorage.textScale = 0.75 * v;
+              });
+            },
+            title: "Font scale",
+            description: "Scale font",
+            value: settingsStorage.textScale / 0.75 / 2,
+          ),
+          const SettingsSection(title: "TDLib", icon: Icons.build),
           SettingsSwitch(
             onChanged: (v) {
               setState(() {
@@ -76,6 +101,7 @@ class _SettingsPageState extends State<SettingsPage> {
             description: "Give maximum download priority for all images.",
             value: settingsStorage.prioritizeAllImages,
           ),
+          const SettingsSection(title: "Developer", icon: Icons.bug_report),
           SettingsSwitch(
             onChanged: (v) {
               setState(() {
@@ -98,12 +124,16 @@ class _SettingsPageState extends State<SettingsPage> {
             value: settingsStorage.verbose,
             active: settingsStorage.debug,
           ),
+          const SettingsSection(
+            title: "Other",
+            icon: Icons.miscellaneous_services,
+          ),
           OutlinedButton.icon(
             icon: const Icon(Icons.logout),
-            label: const Text(
+            label: Text(
               "Logout",
               style: TextStyle(
-                fontSize: 11,
+                fontSize: scaleText(11),
                 fontWeight: FontWeight.bold,
               ),
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:handygram/src/misc/color.dart';
+import 'package:handygram/src/misc/utils.dart';
 import 'package:handygram/src/telegram/chats.dart';
 import 'package:handygram/src/telegram/session.dart';
 import 'chat_image.dart';
@@ -153,8 +154,8 @@ class ChatTile extends StatelessWidget {
                       Expanded(
                         child: Text(
                           title ?? "? ($id)",
-                          style: const TextStyle(
-                            fontSize: 11,
+                          style: TextStyle(
+                            fontSize: scaleText(11),
                             fontWeight: FontWeight.w500,
                           ),
                           maxLines: 1,
@@ -186,8 +187,8 @@ class ChatTile extends StatelessWidget {
                                       .title
                               : userToUsername(session.usersInfoCache[
                                   lastMessage.senderId.getSenderId()]!),
-                          style: const TextStyle(
-                            fontSize: 8,
+                          style: TextStyle(
+                            fontSize: scaleText(8),
                           ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -197,8 +198,8 @@ class ChatTile extends StatelessWidget {
                       Flexible(
                         child: Text(
                           messageContentToString(lastMessage.content),
-                          style: const TextStyle(
-                            fontSize: 10,
+                          style: TextStyle(
+                            fontSize: scaleText(10),
                             color: Colors.grey,
                           ),
                           maxLines: 1,
@@ -206,11 +207,11 @@ class ChatTile extends StatelessWidget {
                         ),
                       ),
                     if (lastDraft != null)
-                      const Flexible(
+                      Flexible(
                         child: Text(
                           "Draft",
                           style: TextStyle(
-                            fontSize: 8,
+                            fontSize: scaleText(8),
                             color: Colors.red,
                           ),
                           maxLines: 1,
@@ -221,8 +222,8 @@ class ChatTile extends StatelessWidget {
                       Flexible(
                         child: Text(
                           lastDraft ?? "Unknown",
-                          style: const TextStyle(
-                            fontSize: 10,
+                          style: TextStyle(
+                            fontSize: scaleText(10),
                             color: Colors.grey,
                           ),
                           maxLines: 1,
@@ -234,8 +235,8 @@ class ChatTile extends StatelessWidget {
                       Flexible(
                         child: Text(
                           _writersToString(writers!),
-                          style: const TextStyle(
-                            fontSize: 8,
+                          style: TextStyle(
+                            fontSize: scaleText(8),
                             color: Colors.blue,
                           ),
                           maxLines: 1,
@@ -245,8 +246,8 @@ class ChatTile extends StatelessWidget {
                     Flexible(
                       child: Text(
                         "${writers!.length == 1 ? "is" : "are"} typing...",
-                        style: const TextStyle(
-                          fontSize: 10,
+                        style: TextStyle(
+                          fontSize: scaleText(10),
                           color: Colors.blue,
                         ),
                         maxLines: 1,
@@ -298,8 +299,8 @@ class ChatTile extends StatelessWidget {
                                   .chatsInfoCache[id]?.unreadCount
                                   .toString() ??
                               ""),
-                          style: const TextStyle(
-                            fontSize: 8,
+                          style: TextStyle(
+                            fontSize: scaleText(8),
                           ),
                         ),
                       ))

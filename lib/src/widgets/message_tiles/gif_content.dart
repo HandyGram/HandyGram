@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:handygram/src/misc/utils.dart';
 import 'package:handygram/src/telegram/messages.dart';
 import 'package:handygram/src/widgets/micro_player.dart';
 import 'package:handygram/src/widgets/scaled_aspect_ratio.dart';
@@ -54,8 +55,8 @@ class MessageTileGifContent extends StatelessWidget {
         if (content.caption != null && content.caption!.text.isNotEmpty)
           Text(
             content.caption!.text,
-            style: const TextStyle(
-              fontSize: 12,
+            style: TextStyle(
+              fontSize: scaleText(12),
             ),
           ),
       ],

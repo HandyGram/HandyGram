@@ -7,6 +7,10 @@ class SettingsStorage {
   Map _raw = {};
   String? settingsLoadError;
 
+  /*
+   * TDLib
+   */
+
   bool get isAsyncInvokes => _raw["isAsyncInvokes"] ?? false;
   set isAsyncInvokes(bool value) {
     _raw["isAsyncInvokes"] = value;
@@ -19,11 +23,34 @@ class SettingsStorage {
     _settingsBox.put("settings", _raw);
   }
 
+  /*
+   * UI
+   */
+
+  /// Disable navigation back button
   bool get backButtonDisabled => _raw["backButtonDisabled"] ?? false;
   set backButtonDisabled(bool value) {
     _raw["backButtonDisabled"] = value;
     _settingsBox.put("settings", _raw);
   }
+
+  /// No profile photos nearby messages
+  bool get noProfilePhotos => _raw["noProfilePhotos"] ?? false;
+  set noProfilePhotos(bool value) {
+    _raw["noProfilePhotos"] = value;
+    _settingsBox.put("settings", _raw);
+  }
+
+  /// Small messages and other UI elements font
+  double get textScale => _raw["textScale"] ?? 1.0;
+  set textScale(double value) {
+    _raw["textScale"] = value;
+    _settingsBox.put("settings", _raw);
+  }
+
+  /*
+   * Developer
+   */
 
   bool get debug => _raw["debug"] ?? false;
   set debug(bool value) {
