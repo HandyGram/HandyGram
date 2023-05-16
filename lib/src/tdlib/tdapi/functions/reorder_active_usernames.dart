@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **ReorderActiveUsernames** *(reorderActiveUsernames)* - TDLib function
-  ///
-  /// Changes order of active usernames of the current user.
-  ///
-  /// * [usernames]: The new order of active usernames. All currently active usernames must be specified.
-  ///
-  /// [Ok] is returned on completion.
-class ReorderActiveUsernames extends TdFunction {
+///
+/// Changes order of active usernames of the current user.
+///
+/// * [usernames]: The new order of active usernames. All currently active usernames must be specified.
+///
+/// [Ok] is returned on completion.
+final class ReorderActiveUsernames extends TdFunction {
   
   /// **ReorderActiveUsernames** *(reorderActiveUsernames)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class ReorderActiveUsernames extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "usernames": usernames.map((i) => i).toList(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ReorderActiveUsernames copyWith({
     List<String>? usernames,
@@ -38,8 +39,11 @@ class ReorderActiveUsernames extends TdFunction {
     usernames: usernames ?? this.usernames,
   );
 
-  static const String constructor = 'reorderActiveUsernames';
-  
+  static const String objectType = 'reorderActiveUsernames';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

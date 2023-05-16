@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **SetCustomLanguagePackString** *(setCustomLanguagePackString)* - TDLib function
-  ///
-  /// Adds, edits or deletes a string in a custom local language pack. Can be called before authorization.
-  ///
-  /// * [languagePackId]: Identifier of a previously added custom local language pack in the current localization target.
-  /// * [newString]: New language pack string.
-  ///
-  /// [Ok] is returned on completion.
-class SetCustomLanguagePackString extends TdFunction {
+///
+/// Adds, edits or deletes a string in a custom local language pack. Can be called before authorization.
+///
+/// * [languagePackId]: Identifier of a previously added custom local language pack in the current localization target.
+/// * [newString]: New language pack string.
+///
+/// [Ok] is returned on completion.
+final class SetCustomLanguagePackString extends TdFunction {
   
   /// **SetCustomLanguagePackString** *(setCustomLanguagePackString)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class SetCustomLanguagePackString extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "language_pack_id": languagePackId,
       "new_string": newString.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetCustomLanguagePackString copyWith({
     String? languagePackId,
@@ -47,8 +48,11 @@ class SetCustomLanguagePackString extends TdFunction {
     newString: newString ?? this.newString,
   );
 
-  static const String constructor = 'setCustomLanguagePackString';
-  
+  static const String objectType = 'setCustomLanguagePackString';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

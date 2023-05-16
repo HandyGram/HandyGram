@@ -1,16 +1,16 @@
 part of '../tdapi.dart';
 
 /// **StartGroupCallRecording** *(startGroupCallRecording)* - TDLib function
-  ///
-  /// Starts recording of an active group call. Requires groupCall.can_be_managed group call flag.
-  ///
-  /// * [groupCallId]: Group call identifier.
-  /// * [title]: Group call recording title; 0-64 characters.
-  /// * [recordVideo]: Pass true to record a video file instead of an audio file.
-  /// * [usePortraitOrientation]: Pass true to use portrait orientation for video instead of landscape one.
-  ///
-  /// [Ok] is returned on completion.
-class StartGroupCallRecording extends TdFunction {
+///
+/// Starts recording of an active group call. Requires groupCall.can_be_managed group call flag.
+///
+/// * [groupCallId]: Group call identifier.
+/// * [title]: Group call recording title; 0-64 characters.
+/// * [recordVideo]: Pass true to record a video file instead of an audio file.
+/// * [usePortraitOrientation]: Pass true to use portrait orientation for video instead of landscape one.
+///
+/// [Ok] is returned on completion.
+final class StartGroupCallRecording extends TdFunction {
   
   /// **StartGroupCallRecording** *(startGroupCallRecording)* - TDLib function
   ///
@@ -43,15 +43,16 @@ class StartGroupCallRecording extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "group_call_id": groupCallId,
       "title": title,
       "record_video": recordVideo,
       "use_portrait_orientation": usePortraitOrientation,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   StartGroupCallRecording copyWith({
     int? groupCallId,
@@ -65,8 +66,11 @@ class StartGroupCallRecording extends TdFunction {
     usePortraitOrientation: usePortraitOrientation ?? this.usePortraitOrientation,
   );
 
-  static const String constructor = 'startGroupCallRecording';
-  
+  static const String objectType = 'startGroupCallRecording';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

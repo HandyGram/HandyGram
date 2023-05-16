@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **CreateBasicGroupChat** *(createBasicGroupChat)* - TDLib function
-  ///
-  /// Returns an existing chat corresponding to a known basic group.
-  ///
-  /// * [basicGroupId]: Basic group identifier.
-  /// * [force]: Pass true to create the chat without a network request. In this case all information about the chat except its type, title and photo can be incorrect.
-  ///
-  /// [Chat] is returned on completion.
-class CreateBasicGroupChat extends TdFunction {
+///
+/// Returns an existing chat corresponding to a known basic group.
+///
+/// * [basicGroupId]: Basic group identifier.
+/// * [force]: Pass true to create the chat without a network request. In this case all information about the chat except its type, title and photo can be incorrect.
+///
+/// [Chat] is returned on completion.
+final class CreateBasicGroupChat extends TdFunction {
   
   /// **CreateBasicGroupChat** *(createBasicGroupChat)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class CreateBasicGroupChat extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "basic_group_id": basicGroupId,
       "force": force,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   CreateBasicGroupChat copyWith({
     int? basicGroupId,
@@ -47,8 +48,11 @@ class CreateBasicGroupChat extends TdFunction {
     force: force ?? this.force,
   );
 
-  static const String constructor = 'createBasicGroupChat';
-  
+  static const String objectType = 'createBasicGroupChat';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

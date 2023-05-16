@@ -1,16 +1,16 @@
 part of '../tdapi.dart';
 
 /// **EditMessageText** *(editMessageText)* - TDLib function
-  ///
-  /// Edits the text of a message (or a text of a game message). Returns the edited message after the edit is completed on the server side.
-  ///
-  /// * [chatId]: The chat the message belongs to.
-  /// * [messageId]: Identifier of the message.
-  /// * [replyMarkup]: The new message reply markup; pass null if none; for bots only *(optional)*.
-  /// * [inputMessageContent]: New text content of the message. Must be of type inputMessageText.
-  ///
-  /// [Message] is returned on completion.
-class EditMessageText extends TdFunction {
+///
+/// Edits the text of a message (or a text of a game message). Returns the edited message after the edit is completed on the server side.
+///
+/// * [chatId]: The chat the message belongs to.
+/// * [messageId]: Identifier of the message.
+/// * [replyMarkup]: The new message reply markup; pass null if none; for bots only *(optional)*.
+/// * [inputMessageContent]: New text content of the message. Must be of type inputMessageText.
+///
+/// [Message] is returned on completion.
+final class EditMessageText extends TdFunction {
   
   /// **EditMessageText** *(editMessageText)* - TDLib function
   ///
@@ -43,15 +43,16 @@ class EditMessageText extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "reply_markup": replyMarkup?.toJson(),
       "input_message_content": inputMessageContent.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   EditMessageText copyWith({
     int? chatId,
@@ -65,8 +66,11 @@ class EditMessageText extends TdFunction {
     inputMessageContent: inputMessageContent ?? this.inputMessageContent,
   );
 
-  static const String constructor = 'editMessageText';
-  
+  static const String objectType = 'editMessageText';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

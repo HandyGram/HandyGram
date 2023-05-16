@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **GetDefaultEmojiStatuses** *(getDefaultEmojiStatuses)* - TDLib function
-  ///
-  /// Returns default emoji statuses.
-  ///
-  /// [EmojiStatuses] is returned on completion.
-class GetDefaultEmojiStatuses extends TdFunction {
+///
+/// Returns default emoji statuses.
+///
+/// [EmojiStatuses] is returned on completion.
+final class GetDefaultEmojiStatuses extends TdFunction {
   
   /// **GetDefaultEmojiStatuses** *(getDefaultEmojiStatuses)* - TDLib function
   ///
@@ -17,16 +17,20 @@ class GetDefaultEmojiStatuses extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetDefaultEmojiStatuses copyWith() => const GetDefaultEmojiStatuses();
 
-  static const String constructor = 'getDefaultEmojiStatuses';
-  
+  static const String objectType = 'getDefaultEmojiStatuses';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

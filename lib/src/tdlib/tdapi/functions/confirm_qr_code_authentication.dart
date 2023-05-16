@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **ConfirmQrCodeAuthentication** *(confirmQrCodeAuthentication)* - TDLib function
-  ///
-  /// Confirms QR code authentication on another device. Returns created session on success.
-  ///
-  /// * [link]: A link from a QR code. The link must be scanned by the in-app camera.
-  ///
-  /// [Session] is returned on completion.
-class ConfirmQrCodeAuthentication extends TdFunction {
+///
+/// Confirms QR code authentication on another device. Returns created session on success.
+///
+/// * [link]: A link from a QR code. The link must be scanned by the in-app camera.
+///
+/// [Session] is returned on completion.
+final class ConfirmQrCodeAuthentication extends TdFunction {
   
   /// **ConfirmQrCodeAuthentication** *(confirmQrCodeAuthentication)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class ConfirmQrCodeAuthentication extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "link": link,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ConfirmQrCodeAuthentication copyWith({
     String? link,
@@ -38,8 +39,11 @@ class ConfirmQrCodeAuthentication extends TdFunction {
     link: link ?? this.link,
   );
 
-  static const String constructor = 'confirmQrCodeAuthentication';
-  
+  static const String objectType = 'confirmQrCodeAuthentication';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

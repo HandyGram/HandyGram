@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **RateSpeechRecognition** *(rateSpeechRecognition)* - TDLib function
-  ///
-  /// Rates recognized speech in a video note or a voice note message.
-  ///
-  /// * [chatId]: Identifier of the chat to which the message belongs.
-  /// * [messageId]: Identifier of the message.
-  /// * [isGood]: Pass true if the speech recognition is good.
-  ///
-  /// [Ok] is returned on completion.
-class RateSpeechRecognition extends TdFunction {
+///
+/// Rates recognized speech in a video note or a voice note message.
+///
+/// * [chatId]: Identifier of the chat to which the message belongs.
+/// * [messageId]: Identifier of the message.
+/// * [isGood]: Pass true if the speech recognition is good.
+///
+/// [Ok] is returned on completion.
+final class RateSpeechRecognition extends TdFunction {
   
   /// **RateSpeechRecognition** *(rateSpeechRecognition)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class RateSpeechRecognition extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "is_good": isGood,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   RateSpeechRecognition copyWith({
     int? chatId,
@@ -56,8 +57,11 @@ class RateSpeechRecognition extends TdFunction {
     isGood: isGood ?? this.isGood,
   );
 
-  static const String constructor = 'rateSpeechRecognition';
-  
+  static const String objectType = 'rateSpeechRecognition';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

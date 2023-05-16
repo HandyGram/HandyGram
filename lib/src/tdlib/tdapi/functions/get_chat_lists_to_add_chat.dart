@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetChatListsToAddChat** *(getChatListsToAddChat)* - TDLib function
-  ///
-  /// Returns chat lists to which the chat can be added. This is an offline request.
-  ///
-  /// * [chatId]: Chat identifier.
-  ///
-  /// [ChatLists] is returned on completion.
-class GetChatListsToAddChat extends TdFunction {
+///
+/// Returns chat lists to which the chat can be added. This is an offline request.
+///
+/// * [chatId]: Chat identifier.
+///
+/// [ChatLists] is returned on completion.
+final class GetChatListsToAddChat extends TdFunction {
   
   /// **GetChatListsToAddChat** *(getChatListsToAddChat)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetChatListsToAddChat extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetChatListsToAddChat copyWith({
     int? chatId,
@@ -38,8 +39,11 @@ class GetChatListsToAddChat extends TdFunction {
     chatId: chatId ?? this.chatId,
   );
 
-  static const String constructor = 'getChatListsToAddChat';
-  
+  static const String objectType = 'getChatListsToAddChat';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

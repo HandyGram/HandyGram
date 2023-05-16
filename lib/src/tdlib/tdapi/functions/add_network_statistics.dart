@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **AddNetworkStatistics** *(addNetworkStatistics)* - TDLib function
-  ///
-  /// Adds the specified data to data usage statistics. Can be called before authorization.
-  ///
-  /// * [entry]: The network statistics entry with the data to be added to statistics.
-  ///
-  /// [Ok] is returned on completion.
-class AddNetworkStatistics extends TdFunction {
+///
+/// Adds the specified data to data usage statistics. Can be called before authorization.
+///
+/// * [entry]: The network statistics entry with the data to be added to statistics.
+///
+/// [Ok] is returned on completion.
+final class AddNetworkStatistics extends TdFunction {
   
   /// **AddNetworkStatistics** *(addNetworkStatistics)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class AddNetworkStatistics extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "entry": entry.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   AddNetworkStatistics copyWith({
     NetworkStatisticsEntry? entry,
@@ -38,8 +39,11 @@ class AddNetworkStatistics extends TdFunction {
     entry: entry ?? this.entry,
   );
 
-  static const String constructor = 'addNetworkStatistics';
-  
+  static const String objectType = 'addNetworkStatistics';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

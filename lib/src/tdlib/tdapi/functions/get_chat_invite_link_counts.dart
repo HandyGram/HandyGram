@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetChatInviteLinkCounts** *(getChatInviteLinkCounts)* - TDLib function
-  ///
-  /// Returns list of chat administrators with number of their invite links. Requires owner privileges in the chat.
-  ///
-  /// * [chatId]: Chat identifier.
-  ///
-  /// [ChatInviteLinkCounts] is returned on completion.
-class GetChatInviteLinkCounts extends TdFunction {
+///
+/// Returns list of chat administrators with number of their invite links. Requires owner privileges in the chat.
+///
+/// * [chatId]: Chat identifier.
+///
+/// [ChatInviteLinkCounts] is returned on completion.
+final class GetChatInviteLinkCounts extends TdFunction {
   
   /// **GetChatInviteLinkCounts** *(getChatInviteLinkCounts)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetChatInviteLinkCounts extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetChatInviteLinkCounts copyWith({
     int? chatId,
@@ -38,8 +39,11 @@ class GetChatInviteLinkCounts extends TdFunction {
     chatId: chatId ?? this.chatId,
   );
 
-  static const String constructor = 'getChatInviteLinkCounts';
-  
+  static const String objectType = 'getChatInviteLinkCounts';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

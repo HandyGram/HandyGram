@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **PassportElementsWithErrors** *(passportElementsWithErrors)* - basic class
-  ///
-  /// Contains information about a Telegram Passport elements and corresponding errors.
-  ///
-  /// * [elements]: Telegram Passport elements.
-  /// * [errors]: Errors in the elements that are already available.
-class PassportElementsWithErrors extends TdObject {
+///
+/// Contains information about a Telegram Passport elements and corresponding errors.
+///
+/// * [elements]: Telegram Passport elements.
+/// * [errors]: Errors in the elements that are already available.
+final class PassportElementsWithErrors extends TdObject {
   
   /// **PassportElementsWithErrors** *(passportElementsWithErrors)* - basic class
   ///
@@ -45,13 +45,14 @@ class PassportElementsWithErrors extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "elements": elements.map((i) => i.toJson()).toList(),
       "errors": errors.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   PassportElementsWithErrors copyWith({
     List<PassportElement>? elements,
@@ -65,8 +66,11 @@ class PassportElementsWithErrors extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'passportElementsWithErrors';
-  
+  static const String objectType = 'passportElementsWithErrors';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

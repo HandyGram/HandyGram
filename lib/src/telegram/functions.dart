@@ -6,18 +6,18 @@ class TelegramError implements Exception {
 
   @override
   String toString() {
-    if (abuser?.getConstructor() == tdlib.TdError.constructor) {
+    if (abuser is tdlib.TdError) {
       var e = abuser as tdlib.TdError;
       return "[${e.extra is int ? (e.extra as int).toRadixString(16) : e.extra}] [TelegramError/TdError ${e.code}] ${e.message}";
     }
-    return "[TelegramError/${abuser?.getConstructor()}] $message (object data: ${abuser?.toJson()})";
+    return "[TelegramError/${abuser?.instanceType}] $message (object data: ${abuser?.toJson()})";
   }
 
   TelegramError(
     this.abuser,
     this.message,
   ) {
-    if (abuser?.getConstructor() == tdlib.TdError.constructor) {
+    if (abuser is tdlib.TdError) {
       var e = abuser as tdlib.TdError;
       l.e(
         "TelegramError",
@@ -84,11 +84,10 @@ class TelegramFunctions {
       chatList: chatList,
     ));
     if (obj == null) return null;
-    if (obj.getConstructor() != tdlib.Chats.constructor) {
+    if (obj is! tdlib.Chats) {
       throw TelegramError(obj, "object is not tdlib.Chats");
     }
-    tdlib.Chats list = obj as tdlib.Chats;
-    return list.chatIds;
+    return obj.chatIds;
   }
 
   Future<tdlib.Chat?> getChat(int id) async {
@@ -99,11 +98,10 @@ class TelegramFunctions {
       ));
     } catch (_) {}
     if (obj == null) return null;
-    if (obj.getConstructor() != tdlib.Chat.constructor) {
-      throw TelegramError(
-          obj, "object ${obj.getConstructor()} is not tdlib.Chat");
+    if (obj is! tdlib.Chat) {
+      throw TelegramError(obj, "object is not tdlib.Chat");
     }
-    return obj as tdlib.Chat;
+    return obj;
   }
 
   Future<tdlib.User?> getUser(int id) async {
@@ -114,10 +112,10 @@ class TelegramFunctions {
       ));
     } catch (_) {}
     if (obj == null) return null;
-    if (obj.getConstructor() != tdlib.User.constructor) {
+    if (obj is! tdlib.User) {
       throw TelegramError(obj, "object is not tdlib.User");
     }
-    return obj as tdlib.User;
+    return obj;
   }
 
   Future<tdlib.UserFullInfo?> getUserFullInfo(int id) async {
@@ -125,10 +123,10 @@ class TelegramFunctions {
       userId: id,
     ));
     if (obj == null) return null;
-    if (obj.getConstructor() != tdlib.UserFullInfo.constructor) {
+    if (obj is! tdlib.UserFullInfo) {
       throw TelegramError(obj, "object is not tdlib.UserFullInfo");
     }
-    return obj as tdlib.UserFullInfo;
+    return obj;
   }
 
   Future<List<TgMessage?>?> getMessages(
@@ -140,11 +138,10 @@ class TelegramFunctions {
       messageIds: messageIds,
     ));
     if (obj == null) return null;
-    if (obj.getConstructor() != tdlib.Messages.constructor) {
+    if (obj is! tdlib.Messages) {
       throw TelegramError(obj, "object is not tdlib.Messages");
     }
-    tdlib.Messages list = obj as tdlib.Messages;
-    return list.messages.map((e) => TgMessage(e)).toList();
+    return obj.messages.map((e) => TgMessage(e)).toList();
   }
 
   Future<TgMessage?> getMessage(
@@ -156,10 +153,10 @@ class TelegramFunctions {
       messageId: messageId,
     ));
     if (obj == null) return null;
-    if (obj.getConstructor() != tdlib.Message.constructor) {
+    if (obj is! tdlib.Message) {
       throw TelegramError(obj, "object is not tdlib.Message");
     }
-    return TgMessage(obj as tdlib.Message);
+    return TgMessage(obj);
   }
 
   Future<List<TgMessage?>?> getChatHistory(
@@ -177,26 +174,25 @@ class TelegramFunctions {
       onlyLocal: onlyLocal,
     ));
     if (obj == null) return null;
-    if (obj.getConstructor() != tdlib.Messages.constructor) {
+    if (obj is! tdlib.Messages) {
       throw TelegramError(obj, "object is not tdlib.Messages");
     }
-    tdlib.Messages list = obj as tdlib.Messages;
-    return list.messages.map((e) => TgMessage(e)).toList();
+    return obj.messages.map((e) => TgMessage(e)).toList();
   }
 
   Future<tdlib.User?> getMe() async {
     tdlib.TdObject? obj = await _invoke(const tdlib.GetMe());
     if (obj == null) return null;
-    if (obj.getConstructor() != tdlib.User.constructor) {
+    if (obj is! tdlib.User) {
       throw TelegramError(obj, "object is not tdlib.User");
     }
-    return obj as tdlib.User;
+    return obj;
   }
 
   Future<void> logOut() async {
     tdlib.TdObject? obj = await _invoke(const tdlib.LogOut());
     if (obj == null) return;
-    if (obj.getConstructor() != tdlib.Ok.constructor) {
+    if (obj is! tdlib.Ok) {
       throw TelegramError(obj, "object is not tdlib.Ok");
     }
   }
@@ -206,7 +202,7 @@ class TelegramFunctions {
   ) async {
     tdlib.TdObject? obj = await _invoke(setTdlibParameters);
     if (obj == null) return;
-    if (obj.getConstructor() != tdlib.Ok.constructor) {
+    if (obj is! tdlib.Ok) {
       throw TelegramError(obj, "object is not tdlib.Ok");
     }
   }
@@ -218,10 +214,10 @@ class TelegramFunctions {
       ),
     );
     if (obj == null) return null;
-    if (obj.getConstructor() != tdlib.File.constructor) {
+    if (obj is! tdlib.File) {
       throw TelegramError(obj, "object is not tdlib.File");
     }
-    return obj as tdlib.File;
+    return obj;
   }
 
   Future<tdlib.File?> getRemoteFile(
@@ -235,10 +231,10 @@ class TelegramFunctions {
       ),
     );
     if (obj == null) return null;
-    if (obj.getConstructor() != tdlib.File.constructor) {
+    if (obj is! tdlib.File) {
       throw TelegramError(obj, "object is not tdlib.File");
     }
-    return obj as tdlib.File;
+    return obj;
   }
 
   Future<tdlib.File?> downloadFile(
@@ -258,10 +254,10 @@ class TelegramFunctions {
       ),
     );
     if (obj == null) return null;
-    if (obj.getConstructor() != tdlib.File.constructor) {
+    if (obj is! tdlib.File) {
       throw TelegramError(obj, "object is not tdlib.File");
     }
-    return obj as tdlib.File;
+    return obj;
   }
 
   Future<void> loadChats([
@@ -273,7 +269,7 @@ class TelegramFunctions {
       chatList: chatList,
     ));
     if (obj == null) return;
-    if (obj.getConstructor() != tdlib.Ok.constructor) {
+    if (obj is! tdlib.Ok) {
       throw TelegramError(obj, "object is not tdlib.Ok");
     }
   }
@@ -289,10 +285,10 @@ class TelegramFunctions {
       limit: limit,
     ));
     if (obj == null) return null;
-    if (obj.getConstructor() != tdlib.ChatPhotos.constructor) {
+    if (obj is! tdlib.ChatPhotos) {
       throw TelegramError(obj, "object is not tdlib.ChatPhotos");
     }
-    return obj as tdlib.ChatPhotos;
+    return obj;
   }
 
   Future<tdlib.Supergroup?> getSupergroup(int id) async {
@@ -303,10 +299,10 @@ class TelegramFunctions {
       ));
     } catch (_) {}
     if (obj == null) return null;
-    if (obj.getConstructor() != tdlib.Supergroup.constructor) {
+    if (obj is! tdlib.Supergroup) {
       throw TelegramError(obj, "object is not tdlib.Supergroup");
     }
-    return obj as tdlib.Supergroup;
+    return obj;
   }
 
   Future<tdlib.SupergroupFullInfo?> getSupergroupFullInfo(int id) async {
@@ -317,10 +313,10 @@ class TelegramFunctions {
       ));
     } catch (_) {}
     if (obj == null) return null;
-    if (obj.getConstructor() != tdlib.SupergroupFullInfo.constructor) {
+    if (obj is! tdlib.SupergroupFullInfo) {
       throw TelegramError(obj, "object is not tdlib.SupergroupFullInfo");
     }
-    return obj as tdlib.SupergroupFullInfo;
+    return obj;
   }
 
   Future<tdlib.BasicGroup?> getBasicGroup(int id) async {
@@ -331,10 +327,10 @@ class TelegramFunctions {
       ));
     } catch (_) {}
     if (obj == null) return null;
-    if (obj.getConstructor() != tdlib.BasicGroup.constructor) {
+    if (obj is! tdlib.BasicGroup) {
       throw TelegramError(obj, "object is not tdlib.BasicGroup");
     }
-    return obj as tdlib.BasicGroup;
+    return obj;
   }
 
   Future<tdlib.BasicGroupFullInfo?> getBasicGroupFullInfo(int id) async {
@@ -345,10 +341,10 @@ class TelegramFunctions {
       ));
     } catch (_) {}
     if (obj == null) return null;
-    if (obj.getConstructor() != tdlib.BasicGroupFullInfo.constructor) {
+    if (obj is! tdlib.BasicGroupFullInfo) {
       throw TelegramError(obj, "object is not tdlib.BasicGroupFullInfo");
     }
-    return obj as tdlib.BasicGroupFullInfo;
+    return obj;
   }
 
   Future<List<tdlib.ChatMember>?> getSupergroupMembers(
@@ -365,9 +361,94 @@ class TelegramFunctions {
       ));
     } catch (_) {}
     if (obj == null) return null;
-    if (obj.getConstructor() != tdlib.ChatMembers.constructor) {
-      throw TelegramError(obj, "object is not tdlib.User");
+    if (obj is! tdlib.ChatMembers) {
+      throw TelegramError(obj, "object is not tdlib.ChatMembers");
     }
-    return (obj as tdlib.ChatMembers).members;
+    return obj.members;
+  }
+
+  Future<tdlib.Message?> sendMessage({
+    required int chatId,
+    required tdlib.InputMessageContent content,
+    int messageThreadId = 0,
+    int replyToMessageId = 0,
+    tdlib.MessageSendOptions? options,
+  }) async {
+    tdlib.TdObject? obj;
+    try {
+      obj = await _invoke(tdlib.SendMessage(
+        chatId: chatId,
+        inputMessageContent: content,
+        messageThreadId: messageThreadId,
+        replyToMessageId: replyToMessageId,
+        options: options,
+
+        // Used only for bots, so we just set it as null
+        replyMarkup: null,
+      ));
+    } catch (_) {}
+    if (obj == null) return null;
+    if (obj is! tdlib.Message) {
+      throw TelegramError(obj, "object is not tdlib.Message");
+    }
+    return obj;
+  }
+
+  Future<List<tdlib.Sticker>?> getStickers(
+    String query,
+    tdlib.StickerType type,
+    int chatId, [
+    int? limit,
+  ]) async {
+    tdlib.TdObject? obj;
+    try {
+      obj = await _invoke(tdlib.GetStickers(
+        query: query,
+        stickerType: type,
+        chatId: chatId,
+        limit: limit ?? 25,
+      ));
+    } catch (_) {}
+    if (obj == null) return null;
+    if (obj is! tdlib.Stickers) {
+      throw TelegramError(obj, "object is not tdlib.Stickers");
+    }
+    return obj.stickers;
+  }
+
+  Future<List<tdlib.StickerSetInfo>?> getInstalledStickerSets(
+    tdlib.StickerType type,
+  ) async {
+    tdlib.TdObject? obj;
+    try {
+      obj = await _invoke(tdlib.GetInstalledStickerSets(
+        stickerType: type,
+      ));
+    } catch (_) {}
+    if (obj == null) return null;
+    if (obj is! tdlib.StickerSets) {
+      throw TelegramError(obj, "object is not tdlib.StickerSets");
+    }
+    return obj.sets;
+  }
+
+  Future<void> addMessageReaction({
+    required int chatId,
+    required int messageId,
+    required tdlib.ReactionType type,
+    bool isBig = false,
+    bool updateRecentReactions = true,
+  }) async {
+    tdlib.TdObject? obj = await _invoke(tdlib.AddMessageReaction(
+      chatId: chatId,
+      messageId: messageId,
+      reactionType: type,
+      isBig: isBig,
+      updateRecentReactions: updateRecentReactions,
+    ));
+    if (obj == null) return;
+    if (obj is! tdlib.Ok) {
+      throw TelegramError(obj, "object is not tdlib.Ok");
+    }
   }
 }

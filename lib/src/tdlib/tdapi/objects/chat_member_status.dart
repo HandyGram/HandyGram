@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **ChatMemberStatus** *(chatMemberStatus)* - parent
-  ///
-  /// Provides information about the status of a member in a chat.
-class ChatMemberStatus extends TdObject {
+///
+/// Provides information about the status of a member in a chat.
+sealed class ChatMemberStatus extends TdObject {
   
   /// **ChatMemberStatus** *(chatMemberStatus)* - parent
   ///
@@ -19,47 +19,50 @@ class ChatMemberStatus extends TdObject {
   /// * [ChatMemberStatusBanned]
   factory ChatMemberStatus.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case ChatMemberStatusCreator.constructor:
+      case ChatMemberStatusCreator.objectType:
         return ChatMemberStatusCreator.fromJson(json);
-      case ChatMemberStatusAdministrator.constructor:
+      case ChatMemberStatusAdministrator.objectType:
         return ChatMemberStatusAdministrator.fromJson(json);
-      case ChatMemberStatusMember.constructor:
+      case ChatMemberStatusMember.objectType:
         return ChatMemberStatusMember.fromJson(json);
-      case ChatMemberStatusRestricted.constructor:
+      case ChatMemberStatusRestricted.objectType:
         return ChatMemberStatusRestricted.fromJson(json);
-      case ChatMemberStatusLeft.constructor:
+      case ChatMemberStatusLeft.objectType:
         return ChatMemberStatusLeft.fromJson(json);
-      case ChatMemberStatusBanned.constructor:
+      case ChatMemberStatusBanned.objectType:
         return ChatMemberStatusBanned.fromJson(json);
       default:
-        return const ChatMemberStatus();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of ChatMemberStatus)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  ChatMemberStatus copyWith() => const ChatMemberStatus();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'chatMemberStatus';
   
+  ChatMemberStatus copyWith();
+
+  static const String objectType = 'chatMemberStatus';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatMemberStatusCreator** *(chatMemberStatusCreator)* - child of ChatMemberStatus
-  ///
-  /// The user is the owner of the chat and has all the administrator privileges.
-  ///
-  /// * [customTitle]: A custom title of the owner; 0-16 characters without emojis; applicable to supergroups only.
-  /// * [isAnonymous]: True, if the creator isn't shown in the chat member list and sends messages anonymously; applicable to supergroups only.
-  /// * [isMember]: True, if the user is a member of the chat.
-class ChatMemberStatusCreator extends ChatMemberStatus {
+///
+/// The user is the owner of the chat and has all the administrator privileges.
+///
+/// * [customTitle]: A custom title of the owner; 0-16 characters without emojis; applicable to supergroups only.
+/// * [isAnonymous]: True, if the creator isn't shown in the chat member list and sends messages anonymously; applicable to supergroups only.
+/// * [isMember]: True, if the user is a member of the chat.
+final class ChatMemberStatusCreator extends ChatMemberStatus {
   
   /// **ChatMemberStatusCreator** *(chatMemberStatusCreator)* - child of ChatMemberStatus
   ///
@@ -92,14 +95,15 @@ class ChatMemberStatusCreator extends ChatMemberStatus {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "custom_title": customTitle,
       "is_anonymous": isAnonymous,
       "is_member": isMember,
-    };
-  }
+		};
+	}
+
   
   @override
   ChatMemberStatusCreator copyWith({
@@ -112,21 +116,24 @@ class ChatMemberStatusCreator extends ChatMemberStatus {
     isMember: isMember ?? this.isMember,
   );
 
-  static const String constructor = 'chatMemberStatusCreator';
-  
+  static const String objectType = 'chatMemberStatusCreator';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatMemberStatusAdministrator** *(chatMemberStatusAdministrator)* - child of ChatMemberStatus
-  ///
-  /// The user is a member of the chat and has some additional privileges. In basic groups, administrators can edit and delete messages sent by others, add new members, ban unprivileged members, and manage video chats.. In supergroups and channels, there are more detailed options for administrator privileges.
-  ///
-  /// * [customTitle]: A custom title of the administrator; 0-16 characters without emojis; applicable to supergroups only.
-  /// * [canBeEdited]: True, if the current user can edit the administrator privileges for the called user.
-  /// * [rights]: Rights of the administrator.
-class ChatMemberStatusAdministrator extends ChatMemberStatus {
+///
+/// The user is a member of the chat and has some additional privileges. In basic groups, administrators can edit and delete messages sent by others, add new members, ban unprivileged members, and manage video chats.. In supergroups and channels, there are more detailed options for administrator privileges.
+///
+/// * [customTitle]: A custom title of the administrator; 0-16 characters without emojis; applicable to supergroups only.
+/// * [canBeEdited]: True, if the current user can edit the administrator privileges for the called user.
+/// * [rights]: Rights of the administrator.
+final class ChatMemberStatusAdministrator extends ChatMemberStatus {
   
   /// **ChatMemberStatusAdministrator** *(chatMemberStatusAdministrator)* - child of ChatMemberStatus
   ///
@@ -159,14 +166,15 @@ class ChatMemberStatusAdministrator extends ChatMemberStatus {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "custom_title": customTitle,
       "can_be_edited": canBeEdited,
       "rights": rights.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   ChatMemberStatusAdministrator copyWith({
@@ -179,17 +187,20 @@ class ChatMemberStatusAdministrator extends ChatMemberStatus {
     rights: rights ?? this.rights,
   );
 
-  static const String constructor = 'chatMemberStatusAdministrator';
-  
+  static const String objectType = 'chatMemberStatusAdministrator';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatMemberStatusMember** *(chatMemberStatusMember)* - child of ChatMemberStatus
-  ///
-  /// The user is a member of the chat, without any additional privileges or restrictions.
-class ChatMemberStatusMember extends ChatMemberStatus {
+///
+/// The user is a member of the chat, without any additional privileges or restrictions.
+final class ChatMemberStatusMember extends ChatMemberStatus {
   
   /// **ChatMemberStatusMember** *(chatMemberStatusMember)* - child of ChatMemberStatus
   ///
@@ -200,30 +211,34 @@ class ChatMemberStatusMember extends ChatMemberStatus {
   factory ChatMemberStatusMember.fromJson(Map<String, dynamic> json) => const ChatMemberStatusMember();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   ChatMemberStatusMember copyWith() => const ChatMemberStatusMember();
 
-  static const String constructor = 'chatMemberStatusMember';
-  
+  static const String objectType = 'chatMemberStatusMember';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatMemberStatusRestricted** *(chatMemberStatusRestricted)* - child of ChatMemberStatus
-  ///
-  /// The user is under certain restrictions in the chat. Not supported in basic groups and channels.
-  ///
-  /// * [isMember]: True, if the user is a member of the chat.
-  /// * [restrictedUntilDate]: Point in time (Unix timestamp) when restrictions will be lifted from the user; 0 if never. If the user is restricted for more than 366 days or for less than 30 seconds from the current time, the user is considered to be restricted forever.
-  /// * [permissions]: User permissions in the chat.
-class ChatMemberStatusRestricted extends ChatMemberStatus {
+///
+/// The user is under certain restrictions in the chat. Not supported in basic groups and channels.
+///
+/// * [isMember]: True, if the user is a member of the chat.
+/// * [restrictedUntilDate]: Point in time (Unix timestamp) when restrictions will be lifted from the user; 0 if never. If the user is restricted for more than 366 days or for less than 30 seconds from the current time, the user is considered to be restricted forever.
+/// * [permissions]: User permissions in the chat.
+final class ChatMemberStatusRestricted extends ChatMemberStatus {
   
   /// **ChatMemberStatusRestricted** *(chatMemberStatusRestricted)* - child of ChatMemberStatus
   ///
@@ -256,14 +271,15 @@ class ChatMemberStatusRestricted extends ChatMemberStatus {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "is_member": isMember,
       "restricted_until_date": restrictedUntilDate,
       "permissions": permissions.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   ChatMemberStatusRestricted copyWith({
@@ -276,17 +292,20 @@ class ChatMemberStatusRestricted extends ChatMemberStatus {
     permissions: permissions ?? this.permissions,
   );
 
-  static const String constructor = 'chatMemberStatusRestricted';
-  
+  static const String objectType = 'chatMemberStatusRestricted';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatMemberStatusLeft** *(chatMemberStatusLeft)* - child of ChatMemberStatus
-  ///
-  /// The user or the chat is not a chat member.
-class ChatMemberStatusLeft extends ChatMemberStatus {
+///
+/// The user or the chat is not a chat member.
+final class ChatMemberStatusLeft extends ChatMemberStatus {
   
   /// **ChatMemberStatusLeft** *(chatMemberStatusLeft)* - child of ChatMemberStatus
   ///
@@ -297,28 +316,32 @@ class ChatMemberStatusLeft extends ChatMemberStatus {
   factory ChatMemberStatusLeft.fromJson(Map<String, dynamic> json) => const ChatMemberStatusLeft();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   ChatMemberStatusLeft copyWith() => const ChatMemberStatusLeft();
 
-  static const String constructor = 'chatMemberStatusLeft';
-  
+  static const String objectType = 'chatMemberStatusLeft';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatMemberStatusBanned** *(chatMemberStatusBanned)* - child of ChatMemberStatus
-  ///
-  /// The user or the chat was banned (and hence is not a member of the chat). Implies the user can't return to the chat, view messages, or be used as a participant identifier to join a video chat of the chat.
-  ///
-  /// * [bannedUntilDate]: Point in time (Unix timestamp) when the user will be unbanned; 0 if never. If the user is banned for more than 366 days or for less than 30 seconds from the current time, the user is considered to be banned forever. Always 0 in basic groups.
-class ChatMemberStatusBanned extends ChatMemberStatus {
+///
+/// The user or the chat was banned (and hence is not a member of the chat). Implies the user can't return to the chat, view messages, or be used as a participant identifier to join a video chat of the chat.
+///
+/// * [bannedUntilDate]: Point in time (Unix timestamp) when the user will be unbanned; 0 if never. If the user is banned for more than 366 days or for less than 30 seconds from the current time, the user is considered to be banned forever. Always 0 in basic groups.
+final class ChatMemberStatusBanned extends ChatMemberStatus {
   
   /// **ChatMemberStatusBanned** *(chatMemberStatusBanned)* - child of ChatMemberStatus
   ///
@@ -339,12 +362,13 @@ class ChatMemberStatusBanned extends ChatMemberStatus {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "banned_until_date": bannedUntilDate,
-    };
-  }
+		};
+	}
+
   
   @override
   ChatMemberStatusBanned copyWith({
@@ -353,8 +377,11 @@ class ChatMemberStatusBanned extends ChatMemberStatus {
     bannedUntilDate: bannedUntilDate ?? this.bannedUntilDate,
   );
 
-  static const String constructor = 'chatMemberStatusBanned';
-  
+  static const String objectType = 'chatMemberStatusBanned';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

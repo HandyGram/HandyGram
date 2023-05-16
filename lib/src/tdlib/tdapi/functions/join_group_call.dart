@@ -1,19 +1,19 @@
 part of '../tdapi.dart';
 
 /// **JoinGroupCall** *(joinGroupCall)* - TDLib function
-  ///
-  /// Joins an active group call. Returns join response payload for tgcalls.
-  ///
-  /// * [groupCallId]: Group call identifier.
-  /// * [participantId]: Identifier of a group call participant, which will be used to join the call; pass null to join as self; video chats only *(optional)*.
-  /// * [audioSourceId]: Caller audio channel synchronization source identifier; received from tgcalls.
-  /// * [payload]: Group call join payload; received from tgcalls.
-  /// * [isMuted]: Pass true to join the call with muted microphone.
-  /// * [isMyVideoEnabled]: Pass true if the user's video is enabled.
-  /// * [inviteHash]: If non-empty, invite hash to be used to join the group call without being muted by administrators.
-  ///
-  /// [Text] is returned on completion.
-class JoinGroupCall extends TdFunction {
+///
+/// Joins an active group call. Returns join response payload for tgcalls.
+///
+/// * [groupCallId]: Group call identifier.
+/// * [participantId]: Identifier of a group call participant, which will be used to join the call; pass null to join as self; video chats only *(optional)*.
+/// * [audioSourceId]: Caller audio channel synchronization source identifier; received from tgcalls.
+/// * [payload]: Group call join payload; received from tgcalls.
+/// * [isMuted]: Pass true to join the call with muted microphone.
+/// * [isMyVideoEnabled]: Pass true if the user's video is enabled.
+/// * [inviteHash]: If non-empty, invite hash to be used to join the group call without being muted by administrators.
+///
+/// [Text] is returned on completion.
+final class JoinGroupCall extends TdFunction {
   
   /// **JoinGroupCall** *(joinGroupCall)* - TDLib function
   ///
@@ -61,8 +61,8 @@ class JoinGroupCall extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "group_call_id": groupCallId,
       "participant_id": participantId?.toJson(),
       "audio_source_id": audioSourceId,
@@ -71,8 +71,9 @@ class JoinGroupCall extends TdFunction {
       "is_my_video_enabled": isMyVideoEnabled,
       "invite_hash": inviteHash,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   JoinGroupCall copyWith({
     int? groupCallId,
@@ -92,8 +93,11 @@ class JoinGroupCall extends TdFunction {
     inviteHash: inviteHash ?? this.inviteHash,
   );
 
-  static const String constructor = 'joinGroupCall';
-  
+  static const String objectType = 'joinGroupCall';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

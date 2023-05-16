@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **DeleteChatMessagesBySender** *(deleteChatMessagesBySender)* - TDLib function
-  ///
-  /// Deletes all messages sent by the specified message sender in a chat. Supported only for supergroups; requires can_delete_messages administrator privileges.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [senderId]: Identifier of the sender of messages to delete.
-  ///
-  /// [Ok] is returned on completion.
-class DeleteChatMessagesBySender extends TdFunction {
+///
+/// Deletes all messages sent by the specified message sender in a chat. Supported only for supergroups; requires can_delete_messages administrator privileges.
+///
+/// * [chatId]: Chat identifier.
+/// * [senderId]: Identifier of the sender of messages to delete.
+///
+/// [Ok] is returned on completion.
+final class DeleteChatMessagesBySender extends TdFunction {
   
   /// **DeleteChatMessagesBySender** *(deleteChatMessagesBySender)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class DeleteChatMessagesBySender extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "sender_id": senderId.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   DeleteChatMessagesBySender copyWith({
     int? chatId,
@@ -47,8 +48,11 @@ class DeleteChatMessagesBySender extends TdFunction {
     senderId: senderId ?? this.senderId,
   );
 
-  static const String constructor = 'deleteChatMessagesBySender';
-  
+  static const String objectType = 'deleteChatMessagesBySender';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

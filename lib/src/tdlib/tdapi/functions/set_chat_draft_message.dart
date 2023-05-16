@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **SetChatDraftMessage** *(setChatDraftMessage)* - TDLib function
-  ///
-  /// Changes the draft message in a chat.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [messageThreadId]: If not 0, a message thread identifier in which the draft was changed.
-  /// * [draftMessage]: New draft message; pass null to remove the draft *(optional)*.
-  ///
-  /// [Ok] is returned on completion.
-class SetChatDraftMessage extends TdFunction {
+///
+/// Changes the draft message in a chat.
+///
+/// * [chatId]: Chat identifier.
+/// * [messageThreadId]: If not 0, a message thread identifier in which the draft was changed.
+/// * [draftMessage]: New draft message; pass null to remove the draft *(optional)*.
+///
+/// [Ok] is returned on completion.
+final class SetChatDraftMessage extends TdFunction {
   
   /// **SetChatDraftMessage** *(setChatDraftMessage)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class SetChatDraftMessage extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_thread_id": messageThreadId,
       "draft_message": draftMessage?.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetChatDraftMessage copyWith({
     int? chatId,
@@ -56,8 +57,11 @@ class SetChatDraftMessage extends TdFunction {
     draftMessage: draftMessage ?? this.draftMessage,
   );
 
-  static const String constructor = 'setChatDraftMessage';
-  
+  static const String objectType = 'setChatDraftMessage';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

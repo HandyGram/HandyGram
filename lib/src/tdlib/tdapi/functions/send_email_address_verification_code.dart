@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **SendEmailAddressVerificationCode** *(sendEmailAddressVerificationCode)* - TDLib function
-  ///
-  /// Sends a code to verify an email address to be added to a user's Telegram Passport.
-  ///
-  /// * [emailAddress]: Email address.
-  ///
-  /// [EmailAddressAuthenticationCodeInfo] is returned on completion.
-class SendEmailAddressVerificationCode extends TdFunction {
+///
+/// Sends a code to verify an email address to be added to a user's Telegram Passport.
+///
+/// * [emailAddress]: Email address.
+///
+/// [EmailAddressAuthenticationCodeInfo] is returned on completion.
+final class SendEmailAddressVerificationCode extends TdFunction {
   
   /// **SendEmailAddressVerificationCode** *(sendEmailAddressVerificationCode)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class SendEmailAddressVerificationCode extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "email_address": emailAddress,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SendEmailAddressVerificationCode copyWith({
     String? emailAddress,
@@ -38,8 +39,11 @@ class SendEmailAddressVerificationCode extends TdFunction {
     emailAddress: emailAddress ?? this.emailAddress,
   );
 
-  static const String constructor = 'sendEmailAddressVerificationCode';
-  
+  static const String objectType = 'sendEmailAddressVerificationCode';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

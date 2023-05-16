@@ -1,28 +1,28 @@
 part of '../tdapi.dart';
 
 /// **GroupCallParticipant** *(groupCallParticipant)* - basic class
-  ///
-  /// Represents a group call participant.
-  ///
-  /// * [participantId]: Identifier of the group call participant.
-  /// * [audioSourceId]: User's audio channel synchronization source identifier.
-  /// * [screenSharingAudioSourceId]: User's screen sharing audio channel synchronization source identifier.
-  /// * [videoInfo]: Information about user's video channel; may be null if there is no active video *(optional)*.
-  /// * [screenSharingVideoInfo]: Information about user's screen sharing video channel; may be null if there is no active screen sharing video *(optional)*.
-  /// * [bio]: The participant user's bio or the participant chat's description.
-  /// * [isCurrentUser]: True, if the participant is the current user.
-  /// * [isSpeaking]: True, if the participant is speaking as set by setGroupCallParticipantIsSpeaking.
-  /// * [isHandRaised]: True, if the participant hand is raised.
-  /// * [canBeMutedForAllUsers]: True, if the current user can mute the participant for all other group call participants.
-  /// * [canBeUnmutedForAllUsers]: True, if the current user can allow the participant to unmute themselves or unmute the participant (if the participant is the current user).
-  /// * [canBeMutedForCurrentUser]: True, if the current user can mute the participant only for self.
-  /// * [canBeUnmutedForCurrentUser]: True, if the current user can unmute the participant for self.
-  /// * [isMutedForAllUsers]: True, if the participant is muted for all users.
-  /// * [isMutedForCurrentUser]: True, if the participant is muted for the current user.
-  /// * [canUnmuteSelf]: True, if the participant is muted for all users, but can unmute themselves.
-  /// * [volumeLevel]: Participant's volume level; 1-20000 in hundreds of percents.
-  /// * [order]: User's order in the group call participant list. Orders must be compared lexicographically. The bigger is order, the higher is user in the list. If order is empty, the user must be removed from the participant list.
-class GroupCallParticipant extends TdObject {
+///
+/// Represents a group call participant.
+///
+/// * [participantId]: Identifier of the group call participant.
+/// * [audioSourceId]: User's audio channel synchronization source identifier.
+/// * [screenSharingAudioSourceId]: User's screen sharing audio channel synchronization source identifier.
+/// * [videoInfo]: Information about user's video channel; may be null if there is no active video *(optional)*.
+/// * [screenSharingVideoInfo]: Information about user's screen sharing video channel; may be null if there is no active screen sharing video *(optional)*.
+/// * [bio]: The participant user's bio or the participant chat's description.
+/// * [isCurrentUser]: True, if the participant is the current user.
+/// * [isSpeaking]: True, if the participant is speaking as set by setGroupCallParticipantIsSpeaking.
+/// * [isHandRaised]: True, if the participant hand is raised.
+/// * [canBeMutedForAllUsers]: True, if the current user can mute the participant for all other group call participants.
+/// * [canBeUnmutedForAllUsers]: True, if the current user can allow the participant to unmute themselves or unmute the participant (if the participant is the current user).
+/// * [canBeMutedForCurrentUser]: True, if the current user can mute the participant only for self.
+/// * [canBeUnmutedForCurrentUser]: True, if the current user can unmute the participant for self.
+/// * [isMutedForAllUsers]: True, if the participant is muted for all users.
+/// * [isMutedForCurrentUser]: True, if the participant is muted for the current user.
+/// * [canUnmuteSelf]: True, if the participant is muted for all users, but can unmute themselves.
+/// * [volumeLevel]: Participant's volume level; 1-20000 in hundreds of percents.
+/// * [order]: User's order in the group call participant list. Orders must be compared lexicographically. The bigger is order, the higher is user in the list. If order is empty, the user must be removed from the participant list.
+final class GroupCallParticipant extends TdObject {
   
   /// **GroupCallParticipant** *(groupCallParticipant)* - basic class
   ///
@@ -145,9 +145,9 @@ class GroupCallParticipant extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "participant_id": participantId.toJson(),
       "audio_source_id": audioSourceId,
       "screen_sharing_audio_source_id": screenSharingAudioSourceId,
@@ -166,8 +166,9 @@ class GroupCallParticipant extends TdObject {
       "can_unmute_self": canUnmuteSelf,
       "volume_level": volumeLevel,
       "order": order,
-    };
-  }
+		};
+	}
+
   
   GroupCallParticipant copyWith({
     MessageSender? participantId,
@@ -209,8 +210,11 @@ class GroupCallParticipant extends TdObject {
     order: order ?? this.order,
   );
 
-  static const String constructor = 'groupCallParticipant';
-  
+  static const String objectType = 'groupCallParticipant';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

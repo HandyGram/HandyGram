@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **StickerSets** *(stickerSets)* - basic class
-  ///
-  /// Represents a list of sticker sets.
-  ///
-  /// * [totalCount]: Approximate total number of sticker sets found.
-  /// * [sets]: List of sticker sets.
-class StickerSets extends TdObject {
+///
+/// Represents a list of sticker sets.
+///
+/// * [totalCount]: Approximate total number of sticker sets found.
+/// * [sets]: List of sticker sets.
+final class StickerSets extends TdObject {
   
   /// **StickerSets** *(stickerSets)* - basic class
   ///
@@ -45,13 +45,14 @@ class StickerSets extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "total_count": totalCount,
       "sets": sets.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   StickerSets copyWith({
     int? totalCount,
@@ -65,8 +66,11 @@ class StickerSets extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'stickerSets';
-  
+  static const String objectType = 'stickerSets';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

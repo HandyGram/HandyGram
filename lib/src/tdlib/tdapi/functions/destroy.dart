@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **Destroy** *(destroy)* - TDLib function
-  ///
-  /// Closes the TDLib instance, destroying all local data without a proper logout. The current user session will remain in the list of all active sessions. All local data will be destroyed.. After the destruction completes updateAuthorizationState with authorizationStateClosed will be sent. Can be called before authorization.
-  ///
-  /// [Ok] is returned on completion.
-class Destroy extends TdFunction {
+///
+/// Closes the TDLib instance, destroying all local data without a proper logout. The current user session will remain in the list of all active sessions. All local data will be destroyed.. After the destruction completes updateAuthorizationState with authorizationStateClosed will be sent. Can be called before authorization.
+///
+/// [Ok] is returned on completion.
+final class Destroy extends TdFunction {
   
   /// **Destroy** *(destroy)* - TDLib function
   ///
@@ -17,16 +17,20 @@ class Destroy extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   Destroy copyWith() => const Destroy();
 
-  static const String constructor = 'destroy';
-  
+  static const String objectType = 'destroy';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

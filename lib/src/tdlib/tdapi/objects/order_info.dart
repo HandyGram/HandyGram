@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **OrderInfo** *(orderInfo)* - basic class
-  ///
-  /// Order information.
-  ///
-  /// * [name]: Name of the user.
-  /// * [phoneNumber]: Phone number of the user.
-  /// * [emailAddress]: Email address of the user.
-  /// * [shippingAddress]: Shipping address for this order; may be null *(optional)*.
-class OrderInfo extends TdObject {
+///
+/// Order information.
+///
+/// * [name]: Name of the user.
+/// * [phoneNumber]: Phone number of the user.
+/// * [emailAddress]: Email address of the user.
+/// * [shippingAddress]: Shipping address for this order; may be null *(optional)*.
+final class OrderInfo extends TdObject {
   
   /// **OrderInfo** *(orderInfo)* - basic class
   ///
@@ -59,15 +59,16 @@ class OrderInfo extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "name": name,
       "phone_number": phoneNumber,
       "email_address": emailAddress,
       "shipping_address": shippingAddress?.toJson(),
-    };
-  }
+		};
+	}
+
   
   OrderInfo copyWith({
     String? name,
@@ -85,8 +86,11 @@ class OrderInfo extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'orderInfo';
-  
+  static const String objectType = 'orderInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

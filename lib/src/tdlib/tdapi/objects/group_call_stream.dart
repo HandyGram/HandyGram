@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GroupCallStream** *(groupCallStream)* - basic class
-  ///
-  /// Describes an available stream in a group call.
-  ///
-  /// * [channelId]: Identifier of an audio/video channel.
-  /// * [scale]: Scale of segment durations in the stream. The duration is 1000/(2**scale) milliseconds.
-  /// * [timeOffset]: Point in time when the stream currently ends; Unix timestamp in milliseconds.
-class GroupCallStream extends TdObject {
+///
+/// Describes an available stream in a group call.
+///
+/// * [channelId]: Identifier of an audio/video channel.
+/// * [scale]: Scale of segment durations in the stream. The duration is 1000/(2**scale) milliseconds.
+/// * [timeOffset]: Point in time when the stream currently ends; Unix timestamp in milliseconds.
+final class GroupCallStream extends TdObject {
   
   /// **GroupCallStream** *(groupCallStream)* - basic class
   ///
@@ -40,14 +40,15 @@ class GroupCallStream extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "channel_id": channelId,
       "scale": scale,
       "time_offset": timeOffset,
-    };
-  }
+		};
+	}
+
   
   GroupCallStream copyWith({
     int? channelId,
@@ -59,8 +60,11 @@ class GroupCallStream extends TdObject {
     timeOffset: timeOffset ?? this.timeOffset,
   );
 
-  static const String constructor = 'groupCallStream';
-  
+  static const String objectType = 'groupCallStream';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,18 +1,18 @@
 part of '../tdapi.dart';
 
 /// **BotInfo** *(botInfo)* - basic class
-  ///
-  /// Contains information about a bot.
-  ///
-  /// * [shareText]: The text that is shown on the bot's profile page and is sent together with the link when users share the bot.
-  /// * [description]: The text shown in the chat with the bot if the chat is empty.
-  /// * [photo]: Photo shown in the chat with the bot if the chat is empty; may be null *(optional)*.
-  /// * [animation]: Animation shown in the chat with the bot if the chat is empty; may be null *(optional)*.
-  /// * [menuButton]: Information about a button to show instead of the bot commands menu button; may be null if ordinary bot commands menu must be shown *(optional)*.
-  /// * [commands]: List of the bot commands.
-  /// * [defaultGroupAdministratorRights]: Default administrator rights for adding the bot to basic group and supergroup chats; may be null *(optional)*.
-  /// * [defaultChannelAdministratorRights]: Default administrator rights for adding the bot to channels; may be null *(optional)*.
-class BotInfo extends TdObject {
+///
+/// Contains information about a bot.
+///
+/// * [shareText]: The text that is shown on the bot's profile page and is sent together with the link when users share the bot.
+/// * [description]: The text shown in the chat with the bot if the chat is empty.
+/// * [photo]: Photo shown in the chat with the bot if the chat is empty; may be null *(optional)*.
+/// * [animation]: Animation shown in the chat with the bot if the chat is empty; may be null *(optional)*.
+/// * [menuButton]: Information about a button to show instead of the bot commands menu button; may be null if ordinary bot commands menu must be shown *(optional)*.
+/// * [commands]: List of the bot commands.
+/// * [defaultGroupAdministratorRights]: Default administrator rights for adding the bot to basic group and supergroup chats; may be null *(optional)*.
+/// * [defaultChannelAdministratorRights]: Default administrator rights for adding the bot to channels; may be null *(optional)*.
+final class BotInfo extends TdObject {
   
   /// **BotInfo** *(botInfo)* - basic class
   ///
@@ -75,9 +75,9 @@ class BotInfo extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "share_text": shareText,
       "description": description,
       "photo": photo?.toJson(),
@@ -86,8 +86,9 @@ class BotInfo extends TdObject {
       "commands": commands.map((i) => i.toJson()).toList(),
       "default_group_administrator_rights": defaultGroupAdministratorRights?.toJson(),
       "default_channel_administrator_rights": defaultChannelAdministratorRights?.toJson(),
-    };
-  }
+		};
+	}
+
   
   BotInfo copyWith({
     String? shareText,
@@ -109,8 +110,11 @@ class BotInfo extends TdObject {
     defaultChannelAdministratorRights: defaultChannelAdministratorRights ?? this.defaultChannelAdministratorRights,
   );
 
-  static const String constructor = 'botInfo';
-  
+  static const String objectType = 'botInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

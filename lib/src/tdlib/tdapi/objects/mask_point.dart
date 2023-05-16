@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **MaskPoint** *(maskPoint)* - parent
-  ///
-  /// Part of the face, relative to which a mask is placed.
-class MaskPoint extends TdObject {
+///
+/// Part of the face, relative to which a mask is placed.
+sealed class MaskPoint extends TdObject {
   
   /// **MaskPoint** *(maskPoint)* - parent
   ///
@@ -17,39 +17,42 @@ class MaskPoint extends TdObject {
   /// * [MaskPointChin]
   factory MaskPoint.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case MaskPointForehead.constructor:
+      case MaskPointForehead.objectType:
         return MaskPointForehead.fromJson(json);
-      case MaskPointEyes.constructor:
+      case MaskPointEyes.objectType:
         return MaskPointEyes.fromJson(json);
-      case MaskPointMouth.constructor:
+      case MaskPointMouth.objectType:
         return MaskPointMouth.fromJson(json);
-      case MaskPointChin.constructor:
+      case MaskPointChin.objectType:
         return MaskPointChin.fromJson(json);
       default:
-        return const MaskPoint();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of MaskPoint)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  MaskPoint copyWith() => const MaskPoint();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'maskPoint';
   
+  MaskPoint copyWith();
+
+  static const String objectType = 'maskPoint';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MaskPointForehead** *(maskPointForehead)* - child of MaskPoint
-  ///
-  /// The mask is placed relatively to the forehead.
-class MaskPointForehead extends MaskPoint {
+///
+/// The mask is placed relatively to the forehead.
+final class MaskPointForehead extends MaskPoint {
   
   /// **MaskPointForehead** *(maskPointForehead)* - child of MaskPoint
   ///
@@ -60,26 +63,30 @@ class MaskPointForehead extends MaskPoint {
   factory MaskPointForehead.fromJson(Map<String, dynamic> json) => const MaskPointForehead();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   MaskPointForehead copyWith() => const MaskPointForehead();
 
-  static const String constructor = 'maskPointForehead';
-  
+  static const String objectType = 'maskPointForehead';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MaskPointEyes** *(maskPointEyes)* - child of MaskPoint
-  ///
-  /// The mask is placed relatively to the eyes.
-class MaskPointEyes extends MaskPoint {
+///
+/// The mask is placed relatively to the eyes.
+final class MaskPointEyes extends MaskPoint {
   
   /// **MaskPointEyes** *(maskPointEyes)* - child of MaskPoint
   ///
@@ -90,26 +97,30 @@ class MaskPointEyes extends MaskPoint {
   factory MaskPointEyes.fromJson(Map<String, dynamic> json) => const MaskPointEyes();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   MaskPointEyes copyWith() => const MaskPointEyes();
 
-  static const String constructor = 'maskPointEyes';
-  
+  static const String objectType = 'maskPointEyes';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MaskPointMouth** *(maskPointMouth)* - child of MaskPoint
-  ///
-  /// The mask is placed relatively to the mouth.
-class MaskPointMouth extends MaskPoint {
+///
+/// The mask is placed relatively to the mouth.
+final class MaskPointMouth extends MaskPoint {
   
   /// **MaskPointMouth** *(maskPointMouth)* - child of MaskPoint
   ///
@@ -120,26 +131,30 @@ class MaskPointMouth extends MaskPoint {
   factory MaskPointMouth.fromJson(Map<String, dynamic> json) => const MaskPointMouth();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   MaskPointMouth copyWith() => const MaskPointMouth();
 
-  static const String constructor = 'maskPointMouth';
-  
+  static const String objectType = 'maskPointMouth';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MaskPointChin** *(maskPointChin)* - child of MaskPoint
-  ///
-  /// The mask is placed relatively to the chin.
-class MaskPointChin extends MaskPoint {
+///
+/// The mask is placed relatively to the chin.
+final class MaskPointChin extends MaskPoint {
   
   /// **MaskPointChin** *(maskPointChin)* - child of MaskPoint
   ///
@@ -150,17 +165,21 @@ class MaskPointChin extends MaskPoint {
   factory MaskPointChin.fromJson(Map<String, dynamic> json) => const MaskPointChin();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   MaskPointChin copyWith() => const MaskPointChin();
 
-  static const String constructor = 'maskPointChin';
-  
+  static const String objectType = 'maskPointChin';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

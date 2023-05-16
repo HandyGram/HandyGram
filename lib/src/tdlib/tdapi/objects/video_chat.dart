@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **VideoChat** *(videoChat)* - basic class
-  ///
-  /// Describes a video chat.
-  ///
-  /// * [groupCallId]: Group call identifier of an active video chat; 0 if none. Full information about the video chat can be received through the method getGroupCall.
-  /// * [hasParticipants]: True, if the video chat has participants.
-  /// * [defaultParticipantId]: Default group call participant identifier to join the video chat; may be null *(optional)*.
-class VideoChat extends TdObject {
+///
+/// Describes a video chat.
+///
+/// * [groupCallId]: Group call identifier of an active video chat; 0 if none. Full information about the video chat can be received through the method getGroupCall.
+/// * [hasParticipants]: True, if the video chat has participants.
+/// * [defaultParticipantId]: Default group call participant identifier to join the video chat; may be null *(optional)*.
+final class VideoChat extends TdObject {
   
   /// **VideoChat** *(videoChat)* - basic class
   ///
@@ -40,14 +40,15 @@ class VideoChat extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "group_call_id": groupCallId,
       "has_participants": hasParticipants,
       "default_participant_id": defaultParticipantId?.toJson(),
-    };
-  }
+		};
+	}
+
   
   VideoChat copyWith({
     int? groupCallId,
@@ -59,8 +60,11 @@ class VideoChat extends TdObject {
     defaultParticipantId: defaultParticipantId ?? this.defaultParticipantId,
   );
 
-  static const String constructor = 'videoChat';
-  
+  static const String objectType = 'videoChat';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

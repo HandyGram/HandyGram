@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **Document** *(document)* - basic class
-  ///
-  /// Describes a document of any type.
-  ///
-  /// * [fileName]: Original name of the file; as defined by the sender.
-  /// * [mimeType]: MIME type of the file; as defined by the sender.
-  /// * [minithumbnail]: Document minithumbnail; may be null *(optional)*.
-  /// * [thumbnail]: Document thumbnail in JPEG or PNG format (PNG will be used only for background patterns); as defined by the sender; may be null *(optional)*.
-  /// * [document]: File containing the document.
-class Document extends TdObject {
+///
+/// Describes a document of any type.
+///
+/// * [fileName]: Original name of the file; as defined by the sender.
+/// * [mimeType]: MIME type of the file; as defined by the sender.
+/// * [minithumbnail]: Document minithumbnail; may be null *(optional)*.
+/// * [thumbnail]: Document thumbnail in JPEG or PNG format (PNG will be used only for background patterns); as defined by the sender; may be null *(optional)*.
+/// * [document]: File containing the document.
+final class Document extends TdObject {
   
   /// **Document** *(document)* - basic class
   ///
@@ -54,16 +54,17 @@ class Document extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "file_name": fileName,
       "mime_type": mimeType,
       "minithumbnail": minithumbnail?.toJson(),
       "thumbnail": thumbnail?.toJson(),
       "document": document.toJson(),
-    };
-  }
+		};
+	}
+
   
   Document copyWith({
     String? fileName,
@@ -79,8 +80,11 @@ class Document extends TdObject {
     document: document ?? this.document,
   );
 
-  static const String constructor = 'document';
-  
+  static const String objectType = 'document';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

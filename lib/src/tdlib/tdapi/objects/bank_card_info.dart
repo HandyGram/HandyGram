@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **BankCardInfo** *(bankCardInfo)* - basic class
-  ///
-  /// Information about a bank card.
-  ///
-  /// * [title]: Title of the bank card description.
-  /// * [actions]: Actions that can be done with the bank card number.
-class BankCardInfo extends TdObject {
+///
+/// Information about a bank card.
+///
+/// * [title]: Title of the bank card description.
+/// * [actions]: Actions that can be done with the bank card number.
+final class BankCardInfo extends TdObject {
   
   /// **BankCardInfo** *(bankCardInfo)* - basic class
   ///
@@ -45,13 +45,14 @@ class BankCardInfo extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "title": title,
       "actions": actions.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   BankCardInfo copyWith({
     String? title,
@@ -65,8 +66,11 @@ class BankCardInfo extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'bankCardInfo';
-  
+  static const String objectType = 'bankCardInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

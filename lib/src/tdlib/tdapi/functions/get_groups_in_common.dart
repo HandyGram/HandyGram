@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **GetGroupsInCommon** *(getGroupsInCommon)* - TDLib function
-  ///
-  /// Returns a list of common group chats with a given user. Chats are sorted by their type and creation date.
-  ///
-  /// * [userId]: User identifier.
-  /// * [offsetChatId]: Chat identifier starting from which to return chats; use 0 for the first request.
-  /// * [limit]: The maximum number of chats to be returned; up to 100.
-  ///
-  /// [Chats] is returned on completion.
-class GetGroupsInCommon extends TdFunction {
+///
+/// Returns a list of common group chats with a given user. Chats are sorted by their type and creation date.
+///
+/// * [userId]: User identifier.
+/// * [offsetChatId]: Chat identifier starting from which to return chats; use 0 for the first request.
+/// * [limit]: The maximum number of chats to be returned; up to 100.
+///
+/// [Chats] is returned on completion.
+final class GetGroupsInCommon extends TdFunction {
   
   /// **GetGroupsInCommon** *(getGroupsInCommon)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class GetGroupsInCommon extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "user_id": userId,
       "offset_chat_id": offsetChatId,
       "limit": limit,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetGroupsInCommon copyWith({
     int? userId,
@@ -56,8 +57,11 @@ class GetGroupsInCommon extends TdFunction {
     limit: limit ?? this.limit,
   );
 
-  static const String constructor = 'getGroupsInCommon';
-  
+  static const String objectType = 'getGroupsInCommon';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **ChatStatisticsMessageInteractionInfo** *(chatStatisticsMessageInteractionInfo)* - basic class
-  ///
-  /// Contains statistics about interactions with a message.
-  ///
-  /// * [messageId]: Message identifier.
-  /// * [viewCount]: Number of times the message was viewed.
-  /// * [forwardCount]: Number of times the message was forwarded.
-class ChatStatisticsMessageInteractionInfo extends TdObject {
+///
+/// Contains statistics about interactions with a message.
+///
+/// * [messageId]: Message identifier.
+/// * [viewCount]: Number of times the message was viewed.
+/// * [forwardCount]: Number of times the message was forwarded.
+final class ChatStatisticsMessageInteractionInfo extends TdObject {
   
   /// **ChatStatisticsMessageInteractionInfo** *(chatStatisticsMessageInteractionInfo)* - basic class
   ///
@@ -40,14 +40,15 @@ class ChatStatisticsMessageInteractionInfo extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "message_id": messageId,
       "view_count": viewCount,
       "forward_count": forwardCount,
-    };
-  }
+		};
+	}
+
   
   ChatStatisticsMessageInteractionInfo copyWith({
     int? messageId,
@@ -59,8 +60,11 @@ class ChatStatisticsMessageInteractionInfo extends TdObject {
     forwardCount: forwardCount ?? this.forwardCount,
   );
 
-  static const String constructor = 'chatStatisticsMessageInteractionInfo';
-  
+  static const String objectType = 'chatStatisticsMessageInteractionInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

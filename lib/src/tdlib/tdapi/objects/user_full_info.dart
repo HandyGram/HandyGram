@@ -1,24 +1,24 @@
 part of '../tdapi.dart';
 
 /// **UserFullInfo** *(userFullInfo)* - basic class
-  ///
-  /// Contains full information about a user.
-  ///
-  /// * [personalPhoto]: User profile photo set by the current user for the contact; may be null. If null and user.profile_photo is null, then the photo is empty; otherwise, it is unknown.. If non-null, then it is the same photo as in user.profile_photo and chat.photo. This photo isn't returned in the list of user photos *(optional)*.
-  /// * [photo]: User profile photo; may be null. If null and user.profile_photo is null, then the photo is empty; otherwise, it is unknown.. If non-null and personal_photo is null, then it is the same photo as in user.profile_photo and chat.photo *(optional)*.
-  /// * [publicPhoto]: User profile photo visible if the main photo is hidden by privacy settings; may be null. If null and user.profile_photo is null, then the photo is empty; otherwise, it is unknown.. If non-null and both photo and personal_photo are null, then it is the same photo as in user.profile_photo and chat.photo. This photo isn't returned in the list of user photos *(optional)*.
-  /// * [isBlocked]: True, if the user is blocked by the current user.
-  /// * [canBeCalled]: True, if the user can be called.
-  /// * [supportsVideoCalls]: True, if a video call can be created with the user.
-  /// * [hasPrivateCalls]: True, if the user can't be called due to their privacy settings.
-  /// * [hasPrivateForwards]: True, if the user can't be linked in forwarded messages due to their privacy settings.
-  /// * [hasRestrictedVoiceAndVideoNoteMessages]: True, if voice and video notes can't be sent or forwarded to the user.
-  /// * [needPhoneNumberPrivacyException]: True, if the current user needs to explicitly allow to share their phone number with the user when the method addContact is used.
-  /// * [bio]: A short user bio; may be null for bots *(optional)*.
-  /// * [premiumGiftOptions]: The list of available options for gifting Telegram Premium to the user.
-  /// * [groupInCommonCount]: Number of group chats where both the other user and the current user are a member; 0 for the current user.
-  /// * [botInfo]: For bots, information about the bot; may be null *(optional)*.
-class UserFullInfo extends TdObject {
+///
+/// Contains full information about a user.
+///
+/// * [personalPhoto]: User profile photo set by the current user for the contact; may be null. If null and user.profile_photo is null, then the photo is empty; otherwise, it is unknown.. If non-null, then it is the same photo as in user.profile_photo and chat.photo. This photo isn't returned in the list of user photos *(optional)*.
+/// * [photo]: User profile photo; may be null. If null and user.profile_photo is null, then the photo is empty; otherwise, it is unknown.. If non-null and personal_photo is null, then it is the same photo as in user.profile_photo and chat.photo *(optional)*.
+/// * [publicPhoto]: User profile photo visible if the main photo is hidden by privacy settings; may be null. If null and user.profile_photo is null, then the photo is empty; otherwise, it is unknown.. If non-null and both photo and personal_photo are null, then it is the same photo as in user.profile_photo and chat.photo. This photo isn't returned in the list of user photos *(optional)*.
+/// * [isBlocked]: True, if the user is blocked by the current user.
+/// * [canBeCalled]: True, if the user can be called.
+/// * [supportsVideoCalls]: True, if a video call can be created with the user.
+/// * [hasPrivateCalls]: True, if the user can't be called due to their privacy settings.
+/// * [hasPrivateForwards]: True, if the user can't be linked in forwarded messages due to their privacy settings.
+/// * [hasRestrictedVoiceAndVideoNoteMessages]: True, if voice and video notes can't be sent or forwarded to the user.
+/// * [needPhoneNumberPrivacyException]: True, if the current user needs to explicitly allow to share their phone number with the user when the method addContact is used.
+/// * [bio]: A short user bio; may be null for bots *(optional)*.
+/// * [premiumGiftOptions]: The list of available options for gifting Telegram Premium to the user.
+/// * [groupInCommonCount]: Number of group chats where both the other user and the current user are a member; 0 for the current user.
+/// * [botInfo]: For bots, information about the bot; may be null *(optional)*.
+final class UserFullInfo extends TdObject {
   
   /// **UserFullInfo** *(userFullInfo)* - basic class
   ///
@@ -129,9 +129,9 @@ class UserFullInfo extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "personal_photo": personalPhoto?.toJson(),
       "photo": photo?.toJson(),
       "public_photo": publicPhoto?.toJson(),
@@ -146,8 +146,9 @@ class UserFullInfo extends TdObject {
       "premium_gift_options": premiumGiftOptions.map((i) => i.toJson()).toList(),
       "group_in_common_count": groupInCommonCount,
       "bot_info": botInfo?.toJson(),
-    };
-  }
+		};
+	}
+
   
   UserFullInfo copyWith({
     ChatPhoto? personalPhoto,
@@ -185,8 +186,11 @@ class UserFullInfo extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'userFullInfo';
-  
+  static const String objectType = 'userFullInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

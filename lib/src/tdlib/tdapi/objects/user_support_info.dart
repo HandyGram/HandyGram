@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **UserSupportInfo** *(userSupportInfo)* - basic class
-  ///
-  /// Contains custom information about the user.
-  ///
-  /// * [message]: Information message.
-  /// * [author]: Information author.
-  /// * [date]: Information change date.
-class UserSupportInfo extends TdObject {
+///
+/// Contains custom information about the user.
+///
+/// * [message]: Information message.
+/// * [author]: Information author.
+/// * [date]: Information change date.
+final class UserSupportInfo extends TdObject {
   
   /// **UserSupportInfo** *(userSupportInfo)* - basic class
   ///
@@ -52,14 +52,15 @@ class UserSupportInfo extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "message": message.toJson(),
       "author": author,
       "date": date,
-    };
-  }
+		};
+	}
+
   
   UserSupportInfo copyWith({
     FormattedText? message,
@@ -75,8 +76,11 @@ class UserSupportInfo extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'userSupportInfo';
-  
+  static const String objectType = 'userSupportInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

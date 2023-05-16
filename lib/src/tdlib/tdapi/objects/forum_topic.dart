@@ -1,20 +1,20 @@
 part of '../tdapi.dart';
 
 /// **ForumTopic** *(forumTopic)* - basic class
-  ///
-  /// Describes a forum topic.
-  ///
-  /// * [info]: Basic information about the topic.
-  /// * [lastMessage]: Last message in the topic; may be null if unknown *(optional)*.
-  /// * [isPinned]: True, if the topic is pinned in the topic list.
-  /// * [unreadCount]: Number of unread messages in the topic.
-  /// * [lastReadInboxMessageId]: Identifier of the last read incoming message.
-  /// * [lastReadOutboxMessageId]: Identifier of the last read outgoing message.
-  /// * [unreadMentionCount]: Number of unread messages with a mention/reply in the topic.
-  /// * [unreadReactionCount]: Number of messages with unread reactions in the topic.
-  /// * [notificationSettings]: Notification settings for the topic.
-  /// * [draftMessage]: A draft of a message in the topic; may be null *(optional)*.
-class ForumTopic extends TdObject {
+///
+/// Describes a forum topic.
+///
+/// * [info]: Basic information about the topic.
+/// * [lastMessage]: Last message in the topic; may be null if unknown *(optional)*.
+/// * [isPinned]: True, if the topic is pinned in the topic list.
+/// * [unreadCount]: Number of unread messages in the topic.
+/// * [lastReadInboxMessageId]: Identifier of the last read incoming message.
+/// * [lastReadOutboxMessageId]: Identifier of the last read outgoing message.
+/// * [unreadMentionCount]: Number of unread messages with a mention/reply in the topic.
+/// * [unreadReactionCount]: Number of messages with unread reactions in the topic.
+/// * [notificationSettings]: Notification settings for the topic.
+/// * [draftMessage]: A draft of a message in the topic; may be null *(optional)*.
+final class ForumTopic extends TdObject {
   
   /// **ForumTopic** *(forumTopic)* - basic class
   ///
@@ -101,9 +101,9 @@ class ForumTopic extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "info": info.toJson(),
       "last_message": lastMessage?.toJson(),
       "is_pinned": isPinned,
@@ -114,8 +114,9 @@ class ForumTopic extends TdObject {
       "unread_reaction_count": unreadReactionCount,
       "notification_settings": notificationSettings.toJson(),
       "draft_message": draftMessage?.toJson(),
-    };
-  }
+		};
+	}
+
   
   ForumTopic copyWith({
     ForumTopicInfo? info,
@@ -145,8 +146,11 @@ class ForumTopic extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'forumTopic';
-  
+  static const String objectType = 'forumTopic';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

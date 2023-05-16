@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **DatedFile** *(datedFile)* - basic class
-  ///
-  /// File with the date it was uploaded.
-  ///
-  /// * [file]: The file.
-  /// * [date]: Point in time (Unix timestamp) when the file was uploaded.
-class DatedFile extends TdObject {
+///
+/// File with the date it was uploaded.
+///
+/// * [file]: The file.
+/// * [date]: Point in time (Unix timestamp) when the file was uploaded.
+final class DatedFile extends TdObject {
   
   /// **DatedFile** *(datedFile)* - basic class
   ///
@@ -33,13 +33,14 @@ class DatedFile extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "file": file.toJson(),
       "date": date,
-    };
-  }
+		};
+	}
+
   
   DatedFile copyWith({
     File? file,
@@ -49,8 +50,11 @@ class DatedFile extends TdObject {
     date: date ?? this.date,
   );
 
-  static const String constructor = 'datedFile';
-  
+  static const String objectType = 'datedFile';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

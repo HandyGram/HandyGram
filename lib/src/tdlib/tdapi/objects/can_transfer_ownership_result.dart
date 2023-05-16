@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **CanTransferOwnershipResult** *(canTransferOwnershipResult)* - parent
-  ///
-  /// Represents result of checking whether the current session can be used to transfer a chat ownership to another user.
-class CanTransferOwnershipResult extends TdObject {
+///
+/// Represents result of checking whether the current session can be used to transfer a chat ownership to another user.
+sealed class CanTransferOwnershipResult extends TdObject {
   
   /// **CanTransferOwnershipResult** *(canTransferOwnershipResult)* - parent
   ///
@@ -17,39 +17,42 @@ class CanTransferOwnershipResult extends TdObject {
   /// * [CanTransferOwnershipResultSessionTooFresh]
   factory CanTransferOwnershipResult.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case CanTransferOwnershipResultOk.constructor:
+      case CanTransferOwnershipResultOk.objectType:
         return CanTransferOwnershipResultOk.fromJson(json);
-      case CanTransferOwnershipResultPasswordNeeded.constructor:
+      case CanTransferOwnershipResultPasswordNeeded.objectType:
         return CanTransferOwnershipResultPasswordNeeded.fromJson(json);
-      case CanTransferOwnershipResultPasswordTooFresh.constructor:
+      case CanTransferOwnershipResultPasswordTooFresh.objectType:
         return CanTransferOwnershipResultPasswordTooFresh.fromJson(json);
-      case CanTransferOwnershipResultSessionTooFresh.constructor:
+      case CanTransferOwnershipResultSessionTooFresh.objectType:
         return CanTransferOwnershipResultSessionTooFresh.fromJson(json);
       default:
-        return const CanTransferOwnershipResult();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of CanTransferOwnershipResult)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  CanTransferOwnershipResult copyWith() => const CanTransferOwnershipResult();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'canTransferOwnershipResult';
   
+  CanTransferOwnershipResult copyWith();
+
+  static const String objectType = 'canTransferOwnershipResult';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **CanTransferOwnershipResultOk** *(canTransferOwnershipResultOk)* - child of CanTransferOwnershipResult
-  ///
-  /// The session can be used.
-class CanTransferOwnershipResultOk extends CanTransferOwnershipResult {
+///
+/// The session can be used.
+final class CanTransferOwnershipResultOk extends CanTransferOwnershipResult {
   
   /// **CanTransferOwnershipResultOk** *(canTransferOwnershipResultOk)* - child of CanTransferOwnershipResult
   ///
@@ -75,11 +78,12 @@ class CanTransferOwnershipResultOk extends CanTransferOwnershipResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   CanTransferOwnershipResultOk copyWith({
@@ -90,17 +94,20 @@ class CanTransferOwnershipResultOk extends CanTransferOwnershipResult {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'canTransferOwnershipResultOk';
-  
+  static const String objectType = 'canTransferOwnershipResultOk';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **CanTransferOwnershipResultPasswordNeeded** *(canTransferOwnershipResultPasswordNeeded)* - child of CanTransferOwnershipResult
-  ///
-  /// The 2-step verification needs to be enabled first.
-class CanTransferOwnershipResultPasswordNeeded extends CanTransferOwnershipResult {
+///
+/// The 2-step verification needs to be enabled first.
+final class CanTransferOwnershipResultPasswordNeeded extends CanTransferOwnershipResult {
   
   /// **CanTransferOwnershipResultPasswordNeeded** *(canTransferOwnershipResultPasswordNeeded)* - child of CanTransferOwnershipResult
   ///
@@ -126,11 +133,12 @@ class CanTransferOwnershipResultPasswordNeeded extends CanTransferOwnershipResul
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   CanTransferOwnershipResultPasswordNeeded copyWith({
@@ -141,19 +149,22 @@ class CanTransferOwnershipResultPasswordNeeded extends CanTransferOwnershipResul
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'canTransferOwnershipResultPasswordNeeded';
-  
+  static const String objectType = 'canTransferOwnershipResultPasswordNeeded';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **CanTransferOwnershipResultPasswordTooFresh** *(canTransferOwnershipResultPasswordTooFresh)* - child of CanTransferOwnershipResult
-  ///
-  /// The 2-step verification was enabled recently, user needs to wait.
-  ///
-  /// * [retryAfter]: Time left before the session can be used to transfer ownership of a chat, in seconds.
-class CanTransferOwnershipResultPasswordTooFresh extends CanTransferOwnershipResult {
+///
+/// The 2-step verification was enabled recently, user needs to wait.
+///
+/// * [retryAfter]: Time left before the session can be used to transfer ownership of a chat, in seconds.
+final class CanTransferOwnershipResultPasswordTooFresh extends CanTransferOwnershipResult {
   
   /// **CanTransferOwnershipResultPasswordTooFresh** *(canTransferOwnershipResultPasswordTooFresh)* - child of CanTransferOwnershipResult
   ///
@@ -186,12 +197,13 @@ class CanTransferOwnershipResultPasswordTooFresh extends CanTransferOwnershipRes
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "retry_after": retryAfter,
-    };
-  }
+		};
+	}
+
   
   @override
   CanTransferOwnershipResultPasswordTooFresh copyWith({
@@ -204,19 +216,22 @@ class CanTransferOwnershipResultPasswordTooFresh extends CanTransferOwnershipRes
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'canTransferOwnershipResultPasswordTooFresh';
-  
+  static const String objectType = 'canTransferOwnershipResultPasswordTooFresh';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **CanTransferOwnershipResultSessionTooFresh** *(canTransferOwnershipResultSessionTooFresh)* - child of CanTransferOwnershipResult
-  ///
-  /// The session was created recently, user needs to wait.
-  ///
-  /// * [retryAfter]: Time left before the session can be used to transfer ownership of a chat, in seconds.
-class CanTransferOwnershipResultSessionTooFresh extends CanTransferOwnershipResult {
+///
+/// The session was created recently, user needs to wait.
+///
+/// * [retryAfter]: Time left before the session can be used to transfer ownership of a chat, in seconds.
+final class CanTransferOwnershipResultSessionTooFresh extends CanTransferOwnershipResult {
   
   /// **CanTransferOwnershipResultSessionTooFresh** *(canTransferOwnershipResultSessionTooFresh)* - child of CanTransferOwnershipResult
   ///
@@ -249,12 +264,13 @@ class CanTransferOwnershipResultSessionTooFresh extends CanTransferOwnershipResu
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "retry_after": retryAfter,
-    };
-  }
+		};
+	}
+
   
   @override
   CanTransferOwnershipResultSessionTooFresh copyWith({
@@ -267,8 +283,11 @@ class CanTransferOwnershipResultSessionTooFresh extends CanTransferOwnershipResu
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'canTransferOwnershipResultSessionTooFresh';
-  
+  static const String objectType = 'canTransferOwnershipResultSessionTooFresh';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

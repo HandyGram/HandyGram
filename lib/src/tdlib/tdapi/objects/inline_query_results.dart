@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **InlineQueryResults** *(inlineQueryResults)* - basic class
-  ///
-  /// Represents the results of the inline query. Use sendInlineQueryResultMessage to send the result of the query.
-  ///
-  /// * [inlineQueryId]: Unique identifier of the inline query.
-  /// * [nextOffset]: The offset for the next request. If empty, there are no more results.
-  /// * [results]: Results of the query.
-  /// * [switchPmText]: If non-empty, this text must be shown on the button, which opens a private chat with the bot and sends the bot a start message with the switch_pm_parameter.
-  /// * [switchPmParameter]: Parameter for the bot start message.
-class InlineQueryResults extends TdObject {
+///
+/// Represents the results of the inline query. Use sendInlineQueryResultMessage to send the result of the query.
+///
+/// * [inlineQueryId]: Unique identifier of the inline query.
+/// * [nextOffset]: The offset for the next request. If empty, there are no more results.
+/// * [results]: Results of the query.
+/// * [switchPmText]: If non-empty, this text must be shown on the button, which opens a private chat with the bot and sends the bot a start message with the switch_pm_parameter.
+/// * [switchPmParameter]: Parameter for the bot start message.
+final class InlineQueryResults extends TdObject {
   
   /// **InlineQueryResults** *(inlineQueryResults)* - basic class
   ///
@@ -66,16 +66,17 @@ class InlineQueryResults extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "inline_query_id": inlineQueryId,
       "next_offset": nextOffset,
       "results": results.map((i) => i.toJson()).toList(),
       "switch_pm_text": switchPmText,
       "switch_pm_parameter": switchPmParameter,
-    };
-  }
+		};
+	}
+
   
   InlineQueryResults copyWith({
     int? inlineQueryId,
@@ -95,8 +96,11 @@ class InlineQueryResults extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'inlineQueryResults';
-  
+  static const String objectType = 'inlineQueryResults';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

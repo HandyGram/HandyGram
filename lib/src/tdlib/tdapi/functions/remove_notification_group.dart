@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **RemoveNotificationGroup** *(removeNotificationGroup)* - TDLib function
-  ///
-  /// Removes a group of active notifications. Needs to be called only if the notification group is removed by the current user.
-  ///
-  /// * [notificationGroupId]: Notification group identifier.
-  /// * [maxNotificationId]: The maximum identifier of removed notifications.
-  ///
-  /// [Ok] is returned on completion.
-class RemoveNotificationGroup extends TdFunction {
+///
+/// Removes a group of active notifications. Needs to be called only if the notification group is removed by the current user.
+///
+/// * [notificationGroupId]: Notification group identifier.
+/// * [maxNotificationId]: The maximum identifier of removed notifications.
+///
+/// [Ok] is returned on completion.
+final class RemoveNotificationGroup extends TdFunction {
   
   /// **RemoveNotificationGroup** *(removeNotificationGroup)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class RemoveNotificationGroup extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "notification_group_id": notificationGroupId,
       "max_notification_id": maxNotificationId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   RemoveNotificationGroup copyWith({
     int? notificationGroupId,
@@ -47,8 +48,11 @@ class RemoveNotificationGroup extends TdFunction {
     maxNotificationId: maxNotificationId ?? this.maxNotificationId,
   );
 
-  static const String constructor = 'removeNotificationGroup';
-  
+  static const String objectType = 'removeNotificationGroup';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

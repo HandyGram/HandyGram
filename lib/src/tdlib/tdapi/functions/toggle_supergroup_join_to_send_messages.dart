@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **ToggleSupergroupJoinToSendMessages** *(toggleSupergroupJoinToSendMessages)* - TDLib function
-  ///
-  /// Toggles whether joining is mandatory to send messages to a discussion supergroup; requires can_restrict_members administrator right.
-  ///
-  /// * [supergroupId]: Identifier of the supergroup.
-  /// * [joinToSendMessages]: New value of join_to_send_messages.
-  ///
-  /// [Ok] is returned on completion.
-class ToggleSupergroupJoinToSendMessages extends TdFunction {
+///
+/// Toggles whether joining is mandatory to send messages to a discussion supergroup; requires can_restrict_members administrator right.
+///
+/// * [supergroupId]: Identifier of the supergroup.
+/// * [joinToSendMessages]: New value of join_to_send_messages.
+///
+/// [Ok] is returned on completion.
+final class ToggleSupergroupJoinToSendMessages extends TdFunction {
   
   /// **ToggleSupergroupJoinToSendMessages** *(toggleSupergroupJoinToSendMessages)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class ToggleSupergroupJoinToSendMessages extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "supergroup_id": supergroupId,
       "join_to_send_messages": joinToSendMessages,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ToggleSupergroupJoinToSendMessages copyWith({
     int? supergroupId,
@@ -47,8 +48,11 @@ class ToggleSupergroupJoinToSendMessages extends TdFunction {
     joinToSendMessages: joinToSendMessages ?? this.joinToSendMessages,
   );
 
-  static const String constructor = 'toggleSupergroupJoinToSendMessages';
-  
+  static const String objectType = 'toggleSupergroupJoinToSendMessages';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

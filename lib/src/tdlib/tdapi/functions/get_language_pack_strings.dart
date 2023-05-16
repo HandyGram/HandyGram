@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **GetLanguagePackStrings** *(getLanguagePackStrings)* - TDLib function
-  ///
-  /// Returns strings from a language pack in the current localization target by their keys. Can be called before authorization.
-  ///
-  /// * [languagePackId]: Language pack identifier of the strings to be returned.
-  /// * [keys]: Language pack keys of the strings to be returned; leave empty to request all available strings.
-  ///
-  /// [LanguagePackStrings] is returned on completion.
-class GetLanguagePackStrings extends TdFunction {
+///
+/// Returns strings from a language pack in the current localization target by their keys. Can be called before authorization.
+///
+/// * [languagePackId]: Language pack identifier of the strings to be returned.
+/// * [keys]: Language pack keys of the strings to be returned; leave empty to request all available strings.
+///
+/// [LanguagePackStrings] is returned on completion.
+final class GetLanguagePackStrings extends TdFunction {
   
   /// **GetLanguagePackStrings** *(getLanguagePackStrings)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class GetLanguagePackStrings extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "language_pack_id": languagePackId,
       "keys": keys.map((i) => i).toList(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetLanguagePackStrings copyWith({
     String? languagePackId,
@@ -47,8 +48,11 @@ class GetLanguagePackStrings extends TdFunction {
     keys: keys ?? this.keys,
   );
 
-  static const String constructor = 'getLanguagePackStrings';
-  
+  static const String objectType = 'getLanguagePackStrings';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

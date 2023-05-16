@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **PollOption** *(pollOption)* - basic class
-  ///
-  /// Describes one answer option of a poll.
-  ///
-  /// * [text]: Option text; 1-100 characters.
-  /// * [voterCount]: Number of voters for this option, available only for closed or voted polls.
-  /// * [votePercentage]: The percentage of votes for this option; 0-100.
-  /// * [isChosen]: True, if the option was chosen by the user.
-  /// * [isBeingChosen]: True, if the option is being chosen by a pending setPollAnswer request.
-class PollOption extends TdObject {
+///
+/// Describes one answer option of a poll.
+///
+/// * [text]: Option text; 1-100 characters.
+/// * [voterCount]: Number of voters for this option, available only for closed or voted polls.
+/// * [votePercentage]: The percentage of votes for this option; 0-100.
+/// * [isChosen]: True, if the option was chosen by the user.
+/// * [isBeingChosen]: True, if the option is being chosen by a pending setPollAnswer request.
+final class PollOption extends TdObject {
   
   /// **PollOption** *(pollOption)* - basic class
   ///
@@ -54,16 +54,17 @@ class PollOption extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text,
       "voter_count": voterCount,
       "vote_percentage": votePercentage,
       "is_chosen": isChosen,
       "is_being_chosen": isBeingChosen,
-    };
-  }
+		};
+	}
+
   
   PollOption copyWith({
     String? text,
@@ -79,8 +80,11 @@ class PollOption extends TdObject {
     isBeingChosen: isBeingChosen ?? this.isBeingChosen,
   );
 
-  static const String constructor = 'pollOption';
-  
+  static const String objectType = 'pollOption';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

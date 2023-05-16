@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **UserType** *(userType)* - parent
-  ///
-  /// Represents the type of a user. The following types are possible: regular users, deleted users and bots.
-class UserType extends TdObject {
+///
+/// Represents the type of a user. The following types are possible: regular users, deleted users and bots.
+sealed class UserType extends TdObject {
   
   /// **UserType** *(userType)* - parent
   ///
@@ -17,39 +17,42 @@ class UserType extends TdObject {
   /// * [UserTypeUnknown]
   factory UserType.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case UserTypeRegular.constructor:
+      case UserTypeRegular.objectType:
         return UserTypeRegular.fromJson(json);
-      case UserTypeDeleted.constructor:
+      case UserTypeDeleted.objectType:
         return UserTypeDeleted.fromJson(json);
-      case UserTypeBot.constructor:
+      case UserTypeBot.objectType:
         return UserTypeBot.fromJson(json);
-      case UserTypeUnknown.constructor:
+      case UserTypeUnknown.objectType:
         return UserTypeUnknown.fromJson(json);
       default:
-        return const UserType();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of UserType)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  UserType copyWith() => const UserType();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'userType';
   
+  UserType copyWith();
+
+  static const String objectType = 'userType';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UserTypeRegular** *(userTypeRegular)* - child of UserType
-  ///
-  /// A regular user.
-class UserTypeRegular extends UserType {
+///
+/// A regular user.
+final class UserTypeRegular extends UserType {
   
   /// **UserTypeRegular** *(userTypeRegular)* - child of UserType
   ///
@@ -60,26 +63,30 @@ class UserTypeRegular extends UserType {
   factory UserTypeRegular.fromJson(Map<String, dynamic> json) => const UserTypeRegular();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   UserTypeRegular copyWith() => const UserTypeRegular();
 
-  static const String constructor = 'userTypeRegular';
-  
+  static const String objectType = 'userTypeRegular';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UserTypeDeleted** *(userTypeDeleted)* - child of UserType
-  ///
-  /// A deleted user or deleted bot. No information on the user besides the user identifier is available. It is not possible to perform any active actions on this type of user.
-class UserTypeDeleted extends UserType {
+///
+/// A deleted user or deleted bot. No information on the user besides the user identifier is available. It is not possible to perform any active actions on this type of user.
+final class UserTypeDeleted extends UserType {
   
   /// **UserTypeDeleted** *(userTypeDeleted)* - child of UserType
   ///
@@ -90,33 +97,37 @@ class UserTypeDeleted extends UserType {
   factory UserTypeDeleted.fromJson(Map<String, dynamic> json) => const UserTypeDeleted();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   UserTypeDeleted copyWith() => const UserTypeDeleted();
 
-  static const String constructor = 'userTypeDeleted';
-  
+  static const String objectType = 'userTypeDeleted';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UserTypeBot** *(userTypeBot)* - child of UserType
-  ///
-  /// A bot (see https://core.telegram.org/bots).
-  ///
-  /// * [canJoinGroups]: True, if the bot can be invited to basic group and supergroup chats.
-  /// * [canReadAllGroupMessages]: True, if the bot can read all messages in basic group or supergroup chats and not just those addressed to the bot. In private and channel chats a bot can always read all messages.
-  /// * [isInline]: True, if the bot supports inline queries.
-  /// * [inlineQueryPlaceholder]: Placeholder for inline queries (displayed on the application input field).
-  /// * [needLocation]: True, if the location of the user is expected to be sent with every inline query to this bot.
-  /// * [canBeAddedToAttachmentMenu]: True, if the bot can be added to attachment menu.
-class UserTypeBot extends UserType {
+///
+/// A bot (see https://core.telegram.org/bots).
+///
+/// * [canJoinGroups]: True, if the bot can be invited to basic group and supergroup chats.
+/// * [canReadAllGroupMessages]: True, if the bot can read all messages in basic group or supergroup chats and not just those addressed to the bot. In private and channel chats a bot can always read all messages.
+/// * [isInline]: True, if the bot supports inline queries.
+/// * [inlineQueryPlaceholder]: Placeholder for inline queries (displayed on the application input field).
+/// * [needLocation]: True, if the location of the user is expected to be sent with every inline query to this bot.
+/// * [canBeAddedToAttachmentMenu]: True, if the bot can be added to attachment menu.
+final class UserTypeBot extends UserType {
   
   /// **UserTypeBot** *(userTypeBot)* - child of UserType
   ///
@@ -167,17 +178,18 @@ class UserTypeBot extends UserType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "can_join_groups": canJoinGroups,
       "can_read_all_group_messages": canReadAllGroupMessages,
       "is_inline": isInline,
       "inline_query_placeholder": inlineQueryPlaceholder,
       "need_location": needLocation,
       "can_be_added_to_attachment_menu": canBeAddedToAttachmentMenu,
-    };
-  }
+		};
+	}
+
   
   @override
   UserTypeBot copyWith({
@@ -196,17 +208,20 @@ class UserTypeBot extends UserType {
     canBeAddedToAttachmentMenu: canBeAddedToAttachmentMenu ?? this.canBeAddedToAttachmentMenu,
   );
 
-  static const String constructor = 'userTypeBot';
-  
+  static const String objectType = 'userTypeBot';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UserTypeUnknown** *(userTypeUnknown)* - child of UserType
-  ///
-  /// No information on the user besides the user identifier is available, yet this user has not been deleted. This object is extremely rare and must be handled like a deleted user. It is not possible to perform any actions on users of this type.
-class UserTypeUnknown extends UserType {
+///
+/// No information on the user besides the user identifier is available, yet this user has not been deleted. This object is extremely rare and must be handled like a deleted user. It is not possible to perform any actions on users of this type.
+final class UserTypeUnknown extends UserType {
   
   /// **UserTypeUnknown** *(userTypeUnknown)* - child of UserType
   ///
@@ -217,17 +232,21 @@ class UserTypeUnknown extends UserType {
   factory UserTypeUnknown.fromJson(Map<String, dynamic> json) => const UserTypeUnknown();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   UserTypeUnknown copyWith() => const UserTypeUnknown();
 
-  static const String constructor = 'userTypeUnknown';
-  
+  static const String objectType = 'userTypeUnknown';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **GetLogTags** *(getLogTags)* - TDLib function
-  ///
-  /// Returns list of available TDLib internal log tags, for example,.
-  ///
-  /// [LogTags] is returned on completion.
-class GetLogTags extends TdFunction {
+///
+/// Returns list of available TDLib internal log tags, for example,.
+///
+/// [LogTags] is returned on completion.
+final class GetLogTags extends TdFunction {
   
   /// **GetLogTags** *(getLogTags)* - TDLib function
   ///
@@ -17,16 +17,20 @@ class GetLogTags extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetLogTags copyWith() => const GetLogTags();
 
-  static const String constructor = 'getLogTags';
-  
+  static const String objectType = 'getLogTags';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

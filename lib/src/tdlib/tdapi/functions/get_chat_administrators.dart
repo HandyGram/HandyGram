@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetChatAdministrators** *(getChatAdministrators)* - TDLib function
-  ///
-  /// Returns a list of administrators of the chat with their custom titles.
-  ///
-  /// * [chatId]: Chat identifier.
-  ///
-  /// [ChatAdministrators] is returned on completion.
-class GetChatAdministrators extends TdFunction {
+///
+/// Returns a list of administrators of the chat with their custom titles.
+///
+/// * [chatId]: Chat identifier.
+///
+/// [ChatAdministrators] is returned on completion.
+final class GetChatAdministrators extends TdFunction {
   
   /// **GetChatAdministrators** *(getChatAdministrators)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetChatAdministrators extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetChatAdministrators copyWith({
     int? chatId,
@@ -38,8 +39,11 @@ class GetChatAdministrators extends TdFunction {
     chatId: chatId ?? this.chatId,
   );
 
-  static const String constructor = 'getChatAdministrators';
-  
+  static const String objectType = 'getChatAdministrators';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

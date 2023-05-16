@@ -10,7 +10,7 @@ class TgChatActions extends ChangeNotifier {
 
   void processEvent(tdlib.UpdateChatAction event) {
     _isTyping[event.chatId] ??= [];
-    if (event.action.getConstructor() != "chatActionCancel") {
+    if (event.action is tdlib.ChatActionCancel) {
       _isTyping[event.chatId]!.add(event.senderId.getSenderId());
       Timer(
         const Duration(seconds: 30),
@@ -32,9 +32,6 @@ class TgChatActions extends ChangeNotifier {
 }
 
 void actionsHandler(tdlib.TdObject event, TgSession session) {
-  if (event.getConstructor() != "updateChatAction") {
-    return;
-  }
-
-  session.chatActions.processEvent(event as tdlib.UpdateChatAction);
+  if (event is! tdlib.UpdateChatAction) return;
+  session.chatActions.processEvent(event);
 }

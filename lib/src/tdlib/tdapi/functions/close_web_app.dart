@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **CloseWebApp** *(closeWebApp)* - TDLib function
-  ///
-  /// Informs TDLib that a previously opened Web App was closed.
-  ///
-  /// * [webAppLaunchId]: Identifier of Web App launch, received from openWebApp.
-  ///
-  /// [Ok] is returned on completion.
-class CloseWebApp extends TdFunction {
+///
+/// Informs TDLib that a previously opened Web App was closed.
+///
+/// * [webAppLaunchId]: Identifier of Web App launch, received from openWebApp.
+///
+/// [Ok] is returned on completion.
+final class CloseWebApp extends TdFunction {
   
   /// **CloseWebApp** *(closeWebApp)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class CloseWebApp extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "web_app_launch_id": webAppLaunchId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   CloseWebApp copyWith({
     int? webAppLaunchId,
@@ -38,8 +39,11 @@ class CloseWebApp extends TdFunction {
     webAppLaunchId: webAppLaunchId ?? this.webAppLaunchId,
   );
 
-  static const String constructor = 'closeWebApp';
-  
+  static const String objectType = 'closeWebApp';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

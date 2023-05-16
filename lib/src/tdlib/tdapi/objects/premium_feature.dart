@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **PremiumFeature** *(premiumFeature)* - parent
-  ///
-  /// Describes a feature available to Premium users.
-class PremiumFeature extends TdObject {
+///
+/// Describes a feature available to Premium users.
+sealed class PremiumFeature extends TdObject {
   
   /// **PremiumFeature** *(premiumFeature)* - parent
   ///
@@ -27,59 +27,62 @@ class PremiumFeature extends TdObject {
   /// * [PremiumFeatureAppIcons]
   factory PremiumFeature.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case PremiumFeatureIncreasedLimits.constructor:
+      case PremiumFeatureIncreasedLimits.objectType:
         return PremiumFeatureIncreasedLimits.fromJson(json);
-      case PremiumFeatureIncreasedUploadFileSize.constructor:
+      case PremiumFeatureIncreasedUploadFileSize.objectType:
         return PremiumFeatureIncreasedUploadFileSize.fromJson(json);
-      case PremiumFeatureImprovedDownloadSpeed.constructor:
+      case PremiumFeatureImprovedDownloadSpeed.objectType:
         return PremiumFeatureImprovedDownloadSpeed.fromJson(json);
-      case PremiumFeatureVoiceRecognition.constructor:
+      case PremiumFeatureVoiceRecognition.objectType:
         return PremiumFeatureVoiceRecognition.fromJson(json);
-      case PremiumFeatureDisabledAds.constructor:
+      case PremiumFeatureDisabledAds.objectType:
         return PremiumFeatureDisabledAds.fromJson(json);
-      case PremiumFeatureUniqueReactions.constructor:
+      case PremiumFeatureUniqueReactions.objectType:
         return PremiumFeatureUniqueReactions.fromJson(json);
-      case PremiumFeatureUniqueStickers.constructor:
+      case PremiumFeatureUniqueStickers.objectType:
         return PremiumFeatureUniqueStickers.fromJson(json);
-      case PremiumFeatureCustomEmoji.constructor:
+      case PremiumFeatureCustomEmoji.objectType:
         return PremiumFeatureCustomEmoji.fromJson(json);
-      case PremiumFeatureAdvancedChatManagement.constructor:
+      case PremiumFeatureAdvancedChatManagement.objectType:
         return PremiumFeatureAdvancedChatManagement.fromJson(json);
-      case PremiumFeatureProfileBadge.constructor:
+      case PremiumFeatureProfileBadge.objectType:
         return PremiumFeatureProfileBadge.fromJson(json);
-      case PremiumFeatureEmojiStatus.constructor:
+      case PremiumFeatureEmojiStatus.objectType:
         return PremiumFeatureEmojiStatus.fromJson(json);
-      case PremiumFeatureAnimatedProfilePhoto.constructor:
+      case PremiumFeatureAnimatedProfilePhoto.objectType:
         return PremiumFeatureAnimatedProfilePhoto.fromJson(json);
-      case PremiumFeatureForumTopicIcon.constructor:
+      case PremiumFeatureForumTopicIcon.objectType:
         return PremiumFeatureForumTopicIcon.fromJson(json);
-      case PremiumFeatureAppIcons.constructor:
+      case PremiumFeatureAppIcons.objectType:
         return PremiumFeatureAppIcons.fromJson(json);
       default:
-        return const PremiumFeature();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of PremiumFeature)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  PremiumFeature copyWith() => const PremiumFeature();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'premiumFeature';
   
+  PremiumFeature copyWith();
+
+  static const String objectType = 'premiumFeature';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumFeatureIncreasedLimits** *(premiumFeatureIncreasedLimits)* - child of PremiumFeature
-  ///
-  /// Increased limits.
-class PremiumFeatureIncreasedLimits extends PremiumFeature {
+///
+/// Increased limits.
+final class PremiumFeatureIncreasedLimits extends PremiumFeature {
   
   /// **PremiumFeatureIncreasedLimits** *(premiumFeatureIncreasedLimits)* - child of PremiumFeature
   ///
@@ -90,26 +93,30 @@ class PremiumFeatureIncreasedLimits extends PremiumFeature {
   factory PremiumFeatureIncreasedLimits.fromJson(Map<String, dynamic> json) => const PremiumFeatureIncreasedLimits();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PremiumFeatureIncreasedLimits copyWith() => const PremiumFeatureIncreasedLimits();
 
-  static const String constructor = 'premiumFeatureIncreasedLimits';
-  
+  static const String objectType = 'premiumFeatureIncreasedLimits';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumFeatureIncreasedUploadFileSize** *(premiumFeatureIncreasedUploadFileSize)* - child of PremiumFeature
-  ///
-  /// Increased maximum upload file size.
-class PremiumFeatureIncreasedUploadFileSize extends PremiumFeature {
+///
+/// Increased maximum upload file size.
+final class PremiumFeatureIncreasedUploadFileSize extends PremiumFeature {
   
   /// **PremiumFeatureIncreasedUploadFileSize** *(premiumFeatureIncreasedUploadFileSize)* - child of PremiumFeature
   ///
@@ -120,26 +127,30 @@ class PremiumFeatureIncreasedUploadFileSize extends PremiumFeature {
   factory PremiumFeatureIncreasedUploadFileSize.fromJson(Map<String, dynamic> json) => const PremiumFeatureIncreasedUploadFileSize();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PremiumFeatureIncreasedUploadFileSize copyWith() => const PremiumFeatureIncreasedUploadFileSize();
 
-  static const String constructor = 'premiumFeatureIncreasedUploadFileSize';
-  
+  static const String objectType = 'premiumFeatureIncreasedUploadFileSize';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumFeatureImprovedDownloadSpeed** *(premiumFeatureImprovedDownloadSpeed)* - child of PremiumFeature
-  ///
-  /// Improved download speed.
-class PremiumFeatureImprovedDownloadSpeed extends PremiumFeature {
+///
+/// Improved download speed.
+final class PremiumFeatureImprovedDownloadSpeed extends PremiumFeature {
   
   /// **PremiumFeatureImprovedDownloadSpeed** *(premiumFeatureImprovedDownloadSpeed)* - child of PremiumFeature
   ///
@@ -150,26 +161,30 @@ class PremiumFeatureImprovedDownloadSpeed extends PremiumFeature {
   factory PremiumFeatureImprovedDownloadSpeed.fromJson(Map<String, dynamic> json) => const PremiumFeatureImprovedDownloadSpeed();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PremiumFeatureImprovedDownloadSpeed copyWith() => const PremiumFeatureImprovedDownloadSpeed();
 
-  static const String constructor = 'premiumFeatureImprovedDownloadSpeed';
-  
+  static const String objectType = 'premiumFeatureImprovedDownloadSpeed';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumFeatureVoiceRecognition** *(premiumFeatureVoiceRecognition)* - child of PremiumFeature
-  ///
-  /// The ability to convert voice notes to text.
-class PremiumFeatureVoiceRecognition extends PremiumFeature {
+///
+/// The ability to convert voice notes to text.
+final class PremiumFeatureVoiceRecognition extends PremiumFeature {
   
   /// **PremiumFeatureVoiceRecognition** *(premiumFeatureVoiceRecognition)* - child of PremiumFeature
   ///
@@ -180,26 +195,30 @@ class PremiumFeatureVoiceRecognition extends PremiumFeature {
   factory PremiumFeatureVoiceRecognition.fromJson(Map<String, dynamic> json) => const PremiumFeatureVoiceRecognition();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PremiumFeatureVoiceRecognition copyWith() => const PremiumFeatureVoiceRecognition();
 
-  static const String constructor = 'premiumFeatureVoiceRecognition';
-  
+  static const String objectType = 'premiumFeatureVoiceRecognition';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumFeatureDisabledAds** *(premiumFeatureDisabledAds)* - child of PremiumFeature
-  ///
-  /// Disabled ads.
-class PremiumFeatureDisabledAds extends PremiumFeature {
+///
+/// Disabled ads.
+final class PremiumFeatureDisabledAds extends PremiumFeature {
   
   /// **PremiumFeatureDisabledAds** *(premiumFeatureDisabledAds)* - child of PremiumFeature
   ///
@@ -210,26 +229,30 @@ class PremiumFeatureDisabledAds extends PremiumFeature {
   factory PremiumFeatureDisabledAds.fromJson(Map<String, dynamic> json) => const PremiumFeatureDisabledAds();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PremiumFeatureDisabledAds copyWith() => const PremiumFeatureDisabledAds();
 
-  static const String constructor = 'premiumFeatureDisabledAds';
-  
+  static const String objectType = 'premiumFeatureDisabledAds';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumFeatureUniqueReactions** *(premiumFeatureUniqueReactions)* - child of PremiumFeature
-  ///
-  /// Allowed to use more reactions.
-class PremiumFeatureUniqueReactions extends PremiumFeature {
+///
+/// Allowed to use more reactions.
+final class PremiumFeatureUniqueReactions extends PremiumFeature {
   
   /// **PremiumFeatureUniqueReactions** *(premiumFeatureUniqueReactions)* - child of PremiumFeature
   ///
@@ -240,26 +263,30 @@ class PremiumFeatureUniqueReactions extends PremiumFeature {
   factory PremiumFeatureUniqueReactions.fromJson(Map<String, dynamic> json) => const PremiumFeatureUniqueReactions();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PremiumFeatureUniqueReactions copyWith() => const PremiumFeatureUniqueReactions();
 
-  static const String constructor = 'premiumFeatureUniqueReactions';
-  
+  static const String objectType = 'premiumFeatureUniqueReactions';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumFeatureUniqueStickers** *(premiumFeatureUniqueStickers)* - child of PremiumFeature
-  ///
-  /// Allowed to use premium stickers with unique effects.
-class PremiumFeatureUniqueStickers extends PremiumFeature {
+///
+/// Allowed to use premium stickers with unique effects.
+final class PremiumFeatureUniqueStickers extends PremiumFeature {
   
   /// **PremiumFeatureUniqueStickers** *(premiumFeatureUniqueStickers)* - child of PremiumFeature
   ///
@@ -270,26 +297,30 @@ class PremiumFeatureUniqueStickers extends PremiumFeature {
   factory PremiumFeatureUniqueStickers.fromJson(Map<String, dynamic> json) => const PremiumFeatureUniqueStickers();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PremiumFeatureUniqueStickers copyWith() => const PremiumFeatureUniqueStickers();
 
-  static const String constructor = 'premiumFeatureUniqueStickers';
-  
+  static const String objectType = 'premiumFeatureUniqueStickers';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumFeatureCustomEmoji** *(premiumFeatureCustomEmoji)* - child of PremiumFeature
-  ///
-  /// Allowed to use custom emoji stickers in message texts and captions.
-class PremiumFeatureCustomEmoji extends PremiumFeature {
+///
+/// Allowed to use custom emoji stickers in message texts and captions.
+final class PremiumFeatureCustomEmoji extends PremiumFeature {
   
   /// **PremiumFeatureCustomEmoji** *(premiumFeatureCustomEmoji)* - child of PremiumFeature
   ///
@@ -300,26 +331,30 @@ class PremiumFeatureCustomEmoji extends PremiumFeature {
   factory PremiumFeatureCustomEmoji.fromJson(Map<String, dynamic> json) => const PremiumFeatureCustomEmoji();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PremiumFeatureCustomEmoji copyWith() => const PremiumFeatureCustomEmoji();
 
-  static const String constructor = 'premiumFeatureCustomEmoji';
-  
+  static const String objectType = 'premiumFeatureCustomEmoji';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumFeatureAdvancedChatManagement** *(premiumFeatureAdvancedChatManagement)* - child of PremiumFeature
-  ///
-  /// Ability to change position of the main chat list, archive and mute all new chats from non-contacts, and completely disable notifications about the user's contacts joined Telegram.
-class PremiumFeatureAdvancedChatManagement extends PremiumFeature {
+///
+/// Ability to change position of the main chat list, archive and mute all new chats from non-contacts, and completely disable notifications about the user's contacts joined Telegram.
+final class PremiumFeatureAdvancedChatManagement extends PremiumFeature {
   
   /// **PremiumFeatureAdvancedChatManagement** *(premiumFeatureAdvancedChatManagement)* - child of PremiumFeature
   ///
@@ -330,26 +365,30 @@ class PremiumFeatureAdvancedChatManagement extends PremiumFeature {
   factory PremiumFeatureAdvancedChatManagement.fromJson(Map<String, dynamic> json) => const PremiumFeatureAdvancedChatManagement();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PremiumFeatureAdvancedChatManagement copyWith() => const PremiumFeatureAdvancedChatManagement();
 
-  static const String constructor = 'premiumFeatureAdvancedChatManagement';
-  
+  static const String objectType = 'premiumFeatureAdvancedChatManagement';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumFeatureProfileBadge** *(premiumFeatureProfileBadge)* - child of PremiumFeature
-  ///
-  /// A badge in the user's profile.
-class PremiumFeatureProfileBadge extends PremiumFeature {
+///
+/// A badge in the user's profile.
+final class PremiumFeatureProfileBadge extends PremiumFeature {
   
   /// **PremiumFeatureProfileBadge** *(premiumFeatureProfileBadge)* - child of PremiumFeature
   ///
@@ -360,26 +399,30 @@ class PremiumFeatureProfileBadge extends PremiumFeature {
   factory PremiumFeatureProfileBadge.fromJson(Map<String, dynamic> json) => const PremiumFeatureProfileBadge();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PremiumFeatureProfileBadge copyWith() => const PremiumFeatureProfileBadge();
 
-  static const String constructor = 'premiumFeatureProfileBadge';
-  
+  static const String objectType = 'premiumFeatureProfileBadge';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumFeatureEmojiStatus** *(premiumFeatureEmojiStatus)* - child of PremiumFeature
-  ///
-  /// A emoji status shown along with the user's name.
-class PremiumFeatureEmojiStatus extends PremiumFeature {
+///
+/// A emoji status shown along with the user's name.
+final class PremiumFeatureEmojiStatus extends PremiumFeature {
   
   /// **PremiumFeatureEmojiStatus** *(premiumFeatureEmojiStatus)* - child of PremiumFeature
   ///
@@ -390,26 +433,30 @@ class PremiumFeatureEmojiStatus extends PremiumFeature {
   factory PremiumFeatureEmojiStatus.fromJson(Map<String, dynamic> json) => const PremiumFeatureEmojiStatus();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PremiumFeatureEmojiStatus copyWith() => const PremiumFeatureEmojiStatus();
 
-  static const String constructor = 'premiumFeatureEmojiStatus';
-  
+  static const String objectType = 'premiumFeatureEmojiStatus';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumFeatureAnimatedProfilePhoto** *(premiumFeatureAnimatedProfilePhoto)* - child of PremiumFeature
-  ///
-  /// Profile photo animation on message and chat screens.
-class PremiumFeatureAnimatedProfilePhoto extends PremiumFeature {
+///
+/// Profile photo animation on message and chat screens.
+final class PremiumFeatureAnimatedProfilePhoto extends PremiumFeature {
   
   /// **PremiumFeatureAnimatedProfilePhoto** *(premiumFeatureAnimatedProfilePhoto)* - child of PremiumFeature
   ///
@@ -420,26 +467,30 @@ class PremiumFeatureAnimatedProfilePhoto extends PremiumFeature {
   factory PremiumFeatureAnimatedProfilePhoto.fromJson(Map<String, dynamic> json) => const PremiumFeatureAnimatedProfilePhoto();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PremiumFeatureAnimatedProfilePhoto copyWith() => const PremiumFeatureAnimatedProfilePhoto();
 
-  static const String constructor = 'premiumFeatureAnimatedProfilePhoto';
-  
+  static const String objectType = 'premiumFeatureAnimatedProfilePhoto';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumFeatureForumTopicIcon** *(premiumFeatureForumTopicIcon)* - child of PremiumFeature
-  ///
-  /// The ability to set a custom emoji as a forum topic icon.
-class PremiumFeatureForumTopicIcon extends PremiumFeature {
+///
+/// The ability to set a custom emoji as a forum topic icon.
+final class PremiumFeatureForumTopicIcon extends PremiumFeature {
   
   /// **PremiumFeatureForumTopicIcon** *(premiumFeatureForumTopicIcon)* - child of PremiumFeature
   ///
@@ -450,26 +501,30 @@ class PremiumFeatureForumTopicIcon extends PremiumFeature {
   factory PremiumFeatureForumTopicIcon.fromJson(Map<String, dynamic> json) => const PremiumFeatureForumTopicIcon();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PremiumFeatureForumTopicIcon copyWith() => const PremiumFeatureForumTopicIcon();
 
-  static const String constructor = 'premiumFeatureForumTopicIcon';
-  
+  static const String objectType = 'premiumFeatureForumTopicIcon';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumFeatureAppIcons** *(premiumFeatureAppIcons)* - child of PremiumFeature
-  ///
-  /// Allowed to set a premium appllication icons.
-class PremiumFeatureAppIcons extends PremiumFeature {
+///
+/// Allowed to set a premium appllication icons.
+final class PremiumFeatureAppIcons extends PremiumFeature {
   
   /// **PremiumFeatureAppIcons** *(premiumFeatureAppIcons)* - child of PremiumFeature
   ///
@@ -480,17 +535,21 @@ class PremiumFeatureAppIcons extends PremiumFeature {
   factory PremiumFeatureAppIcons.fromJson(Map<String, dynamic> json) => const PremiumFeatureAppIcons();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PremiumFeatureAppIcons copyWith() => const PremiumFeatureAppIcons();
 
-  static const String constructor = 'premiumFeatureAppIcons';
-  
+  static const String objectType = 'premiumFeatureAppIcons';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

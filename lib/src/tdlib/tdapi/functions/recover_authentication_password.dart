@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **RecoverAuthenticationPassword** *(recoverAuthenticationPassword)* - TDLib function
-  ///
-  /// Recovers the 2-step verification password with a password recovery code sent to an email address that was previously set up. Works only when the current authorization state is authorizationStateWaitPassword.
-  ///
-  /// * [recoveryCode]: Recovery code to check.
-  /// * [newPassword]: New 2-step verification password of the user; may be empty to remove the password.
-  /// * [newHint]: New password hint; may be empty.
-  ///
-  /// [Ok] is returned on completion.
-class RecoverAuthenticationPassword extends TdFunction {
+///
+/// Recovers the 2-step verification password with a password recovery code sent to an email address that was previously set up. Works only when the current authorization state is authorizationStateWaitPassword.
+///
+/// * [recoveryCode]: Recovery code to check.
+/// * [newPassword]: New 2-step verification password of the user; may be empty to remove the password.
+/// * [newHint]: New password hint; may be empty.
+///
+/// [Ok] is returned on completion.
+final class RecoverAuthenticationPassword extends TdFunction {
   
   /// **RecoverAuthenticationPassword** *(recoverAuthenticationPassword)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class RecoverAuthenticationPassword extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "recovery_code": recoveryCode,
       "new_password": newPassword,
       "new_hint": newHint,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   RecoverAuthenticationPassword copyWith({
     String? recoveryCode,
@@ -56,8 +57,11 @@ class RecoverAuthenticationPassword extends TdFunction {
     newHint: newHint ?? this.newHint,
   );
 
-  static const String constructor = 'recoverAuthenticationPassword';
-  
+  static const String objectType = 'recoverAuthenticationPassword';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

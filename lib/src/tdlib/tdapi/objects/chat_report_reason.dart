@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **ChatReportReason** *(chatReportReason)* - parent
-  ///
-  /// Describes the reason why a chat is reported.
-class ChatReportReason extends TdObject {
+///
+/// Describes the reason why a chat is reported.
+sealed class ChatReportReason extends TdObject {
   
   /// **ChatReportReason** *(chatReportReason)* - parent
   ///
@@ -23,51 +23,54 @@ class ChatReportReason extends TdObject {
   /// * [ChatReportReasonCustom]
   factory ChatReportReason.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case ChatReportReasonSpam.constructor:
+      case ChatReportReasonSpam.objectType:
         return ChatReportReasonSpam.fromJson(json);
-      case ChatReportReasonViolence.constructor:
+      case ChatReportReasonViolence.objectType:
         return ChatReportReasonViolence.fromJson(json);
-      case ChatReportReasonPornography.constructor:
+      case ChatReportReasonPornography.objectType:
         return ChatReportReasonPornography.fromJson(json);
-      case ChatReportReasonChildAbuse.constructor:
+      case ChatReportReasonChildAbuse.objectType:
         return ChatReportReasonChildAbuse.fromJson(json);
-      case ChatReportReasonCopyright.constructor:
+      case ChatReportReasonCopyright.objectType:
         return ChatReportReasonCopyright.fromJson(json);
-      case ChatReportReasonUnrelatedLocation.constructor:
+      case ChatReportReasonUnrelatedLocation.objectType:
         return ChatReportReasonUnrelatedLocation.fromJson(json);
-      case ChatReportReasonFake.constructor:
+      case ChatReportReasonFake.objectType:
         return ChatReportReasonFake.fromJson(json);
-      case ChatReportReasonIllegalDrugs.constructor:
+      case ChatReportReasonIllegalDrugs.objectType:
         return ChatReportReasonIllegalDrugs.fromJson(json);
-      case ChatReportReasonPersonalDetails.constructor:
+      case ChatReportReasonPersonalDetails.objectType:
         return ChatReportReasonPersonalDetails.fromJson(json);
-      case ChatReportReasonCustom.constructor:
+      case ChatReportReasonCustom.objectType:
         return ChatReportReasonCustom.fromJson(json);
       default:
-        return const ChatReportReason();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of ChatReportReason)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  ChatReportReason copyWith() => const ChatReportReason();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'chatReportReason';
   
+  ChatReportReason copyWith();
+
+  static const String objectType = 'chatReportReason';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatReportReasonSpam** *(chatReportReasonSpam)* - child of ChatReportReason
-  ///
-  /// The chat contains spam messages.
-class ChatReportReasonSpam extends ChatReportReason {
+///
+/// The chat contains spam messages.
+final class ChatReportReasonSpam extends ChatReportReason {
   
   /// **ChatReportReasonSpam** *(chatReportReasonSpam)* - child of ChatReportReason
   ///
@@ -78,26 +81,30 @@ class ChatReportReasonSpam extends ChatReportReason {
   factory ChatReportReasonSpam.fromJson(Map<String, dynamic> json) => const ChatReportReasonSpam();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   ChatReportReasonSpam copyWith() => const ChatReportReasonSpam();
 
-  static const String constructor = 'chatReportReasonSpam';
-  
+  static const String objectType = 'chatReportReasonSpam';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatReportReasonViolence** *(chatReportReasonViolence)* - child of ChatReportReason
-  ///
-  /// The chat promotes violence.
-class ChatReportReasonViolence extends ChatReportReason {
+///
+/// The chat promotes violence.
+final class ChatReportReasonViolence extends ChatReportReason {
   
   /// **ChatReportReasonViolence** *(chatReportReasonViolence)* - child of ChatReportReason
   ///
@@ -108,26 +115,30 @@ class ChatReportReasonViolence extends ChatReportReason {
   factory ChatReportReasonViolence.fromJson(Map<String, dynamic> json) => const ChatReportReasonViolence();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   ChatReportReasonViolence copyWith() => const ChatReportReasonViolence();
 
-  static const String constructor = 'chatReportReasonViolence';
-  
+  static const String objectType = 'chatReportReasonViolence';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatReportReasonPornography** *(chatReportReasonPornography)* - child of ChatReportReason
-  ///
-  /// The chat contains pornographic messages.
-class ChatReportReasonPornography extends ChatReportReason {
+///
+/// The chat contains pornographic messages.
+final class ChatReportReasonPornography extends ChatReportReason {
   
   /// **ChatReportReasonPornography** *(chatReportReasonPornography)* - child of ChatReportReason
   ///
@@ -138,26 +149,30 @@ class ChatReportReasonPornography extends ChatReportReason {
   factory ChatReportReasonPornography.fromJson(Map<String, dynamic> json) => const ChatReportReasonPornography();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   ChatReportReasonPornography copyWith() => const ChatReportReasonPornography();
 
-  static const String constructor = 'chatReportReasonPornography';
-  
+  static const String objectType = 'chatReportReasonPornography';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatReportReasonChildAbuse** *(chatReportReasonChildAbuse)* - child of ChatReportReason
-  ///
-  /// The chat has child abuse related content.
-class ChatReportReasonChildAbuse extends ChatReportReason {
+///
+/// The chat has child abuse related content.
+final class ChatReportReasonChildAbuse extends ChatReportReason {
   
   /// **ChatReportReasonChildAbuse** *(chatReportReasonChildAbuse)* - child of ChatReportReason
   ///
@@ -168,26 +183,30 @@ class ChatReportReasonChildAbuse extends ChatReportReason {
   factory ChatReportReasonChildAbuse.fromJson(Map<String, dynamic> json) => const ChatReportReasonChildAbuse();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   ChatReportReasonChildAbuse copyWith() => const ChatReportReasonChildAbuse();
 
-  static const String constructor = 'chatReportReasonChildAbuse';
-  
+  static const String objectType = 'chatReportReasonChildAbuse';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatReportReasonCopyright** *(chatReportReasonCopyright)* - child of ChatReportReason
-  ///
-  /// The chat contains copyrighted content.
-class ChatReportReasonCopyright extends ChatReportReason {
+///
+/// The chat contains copyrighted content.
+final class ChatReportReasonCopyright extends ChatReportReason {
   
   /// **ChatReportReasonCopyright** *(chatReportReasonCopyright)* - child of ChatReportReason
   ///
@@ -198,26 +217,30 @@ class ChatReportReasonCopyright extends ChatReportReason {
   factory ChatReportReasonCopyright.fromJson(Map<String, dynamic> json) => const ChatReportReasonCopyright();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   ChatReportReasonCopyright copyWith() => const ChatReportReasonCopyright();
 
-  static const String constructor = 'chatReportReasonCopyright';
-  
+  static const String objectType = 'chatReportReasonCopyright';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatReportReasonUnrelatedLocation** *(chatReportReasonUnrelatedLocation)* - child of ChatReportReason
-  ///
-  /// The location-based chat is unrelated to its stated location.
-class ChatReportReasonUnrelatedLocation extends ChatReportReason {
+///
+/// The location-based chat is unrelated to its stated location.
+final class ChatReportReasonUnrelatedLocation extends ChatReportReason {
   
   /// **ChatReportReasonUnrelatedLocation** *(chatReportReasonUnrelatedLocation)* - child of ChatReportReason
   ///
@@ -228,26 +251,30 @@ class ChatReportReasonUnrelatedLocation extends ChatReportReason {
   factory ChatReportReasonUnrelatedLocation.fromJson(Map<String, dynamic> json) => const ChatReportReasonUnrelatedLocation();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   ChatReportReasonUnrelatedLocation copyWith() => const ChatReportReasonUnrelatedLocation();
 
-  static const String constructor = 'chatReportReasonUnrelatedLocation';
-  
+  static const String objectType = 'chatReportReasonUnrelatedLocation';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatReportReasonFake** *(chatReportReasonFake)* - child of ChatReportReason
-  ///
-  /// The chat represents a fake account.
-class ChatReportReasonFake extends ChatReportReason {
+///
+/// The chat represents a fake account.
+final class ChatReportReasonFake extends ChatReportReason {
   
   /// **ChatReportReasonFake** *(chatReportReasonFake)* - child of ChatReportReason
   ///
@@ -258,26 +285,30 @@ class ChatReportReasonFake extends ChatReportReason {
   factory ChatReportReasonFake.fromJson(Map<String, dynamic> json) => const ChatReportReasonFake();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   ChatReportReasonFake copyWith() => const ChatReportReasonFake();
 
-  static const String constructor = 'chatReportReasonFake';
-  
+  static const String objectType = 'chatReportReasonFake';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatReportReasonIllegalDrugs** *(chatReportReasonIllegalDrugs)* - child of ChatReportReason
-  ///
-  /// The chat has illegal drugs related content.
-class ChatReportReasonIllegalDrugs extends ChatReportReason {
+///
+/// The chat has illegal drugs related content.
+final class ChatReportReasonIllegalDrugs extends ChatReportReason {
   
   /// **ChatReportReasonIllegalDrugs** *(chatReportReasonIllegalDrugs)* - child of ChatReportReason
   ///
@@ -288,26 +319,30 @@ class ChatReportReasonIllegalDrugs extends ChatReportReason {
   factory ChatReportReasonIllegalDrugs.fromJson(Map<String, dynamic> json) => const ChatReportReasonIllegalDrugs();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   ChatReportReasonIllegalDrugs copyWith() => const ChatReportReasonIllegalDrugs();
 
-  static const String constructor = 'chatReportReasonIllegalDrugs';
-  
+  static const String objectType = 'chatReportReasonIllegalDrugs';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatReportReasonPersonalDetails** *(chatReportReasonPersonalDetails)* - child of ChatReportReason
-  ///
-  /// The chat contains messages with personal details.
-class ChatReportReasonPersonalDetails extends ChatReportReason {
+///
+/// The chat contains messages with personal details.
+final class ChatReportReasonPersonalDetails extends ChatReportReason {
   
   /// **ChatReportReasonPersonalDetails** *(chatReportReasonPersonalDetails)* - child of ChatReportReason
   ///
@@ -318,26 +353,30 @@ class ChatReportReasonPersonalDetails extends ChatReportReason {
   factory ChatReportReasonPersonalDetails.fromJson(Map<String, dynamic> json) => const ChatReportReasonPersonalDetails();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   ChatReportReasonPersonalDetails copyWith() => const ChatReportReasonPersonalDetails();
 
-  static const String constructor = 'chatReportReasonPersonalDetails';
-  
+  static const String objectType = 'chatReportReasonPersonalDetails';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatReportReasonCustom** *(chatReportReasonCustom)* - child of ChatReportReason
-  ///
-  /// A custom reason provided by the user.
-class ChatReportReasonCustom extends ChatReportReason {
+///
+/// A custom reason provided by the user.
+final class ChatReportReasonCustom extends ChatReportReason {
   
   /// **ChatReportReasonCustom** *(chatReportReasonCustom)* - child of ChatReportReason
   ///
@@ -348,17 +387,21 @@ class ChatReportReasonCustom extends ChatReportReason {
   factory ChatReportReasonCustom.fromJson(Map<String, dynamic> json) => const ChatReportReasonCustom();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   ChatReportReasonCustom copyWith() => const ChatReportReasonCustom();
 
-  static const String constructor = 'chatReportReasonCustom';
-  
+  static const String objectType = 'chatReportReasonCustom';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,17 +1,17 @@
 part of '../tdapi.dart';
 
 /// **VideoNote** *(videoNote)* - basic class
-  ///
-  /// Describes a video note. The video must be equal in width and height, cropped to a circle, and stored in MPEG4 format.
-  ///
-  /// * [duration]: Duration of the video, in seconds; as defined by the sender.
-  /// * [waveform]: A waveform representation of the video note's audio in 5-bit format; may be empty if unknown.
-  /// * [length]: Video width and height; as defined by the sender.
-  /// * [minithumbnail]: Video minithumbnail; may be null *(optional)*.
-  /// * [thumbnail]: Video thumbnail in JPEG format; as defined by the sender; may be null *(optional)*.
-  /// * [speechRecognitionResult]: Result of speech recognition in the video note; may be null *(optional)*.
-  /// * [video]: File containing the video.
-class VideoNote extends TdObject {
+///
+/// Describes a video note. The video must be equal in width and height, cropped to a circle, and stored in MPEG4 format.
+///
+/// * [duration]: Duration of the video, in seconds; as defined by the sender.
+/// * [waveform]: A waveform representation of the video note's audio in 5-bit format; may be empty if unknown.
+/// * [length]: Video width and height; as defined by the sender.
+/// * [minithumbnail]: Video minithumbnail; may be null *(optional)*.
+/// * [thumbnail]: Video thumbnail in JPEG format; as defined by the sender; may be null *(optional)*.
+/// * [speechRecognitionResult]: Result of speech recognition in the video note; may be null *(optional)*.
+/// * [video]: File containing the video.
+final class VideoNote extends TdObject {
   
   /// **VideoNote** *(videoNote)* - basic class
   ///
@@ -68,9 +68,9 @@ class VideoNote extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "duration": duration,
       "waveform": waveform,
       "length": length,
@@ -78,8 +78,9 @@ class VideoNote extends TdObject {
       "thumbnail": thumbnail?.toJson(),
       "speech_recognition_result": speechRecognitionResult?.toJson(),
       "video": video.toJson(),
-    };
-  }
+		};
+	}
+
   
   VideoNote copyWith({
     int? duration,
@@ -99,8 +100,11 @@ class VideoNote extends TdObject {
     video: video ?? this.video,
   );
 
-  static const String constructor = 'videoNote';
-  
+  static const String objectType = 'videoNote';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

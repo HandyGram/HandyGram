@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **DeleteCommands** *(deleteCommands)* - TDLib function
-  ///
-  /// Deletes commands supported by the bot for the given user scope and language; for bots only.
-  ///
-  /// * [scope]: The scope to which the commands are relevant; pass null to delete commands in the default bot command scope *(optional)*.
-  /// * [languageCode]: A two-letter ISO 639-1 language code or an empty string.
-  ///
-  /// [Ok] is returned on completion.
-class DeleteCommands extends TdFunction {
+///
+/// Deletes commands supported by the bot for the given user scope and language; for bots only.
+///
+/// * [scope]: The scope to which the commands are relevant; pass null to delete commands in the default bot command scope *(optional)*.
+/// * [languageCode]: A two-letter ISO 639-1 language code or an empty string.
+///
+/// [Ok] is returned on completion.
+final class DeleteCommands extends TdFunction {
   
   /// **DeleteCommands** *(deleteCommands)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class DeleteCommands extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "scope": scope?.toJson(),
       "language_code": languageCode,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   DeleteCommands copyWith({
     BotCommandScope? scope,
@@ -47,8 +48,11 @@ class DeleteCommands extends TdFunction {
     languageCode: languageCode ?? this.languageCode,
   );
 
-  static const String constructor = 'deleteCommands';
-  
+  static const String objectType = 'deleteCommands';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

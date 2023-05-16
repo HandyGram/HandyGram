@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **NotificationType** *(notificationType)* - parent
-  ///
-  /// Contains detailed information about a notification.
-class NotificationType extends TdObject {
+///
+/// Contains detailed information about a notification.
+sealed class NotificationType extends TdObject {
   
   /// **NotificationType** *(notificationType)* - parent
   ///
@@ -17,42 +17,45 @@ class NotificationType extends TdObject {
   /// * [NotificationTypeNewPushMessage]
   factory NotificationType.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case NotificationTypeNewMessage.constructor:
+      case NotificationTypeNewMessage.objectType:
         return NotificationTypeNewMessage.fromJson(json);
-      case NotificationTypeNewSecretChat.constructor:
+      case NotificationTypeNewSecretChat.objectType:
         return NotificationTypeNewSecretChat.fromJson(json);
-      case NotificationTypeNewCall.constructor:
+      case NotificationTypeNewCall.objectType:
         return NotificationTypeNewCall.fromJson(json);
-      case NotificationTypeNewPushMessage.constructor:
+      case NotificationTypeNewPushMessage.objectType:
         return NotificationTypeNewPushMessage.fromJson(json);
       default:
-        return const NotificationType();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of NotificationType)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  NotificationType copyWith() => const NotificationType();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'notificationType';
   
+  NotificationType copyWith();
+
+  static const String objectType = 'notificationType';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **NotificationTypeNewMessage** *(notificationTypeNewMessage)* - child of NotificationType
-  ///
-  /// New message was received.
-  ///
-  /// * [message]: The message.
-  /// * [showPreview]: True, if message content must be displayed in notifications.
-class NotificationTypeNewMessage extends NotificationType {
+///
+/// New message was received.
+///
+/// * [message]: The message.
+/// * [showPreview]: True, if message content must be displayed in notifications.
+final class NotificationTypeNewMessage extends NotificationType {
   
   /// **NotificationTypeNewMessage** *(notificationTypeNewMessage)* - child of NotificationType
   ///
@@ -79,13 +82,14 @@ class NotificationTypeNewMessage extends NotificationType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "message": message.toJson(),
       "show_preview": showPreview,
-    };
-  }
+		};
+	}
+
   
   @override
   NotificationTypeNewMessage copyWith({
@@ -96,17 +100,20 @@ class NotificationTypeNewMessage extends NotificationType {
     showPreview: showPreview ?? this.showPreview,
   );
 
-  static const String constructor = 'notificationTypeNewMessage';
-  
+  static const String objectType = 'notificationTypeNewMessage';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **NotificationTypeNewSecretChat** *(notificationTypeNewSecretChat)* - child of NotificationType
-  ///
-  /// New secret chat was created.
-class NotificationTypeNewSecretChat extends NotificationType {
+///
+/// New secret chat was created.
+final class NotificationTypeNewSecretChat extends NotificationType {
   
   /// **NotificationTypeNewSecretChat** *(notificationTypeNewSecretChat)* - child of NotificationType
   ///
@@ -117,28 +124,32 @@ class NotificationTypeNewSecretChat extends NotificationType {
   factory NotificationTypeNewSecretChat.fromJson(Map<String, dynamic> json) => const NotificationTypeNewSecretChat();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   NotificationTypeNewSecretChat copyWith() => const NotificationTypeNewSecretChat();
 
-  static const String constructor = 'notificationTypeNewSecretChat';
-  
+  static const String objectType = 'notificationTypeNewSecretChat';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **NotificationTypeNewCall** *(notificationTypeNewCall)* - child of NotificationType
-  ///
-  /// New call was received.
-  ///
-  /// * [callId]: Call identifier.
-class NotificationTypeNewCall extends NotificationType {
+///
+/// New call was received.
+///
+/// * [callId]: Call identifier.
+final class NotificationTypeNewCall extends NotificationType {
   
   /// **NotificationTypeNewCall** *(notificationTypeNewCall)* - child of NotificationType
   ///
@@ -159,12 +170,13 @@ class NotificationTypeNewCall extends NotificationType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "call_id": callId,
-    };
-  }
+		};
+	}
+
   
   @override
   NotificationTypeNewCall copyWith({
@@ -173,23 +185,26 @@ class NotificationTypeNewCall extends NotificationType {
     callId: callId ?? this.callId,
   );
 
-  static const String constructor = 'notificationTypeNewCall';
-  
+  static const String objectType = 'notificationTypeNewCall';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **NotificationTypeNewPushMessage** *(notificationTypeNewPushMessage)* - child of NotificationType
-  ///
-  /// New message was received through a push notification.
-  ///
-  /// * [messageId]: The message identifier. The message will not be available in the chat history, but the notificationTypeNewPushMessage can be used in viewMessages, or as reply_to_message_id.
-  /// * [senderId]: Identifier of the sender of the message. Corresponding user or chat may be inaccessible.
-  /// * [senderName]: Name of the sender.
-  /// * [isOutgoing]: True, if the message is outgoing.
-  /// * [content]: Push message content.
-class NotificationTypeNewPushMessage extends NotificationType {
+///
+/// New message was received through a push notification.
+///
+/// * [messageId]: The message identifier. The message will not be available in the chat history, but the notificationTypeNewPushMessage can be used in viewMessages, or as reply_to_message_id.
+/// * [senderId]: Identifier of the sender of the message. Corresponding user or chat may be inaccessible.
+/// * [senderName]: Name of the sender.
+/// * [isOutgoing]: True, if the message is outgoing.
+/// * [content]: Push message content.
+final class NotificationTypeNewPushMessage extends NotificationType {
   
   /// **NotificationTypeNewPushMessage** *(notificationTypeNewPushMessage)* - child of NotificationType
   ///
@@ -234,16 +249,17 @@ class NotificationTypeNewPushMessage extends NotificationType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "message_id": messageId,
       "sender_id": senderId.toJson(),
       "sender_name": senderName,
       "is_outgoing": isOutgoing,
       "content": content.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   NotificationTypeNewPushMessage copyWith({
@@ -260,8 +276,11 @@ class NotificationTypeNewPushMessage extends NotificationType {
     content: content ?? this.content,
   );
 
-  static const String constructor = 'notificationTypeNewPushMessage';
-  
+  static const String objectType = 'notificationTypeNewPushMessage';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

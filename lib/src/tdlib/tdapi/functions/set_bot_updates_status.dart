@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **SetBotUpdatesStatus** *(setBotUpdatesStatus)* - TDLib function
-  ///
-  /// Informs the server about the number of pending bot updates if they haven't been processed for a long time; for bots only.
-  ///
-  /// * [pendingUpdateCount]: The number of pending updates.
-  /// * [errorMessage]: The last error message.
-  ///
-  /// [Ok] is returned on completion.
-class SetBotUpdatesStatus extends TdFunction {
+///
+/// Informs the server about the number of pending bot updates if they haven't been processed for a long time; for bots only.
+///
+/// * [pendingUpdateCount]: The number of pending updates.
+/// * [errorMessage]: The last error message.
+///
+/// [Ok] is returned on completion.
+final class SetBotUpdatesStatus extends TdFunction {
   
   /// **SetBotUpdatesStatus** *(setBotUpdatesStatus)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class SetBotUpdatesStatus extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "pending_update_count": pendingUpdateCount,
       "error_message": errorMessage,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetBotUpdatesStatus copyWith({
     int? pendingUpdateCount,
@@ -47,8 +48,11 @@ class SetBotUpdatesStatus extends TdFunction {
     errorMessage: errorMessage ?? this.errorMessage,
   );
 
-  static const String constructor = 'setBotUpdatesStatus';
-  
+  static const String objectType = 'setBotUpdatesStatus';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

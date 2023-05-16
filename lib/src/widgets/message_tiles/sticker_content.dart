@@ -34,7 +34,7 @@ class _MessageTileStickerContentState extends State<MessageTileStickerContent> {
   void _getSize(BuildContext context) {
     int sHeight = 0, sWidth = 0;
     var content = widget.msg.content as TgStickerMessageContent;
-    if (content.sticker.format.getConstructor() == "stickerFormatTgs") {
+    if (content.sticker.format is tdlib.StickerFormatTgs) {
       sHeight = content.sticker.thumbnail!.height;
       sWidth = content.sticker.thumbnail!.width;
     } else {
@@ -58,7 +58,7 @@ class _MessageTileStickerContentState extends State<MessageTileStickerContent> {
     String sId = "";
     tdlib.FileType sType = const tdlib.FileTypeNone();
 
-    if (content.sticker.format.getConstructor() == "stickerFormatTgs") {
+    if (content.sticker.format is tdlib.StickerFormatTgs) {
       sId = content.sticker.thumbnail!.file.remote.id;
       sType = const tdlib.FileTypeThumbnail();
     } else {
@@ -68,7 +68,7 @@ class _MessageTileStickerContentState extends State<MessageTileStickerContent> {
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _getSize(context);
-      if (content.sticker.format.getConstructor() != "stickerFormatWebm") {
+      if (content.sticker.format is tdlib.StickerFormatWebm) {
         loadF = CancelableOperation.fromFuture(
           TgImage(
             id: sId,
@@ -95,8 +95,7 @@ class _MessageTileStickerContentState extends State<MessageTileStickerContent> {
     _getSize(context);
     var content = widget.msg.content as TgStickerMessageContent;
     if (image == null &&
-        content.sticker.format.getConstructor() == "stickerFormatWebm") {
-      if (content.sticker.format.getConstructor() == "stickerFormatWebm") {
+        content.sticker.format is tdlib.StickerFormatWebm) {
         image = MicroPlayer(
           videoFile: content.sticker.sticker,
           thumb: content.sticker.thumbnail!,
@@ -109,7 +108,6 @@ class _MessageTileStickerContentState extends State<MessageTileStickerContent> {
             ),
           ),
         );
-      }
     }
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,

@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **ToggleSupergroupIsForum** *(toggleSupergroupIsForum)* - TDLib function
-  ///
-  /// Toggles whether the supergroup is a forum; requires owner privileges in the supergroup. Discussion supergroups can't be converted to forums.
-  ///
-  /// * [supergroupId]: Identifier of the supergroup.
-  /// * [isForum]: New value of is_forum.
-  ///
-  /// [Ok] is returned on completion.
-class ToggleSupergroupIsForum extends TdFunction {
+///
+/// Toggles whether the supergroup is a forum; requires owner privileges in the supergroup. Discussion supergroups can't be converted to forums.
+///
+/// * [supergroupId]: Identifier of the supergroup.
+/// * [isForum]: New value of is_forum.
+///
+/// [Ok] is returned on completion.
+final class ToggleSupergroupIsForum extends TdFunction {
   
   /// **ToggleSupergroupIsForum** *(toggleSupergroupIsForum)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class ToggleSupergroupIsForum extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "supergroup_id": supergroupId,
       "is_forum": isForum,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ToggleSupergroupIsForum copyWith({
     int? supergroupId,
@@ -47,8 +48,11 @@ class ToggleSupergroupIsForum extends TdFunction {
     isForum: isForum ?? this.isForum,
   );
 
-  static const String constructor = 'toggleSupergroupIsForum';
-  
+  static const String objectType = 'toggleSupergroupIsForum';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

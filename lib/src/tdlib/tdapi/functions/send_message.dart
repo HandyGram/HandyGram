@@ -1,18 +1,18 @@
 part of '../tdapi.dart';
 
 /// **SendMessage** *(sendMessage)* - TDLib function
-  ///
-  /// Sends a message. Returns the sent message.
-  ///
-  /// * [chatId]: Target chat.
-  /// * [messageThreadId]: If not 0, a message thread identifier in which the message will be sent.
-  /// * [replyToMessageId]: Identifier of the replied message; 0 if none.
-  /// * [options]: Options to be used to send the message; pass null to use default options *(optional)*.
-  /// * [replyMarkup]: Markup for replying to the message; pass null if none; for bots only *(optional)*.
-  /// * [inputMessageContent]: The content of the message to be sent.
-  ///
-  /// [Message] is returned on completion.
-class SendMessage extends TdFunction {
+///
+/// Sends a message. Returns the sent message.
+///
+/// * [chatId]: Target chat.
+/// * [messageThreadId]: If not 0, a message thread identifier in which the message will be sent.
+/// * [replyToMessageId]: Identifier of the replied message; 0 if none.
+/// * [options]: Options to be used to send the message; pass null to use default options *(optional)*.
+/// * [replyMarkup]: Markup for replying to the message; pass null if none; for bots only *(optional)*.
+/// * [inputMessageContent]: The content of the message to be sent.
+///
+/// [Message] is returned on completion.
+final class SendMessage extends TdFunction {
   
   /// **SendMessage** *(sendMessage)* - TDLib function
   ///
@@ -55,8 +55,8 @@ class SendMessage extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_thread_id": messageThreadId,
       "reply_to_message_id": replyToMessageId,
@@ -64,8 +64,9 @@ class SendMessage extends TdFunction {
       "reply_markup": replyMarkup?.toJson(),
       "input_message_content": inputMessageContent.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SendMessage copyWith({
     int? chatId,
@@ -83,8 +84,11 @@ class SendMessage extends TdFunction {
     inputMessageContent: inputMessageContent ?? this.inputMessageContent,
   );
 
-  static const String constructor = 'sendMessage';
-  
+  static const String objectType = 'sendMessage';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

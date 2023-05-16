@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **EnableProxy** *(enableProxy)* - TDLib function
-  ///
-  /// Enables a proxy. Only one proxy can be enabled at a time. Can be called before authorization.
-  ///
-  /// * [proxyId]: Proxy identifier.
-  ///
-  /// [Ok] is returned on completion.
-class EnableProxy extends TdFunction {
+///
+/// Enables a proxy. Only one proxy can be enabled at a time. Can be called before authorization.
+///
+/// * [proxyId]: Proxy identifier.
+///
+/// [Ok] is returned on completion.
+final class EnableProxy extends TdFunction {
   
   /// **EnableProxy** *(enableProxy)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class EnableProxy extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "proxy_id": proxyId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   EnableProxy copyWith({
     int? proxyId,
@@ -38,8 +39,11 @@ class EnableProxy extends TdFunction {
     proxyId: proxyId ?? this.proxyId,
   );
 
-  static const String constructor = 'enableProxy';
-  
+  static const String objectType = 'enableProxy';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

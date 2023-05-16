@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **ImportedContacts** *(importedContacts)* - basic class
-  ///
-  /// Represents the result of an importContacts request.
-  ///
-  /// * [userIds]: User identifiers of the imported contacts in the same order as they were specified in the request; 0 if the contact is not yet a registered user.
-  /// * [importerCount]: The number of users that imported the corresponding contact; 0 for already registered users or if unavailable.
-class ImportedContacts extends TdObject {
+///
+/// Represents the result of an importContacts request.
+///
+/// * [userIds]: User identifiers of the imported contacts in the same order as they were specified in the request; 0 if the contact is not yet a registered user.
+/// * [importerCount]: The number of users that imported the corresponding contact; 0 for already registered users or if unavailable.
+final class ImportedContacts extends TdObject {
   
   /// **ImportedContacts** *(importedContacts)* - basic class
   ///
@@ -45,13 +45,14 @@ class ImportedContacts extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "user_ids": userIds.map((i) => i).toList(),
       "importer_count": importerCount.map((i) => i).toList(),
-    };
-  }
+		};
+	}
+
   
   ImportedContacts copyWith({
     List<int>? userIds,
@@ -65,8 +66,11 @@ class ImportedContacts extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'importedContacts';
-  
+  static const String objectType = 'importedContacts';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

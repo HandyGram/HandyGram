@@ -1,16 +1,16 @@
 part of '../tdapi.dart';
 
 /// **AddProxy** *(addProxy)* - TDLib function
-  ///
-  /// Adds a proxy server for network requests. Can be called before authorization.
-  ///
-  /// * [server]: Proxy server IP address.
-  /// * [port]: Proxy server port.
-  /// * [enable]: Pass true to immediately enable the proxy.
-  /// * [type]: Proxy type.
-  ///
-  /// [Proxy] is returned on completion.
-class AddProxy extends TdFunction {
+///
+/// Adds a proxy server for network requests. Can be called before authorization.
+///
+/// * [server]: Proxy server IP address.
+/// * [port]: Proxy server port.
+/// * [enable]: Pass true to immediately enable the proxy.
+/// * [type]: Proxy type.
+///
+/// [Proxy] is returned on completion.
+final class AddProxy extends TdFunction {
   
   /// **AddProxy** *(addProxy)* - TDLib function
   ///
@@ -43,15 +43,16 @@ class AddProxy extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "server": server,
       "port": port,
       "enable": enable,
       "type": type.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   AddProxy copyWith({
     String? server,
@@ -65,8 +66,11 @@ class AddProxy extends TdFunction {
     type: type ?? this.type,
   );
 
-  static const String constructor = 'addProxy';
-  
+  static const String objectType = 'addProxy';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

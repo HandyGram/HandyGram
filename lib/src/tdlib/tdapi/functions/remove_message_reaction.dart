@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **RemoveMessageReaction** *(removeMessageReaction)* - TDLib function
-  ///
-  /// Removes a reaction from a message. A chosen reaction can always be removed.
-  ///
-  /// * [chatId]: Identifier of the chat to which the message belongs.
-  /// * [messageId]: Identifier of the message.
-  /// * [reactionType]: Type of the reaction to remove.
-  ///
-  /// [Ok] is returned on completion.
-class RemoveMessageReaction extends TdFunction {
+///
+/// Removes a reaction from a message. A chosen reaction can always be removed.
+///
+/// * [chatId]: Identifier of the chat to which the message belongs.
+/// * [messageId]: Identifier of the message.
+/// * [reactionType]: Type of the reaction to remove.
+///
+/// [Ok] is returned on completion.
+final class RemoveMessageReaction extends TdFunction {
   
   /// **RemoveMessageReaction** *(removeMessageReaction)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class RemoveMessageReaction extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "reaction_type": reactionType.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   RemoveMessageReaction copyWith({
     int? chatId,
@@ -56,8 +57,11 @@ class RemoveMessageReaction extends TdFunction {
     reactionType: reactionType ?? this.reactionType,
   );
 
-  static const String constructor = 'removeMessageReaction';
-  
+  static const String objectType = 'removeMessageReaction';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

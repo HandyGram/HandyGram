@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetMenuButton** *(getMenuButton)* - TDLib function
-  ///
-  /// Returns menu button set by the bot for the given user; for bots only.
-  ///
-  /// * [userId]: Identifier of the user or 0 to get the default menu button.
-  ///
-  /// [BotMenuButton] is returned on completion.
-class GetMenuButton extends TdFunction {
+///
+/// Returns menu button set by the bot for the given user; for bots only.
+///
+/// * [userId]: Identifier of the user or 0 to get the default menu button.
+///
+/// [BotMenuButton] is returned on completion.
+final class GetMenuButton extends TdFunction {
   
   /// **GetMenuButton** *(getMenuButton)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetMenuButton extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "user_id": userId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetMenuButton copyWith({
     int? userId,
@@ -38,8 +39,11 @@ class GetMenuButton extends TdFunction {
     userId: userId ?? this.userId,
   );
 
-  static const String constructor = 'getMenuButton';
-  
+  static const String objectType = 'getMenuButton';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

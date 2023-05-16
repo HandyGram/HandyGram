@@ -1,17 +1,17 @@
 part of '../tdapi.dart';
 
 /// **GetMessageAddedReactions** *(getMessageAddedReactions)* - TDLib function
-  ///
-  /// Returns reactions added for a message, along with their sender.
-  ///
-  /// * [chatId]: Identifier of the chat to which the message belongs.
-  /// * [messageId]: Identifier of the message.
-  /// * [reactionType]: Type of the reactions to return; pass null to return all added reactions *(optional)*.
-  /// * [offset]: Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results.
-  /// * [limit]: The maximum number of reactions to be returned; must be positive and can't be greater than 100.
-  ///
-  /// [AddedReactions] is returned on completion.
-class GetMessageAddedReactions extends TdFunction {
+///
+/// Returns reactions added for a message, along with their sender.
+///
+/// * [chatId]: Identifier of the chat to which the message belongs.
+/// * [messageId]: Identifier of the message.
+/// * [reactionType]: Type of the reactions to return; pass null to return all added reactions *(optional)*.
+/// * [offset]: Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results.
+/// * [limit]: The maximum number of reactions to be returned; must be positive and can't be greater than 100.
+///
+/// [AddedReactions] is returned on completion.
+final class GetMessageAddedReactions extends TdFunction {
   
   /// **GetMessageAddedReactions** *(getMessageAddedReactions)* - TDLib function
   ///
@@ -49,16 +49,17 @@ class GetMessageAddedReactions extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "reaction_type": reactionType?.toJson(),
       "offset": offset,
       "limit": limit,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetMessageAddedReactions copyWith({
     int? chatId,
@@ -74,8 +75,11 @@ class GetMessageAddedReactions extends TdFunction {
     limit: limit ?? this.limit,
   );
 
-  static const String constructor = 'getMessageAddedReactions';
-  
+  static const String objectType = 'getMessageAddedReactions';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

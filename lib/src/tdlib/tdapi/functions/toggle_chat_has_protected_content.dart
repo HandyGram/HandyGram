@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **ToggleChatHasProtectedContent** *(toggleChatHasProtectedContent)* - TDLib function
-  ///
-  /// Changes the ability of users to save, forward, or copy chat content. Supported only for basic groups, supergroups and channels. Requires owner privileges.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [hasProtectedContent]: New value of has_protected_content.
-  ///
-  /// [Ok] is returned on completion.
-class ToggleChatHasProtectedContent extends TdFunction {
+///
+/// Changes the ability of users to save, forward, or copy chat content. Supported only for basic groups, supergroups and channels. Requires owner privileges.
+///
+/// * [chatId]: Chat identifier.
+/// * [hasProtectedContent]: New value of has_protected_content.
+///
+/// [Ok] is returned on completion.
+final class ToggleChatHasProtectedContent extends TdFunction {
   
   /// **ToggleChatHasProtectedContent** *(toggleChatHasProtectedContent)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class ToggleChatHasProtectedContent extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "has_protected_content": hasProtectedContent,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ToggleChatHasProtectedContent copyWith({
     int? chatId,
@@ -47,8 +48,11 @@ class ToggleChatHasProtectedContent extends TdFunction {
     hasProtectedContent: hasProtectedContent ?? this.hasProtectedContent,
   );
 
-  static const String constructor = 'toggleChatHasProtectedContent';
-  
+  static const String objectType = 'toggleChatHasProtectedContent';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

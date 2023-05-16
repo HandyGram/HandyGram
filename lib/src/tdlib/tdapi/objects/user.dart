@@ -1,30 +1,30 @@
 part of '../tdapi.dart';
 
 /// **User** *(user)* - basic class
-  ///
-  /// Represents a user.
-  ///
-  /// * [id]: User identifier.
-  /// * [firstName]: First name of the user.
-  /// * [lastName]: Last name of the user.
-  /// * [usernames]: Usernames of the user; may be null *(optional)*.
-  /// * [phoneNumber]: Phone number of the user.
-  /// * [status]: Current online status of the user.
-  /// * [profilePhoto]: Profile photo of the user; may be null *(optional)*.
-  /// * [emojiStatus]: Emoji status to be shown instead of the default Telegram Premium badge; may be null. For Telegram Premium users only *(optional)*.
-  /// * [isContact]: The user is a contact of the current user.
-  /// * [isMutualContact]: The user is a contact of the current user and the current user is a contact of the user.
-  /// * [isVerified]: True, if the user is verified.
-  /// * [isPremium]: True, if the user is a Telegram Premium user.
-  /// * [isSupport]: True, if the user is Telegram support account.
-  /// * [restrictionReason]: If non-empty, it contains a human-readable description of the reason why access to this user must be restricted.
-  /// * [isScam]: True, if many users reported this user as a scam.
-  /// * [isFake]: True, if many users reported this user as a fake account.
-  /// * [haveAccess]: If false, the user is inaccessible, and the only information known about the user is inside this class. Identifier of the user can't be passed to any method.
-  /// * [type]: Type of the user.
-  /// * [languageCode]: IETF language tag of the user's language; only available to bots.
-  /// * [addedToAttachmentMenu]: True, if the user added the current bot to attachment menu; only available to bots.
-class User extends TdObject {
+///
+/// Represents a user.
+///
+/// * [id]: User identifier.
+/// * [firstName]: First name of the user.
+/// * [lastName]: Last name of the user.
+/// * [usernames]: Usernames of the user; may be null *(optional)*.
+/// * [phoneNumber]: Phone number of the user.
+/// * [status]: Current online status of the user.
+/// * [profilePhoto]: Profile photo of the user; may be null *(optional)*.
+/// * [emojiStatus]: Emoji status to be shown instead of the default Telegram Premium badge; may be null. For Telegram Premium users only *(optional)*.
+/// * [isContact]: The user is a contact of the current user.
+/// * [isMutualContact]: The user is a contact of the current user and the current user is a contact of the user.
+/// * [isVerified]: True, if the user is verified.
+/// * [isPremium]: True, if the user is a Telegram Premium user.
+/// * [isSupport]: True, if the user is Telegram support account.
+/// * [restrictionReason]: If non-empty, it contains a human-readable description of the reason why access to this user must be restricted.
+/// * [isScam]: True, if many users reported this user as a scam.
+/// * [isFake]: True, if many users reported this user as a fake account.
+/// * [haveAccess]: If false, the user is inaccessible, and the only information known about the user is inside this class. Identifier of the user can't be passed to any method.
+/// * [type]: Type of the user.
+/// * [languageCode]: IETF language tag of the user's language; only available to bots.
+/// * [addedToAttachmentMenu]: True, if the user added the current bot to attachment menu; only available to bots.
+final class User extends TdObject {
   
   /// **User** *(user)* - basic class
   ///
@@ -171,9 +171,9 @@ class User extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "first_name": firstName,
       "last_name": lastName,
@@ -194,8 +194,9 @@ class User extends TdObject {
       "type": type.toJson(),
       "language_code": languageCode,
       "added_to_attachment_menu": addedToAttachmentMenu,
-    };
-  }
+		};
+	}
+
   
   User copyWith({
     int? id,
@@ -245,8 +246,11 @@ class User extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'user';
-  
+  static const String objectType = 'user';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

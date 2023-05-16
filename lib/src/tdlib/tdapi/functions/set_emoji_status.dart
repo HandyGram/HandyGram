@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **SetEmojiStatus** *(setEmojiStatus)* - TDLib function
-  ///
-  /// Changes the emoji status of the current user; for Telegram Premium users only.
-  ///
-  /// * [emojiStatus]: New emoji status; pass null to switch to the default badge *(optional)*.
-  /// * [duration]: Duration of the status, in seconds; pass 0 to keep the status active until it will be changed manually.
-  ///
-  /// [Ok] is returned on completion.
-class SetEmojiStatus extends TdFunction {
+///
+/// Changes the emoji status of the current user; for Telegram Premium users only.
+///
+/// * [emojiStatus]: New emoji status; pass null to switch to the default badge *(optional)*.
+/// * [duration]: Duration of the status, in seconds; pass 0 to keep the status active until it will be changed manually.
+///
+/// [Ok] is returned on completion.
+final class SetEmojiStatus extends TdFunction {
   
   /// **SetEmojiStatus** *(setEmojiStatus)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class SetEmojiStatus extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "emoji_status": emojiStatus?.toJson(),
       "duration": duration,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetEmojiStatus copyWith({
     EmojiStatus? emojiStatus,
@@ -47,8 +48,11 @@ class SetEmojiStatus extends TdFunction {
     duration: duration ?? this.duration,
   );
 
-  static const String constructor = 'setEmojiStatus';
-  
+  static const String objectType = 'setEmojiStatus';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

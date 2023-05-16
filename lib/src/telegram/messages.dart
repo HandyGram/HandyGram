@@ -82,9 +82,35 @@ final Map<String, TgMessageType> _stringToTypeMap = {
 };
 
 /// TgMessageType to String converter
-TgMessageType stringToMsgType(String s) {
-  return _stringToTypeMap[s] ?? TgMessageType.unsupportedHandygram;
-}
+TgMessageType contentToMsgType(tdlib.MessageContent s) => switch (s) {
+      // Media messages.
+      tdlib.MessageAnimation() => TgMessageType.animation, // implemented
+      tdlib.MessageAudio() => TgMessageType.audio,
+      tdlib.MessageDocument() => TgMessageType.document,
+      tdlib.MessageVideo() => TgMessageType.video, // implemented
+      tdlib.MessagePhoto() => TgMessageType.photo, // implemented
+      tdlib.MessageSticker() => TgMessageType.sticker, // implemented
+
+      // Call events messages.
+      // tdlib.MessageCall() =>  TgMessageType.call,
+
+      // Object messages.
+      tdlib.MessageContact() => TgMessageType.contact,
+      tdlib.MessageDice() => TgMessageType.dice,
+      tdlib.MessagePoll() => TgMessageType.poll,
+
+      // Text messages.
+      tdlib.MessagePinMessage() => TgMessageType.pinMessage,
+      tdlib.MessageText() => TgMessageType.text, // implemented
+
+      // Notes.
+      tdlib.MessageVideoNote() => TgMessageType.videoNote,
+      tdlib.MessageVoiceNote() => TgMessageType.voiceNote, // implemented
+
+      // Extras.
+      tdlib.MessageUnsupported() => TgMessageType.unsupportedTdlib,
+      _ => TgMessageType.unsupportedHandygram,
+    };
 
 /// String to TgMessageType converter
 String msgTypeToStr(TgMessageType type) {
@@ -96,7 +122,7 @@ String msgTypeToStr(TgMessageType type) {
 }
 
 TgMessageContent parseMessageContent(tdlib.MessageContent content) {
-  TgMessageType type = stringToMsgType(content.getConstructor());
+  TgMessageType type = contentToMsgType(content);
   switch (type) {
     case TgMessageType.animation:
       content as tdlib.MessageAnimation;
@@ -351,7 +377,7 @@ class TgMessage {
   TgMessage(
     this.tgMsg,
   ) {
-    type = stringToMsgType(tgMsg.content.getConstructor());
+    type = contentToMsgType(tgMsg.content);
   }
 }
 
@@ -369,7 +395,7 @@ class TgMessageContent {
   TgMessageContent(
     this.tgMsg,
   ) {
-    type = stringToMsgType(tgMsg.getConstructor());
+    type = contentToMsgType(tgMsg);
   }
 }
 
@@ -932,45 +958,34 @@ class TgMessagesListCombine {
 }
 
 void messagesHandler(tdlib.TdObject object, TgSession session) async {
-  switch (object.getConstructor()) {
-    case tdlib.UpdateNewMessage.constructor:
-      object as tdlib.UpdateNewMessage;
-      session.messages.updateLastMessage(
-        object.message.chatId,
-        object.message,
-      );
+  switch (object) {
+    case tdlib.UpdateNewMessage(message: var msg):
+      session.messages.updateLastMessage(msg.chatId, msg);
       return;
-    case tdlib.UpdateDeleteMessages.constructor:
-      object as tdlib.UpdateDeleteMessages;
-      session.messages.deleteMessages(
-        object.chatId,
-        object.messageIds,
-      );
+    case tdlib.UpdateDeleteMessages(chatId: var cid, messageIds: var mids):
+      session.messages.deleteMessages(cid, mids);
       return;
-    case tdlib.UpdateMessageContent.constructor:
-      object as tdlib.UpdateMessageContent;
-      session.messages.updateMessageContent(
-        object.chatId,
-        object.messageId,
-        object.newContent,
-      );
+    case tdlib.UpdateMessageContent(
+        chatId: var cid,
+        messageId: var mid,
+        newContent: var nc
+      ):
+      session.messages.updateMessageContent(cid, mid, nc);
       return;
-    case tdlib.UpdateMessageInteractionInfo.constructor:
-      object as tdlib.UpdateMessageInteractionInfo;
-      session.messages.updateInteractionInfo(
-        object.chatId,
-        object.messageId,
-        object.interactionInfo,
-      );
+    case tdlib.UpdateMessageInteractionInfo(
+        chatId: var cid,
+        messageId: var mid,
+        interactionInfo: var ii
+      ):
+      session.messages.updateInteractionInfo(cid, mid, ii);
       break;
-    case tdlib.UpdateMessageEdited.constructor:
-      object as tdlib.UpdateMessageEdited;
-      session.messages.updateEditData(
-        object.chatId,
-        object.messageId,
-        object.replyMarkup,
-        object.editDate,
-      );
+    case tdlib.UpdateMessageEdited(
+        chatId: var cid,
+        messageId: var mid,
+        replyMarkup: var rm,
+        editDate: var ed,
+      ):
+      session.messages.updateEditData(cid, mid, rm, ed);
       break;
     default:
       return;

@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **ParseTextEntities** *(parseTextEntities)* - TDLib function
-  ///
-  /// Parses Bold, Italic, Underline, Strikethrough, Spoiler, CustomEmoji, Code, Pre, PreCode, TextUrl and MentionName entities from a marked-up text. Can be called synchronously.
-  ///
-  /// * [text]: The text to parse.
-  /// * [parseMode]: Text parse mode.
-  ///
-  /// [FormattedText] is returned on completion.
-class ParseTextEntities extends TdFunction {
+///
+/// Parses Bold, Italic, Underline, Strikethrough, Spoiler, CustomEmoji, Code, Pre, PreCode, TextUrl and MentionName entities from a marked-up text. Can be called synchronously.
+///
+/// * [text]: The text to parse.
+/// * [parseMode]: Text parse mode.
+///
+/// [FormattedText] is returned on completion.
+final class ParseTextEntities extends TdFunction {
   
   /// **ParseTextEntities** *(parseTextEntities)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class ParseTextEntities extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "text": text,
       "parse_mode": parseMode.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ParseTextEntities copyWith({
     String? text,
@@ -47,8 +48,11 @@ class ParseTextEntities extends TdFunction {
     parseMode: parseMode ?? this.parseMode,
   );
 
-  static const String constructor = 'parseTextEntities';
-  
+  static const String objectType = 'parseTextEntities';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

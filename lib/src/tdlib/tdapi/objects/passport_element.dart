@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **PassportElement** *(passportElement)* - parent
-  ///
-  /// Contains information about a Telegram Passport element.
-class PassportElement extends TdObject {
+///
+/// Contains information about a Telegram Passport element.
+sealed class PassportElement extends TdObject {
   
   /// **PassportElement** *(passportElement)* - parent
   ///
@@ -26,59 +26,62 @@ class PassportElement extends TdObject {
   /// * [PassportElementEmailAddress]
   factory PassportElement.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case PassportElementPersonalDetails.constructor:
+      case PassportElementPersonalDetails.objectType:
         return PassportElementPersonalDetails.fromJson(json);
-      case PassportElementPassport.constructor:
+      case PassportElementPassport.objectType:
         return PassportElementPassport.fromJson(json);
-      case PassportElementDriverLicense.constructor:
+      case PassportElementDriverLicense.objectType:
         return PassportElementDriverLicense.fromJson(json);
-      case PassportElementIdentityCard.constructor:
+      case PassportElementIdentityCard.objectType:
         return PassportElementIdentityCard.fromJson(json);
-      case PassportElementInternalPassport.constructor:
+      case PassportElementInternalPassport.objectType:
         return PassportElementInternalPassport.fromJson(json);
-      case PassportElementAddress.constructor:
+      case PassportElementAddress.objectType:
         return PassportElementAddress.fromJson(json);
-      case PassportElementUtilityBill.constructor:
+      case PassportElementUtilityBill.objectType:
         return PassportElementUtilityBill.fromJson(json);
-      case PassportElementBankStatement.constructor:
+      case PassportElementBankStatement.objectType:
         return PassportElementBankStatement.fromJson(json);
-      case PassportElementRentalAgreement.constructor:
+      case PassportElementRentalAgreement.objectType:
         return PassportElementRentalAgreement.fromJson(json);
-      case PassportElementPassportRegistration.constructor:
+      case PassportElementPassportRegistration.objectType:
         return PassportElementPassportRegistration.fromJson(json);
-      case PassportElementTemporaryRegistration.constructor:
+      case PassportElementTemporaryRegistration.objectType:
         return PassportElementTemporaryRegistration.fromJson(json);
-      case PassportElementPhoneNumber.constructor:
+      case PassportElementPhoneNumber.objectType:
         return PassportElementPhoneNumber.fromJson(json);
-      case PassportElementEmailAddress.constructor:
+      case PassportElementEmailAddress.objectType:
         return PassportElementEmailAddress.fromJson(json);
       default:
-        return const PassportElement();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of PassportElement)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  PassportElement copyWith() => const PassportElement();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'passportElement';
   
+  PassportElement copyWith();
+
+  static const String objectType = 'passportElement';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PassportElementPersonalDetails** *(passportElementPersonalDetails)* - child of PassportElement
-  ///
-  /// A Telegram Passport element containing the user's personal details.
-  ///
-  /// * [personalDetails]: Personal details of the user.
-class PassportElementPersonalDetails extends PassportElement {
+///
+/// A Telegram Passport element containing the user's personal details.
+///
+/// * [personalDetails]: Personal details of the user.
+final class PassportElementPersonalDetails extends PassportElement {
   
   /// **PassportElementPersonalDetails** *(passportElementPersonalDetails)* - child of PassportElement
   ///
@@ -111,12 +114,13 @@ class PassportElementPersonalDetails extends PassportElement {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "personal_details": personalDetails.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   PassportElementPersonalDetails copyWith({
@@ -129,19 +133,22 @@ class PassportElementPersonalDetails extends PassportElement {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'passportElementPersonalDetails';
-  
+  static const String objectType = 'passportElementPersonalDetails';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PassportElementPassport** *(passportElementPassport)* - child of PassportElement
-  ///
-  /// A Telegram Passport element containing the user's passport.
-  ///
-  /// * [passport]: Passport.
-class PassportElementPassport extends PassportElement {
+///
+/// A Telegram Passport element containing the user's passport.
+///
+/// * [passport]: Passport.
+final class PassportElementPassport extends PassportElement {
   
   /// **PassportElementPassport** *(passportElementPassport)* - child of PassportElement
   ///
@@ -174,12 +181,13 @@ class PassportElementPassport extends PassportElement {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "passport": passport.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   PassportElementPassport copyWith({
@@ -192,19 +200,22 @@ class PassportElementPassport extends PassportElement {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'passportElementPassport';
-  
+  static const String objectType = 'passportElementPassport';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PassportElementDriverLicense** *(passportElementDriverLicense)* - child of PassportElement
-  ///
-  /// A Telegram Passport element containing the user's driver license.
-  ///
-  /// * [driverLicense]: Driver license.
-class PassportElementDriverLicense extends PassportElement {
+///
+/// A Telegram Passport element containing the user's driver license.
+///
+/// * [driverLicense]: Driver license.
+final class PassportElementDriverLicense extends PassportElement {
   
   /// **PassportElementDriverLicense** *(passportElementDriverLicense)* - child of PassportElement
   ///
@@ -237,12 +248,13 @@ class PassportElementDriverLicense extends PassportElement {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "driver_license": driverLicense.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   PassportElementDriverLicense copyWith({
@@ -255,19 +267,22 @@ class PassportElementDriverLicense extends PassportElement {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'passportElementDriverLicense';
-  
+  static const String objectType = 'passportElementDriverLicense';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PassportElementIdentityCard** *(passportElementIdentityCard)* - child of PassportElement
-  ///
-  /// A Telegram Passport element containing the user's identity card.
-  ///
-  /// * [identityCard]: Identity card.
-class PassportElementIdentityCard extends PassportElement {
+///
+/// A Telegram Passport element containing the user's identity card.
+///
+/// * [identityCard]: Identity card.
+final class PassportElementIdentityCard extends PassportElement {
   
   /// **PassportElementIdentityCard** *(passportElementIdentityCard)* - child of PassportElement
   ///
@@ -300,12 +315,13 @@ class PassportElementIdentityCard extends PassportElement {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "identity_card": identityCard.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   PassportElementIdentityCard copyWith({
@@ -318,19 +334,22 @@ class PassportElementIdentityCard extends PassportElement {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'passportElementIdentityCard';
-  
+  static const String objectType = 'passportElementIdentityCard';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PassportElementInternalPassport** *(passportElementInternalPassport)* - child of PassportElement
-  ///
-  /// A Telegram Passport element containing the user's internal passport.
-  ///
-  /// * [internalPassport]: Internal passport.
-class PassportElementInternalPassport extends PassportElement {
+///
+/// A Telegram Passport element containing the user's internal passport.
+///
+/// * [internalPassport]: Internal passport.
+final class PassportElementInternalPassport extends PassportElement {
   
   /// **PassportElementInternalPassport** *(passportElementInternalPassport)* - child of PassportElement
   ///
@@ -363,12 +382,13 @@ class PassportElementInternalPassport extends PassportElement {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "internal_passport": internalPassport.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   PassportElementInternalPassport copyWith({
@@ -381,19 +401,22 @@ class PassportElementInternalPassport extends PassportElement {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'passportElementInternalPassport';
-  
+  static const String objectType = 'passportElementInternalPassport';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PassportElementAddress** *(passportElementAddress)* - child of PassportElement
-  ///
-  /// A Telegram Passport element containing the user's address.
-  ///
-  /// * [address]: Address.
-class PassportElementAddress extends PassportElement {
+///
+/// A Telegram Passport element containing the user's address.
+///
+/// * [address]: Address.
+final class PassportElementAddress extends PassportElement {
   
   /// **PassportElementAddress** *(passportElementAddress)* - child of PassportElement
   ///
@@ -426,12 +449,13 @@ class PassportElementAddress extends PassportElement {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "address": address.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   PassportElementAddress copyWith({
@@ -444,19 +468,22 @@ class PassportElementAddress extends PassportElement {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'passportElementAddress';
-  
+  static const String objectType = 'passportElementAddress';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PassportElementUtilityBill** *(passportElementUtilityBill)* - child of PassportElement
-  ///
-  /// A Telegram Passport element containing the user's utility bill.
-  ///
-  /// * [utilityBill]: Utility bill.
-class PassportElementUtilityBill extends PassportElement {
+///
+/// A Telegram Passport element containing the user's utility bill.
+///
+/// * [utilityBill]: Utility bill.
+final class PassportElementUtilityBill extends PassportElement {
   
   /// **PassportElementUtilityBill** *(passportElementUtilityBill)* - child of PassportElement
   ///
@@ -489,12 +516,13 @@ class PassportElementUtilityBill extends PassportElement {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "utility_bill": utilityBill.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   PassportElementUtilityBill copyWith({
@@ -507,19 +535,22 @@ class PassportElementUtilityBill extends PassportElement {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'passportElementUtilityBill';
-  
+  static const String objectType = 'passportElementUtilityBill';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PassportElementBankStatement** *(passportElementBankStatement)* - child of PassportElement
-  ///
-  /// A Telegram Passport element containing the user's bank statement.
-  ///
-  /// * [bankStatement]: Bank statement.
-class PassportElementBankStatement extends PassportElement {
+///
+/// A Telegram Passport element containing the user's bank statement.
+///
+/// * [bankStatement]: Bank statement.
+final class PassportElementBankStatement extends PassportElement {
   
   /// **PassportElementBankStatement** *(passportElementBankStatement)* - child of PassportElement
   ///
@@ -552,12 +583,13 @@ class PassportElementBankStatement extends PassportElement {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "bank_statement": bankStatement.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   PassportElementBankStatement copyWith({
@@ -570,19 +602,22 @@ class PassportElementBankStatement extends PassportElement {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'passportElementBankStatement';
-  
+  static const String objectType = 'passportElementBankStatement';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PassportElementRentalAgreement** *(passportElementRentalAgreement)* - child of PassportElement
-  ///
-  /// A Telegram Passport element containing the user's rental agreement.
-  ///
-  /// * [rentalAgreement]: Rental agreement.
-class PassportElementRentalAgreement extends PassportElement {
+///
+/// A Telegram Passport element containing the user's rental agreement.
+///
+/// * [rentalAgreement]: Rental agreement.
+final class PassportElementRentalAgreement extends PassportElement {
   
   /// **PassportElementRentalAgreement** *(passportElementRentalAgreement)* - child of PassportElement
   ///
@@ -615,12 +650,13 @@ class PassportElementRentalAgreement extends PassportElement {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "rental_agreement": rentalAgreement.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   PassportElementRentalAgreement copyWith({
@@ -633,19 +669,22 @@ class PassportElementRentalAgreement extends PassportElement {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'passportElementRentalAgreement';
-  
+  static const String objectType = 'passportElementRentalAgreement';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PassportElementPassportRegistration** *(passportElementPassportRegistration)* - child of PassportElement
-  ///
-  /// A Telegram Passport element containing the user's passport registration pages.
-  ///
-  /// * [passportRegistration]: Passport registration pages.
-class PassportElementPassportRegistration extends PassportElement {
+///
+/// A Telegram Passport element containing the user's passport registration pages.
+///
+/// * [passportRegistration]: Passport registration pages.
+final class PassportElementPassportRegistration extends PassportElement {
   
   /// **PassportElementPassportRegistration** *(passportElementPassportRegistration)* - child of PassportElement
   ///
@@ -678,12 +717,13 @@ class PassportElementPassportRegistration extends PassportElement {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "passport_registration": passportRegistration.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   PassportElementPassportRegistration copyWith({
@@ -696,19 +736,22 @@ class PassportElementPassportRegistration extends PassportElement {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'passportElementPassportRegistration';
-  
+  static const String objectType = 'passportElementPassportRegistration';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PassportElementTemporaryRegistration** *(passportElementTemporaryRegistration)* - child of PassportElement
-  ///
-  /// A Telegram Passport element containing the user's temporary registration.
-  ///
-  /// * [temporaryRegistration]: Temporary registration.
-class PassportElementTemporaryRegistration extends PassportElement {
+///
+/// A Telegram Passport element containing the user's temporary registration.
+///
+/// * [temporaryRegistration]: Temporary registration.
+final class PassportElementTemporaryRegistration extends PassportElement {
   
   /// **PassportElementTemporaryRegistration** *(passportElementTemporaryRegistration)* - child of PassportElement
   ///
@@ -741,12 +784,13 @@ class PassportElementTemporaryRegistration extends PassportElement {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "temporary_registration": temporaryRegistration.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   PassportElementTemporaryRegistration copyWith({
@@ -759,19 +803,22 @@ class PassportElementTemporaryRegistration extends PassportElement {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'passportElementTemporaryRegistration';
-  
+  static const String objectType = 'passportElementTemporaryRegistration';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PassportElementPhoneNumber** *(passportElementPhoneNumber)* - child of PassportElement
-  ///
-  /// A Telegram Passport element containing the user's phone number.
-  ///
-  /// * [phoneNumber]: Phone number.
-class PassportElementPhoneNumber extends PassportElement {
+///
+/// A Telegram Passport element containing the user's phone number.
+///
+/// * [phoneNumber]: Phone number.
+final class PassportElementPhoneNumber extends PassportElement {
   
   /// **PassportElementPhoneNumber** *(passportElementPhoneNumber)* - child of PassportElement
   ///
@@ -804,12 +851,13 @@ class PassportElementPhoneNumber extends PassportElement {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "phone_number": phoneNumber,
-    };
-  }
+		};
+	}
+
   
   @override
   PassportElementPhoneNumber copyWith({
@@ -822,19 +870,22 @@ class PassportElementPhoneNumber extends PassportElement {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'passportElementPhoneNumber';
-  
+  static const String objectType = 'passportElementPhoneNumber';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PassportElementEmailAddress** *(passportElementEmailAddress)* - child of PassportElement
-  ///
-  /// A Telegram Passport element containing the user's email address.
-  ///
-  /// * [emailAddress]: Email address.
-class PassportElementEmailAddress extends PassportElement {
+///
+/// A Telegram Passport element containing the user's email address.
+///
+/// * [emailAddress]: Email address.
+final class PassportElementEmailAddress extends PassportElement {
   
   /// **PassportElementEmailAddress** *(passportElementEmailAddress)* - child of PassportElement
   ///
@@ -867,12 +918,13 @@ class PassportElementEmailAddress extends PassportElement {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "email_address": emailAddress,
-    };
-  }
+		};
+	}
+
   
   @override
   PassportElementEmailAddress copyWith({
@@ -885,8 +937,11 @@ class PassportElementEmailAddress extends PassportElement {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'passportElementEmailAddress';
-  
+  static const String objectType = 'passportElementEmailAddress';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

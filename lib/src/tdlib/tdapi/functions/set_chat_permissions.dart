@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **SetChatPermissions** *(setChatPermissions)* - TDLib function
-  ///
-  /// Changes the chat members permissions. Supported only for basic groups and supergroups. Requires can_restrict_members administrator right.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [permissions]: New non-administrator members permissions in the chat.
-  ///
-  /// [Ok] is returned on completion.
-class SetChatPermissions extends TdFunction {
+///
+/// Changes the chat members permissions. Supported only for basic groups and supergroups. Requires can_restrict_members administrator right.
+///
+/// * [chatId]: Chat identifier.
+/// * [permissions]: New non-administrator members permissions in the chat.
+///
+/// [Ok] is returned on completion.
+final class SetChatPermissions extends TdFunction {
   
   /// **SetChatPermissions** *(setChatPermissions)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class SetChatPermissions extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "permissions": permissions.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetChatPermissions copyWith({
     int? chatId,
@@ -47,8 +48,11 @@ class SetChatPermissions extends TdFunction {
     permissions: permissions ?? this.permissions,
   );
 
-  static const String constructor = 'setChatPermissions';
-  
+  static const String objectType = 'setChatPermissions';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

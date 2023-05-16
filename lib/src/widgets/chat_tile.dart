@@ -7,16 +7,20 @@ import 'package:handygram/src/telegram/users.dart';
 import 'package:handygram/src/tdlib/td_api.dart' as tdlib;
 import 'package:handygram/src/misc/tdlib_utils.dart';
 
-String _getChatTileType(int id) {
-  // TODO: handle supergroups (channels)
-  String? cht = session.chatsInfoCache[id]?.type.getConstructor();
-  String type = cht == "chatTypePrivate"
-      ? (session.usersInfoCache[id]?.type.getConstructor() ?? "userTypeRegular")
-      : cht == "chatTypeSecret"
-          ? "secret"
-          : "group";
-  return type;
-}
+// returns user, bot, deleted_user, unknown_user, channel, group
+String _getChatTileType(int id) => switch (session.chatsInfoCache[id]?.type) {
+      tdlib.ChatTypePrivate() => switch (session.usersInfoCache[id]?.type) {
+          tdlib.UserTypeBot() => "bot",
+          tdlib.UserTypeDeleted() => "deleted_user",
+          tdlib.UserTypeUnknown() => "unknown_user",
+          _ => "user",
+        },
+      tdlib.ChatTypeSupergroup(isChannel: var isChannel) =>
+        isChannel ? "channel" : "group",
+      tdlib.ChatTypeSecret() => "user",
+      tdlib.ChatTypeBasicGroup() => "group",
+      _ => "group",
+    };
 
 String _writersToString(List<String> writers) {
   if (writers.length == 1) {
@@ -51,7 +55,7 @@ class ChatTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String userType = _getChatTileType(id);
-    bool isRegularUser = userType == "userTypeRegular" && id != 777000;
+    bool isRegularUser = userType == "user" && id != 777000;
     tdlib.Message? lastMessage = lastMsg;
     if (session.chatsInfoCache[id]?.lastMessage != null &&
         lastMessage == null) {
@@ -92,8 +96,8 @@ class ChatTile extends StatelessWidget {
                     milliseconds: 300,
                   ),
                   child: (isRegularUser &&
-                          session.usersInfoCache[id]?.status.getConstructor() ==
-                              "userStatusOnline")
+                          session.usersInfoCache[id]?.status
+                              is tdlib.UserStatusOnline)
                       ? SizedBox(
                           height: 40,
                           width: 40,
@@ -134,13 +138,15 @@ class ChatTile extends StatelessWidget {
                     children: [
                       if (!isRegularUser)
                         Icon(
-                          userType == "userTypeBot"
+                          userType == "bot"
                               ? Icons.smart_toy
                               : userType == "group"
                                   ? Icons.group
-                                  : id == 777000
-                                      ? Icons.security
-                                      : Icons.delete,
+                                  : userType == "channel"
+                                      ? Icons.star
+                                      : id == 777000
+                                          ? Icons.security
+                                          : Icons.delete,
                           size: 12,
                         ),
                       if (!isRegularUser) const SizedBox(width: 3),
@@ -160,8 +166,8 @@ class ChatTile extends StatelessWidget {
                   if (writers == null || writers!.isEmpty) ...[
                     if (lastMessage != null &&
                         lastDraft == null &&
-                        session.chatsInfoCache[id]?.type.getConstructor() !=
-                            tdlib.ChatTypePrivate.constructor &&
+                        session.chatsInfoCache[id]?.type
+                            is tdlib.ChatTypePrivate &&
                         lastMessage.senderId.getSenderId() != id)
                       Flexible(
                         child: Text(

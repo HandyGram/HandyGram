@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **TextEntityType** *(textEntityType)* - parent
-  ///
-  /// Represents a part of the text which must be formatted differently.
-class TextEntityType extends TdObject {
+///
+/// Represents a part of the text which must be formatted differently.
+sealed class TextEntityType extends TdObject {
   
   /// **TextEntityType** *(textEntityType)* - parent
   ///
@@ -33,71 +33,74 @@ class TextEntityType extends TdObject {
   /// * [TextEntityTypeMediaTimestamp]
   factory TextEntityType.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case TextEntityTypeMention.constructor:
+      case TextEntityTypeMention.objectType:
         return TextEntityTypeMention.fromJson(json);
-      case TextEntityTypeHashtag.constructor:
+      case TextEntityTypeHashtag.objectType:
         return TextEntityTypeHashtag.fromJson(json);
-      case TextEntityTypeCashtag.constructor:
+      case TextEntityTypeCashtag.objectType:
         return TextEntityTypeCashtag.fromJson(json);
-      case TextEntityTypeBotCommand.constructor:
+      case TextEntityTypeBotCommand.objectType:
         return TextEntityTypeBotCommand.fromJson(json);
-      case TextEntityTypeUrl.constructor:
+      case TextEntityTypeUrl.objectType:
         return TextEntityTypeUrl.fromJson(json);
-      case TextEntityTypeEmailAddress.constructor:
+      case TextEntityTypeEmailAddress.objectType:
         return TextEntityTypeEmailAddress.fromJson(json);
-      case TextEntityTypePhoneNumber.constructor:
+      case TextEntityTypePhoneNumber.objectType:
         return TextEntityTypePhoneNumber.fromJson(json);
-      case TextEntityTypeBankCardNumber.constructor:
+      case TextEntityTypeBankCardNumber.objectType:
         return TextEntityTypeBankCardNumber.fromJson(json);
-      case TextEntityTypeBold.constructor:
+      case TextEntityTypeBold.objectType:
         return TextEntityTypeBold.fromJson(json);
-      case TextEntityTypeItalic.constructor:
+      case TextEntityTypeItalic.objectType:
         return TextEntityTypeItalic.fromJson(json);
-      case TextEntityTypeUnderline.constructor:
+      case TextEntityTypeUnderline.objectType:
         return TextEntityTypeUnderline.fromJson(json);
-      case TextEntityTypeStrikethrough.constructor:
+      case TextEntityTypeStrikethrough.objectType:
         return TextEntityTypeStrikethrough.fromJson(json);
-      case TextEntityTypeSpoiler.constructor:
+      case TextEntityTypeSpoiler.objectType:
         return TextEntityTypeSpoiler.fromJson(json);
-      case TextEntityTypeCode.constructor:
+      case TextEntityTypeCode.objectType:
         return TextEntityTypeCode.fromJson(json);
-      case TextEntityTypePre.constructor:
+      case TextEntityTypePre.objectType:
         return TextEntityTypePre.fromJson(json);
-      case TextEntityTypePreCode.constructor:
+      case TextEntityTypePreCode.objectType:
         return TextEntityTypePreCode.fromJson(json);
-      case TextEntityTypeTextUrl.constructor:
+      case TextEntityTypeTextUrl.objectType:
         return TextEntityTypeTextUrl.fromJson(json);
-      case TextEntityTypeMentionName.constructor:
+      case TextEntityTypeMentionName.objectType:
         return TextEntityTypeMentionName.fromJson(json);
-      case TextEntityTypeCustomEmoji.constructor:
+      case TextEntityTypeCustomEmoji.objectType:
         return TextEntityTypeCustomEmoji.fromJson(json);
-      case TextEntityTypeMediaTimestamp.constructor:
+      case TextEntityTypeMediaTimestamp.objectType:
         return TextEntityTypeMediaTimestamp.fromJson(json);
       default:
-        return const TextEntityType();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of TextEntityType)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  TextEntityType copyWith() => const TextEntityType();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'textEntityType';
   
+  TextEntityType copyWith();
+
+  static const String objectType = 'textEntityType';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **TextEntityTypeMention** *(textEntityTypeMention)* - child of TextEntityType
-  ///
-  /// A mention of a user, a supergroup, or a channel by their username.
-class TextEntityTypeMention extends TextEntityType {
+///
+/// A mention of a user, a supergroup, or a channel by their username.
+final class TextEntityTypeMention extends TextEntityType {
   
   /// **TextEntityTypeMention** *(textEntityTypeMention)* - child of TextEntityType
   ///
@@ -108,26 +111,30 @@ class TextEntityTypeMention extends TextEntityType {
   factory TextEntityTypeMention.fromJson(Map<String, dynamic> json) => const TextEntityTypeMention();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   TextEntityTypeMention copyWith() => const TextEntityTypeMention();
 
-  static const String constructor = 'textEntityTypeMention';
-  
+  static const String objectType = 'textEntityTypeMention';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **TextEntityTypeHashtag** *(textEntityTypeHashtag)* - child of TextEntityType
-  ///
-  /// A hashtag text, beginning with "#".
-class TextEntityTypeHashtag extends TextEntityType {
+///
+/// A hashtag text, beginning with "#".
+final class TextEntityTypeHashtag extends TextEntityType {
   
   /// **TextEntityTypeHashtag** *(textEntityTypeHashtag)* - child of TextEntityType
   ///
@@ -138,26 +145,30 @@ class TextEntityTypeHashtag extends TextEntityType {
   factory TextEntityTypeHashtag.fromJson(Map<String, dynamic> json) => const TextEntityTypeHashtag();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   TextEntityTypeHashtag copyWith() => const TextEntityTypeHashtag();
 
-  static const String constructor = 'textEntityTypeHashtag';
-  
+  static const String objectType = 'textEntityTypeHashtag';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **TextEntityTypeCashtag** *(textEntityTypeCashtag)* - child of TextEntityType
-  ///
-  /// A cashtag text, beginning with "$" and consisting of capital English letters (e.g., "$USD").
-class TextEntityTypeCashtag extends TextEntityType {
+///
+/// A cashtag text, beginning with "$" and consisting of capital English letters (e.g., "$USD").
+final class TextEntityTypeCashtag extends TextEntityType {
   
   /// **TextEntityTypeCashtag** *(textEntityTypeCashtag)* - child of TextEntityType
   ///
@@ -168,26 +179,30 @@ class TextEntityTypeCashtag extends TextEntityType {
   factory TextEntityTypeCashtag.fromJson(Map<String, dynamic> json) => const TextEntityTypeCashtag();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   TextEntityTypeCashtag copyWith() => const TextEntityTypeCashtag();
 
-  static const String constructor = 'textEntityTypeCashtag';
-  
+  static const String objectType = 'textEntityTypeCashtag';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **TextEntityTypeBotCommand** *(textEntityTypeBotCommand)* - child of TextEntityType
-  ///
-  /// A bot command, beginning with "/".
-class TextEntityTypeBotCommand extends TextEntityType {
+///
+/// A bot command, beginning with "/".
+final class TextEntityTypeBotCommand extends TextEntityType {
   
   /// **TextEntityTypeBotCommand** *(textEntityTypeBotCommand)* - child of TextEntityType
   ///
@@ -198,26 +213,30 @@ class TextEntityTypeBotCommand extends TextEntityType {
   factory TextEntityTypeBotCommand.fromJson(Map<String, dynamic> json) => const TextEntityTypeBotCommand();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   TextEntityTypeBotCommand copyWith() => const TextEntityTypeBotCommand();
 
-  static const String constructor = 'textEntityTypeBotCommand';
-  
+  static const String objectType = 'textEntityTypeBotCommand';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **TextEntityTypeUrl** *(textEntityTypeUrl)* - child of TextEntityType
-  ///
-  /// An HTTP URL.
-class TextEntityTypeUrl extends TextEntityType {
+///
+/// An HTTP URL.
+final class TextEntityTypeUrl extends TextEntityType {
   
   /// **TextEntityTypeUrl** *(textEntityTypeUrl)* - child of TextEntityType
   ///
@@ -228,26 +247,30 @@ class TextEntityTypeUrl extends TextEntityType {
   factory TextEntityTypeUrl.fromJson(Map<String, dynamic> json) => const TextEntityTypeUrl();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   TextEntityTypeUrl copyWith() => const TextEntityTypeUrl();
 
-  static const String constructor = 'textEntityTypeUrl';
-  
+  static const String objectType = 'textEntityTypeUrl';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **TextEntityTypeEmailAddress** *(textEntityTypeEmailAddress)* - child of TextEntityType
-  ///
-  /// An email address.
-class TextEntityTypeEmailAddress extends TextEntityType {
+///
+/// An email address.
+final class TextEntityTypeEmailAddress extends TextEntityType {
   
   /// **TextEntityTypeEmailAddress** *(textEntityTypeEmailAddress)* - child of TextEntityType
   ///
@@ -258,26 +281,30 @@ class TextEntityTypeEmailAddress extends TextEntityType {
   factory TextEntityTypeEmailAddress.fromJson(Map<String, dynamic> json) => const TextEntityTypeEmailAddress();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   TextEntityTypeEmailAddress copyWith() => const TextEntityTypeEmailAddress();
 
-  static const String constructor = 'textEntityTypeEmailAddress';
-  
+  static const String objectType = 'textEntityTypeEmailAddress';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **TextEntityTypePhoneNumber** *(textEntityTypePhoneNumber)* - child of TextEntityType
-  ///
-  /// A phone number.
-class TextEntityTypePhoneNumber extends TextEntityType {
+///
+/// A phone number.
+final class TextEntityTypePhoneNumber extends TextEntityType {
   
   /// **TextEntityTypePhoneNumber** *(textEntityTypePhoneNumber)* - child of TextEntityType
   ///
@@ -288,26 +315,30 @@ class TextEntityTypePhoneNumber extends TextEntityType {
   factory TextEntityTypePhoneNumber.fromJson(Map<String, dynamic> json) => const TextEntityTypePhoneNumber();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   TextEntityTypePhoneNumber copyWith() => const TextEntityTypePhoneNumber();
 
-  static const String constructor = 'textEntityTypePhoneNumber';
-  
+  static const String objectType = 'textEntityTypePhoneNumber';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **TextEntityTypeBankCardNumber** *(textEntityTypeBankCardNumber)* - child of TextEntityType
-  ///
-  /// A bank card number. The getBankCardInfo method can be used to get information about the bank card.
-class TextEntityTypeBankCardNumber extends TextEntityType {
+///
+/// A bank card number. The getBankCardInfo method can be used to get information about the bank card.
+final class TextEntityTypeBankCardNumber extends TextEntityType {
   
   /// **TextEntityTypeBankCardNumber** *(textEntityTypeBankCardNumber)* - child of TextEntityType
   ///
@@ -318,26 +349,30 @@ class TextEntityTypeBankCardNumber extends TextEntityType {
   factory TextEntityTypeBankCardNumber.fromJson(Map<String, dynamic> json) => const TextEntityTypeBankCardNumber();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   TextEntityTypeBankCardNumber copyWith() => const TextEntityTypeBankCardNumber();
 
-  static const String constructor = 'textEntityTypeBankCardNumber';
-  
+  static const String objectType = 'textEntityTypeBankCardNumber';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **TextEntityTypeBold** *(textEntityTypeBold)* - child of TextEntityType
-  ///
-  /// A bold text.
-class TextEntityTypeBold extends TextEntityType {
+///
+/// A bold text.
+final class TextEntityTypeBold extends TextEntityType {
   
   /// **TextEntityTypeBold** *(textEntityTypeBold)* - child of TextEntityType
   ///
@@ -348,26 +383,30 @@ class TextEntityTypeBold extends TextEntityType {
   factory TextEntityTypeBold.fromJson(Map<String, dynamic> json) => const TextEntityTypeBold();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   TextEntityTypeBold copyWith() => const TextEntityTypeBold();
 
-  static const String constructor = 'textEntityTypeBold';
-  
+  static const String objectType = 'textEntityTypeBold';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **TextEntityTypeItalic** *(textEntityTypeItalic)* - child of TextEntityType
-  ///
-  /// An italic text.
-class TextEntityTypeItalic extends TextEntityType {
+///
+/// An italic text.
+final class TextEntityTypeItalic extends TextEntityType {
   
   /// **TextEntityTypeItalic** *(textEntityTypeItalic)* - child of TextEntityType
   ///
@@ -378,26 +417,30 @@ class TextEntityTypeItalic extends TextEntityType {
   factory TextEntityTypeItalic.fromJson(Map<String, dynamic> json) => const TextEntityTypeItalic();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   TextEntityTypeItalic copyWith() => const TextEntityTypeItalic();
 
-  static const String constructor = 'textEntityTypeItalic';
-  
+  static const String objectType = 'textEntityTypeItalic';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **TextEntityTypeUnderline** *(textEntityTypeUnderline)* - child of TextEntityType
-  ///
-  /// An underlined text.
-class TextEntityTypeUnderline extends TextEntityType {
+///
+/// An underlined text.
+final class TextEntityTypeUnderline extends TextEntityType {
   
   /// **TextEntityTypeUnderline** *(textEntityTypeUnderline)* - child of TextEntityType
   ///
@@ -408,26 +451,30 @@ class TextEntityTypeUnderline extends TextEntityType {
   factory TextEntityTypeUnderline.fromJson(Map<String, dynamic> json) => const TextEntityTypeUnderline();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   TextEntityTypeUnderline copyWith() => const TextEntityTypeUnderline();
 
-  static const String constructor = 'textEntityTypeUnderline';
-  
+  static const String objectType = 'textEntityTypeUnderline';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **TextEntityTypeStrikethrough** *(textEntityTypeStrikethrough)* - child of TextEntityType
-  ///
-  /// A strikethrough text.
-class TextEntityTypeStrikethrough extends TextEntityType {
+///
+/// A strikethrough text.
+final class TextEntityTypeStrikethrough extends TextEntityType {
   
   /// **TextEntityTypeStrikethrough** *(textEntityTypeStrikethrough)* - child of TextEntityType
   ///
@@ -438,26 +485,30 @@ class TextEntityTypeStrikethrough extends TextEntityType {
   factory TextEntityTypeStrikethrough.fromJson(Map<String, dynamic> json) => const TextEntityTypeStrikethrough();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   TextEntityTypeStrikethrough copyWith() => const TextEntityTypeStrikethrough();
 
-  static const String constructor = 'textEntityTypeStrikethrough';
-  
+  static const String objectType = 'textEntityTypeStrikethrough';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **TextEntityTypeSpoiler** *(textEntityTypeSpoiler)* - child of TextEntityType
-  ///
-  /// A spoiler text.
-class TextEntityTypeSpoiler extends TextEntityType {
+///
+/// A spoiler text.
+final class TextEntityTypeSpoiler extends TextEntityType {
   
   /// **TextEntityTypeSpoiler** *(textEntityTypeSpoiler)* - child of TextEntityType
   ///
@@ -468,26 +519,30 @@ class TextEntityTypeSpoiler extends TextEntityType {
   factory TextEntityTypeSpoiler.fromJson(Map<String, dynamic> json) => const TextEntityTypeSpoiler();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   TextEntityTypeSpoiler copyWith() => const TextEntityTypeSpoiler();
 
-  static const String constructor = 'textEntityTypeSpoiler';
-  
+  static const String objectType = 'textEntityTypeSpoiler';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **TextEntityTypeCode** *(textEntityTypeCode)* - child of TextEntityType
-  ///
-  /// Text that must be formatted as if inside a code HTML tag.
-class TextEntityTypeCode extends TextEntityType {
+///
+/// Text that must be formatted as if inside a code HTML tag.
+final class TextEntityTypeCode extends TextEntityType {
   
   /// **TextEntityTypeCode** *(textEntityTypeCode)* - child of TextEntityType
   ///
@@ -498,26 +553,30 @@ class TextEntityTypeCode extends TextEntityType {
   factory TextEntityTypeCode.fromJson(Map<String, dynamic> json) => const TextEntityTypeCode();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   TextEntityTypeCode copyWith() => const TextEntityTypeCode();
 
-  static const String constructor = 'textEntityTypeCode';
-  
+  static const String objectType = 'textEntityTypeCode';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **TextEntityTypePre** *(textEntityTypePre)* - child of TextEntityType
-  ///
-  /// Text that must be formatted as if inside a pre HTML tag.
-class TextEntityTypePre extends TextEntityType {
+///
+/// Text that must be formatted as if inside a pre HTML tag.
+final class TextEntityTypePre extends TextEntityType {
   
   /// **TextEntityTypePre** *(textEntityTypePre)* - child of TextEntityType
   ///
@@ -528,28 +587,32 @@ class TextEntityTypePre extends TextEntityType {
   factory TextEntityTypePre.fromJson(Map<String, dynamic> json) => const TextEntityTypePre();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   TextEntityTypePre copyWith() => const TextEntityTypePre();
 
-  static const String constructor = 'textEntityTypePre';
-  
+  static const String objectType = 'textEntityTypePre';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **TextEntityTypePreCode** *(textEntityTypePreCode)* - child of TextEntityType
-  ///
-  /// Text that must be formatted as if inside pre, and code HTML tags.
-  ///
-  /// * [language]: Programming language of the code; as defined by the sender.
-class TextEntityTypePreCode extends TextEntityType {
+///
+/// Text that must be formatted as if inside pre, and code HTML tags.
+///
+/// * [language]: Programming language of the code; as defined by the sender.
+final class TextEntityTypePreCode extends TextEntityType {
   
   /// **TextEntityTypePreCode** *(textEntityTypePreCode)* - child of TextEntityType
   ///
@@ -570,12 +633,13 @@ class TextEntityTypePreCode extends TextEntityType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "language": language,
-    };
-  }
+		};
+	}
+
   
   @override
   TextEntityTypePreCode copyWith({
@@ -584,19 +648,22 @@ class TextEntityTypePreCode extends TextEntityType {
     language: language ?? this.language,
   );
 
-  static const String constructor = 'textEntityTypePreCode';
-  
+  static const String objectType = 'textEntityTypePreCode';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **TextEntityTypeTextUrl** *(textEntityTypeTextUrl)* - child of TextEntityType
-  ///
-  /// A text description shown instead of a raw URL.
-  ///
-  /// * [url]: HTTP or tg:// URL to be opened when the link is clicked.
-class TextEntityTypeTextUrl extends TextEntityType {
+///
+/// A text description shown instead of a raw URL.
+///
+/// * [url]: HTTP or tg:// URL to be opened when the link is clicked.
+final class TextEntityTypeTextUrl extends TextEntityType {
   
   /// **TextEntityTypeTextUrl** *(textEntityTypeTextUrl)* - child of TextEntityType
   ///
@@ -617,12 +684,13 @@ class TextEntityTypeTextUrl extends TextEntityType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "url": url,
-    };
-  }
+		};
+	}
+
   
   @override
   TextEntityTypeTextUrl copyWith({
@@ -631,19 +699,22 @@ class TextEntityTypeTextUrl extends TextEntityType {
     url: url ?? this.url,
   );
 
-  static const String constructor = 'textEntityTypeTextUrl';
-  
+  static const String objectType = 'textEntityTypeTextUrl';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **TextEntityTypeMentionName** *(textEntityTypeMentionName)* - child of TextEntityType
-  ///
-  /// A text shows instead of a raw mention of the user (e.g., when the user has no username).
-  ///
-  /// * [userId]: Identifier of the mentioned user.
-class TextEntityTypeMentionName extends TextEntityType {
+///
+/// A text shows instead of a raw mention of the user (e.g., when the user has no username).
+///
+/// * [userId]: Identifier of the mentioned user.
+final class TextEntityTypeMentionName extends TextEntityType {
   
   /// **TextEntityTypeMentionName** *(textEntityTypeMentionName)* - child of TextEntityType
   ///
@@ -664,12 +735,13 @@ class TextEntityTypeMentionName extends TextEntityType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "user_id": userId,
-    };
-  }
+		};
+	}
+
   
   @override
   TextEntityTypeMentionName copyWith({
@@ -678,19 +750,22 @@ class TextEntityTypeMentionName extends TextEntityType {
     userId: userId ?? this.userId,
   );
 
-  static const String constructor = 'textEntityTypeMentionName';
-  
+  static const String objectType = 'textEntityTypeMentionName';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **TextEntityTypeCustomEmoji** *(textEntityTypeCustomEmoji)* - child of TextEntityType
-  ///
-  /// A custom emoji. The text behind a custom emoji must be an emoji. Only premium users can use premium custom emoji.
-  ///
-  /// * [customEmojiId]: Unique identifier of the custom emoji.
-class TextEntityTypeCustomEmoji extends TextEntityType {
+///
+/// A custom emoji. The text behind a custom emoji must be an emoji. Only premium users can use premium custom emoji.
+///
+/// * [customEmojiId]: Unique identifier of the custom emoji.
+final class TextEntityTypeCustomEmoji extends TextEntityType {
   
   /// **TextEntityTypeCustomEmoji** *(textEntityTypeCustomEmoji)* - child of TextEntityType
   ///
@@ -711,12 +786,13 @@ class TextEntityTypeCustomEmoji extends TextEntityType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "custom_emoji_id": customEmojiId,
-    };
-  }
+		};
+	}
+
   
   @override
   TextEntityTypeCustomEmoji copyWith({
@@ -725,19 +801,22 @@ class TextEntityTypeCustomEmoji extends TextEntityType {
     customEmojiId: customEmojiId ?? this.customEmojiId,
   );
 
-  static const String constructor = 'textEntityTypeCustomEmoji';
-  
+  static const String objectType = 'textEntityTypeCustomEmoji';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **TextEntityTypeMediaTimestamp** *(textEntityTypeMediaTimestamp)* - child of TextEntityType
-  ///
-  /// A media timestamp.
-  ///
-  /// * [mediaTimestamp]: Timestamp from which a video/audio/video note/voice note playing must start, in seconds. The media can be in the content or the web page preview of the current message, or in the same places in the replied message.
-class TextEntityTypeMediaTimestamp extends TextEntityType {
+///
+/// A media timestamp.
+///
+/// * [mediaTimestamp]: Timestamp from which a video/audio/video note/voice note playing must start, in seconds. The media can be in the content or the web page preview of the current message, or in the same places in the replied message.
+final class TextEntityTypeMediaTimestamp extends TextEntityType {
   
   /// **TextEntityTypeMediaTimestamp** *(textEntityTypeMediaTimestamp)* - child of TextEntityType
   ///
@@ -758,12 +837,13 @@ class TextEntityTypeMediaTimestamp extends TextEntityType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "media_timestamp": mediaTimestamp,
-    };
-  }
+		};
+	}
+
   
   @override
   TextEntityTypeMediaTimestamp copyWith({
@@ -772,8 +852,11 @@ class TextEntityTypeMediaTimestamp extends TextEntityType {
     mediaTimestamp: mediaTimestamp ?? this.mediaTimestamp,
   );
 
-  static const String constructor = 'textEntityTypeMediaTimestamp';
-  
+  static const String objectType = 'textEntityTypeMediaTimestamp';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **TrendingStickerSets** *(trendingStickerSets)* - basic class
-  ///
-  /// Represents a list of trending sticker sets.
-  ///
-  /// * [totalCount]: Approximate total number of trending sticker sets.
-  /// * [sets]: List of trending sticker sets.
-  /// * [isPremium]: True, if the list contains sticker sets with premium stickers.
-class TrendingStickerSets extends TdObject {
+///
+/// Represents a list of trending sticker sets.
+///
+/// * [totalCount]: Approximate total number of trending sticker sets.
+/// * [sets]: List of trending sticker sets.
+/// * [isPremium]: True, if the list contains sticker sets with premium stickers.
+final class TrendingStickerSets extends TdObject {
   
   /// **TrendingStickerSets** *(trendingStickerSets)* - basic class
   ///
@@ -52,14 +52,15 @@ class TrendingStickerSets extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "total_count": totalCount,
       "sets": sets.map((i) => i.toJson()).toList(),
       "is_premium": isPremium,
-    };
-  }
+		};
+	}
+
   
   TrendingStickerSets copyWith({
     int? totalCount,
@@ -75,8 +76,11 @@ class TrendingStickerSets extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'trendingStickerSets';
-  
+  static const String objectType = 'trendingStickerSets';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **Sessions** *(sessions)* - basic class
-  ///
-  /// Contains a list of sessions.
-  ///
-  /// * [sessions]: List of sessions.
-  /// * [inactiveSessionTtlDays]: Number of days of inactivity before sessions will automatically be terminated; 1-366 days.
-class Sessions extends TdObject {
+///
+/// Contains a list of sessions.
+///
+/// * [sessions]: List of sessions.
+/// * [inactiveSessionTtlDays]: Number of days of inactivity before sessions will automatically be terminated; 1-366 days.
+final class Sessions extends TdObject {
   
   /// **Sessions** *(sessions)* - basic class
   ///
@@ -45,13 +45,14 @@ class Sessions extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "sessions": sessions.map((i) => i.toJson()).toList(),
       "inactive_session_ttl_days": inactiveSessionTtlDays,
-    };
-  }
+		};
+	}
+
   
   Sessions copyWith({
     List<Session>? sessions,
@@ -65,8 +66,11 @@ class Sessions extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'sessions';
-  
+  static const String objectType = 'sessions';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,18 +1,18 @@
 part of '../tdapi.dart';
 
 /// **GetChatEventLog** *(getChatEventLog)* - TDLib function
-  ///
-  /// Returns a list of service actions taken by chat members and administrators in the last 48 hours. Available only for supergroups and channels. Requires administrator rights. Returns results in reverse chronological order (i.e., in order of decreasing event_id).
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [query]: Search query by which to filter events.
-  /// * [fromEventId]: Identifier of an event from which to return results. Use 0 to get results from the latest events.
-  /// * [limit]: The maximum number of events to return; up to 100.
-  /// * [filters]: The types of events to return; pass null to get chat events of all types *(optional)*.
-  /// * [userIds]: User identifiers by which to filter events. By default, events relating to all users will be returned.
-  ///
-  /// [ChatEvents] is returned on completion.
-class GetChatEventLog extends TdFunction {
+///
+/// Returns a list of service actions taken by chat members and administrators in the last 48 hours. Available only for supergroups and channels. Requires administrator rights. Returns results in reverse chronological order (i.e., in order of decreasing event_id).
+///
+/// * [chatId]: Chat identifier.
+/// * [query]: Search query by which to filter events.
+/// * [fromEventId]: Identifier of an event from which to return results. Use 0 to get results from the latest events.
+/// * [limit]: The maximum number of events to return; up to 100.
+/// * [filters]: The types of events to return; pass null to get chat events of all types *(optional)*.
+/// * [userIds]: User identifiers by which to filter events. By default, events relating to all users will be returned.
+///
+/// [ChatEvents] is returned on completion.
+final class GetChatEventLog extends TdFunction {
   
   /// **GetChatEventLog** *(getChatEventLog)* - TDLib function
   ///
@@ -55,8 +55,8 @@ class GetChatEventLog extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "query": query,
       "from_event_id": fromEventId,
@@ -64,8 +64,9 @@ class GetChatEventLog extends TdFunction {
       "filters": filters?.toJson(),
       "user_ids": userIds.map((i) => i).toList(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetChatEventLog copyWith({
     int? chatId,
@@ -83,8 +84,11 @@ class GetChatEventLog extends TdFunction {
     userIds: userIds ?? this.userIds,
   );
 
-  static const String constructor = 'getChatEventLog';
-  
+  static const String objectType = 'getChatEventLog';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -5,6 +5,7 @@ import 'package:handygram/src/widgets/chat_image.dart';
 import 'package:handygram/src/telegram/session.dart';
 import 'package:handygram/src/misc/tdlib_utils.dart';
 import 'package:handygram/src/tdlib/td_api.dart' as tdlib;
+import 'package:handygram/src/widgets/message_tiles/reaction_chip.dart';
 
 Size downscaleProperly(Size contentSize, Size screenSize, double factor) {
   if (contentSize.width > contentSize.height) {
@@ -66,7 +67,7 @@ class _ReplyMessagePreviewState extends State<_ReplyMessagePreview> {
       return;
     }
 
-    if (msg!.senderId.getConstructor() == "messageSenderUser") {
+    if (msg!.senderId is tdlib.MessageSenderUser) {
       title = (await session.usersInfoCache.get(msg!.senderId.getSenderId()))
           ?.firstName;
     } else {
@@ -207,7 +208,7 @@ class MessageBaseTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    bool isUser = msg.senderId.getConstructor() == "messageSenderUser";
+    bool isUser = msg.senderId is tdlib.MessageSenderUser;
     String? ptitle;
     if (isUser) {
       final uref = ref.watch(session.usersInfoCacheP);
@@ -239,8 +240,7 @@ class MessageBaseTile extends ConsumerWidget {
                 msg.senderId.getSenderId(),
               ),
               id: msg.senderId.getSenderId(),
-              isUser: msg.senderId.getConstructor() ==
-                  tdlib.MessageSenderUser.constructor,
+              isUser: msg.senderId is tdlib.MessageSenderUser,
             ),
           )
         else
@@ -286,10 +286,19 @@ class MessageBaseTile extends ConsumerWidget {
                         fontSize: 12,
                       ),
                     ),
-                if (child != null && !small)
+                if (child != null && (!small || msg.interactionInfo != null))
                   const SizedBox(
                     height: 1,
                   ),
+                if (msg.interactionInfo != null)
+                  Row(
+                    children: msg.interactionInfo!.reactions
+                        .map<Widget>(
+                          (e) => ReactionChip(reaction: e),
+                        )
+                        .toList(),
+                  ),
+                const SizedBox(height: 1),
                 if (!small)
                   Row(
                     mainAxisSize: MainAxisSize.min,
@@ -337,8 +346,7 @@ class MessageBaseTile extends ConsumerWidget {
               key: ValueKey<int>(
                 msg.senderId.getSenderId(),
               ),
-              isUser: msg.senderId.getConstructor() ==
-                  tdlib.MessageSenderUser.constructor,
+              isUser: msg.senderId is tdlib.MessageSenderUser,
               id: msg.senderId.getSenderId(),
             ),
           )

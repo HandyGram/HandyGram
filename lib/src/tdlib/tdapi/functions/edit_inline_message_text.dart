@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **EditInlineMessageText** *(editInlineMessageText)* - TDLib function
-  ///
-  /// Edits the text of an inline text or game message sent via a bot; for bots only.
-  ///
-  /// * [inlineMessageId]: Inline message identifier.
-  /// * [replyMarkup]: The new message reply markup; pass null if none *(optional)*.
-  /// * [inputMessageContent]: New text content of the message. Must be of type inputMessageText.
-  ///
-  /// [Ok] is returned on completion.
-class EditInlineMessageText extends TdFunction {
+///
+/// Edits the text of an inline text or game message sent via a bot; for bots only.
+///
+/// * [inlineMessageId]: Inline message identifier.
+/// * [replyMarkup]: The new message reply markup; pass null if none *(optional)*.
+/// * [inputMessageContent]: New text content of the message. Must be of type inputMessageText.
+///
+/// [Ok] is returned on completion.
+final class EditInlineMessageText extends TdFunction {
   
   /// **EditInlineMessageText** *(editInlineMessageText)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class EditInlineMessageText extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "inline_message_id": inlineMessageId,
       "reply_markup": replyMarkup?.toJson(),
       "input_message_content": inputMessageContent.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   EditInlineMessageText copyWith({
     String? inlineMessageId,
@@ -56,8 +57,11 @@ class EditInlineMessageText extends TdFunction {
     inputMessageContent: inputMessageContent ?? this.inputMessageContent,
   );
 
-  static const String constructor = 'editInlineMessageText';
-  
+  static const String objectType = 'editInlineMessageText';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **AddStickerToSet** *(addStickerToSet)* - TDLib function
-  ///
-  /// Adds a new sticker to a set; for bots only. Returns the sticker set.
-  ///
-  /// * [userId]: Sticker set owner.
-  /// * [name]: Sticker set name.
-  /// * [sticker]: Sticker to add to the set.
-  ///
-  /// [StickerSet] is returned on completion.
-class AddStickerToSet extends TdFunction {
+///
+/// Adds a new sticker to a set; for bots only. Returns the sticker set.
+///
+/// * [userId]: Sticker set owner.
+/// * [name]: Sticker set name.
+/// * [sticker]: Sticker to add to the set.
+///
+/// [StickerSet] is returned on completion.
+final class AddStickerToSet extends TdFunction {
   
   /// **AddStickerToSet** *(addStickerToSet)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class AddStickerToSet extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "user_id": userId,
       "name": name,
       "sticker": sticker.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   AddStickerToSet copyWith({
     int? userId,
@@ -56,8 +57,11 @@ class AddStickerToSet extends TdFunction {
     sticker: sticker ?? this.sticker,
   );
 
-  static const String constructor = 'addStickerToSet';
-  
+  static const String objectType = 'addStickerToSet';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

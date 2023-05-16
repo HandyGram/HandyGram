@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **SendWebAppData** *(sendWebAppData)* - TDLib function
-  ///
-  /// Sends data received from a keyboardButtonTypeWebApp Web App to a bot.
-  ///
-  /// * [botUserId]: Identifier of the target bot.
-  /// * [buttonText]: Text of the keyboardButtonTypeWebApp button, which opened the Web App.
-  /// * [data]: Received data.
-  ///
-  /// [Ok] is returned on completion.
-class SendWebAppData extends TdFunction {
+///
+/// Sends data received from a keyboardButtonTypeWebApp Web App to a bot.
+///
+/// * [botUserId]: Identifier of the target bot.
+/// * [buttonText]: Text of the keyboardButtonTypeWebApp button, which opened the Web App.
+/// * [data]: Received data.
+///
+/// [Ok] is returned on completion.
+final class SendWebAppData extends TdFunction {
   
   /// **SendWebAppData** *(sendWebAppData)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class SendWebAppData extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "bot_user_id": botUserId,
       "button_text": buttonText,
       "data": data,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SendWebAppData copyWith({
     int? botUserId,
@@ -56,8 +57,11 @@ class SendWebAppData extends TdFunction {
     data: data ?? this.data,
   );
 
-  static const String constructor = 'sendWebAppData';
-  
+  static const String objectType = 'sendWebAppData';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

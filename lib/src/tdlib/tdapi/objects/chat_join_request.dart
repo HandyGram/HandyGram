@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **ChatJoinRequest** *(chatJoinRequest)* - basic class
-  ///
-  /// Describes a user that sent a join request and waits for administrator approval.
-  ///
-  /// * [userId]: User identifier.
-  /// * [date]: Point in time (Unix timestamp) when the user sent the join request.
-  /// * [bio]: A short bio of the user.
-class ChatJoinRequest extends TdObject {
+///
+/// Describes a user that sent a join request and waits for administrator approval.
+///
+/// * [userId]: User identifier.
+/// * [date]: Point in time (Unix timestamp) when the user sent the join request.
+/// * [bio]: A short bio of the user.
+final class ChatJoinRequest extends TdObject {
   
   /// **ChatJoinRequest** *(chatJoinRequest)* - basic class
   ///
@@ -40,14 +40,15 @@ class ChatJoinRequest extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "user_id": userId,
       "date": date,
       "bio": bio,
-    };
-  }
+		};
+	}
+
   
   ChatJoinRequest copyWith({
     int? userId,
@@ -59,8 +60,11 @@ class ChatJoinRequest extends TdObject {
     bio: bio ?? this.bio,
   );
 
-  static const String constructor = 'chatJoinRequest';
-  
+  static const String objectType = 'chatJoinRequest';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

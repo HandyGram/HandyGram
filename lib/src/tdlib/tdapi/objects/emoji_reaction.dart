@@ -1,20 +1,20 @@
 part of '../tdapi.dart';
 
 /// **EmojiReaction** *(emojiReaction)* - basic class
-  ///
-  /// Contains information about a emoji reaction.
-  ///
-  /// * [emoji]: Text representation of the reaction.
-  /// * [title]: Reaction title.
-  /// * [isActive]: True, if the reaction can be added to new messages and enabled in chats.
-  /// * [staticIcon]: Static icon for the reaction.
-  /// * [appearAnimation]: Appear animation for the reaction.
-  /// * [selectAnimation]: Select animation for the reaction.
-  /// * [activateAnimation]: Activate animation for the reaction.
-  /// * [effectAnimation]: Effect animation for the reaction.
-  /// * [aroundAnimation]: Around animation for the reaction; may be null *(optional)*.
-  /// * [centerAnimation]: Center animation for the reaction; may be null *(optional)*.
-class EmojiReaction extends TdObject {
+///
+/// Contains information about a emoji reaction.
+///
+/// * [emoji]: Text representation of the reaction.
+/// * [title]: Reaction title.
+/// * [isActive]: True, if the reaction can be added to new messages and enabled in chats.
+/// * [staticIcon]: Static icon for the reaction.
+/// * [appearAnimation]: Appear animation for the reaction.
+/// * [selectAnimation]: Select animation for the reaction.
+/// * [activateAnimation]: Activate animation for the reaction.
+/// * [effectAnimation]: Effect animation for the reaction.
+/// * [aroundAnimation]: Around animation for the reaction; may be null *(optional)*.
+/// * [centerAnimation]: Center animation for the reaction; may be null *(optional)*.
+final class EmojiReaction extends TdObject {
   
   /// **EmojiReaction** *(emojiReaction)* - basic class
   ///
@@ -101,9 +101,9 @@ class EmojiReaction extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "emoji": emoji,
       "title": title,
       "is_active": isActive,
@@ -114,8 +114,9 @@ class EmojiReaction extends TdObject {
       "effect_animation": effectAnimation.toJson(),
       "around_animation": aroundAnimation?.toJson(),
       "center_animation": centerAnimation?.toJson(),
-    };
-  }
+		};
+	}
+
   
   EmojiReaction copyWith({
     String? emoji,
@@ -145,8 +146,11 @@ class EmojiReaction extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'emojiReaction';
-  
+  static const String objectType = 'emojiReaction';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

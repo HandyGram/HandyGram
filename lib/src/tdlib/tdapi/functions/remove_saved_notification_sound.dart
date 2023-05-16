@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **RemoveSavedNotificationSound** *(removeSavedNotificationSound)* - TDLib function
-  ///
-  /// Removes a notification sound from the list of saved notification sounds.
-  ///
-  /// * [notificationSoundId]: Identifier of the notification sound.
-  ///
-  /// [Ok] is returned on completion.
-class RemoveSavedNotificationSound extends TdFunction {
+///
+/// Removes a notification sound from the list of saved notification sounds.
+///
+/// * [notificationSoundId]: Identifier of the notification sound.
+///
+/// [Ok] is returned on completion.
+final class RemoveSavedNotificationSound extends TdFunction {
   
   /// **RemoveSavedNotificationSound** *(removeSavedNotificationSound)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class RemoveSavedNotificationSound extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "notification_sound_id": notificationSoundId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   RemoveSavedNotificationSound copyWith({
     int? notificationSoundId,
@@ -38,8 +39,11 @@ class RemoveSavedNotificationSound extends TdFunction {
     notificationSoundId: notificationSoundId ?? this.notificationSoundId,
   );
 
-  static const String constructor = 'removeSavedNotificationSound';
-  
+  static const String objectType = 'removeSavedNotificationSound';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **AddChatMembers** *(addChatMembers)* - TDLib function
-  ///
-  /// Adds multiple new members to a chat. Currently, this method is only available for supergroups and channels. This method can't be used to join a chat. Members can't be added to a channel if it has more than 200 members.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [userIds]: Identifiers of the users to be added to the chat. The maximum number of added users is 20 for supergroups and 100 for channels.
-  ///
-  /// [Ok] is returned on completion.
-class AddChatMembers extends TdFunction {
+///
+/// Adds multiple new members to a chat. Currently, this method is only available for supergroups and channels. This method can't be used to join a chat. Members can't be added to a channel if it has more than 200 members.
+///
+/// * [chatId]: Chat identifier.
+/// * [userIds]: Identifiers of the users to be added to the chat. The maximum number of added users is 20 for supergroups and 100 for channels.
+///
+/// [Ok] is returned on completion.
+final class AddChatMembers extends TdFunction {
   
   /// **AddChatMembers** *(addChatMembers)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class AddChatMembers extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "user_ids": userIds.map((i) => i).toList(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   AddChatMembers copyWith({
     int? chatId,
@@ -47,8 +48,11 @@ class AddChatMembers extends TdFunction {
     userIds: userIds ?? this.userIds,
   );
 
-  static const String constructor = 'addChatMembers';
-  
+  static const String objectType = 'addChatMembers';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

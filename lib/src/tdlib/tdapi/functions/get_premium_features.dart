@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetPremiumFeatures** *(getPremiumFeatures)* - TDLib function
-  ///
-  /// Returns information about features, available to Premium users.
-  ///
-  /// * [source]: Source of the request; pass null if the method is called from some non-standard source *(optional)*.
-  ///
-  /// [PremiumFeatures] is returned on completion.
-class GetPremiumFeatures extends TdFunction {
+///
+/// Returns information about features, available to Premium users.
+///
+/// * [source]: Source of the request; pass null if the method is called from some non-standard source *(optional)*.
+///
+/// [PremiumFeatures] is returned on completion.
+final class GetPremiumFeatures extends TdFunction {
   
   /// **GetPremiumFeatures** *(getPremiumFeatures)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetPremiumFeatures extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "source": source?.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetPremiumFeatures copyWith({
     PremiumSource? source,
@@ -38,8 +39,11 @@ class GetPremiumFeatures extends TdFunction {
     source: source ?? this.source,
   );
 
-  static const String constructor = 'getPremiumFeatures';
-  
+  static const String objectType = 'getPremiumFeatures';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **Minithumbnail** *(minithumbnail)* - basic class
-  ///
-  /// Thumbnail image of a very poor quality and low resolution.
-  ///
-  /// * [width]: Thumbnail width, usually doesn't exceed 40.
-  /// * [height]: Thumbnail height, usually doesn't exceed 40.
-  /// * [data]: The thumbnail in JPEG format.
-class Minithumbnail extends TdObject {
+///
+/// Thumbnail image of a very poor quality and low resolution.
+///
+/// * [width]: Thumbnail width, usually doesn't exceed 40.
+/// * [height]: Thumbnail height, usually doesn't exceed 40.
+/// * [data]: The thumbnail in JPEG format.
+final class Minithumbnail extends TdObject {
   
   /// **Minithumbnail** *(minithumbnail)* - basic class
   ///
@@ -40,14 +40,15 @@ class Minithumbnail extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "width": width,
       "height": height,
       "data": data,
-    };
-  }
+		};
+	}
+
   
   Minithumbnail copyWith({
     int? width,
@@ -59,8 +60,11 @@ class Minithumbnail extends TdObject {
     data: data ?? this.data,
   );
 
-  static const String constructor = 'minithumbnail';
-  
+  static const String objectType = 'minithumbnail';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

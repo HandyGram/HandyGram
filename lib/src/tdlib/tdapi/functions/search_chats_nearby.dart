@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **SearchChatsNearby** *(searchChatsNearby)* - TDLib function
-  ///
-  /// Returns a list of users and location-based supergroups nearby. The list of users nearby will be updated for 60 seconds after the request by the updates updateUsersNearby.. The request must be sent again every 25 seconds with adjusted location to not miss new chats.
-  ///
-  /// * [location]: Current user location.
-  ///
-  /// [ChatsNearby] is returned on completion.
-class SearchChatsNearby extends TdFunction {
+///
+/// Returns a list of users and location-based supergroups nearby. The list of users nearby will be updated for 60 seconds after the request by the updates updateUsersNearby.. The request must be sent again every 25 seconds with adjusted location to not miss new chats.
+///
+/// * [location]: Current user location.
+///
+/// [ChatsNearby] is returned on completion.
+final class SearchChatsNearby extends TdFunction {
   
   /// **SearchChatsNearby** *(searchChatsNearby)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class SearchChatsNearby extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "location": location.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SearchChatsNearby copyWith({
     Location? location,
@@ -38,8 +39,11 @@ class SearchChatsNearby extends TdFunction {
     location: location ?? this.location,
   );
 
-  static const String constructor = 'searchChatsNearby';
-  
+  static const String objectType = 'searchChatsNearby';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

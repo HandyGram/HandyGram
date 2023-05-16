@@ -1,17 +1,17 @@
 part of '../tdapi.dart';
 
 /// **Game** *(game)* - basic class
-  ///
-  /// Describes a game.
-  ///
-  /// * [id]: Unique game identifier.
-  /// * [shortName]: Game short name. To share a game use the URL https://t.me/{bot_username}?game={game_short_name}.
-  /// * [title]: Game title.
-  /// * [text]: Game text, usually containing scoreboards for a game.
-  /// * [description]: Game description.
-  /// * [photo]: Game photo.
-  /// * [animation]: Game animation; may be null *(optional)*.
-class Game extends TdObject {
+///
+/// Describes a game.
+///
+/// * [id]: Unique game identifier.
+/// * [shortName]: Game short name. To share a game use the URL https://t.me/{bot_username}?game={game_short_name}.
+/// * [title]: Game title.
+/// * [text]: Game text, usually containing scoreboards for a game.
+/// * [description]: Game description.
+/// * [photo]: Game photo.
+/// * [animation]: Game animation; may be null *(optional)*.
+final class Game extends TdObject {
   
   /// **Game** *(game)* - basic class
   ///
@@ -68,9 +68,9 @@ class Game extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "short_name": shortName,
       "title": title,
@@ -78,8 +78,9 @@ class Game extends TdObject {
       "description": description,
       "photo": photo.toJson(),
       "animation": animation?.toJson(),
-    };
-  }
+		};
+	}
+
   
   Game copyWith({
     int? id,
@@ -99,8 +100,11 @@ class Game extends TdObject {
     animation: animation ?? this.animation,
   );
 
-  static const String constructor = 'game';
-  
+  static const String objectType = 'game';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

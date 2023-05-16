@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **ReorderChatFilters** *(reorderChatFilters)* - TDLib function
-  ///
-  /// Changes the order of chat filters.
-  ///
-  /// * [chatFilterIds]: Identifiers of chat filters in the new correct order.
-  /// * [mainChatListPosition]: Position of the main chat list among chat filters, 0-based. Can be non-zero only for Premium users.
-  ///
-  /// [Ok] is returned on completion.
-class ReorderChatFilters extends TdFunction {
+///
+/// Changes the order of chat filters.
+///
+/// * [chatFilterIds]: Identifiers of chat filters in the new correct order.
+/// * [mainChatListPosition]: Position of the main chat list among chat filters, 0-based. Can be non-zero only for Premium users.
+///
+/// [Ok] is returned on completion.
+final class ReorderChatFilters extends TdFunction {
   
   /// **ReorderChatFilters** *(reorderChatFilters)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class ReorderChatFilters extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_filter_ids": chatFilterIds.map((i) => i).toList(),
       "main_chat_list_position": mainChatListPosition,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ReorderChatFilters copyWith({
     List<int>? chatFilterIds,
@@ -47,8 +48,11 @@ class ReorderChatFilters extends TdFunction {
     mainChatListPosition: mainChatListPosition ?? this.mainChatListPosition,
   );
 
-  static const String constructor = 'reorderChatFilters';
-  
+  static const String objectType = 'reorderChatFilters';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

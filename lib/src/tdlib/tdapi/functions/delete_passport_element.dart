@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **DeletePassportElement** *(deletePassportElement)* - TDLib function
-  ///
-  /// Deletes a Telegram Passport element.
-  ///
-  /// * [type]: Element type.
-  ///
-  /// [Ok] is returned on completion.
-class DeletePassportElement extends TdFunction {
+///
+/// Deletes a Telegram Passport element.
+///
+/// * [type]: Element type.
+///
+/// [Ok] is returned on completion.
+final class DeletePassportElement extends TdFunction {
   
   /// **DeletePassportElement** *(deletePassportElement)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class DeletePassportElement extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "type": type.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   DeletePassportElement copyWith({
     PassportElementType? type,
@@ -38,8 +39,11 @@ class DeletePassportElement extends TdFunction {
     type: type ?? this.type,
   );
 
-  static const String constructor = 'deletePassportElement';
-  
+  static const String objectType = 'deletePassportElement';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

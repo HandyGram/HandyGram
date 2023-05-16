@@ -1,16 +1,16 @@
 part of '../tdapi.dart';
 
 /// **Venue** *(venue)* - basic class
-  ///
-  /// Describes a venue.
-  ///
-  /// * [location]: Venue location; as defined by the sender.
-  /// * [title]: Venue name; as defined by the sender.
-  /// * [address]: Venue address; as defined by the sender.
-  /// * [provider]: Provider of the venue database; as defined by the sender. Currently, only "foursquare" and "gplaces" (Google Places) need to be supported.
-  /// * [id]: Identifier of the venue in the provider database; as defined by the sender.
-  /// * [type]: Type of the venue in the provider database; as defined by the sender.
-class Venue extends TdObject {
+///
+/// Describes a venue.
+///
+/// * [location]: Venue location; as defined by the sender.
+/// * [title]: Venue name; as defined by the sender.
+/// * [address]: Venue address; as defined by the sender.
+/// * [provider]: Provider of the venue database; as defined by the sender. Currently, only "foursquare" and "gplaces" (Google Places) need to be supported.
+/// * [id]: Identifier of the venue in the provider database; as defined by the sender.
+/// * [type]: Type of the venue in the provider database; as defined by the sender.
+final class Venue extends TdObject {
   
   /// **Venue** *(venue)* - basic class
   ///
@@ -61,17 +61,18 @@ class Venue extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "location": location.toJson(),
       "title": title,
       "address": address,
       "provider": provider,
       "id": id,
       "type": type,
-    };
-  }
+		};
+	}
+
   
   Venue copyWith({
     Location? location,
@@ -89,8 +90,11 @@ class Venue extends TdObject {
     type: type ?? this.type,
   );
 
-  static const String constructor = 'venue';
-  
+  static const String objectType = 'venue';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **UnpinAllMessageThreadMessages** *(unpinAllMessageThreadMessages)* - TDLib function
-  ///
-  /// Removes all pinned messages from a forum topic; requires can_pin_messages rights in the supergroup.
-  ///
-  /// * [chatId]: Identifier of the chat.
-  /// * [messageThreadId]: Message thread identifier in which messages will be unpinned.
-  ///
-  /// [Ok] is returned on completion.
-class UnpinAllMessageThreadMessages extends TdFunction {
+///
+/// Removes all pinned messages from a forum topic; requires can_pin_messages rights in the supergroup.
+///
+/// * [chatId]: Identifier of the chat.
+/// * [messageThreadId]: Message thread identifier in which messages will be unpinned.
+///
+/// [Ok] is returned on completion.
+final class UnpinAllMessageThreadMessages extends TdFunction {
   
   /// **UnpinAllMessageThreadMessages** *(unpinAllMessageThreadMessages)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class UnpinAllMessageThreadMessages extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_thread_id": messageThreadId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   UnpinAllMessageThreadMessages copyWith({
     int? chatId,
@@ -47,8 +48,11 @@ class UnpinAllMessageThreadMessages extends TdFunction {
     messageThreadId: messageThreadId ?? this.messageThreadId,
   );
 
-  static const String constructor = 'unpinAllMessageThreadMessages';
-  
+  static const String objectType = 'unpinAllMessageThreadMessages';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

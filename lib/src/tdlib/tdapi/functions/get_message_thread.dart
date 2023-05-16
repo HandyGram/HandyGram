@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **GetMessageThread** *(getMessageThread)* - TDLib function
-  ///
-  /// Returns information about a message thread. Can be used only if message.can_get_message_thread == true.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [messageId]: Identifier of the message.
-  ///
-  /// [MessageThreadInfo] is returned on completion.
-class GetMessageThread extends TdFunction {
+///
+/// Returns information about a message thread. Can be used only if message.can_get_message_thread == true.
+///
+/// * [chatId]: Chat identifier.
+/// * [messageId]: Identifier of the message.
+///
+/// [MessageThreadInfo] is returned on completion.
+final class GetMessageThread extends TdFunction {
   
   /// **GetMessageThread** *(getMessageThread)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class GetMessageThread extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetMessageThread copyWith({
     int? chatId,
@@ -47,8 +48,11 @@ class GetMessageThread extends TdFunction {
     messageId: messageId ?? this.messageId,
   );
 
-  static const String constructor = 'getMessageThread';
-  
+  static const String objectType = 'getMessageThread';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

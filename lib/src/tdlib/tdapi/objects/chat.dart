@@ -1,41 +1,41 @@
 part of '../tdapi.dart';
 
 /// **Chat** *(chat)* - basic class
-  ///
-  /// A chat. (Can be a private chat, basic group, supergroup, or secret chat).
-  ///
-  /// * [id]: Chat unique identifier.
-  /// * [type]: Type of the chat.
-  /// * [title]: Chat title.
-  /// * [photo]: Chat photo; may be null *(optional)*.
-  /// * [permissions]: Actions that non-administrator chat members are allowed to take in the chat.
-  /// * [lastMessage]: Last message in the chat; may be null *(optional)*.
-  /// * [positions]: Positions of the chat in chat lists.
-  /// * [messageSenderId]: Identifier of a user or chat that is selected to send messages in the chat; may be null if the user can't change message sender *(optional)*.
-  /// * [hasProtectedContent]: True, if chat content can't be saved locally, forwarded, or copied.
-  /// * [isMarkedAsUnread]: True, if the chat is marked as unread.
-  /// * [isBlocked]: True, if the chat is blocked by the current user and private messages from the chat can't be received.
-  /// * [hasScheduledMessages]: True, if the chat has scheduled messages.
-  /// * [canBeDeletedOnlyForSelf]: True, if the chat messages can be deleted only for the current user while other users will continue to see the messages.
-  /// * [canBeDeletedForAllUsers]: True, if the chat messages can be deleted for all users.
-  /// * [canBeReported]: True, if the chat can be reported to Telegram moderators through reportChat or reportChatPhoto.
-  /// * [defaultDisableNotification]: Default value of the disable_notification parameter, used when a message is sent to the chat.
-  /// * [unreadCount]: Number of unread messages in the chat.
-  /// * [lastReadInboxMessageId]: Identifier of the last read incoming message.
-  /// * [lastReadOutboxMessageId]: Identifier of the last read outgoing message.
-  /// * [unreadMentionCount]: Number of unread messages with a mention/reply in the chat.
-  /// * [unreadReactionCount]: Number of messages with unread reactions in the chat.
-  /// * [notificationSettings]: Notification settings for the chat.
-  /// * [availableReactions]: Types of reaction, available in the chat.
-  /// * [messageAutoDeleteTime]: Current message auto-delete or self-destruct timer setting for the chat, in seconds; 0 if disabled. Self-destruct timer in secret chats starts after the message or its content is viewed. Auto-delete timer in other chats starts from the send date.
-  /// * [themeName]: If non-empty, name of a theme, set for the chat.
-  /// * [actionBar]: Information about actions which must be possible to do through the chat action bar; may be null *(optional)*.
-  /// * [videoChat]: Information about video chat of the chat.
-  /// * [pendingJoinRequests]: Information about pending join requests; may be null *(optional)*.
-  /// * [replyMarkupMessageId]: Identifier of the message from which reply markup needs to be used; 0 if there is no default custom reply markup in the chat.
-  /// * [draftMessage]: A draft of a message in the chat; may be null *(optional)*.
-  /// * [clientData]: Application-specific data associated with the chat. (For example, the chat scroll position or local chat notification settings can be stored here.) Persistent if the message database is used.
-class Chat extends TdObject {
+///
+/// A chat. (Can be a private chat, basic group, supergroup, or secret chat).
+///
+/// * [id]: Chat unique identifier.
+/// * [type]: Type of the chat.
+/// * [title]: Chat title.
+/// * [photo]: Chat photo; may be null *(optional)*.
+/// * [permissions]: Actions that non-administrator chat members are allowed to take in the chat.
+/// * [lastMessage]: Last message in the chat; may be null *(optional)*.
+/// * [positions]: Positions of the chat in chat lists.
+/// * [messageSenderId]: Identifier of a user or chat that is selected to send messages in the chat; may be null if the user can't change message sender *(optional)*.
+/// * [hasProtectedContent]: True, if chat content can't be saved locally, forwarded, or copied.
+/// * [isMarkedAsUnread]: True, if the chat is marked as unread.
+/// * [isBlocked]: True, if the chat is blocked by the current user and private messages from the chat can't be received.
+/// * [hasScheduledMessages]: True, if the chat has scheduled messages.
+/// * [canBeDeletedOnlyForSelf]: True, if the chat messages can be deleted only for the current user while other users will continue to see the messages.
+/// * [canBeDeletedForAllUsers]: True, if the chat messages can be deleted for all users.
+/// * [canBeReported]: True, if the chat can be reported to Telegram moderators through reportChat or reportChatPhoto.
+/// * [defaultDisableNotification]: Default value of the disable_notification parameter, used when a message is sent to the chat.
+/// * [unreadCount]: Number of unread messages in the chat.
+/// * [lastReadInboxMessageId]: Identifier of the last read incoming message.
+/// * [lastReadOutboxMessageId]: Identifier of the last read outgoing message.
+/// * [unreadMentionCount]: Number of unread messages with a mention/reply in the chat.
+/// * [unreadReactionCount]: Number of messages with unread reactions in the chat.
+/// * [notificationSettings]: Notification settings for the chat.
+/// * [availableReactions]: Types of reaction, available in the chat.
+/// * [messageAutoDeleteTime]: Current message auto-delete or self-destruct timer setting for the chat, in seconds; 0 if disabled. Self-destruct timer in secret chats starts after the message or its content is viewed. Auto-delete timer in other chats starts from the send date.
+/// * [themeName]: If non-empty, name of a theme, set for the chat.
+/// * [actionBar]: Information about actions which must be possible to do through the chat action bar; may be null *(optional)*.
+/// * [videoChat]: Information about video chat of the chat.
+/// * [pendingJoinRequests]: Information about pending join requests; may be null *(optional)*.
+/// * [replyMarkupMessageId]: Identifier of the message from which reply markup needs to be used; 0 if there is no default custom reply markup in the chat.
+/// * [draftMessage]: A draft of a message in the chat; may be null *(optional)*.
+/// * [clientData]: Application-specific data associated with the chat. (For example, the chat scroll position or local chat notification settings can be stored here.) Persistent if the message database is used.
+final class Chat extends TdObject {
   
   /// **Chat** *(chat)* - basic class
   ///
@@ -248,9 +248,9 @@ class Chat extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "type": type.toJson(),
       "title": title,
@@ -282,8 +282,9 @@ class Chat extends TdObject {
       "reply_markup_message_id": replyMarkupMessageId,
       "draft_message": draftMessage?.toJson(),
       "client_data": clientData,
-    };
-  }
+		};
+	}
+
   
   Chat copyWith({
     int? id,
@@ -355,8 +356,11 @@ class Chat extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'chat';
-  
+  static const String objectType = 'chat';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

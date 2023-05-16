@@ -1,17 +1,17 @@
 part of '../tdapi.dart';
 
 /// **GetGroupCallStreamSegment** *(getGroupCallStreamSegment)* - TDLib function
-  ///
-  /// Returns a file with a segment of a group call stream in a modified OGG format for audio or MPEG-4 format for video.
-  ///
-  /// * [groupCallId]: Group call identifier.
-  /// * [timeOffset]: Point in time when the stream segment begins; Unix timestamp in milliseconds.
-  /// * [scale]: Segment duration scale; 0-1. Segment's duration is 1000/(2**scale) milliseconds.
-  /// * [channelId]: Identifier of an audio/video channel to get as received from tgcalls.
-  /// * [videoQuality]: Video quality as received from tgcalls; pass null to get the worst available quality *(optional)*.
-  ///
-  /// [FilePart] is returned on completion.
-class GetGroupCallStreamSegment extends TdFunction {
+///
+/// Returns a file with a segment of a group call stream in a modified OGG format for audio or MPEG-4 format for video.
+///
+/// * [groupCallId]: Group call identifier.
+/// * [timeOffset]: Point in time when the stream segment begins; Unix timestamp in milliseconds.
+/// * [scale]: Segment duration scale; 0-1. Segment's duration is 1000/(2**scale) milliseconds.
+/// * [channelId]: Identifier of an audio/video channel to get as received from tgcalls.
+/// * [videoQuality]: Video quality as received from tgcalls; pass null to get the worst available quality *(optional)*.
+///
+/// [FilePart] is returned on completion.
+final class GetGroupCallStreamSegment extends TdFunction {
   
   /// **GetGroupCallStreamSegment** *(getGroupCallStreamSegment)* - TDLib function
   ///
@@ -49,16 +49,17 @@ class GetGroupCallStreamSegment extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "group_call_id": groupCallId,
       "time_offset": timeOffset,
       "scale": scale,
       "channel_id": channelId,
       "video_quality": videoQuality?.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetGroupCallStreamSegment copyWith({
     int? groupCallId,
@@ -74,8 +75,11 @@ class GetGroupCallStreamSegment extends TdFunction {
     videoQuality: videoQuality ?? this.videoQuality,
   );
 
-  static const String constructor = 'getGroupCallStreamSegment';
-  
+  static const String objectType = 'getGroupCallStreamSegment';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

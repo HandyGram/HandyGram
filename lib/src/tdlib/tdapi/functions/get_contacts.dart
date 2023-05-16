@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **GetContacts** *(getContacts)* - TDLib function
-  ///
-  /// Returns all user contacts.
-  ///
-  /// [Users] is returned on completion.
-class GetContacts extends TdFunction {
+///
+/// Returns all user contacts.
+///
+/// [Users] is returned on completion.
+final class GetContacts extends TdFunction {
   
   /// **GetContacts** *(getContacts)* - TDLib function
   ///
@@ -17,16 +17,20 @@ class GetContacts extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetContacts copyWith() => const GetContacts();
 
-  static const String constructor = 'getContacts';
-  
+  static const String objectType = 'getContacts';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

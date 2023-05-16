@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **SetGroupCallParticipantVolumeLevel** *(setGroupCallParticipantVolumeLevel)* - TDLib function
-  ///
-  /// Changes volume level of a participant of an active group call. If the current user can manage the group call, then the participant's volume level will be changed for all users with the default volume level.
-  ///
-  /// * [groupCallId]: Group call identifier.
-  /// * [participantId]: Participant identifier.
-  /// * [volumeLevel]: New participant's volume level; 1-20000 in hundreds of percents.
-  ///
-  /// [Ok] is returned on completion.
-class SetGroupCallParticipantVolumeLevel extends TdFunction {
+///
+/// Changes volume level of a participant of an active group call. If the current user can manage the group call, then the participant's volume level will be changed for all users with the default volume level.
+///
+/// * [groupCallId]: Group call identifier.
+/// * [participantId]: Participant identifier.
+/// * [volumeLevel]: New participant's volume level; 1-20000 in hundreds of percents.
+///
+/// [Ok] is returned on completion.
+final class SetGroupCallParticipantVolumeLevel extends TdFunction {
   
   /// **SetGroupCallParticipantVolumeLevel** *(setGroupCallParticipantVolumeLevel)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class SetGroupCallParticipantVolumeLevel extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "group_call_id": groupCallId,
       "participant_id": participantId.toJson(),
       "volume_level": volumeLevel,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetGroupCallParticipantVolumeLevel copyWith({
     int? groupCallId,
@@ -56,8 +57,11 @@ class SetGroupCallParticipantVolumeLevel extends TdFunction {
     volumeLevel: volumeLevel ?? this.volumeLevel,
   );
 
-  static const String constructor = 'setGroupCallParticipantVolumeLevel';
-  
+  static const String objectType = 'setGroupCallParticipantVolumeLevel';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

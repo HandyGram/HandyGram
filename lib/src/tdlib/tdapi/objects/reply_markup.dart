@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **ReplyMarkup** *(replyMarkup)* - parent
-  ///
-  /// Contains a description of a custom keyboard and actions that can be done with it to quickly reply to bots.
-class ReplyMarkup extends TdObject {
+///
+/// Contains a description of a custom keyboard and actions that can be done with it to quickly reply to bots.
+sealed class ReplyMarkup extends TdObject {
   
   /// **ReplyMarkup** *(replyMarkup)* - parent
   ///
@@ -17,41 +17,44 @@ class ReplyMarkup extends TdObject {
   /// * [ReplyMarkupInlineKeyboard]
   factory ReplyMarkup.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case ReplyMarkupRemoveKeyboard.constructor:
+      case ReplyMarkupRemoveKeyboard.objectType:
         return ReplyMarkupRemoveKeyboard.fromJson(json);
-      case ReplyMarkupForceReply.constructor:
+      case ReplyMarkupForceReply.objectType:
         return ReplyMarkupForceReply.fromJson(json);
-      case ReplyMarkupShowKeyboard.constructor:
+      case ReplyMarkupShowKeyboard.objectType:
         return ReplyMarkupShowKeyboard.fromJson(json);
-      case ReplyMarkupInlineKeyboard.constructor:
+      case ReplyMarkupInlineKeyboard.objectType:
         return ReplyMarkupInlineKeyboard.fromJson(json);
       default:
-        return const ReplyMarkup();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of ReplyMarkup)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  ReplyMarkup copyWith() => const ReplyMarkup();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'replyMarkup';
   
+  ReplyMarkup copyWith();
+
+  static const String objectType = 'replyMarkup';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ReplyMarkupRemoveKeyboard** *(replyMarkupRemoveKeyboard)* - child of ReplyMarkup
-  ///
-  /// Instructs application to remove the keyboard once this message has been received. This kind of keyboard can't be received in an incoming message; instead, updateChatReplyMarkup with message_id == 0 will be sent.
-  ///
-  /// * [isPersonal]: True, if the keyboard is removed only for the mentioned users or the target user of a reply.
-class ReplyMarkupRemoveKeyboard extends ReplyMarkup {
+///
+/// Instructs application to remove the keyboard once this message has been received. This kind of keyboard can't be received in an incoming message; instead, updateChatReplyMarkup with message_id == 0 will be sent.
+///
+/// * [isPersonal]: True, if the keyboard is removed only for the mentioned users or the target user of a reply.
+final class ReplyMarkupRemoveKeyboard extends ReplyMarkup {
   
   /// **ReplyMarkupRemoveKeyboard** *(replyMarkupRemoveKeyboard)* - child of ReplyMarkup
   ///
@@ -72,12 +75,13 @@ class ReplyMarkupRemoveKeyboard extends ReplyMarkup {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "is_personal": isPersonal,
-    };
-  }
+		};
+	}
+
   
   @override
   ReplyMarkupRemoveKeyboard copyWith({
@@ -86,20 +90,23 @@ class ReplyMarkupRemoveKeyboard extends ReplyMarkup {
     isPersonal: isPersonal ?? this.isPersonal,
   );
 
-  static const String constructor = 'replyMarkupRemoveKeyboard';
-  
+  static const String objectType = 'replyMarkupRemoveKeyboard';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ReplyMarkupForceReply** *(replyMarkupForceReply)* - child of ReplyMarkup
-  ///
-  /// Instructs application to force a reply to this message.
-  ///
-  /// * [isPersonal]: True, if a forced reply must automatically be shown to the current user. For outgoing messages, specify true to show the forced reply only for the mentioned users and for the target user of a reply.
-  /// * [inputFieldPlaceholder]: If non-empty, the placeholder to be shown in the input field when the reply is active; 0-64 characters.
-class ReplyMarkupForceReply extends ReplyMarkup {
+///
+/// Instructs application to force a reply to this message.
+///
+/// * [isPersonal]: True, if a forced reply must automatically be shown to the current user. For outgoing messages, specify true to show the forced reply only for the mentioned users and for the target user of a reply.
+/// * [inputFieldPlaceholder]: If non-empty, the placeholder to be shown in the input field when the reply is active; 0-64 characters.
+final class ReplyMarkupForceReply extends ReplyMarkup {
   
   /// **ReplyMarkupForceReply** *(replyMarkupForceReply)* - child of ReplyMarkup
   ///
@@ -126,13 +133,14 @@ class ReplyMarkupForceReply extends ReplyMarkup {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "is_personal": isPersonal,
       "input_field_placeholder": inputFieldPlaceholder,
-    };
-  }
+		};
+	}
+
   
   @override
   ReplyMarkupForceReply copyWith({
@@ -143,24 +151,27 @@ class ReplyMarkupForceReply extends ReplyMarkup {
     inputFieldPlaceholder: inputFieldPlaceholder ?? this.inputFieldPlaceholder,
   );
 
-  static const String constructor = 'replyMarkupForceReply';
-  
+  static const String objectType = 'replyMarkupForceReply';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ReplyMarkupShowKeyboard** *(replyMarkupShowKeyboard)* - child of ReplyMarkup
-  ///
-  /// Contains a custom keyboard layout to quickly reply to bots.
-  ///
-  /// * [rows]: A list of rows of bot keyboard buttons.
-  /// * [isPersistent]: True, if the keyboard is supposed to always be shown when the ordinary keyboard is hidden.
-  /// * [resizeKeyboard]: True, if the application needs to resize the keyboard vertically.
-  /// * [oneTime]: True, if the application needs to hide the keyboard after use.
-  /// * [isPersonal]: True, if the keyboard must automatically be shown to the current user. For outgoing messages, specify true to show the keyboard only for the mentioned users and for the target user of a reply.
-  /// * [inputFieldPlaceholder]: If non-empty, the placeholder to be shown in the input field when the keyboard is active; 0-64 characters.
-class ReplyMarkupShowKeyboard extends ReplyMarkup {
+///
+/// Contains a custom keyboard layout to quickly reply to bots.
+///
+/// * [rows]: A list of rows of bot keyboard buttons.
+/// * [isPersistent]: True, if the keyboard is supposed to always be shown when the ordinary keyboard is hidden.
+/// * [resizeKeyboard]: True, if the application needs to resize the keyboard vertically.
+/// * [oneTime]: True, if the application needs to hide the keyboard after use.
+/// * [isPersonal]: True, if the keyboard must automatically be shown to the current user. For outgoing messages, specify true to show the keyboard only for the mentioned users and for the target user of a reply.
+/// * [inputFieldPlaceholder]: If non-empty, the placeholder to be shown in the input field when the keyboard is active; 0-64 characters.
+final class ReplyMarkupShowKeyboard extends ReplyMarkup {
   
   /// **ReplyMarkupShowKeyboard** *(replyMarkupShowKeyboard)* - child of ReplyMarkup
   ///
@@ -211,17 +222,18 @@ class ReplyMarkupShowKeyboard extends ReplyMarkup {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "rows": rows.map((i) => i.map((ii) => ii.toJson()).toList()).toList(),
       "is_persistent": isPersistent,
       "resize_keyboard": resizeKeyboard,
       "one_time": oneTime,
       "is_personal": isPersonal,
       "input_field_placeholder": inputFieldPlaceholder,
-    };
-  }
+		};
+	}
+
   
   @override
   ReplyMarkupShowKeyboard copyWith({
@@ -240,19 +252,22 @@ class ReplyMarkupShowKeyboard extends ReplyMarkup {
     inputFieldPlaceholder: inputFieldPlaceholder ?? this.inputFieldPlaceholder,
   );
 
-  static const String constructor = 'replyMarkupShowKeyboard';
-  
+  static const String objectType = 'replyMarkupShowKeyboard';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ReplyMarkupInlineKeyboard** *(replyMarkupInlineKeyboard)* - child of ReplyMarkup
-  ///
-  /// Contains an inline keyboard layout.
-  ///
-  /// * [rows]: A list of rows of inline keyboard buttons.
-class ReplyMarkupInlineKeyboard extends ReplyMarkup {
+///
+/// Contains an inline keyboard layout.
+///
+/// * [rows]: A list of rows of inline keyboard buttons.
+final class ReplyMarkupInlineKeyboard extends ReplyMarkup {
   
   /// **ReplyMarkupInlineKeyboard** *(replyMarkupInlineKeyboard)* - child of ReplyMarkup
   ///
@@ -273,12 +288,13 @@ class ReplyMarkupInlineKeyboard extends ReplyMarkup {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "rows": rows.map((i) => i.map((ii) => ii.toJson()).toList()).toList(),
-    };
-  }
+		};
+	}
+
   
   @override
   ReplyMarkupInlineKeyboard copyWith({
@@ -287,8 +303,11 @@ class ReplyMarkupInlineKeyboard extends ReplyMarkup {
     rows: rows ?? this.rows,
   );
 
-  static const String constructor = 'replyMarkupInlineKeyboard';
-  
+  static const String objectType = 'replyMarkupInlineKeyboard';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

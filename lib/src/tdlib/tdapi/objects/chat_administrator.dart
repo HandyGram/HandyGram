@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **ChatAdministrator** *(chatAdministrator)* - basic class
-  ///
-  /// Contains information about a chat administrator.
-  ///
-  /// * [userId]: User identifier of the administrator.
-  /// * [customTitle]: Custom title of the administrator.
-  /// * [isOwner]: True, if the user is the owner of the chat.
-class ChatAdministrator extends TdObject {
+///
+/// Contains information about a chat administrator.
+///
+/// * [userId]: User identifier of the administrator.
+/// * [customTitle]: Custom title of the administrator.
+/// * [isOwner]: True, if the user is the owner of the chat.
+final class ChatAdministrator extends TdObject {
   
   /// **ChatAdministrator** *(chatAdministrator)* - basic class
   ///
@@ -40,14 +40,15 @@ class ChatAdministrator extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "user_id": userId,
       "custom_title": customTitle,
       "is_owner": isOwner,
-    };
-  }
+		};
+	}
+
   
   ChatAdministrator copyWith({
     int? userId,
@@ -59,8 +60,11 @@ class ChatAdministrator extends TdObject {
     isOwner: isOwner ?? this.isOwner,
   );
 
-  static const String constructor = 'chatAdministrator';
-  
+  static const String objectType = 'chatAdministrator';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

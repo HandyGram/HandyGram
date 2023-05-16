@@ -1,22 +1,22 @@
 part of '../tdapi.dart';
 
 /// **ChatAdministratorRights** *(chatAdministratorRights)* - basic class
-  ///
-  /// Describes rights of the administrator.
-  ///
-  /// * [canManageChat]: True, if the administrator can get chat event log, get chat statistics, get message statistics in channels, get channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other privilege; applicable to supergroups and channels only.
-  /// * [canChangeInfo]: True, if the administrator can change the chat title, photo, and other settings.
-  /// * [canPostMessages]: True, if the administrator can create channel posts; applicable to channels only.
-  /// * [canEditMessages]: True, if the administrator can edit messages of other users and pin messages; applicable to channels only.
-  /// * [canDeleteMessages]: True, if the administrator can delete messages of other users.
-  /// * [canInviteUsers]: True, if the administrator can invite new users to the chat.
-  /// * [canRestrictMembers]: True, if the administrator can restrict, ban, or unban chat members; always true for channels.
-  /// * [canPinMessages]: True, if the administrator can pin messages; applicable to basic groups and supergroups only.
-  /// * [canManageTopics]: True, if the administrator can manage topics; applicable to forum supergroups only.
-  /// * [canPromoteMembers]: True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that were directly or indirectly promoted by them.
-  /// * [canManageVideoChats]: True, if the administrator can manage video chats.
-  /// * [isAnonymous]: True, if the administrator isn't shown in the chat member list and sends messages anonymously; applicable to supergroups only.
-class ChatAdministratorRights extends TdObject {
+///
+/// Describes rights of the administrator.
+///
+/// * [canManageChat]: True, if the administrator can get chat event log, get chat statistics, get message statistics in channels, get channel members, see anonymous administrators in supergroups and ignore slow mode. Implied by any other privilege; applicable to supergroups and channels only.
+/// * [canChangeInfo]: True, if the administrator can change the chat title, photo, and other settings.
+/// * [canPostMessages]: True, if the administrator can create channel posts; applicable to channels only.
+/// * [canEditMessages]: True, if the administrator can edit messages of other users and pin messages; applicable to channels only.
+/// * [canDeleteMessages]: True, if the administrator can delete messages of other users.
+/// * [canInviteUsers]: True, if the administrator can invite new users to the chat.
+/// * [canRestrictMembers]: True, if the administrator can restrict, ban, or unban chat members; always true for channels.
+/// * [canPinMessages]: True, if the administrator can pin messages; applicable to basic groups and supergroups only.
+/// * [canManageTopics]: True, if the administrator can manage topics; applicable to forum supergroups only.
+/// * [canPromoteMembers]: True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that were directly or indirectly promoted by them.
+/// * [canManageVideoChats]: True, if the administrator can manage video chats.
+/// * [isAnonymous]: True, if the administrator isn't shown in the chat member list and sends messages anonymously; applicable to supergroups only.
+final class ChatAdministratorRights extends TdObject {
   
   /// **ChatAdministratorRights** *(chatAdministratorRights)* - basic class
   ///
@@ -103,9 +103,9 @@ class ChatAdministratorRights extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "can_manage_chat": canManageChat,
       "can_change_info": canChangeInfo,
       "can_post_messages": canPostMessages,
@@ -118,8 +118,9 @@ class ChatAdministratorRights extends TdObject {
       "can_promote_members": canPromoteMembers,
       "can_manage_video_chats": canManageVideoChats,
       "is_anonymous": isAnonymous,
-    };
-  }
+		};
+	}
+
   
   ChatAdministratorRights copyWith({
     bool? canManageChat,
@@ -149,8 +150,11 @@ class ChatAdministratorRights extends TdObject {
     isAnonymous: isAnonymous ?? this.isAnonymous,
   );
 
-  static const String constructor = 'chatAdministratorRights';
-  
+  static const String objectType = 'chatAdministratorRights';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

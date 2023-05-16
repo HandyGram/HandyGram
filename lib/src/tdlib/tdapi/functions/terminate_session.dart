@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **TerminateSession** *(terminateSession)* - TDLib function
-  ///
-  /// Terminates a session of the current user.
-  ///
-  /// * [sessionId]: Session identifier.
-  ///
-  /// [Ok] is returned on completion.
-class TerminateSession extends TdFunction {
+///
+/// Terminates a session of the current user.
+///
+/// * [sessionId]: Session identifier.
+///
+/// [Ok] is returned on completion.
+final class TerminateSession extends TdFunction {
   
   /// **TerminateSession** *(terminateSession)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class TerminateSession extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "session_id": sessionId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   TerminateSession copyWith({
     int? sessionId,
@@ -38,8 +39,11 @@ class TerminateSession extends TdFunction {
     sessionId: sessionId ?? this.sessionId,
   );
 
-  static const String constructor = 'terminateSession';
-  
+  static const String objectType = 'terminateSession';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

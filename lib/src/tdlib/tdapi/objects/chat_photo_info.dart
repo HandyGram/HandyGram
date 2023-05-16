@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **ChatPhotoInfo** *(chatPhotoInfo)* - basic class
-  ///
-  /// Contains basic information about the photo of a chat.
-  ///
-  /// * [small]: A small (160x160) chat photo variant in JPEG format. The file can be downloaded only before the photo is changed.
-  /// * [big]: A big (640x640) chat photo variant in JPEG format. The file can be downloaded only before the photo is changed.
-  /// * [minithumbnail]: Chat photo minithumbnail; may be null *(optional)*.
-  /// * [hasAnimation]: True, if the photo has animated variant.
-  /// * [isPersonal]: True, if the photo is visible only for the current user.
-class ChatPhotoInfo extends TdObject {
+///
+/// Contains basic information about the photo of a chat.
+///
+/// * [small]: A small (160x160) chat photo variant in JPEG format. The file can be downloaded only before the photo is changed.
+/// * [big]: A big (640x640) chat photo variant in JPEG format. The file can be downloaded only before the photo is changed.
+/// * [minithumbnail]: Chat photo minithumbnail; may be null *(optional)*.
+/// * [hasAnimation]: True, if the photo has animated variant.
+/// * [isPersonal]: True, if the photo is visible only for the current user.
+final class ChatPhotoInfo extends TdObject {
   
   /// **ChatPhotoInfo** *(chatPhotoInfo)* - basic class
   ///
@@ -54,16 +54,17 @@ class ChatPhotoInfo extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "small": small.toJson(),
       "big": big.toJson(),
       "minithumbnail": minithumbnail?.toJson(),
       "has_animation": hasAnimation,
       "is_personal": isPersonal,
-    };
-  }
+		};
+	}
+
   
   ChatPhotoInfo copyWith({
     File? small,
@@ -79,8 +80,11 @@ class ChatPhotoInfo extends TdObject {
     isPersonal: isPersonal ?? this.isPersonal,
   );
 
-  static const String constructor = 'chatPhotoInfo';
-  
+  static const String objectType = 'chatPhotoInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

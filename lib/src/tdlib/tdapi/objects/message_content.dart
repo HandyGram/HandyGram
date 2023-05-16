@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **MessageContent** *(messageContent)* - parent
-  ///
-  /// Contains the content of a message.
-class MessageContent extends TdObject {
+///
+/// Contains the content of a message.
+sealed class MessageContent extends TdObject {
   
   /// **MessageContent** *(messageContent)* - parent
   ///
@@ -71,150 +71,153 @@ class MessageContent extends TdObject {
   /// * [MessageUnsupported]
   factory MessageContent.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case MessageText.constructor:
+      case MessageText.objectType:
         return MessageText.fromJson(json);
-      case MessageAnimation.constructor:
+      case MessageAnimation.objectType:
         return MessageAnimation.fromJson(json);
-      case MessageAudio.constructor:
+      case MessageAudio.objectType:
         return MessageAudio.fromJson(json);
-      case MessageDocument.constructor:
+      case MessageDocument.objectType:
         return MessageDocument.fromJson(json);
-      case MessagePhoto.constructor:
+      case MessagePhoto.objectType:
         return MessagePhoto.fromJson(json);
-      case MessageExpiredPhoto.constructor:
+      case MessageExpiredPhoto.objectType:
         return MessageExpiredPhoto.fromJson(json);
-      case MessageSticker.constructor:
+      case MessageSticker.objectType:
         return MessageSticker.fromJson(json);
-      case MessageVideo.constructor:
+      case MessageVideo.objectType:
         return MessageVideo.fromJson(json);
-      case MessageExpiredVideo.constructor:
+      case MessageExpiredVideo.objectType:
         return MessageExpiredVideo.fromJson(json);
-      case MessageVideoNote.constructor:
+      case MessageVideoNote.objectType:
         return MessageVideoNote.fromJson(json);
-      case MessageVoiceNote.constructor:
+      case MessageVoiceNote.objectType:
         return MessageVoiceNote.fromJson(json);
-      case MessageLocation.constructor:
+      case MessageLocation.objectType:
         return MessageLocation.fromJson(json);
-      case MessageVenue.constructor:
+      case MessageVenue.objectType:
         return MessageVenue.fromJson(json);
-      case MessageContact.constructor:
+      case MessageContact.objectType:
         return MessageContact.fromJson(json);
-      case MessageAnimatedEmoji.constructor:
+      case MessageAnimatedEmoji.objectType:
         return MessageAnimatedEmoji.fromJson(json);
-      case MessageDice.constructor:
+      case MessageDice.objectType:
         return MessageDice.fromJson(json);
-      case MessageGame.constructor:
+      case MessageGame.objectType:
         return MessageGame.fromJson(json);
-      case MessagePoll.constructor:
+      case MessagePoll.objectType:
         return MessagePoll.fromJson(json);
-      case MessageInvoice.constructor:
+      case MessageInvoice.objectType:
         return MessageInvoice.fromJson(json);
-      case MessageCall.constructor:
+      case MessageCall.objectType:
         return MessageCall.fromJson(json);
-      case MessageVideoChatScheduled.constructor:
+      case MessageVideoChatScheduled.objectType:
         return MessageVideoChatScheduled.fromJson(json);
-      case MessageVideoChatStarted.constructor:
+      case MessageVideoChatStarted.objectType:
         return MessageVideoChatStarted.fromJson(json);
-      case MessageVideoChatEnded.constructor:
+      case MessageVideoChatEnded.objectType:
         return MessageVideoChatEnded.fromJson(json);
-      case MessageInviteVideoChatParticipants.constructor:
+      case MessageInviteVideoChatParticipants.objectType:
         return MessageInviteVideoChatParticipants.fromJson(json);
-      case MessageBasicGroupChatCreate.constructor:
+      case MessageBasicGroupChatCreate.objectType:
         return MessageBasicGroupChatCreate.fromJson(json);
-      case MessageSupergroupChatCreate.constructor:
+      case MessageSupergroupChatCreate.objectType:
         return MessageSupergroupChatCreate.fromJson(json);
-      case MessageChatChangeTitle.constructor:
+      case MessageChatChangeTitle.objectType:
         return MessageChatChangeTitle.fromJson(json);
-      case MessageChatChangePhoto.constructor:
+      case MessageChatChangePhoto.objectType:
         return MessageChatChangePhoto.fromJson(json);
-      case MessageChatDeletePhoto.constructor:
+      case MessageChatDeletePhoto.objectType:
         return MessageChatDeletePhoto.fromJson(json);
-      case MessageChatAddMembers.constructor:
+      case MessageChatAddMembers.objectType:
         return MessageChatAddMembers.fromJson(json);
-      case MessageChatJoinByLink.constructor:
+      case MessageChatJoinByLink.objectType:
         return MessageChatJoinByLink.fromJson(json);
-      case MessageChatJoinByRequest.constructor:
+      case MessageChatJoinByRequest.objectType:
         return MessageChatJoinByRequest.fromJson(json);
-      case MessageChatDeleteMember.constructor:
+      case MessageChatDeleteMember.objectType:
         return MessageChatDeleteMember.fromJson(json);
-      case MessageChatUpgradeTo.constructor:
+      case MessageChatUpgradeTo.objectType:
         return MessageChatUpgradeTo.fromJson(json);
-      case MessageChatUpgradeFrom.constructor:
+      case MessageChatUpgradeFrom.objectType:
         return MessageChatUpgradeFrom.fromJson(json);
-      case MessagePinMessage.constructor:
+      case MessagePinMessage.objectType:
         return MessagePinMessage.fromJson(json);
-      case MessageScreenshotTaken.constructor:
+      case MessageScreenshotTaken.objectType:
         return MessageScreenshotTaken.fromJson(json);
-      case MessageChatSetTheme.constructor:
+      case MessageChatSetTheme.objectType:
         return MessageChatSetTheme.fromJson(json);
-      case MessageChatSetMessageAutoDeleteTime.constructor:
+      case MessageChatSetMessageAutoDeleteTime.objectType:
         return MessageChatSetMessageAutoDeleteTime.fromJson(json);
-      case MessageForumTopicCreated.constructor:
+      case MessageForumTopicCreated.objectType:
         return MessageForumTopicCreated.fromJson(json);
-      case MessageForumTopicEdited.constructor:
+      case MessageForumTopicEdited.objectType:
         return MessageForumTopicEdited.fromJson(json);
-      case MessageForumTopicIsClosedToggled.constructor:
+      case MessageForumTopicIsClosedToggled.objectType:
         return MessageForumTopicIsClosedToggled.fromJson(json);
-      case MessageForumTopicIsHiddenToggled.constructor:
+      case MessageForumTopicIsHiddenToggled.objectType:
         return MessageForumTopicIsHiddenToggled.fromJson(json);
-      case MessageSuggestProfilePhoto.constructor:
+      case MessageSuggestProfilePhoto.objectType:
         return MessageSuggestProfilePhoto.fromJson(json);
-      case MessageCustomServiceAction.constructor:
+      case MessageCustomServiceAction.objectType:
         return MessageCustomServiceAction.fromJson(json);
-      case MessageGameScore.constructor:
+      case MessageGameScore.objectType:
         return MessageGameScore.fromJson(json);
-      case MessagePaymentSuccessful.constructor:
+      case MessagePaymentSuccessful.objectType:
         return MessagePaymentSuccessful.fromJson(json);
-      case MessagePaymentSuccessfulBot.constructor:
+      case MessagePaymentSuccessfulBot.objectType:
         return MessagePaymentSuccessfulBot.fromJson(json);
-      case MessageGiftedPremium.constructor:
+      case MessageGiftedPremium.objectType:
         return MessageGiftedPremium.fromJson(json);
-      case MessageContactRegistered.constructor:
+      case MessageContactRegistered.objectType:
         return MessageContactRegistered.fromJson(json);
-      case MessageWebsiteConnected.constructor:
+      case MessageWebsiteConnected.objectType:
         return MessageWebsiteConnected.fromJson(json);
-      case MessageBotWriteAccessAllowed.constructor:
+      case MessageBotWriteAccessAllowed.objectType:
         return MessageBotWriteAccessAllowed.fromJson(json);
-      case MessageWebAppDataSent.constructor:
+      case MessageWebAppDataSent.objectType:
         return MessageWebAppDataSent.fromJson(json);
-      case MessageWebAppDataReceived.constructor:
+      case MessageWebAppDataReceived.objectType:
         return MessageWebAppDataReceived.fromJson(json);
-      case MessagePassportDataSent.constructor:
+      case MessagePassportDataSent.objectType:
         return MessagePassportDataSent.fromJson(json);
-      case MessagePassportDataReceived.constructor:
+      case MessagePassportDataReceived.objectType:
         return MessagePassportDataReceived.fromJson(json);
-      case MessageProximityAlertTriggered.constructor:
+      case MessageProximityAlertTriggered.objectType:
         return MessageProximityAlertTriggered.fromJson(json);
-      case MessageUnsupported.constructor:
+      case MessageUnsupported.objectType:
         return MessageUnsupported.fromJson(json);
       default:
-        return const MessageContent();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of MessageContent)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  MessageContent copyWith() => const MessageContent();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'messageContent';
   
+  MessageContent copyWith();
+
+  static const String objectType = 'messageContent';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageText** *(messageText)* - child of MessageContent
-  ///
-  /// A text message.
-  ///
-  /// * [text]: Text of the message.
-  /// * [webPage]: A preview of the web page that's mentioned in the text; may be null *(optional)*.
-class MessageText extends MessageContent {
+///
+/// A text message.
+///
+/// * [text]: Text of the message.
+/// * [webPage]: A preview of the web page that's mentioned in the text; may be null *(optional)*.
+final class MessageText extends MessageContent {
   
   /// **MessageText** *(messageText)* - child of MessageContent
   ///
@@ -241,13 +244,14 @@ class MessageText extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text.toJson(),
       "web_page": webPage?.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   MessageText copyWith({
@@ -258,22 +262,25 @@ class MessageText extends MessageContent {
     webPage: webPage ?? this.webPage,
   );
 
-  static const String constructor = 'messageText';
-  
+  static const String objectType = 'messageText';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageAnimation** *(messageAnimation)* - child of MessageContent
-  ///
-  /// An animation message (GIF-style).
-  ///
-  /// * [animation]: The animation description.
-  /// * [caption]: Animation caption.
-  /// * [hasSpoiler]: True, if the animation preview must be covered by a spoiler animation.
-  /// * [isSecret]: True, if the animation thumbnail must be blurred and the animation must be shown only while tapped.
-class MessageAnimation extends MessageContent {
+///
+/// An animation message (GIF-style).
+///
+/// * [animation]: The animation description.
+/// * [caption]: Animation caption.
+/// * [hasSpoiler]: True, if the animation preview must be covered by a spoiler animation.
+/// * [isSecret]: True, if the animation thumbnail must be blurred and the animation must be shown only while tapped.
+final class MessageAnimation extends MessageContent {
   
   /// **MessageAnimation** *(messageAnimation)* - child of MessageContent
   ///
@@ -312,15 +319,16 @@ class MessageAnimation extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "animation": animation.toJson(),
       "caption": caption.toJson(),
       "has_spoiler": hasSpoiler,
       "is_secret": isSecret,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageAnimation copyWith({
@@ -335,20 +343,23 @@ class MessageAnimation extends MessageContent {
     isSecret: isSecret ?? this.isSecret,
   );
 
-  static const String constructor = 'messageAnimation';
-  
+  static const String objectType = 'messageAnimation';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageAudio** *(messageAudio)* - child of MessageContent
-  ///
-  /// An audio message.
-  ///
-  /// * [audio]: The audio description.
-  /// * [caption]: Audio caption.
-class MessageAudio extends MessageContent {
+///
+/// An audio message.
+///
+/// * [audio]: The audio description.
+/// * [caption]: Audio caption.
+final class MessageAudio extends MessageContent {
   
   /// **MessageAudio** *(messageAudio)* - child of MessageContent
   ///
@@ -375,13 +386,14 @@ class MessageAudio extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "audio": audio.toJson(),
       "caption": caption.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   MessageAudio copyWith({
@@ -392,20 +404,23 @@ class MessageAudio extends MessageContent {
     caption: caption ?? this.caption,
   );
 
-  static const String constructor = 'messageAudio';
-  
+  static const String objectType = 'messageAudio';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageDocument** *(messageDocument)* - child of MessageContent
-  ///
-  /// A document message (general file).
-  ///
-  /// * [document]: The document description.
-  /// * [caption]: Document caption.
-class MessageDocument extends MessageContent {
+///
+/// A document message (general file).
+///
+/// * [document]: The document description.
+/// * [caption]: Document caption.
+final class MessageDocument extends MessageContent {
   
   /// **MessageDocument** *(messageDocument)* - child of MessageContent
   ///
@@ -432,13 +447,14 @@ class MessageDocument extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "document": document.toJson(),
       "caption": caption.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   MessageDocument copyWith({
@@ -449,22 +465,25 @@ class MessageDocument extends MessageContent {
     caption: caption ?? this.caption,
   );
 
-  static const String constructor = 'messageDocument';
-  
+  static const String objectType = 'messageDocument';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessagePhoto** *(messagePhoto)* - child of MessageContent
-  ///
-  /// A photo message.
-  ///
-  /// * [photo]: The photo.
-  /// * [caption]: Photo caption.
-  /// * [hasSpoiler]: True, if the photo preview must be covered by a spoiler animation.
-  /// * [isSecret]: True, if the photo must be blurred and must be shown only while tapped.
-class MessagePhoto extends MessageContent {
+///
+/// A photo message.
+///
+/// * [photo]: The photo.
+/// * [caption]: Photo caption.
+/// * [hasSpoiler]: True, if the photo preview must be covered by a spoiler animation.
+/// * [isSecret]: True, if the photo must be blurred and must be shown only while tapped.
+final class MessagePhoto extends MessageContent {
   
   /// **MessagePhoto** *(messagePhoto)* - child of MessageContent
   ///
@@ -503,15 +522,16 @@ class MessagePhoto extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "photo": photo.toJson(),
       "caption": caption.toJson(),
       "has_spoiler": hasSpoiler,
       "is_secret": isSecret,
-    };
-  }
+		};
+	}
+
   
   @override
   MessagePhoto copyWith({
@@ -526,17 +546,20 @@ class MessagePhoto extends MessageContent {
     isSecret: isSecret ?? this.isSecret,
   );
 
-  static const String constructor = 'messagePhoto';
-  
+  static const String objectType = 'messagePhoto';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageExpiredPhoto** *(messageExpiredPhoto)* - child of MessageContent
-  ///
-  /// A self-destructed photo message.
-class MessageExpiredPhoto extends MessageContent {
+///
+/// A self-destructed photo message.
+final class MessageExpiredPhoto extends MessageContent {
   
   /// **MessageExpiredPhoto** *(messageExpiredPhoto)* - child of MessageContent
   ///
@@ -547,29 +570,33 @@ class MessageExpiredPhoto extends MessageContent {
   factory MessageExpiredPhoto.fromJson(Map<String, dynamic> json) => const MessageExpiredPhoto();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   MessageExpiredPhoto copyWith() => const MessageExpiredPhoto();
 
-  static const String constructor = 'messageExpiredPhoto';
-  
+  static const String objectType = 'messageExpiredPhoto';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageSticker** *(messageSticker)* - child of MessageContent
-  ///
-  /// A sticker message.
-  ///
-  /// * [sticker]: The sticker description.
-  /// * [isPremium]: True, if premium animation of the sticker must be played.
-class MessageSticker extends MessageContent {
+///
+/// A sticker message.
+///
+/// * [sticker]: The sticker description.
+/// * [isPremium]: True, if premium animation of the sticker must be played.
+final class MessageSticker extends MessageContent {
   
   /// **MessageSticker** *(messageSticker)* - child of MessageContent
   ///
@@ -596,13 +623,14 @@ class MessageSticker extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "sticker": sticker.toJson(),
       "is_premium": isPremium,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageSticker copyWith({
@@ -613,22 +641,25 @@ class MessageSticker extends MessageContent {
     isPremium: isPremium ?? this.isPremium,
   );
 
-  static const String constructor = 'messageSticker';
-  
+  static const String objectType = 'messageSticker';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageVideo** *(messageVideo)* - child of MessageContent
-  ///
-  /// A video message.
-  ///
-  /// * [video]: The video description.
-  /// * [caption]: Video caption.
-  /// * [hasSpoiler]: True, if the video preview must be covered by a spoiler animation.
-  /// * [isSecret]: True, if the video thumbnail must be blurred and the video must be shown only while tapped.
-class MessageVideo extends MessageContent {
+///
+/// A video message.
+///
+/// * [video]: The video description.
+/// * [caption]: Video caption.
+/// * [hasSpoiler]: True, if the video preview must be covered by a spoiler animation.
+/// * [isSecret]: True, if the video thumbnail must be blurred and the video must be shown only while tapped.
+final class MessageVideo extends MessageContent {
   
   /// **MessageVideo** *(messageVideo)* - child of MessageContent
   ///
@@ -667,15 +698,16 @@ class MessageVideo extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "video": video.toJson(),
       "caption": caption.toJson(),
       "has_spoiler": hasSpoiler,
       "is_secret": isSecret,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageVideo copyWith({
@@ -690,17 +722,20 @@ class MessageVideo extends MessageContent {
     isSecret: isSecret ?? this.isSecret,
   );
 
-  static const String constructor = 'messageVideo';
-  
+  static const String objectType = 'messageVideo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageExpiredVideo** *(messageExpiredVideo)* - child of MessageContent
-  ///
-  /// A self-destructed video message.
-class MessageExpiredVideo extends MessageContent {
+///
+/// A self-destructed video message.
+final class MessageExpiredVideo extends MessageContent {
   
   /// **MessageExpiredVideo** *(messageExpiredVideo)* - child of MessageContent
   ///
@@ -711,30 +746,34 @@ class MessageExpiredVideo extends MessageContent {
   factory MessageExpiredVideo.fromJson(Map<String, dynamic> json) => const MessageExpiredVideo();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   MessageExpiredVideo copyWith() => const MessageExpiredVideo();
 
-  static const String constructor = 'messageExpiredVideo';
-  
+  static const String objectType = 'messageExpiredVideo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageVideoNote** *(messageVideoNote)* - child of MessageContent
-  ///
-  /// A video note message.
-  ///
-  /// * [videoNote]: The video note description.
-  /// * [isViewed]: True, if at least one of the recipients has viewed the video note.
-  /// * [isSecret]: True, if the video note thumbnail must be blurred and the video note must be shown only while tapped.
-class MessageVideoNote extends MessageContent {
+///
+/// A video note message.
+///
+/// * [videoNote]: The video note description.
+/// * [isViewed]: True, if at least one of the recipients has viewed the video note.
+/// * [isSecret]: True, if the video note thumbnail must be blurred and the video note must be shown only while tapped.
+final class MessageVideoNote extends MessageContent {
   
   /// **MessageVideoNote** *(messageVideoNote)* - child of MessageContent
   ///
@@ -767,14 +806,15 @@ class MessageVideoNote extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "video_note": videoNote.toJson(),
       "is_viewed": isViewed,
       "is_secret": isSecret,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageVideoNote copyWith({
@@ -787,21 +827,24 @@ class MessageVideoNote extends MessageContent {
     isSecret: isSecret ?? this.isSecret,
   );
 
-  static const String constructor = 'messageVideoNote';
-  
+  static const String objectType = 'messageVideoNote';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageVoiceNote** *(messageVoiceNote)* - child of MessageContent
-  ///
-  /// A voice note message.
-  ///
-  /// * [voiceNote]: The voice note description.
-  /// * [caption]: Voice note caption.
-  /// * [isListened]: True, if at least one of the recipients has listened to the voice note.
-class MessageVoiceNote extends MessageContent {
+///
+/// A voice note message.
+///
+/// * [voiceNote]: The voice note description.
+/// * [caption]: Voice note caption.
+/// * [isListened]: True, if at least one of the recipients has listened to the voice note.
+final class MessageVoiceNote extends MessageContent {
   
   /// **MessageVoiceNote** *(messageVoiceNote)* - child of MessageContent
   ///
@@ -834,14 +877,15 @@ class MessageVoiceNote extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "voice_note": voiceNote.toJson(),
       "caption": caption.toJson(),
       "is_listened": isListened,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageVoiceNote copyWith({
@@ -854,23 +898,26 @@ class MessageVoiceNote extends MessageContent {
     isListened: isListened ?? this.isListened,
   );
 
-  static const String constructor = 'messageVoiceNote';
-  
+  static const String objectType = 'messageVoiceNote';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageLocation** *(messageLocation)* - child of MessageContent
-  ///
-  /// A message with a location.
-  ///
-  /// * [location]: The location description.
-  /// * [livePeriod]: Time relative to the message send date, for which the location can be updated, in seconds.
-  /// * [expiresIn]: Left time for which the location can be updated, in seconds. updateMessageContent is not sent when this field changes.
-  /// * [heading]: For live locations, a direction in which the location moves, in degrees; 1-360. If 0 the direction is unknown.
-  /// * [proximityAlertRadius]: For live locations, a maximum distance to another chat member for proximity alerts, in meters (0-100000). 0 if the notification is disabled. Available only to the message sender.
-class MessageLocation extends MessageContent {
+///
+/// A message with a location.
+///
+/// * [location]: The location description.
+/// * [livePeriod]: Time relative to the message send date, for which the location can be updated, in seconds.
+/// * [expiresIn]: Left time for which the location can be updated, in seconds. updateMessageContent is not sent when this field changes.
+/// * [heading]: For live locations, a direction in which the location moves, in degrees; 1-360. If 0 the direction is unknown.
+/// * [proximityAlertRadius]: For live locations, a maximum distance to another chat member for proximity alerts, in meters (0-100000). 0 if the notification is disabled. Available only to the message sender.
+final class MessageLocation extends MessageContent {
   
   /// **MessageLocation** *(messageLocation)* - child of MessageContent
   ///
@@ -915,16 +962,17 @@ class MessageLocation extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "location": location.toJson(),
       "live_period": livePeriod,
       "expires_in": expiresIn,
       "heading": heading,
       "proximity_alert_radius": proximityAlertRadius,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageLocation copyWith({
@@ -941,19 +989,22 @@ class MessageLocation extends MessageContent {
     proximityAlertRadius: proximityAlertRadius ?? this.proximityAlertRadius,
   );
 
-  static const String constructor = 'messageLocation';
-  
+  static const String objectType = 'messageLocation';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageVenue** *(messageVenue)* - child of MessageContent
-  ///
-  /// A message with information about a venue.
-  ///
-  /// * [venue]: The venue description.
-class MessageVenue extends MessageContent {
+///
+/// A message with information about a venue.
+///
+/// * [venue]: The venue description.
+final class MessageVenue extends MessageContent {
   
   /// **MessageVenue** *(messageVenue)* - child of MessageContent
   ///
@@ -974,12 +1025,13 @@ class MessageVenue extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "venue": venue.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   MessageVenue copyWith({
@@ -988,19 +1040,22 @@ class MessageVenue extends MessageContent {
     venue: venue ?? this.venue,
   );
 
-  static const String constructor = 'messageVenue';
-  
+  static const String objectType = 'messageVenue';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageContact** *(messageContact)* - child of MessageContent
-  ///
-  /// A message with a user contact.
-  ///
-  /// * [contact]: The contact description.
-class MessageContact extends MessageContent {
+///
+/// A message with a user contact.
+///
+/// * [contact]: The contact description.
+final class MessageContact extends MessageContent {
   
   /// **MessageContact** *(messageContact)* - child of MessageContent
   ///
@@ -1021,12 +1076,13 @@ class MessageContact extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "contact": contact.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   MessageContact copyWith({
@@ -1035,20 +1091,23 @@ class MessageContact extends MessageContent {
     contact: contact ?? this.contact,
   );
 
-  static const String constructor = 'messageContact';
-  
+  static const String objectType = 'messageContact';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageAnimatedEmoji** *(messageAnimatedEmoji)* - child of MessageContent
-  ///
-  /// A message with an animated emoji.
-  ///
-  /// * [animatedEmoji]: The animated emoji.
-  /// * [emoji]: The corresponding emoji.
-class MessageAnimatedEmoji extends MessageContent {
+///
+/// A message with an animated emoji.
+///
+/// * [animatedEmoji]: The animated emoji.
+/// * [emoji]: The corresponding emoji.
+final class MessageAnimatedEmoji extends MessageContent {
   
   /// **MessageAnimatedEmoji** *(messageAnimatedEmoji)* - child of MessageContent
   ///
@@ -1075,13 +1134,14 @@ class MessageAnimatedEmoji extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "animated_emoji": animatedEmoji.toJson(),
       "emoji": emoji,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageAnimatedEmoji copyWith({
@@ -1092,23 +1152,26 @@ class MessageAnimatedEmoji extends MessageContent {
     emoji: emoji ?? this.emoji,
   );
 
-  static const String constructor = 'messageAnimatedEmoji';
-  
+  static const String objectType = 'messageAnimatedEmoji';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageDice** *(messageDice)* - child of MessageContent
-  ///
-  /// A dice message. The dice value is randomly generated by the server.
-  ///
-  /// * [initialState]: The animated stickers with the initial dice animation; may be null if unknown. updateMessageContent will be sent when the sticker became known *(optional)*.
-  /// * [finalState]: The animated stickers with the final dice animation; may be null if unknown. updateMessageContent will be sent when the sticker became known *(optional)*.
-  /// * [emoji]: Emoji on which the dice throw animation is based.
-  /// * [value]: The dice value. If the value is 0, the dice don't have final state yet.
-  /// * [successAnimationFrameNumber]: Number of frame after which a success animation like a shower of confetti needs to be shown on updateMessageSendSucceeded.
-class MessageDice extends MessageContent {
+///
+/// A dice message. The dice value is randomly generated by the server.
+///
+/// * [initialState]: The animated stickers with the initial dice animation; may be null if unknown. updateMessageContent will be sent when the sticker became known *(optional)*.
+/// * [finalState]: The animated stickers with the final dice animation; may be null if unknown. updateMessageContent will be sent when the sticker became known *(optional)*.
+/// * [emoji]: Emoji on which the dice throw animation is based.
+/// * [value]: The dice value. If the value is 0, the dice don't have final state yet.
+/// * [successAnimationFrameNumber]: Number of frame after which a success animation like a shower of confetti needs to be shown on updateMessageSendSucceeded.
+final class MessageDice extends MessageContent {
   
   /// **MessageDice** *(messageDice)* - child of MessageContent
   ///
@@ -1153,16 +1216,17 @@ class MessageDice extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "initial_state": initialState?.toJson(),
       "final_state": finalState?.toJson(),
       "emoji": emoji,
       "value": value,
       "success_animation_frame_number": successAnimationFrameNumber,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageDice copyWith({
@@ -1179,19 +1243,22 @@ class MessageDice extends MessageContent {
     successAnimationFrameNumber: successAnimationFrameNumber ?? this.successAnimationFrameNumber,
   );
 
-  static const String constructor = 'messageDice';
-  
+  static const String objectType = 'messageDice';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageGame** *(messageGame)* - child of MessageContent
-  ///
-  /// A message with a game.
-  ///
-  /// * [game]: The game description.
-class MessageGame extends MessageContent {
+///
+/// A message with a game.
+///
+/// * [game]: The game description.
+final class MessageGame extends MessageContent {
   
   /// **MessageGame** *(messageGame)* - child of MessageContent
   ///
@@ -1212,12 +1279,13 @@ class MessageGame extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "game": game.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   MessageGame copyWith({
@@ -1226,19 +1294,22 @@ class MessageGame extends MessageContent {
     game: game ?? this.game,
   );
 
-  static const String constructor = 'messageGame';
-  
+  static const String objectType = 'messageGame';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessagePoll** *(messagePoll)* - child of MessageContent
-  ///
-  /// A message with a poll.
-  ///
-  /// * [poll]: The poll description.
-class MessagePoll extends MessageContent {
+///
+/// A message with a poll.
+///
+/// * [poll]: The poll description.
+final class MessagePoll extends MessageContent {
   
   /// **MessagePoll** *(messagePoll)* - child of MessageContent
   ///
@@ -1259,12 +1330,13 @@ class MessagePoll extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "poll": poll.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   MessagePoll copyWith({
@@ -1273,28 +1345,31 @@ class MessagePoll extends MessageContent {
     poll: poll ?? this.poll,
   );
 
-  static const String constructor = 'messagePoll';
-  
+  static const String objectType = 'messagePoll';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageInvoice** *(messageInvoice)* - child of MessageContent
-  ///
-  /// A message with an invoice from a bot.
-  ///
-  /// * [title]: Product title.
-  /// * [description]: Product description.
-  /// * [photo]: Product photo; may be null *(optional)*.
-  /// * [currency]: Currency for the product price.
-  /// * [totalAmount]: Product total price in the smallest units of the currency.
-  /// * [startParameter]: Unique invoice bot start_parameter. To share an invoice use the URL https://t.me/{bot_username}?start={start_parameter}.
-  /// * [isTest]: True, if the invoice is a test invoice.
-  /// * [needShippingAddress]: True, if the shipping address must be specified.
-  /// * [receiptMessageId]: The identifier of the message with the receipt, after the product has been purchased.
-  /// * [extendedMedia]: Extended media attached to the invoice; may be null *(optional)*.
-class MessageInvoice extends MessageContent {
+///
+/// A message with an invoice from a bot.
+///
+/// * [title]: Product title.
+/// * [description]: Product description.
+/// * [photo]: Product photo; may be null *(optional)*.
+/// * [currency]: Currency for the product price.
+/// * [totalAmount]: Product total price in the smallest units of the currency.
+/// * [startParameter]: Unique invoice bot start_parameter. To share an invoice use the URL https://t.me/{bot_username}?start={start_parameter}.
+/// * [isTest]: True, if the invoice is a test invoice.
+/// * [needShippingAddress]: True, if the shipping address must be specified.
+/// * [receiptMessageId]: The identifier of the message with the receipt, after the product has been purchased.
+/// * [extendedMedia]: Extended media attached to the invoice; may be null *(optional)*.
+final class MessageInvoice extends MessageContent {
   
   /// **MessageInvoice** *(messageInvoice)* - child of MessageContent
   ///
@@ -1369,9 +1444,9 @@ class MessageInvoice extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "title": title,
       "description": description.toJson(),
       "photo": photo?.toJson(),
@@ -1382,8 +1457,9 @@ class MessageInvoice extends MessageContent {
       "need_shipping_address": needShippingAddress,
       "receipt_message_id": receiptMessageId,
       "extended_media": extendedMedia?.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   MessageInvoice copyWith({
@@ -1410,21 +1486,24 @@ class MessageInvoice extends MessageContent {
     extendedMedia: extendedMedia ?? this.extendedMedia,
   );
 
-  static const String constructor = 'messageInvoice';
-  
+  static const String objectType = 'messageInvoice';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageCall** *(messageCall)* - child of MessageContent
-  ///
-  /// A message with information about an ended call.
-  ///
-  /// * [isVideo]: True, if the call was a video call.
-  /// * [discardReason]: Reason why the call was discarded.
-  /// * [duration]: Call duration, in seconds.
-class MessageCall extends MessageContent {
+///
+/// A message with information about an ended call.
+///
+/// * [isVideo]: True, if the call was a video call.
+/// * [discardReason]: Reason why the call was discarded.
+/// * [duration]: Call duration, in seconds.
+final class MessageCall extends MessageContent {
   
   /// **MessageCall** *(messageCall)* - child of MessageContent
   ///
@@ -1457,14 +1536,15 @@ class MessageCall extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "is_video": isVideo,
       "discard_reason": discardReason.toJson(),
       "duration": duration,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageCall copyWith({
@@ -1477,20 +1557,23 @@ class MessageCall extends MessageContent {
     duration: duration ?? this.duration,
   );
 
-  static const String constructor = 'messageCall';
-  
+  static const String objectType = 'messageCall';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageVideoChatScheduled** *(messageVideoChatScheduled)* - child of MessageContent
-  ///
-  /// A new video chat was scheduled.
-  ///
-  /// * [groupCallId]: Identifier of the video chat. The video chat can be received through the method getGroupCall.
-  /// * [startDate]: Point in time (Unix timestamp) when the group call is supposed to be started by an administrator.
-class MessageVideoChatScheduled extends MessageContent {
+///
+/// A new video chat was scheduled.
+///
+/// * [groupCallId]: Identifier of the video chat. The video chat can be received through the method getGroupCall.
+/// * [startDate]: Point in time (Unix timestamp) when the group call is supposed to be started by an administrator.
+final class MessageVideoChatScheduled extends MessageContent {
   
   /// **MessageVideoChatScheduled** *(messageVideoChatScheduled)* - child of MessageContent
   ///
@@ -1517,13 +1600,14 @@ class MessageVideoChatScheduled extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "group_call_id": groupCallId,
       "start_date": startDate,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageVideoChatScheduled copyWith({
@@ -1534,19 +1618,22 @@ class MessageVideoChatScheduled extends MessageContent {
     startDate: startDate ?? this.startDate,
   );
 
-  static const String constructor = 'messageVideoChatScheduled';
-  
+  static const String objectType = 'messageVideoChatScheduled';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageVideoChatStarted** *(messageVideoChatStarted)* - child of MessageContent
-  ///
-  /// A newly created video chat.
-  ///
-  /// * [groupCallId]: Identifier of the video chat. The video chat can be received through the method getGroupCall.
-class MessageVideoChatStarted extends MessageContent {
+///
+/// A newly created video chat.
+///
+/// * [groupCallId]: Identifier of the video chat. The video chat can be received through the method getGroupCall.
+final class MessageVideoChatStarted extends MessageContent {
   
   /// **MessageVideoChatStarted** *(messageVideoChatStarted)* - child of MessageContent
   ///
@@ -1567,12 +1654,13 @@ class MessageVideoChatStarted extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "group_call_id": groupCallId,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageVideoChatStarted copyWith({
@@ -1581,19 +1669,22 @@ class MessageVideoChatStarted extends MessageContent {
     groupCallId: groupCallId ?? this.groupCallId,
   );
 
-  static const String constructor = 'messageVideoChatStarted';
-  
+  static const String objectType = 'messageVideoChatStarted';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageVideoChatEnded** *(messageVideoChatEnded)* - child of MessageContent
-  ///
-  /// A message with information about an ended video chat.
-  ///
-  /// * [duration]: Call duration, in seconds.
-class MessageVideoChatEnded extends MessageContent {
+///
+/// A message with information about an ended video chat.
+///
+/// * [duration]: Call duration, in seconds.
+final class MessageVideoChatEnded extends MessageContent {
   
   /// **MessageVideoChatEnded** *(messageVideoChatEnded)* - child of MessageContent
   ///
@@ -1614,12 +1705,13 @@ class MessageVideoChatEnded extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "duration": duration,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageVideoChatEnded copyWith({
@@ -1628,20 +1720,23 @@ class MessageVideoChatEnded extends MessageContent {
     duration: duration ?? this.duration,
   );
 
-  static const String constructor = 'messageVideoChatEnded';
-  
+  static const String objectType = 'messageVideoChatEnded';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageInviteVideoChatParticipants** *(messageInviteVideoChatParticipants)* - child of MessageContent
-  ///
-  /// A message with information about an invite to a video chat.
-  ///
-  /// * [groupCallId]: Identifier of the video chat. The video chat can be received through the method getGroupCall.
-  /// * [userIds]: Invited user identifiers.
-class MessageInviteVideoChatParticipants extends MessageContent {
+///
+/// A message with information about an invite to a video chat.
+///
+/// * [groupCallId]: Identifier of the video chat. The video chat can be received through the method getGroupCall.
+/// * [userIds]: Invited user identifiers.
+final class MessageInviteVideoChatParticipants extends MessageContent {
   
   /// **MessageInviteVideoChatParticipants** *(messageInviteVideoChatParticipants)* - child of MessageContent
   ///
@@ -1668,13 +1763,14 @@ class MessageInviteVideoChatParticipants extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "group_call_id": groupCallId,
       "user_ids": userIds.map((i) => i).toList(),
-    };
-  }
+		};
+	}
+
   
   @override
   MessageInviteVideoChatParticipants copyWith({
@@ -1685,20 +1781,23 @@ class MessageInviteVideoChatParticipants extends MessageContent {
     userIds: userIds ?? this.userIds,
   );
 
-  static const String constructor = 'messageInviteVideoChatParticipants';
-  
+  static const String objectType = 'messageInviteVideoChatParticipants';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageBasicGroupChatCreate** *(messageBasicGroupChatCreate)* - child of MessageContent
-  ///
-  /// A newly created basic group.
-  ///
-  /// * [title]: Title of the basic group.
-  /// * [memberUserIds]: User identifiers of members in the basic group.
-class MessageBasicGroupChatCreate extends MessageContent {
+///
+/// A newly created basic group.
+///
+/// * [title]: Title of the basic group.
+/// * [memberUserIds]: User identifiers of members in the basic group.
+final class MessageBasicGroupChatCreate extends MessageContent {
   
   /// **MessageBasicGroupChatCreate** *(messageBasicGroupChatCreate)* - child of MessageContent
   ///
@@ -1725,13 +1824,14 @@ class MessageBasicGroupChatCreate extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "title": title,
       "member_user_ids": memberUserIds.map((i) => i).toList(),
-    };
-  }
+		};
+	}
+
   
   @override
   MessageBasicGroupChatCreate copyWith({
@@ -1742,19 +1842,22 @@ class MessageBasicGroupChatCreate extends MessageContent {
     memberUserIds: memberUserIds ?? this.memberUserIds,
   );
 
-  static const String constructor = 'messageBasicGroupChatCreate';
-  
+  static const String objectType = 'messageBasicGroupChatCreate';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageSupergroupChatCreate** *(messageSupergroupChatCreate)* - child of MessageContent
-  ///
-  /// A newly created supergroup or channel.
-  ///
-  /// * [title]: Title of the supergroup or channel.
-class MessageSupergroupChatCreate extends MessageContent {
+///
+/// A newly created supergroup or channel.
+///
+/// * [title]: Title of the supergroup or channel.
+final class MessageSupergroupChatCreate extends MessageContent {
   
   /// **MessageSupergroupChatCreate** *(messageSupergroupChatCreate)* - child of MessageContent
   ///
@@ -1775,12 +1878,13 @@ class MessageSupergroupChatCreate extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "title": title,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageSupergroupChatCreate copyWith({
@@ -1789,19 +1893,22 @@ class MessageSupergroupChatCreate extends MessageContent {
     title: title ?? this.title,
   );
 
-  static const String constructor = 'messageSupergroupChatCreate';
-  
+  static const String objectType = 'messageSupergroupChatCreate';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageChatChangeTitle** *(messageChatChangeTitle)* - child of MessageContent
-  ///
-  /// An updated chat title.
-  ///
-  /// * [title]: New chat title.
-class MessageChatChangeTitle extends MessageContent {
+///
+/// An updated chat title.
+///
+/// * [title]: New chat title.
+final class MessageChatChangeTitle extends MessageContent {
   
   /// **MessageChatChangeTitle** *(messageChatChangeTitle)* - child of MessageContent
   ///
@@ -1822,12 +1929,13 @@ class MessageChatChangeTitle extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "title": title,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageChatChangeTitle copyWith({
@@ -1836,19 +1944,22 @@ class MessageChatChangeTitle extends MessageContent {
     title: title ?? this.title,
   );
 
-  static const String constructor = 'messageChatChangeTitle';
-  
+  static const String objectType = 'messageChatChangeTitle';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageChatChangePhoto** *(messageChatChangePhoto)* - child of MessageContent
-  ///
-  /// An updated chat photo.
-  ///
-  /// * [photo]: New chat photo.
-class MessageChatChangePhoto extends MessageContent {
+///
+/// An updated chat photo.
+///
+/// * [photo]: New chat photo.
+final class MessageChatChangePhoto extends MessageContent {
   
   /// **MessageChatChangePhoto** *(messageChatChangePhoto)* - child of MessageContent
   ///
@@ -1869,12 +1980,13 @@ class MessageChatChangePhoto extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "photo": photo.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   MessageChatChangePhoto copyWith({
@@ -1883,17 +1995,20 @@ class MessageChatChangePhoto extends MessageContent {
     photo: photo ?? this.photo,
   );
 
-  static const String constructor = 'messageChatChangePhoto';
-  
+  static const String objectType = 'messageChatChangePhoto';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageChatDeletePhoto** *(messageChatDeletePhoto)* - child of MessageContent
-  ///
-  /// A deleted chat photo.
-class MessageChatDeletePhoto extends MessageContent {
+///
+/// A deleted chat photo.
+final class MessageChatDeletePhoto extends MessageContent {
   
   /// **MessageChatDeletePhoto** *(messageChatDeletePhoto)* - child of MessageContent
   ///
@@ -1904,28 +2019,32 @@ class MessageChatDeletePhoto extends MessageContent {
   factory MessageChatDeletePhoto.fromJson(Map<String, dynamic> json) => const MessageChatDeletePhoto();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   MessageChatDeletePhoto copyWith() => const MessageChatDeletePhoto();
 
-  static const String constructor = 'messageChatDeletePhoto';
-  
+  static const String objectType = 'messageChatDeletePhoto';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageChatAddMembers** *(messageChatAddMembers)* - child of MessageContent
-  ///
-  /// New chat members were added.
-  ///
-  /// * [memberUserIds]: User identifiers of the new members.
-class MessageChatAddMembers extends MessageContent {
+///
+/// New chat members were added.
+///
+/// * [memberUserIds]: User identifiers of the new members.
+final class MessageChatAddMembers extends MessageContent {
   
   /// **MessageChatAddMembers** *(messageChatAddMembers)* - child of MessageContent
   ///
@@ -1946,12 +2065,13 @@ class MessageChatAddMembers extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "member_user_ids": memberUserIds.map((i) => i).toList(),
-    };
-  }
+		};
+	}
+
   
   @override
   MessageChatAddMembers copyWith({
@@ -1960,17 +2080,20 @@ class MessageChatAddMembers extends MessageContent {
     memberUserIds: memberUserIds ?? this.memberUserIds,
   );
 
-  static const String constructor = 'messageChatAddMembers';
-  
+  static const String objectType = 'messageChatAddMembers';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageChatJoinByLink** *(messageChatJoinByLink)* - child of MessageContent
-  ///
-  /// A new member joined the chat via an invite link.
-class MessageChatJoinByLink extends MessageContent {
+///
+/// A new member joined the chat via an invite link.
+final class MessageChatJoinByLink extends MessageContent {
   
   /// **MessageChatJoinByLink** *(messageChatJoinByLink)* - child of MessageContent
   ///
@@ -1981,26 +2104,30 @@ class MessageChatJoinByLink extends MessageContent {
   factory MessageChatJoinByLink.fromJson(Map<String, dynamic> json) => const MessageChatJoinByLink();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   MessageChatJoinByLink copyWith() => const MessageChatJoinByLink();
 
-  static const String constructor = 'messageChatJoinByLink';
-  
+  static const String objectType = 'messageChatJoinByLink';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageChatJoinByRequest** *(messageChatJoinByRequest)* - child of MessageContent
-  ///
-  /// A new member was accepted to the chat by an administrator.
-class MessageChatJoinByRequest extends MessageContent {
+///
+/// A new member was accepted to the chat by an administrator.
+final class MessageChatJoinByRequest extends MessageContent {
   
   /// **MessageChatJoinByRequest** *(messageChatJoinByRequest)* - child of MessageContent
   ///
@@ -2011,28 +2138,32 @@ class MessageChatJoinByRequest extends MessageContent {
   factory MessageChatJoinByRequest.fromJson(Map<String, dynamic> json) => const MessageChatJoinByRequest();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   MessageChatJoinByRequest copyWith() => const MessageChatJoinByRequest();
 
-  static const String constructor = 'messageChatJoinByRequest';
-  
+  static const String objectType = 'messageChatJoinByRequest';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageChatDeleteMember** *(messageChatDeleteMember)* - child of MessageContent
-  ///
-  /// A chat member was deleted.
-  ///
-  /// * [userId]: User identifier of the deleted chat member.
-class MessageChatDeleteMember extends MessageContent {
+///
+/// A chat member was deleted.
+///
+/// * [userId]: User identifier of the deleted chat member.
+final class MessageChatDeleteMember extends MessageContent {
   
   /// **MessageChatDeleteMember** *(messageChatDeleteMember)* - child of MessageContent
   ///
@@ -2053,12 +2184,13 @@ class MessageChatDeleteMember extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "user_id": userId,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageChatDeleteMember copyWith({
@@ -2067,19 +2199,22 @@ class MessageChatDeleteMember extends MessageContent {
     userId: userId ?? this.userId,
   );
 
-  static const String constructor = 'messageChatDeleteMember';
-  
+  static const String objectType = 'messageChatDeleteMember';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageChatUpgradeTo** *(messageChatUpgradeTo)* - child of MessageContent
-  ///
-  /// A basic group was upgraded to a supergroup and was deactivated as the result.
-  ///
-  /// * [supergroupId]: Identifier of the supergroup to which the basic group was upgraded.
-class MessageChatUpgradeTo extends MessageContent {
+///
+/// A basic group was upgraded to a supergroup and was deactivated as the result.
+///
+/// * [supergroupId]: Identifier of the supergroup to which the basic group was upgraded.
+final class MessageChatUpgradeTo extends MessageContent {
   
   /// **MessageChatUpgradeTo** *(messageChatUpgradeTo)* - child of MessageContent
   ///
@@ -2100,12 +2235,13 @@ class MessageChatUpgradeTo extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "supergroup_id": supergroupId,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageChatUpgradeTo copyWith({
@@ -2114,20 +2250,23 @@ class MessageChatUpgradeTo extends MessageContent {
     supergroupId: supergroupId ?? this.supergroupId,
   );
 
-  static const String constructor = 'messageChatUpgradeTo';
-  
+  static const String objectType = 'messageChatUpgradeTo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageChatUpgradeFrom** *(messageChatUpgradeFrom)* - child of MessageContent
-  ///
-  /// A supergroup has been created from a basic group.
-  ///
-  /// * [title]: Title of the newly created supergroup.
-  /// * [basicGroupId]: The identifier of the original basic group.
-class MessageChatUpgradeFrom extends MessageContent {
+///
+/// A supergroup has been created from a basic group.
+///
+/// * [title]: Title of the newly created supergroup.
+/// * [basicGroupId]: The identifier of the original basic group.
+final class MessageChatUpgradeFrom extends MessageContent {
   
   /// **MessageChatUpgradeFrom** *(messageChatUpgradeFrom)* - child of MessageContent
   ///
@@ -2154,13 +2293,14 @@ class MessageChatUpgradeFrom extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "title": title,
       "basic_group_id": basicGroupId,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageChatUpgradeFrom copyWith({
@@ -2171,19 +2311,22 @@ class MessageChatUpgradeFrom extends MessageContent {
     basicGroupId: basicGroupId ?? this.basicGroupId,
   );
 
-  static const String constructor = 'messageChatUpgradeFrom';
-  
+  static const String objectType = 'messageChatUpgradeFrom';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessagePinMessage** *(messagePinMessage)* - child of MessageContent
-  ///
-  /// A message has been pinned.
-  ///
-  /// * [messageId]: Identifier of the pinned message, can be an identifier of a deleted message or 0.
-class MessagePinMessage extends MessageContent {
+///
+/// A message has been pinned.
+///
+/// * [messageId]: Identifier of the pinned message, can be an identifier of a deleted message or 0.
+final class MessagePinMessage extends MessageContent {
   
   /// **MessagePinMessage** *(messagePinMessage)* - child of MessageContent
   ///
@@ -2204,12 +2347,13 @@ class MessagePinMessage extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "message_id": messageId,
-    };
-  }
+		};
+	}
+
   
   @override
   MessagePinMessage copyWith({
@@ -2218,17 +2362,20 @@ class MessagePinMessage extends MessageContent {
     messageId: messageId ?? this.messageId,
   );
 
-  static const String constructor = 'messagePinMessage';
-  
+  static const String objectType = 'messagePinMessage';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageScreenshotTaken** *(messageScreenshotTaken)* - child of MessageContent
-  ///
-  /// A screenshot of a message in the chat has been taken.
-class MessageScreenshotTaken extends MessageContent {
+///
+/// A screenshot of a message in the chat has been taken.
+final class MessageScreenshotTaken extends MessageContent {
   
   /// **MessageScreenshotTaken** *(messageScreenshotTaken)* - child of MessageContent
   ///
@@ -2239,28 +2386,32 @@ class MessageScreenshotTaken extends MessageContent {
   factory MessageScreenshotTaken.fromJson(Map<String, dynamic> json) => const MessageScreenshotTaken();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   MessageScreenshotTaken copyWith() => const MessageScreenshotTaken();
 
-  static const String constructor = 'messageScreenshotTaken';
-  
+  static const String objectType = 'messageScreenshotTaken';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageChatSetTheme** *(messageChatSetTheme)* - child of MessageContent
-  ///
-  /// A theme in the chat has been changed.
-  ///
-  /// * [themeName]: If non-empty, name of a new theme, set for the chat. Otherwise, chat theme was reset to the default one.
-class MessageChatSetTheme extends MessageContent {
+///
+/// A theme in the chat has been changed.
+///
+/// * [themeName]: If non-empty, name of a new theme, set for the chat. Otherwise, chat theme was reset to the default one.
+final class MessageChatSetTheme extends MessageContent {
   
   /// **MessageChatSetTheme** *(messageChatSetTheme)* - child of MessageContent
   ///
@@ -2281,12 +2432,13 @@ class MessageChatSetTheme extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "theme_name": themeName,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageChatSetTheme copyWith({
@@ -2295,20 +2447,23 @@ class MessageChatSetTheme extends MessageContent {
     themeName: themeName ?? this.themeName,
   );
 
-  static const String constructor = 'messageChatSetTheme';
-  
+  static const String objectType = 'messageChatSetTheme';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageChatSetMessageAutoDeleteTime** *(messageChatSetMessageAutoDeleteTime)* - child of MessageContent
-  ///
-  /// The auto-delete or self-destruct timer for messages in the chat has been changed.
-  ///
-  /// * [messageAutoDeleteTime]: New value auto-delete or self-destruct time, in seconds; 0 if disabled.
-  /// * [fromUserId]: If not 0, a user identifier, which default setting was automatically applied.
-class MessageChatSetMessageAutoDeleteTime extends MessageContent {
+///
+/// The auto-delete or self-destruct timer for messages in the chat has been changed.
+///
+/// * [messageAutoDeleteTime]: New value auto-delete or self-destruct time, in seconds; 0 if disabled.
+/// * [fromUserId]: If not 0, a user identifier, which default setting was automatically applied.
+final class MessageChatSetMessageAutoDeleteTime extends MessageContent {
   
   /// **MessageChatSetMessageAutoDeleteTime** *(messageChatSetMessageAutoDeleteTime)* - child of MessageContent
   ///
@@ -2335,13 +2490,14 @@ class MessageChatSetMessageAutoDeleteTime extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "message_auto_delete_time": messageAutoDeleteTime,
       "from_user_id": fromUserId,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageChatSetMessageAutoDeleteTime copyWith({
@@ -2352,20 +2508,23 @@ class MessageChatSetMessageAutoDeleteTime extends MessageContent {
     fromUserId: fromUserId ?? this.fromUserId,
   );
 
-  static const String constructor = 'messageChatSetMessageAutoDeleteTime';
-  
+  static const String objectType = 'messageChatSetMessageAutoDeleteTime';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageForumTopicCreated** *(messageForumTopicCreated)* - child of MessageContent
-  ///
-  /// A forum topic has been created.
-  ///
-  /// * [name]: Name of the topic.
-  /// * [icon]: Icon of the topic.
-class MessageForumTopicCreated extends MessageContent {
+///
+/// A forum topic has been created.
+///
+/// * [name]: Name of the topic.
+/// * [icon]: Icon of the topic.
+final class MessageForumTopicCreated extends MessageContent {
   
   /// **MessageForumTopicCreated** *(messageForumTopicCreated)* - child of MessageContent
   ///
@@ -2392,13 +2551,14 @@ class MessageForumTopicCreated extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "name": name,
       "icon": icon.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   MessageForumTopicCreated copyWith({
@@ -2409,21 +2569,24 @@ class MessageForumTopicCreated extends MessageContent {
     icon: icon ?? this.icon,
   );
 
-  static const String constructor = 'messageForumTopicCreated';
-  
+  static const String objectType = 'messageForumTopicCreated';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageForumTopicEdited** *(messageForumTopicEdited)* - child of MessageContent
-  ///
-  /// A forum topic has been edited.
-  ///
-  /// * [name]: If non-empty, the new name of the topic.
-  /// * [editIconCustomEmojiId]: True, if icon's custom_emoji_id is changed.
-  /// * [iconCustomEmojiId]: New unique identifier of the custom emoji shown on the topic icon; 0 if none. Must be ignored if edit_icon_custom_emoji_id is false.
-class MessageForumTopicEdited extends MessageContent {
+///
+/// A forum topic has been edited.
+///
+/// * [name]: If non-empty, the new name of the topic.
+/// * [editIconCustomEmojiId]: True, if icon's custom_emoji_id is changed.
+/// * [iconCustomEmojiId]: New unique identifier of the custom emoji shown on the topic icon; 0 if none. Must be ignored if edit_icon_custom_emoji_id is false.
+final class MessageForumTopicEdited extends MessageContent {
   
   /// **MessageForumTopicEdited** *(messageForumTopicEdited)* - child of MessageContent
   ///
@@ -2456,14 +2619,15 @@ class MessageForumTopicEdited extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "name": name,
       "edit_icon_custom_emoji_id": editIconCustomEmojiId,
       "icon_custom_emoji_id": iconCustomEmojiId,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageForumTopicEdited copyWith({
@@ -2476,19 +2640,22 @@ class MessageForumTopicEdited extends MessageContent {
     iconCustomEmojiId: iconCustomEmojiId ?? this.iconCustomEmojiId,
   );
 
-  static const String constructor = 'messageForumTopicEdited';
-  
+  static const String objectType = 'messageForumTopicEdited';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageForumTopicIsClosedToggled** *(messageForumTopicIsClosedToggled)* - child of MessageContent
-  ///
-  /// A forum topic has been closed or opened.
-  ///
-  /// * [isClosed]: True, if the topic was closed; otherwise, the topic was reopened.
-class MessageForumTopicIsClosedToggled extends MessageContent {
+///
+/// A forum topic has been closed or opened.
+///
+/// * [isClosed]: True, if the topic was closed; otherwise, the topic was reopened.
+final class MessageForumTopicIsClosedToggled extends MessageContent {
   
   /// **MessageForumTopicIsClosedToggled** *(messageForumTopicIsClosedToggled)* - child of MessageContent
   ///
@@ -2509,12 +2676,13 @@ class MessageForumTopicIsClosedToggled extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "is_closed": isClosed,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageForumTopicIsClosedToggled copyWith({
@@ -2523,19 +2691,22 @@ class MessageForumTopicIsClosedToggled extends MessageContent {
     isClosed: isClosed ?? this.isClosed,
   );
 
-  static const String constructor = 'messageForumTopicIsClosedToggled';
-  
+  static const String objectType = 'messageForumTopicIsClosedToggled';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageForumTopicIsHiddenToggled** *(messageForumTopicIsHiddenToggled)* - child of MessageContent
-  ///
-  /// A General forum topic has been hidden or unhidden.
-  ///
-  /// * [isHidden]: True, if the topic was hidden; otherwise, the topic was unhidden.
-class MessageForumTopicIsHiddenToggled extends MessageContent {
+///
+/// A General forum topic has been hidden or unhidden.
+///
+/// * [isHidden]: True, if the topic was hidden; otherwise, the topic was unhidden.
+final class MessageForumTopicIsHiddenToggled extends MessageContent {
   
   /// **MessageForumTopicIsHiddenToggled** *(messageForumTopicIsHiddenToggled)* - child of MessageContent
   ///
@@ -2556,12 +2727,13 @@ class MessageForumTopicIsHiddenToggled extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "is_hidden": isHidden,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageForumTopicIsHiddenToggled copyWith({
@@ -2570,19 +2742,22 @@ class MessageForumTopicIsHiddenToggled extends MessageContent {
     isHidden: isHidden ?? this.isHidden,
   );
 
-  static const String constructor = 'messageForumTopicIsHiddenToggled';
-  
+  static const String objectType = 'messageForumTopicIsHiddenToggled';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageSuggestProfilePhoto** *(messageSuggestProfilePhoto)* - child of MessageContent
-  ///
-  /// A profile photo was suggested to a user in a private chat.
-  ///
-  /// * [photo]: The suggested chat photo. Use the method setProfilePhoto with inputChatPhotoPrevious to apply the photo.
-class MessageSuggestProfilePhoto extends MessageContent {
+///
+/// A profile photo was suggested to a user in a private chat.
+///
+/// * [photo]: The suggested chat photo. Use the method setProfilePhoto with inputChatPhotoPrevious to apply the photo.
+final class MessageSuggestProfilePhoto extends MessageContent {
   
   /// **MessageSuggestProfilePhoto** *(messageSuggestProfilePhoto)* - child of MessageContent
   ///
@@ -2603,12 +2778,13 @@ class MessageSuggestProfilePhoto extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "photo": photo.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   MessageSuggestProfilePhoto copyWith({
@@ -2617,19 +2793,22 @@ class MessageSuggestProfilePhoto extends MessageContent {
     photo: photo ?? this.photo,
   );
 
-  static const String constructor = 'messageSuggestProfilePhoto';
-  
+  static const String objectType = 'messageSuggestProfilePhoto';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageCustomServiceAction** *(messageCustomServiceAction)* - child of MessageContent
-  ///
-  /// A non-standard action has happened in the chat.
-  ///
-  /// * [text]: Message text to be shown in the chat.
-class MessageCustomServiceAction extends MessageContent {
+///
+/// A non-standard action has happened in the chat.
+///
+/// * [text]: Message text to be shown in the chat.
+final class MessageCustomServiceAction extends MessageContent {
   
   /// **MessageCustomServiceAction** *(messageCustomServiceAction)* - child of MessageContent
   ///
@@ -2650,12 +2829,13 @@ class MessageCustomServiceAction extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageCustomServiceAction copyWith({
@@ -2664,21 +2844,24 @@ class MessageCustomServiceAction extends MessageContent {
     text: text ?? this.text,
   );
 
-  static const String constructor = 'messageCustomServiceAction';
-  
+  static const String objectType = 'messageCustomServiceAction';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageGameScore** *(messageGameScore)* - child of MessageContent
-  ///
-  /// A new high score was achieved in a game.
-  ///
-  /// * [gameMessageId]: Identifier of the message with the game, can be an identifier of a deleted message.
-  /// * [gameId]: Identifier of the game; may be different from the games presented in the message with the game.
-  /// * [score]: New score.
-class MessageGameScore extends MessageContent {
+///
+/// A new high score was achieved in a game.
+///
+/// * [gameMessageId]: Identifier of the message with the game, can be an identifier of a deleted message.
+/// * [gameId]: Identifier of the game; may be different from the games presented in the message with the game.
+/// * [score]: New score.
+final class MessageGameScore extends MessageContent {
   
   /// **MessageGameScore** *(messageGameScore)* - child of MessageContent
   ///
@@ -2711,14 +2894,15 @@ class MessageGameScore extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "game_message_id": gameMessageId,
       "game_id": gameId,
       "score": score,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageGameScore copyWith({
@@ -2731,25 +2915,28 @@ class MessageGameScore extends MessageContent {
     score: score ?? this.score,
   );
 
-  static const String constructor = 'messageGameScore';
-  
+  static const String objectType = 'messageGameScore';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessagePaymentSuccessful** *(messagePaymentSuccessful)* - child of MessageContent
-  ///
-  /// A payment has been completed.
-  ///
-  /// * [invoiceChatId]: Identifier of the chat, containing the corresponding invoice message.
-  /// * [invoiceMessageId]: Identifier of the message with the corresponding invoice; can be 0 or an identifier of a deleted message.
-  /// * [currency]: Currency for the price of the product.
-  /// * [totalAmount]: Total price for the product, in the smallest units of the currency.
-  /// * [isRecurring]: True, if this is a recurring payment.
-  /// * [isFirstRecurring]: True, if this is the first recurring payment.
-  /// * [invoiceName]: Name of the invoice; may be empty if unknown.
-class MessagePaymentSuccessful extends MessageContent {
+///
+/// A payment has been completed.
+///
+/// * [invoiceChatId]: Identifier of the chat, containing the corresponding invoice message.
+/// * [invoiceMessageId]: Identifier of the message with the corresponding invoice; can be 0 or an identifier of a deleted message.
+/// * [currency]: Currency for the price of the product.
+/// * [totalAmount]: Total price for the product, in the smallest units of the currency.
+/// * [isRecurring]: True, if this is a recurring payment.
+/// * [isFirstRecurring]: True, if this is the first recurring payment.
+/// * [invoiceName]: Name of the invoice; may be empty if unknown.
+final class MessagePaymentSuccessful extends MessageContent {
   
   /// **MessagePaymentSuccessful** *(messagePaymentSuccessful)* - child of MessageContent
   ///
@@ -2806,9 +2993,9 @@ class MessagePaymentSuccessful extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "invoice_chat_id": invoiceChatId,
       "invoice_message_id": invoiceMessageId,
       "currency": currency,
@@ -2816,8 +3003,9 @@ class MessagePaymentSuccessful extends MessageContent {
       "is_recurring": isRecurring,
       "is_first_recurring": isFirstRecurring,
       "invoice_name": invoiceName,
-    };
-  }
+		};
+	}
+
   
   @override
   MessagePaymentSuccessful copyWith({
@@ -2838,27 +3026,30 @@ class MessagePaymentSuccessful extends MessageContent {
     invoiceName: invoiceName ?? this.invoiceName,
   );
 
-  static const String constructor = 'messagePaymentSuccessful';
-  
+  static const String objectType = 'messagePaymentSuccessful';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessagePaymentSuccessfulBot** *(messagePaymentSuccessfulBot)* - child of MessageContent
-  ///
-  /// A payment has been completed; for bots only.
-  ///
-  /// * [currency]: Currency for price of the product.
-  /// * [totalAmount]: Total price for the product, in the smallest units of the currency.
-  /// * [isRecurring]: True, if this is a recurring payment.
-  /// * [isFirstRecurring]: True, if this is the first recurring payment.
-  /// * [invoicePayload]: Invoice payload.
-  /// * [shippingOptionId]: Identifier of the shipping option chosen by the user; may be empty if not applicable.
-  /// * [orderInfo]: Information about the order; may be null *(optional)*.
-  /// * [telegramPaymentChargeId]: Telegram payment identifier.
-  /// * [providerPaymentChargeId]: Provider payment identifier.
-class MessagePaymentSuccessfulBot extends MessageContent {
+///
+/// A payment has been completed; for bots only.
+///
+/// * [currency]: Currency for price of the product.
+/// * [totalAmount]: Total price for the product, in the smallest units of the currency.
+/// * [isRecurring]: True, if this is a recurring payment.
+/// * [isFirstRecurring]: True, if this is the first recurring payment.
+/// * [invoicePayload]: Invoice payload.
+/// * [shippingOptionId]: Identifier of the shipping option chosen by the user; may be empty if not applicable.
+/// * [orderInfo]: Information about the order; may be null *(optional)*.
+/// * [telegramPaymentChargeId]: Telegram payment identifier.
+/// * [providerPaymentChargeId]: Provider payment identifier.
+final class MessagePaymentSuccessfulBot extends MessageContent {
   
   /// **MessagePaymentSuccessfulBot** *(messagePaymentSuccessfulBot)* - child of MessageContent
   ///
@@ -2927,9 +3118,9 @@ class MessagePaymentSuccessfulBot extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "currency": currency,
       "total_amount": totalAmount,
       "is_recurring": isRecurring,
@@ -2939,8 +3130,9 @@ class MessagePaymentSuccessfulBot extends MessageContent {
       "order_info": orderInfo?.toJson(),
       "telegram_payment_charge_id": telegramPaymentChargeId,
       "provider_payment_charge_id": providerPaymentChargeId,
-    };
-  }
+		};
+	}
+
   
   @override
   MessagePaymentSuccessfulBot copyWith({
@@ -2965,22 +3157,25 @@ class MessagePaymentSuccessfulBot extends MessageContent {
     providerPaymentChargeId: providerPaymentChargeId ?? this.providerPaymentChargeId,
   );
 
-  static const String constructor = 'messagePaymentSuccessfulBot';
-  
+  static const String objectType = 'messagePaymentSuccessfulBot';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageGiftedPremium** *(messageGiftedPremium)* - child of MessageContent
-  ///
-  /// Telegram Premium was gifted to the user.
-  ///
-  /// * [currency]: Currency for the paid amount.
-  /// * [amount]: The paid amount, in the smallest units of the currency.
-  /// * [monthCount]: Number of month the Telegram Premium subscription will be active.
-  /// * [sticker]: A sticker to be shown in the message; may be null if unknown *(optional)*.
-class MessageGiftedPremium extends MessageContent {
+///
+/// Telegram Premium was gifted to the user.
+///
+/// * [currency]: Currency for the paid amount.
+/// * [amount]: The paid amount, in the smallest units of the currency.
+/// * [monthCount]: Number of month the Telegram Premium subscription will be active.
+/// * [sticker]: A sticker to be shown in the message; may be null if unknown *(optional)*.
+final class MessageGiftedPremium extends MessageContent {
   
   /// **MessageGiftedPremium** *(messageGiftedPremium)* - child of MessageContent
   ///
@@ -3019,15 +3214,16 @@ class MessageGiftedPremium extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "currency": currency,
       "amount": amount,
       "month_count": monthCount,
       "sticker": sticker?.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   MessageGiftedPremium copyWith({
@@ -3042,17 +3238,20 @@ class MessageGiftedPremium extends MessageContent {
     sticker: sticker ?? this.sticker,
   );
 
-  static const String constructor = 'messageGiftedPremium';
-  
+  static const String objectType = 'messageGiftedPremium';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageContactRegistered** *(messageContactRegistered)* - child of MessageContent
-  ///
-  /// A contact has registered with Telegram.
-class MessageContactRegistered extends MessageContent {
+///
+/// A contact has registered with Telegram.
+final class MessageContactRegistered extends MessageContent {
   
   /// **MessageContactRegistered** *(messageContactRegistered)* - child of MessageContent
   ///
@@ -3063,28 +3262,32 @@ class MessageContactRegistered extends MessageContent {
   factory MessageContactRegistered.fromJson(Map<String, dynamic> json) => const MessageContactRegistered();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   MessageContactRegistered copyWith() => const MessageContactRegistered();
 
-  static const String constructor = 'messageContactRegistered';
-  
+  static const String objectType = 'messageContactRegistered';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageWebsiteConnected** *(messageWebsiteConnected)* - child of MessageContent
-  ///
-  /// The current user has connected a website by logging in using Telegram Login Widget on it.
-  ///
-  /// * [domainName]: Domain name of the connected website.
-class MessageWebsiteConnected extends MessageContent {
+///
+/// The current user has connected a website by logging in using Telegram Login Widget on it.
+///
+/// * [domainName]: Domain name of the connected website.
+final class MessageWebsiteConnected extends MessageContent {
   
   /// **MessageWebsiteConnected** *(messageWebsiteConnected)* - child of MessageContent
   ///
@@ -3105,12 +3308,13 @@ class MessageWebsiteConnected extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "domain_name": domainName,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageWebsiteConnected copyWith({
@@ -3119,17 +3323,20 @@ class MessageWebsiteConnected extends MessageContent {
     domainName: domainName ?? this.domainName,
   );
 
-  static const String constructor = 'messageWebsiteConnected';
-  
+  static const String objectType = 'messageWebsiteConnected';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageBotWriteAccessAllowed** *(messageBotWriteAccessAllowed)* - child of MessageContent
-  ///
-  /// The user allowed the bot to send messages.
-class MessageBotWriteAccessAllowed extends MessageContent {
+///
+/// The user allowed the bot to send messages.
+final class MessageBotWriteAccessAllowed extends MessageContent {
   
   /// **MessageBotWriteAccessAllowed** *(messageBotWriteAccessAllowed)* - child of MessageContent
   ///
@@ -3140,28 +3347,32 @@ class MessageBotWriteAccessAllowed extends MessageContent {
   factory MessageBotWriteAccessAllowed.fromJson(Map<String, dynamic> json) => const MessageBotWriteAccessAllowed();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   MessageBotWriteAccessAllowed copyWith() => const MessageBotWriteAccessAllowed();
 
-  static const String constructor = 'messageBotWriteAccessAllowed';
-  
+  static const String objectType = 'messageBotWriteAccessAllowed';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageWebAppDataSent** *(messageWebAppDataSent)* - child of MessageContent
-  ///
-  /// Data from a Web App has been sent to a bot.
-  ///
-  /// * [buttonText]: Text of the keyboardButtonTypeWebApp button, which opened the Web App.
-class MessageWebAppDataSent extends MessageContent {
+///
+/// Data from a Web App has been sent to a bot.
+///
+/// * [buttonText]: Text of the keyboardButtonTypeWebApp button, which opened the Web App.
+final class MessageWebAppDataSent extends MessageContent {
   
   /// **MessageWebAppDataSent** *(messageWebAppDataSent)* - child of MessageContent
   ///
@@ -3182,12 +3393,13 @@ class MessageWebAppDataSent extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "button_text": buttonText,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageWebAppDataSent copyWith({
@@ -3196,20 +3408,23 @@ class MessageWebAppDataSent extends MessageContent {
     buttonText: buttonText ?? this.buttonText,
   );
 
-  static const String constructor = 'messageWebAppDataSent';
-  
+  static const String objectType = 'messageWebAppDataSent';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageWebAppDataReceived** *(messageWebAppDataReceived)* - child of MessageContent
-  ///
-  /// Data from a Web App has been received; for bots only.
-  ///
-  /// * [buttonText]: Text of the keyboardButtonTypeWebApp button, which opened the Web App.
-  /// * [data]: Received data.
-class MessageWebAppDataReceived extends MessageContent {
+///
+/// Data from a Web App has been received; for bots only.
+///
+/// * [buttonText]: Text of the keyboardButtonTypeWebApp button, which opened the Web App.
+/// * [data]: Received data.
+final class MessageWebAppDataReceived extends MessageContent {
   
   /// **MessageWebAppDataReceived** *(messageWebAppDataReceived)* - child of MessageContent
   ///
@@ -3236,13 +3451,14 @@ class MessageWebAppDataReceived extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "button_text": buttonText,
       "data": data,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageWebAppDataReceived copyWith({
@@ -3253,19 +3469,22 @@ class MessageWebAppDataReceived extends MessageContent {
     data: data ?? this.data,
   );
 
-  static const String constructor = 'messageWebAppDataReceived';
-  
+  static const String objectType = 'messageWebAppDataReceived';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessagePassportDataSent** *(messagePassportDataSent)* - child of MessageContent
-  ///
-  /// Telegram Passport data has been sent to a bot.
-  ///
-  /// * [types]: List of Telegram Passport element types sent.
-class MessagePassportDataSent extends MessageContent {
+///
+/// Telegram Passport data has been sent to a bot.
+///
+/// * [types]: List of Telegram Passport element types sent.
+final class MessagePassportDataSent extends MessageContent {
   
   /// **MessagePassportDataSent** *(messagePassportDataSent)* - child of MessageContent
   ///
@@ -3286,12 +3505,13 @@ class MessagePassportDataSent extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "types": types.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   @override
   MessagePassportDataSent copyWith({
@@ -3300,20 +3520,23 @@ class MessagePassportDataSent extends MessageContent {
     types: types ?? this.types,
   );
 
-  static const String constructor = 'messagePassportDataSent';
-  
+  static const String objectType = 'messagePassportDataSent';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessagePassportDataReceived** *(messagePassportDataReceived)* - child of MessageContent
-  ///
-  /// Telegram Passport data has been received; for bots only.
-  ///
-  /// * [elements]: List of received Telegram Passport elements.
-  /// * [credentials]: Encrypted data credentials.
-class MessagePassportDataReceived extends MessageContent {
+///
+/// Telegram Passport data has been received; for bots only.
+///
+/// * [elements]: List of received Telegram Passport elements.
+/// * [credentials]: Encrypted data credentials.
+final class MessagePassportDataReceived extends MessageContent {
   
   /// **MessagePassportDataReceived** *(messagePassportDataReceived)* - child of MessageContent
   ///
@@ -3340,13 +3563,14 @@ class MessagePassportDataReceived extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "elements": elements.map((i) => i.toJson()).toList(),
       "credentials": credentials.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   MessagePassportDataReceived copyWith({
@@ -3357,21 +3581,24 @@ class MessagePassportDataReceived extends MessageContent {
     credentials: credentials ?? this.credentials,
   );
 
-  static const String constructor = 'messagePassportDataReceived';
-  
+  static const String objectType = 'messagePassportDataReceived';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageProximityAlertTriggered** *(messageProximityAlertTriggered)* - child of MessageContent
-  ///
-  /// A user in the chat came within proximity alert range.
-  ///
-  /// * [travelerId]: The identifier of a user or chat that triggered the proximity alert.
-  /// * [watcherId]: The identifier of a user or chat that subscribed for the proximity alert.
-  /// * [distance]: The distance between the users.
-class MessageProximityAlertTriggered extends MessageContent {
+///
+/// A user in the chat came within proximity alert range.
+///
+/// * [travelerId]: The identifier of a user or chat that triggered the proximity alert.
+/// * [watcherId]: The identifier of a user or chat that subscribed for the proximity alert.
+/// * [distance]: The distance between the users.
+final class MessageProximityAlertTriggered extends MessageContent {
   
   /// **MessageProximityAlertTriggered** *(messageProximityAlertTriggered)* - child of MessageContent
   ///
@@ -3404,14 +3631,15 @@ class MessageProximityAlertTriggered extends MessageContent {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "traveler_id": travelerId.toJson(),
       "watcher_id": watcherId.toJson(),
       "distance": distance,
-    };
-  }
+		};
+	}
+
   
   @override
   MessageProximityAlertTriggered copyWith({
@@ -3424,17 +3652,20 @@ class MessageProximityAlertTriggered extends MessageContent {
     distance: distance ?? this.distance,
   );
 
-  static const String constructor = 'messageProximityAlertTriggered';
-  
+  static const String objectType = 'messageProximityAlertTriggered';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageUnsupported** *(messageUnsupported)* - child of MessageContent
-  ///
-  /// Message content that is not supported in the current TDLib version.
-class MessageUnsupported extends MessageContent {
+///
+/// Message content that is not supported in the current TDLib version.
+final class MessageUnsupported extends MessageContent {
   
   /// **MessageUnsupported** *(messageUnsupported)* - child of MessageContent
   ///
@@ -3445,17 +3676,21 @@ class MessageUnsupported extends MessageContent {
   factory MessageUnsupported.fromJson(Map<String, dynamic> json) => const MessageUnsupported();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   MessageUnsupported copyWith() => const MessageUnsupported();
 
-  static const String constructor = 'messageUnsupported';
-  
+  static const String objectType = 'messageUnsupported';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

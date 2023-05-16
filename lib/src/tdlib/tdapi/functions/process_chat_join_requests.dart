@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **ProcessChatJoinRequests** *(processChatJoinRequests)* - TDLib function
-  ///
-  /// Handles all pending join requests for a given link in a chat.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [inviteLink]: Invite link for which to process join requests. If empty, all join requests will be processed. Requires administrator privileges and can_invite_users right in the chat for own links and owner privileges for other links.
-  /// * [approve]: Pass true to approve all requests; pass false to decline them.
-  ///
-  /// [Ok] is returned on completion.
-class ProcessChatJoinRequests extends TdFunction {
+///
+/// Handles all pending join requests for a given link in a chat.
+///
+/// * [chatId]: Chat identifier.
+/// * [inviteLink]: Invite link for which to process join requests. If empty, all join requests will be processed. Requires administrator privileges and can_invite_users right in the chat for own links and owner privileges for other links.
+/// * [approve]: Pass true to approve all requests; pass false to decline them.
+///
+/// [Ok] is returned on completion.
+final class ProcessChatJoinRequests extends TdFunction {
   
   /// **ProcessChatJoinRequests** *(processChatJoinRequests)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class ProcessChatJoinRequests extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "invite_link": inviteLink,
       "approve": approve,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ProcessChatJoinRequests copyWith({
     int? chatId,
@@ -56,8 +57,11 @@ class ProcessChatJoinRequests extends TdFunction {
     approve: approve ?? this.approve,
   );
 
-  static const String constructor = 'processChatJoinRequests';
-  
+  static const String objectType = 'processChatJoinRequests';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

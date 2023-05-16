@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **ToggleBotIsAddedToAttachmentMenu** *(toggleBotIsAddedToAttachmentMenu)* - TDLib function
-  ///
-  /// Adds or removes a bot to attachment menu. Bot can be added to attachment menu, only if userTypeBot.can_be_added_to_attachment_menu == true.
-  ///
-  /// * [botUserId]: Bot's user identifier.
-  /// * [isAdded]: Pass true to add the bot to attachment menu; pass false to remove the bot from attachment menu.
-  /// * [allowWriteAccess]: Pass true if the current user allowed the bot to send them messages. Ignored if is_added is false.
-  ///
-  /// [Ok] is returned on completion.
-class ToggleBotIsAddedToAttachmentMenu extends TdFunction {
+///
+/// Adds or removes a bot to attachment menu. Bot can be added to attachment menu, only if userTypeBot.can_be_added_to_attachment_menu == true.
+///
+/// * [botUserId]: Bot's user identifier.
+/// * [isAdded]: Pass true to add the bot to attachment menu; pass false to remove the bot from attachment menu.
+/// * [allowWriteAccess]: Pass true if the current user allowed the bot to send them messages. Ignored if is_added is false.
+///
+/// [Ok] is returned on completion.
+final class ToggleBotIsAddedToAttachmentMenu extends TdFunction {
   
   /// **ToggleBotIsAddedToAttachmentMenu** *(toggleBotIsAddedToAttachmentMenu)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class ToggleBotIsAddedToAttachmentMenu extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "bot_user_id": botUserId,
       "is_added": isAdded,
       "allow_write_access": allowWriteAccess,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ToggleBotIsAddedToAttachmentMenu copyWith({
     int? botUserId,
@@ -56,8 +57,11 @@ class ToggleBotIsAddedToAttachmentMenu extends TdFunction {
     allowWriteAccess: allowWriteAccess ?? this.allowWriteAccess,
   );
 
-  static const String constructor = 'toggleBotIsAddedToAttachmentMenu';
-  
+  static const String objectType = 'toggleBotIsAddedToAttachmentMenu';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

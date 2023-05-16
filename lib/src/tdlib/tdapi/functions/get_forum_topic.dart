@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **GetForumTopic** *(getForumTopic)* - TDLib function
-  ///
-  /// Returns information about a forum topic.
-  ///
-  /// * [chatId]: Identifier of the chat.
-  /// * [messageThreadId]: Message thread identifier of the forum topic.
-  ///
-  /// [ForumTopic] is returned on completion.
-class GetForumTopic extends TdFunction {
+///
+/// Returns information about a forum topic.
+///
+/// * [chatId]: Identifier of the chat.
+/// * [messageThreadId]: Message thread identifier of the forum topic.
+///
+/// [ForumTopic] is returned on completion.
+final class GetForumTopic extends TdFunction {
   
   /// **GetForumTopic** *(getForumTopic)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class GetForumTopic extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_thread_id": messageThreadId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetForumTopic copyWith({
     int? chatId,
@@ -47,8 +48,11 @@ class GetForumTopic extends TdFunction {
     messageThreadId: messageThreadId ?? this.messageThreadId,
   );
 
-  static const String constructor = 'getForumTopic';
-  
+  static const String objectType = 'getForumTopic';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

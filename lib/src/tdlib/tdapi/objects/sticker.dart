@@ -1,19 +1,19 @@
 part of '../tdapi.dart';
 
 /// **Sticker** *(sticker)* - basic class
-  ///
-  /// Describes a sticker.
-  ///
-  /// * [setId]: The identifier of the sticker set to which the sticker belongs; 0 if none.
-  /// * [width]: Sticker width; as defined by the sender.
-  /// * [height]: Sticker height; as defined by the sender.
-  /// * [emoji]: Emoji corresponding to the sticker.
-  /// * [format]: Sticker format.
-  /// * [fullType]: Sticker's full type.
-  /// * [outline]: Sticker's outline represented as a list of closed vector paths; may be empty. The coordinate system origin is in the upper-left corner.
-  /// * [thumbnail]: Sticker thumbnail in WEBP or JPEG format; may be null *(optional)*.
-  /// * [sticker]: File containing the sticker.
-class Sticker extends TdObject {
+///
+/// Describes a sticker.
+///
+/// * [setId]: The identifier of the sticker set to which the sticker belongs; 0 if none.
+/// * [width]: Sticker width; as defined by the sender.
+/// * [height]: Sticker height; as defined by the sender.
+/// * [emoji]: Emoji corresponding to the sticker.
+/// * [format]: Sticker format.
+/// * [fullType]: Sticker's full type.
+/// * [outline]: Sticker's outline represented as a list of closed vector paths; may be empty. The coordinate system origin is in the upper-left corner.
+/// * [thumbnail]: Sticker thumbnail in WEBP or JPEG format; may be null *(optional)*.
+/// * [sticker]: File containing the sticker.
+final class Sticker extends TdObject {
   
   /// **Sticker** *(sticker)* - basic class
   ///
@@ -94,9 +94,9 @@ class Sticker extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "set_id": setId,
       "width": width,
       "height": height,
@@ -106,8 +106,9 @@ class Sticker extends TdObject {
       "outline": outline.map((i) => i.toJson()).toList(),
       "thumbnail": thumbnail?.toJson(),
       "sticker": sticker.toJson(),
-    };
-  }
+		};
+	}
+
   
   Sticker copyWith({
     int? setId,
@@ -135,8 +136,11 @@ class Sticker extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'sticker';
-  
+  static const String objectType = 'sticker';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **TestSquareInt** *(testSquareInt)* - TDLib function
-  ///
-  /// Returns the squared received number; for testing only. This is an offline method. Can be called before authorization.
-  ///
-  /// * [x]: Number to square.
-  ///
-  /// [TestInt] is returned on completion.
-class TestSquareInt extends TdFunction {
+///
+/// Returns the squared received number; for testing only. This is an offline method. Can be called before authorization.
+///
+/// * [x]: Number to square.
+///
+/// [TestInt] is returned on completion.
+final class TestSquareInt extends TdFunction {
   
   /// **TestSquareInt** *(testSquareInt)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class TestSquareInt extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "x": x,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   TestSquareInt copyWith({
     int? x,
@@ -38,8 +39,11 @@ class TestSquareInt extends TdFunction {
     x: x ?? this.x,
   );
 
-  static const String constructor = 'testSquareInt';
-  
+  static const String objectType = 'testSquareInt';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

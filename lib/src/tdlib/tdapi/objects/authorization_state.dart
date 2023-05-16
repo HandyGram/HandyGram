@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **AuthorizationState** *(authorizationState)* - parent
-  ///
-  /// Represents the current authorization state of the TDLib client.
-class AuthorizationState extends TdObject {
+///
+/// Represents the current authorization state of the TDLib client.
+sealed class AuthorizationState extends TdObject {
   
   /// **AuthorizationState** *(authorizationState)* - parent
   ///
@@ -25,55 +25,58 @@ class AuthorizationState extends TdObject {
   /// * [AuthorizationStateClosed]
   factory AuthorizationState.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case AuthorizationStateWaitTdlibParameters.constructor:
+      case AuthorizationStateWaitTdlibParameters.objectType:
         return AuthorizationStateWaitTdlibParameters.fromJson(json);
-      case AuthorizationStateWaitPhoneNumber.constructor:
+      case AuthorizationStateWaitPhoneNumber.objectType:
         return AuthorizationStateWaitPhoneNumber.fromJson(json);
-      case AuthorizationStateWaitEmailAddress.constructor:
+      case AuthorizationStateWaitEmailAddress.objectType:
         return AuthorizationStateWaitEmailAddress.fromJson(json);
-      case AuthorizationStateWaitEmailCode.constructor:
+      case AuthorizationStateWaitEmailCode.objectType:
         return AuthorizationStateWaitEmailCode.fromJson(json);
-      case AuthorizationStateWaitCode.constructor:
+      case AuthorizationStateWaitCode.objectType:
         return AuthorizationStateWaitCode.fromJson(json);
-      case AuthorizationStateWaitOtherDeviceConfirmation.constructor:
+      case AuthorizationStateWaitOtherDeviceConfirmation.objectType:
         return AuthorizationStateWaitOtherDeviceConfirmation.fromJson(json);
-      case AuthorizationStateWaitRegistration.constructor:
+      case AuthorizationStateWaitRegistration.objectType:
         return AuthorizationStateWaitRegistration.fromJson(json);
-      case AuthorizationStateWaitPassword.constructor:
+      case AuthorizationStateWaitPassword.objectType:
         return AuthorizationStateWaitPassword.fromJson(json);
-      case AuthorizationStateReady.constructor:
+      case AuthorizationStateReady.objectType:
         return AuthorizationStateReady.fromJson(json);
-      case AuthorizationStateLoggingOut.constructor:
+      case AuthorizationStateLoggingOut.objectType:
         return AuthorizationStateLoggingOut.fromJson(json);
-      case AuthorizationStateClosing.constructor:
+      case AuthorizationStateClosing.objectType:
         return AuthorizationStateClosing.fromJson(json);
-      case AuthorizationStateClosed.constructor:
+      case AuthorizationStateClosed.objectType:
         return AuthorizationStateClosed.fromJson(json);
       default:
-        return const AuthorizationState();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of AuthorizationState)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  AuthorizationState copyWith() => const AuthorizationState();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'authorizationState';
   
+  AuthorizationState copyWith();
+
+  static const String objectType = 'authorizationState';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **AuthorizationStateWaitTdlibParameters** *(authorizationStateWaitTdlibParameters)* - child of AuthorizationState
-  ///
-  /// Initializetion parameters are needed. Call setTdlibParameters to provide them.
-class AuthorizationStateWaitTdlibParameters extends AuthorizationState {
+///
+/// Initializetion parameters are needed. Call setTdlibParameters to provide them.
+final class AuthorizationStateWaitTdlibParameters extends AuthorizationState {
   
   /// **AuthorizationStateWaitTdlibParameters** *(authorizationStateWaitTdlibParameters)* - child of AuthorizationState
   ///
@@ -99,11 +102,12 @@ class AuthorizationStateWaitTdlibParameters extends AuthorizationState {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   AuthorizationStateWaitTdlibParameters copyWith({
@@ -114,17 +118,20 @@ class AuthorizationStateWaitTdlibParameters extends AuthorizationState {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'authorizationStateWaitTdlibParameters';
-  
+  static const String objectType = 'authorizationStateWaitTdlibParameters';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **AuthorizationStateWaitPhoneNumber** *(authorizationStateWaitPhoneNumber)* - child of AuthorizationState
-  ///
-  /// TDLib needs the user's phone number to authorize. Call setAuthenticationPhoneNumber to provide the phone number, or use requestQrCodeAuthentication or checkAuthenticationBotToken for other authentication options.
-class AuthorizationStateWaitPhoneNumber extends AuthorizationState {
+///
+/// TDLib needs the user's phone number to authorize. Call setAuthenticationPhoneNumber to provide the phone number, or use requestQrCodeAuthentication or checkAuthenticationBotToken for other authentication options.
+final class AuthorizationStateWaitPhoneNumber extends AuthorizationState {
   
   /// **AuthorizationStateWaitPhoneNumber** *(authorizationStateWaitPhoneNumber)* - child of AuthorizationState
   ///
@@ -150,11 +157,12 @@ class AuthorizationStateWaitPhoneNumber extends AuthorizationState {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   AuthorizationStateWaitPhoneNumber copyWith({
@@ -165,20 +173,23 @@ class AuthorizationStateWaitPhoneNumber extends AuthorizationState {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'authorizationStateWaitPhoneNumber';
-  
+  static const String objectType = 'authorizationStateWaitPhoneNumber';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **AuthorizationStateWaitEmailAddress** *(authorizationStateWaitEmailAddress)* - child of AuthorizationState
-  ///
-  /// TDLib needs the user's email address to authorize. Call setAuthenticationEmailAddress to provide the email address, or directly call checkAuthenticationEmailCode with Apple authorizationStateWaitEmailAddress/Google authorizationStateWaitEmailAddress token if allowed.
-  ///
-  /// * [allowAppleId]: True, if authorization through Apple authorizationStateWaitEmailAddress is allowed.
-  /// * [allowGoogleId]: True, if authorization through Google authorizationStateWaitEmailAddress is allowed.
-class AuthorizationStateWaitEmailAddress extends AuthorizationState {
+///
+/// TDLib needs the user's email address to authorize. Call setAuthenticationEmailAddress to provide the email address, or directly call checkAuthenticationEmailCode with Apple authorizationStateWaitEmailAddress/Google authorizationStateWaitEmailAddress token if allowed.
+///
+/// * [allowAppleId]: True, if authorization through Apple authorizationStateWaitEmailAddress is allowed.
+/// * [allowGoogleId]: True, if authorization through Google authorizationStateWaitEmailAddress is allowed.
+final class AuthorizationStateWaitEmailAddress extends AuthorizationState {
   
   /// **AuthorizationStateWaitEmailAddress** *(authorizationStateWaitEmailAddress)* - child of AuthorizationState
   ///
@@ -217,13 +228,14 @@ class AuthorizationStateWaitEmailAddress extends AuthorizationState {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "allow_apple_id": allowAppleId,
       "allow_google_id": allowGoogleId,
-    };
-  }
+		};
+	}
+
   
   @override
   AuthorizationStateWaitEmailAddress copyWith({
@@ -238,22 +250,25 @@ class AuthorizationStateWaitEmailAddress extends AuthorizationState {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'authorizationStateWaitEmailAddress';
-  
+  static const String objectType = 'authorizationStateWaitEmailAddress';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **AuthorizationStateWaitEmailCode** *(authorizationStateWaitEmailCode)* - child of AuthorizationState
-  ///
-  /// TDLib needs the user's authentication code sent to an email address to authorize. Call checkAuthenticationEmailCode to provide the code.
-  ///
-  /// * [allowAppleId]: True, if authorization through Apple authorizationStateWaitEmailCode is allowed.
-  /// * [allowGoogleId]: True, if authorization through Google authorizationStateWaitEmailCode is allowed.
-  /// * [codeInfo]: Information about the sent authentication code.
-  /// * [nextPhoneNumberAuthorizationDate]: Point in time (Unix timestamp) when the user will be able to authorize with a code sent to the user's phone number; 0 if unknown.
-class AuthorizationStateWaitEmailCode extends AuthorizationState {
+///
+/// TDLib needs the user's authentication code sent to an email address to authorize. Call checkAuthenticationEmailCode to provide the code.
+///
+/// * [allowAppleId]: True, if authorization through Apple authorizationStateWaitEmailCode is allowed.
+/// * [allowGoogleId]: True, if authorization through Google authorizationStateWaitEmailCode is allowed.
+/// * [codeInfo]: Information about the sent authentication code.
+/// * [nextPhoneNumberAuthorizationDate]: Point in time (Unix timestamp) when the user will be able to authorize with a code sent to the user's phone number; 0 if unknown.
+final class AuthorizationStateWaitEmailCode extends AuthorizationState {
   
   /// **AuthorizationStateWaitEmailCode** *(authorizationStateWaitEmailCode)* - child of AuthorizationState
   ///
@@ -304,15 +319,16 @@ class AuthorizationStateWaitEmailCode extends AuthorizationState {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "allow_apple_id": allowAppleId,
       "allow_google_id": allowGoogleId,
       "code_info": codeInfo.toJson(),
       "next_phone_number_authorization_date": nextPhoneNumberAuthorizationDate,
-    };
-  }
+		};
+	}
+
   
   @override
   AuthorizationStateWaitEmailCode copyWith({
@@ -331,19 +347,22 @@ class AuthorizationStateWaitEmailCode extends AuthorizationState {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'authorizationStateWaitEmailCode';
-  
+  static const String objectType = 'authorizationStateWaitEmailCode';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **AuthorizationStateWaitCode** *(authorizationStateWaitCode)* - child of AuthorizationState
-  ///
-  /// TDLib needs the user's authentication code to authorize. Call checkAuthenticationCode to check the code.
-  ///
-  /// * [codeInfo]: Information about the authorization code that was sent.
-class AuthorizationStateWaitCode extends AuthorizationState {
+///
+/// TDLib needs the user's authentication code to authorize. Call checkAuthenticationCode to check the code.
+///
+/// * [codeInfo]: Information about the authorization code that was sent.
+final class AuthorizationStateWaitCode extends AuthorizationState {
   
   /// **AuthorizationStateWaitCode** *(authorizationStateWaitCode)* - child of AuthorizationState
   ///
@@ -376,12 +395,13 @@ class AuthorizationStateWaitCode extends AuthorizationState {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "code_info": codeInfo.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   AuthorizationStateWaitCode copyWith({
@@ -394,19 +414,22 @@ class AuthorizationStateWaitCode extends AuthorizationState {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'authorizationStateWaitCode';
-  
+  static const String objectType = 'authorizationStateWaitCode';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **AuthorizationStateWaitOtherDeviceConfirmation** *(authorizationStateWaitOtherDeviceConfirmation)* - child of AuthorizationState
-  ///
-  /// The user needs to confirm authorization on another logged in device by scanning a QR code with the provided link.
-  ///
-  /// * [link]: A tg:// URL for the QR code. The link will be updated frequently.
-class AuthorizationStateWaitOtherDeviceConfirmation extends AuthorizationState {
+///
+/// The user needs to confirm authorization on another logged in device by scanning a QR code with the provided link.
+///
+/// * [link]: A tg:// URL for the QR code. The link will be updated frequently.
+final class AuthorizationStateWaitOtherDeviceConfirmation extends AuthorizationState {
   
   /// **AuthorizationStateWaitOtherDeviceConfirmation** *(authorizationStateWaitOtherDeviceConfirmation)* - child of AuthorizationState
   ///
@@ -439,12 +462,13 @@ class AuthorizationStateWaitOtherDeviceConfirmation extends AuthorizationState {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "link": link,
-    };
-  }
+		};
+	}
+
   
   @override
   AuthorizationStateWaitOtherDeviceConfirmation copyWith({
@@ -457,19 +481,22 @@ class AuthorizationStateWaitOtherDeviceConfirmation extends AuthorizationState {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'authorizationStateWaitOtherDeviceConfirmation';
-  
+  static const String objectType = 'authorizationStateWaitOtherDeviceConfirmation';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **AuthorizationStateWaitRegistration** *(authorizationStateWaitRegistration)* - child of AuthorizationState
-  ///
-  /// The user is unregistered and need to accept terms of service and enter their first name and last name to finish registration. Call registerUser to accept the terms of service and provide the data.
-  ///
-  /// * [termsOfService]: Telegram terms of service.
-class AuthorizationStateWaitRegistration extends AuthorizationState {
+///
+/// The user is unregistered and need to accept terms of service and enter their first name and last name to finish registration. Call registerUser to accept the terms of service and provide the data.
+///
+/// * [termsOfService]: Telegram terms of service.
+final class AuthorizationStateWaitRegistration extends AuthorizationState {
   
   /// **AuthorizationStateWaitRegistration** *(authorizationStateWaitRegistration)* - child of AuthorizationState
   ///
@@ -502,12 +529,13 @@ class AuthorizationStateWaitRegistration extends AuthorizationState {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "terms_of_service": termsOfService.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   AuthorizationStateWaitRegistration copyWith({
@@ -520,21 +548,24 @@ class AuthorizationStateWaitRegistration extends AuthorizationState {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'authorizationStateWaitRegistration';
-  
+  static const String objectType = 'authorizationStateWaitRegistration';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **AuthorizationStateWaitPassword** *(authorizationStateWaitPassword)* - child of AuthorizationState
-  ///
-  /// The user has been authorized, but needs to enter a 2-step verification password to start using the application.. Call checkAuthenticationPassword to provide the password, or requestAuthenticationPasswordRecovery to recover the password, or deleteAccount to delete the account after a week.
-  ///
-  /// * [passwordHint]: Hint for the password; may be empty.
-  /// * [hasRecoveryEmailAddress]: True, if a recovery email address has been set up.
-  /// * [recoveryEmailAddressPattern]: Pattern of the email address to which the recovery email was sent; empty until a recovery email has been sent.
-class AuthorizationStateWaitPassword extends AuthorizationState {
+///
+/// The user has been authorized, but needs to enter a 2-step verification password to start using the application.. Call checkAuthenticationPassword to provide the password, or requestAuthenticationPasswordRecovery to recover the password, or deleteAccount to delete the account after a week.
+///
+/// * [passwordHint]: Hint for the password; may be empty.
+/// * [hasRecoveryEmailAddress]: True, if a recovery email address has been set up.
+/// * [recoveryEmailAddressPattern]: Pattern of the email address to which the recovery email was sent; empty until a recovery email has been sent.
+final class AuthorizationStateWaitPassword extends AuthorizationState {
   
   /// **AuthorizationStateWaitPassword** *(authorizationStateWaitPassword)* - child of AuthorizationState
   ///
@@ -579,14 +610,15 @@ class AuthorizationStateWaitPassword extends AuthorizationState {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "password_hint": passwordHint,
       "has_recovery_email_address": hasRecoveryEmailAddress,
       "recovery_email_address_pattern": recoveryEmailAddressPattern,
-    };
-  }
+		};
+	}
+
   
   @override
   AuthorizationStateWaitPassword copyWith({
@@ -603,17 +635,20 @@ class AuthorizationStateWaitPassword extends AuthorizationState {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'authorizationStateWaitPassword';
-  
+  static const String objectType = 'authorizationStateWaitPassword';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **AuthorizationStateReady** *(authorizationStateReady)* - child of AuthorizationState
-  ///
-  /// The user has been successfully authorized. TDLib is now ready to answer general requests.
-class AuthorizationStateReady extends AuthorizationState {
+///
+/// The user has been successfully authorized. TDLib is now ready to answer general requests.
+final class AuthorizationStateReady extends AuthorizationState {
   
   /// **AuthorizationStateReady** *(authorizationStateReady)* - child of AuthorizationState
   ///
@@ -639,11 +674,12 @@ class AuthorizationStateReady extends AuthorizationState {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   AuthorizationStateReady copyWith({
@@ -654,17 +690,20 @@ class AuthorizationStateReady extends AuthorizationState {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'authorizationStateReady';
-  
+  static const String objectType = 'authorizationStateReady';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **AuthorizationStateLoggingOut** *(authorizationStateLoggingOut)* - child of AuthorizationState
-  ///
-  /// The user is currently logging out.
-class AuthorizationStateLoggingOut extends AuthorizationState {
+///
+/// The user is currently logging out.
+final class AuthorizationStateLoggingOut extends AuthorizationState {
   
   /// **AuthorizationStateLoggingOut** *(authorizationStateLoggingOut)* - child of AuthorizationState
   ///
@@ -690,11 +729,12 @@ class AuthorizationStateLoggingOut extends AuthorizationState {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   AuthorizationStateLoggingOut copyWith({
@@ -705,17 +745,20 @@ class AuthorizationStateLoggingOut extends AuthorizationState {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'authorizationStateLoggingOut';
-  
+  static const String objectType = 'authorizationStateLoggingOut';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **AuthorizationStateClosing** *(authorizationStateClosing)* - child of AuthorizationState
-  ///
-  /// TDLib is closing, all subsequent queries will be answered with the error 500. Note that closing TDLib can take a while. All resources will be freed only after authorizationStateClosed has been received.
-class AuthorizationStateClosing extends AuthorizationState {
+///
+/// TDLib is closing, all subsequent queries will be answered with the error 500. Note that closing TDLib can take a while. All resources will be freed only after authorizationStateClosed has been received.
+final class AuthorizationStateClosing extends AuthorizationState {
   
   /// **AuthorizationStateClosing** *(authorizationStateClosing)* - child of AuthorizationState
   ///
@@ -741,11 +784,12 @@ class AuthorizationStateClosing extends AuthorizationState {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   AuthorizationStateClosing copyWith({
@@ -756,17 +800,20 @@ class AuthorizationStateClosing extends AuthorizationState {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'authorizationStateClosing';
-  
+  static const String objectType = 'authorizationStateClosing';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **AuthorizationStateClosed** *(authorizationStateClosed)* - child of AuthorizationState
-  ///
-  /// TDLib client is in its final state. All databases are closed and all resources are released. No other updates will be received after this. All queries will be responded to. with error code 500. To continue working, one must create a new instance of the TDLib client.
-class AuthorizationStateClosed extends AuthorizationState {
+///
+/// TDLib client is in its final state. All databases are closed and all resources are released. No other updates will be received after this. All queries will be responded to. with error code 500. To continue working, one must create a new instance of the TDLib client.
+final class AuthorizationStateClosed extends AuthorizationState {
   
   /// **AuthorizationStateClosed** *(authorizationStateClosed)* - child of AuthorizationState
   ///
@@ -792,11 +839,12 @@ class AuthorizationStateClosed extends AuthorizationState {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   AuthorizationStateClosed copyWith({
@@ -807,8 +855,11 @@ class AuthorizationStateClosed extends AuthorizationState {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'authorizationStateClosed';
-  
+  static const String objectType = 'authorizationStateClosed';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **GetCurrentState** *(getCurrentState)* - TDLib function
-  ///
-  /// Returns all updates needed to restore current TDLib state, i.e. all actual updateAuthorizationState/updateUser/updateNewChat and others. This is especially useful if TDLib is run in a separate process. Can be called before initialization.
-  ///
-  /// [Updates] is returned on completion.
-class GetCurrentState extends TdFunction {
+///
+/// Returns all updates needed to restore current TDLib state, i.e. all actual updateAuthorizationState/updateUser/updateNewChat and others. This is especially useful if TDLib is run in a separate process. Can be called before initialization.
+///
+/// [Updates] is returned on completion.
+final class GetCurrentState extends TdFunction {
   
   /// **GetCurrentState** *(getCurrentState)* - TDLib function
   ///
@@ -17,16 +17,20 @@ class GetCurrentState extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetCurrentState copyWith() => const GetCurrentState();
 
-  static const String constructor = 'getCurrentState';
-  
+  static const String objectType = 'getCurrentState';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

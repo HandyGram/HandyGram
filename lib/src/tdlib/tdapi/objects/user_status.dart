@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **UserStatus** *(userStatus)* - parent
-  ///
-  /// Describes the last time the user was online.
-class UserStatus extends TdObject {
+///
+/// Describes the last time the user was online.
+sealed class UserStatus extends TdObject {
   
   /// **UserStatus** *(userStatus)* - parent
   ///
@@ -19,43 +19,46 @@ class UserStatus extends TdObject {
   /// * [UserStatusLastMonth]
   factory UserStatus.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case UserStatusEmpty.constructor:
+      case UserStatusEmpty.objectType:
         return UserStatusEmpty.fromJson(json);
-      case UserStatusOnline.constructor:
+      case UserStatusOnline.objectType:
         return UserStatusOnline.fromJson(json);
-      case UserStatusOffline.constructor:
+      case UserStatusOffline.objectType:
         return UserStatusOffline.fromJson(json);
-      case UserStatusRecently.constructor:
+      case UserStatusRecently.objectType:
         return UserStatusRecently.fromJson(json);
-      case UserStatusLastWeek.constructor:
+      case UserStatusLastWeek.objectType:
         return UserStatusLastWeek.fromJson(json);
-      case UserStatusLastMonth.constructor:
+      case UserStatusLastMonth.objectType:
         return UserStatusLastMonth.fromJson(json);
       default:
-        return const UserStatus();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of UserStatus)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  UserStatus copyWith() => const UserStatus();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'userStatus';
   
+  UserStatus copyWith();
+
+  static const String objectType = 'userStatus';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UserStatusEmpty** *(userStatusEmpty)* - child of UserStatus
-  ///
-  /// The user status was never changed.
-class UserStatusEmpty extends UserStatus {
+///
+/// The user status was never changed.
+final class UserStatusEmpty extends UserStatus {
   
   /// **UserStatusEmpty** *(userStatusEmpty)* - child of UserStatus
   ///
@@ -66,28 +69,32 @@ class UserStatusEmpty extends UserStatus {
   factory UserStatusEmpty.fromJson(Map<String, dynamic> json) => const UserStatusEmpty();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   UserStatusEmpty copyWith() => const UserStatusEmpty();
 
-  static const String constructor = 'userStatusEmpty';
-  
+  static const String objectType = 'userStatusEmpty';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UserStatusOnline** *(userStatusOnline)* - child of UserStatus
-  ///
-  /// The user is online.
-  ///
-  /// * [expires]: Point in time (Unix timestamp) when the user's online status will expire.
-class UserStatusOnline extends UserStatus {
+///
+/// The user is online.
+///
+/// * [expires]: Point in time (Unix timestamp) when the user's online status will expire.
+final class UserStatusOnline extends UserStatus {
   
   /// **UserStatusOnline** *(userStatusOnline)* - child of UserStatus
   ///
@@ -108,12 +115,13 @@ class UserStatusOnline extends UserStatus {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "expires": expires,
-    };
-  }
+		};
+	}
+
   
   @override
   UserStatusOnline copyWith({
@@ -122,19 +130,22 @@ class UserStatusOnline extends UserStatus {
     expires: expires ?? this.expires,
   );
 
-  static const String constructor = 'userStatusOnline';
-  
+  static const String objectType = 'userStatusOnline';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UserStatusOffline** *(userStatusOffline)* - child of UserStatus
-  ///
-  /// The user is offline.
-  ///
-  /// * [wasOnline]: Point in time (Unix timestamp) when the user was last online.
-class UserStatusOffline extends UserStatus {
+///
+/// The user is offline.
+///
+/// * [wasOnline]: Point in time (Unix timestamp) when the user was last online.
+final class UserStatusOffline extends UserStatus {
   
   /// **UserStatusOffline** *(userStatusOffline)* - child of UserStatus
   ///
@@ -155,12 +166,13 @@ class UserStatusOffline extends UserStatus {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "was_online": wasOnline,
-    };
-  }
+		};
+	}
+
   
   @override
   UserStatusOffline copyWith({
@@ -169,17 +181,20 @@ class UserStatusOffline extends UserStatus {
     wasOnline: wasOnline ?? this.wasOnline,
   );
 
-  static const String constructor = 'userStatusOffline';
-  
+  static const String objectType = 'userStatusOffline';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UserStatusRecently** *(userStatusRecently)* - child of UserStatus
-  ///
-  /// The user was online recently.
-class UserStatusRecently extends UserStatus {
+///
+/// The user was online recently.
+final class UserStatusRecently extends UserStatus {
   
   /// **UserStatusRecently** *(userStatusRecently)* - child of UserStatus
   ///
@@ -190,26 +205,30 @@ class UserStatusRecently extends UserStatus {
   factory UserStatusRecently.fromJson(Map<String, dynamic> json) => const UserStatusRecently();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   UserStatusRecently copyWith() => const UserStatusRecently();
 
-  static const String constructor = 'userStatusRecently';
-  
+  static const String objectType = 'userStatusRecently';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UserStatusLastWeek** *(userStatusLastWeek)* - child of UserStatus
-  ///
-  /// The user is offline, but was online last week.
-class UserStatusLastWeek extends UserStatus {
+///
+/// The user is offline, but was online last week.
+final class UserStatusLastWeek extends UserStatus {
   
   /// **UserStatusLastWeek** *(userStatusLastWeek)* - child of UserStatus
   ///
@@ -220,26 +239,30 @@ class UserStatusLastWeek extends UserStatus {
   factory UserStatusLastWeek.fromJson(Map<String, dynamic> json) => const UserStatusLastWeek();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   UserStatusLastWeek copyWith() => const UserStatusLastWeek();
 
-  static const String constructor = 'userStatusLastWeek';
-  
+  static const String objectType = 'userStatusLastWeek';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UserStatusLastMonth** *(userStatusLastMonth)* - child of UserStatus
-  ///
-  /// The user is offline, but was online last month.
-class UserStatusLastMonth extends UserStatus {
+///
+/// The user is offline, but was online last month.
+final class UserStatusLastMonth extends UserStatus {
   
   /// **UserStatusLastMonth** *(userStatusLastMonth)* - child of UserStatus
   ///
@@ -250,17 +273,21 @@ class UserStatusLastMonth extends UserStatus {
   factory UserStatusLastMonth.fromJson(Map<String, dynamic> json) => const UserStatusLastMonth();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   UserStatusLastMonth copyWith() => const UserStatusLastMonth();
 
-  static const String constructor = 'userStatusLastMonth';
-  
+  static const String objectType = 'userStatusLastMonth';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

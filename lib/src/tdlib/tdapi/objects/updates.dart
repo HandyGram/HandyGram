@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **Updates** *(updates)* - basic class
-  ///
-  /// Contains a list of updates.
-  ///
-  /// * [updates]: List of updates.
-class Updates extends TdObject {
+///
+/// Contains a list of updates.
+///
+/// * [updates]: List of updates.
+final class Updates extends TdObject {
   
   /// **Updates** *(updates)* - basic class
   ///
@@ -38,12 +38,13 @@ class Updates extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "updates": updates.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   Updates copyWith({
     List<Update>? updates,
@@ -55,8 +56,11 @@ class Updates extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updates';
-  
+  static const String objectType = 'updates';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

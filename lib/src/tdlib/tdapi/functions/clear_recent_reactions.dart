@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **ClearRecentReactions** *(clearRecentReactions)* - TDLib function
-  ///
-  /// Clears the list of recently used reactions.
-  ///
-  /// [Ok] is returned on completion.
-class ClearRecentReactions extends TdFunction {
+///
+/// Clears the list of recently used reactions.
+///
+/// [Ok] is returned on completion.
+final class ClearRecentReactions extends TdFunction {
   
   /// **ClearRecentReactions** *(clearRecentReactions)* - TDLib function
   ///
@@ -17,16 +17,20 @@ class ClearRecentReactions extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ClearRecentReactions copyWith() => const ClearRecentReactions();
 
-  static const String constructor = 'clearRecentReactions';
-  
+  static const String objectType = 'clearRecentReactions';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

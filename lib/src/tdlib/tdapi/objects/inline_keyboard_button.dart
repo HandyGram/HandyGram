@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **InlineKeyboardButton** *(inlineKeyboardButton)* - basic class
-  ///
-  /// Represents a single button in an inline keyboard.
-  ///
-  /// * [text]: Text of the button.
-  /// * [type]: Type of the button.
-class InlineKeyboardButton extends TdObject {
+///
+/// Represents a single button in an inline keyboard.
+///
+/// * [text]: Text of the button.
+/// * [type]: Type of the button.
+final class InlineKeyboardButton extends TdObject {
   
   /// **InlineKeyboardButton** *(inlineKeyboardButton)* - basic class
   ///
@@ -33,13 +33,14 @@ class InlineKeyboardButton extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text,
       "type": type.toJson(),
-    };
-  }
+		};
+	}
+
   
   InlineKeyboardButton copyWith({
     String? text,
@@ -49,8 +50,11 @@ class InlineKeyboardButton extends TdObject {
     type: type ?? this.type,
   );
 
-  static const String constructor = 'inlineKeyboardButton';
-  
+  static const String objectType = 'inlineKeyboardButton';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

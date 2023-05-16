@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **TranslateText** *(translateText)* - TDLib function
-  ///
-  /// Translates a text to the given language. Returns a 404 error if the translation can't be performed.
-  ///
-  /// * [text]: Text to translate.
-  /// * [fromLanguageCode]: A two-letter ISO 639-1 language code of the language from which the message is translated. If empty, the language will be detected automatically.
-  /// * [toLanguageCode]: A two-letter ISO 639-1 language code of the language to which the message is translated.
-  ///
-  /// [Text] is returned on completion.
-class TranslateText extends TdFunction {
+///
+/// Translates a text to the given language. Returns a 404 error if the translation can't be performed.
+///
+/// * [text]: Text to translate.
+/// * [fromLanguageCode]: A two-letter ISO 639-1 language code of the language from which the message is translated. If empty, the language will be detected automatically.
+/// * [toLanguageCode]: A two-letter ISO 639-1 language code of the language to which the message is translated.
+///
+/// [Text] is returned on completion.
+final class TranslateText extends TdFunction {
   
   /// **TranslateText** *(translateText)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class TranslateText extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "text": text,
       "from_language_code": fromLanguageCode,
       "to_language_code": toLanguageCode,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   TranslateText copyWith({
     String? text,
@@ -56,8 +57,11 @@ class TranslateText extends TdFunction {
     toLanguageCode: toLanguageCode ?? this.toLanguageCode,
   );
 
-  static const String constructor = 'translateText';
-  
+  static const String objectType = 'translateText';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

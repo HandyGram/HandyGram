@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **AuthenticationCodeInfo** *(authenticationCodeInfo)* - basic class
-  ///
-  /// Information about the authentication code that was sent.
-  ///
-  /// * [phoneNumber]: A phone number that is being authenticated.
-  /// * [type]: The way the code was sent to the user.
-  /// * [nextType]: The way the next code will be sent to the user; may be null *(optional)*.
-  /// * [timeout]: Timeout before the code can be re-sent, in seconds.
-class AuthenticationCodeInfo extends TdObject {
+///
+/// Information about the authentication code that was sent.
+///
+/// * [phoneNumber]: A phone number that is being authenticated.
+/// * [type]: The way the code was sent to the user.
+/// * [nextType]: The way the next code will be sent to the user; may be null *(optional)*.
+/// * [timeout]: Timeout before the code can be re-sent, in seconds.
+final class AuthenticationCodeInfo extends TdObject {
   
   /// **AuthenticationCodeInfo** *(authenticationCodeInfo)* - basic class
   ///
@@ -59,15 +59,16 @@ class AuthenticationCodeInfo extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "phone_number": phoneNumber,
       "type": type.toJson(),
       "next_type": nextType?.toJson(),
       "timeout": timeout,
-    };
-  }
+		};
+	}
+
   
   AuthenticationCodeInfo copyWith({
     String? phoneNumber,
@@ -85,8 +86,11 @@ class AuthenticationCodeInfo extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'authenticationCodeInfo';
-  
+  static const String objectType = 'authenticationCodeInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

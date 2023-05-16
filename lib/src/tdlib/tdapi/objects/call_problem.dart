@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **CallProblem** *(callProblem)* - parent
-  ///
-  /// Describes the exact type of a problem with a call.
-class CallProblem extends TdObject {
+///
+/// Describes the exact type of a problem with a call.
+sealed class CallProblem extends TdObject {
   
   /// **CallProblem** *(callProblem)* - parent
   ///
@@ -22,49 +22,52 @@ class CallProblem extends TdObject {
   /// * [CallProblemPixelatedVideo]
   factory CallProblem.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case CallProblemEcho.constructor:
+      case CallProblemEcho.objectType:
         return CallProblemEcho.fromJson(json);
-      case CallProblemNoise.constructor:
+      case CallProblemNoise.objectType:
         return CallProblemNoise.fromJson(json);
-      case CallProblemInterruptions.constructor:
+      case CallProblemInterruptions.objectType:
         return CallProblemInterruptions.fromJson(json);
-      case CallProblemDistortedSpeech.constructor:
+      case CallProblemDistortedSpeech.objectType:
         return CallProblemDistortedSpeech.fromJson(json);
-      case CallProblemSilentLocal.constructor:
+      case CallProblemSilentLocal.objectType:
         return CallProblemSilentLocal.fromJson(json);
-      case CallProblemSilentRemote.constructor:
+      case CallProblemSilentRemote.objectType:
         return CallProblemSilentRemote.fromJson(json);
-      case CallProblemDropped.constructor:
+      case CallProblemDropped.objectType:
         return CallProblemDropped.fromJson(json);
-      case CallProblemDistortedVideo.constructor:
+      case CallProblemDistortedVideo.objectType:
         return CallProblemDistortedVideo.fromJson(json);
-      case CallProblemPixelatedVideo.constructor:
+      case CallProblemPixelatedVideo.objectType:
         return CallProblemPixelatedVideo.fromJson(json);
       default:
-        return const CallProblem();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of CallProblem)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  CallProblem copyWith() => const CallProblem();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'callProblem';
   
+  CallProblem copyWith();
+
+  static const String objectType = 'callProblem';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **CallProblemEcho** *(callProblemEcho)* - child of CallProblem
-  ///
-  /// The user heard their own voice.
-class CallProblemEcho extends CallProblem {
+///
+/// The user heard their own voice.
+final class CallProblemEcho extends CallProblem {
   
   /// **CallProblemEcho** *(callProblemEcho)* - child of CallProblem
   ///
@@ -75,26 +78,30 @@ class CallProblemEcho extends CallProblem {
   factory CallProblemEcho.fromJson(Map<String, dynamic> json) => const CallProblemEcho();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   CallProblemEcho copyWith() => const CallProblemEcho();
 
-  static const String constructor = 'callProblemEcho';
-  
+  static const String objectType = 'callProblemEcho';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **CallProblemNoise** *(callProblemNoise)* - child of CallProblem
-  ///
-  /// The user heard background noise.
-class CallProblemNoise extends CallProblem {
+///
+/// The user heard background noise.
+final class CallProblemNoise extends CallProblem {
   
   /// **CallProblemNoise** *(callProblemNoise)* - child of CallProblem
   ///
@@ -105,26 +112,30 @@ class CallProblemNoise extends CallProblem {
   factory CallProblemNoise.fromJson(Map<String, dynamic> json) => const CallProblemNoise();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   CallProblemNoise copyWith() => const CallProblemNoise();
 
-  static const String constructor = 'callProblemNoise';
-  
+  static const String objectType = 'callProblemNoise';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **CallProblemInterruptions** *(callProblemInterruptions)* - child of CallProblem
-  ///
-  /// The other side kept disappearing.
-class CallProblemInterruptions extends CallProblem {
+///
+/// The other side kept disappearing.
+final class CallProblemInterruptions extends CallProblem {
   
   /// **CallProblemInterruptions** *(callProblemInterruptions)* - child of CallProblem
   ///
@@ -135,26 +146,30 @@ class CallProblemInterruptions extends CallProblem {
   factory CallProblemInterruptions.fromJson(Map<String, dynamic> json) => const CallProblemInterruptions();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   CallProblemInterruptions copyWith() => const CallProblemInterruptions();
 
-  static const String constructor = 'callProblemInterruptions';
-  
+  static const String objectType = 'callProblemInterruptions';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **CallProblemDistortedSpeech** *(callProblemDistortedSpeech)* - child of CallProblem
-  ///
-  /// The speech was distorted.
-class CallProblemDistortedSpeech extends CallProblem {
+///
+/// The speech was distorted.
+final class CallProblemDistortedSpeech extends CallProblem {
   
   /// **CallProblemDistortedSpeech** *(callProblemDistortedSpeech)* - child of CallProblem
   ///
@@ -165,26 +180,30 @@ class CallProblemDistortedSpeech extends CallProblem {
   factory CallProblemDistortedSpeech.fromJson(Map<String, dynamic> json) => const CallProblemDistortedSpeech();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   CallProblemDistortedSpeech copyWith() => const CallProblemDistortedSpeech();
 
-  static const String constructor = 'callProblemDistortedSpeech';
-  
+  static const String objectType = 'callProblemDistortedSpeech';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **CallProblemSilentLocal** *(callProblemSilentLocal)* - child of CallProblem
-  ///
-  /// The user couldn't hear the other side.
-class CallProblemSilentLocal extends CallProblem {
+///
+/// The user couldn't hear the other side.
+final class CallProblemSilentLocal extends CallProblem {
   
   /// **CallProblemSilentLocal** *(callProblemSilentLocal)* - child of CallProblem
   ///
@@ -195,26 +214,30 @@ class CallProblemSilentLocal extends CallProblem {
   factory CallProblemSilentLocal.fromJson(Map<String, dynamic> json) => const CallProblemSilentLocal();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   CallProblemSilentLocal copyWith() => const CallProblemSilentLocal();
 
-  static const String constructor = 'callProblemSilentLocal';
-  
+  static const String objectType = 'callProblemSilentLocal';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **CallProblemSilentRemote** *(callProblemSilentRemote)* - child of CallProblem
-  ///
-  /// The other side couldn't hear the user.
-class CallProblemSilentRemote extends CallProblem {
+///
+/// The other side couldn't hear the user.
+final class CallProblemSilentRemote extends CallProblem {
   
   /// **CallProblemSilentRemote** *(callProblemSilentRemote)* - child of CallProblem
   ///
@@ -225,26 +248,30 @@ class CallProblemSilentRemote extends CallProblem {
   factory CallProblemSilentRemote.fromJson(Map<String, dynamic> json) => const CallProblemSilentRemote();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   CallProblemSilentRemote copyWith() => const CallProblemSilentRemote();
 
-  static const String constructor = 'callProblemSilentRemote';
-  
+  static const String objectType = 'callProblemSilentRemote';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **CallProblemDropped** *(callProblemDropped)* - child of CallProblem
-  ///
-  /// The call ended unexpectedly.
-class CallProblemDropped extends CallProblem {
+///
+/// The call ended unexpectedly.
+final class CallProblemDropped extends CallProblem {
   
   /// **CallProblemDropped** *(callProblemDropped)* - child of CallProblem
   ///
@@ -255,26 +282,30 @@ class CallProblemDropped extends CallProblem {
   factory CallProblemDropped.fromJson(Map<String, dynamic> json) => const CallProblemDropped();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   CallProblemDropped copyWith() => const CallProblemDropped();
 
-  static const String constructor = 'callProblemDropped';
-  
+  static const String objectType = 'callProblemDropped';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **CallProblemDistortedVideo** *(callProblemDistortedVideo)* - child of CallProblem
-  ///
-  /// The video was distorted.
-class CallProblemDistortedVideo extends CallProblem {
+///
+/// The video was distorted.
+final class CallProblemDistortedVideo extends CallProblem {
   
   /// **CallProblemDistortedVideo** *(callProblemDistortedVideo)* - child of CallProblem
   ///
@@ -285,26 +316,30 @@ class CallProblemDistortedVideo extends CallProblem {
   factory CallProblemDistortedVideo.fromJson(Map<String, dynamic> json) => const CallProblemDistortedVideo();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   CallProblemDistortedVideo copyWith() => const CallProblemDistortedVideo();
 
-  static const String constructor = 'callProblemDistortedVideo';
-  
+  static const String objectType = 'callProblemDistortedVideo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **CallProblemPixelatedVideo** *(callProblemPixelatedVideo)* - child of CallProblem
-  ///
-  /// The video was pixelated.
-class CallProblemPixelatedVideo extends CallProblem {
+///
+/// The video was pixelated.
+final class CallProblemPixelatedVideo extends CallProblem {
   
   /// **CallProblemPixelatedVideo** *(callProblemPixelatedVideo)* - child of CallProblem
   ///
@@ -315,17 +350,21 @@ class CallProblemPixelatedVideo extends CallProblem {
   factory CallProblemPixelatedVideo.fromJson(Map<String, dynamic> json) => const CallProblemPixelatedVideo();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   CallProblemPixelatedVideo copyWith() => const CallProblemPixelatedVideo();
 
-  static const String constructor = 'callProblemPixelatedVideo';
-  
+  static const String objectType = 'callProblemPixelatedVideo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

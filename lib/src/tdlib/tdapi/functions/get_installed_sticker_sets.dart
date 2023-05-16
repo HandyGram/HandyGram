@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetInstalledStickerSets** *(getInstalledStickerSets)* - TDLib function
-  ///
-  /// Returns a list of installed sticker sets.
-  ///
-  /// * [stickerType]: Type of the sticker sets to return.
-  ///
-  /// [StickerSets] is returned on completion.
-class GetInstalledStickerSets extends TdFunction {
+///
+/// Returns a list of installed sticker sets.
+///
+/// * [stickerType]: Type of the sticker sets to return.
+///
+/// [StickerSets] is returned on completion.
+final class GetInstalledStickerSets extends TdFunction {
   
   /// **GetInstalledStickerSets** *(getInstalledStickerSets)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetInstalledStickerSets extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "sticker_type": stickerType.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetInstalledStickerSets copyWith({
     StickerType? stickerType,
@@ -38,8 +39,11 @@ class GetInstalledStickerSets extends TdFunction {
     stickerType: stickerType ?? this.stickerType,
   );
 
-  static const String constructor = 'getInstalledStickerSets';
-  
+  static const String objectType = 'getInstalledStickerSets';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **TermsOfService** *(termsOfService)* - basic class
-  ///
-  /// Contains Telegram terms of service.
-  ///
-  /// * [text]: Text of the terms of service.
-  /// * [minUserAge]: The minimum age of a user to be able to accept the terms; 0 if age isn't restricted.
-  /// * [showPopup]: True, if a blocking popup with terms of service must be shown to the user.
-class TermsOfService extends TdObject {
+///
+/// Contains Telegram terms of service.
+///
+/// * [text]: Text of the terms of service.
+/// * [minUserAge]: The minimum age of a user to be able to accept the terms; 0 if age isn't restricted.
+/// * [showPopup]: True, if a blocking popup with terms of service must be shown to the user.
+final class TermsOfService extends TdObject {
   
   /// **TermsOfService** *(termsOfService)* - basic class
   ///
@@ -40,14 +40,15 @@ class TermsOfService extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text.toJson(),
       "min_user_age": minUserAge,
       "show_popup": showPopup,
-    };
-  }
+		};
+	}
+
   
   TermsOfService copyWith({
     FormattedText? text,
@@ -59,8 +60,11 @@ class TermsOfService extends TdObject {
     showPopup: showPopup ?? this.showPopup,
   );
 
-  static const String constructor = 'termsOfService';
-  
+  static const String objectType = 'termsOfService';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

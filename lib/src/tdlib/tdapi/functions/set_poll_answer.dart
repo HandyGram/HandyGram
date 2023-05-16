@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **SetPollAnswer** *(setPollAnswer)* - TDLib function
-  ///
-  /// Changes the user answer to a poll. A poll in quiz mode can be answered only once.
-  ///
-  /// * [chatId]: Identifier of the chat to which the poll belongs.
-  /// * [messageId]: Identifier of the message containing the poll.
-  /// * [optionIds]: 0-based identifiers of answer options, chosen by the user. User can choose more than 1 answer option only is the poll allows multiple answers.
-  ///
-  /// [Ok] is returned on completion.
-class SetPollAnswer extends TdFunction {
+///
+/// Changes the user answer to a poll. A poll in quiz mode can be answered only once.
+///
+/// * [chatId]: Identifier of the chat to which the poll belongs.
+/// * [messageId]: Identifier of the message containing the poll.
+/// * [optionIds]: 0-based identifiers of answer options, chosen by the user. User can choose more than 1 answer option only is the poll allows multiple answers.
+///
+/// [Ok] is returned on completion.
+final class SetPollAnswer extends TdFunction {
   
   /// **SetPollAnswer** *(setPollAnswer)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class SetPollAnswer extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "option_ids": optionIds.map((i) => i).toList(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetPollAnswer copyWith({
     int? chatId,
@@ -56,8 +57,11 @@ class SetPollAnswer extends TdFunction {
     optionIds: optionIds ?? this.optionIds,
   );
 
-  static const String constructor = 'setPollAnswer';
-  
+  static const String objectType = 'setPollAnswer';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

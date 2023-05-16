@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **GroupCallStreams** *(groupCallStreams)* - basic class
-  ///
-  /// Represents a list of group call streams.
-  ///
-  /// * [streams]: A list of group call streams.
-class GroupCallStreams extends TdObject {
+///
+/// Represents a list of group call streams.
+///
+/// * [streams]: A list of group call streams.
+final class GroupCallStreams extends TdObject {
   
   /// **GroupCallStreams** *(groupCallStreams)* - basic class
   ///
@@ -38,12 +38,13 @@ class GroupCallStreams extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "streams": streams.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   GroupCallStreams copyWith({
     List<GroupCallStream>? streams,
@@ -55,8 +56,11 @@ class GroupCallStreams extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'groupCallStreams';
-  
+  static const String objectType = 'groupCallStreams';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

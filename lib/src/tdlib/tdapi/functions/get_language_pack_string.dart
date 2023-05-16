@@ -1,16 +1,16 @@
 part of '../tdapi.dart';
 
 /// **GetLanguagePackString** *(getLanguagePackString)* - TDLib function
-  ///
-  /// Returns a string stored in the local database from the specified localization target and language pack by its key. Returns a 404 error if the string is not found. Can be called synchronously.
-  ///
-  /// * [languagePackDatabasePath]: Path to the language pack database in which strings are stored.
-  /// * [localizationTarget]: Localization target to which the language pack belongs.
-  /// * [languagePackId]: Language pack identifier.
-  /// * [key]: Language pack key of the string to be returned.
-  ///
-  /// [LanguagePackStringValue] is returned on completion.
-class GetLanguagePackString extends TdFunction {
+///
+/// Returns a string stored in the local database from the specified localization target and language pack by its key. Returns a 404 error if the string is not found. Can be called synchronously.
+///
+/// * [languagePackDatabasePath]: Path to the language pack database in which strings are stored.
+/// * [localizationTarget]: Localization target to which the language pack belongs.
+/// * [languagePackId]: Language pack identifier.
+/// * [key]: Language pack key of the string to be returned.
+///
+/// [LanguagePackStringValue] is returned on completion.
+final class GetLanguagePackString extends TdFunction {
   
   /// **GetLanguagePackString** *(getLanguagePackString)* - TDLib function
   ///
@@ -43,15 +43,16 @@ class GetLanguagePackString extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "language_pack_database_path": languagePackDatabasePath,
       "localization_target": localizationTarget,
       "language_pack_id": languagePackId,
       "key": key,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetLanguagePackString copyWith({
     String? languagePackDatabasePath,
@@ -65,8 +66,11 @@ class GetLanguagePackString extends TdFunction {
     key: key ?? this.key,
   );
 
-  static const String constructor = 'getLanguagePackString';
-  
+  static const String objectType = 'getLanguagePackString';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

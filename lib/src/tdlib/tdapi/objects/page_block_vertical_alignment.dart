@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **PageBlockVerticalAlignment** *(pageBlockVerticalAlignment)* - parent
-  ///
-  /// Describes a Vertical alignment of a table cell content.
-class PageBlockVerticalAlignment extends TdObject {
+///
+/// Describes a Vertical alignment of a table cell content.
+sealed class PageBlockVerticalAlignment extends TdObject {
   
   /// **PageBlockVerticalAlignment** *(pageBlockVerticalAlignment)* - parent
   ///
@@ -16,37 +16,40 @@ class PageBlockVerticalAlignment extends TdObject {
   /// * [PageBlockVerticalAlignmentBottom]
   factory PageBlockVerticalAlignment.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case PageBlockVerticalAlignmentTop.constructor:
+      case PageBlockVerticalAlignmentTop.objectType:
         return PageBlockVerticalAlignmentTop.fromJson(json);
-      case PageBlockVerticalAlignmentMiddle.constructor:
+      case PageBlockVerticalAlignmentMiddle.objectType:
         return PageBlockVerticalAlignmentMiddle.fromJson(json);
-      case PageBlockVerticalAlignmentBottom.constructor:
+      case PageBlockVerticalAlignmentBottom.objectType:
         return PageBlockVerticalAlignmentBottom.fromJson(json);
       default:
-        return const PageBlockVerticalAlignment();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of PageBlockVerticalAlignment)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  PageBlockVerticalAlignment copyWith() => const PageBlockVerticalAlignment();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'pageBlockVerticalAlignment';
   
+  PageBlockVerticalAlignment copyWith();
+
+  static const String objectType = 'pageBlockVerticalAlignment';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PageBlockVerticalAlignmentTop** *(pageBlockVerticalAlignmentTop)* - child of PageBlockVerticalAlignment
-  ///
-  /// The content must be top-aligned.
-class PageBlockVerticalAlignmentTop extends PageBlockVerticalAlignment {
+///
+/// The content must be top-aligned.
+final class PageBlockVerticalAlignmentTop extends PageBlockVerticalAlignment {
   
   /// **PageBlockVerticalAlignmentTop** *(pageBlockVerticalAlignmentTop)* - child of PageBlockVerticalAlignment
   ///
@@ -57,26 +60,30 @@ class PageBlockVerticalAlignmentTop extends PageBlockVerticalAlignment {
   factory PageBlockVerticalAlignmentTop.fromJson(Map<String, dynamic> json) => const PageBlockVerticalAlignmentTop();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PageBlockVerticalAlignmentTop copyWith() => const PageBlockVerticalAlignmentTop();
 
-  static const String constructor = 'pageBlockVerticalAlignmentTop';
-  
+  static const String objectType = 'pageBlockVerticalAlignmentTop';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PageBlockVerticalAlignmentMiddle** *(pageBlockVerticalAlignmentMiddle)* - child of PageBlockVerticalAlignment
-  ///
-  /// The content must be middle-aligned.
-class PageBlockVerticalAlignmentMiddle extends PageBlockVerticalAlignment {
+///
+/// The content must be middle-aligned.
+final class PageBlockVerticalAlignmentMiddle extends PageBlockVerticalAlignment {
   
   /// **PageBlockVerticalAlignmentMiddle** *(pageBlockVerticalAlignmentMiddle)* - child of PageBlockVerticalAlignment
   ///
@@ -87,26 +94,30 @@ class PageBlockVerticalAlignmentMiddle extends PageBlockVerticalAlignment {
   factory PageBlockVerticalAlignmentMiddle.fromJson(Map<String, dynamic> json) => const PageBlockVerticalAlignmentMiddle();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PageBlockVerticalAlignmentMiddle copyWith() => const PageBlockVerticalAlignmentMiddle();
 
-  static const String constructor = 'pageBlockVerticalAlignmentMiddle';
-  
+  static const String objectType = 'pageBlockVerticalAlignmentMiddle';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PageBlockVerticalAlignmentBottom** *(pageBlockVerticalAlignmentBottom)* - child of PageBlockVerticalAlignment
-  ///
-  /// The content must be bottom-aligned.
-class PageBlockVerticalAlignmentBottom extends PageBlockVerticalAlignment {
+///
+/// The content must be bottom-aligned.
+final class PageBlockVerticalAlignmentBottom extends PageBlockVerticalAlignment {
   
   /// **PageBlockVerticalAlignmentBottom** *(pageBlockVerticalAlignmentBottom)* - child of PageBlockVerticalAlignment
   ///
@@ -117,17 +128,21 @@ class PageBlockVerticalAlignmentBottom extends PageBlockVerticalAlignment {
   factory PageBlockVerticalAlignmentBottom.fromJson(Map<String, dynamic> json) => const PageBlockVerticalAlignmentBottom();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PageBlockVerticalAlignmentBottom copyWith() => const PageBlockVerticalAlignmentBottom();
 
-  static const String constructor = 'pageBlockVerticalAlignmentBottom';
-  
+  static const String objectType = 'pageBlockVerticalAlignmentBottom';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

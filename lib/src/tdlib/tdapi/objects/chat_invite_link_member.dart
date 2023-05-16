@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **ChatInviteLinkMember** *(chatInviteLinkMember)* - basic class
-  ///
-  /// Describes a chat member joined a chat via an invite link.
-  ///
-  /// * [userId]: User identifier.
-  /// * [joinedChatDate]: Point in time (Unix timestamp) when the user joined the chat.
-  /// * [approverUserId]: User identifier of the chat administrator, approved user join request.
-class ChatInviteLinkMember extends TdObject {
+///
+/// Describes a chat member joined a chat via an invite link.
+///
+/// * [userId]: User identifier.
+/// * [joinedChatDate]: Point in time (Unix timestamp) when the user joined the chat.
+/// * [approverUserId]: User identifier of the chat administrator, approved user join request.
+final class ChatInviteLinkMember extends TdObject {
   
   /// **ChatInviteLinkMember** *(chatInviteLinkMember)* - basic class
   ///
@@ -40,14 +40,15 @@ class ChatInviteLinkMember extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "user_id": userId,
       "joined_chat_date": joinedChatDate,
       "approver_user_id": approverUserId,
-    };
-  }
+		};
+	}
+
   
   ChatInviteLinkMember copyWith({
     int? userId,
@@ -59,8 +60,11 @@ class ChatInviteLinkMember extends TdObject {
     approverUserId: approverUserId ?? this.approverUserId,
   );
 
-  static const String constructor = 'chatInviteLinkMember';
-  
+  static const String objectType = 'chatInviteLinkMember';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **SetLocation** *(setLocation)* - TDLib function
-  ///
-  /// Changes the location of the current user. Needs to be called if getOption("is_location_visible") is true and location changes for more than 1 kilometer.
-  ///
-  /// * [location]: The new location of the user.
-  ///
-  /// [Ok] is returned on completion.
-class SetLocation extends TdFunction {
+///
+/// Changes the location of the current user. Needs to be called if getOption("is_location_visible") is true and location changes for more than 1 kilometer.
+///
+/// * [location]: The new location of the user.
+///
+/// [Ok] is returned on completion.
+final class SetLocation extends TdFunction {
   
   /// **SetLocation** *(setLocation)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class SetLocation extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "location": location.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetLocation copyWith({
     Location? location,
@@ -38,8 +39,11 @@ class SetLocation extends TdFunction {
     location: location ?? this.location,
   );
 
-  static const String constructor = 'setLocation';
-  
+  static const String objectType = 'setLocation';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

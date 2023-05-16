@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **NetworkStatisticsEntry** *(networkStatisticsEntry)* - parent
-  ///
-  /// Contains statistics about network usage.
-class NetworkStatisticsEntry extends TdObject {
+///
+/// Contains statistics about network usage.
+sealed class NetworkStatisticsEntry extends TdObject {
   
   /// **NetworkStatisticsEntry** *(networkStatisticsEntry)* - parent
   ///
@@ -15,40 +15,43 @@ class NetworkStatisticsEntry extends TdObject {
   /// * [NetworkStatisticsEntryCall]
   factory NetworkStatisticsEntry.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case NetworkStatisticsEntryFile.constructor:
+      case NetworkStatisticsEntryFile.objectType:
         return NetworkStatisticsEntryFile.fromJson(json);
-      case NetworkStatisticsEntryCall.constructor:
+      case NetworkStatisticsEntryCall.objectType:
         return NetworkStatisticsEntryCall.fromJson(json);
       default:
-        return const NetworkStatisticsEntry();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of NetworkStatisticsEntry)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  NetworkStatisticsEntry copyWith() => const NetworkStatisticsEntry();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'networkStatisticsEntry';
   
+  NetworkStatisticsEntry copyWith();
+
+  static const String objectType = 'networkStatisticsEntry';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **NetworkStatisticsEntryFile** *(networkStatisticsEntryFile)* - child of NetworkStatisticsEntry
-  ///
-  /// Contains information about the total amount of data that was used to send and receive files.
-  ///
-  /// * [fileType]: Type of the file the data is part of; pass null if the data isn't related to files *(optional)*.
-  /// * [networkType]: Type of the network the data was sent through. Call setNetworkType to maintain the actual network type.
-  /// * [sentBytes]: Total number of bytes sent.
-  /// * [receivedBytes]: Total number of bytes received.
-class NetworkStatisticsEntryFile extends NetworkStatisticsEntry {
+///
+/// Contains information about the total amount of data that was used to send and receive files.
+///
+/// * [fileType]: Type of the file the data is part of; pass null if the data isn't related to files *(optional)*.
+/// * [networkType]: Type of the network the data was sent through. Call setNetworkType to maintain the actual network type.
+/// * [sentBytes]: Total number of bytes sent.
+/// * [receivedBytes]: Total number of bytes received.
+final class NetworkStatisticsEntryFile extends NetworkStatisticsEntry {
   
   /// **NetworkStatisticsEntryFile** *(networkStatisticsEntryFile)* - child of NetworkStatisticsEntry
   ///
@@ -87,15 +90,16 @@ class NetworkStatisticsEntryFile extends NetworkStatisticsEntry {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "file_type": fileType?.toJson(),
       "network_type": networkType.toJson(),
       "sent_bytes": sentBytes,
       "received_bytes": receivedBytes,
-    };
-  }
+		};
+	}
+
   
   @override
   NetworkStatisticsEntryFile copyWith({
@@ -110,22 +114,25 @@ class NetworkStatisticsEntryFile extends NetworkStatisticsEntry {
     receivedBytes: receivedBytes ?? this.receivedBytes,
   );
 
-  static const String constructor = 'networkStatisticsEntryFile';
-  
+  static const String objectType = 'networkStatisticsEntryFile';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **NetworkStatisticsEntryCall** *(networkStatisticsEntryCall)* - child of NetworkStatisticsEntry
-  ///
-  /// Contains information about the total amount of data that was used for calls.
-  ///
-  /// * [networkType]: Type of the network the data was sent through. Call setNetworkType to maintain the actual network type.
-  /// * [sentBytes]: Total number of bytes sent.
-  /// * [receivedBytes]: Total number of bytes received.
-  /// * [duration]: Total call duration, in seconds.
-class NetworkStatisticsEntryCall extends NetworkStatisticsEntry {
+///
+/// Contains information about the total amount of data that was used for calls.
+///
+/// * [networkType]: Type of the network the data was sent through. Call setNetworkType to maintain the actual network type.
+/// * [sentBytes]: Total number of bytes sent.
+/// * [receivedBytes]: Total number of bytes received.
+/// * [duration]: Total call duration, in seconds.
+final class NetworkStatisticsEntryCall extends NetworkStatisticsEntry {
   
   /// **NetworkStatisticsEntryCall** *(networkStatisticsEntryCall)* - child of NetworkStatisticsEntry
   ///
@@ -164,15 +171,16 @@ class NetworkStatisticsEntryCall extends NetworkStatisticsEntry {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "network_type": networkType.toJson(),
       "sent_bytes": sentBytes,
       "received_bytes": receivedBytes,
       "duration": duration,
-    };
-  }
+		};
+	}
+
   
   @override
   NetworkStatisticsEntryCall copyWith({
@@ -187,8 +195,11 @@ class NetworkStatisticsEntryCall extends NetworkStatisticsEntry {
     duration: duration ?? this.duration,
   );
 
-  static const String constructor = 'networkStatisticsEntryCall';
-  
+  static const String objectType = 'networkStatisticsEntryCall';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

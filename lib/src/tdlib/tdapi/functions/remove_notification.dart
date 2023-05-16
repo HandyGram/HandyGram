@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **RemoveNotification** *(removeNotification)* - TDLib function
-  ///
-  /// Removes an active notification from notification list. Needs to be called only if the notification is removed by the current user.
-  ///
-  /// * [notificationGroupId]: Identifier of notification group to which the notification belongs.
-  /// * [notificationId]: Identifier of removed notification.
-  ///
-  /// [Ok] is returned on completion.
-class RemoveNotification extends TdFunction {
+///
+/// Removes an active notification from notification list. Needs to be called only if the notification is removed by the current user.
+///
+/// * [notificationGroupId]: Identifier of notification group to which the notification belongs.
+/// * [notificationId]: Identifier of removed notification.
+///
+/// [Ok] is returned on completion.
+final class RemoveNotification extends TdFunction {
   
   /// **RemoveNotification** *(removeNotification)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class RemoveNotification extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "notification_group_id": notificationGroupId,
       "notification_id": notificationId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   RemoveNotification copyWith({
     int? notificationGroupId,
@@ -47,8 +48,11 @@ class RemoveNotification extends TdFunction {
     notificationId: notificationId ?? this.notificationId,
   );
 
-  static const String constructor = 'removeNotification';
-  
+  static const String objectType = 'removeNotification';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

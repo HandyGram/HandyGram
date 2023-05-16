@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **SearchStickerSet** *(searchStickerSet)* - TDLib function
-  ///
-  /// Searches for a sticker set by its name.
-  ///
-  /// * [name]: Name of the sticker set.
-  ///
-  /// [StickerSet] is returned on completion.
-class SearchStickerSet extends TdFunction {
+///
+/// Searches for a sticker set by its name.
+///
+/// * [name]: Name of the sticker set.
+///
+/// [StickerSet] is returned on completion.
+final class SearchStickerSet extends TdFunction {
   
   /// **SearchStickerSet** *(searchStickerSet)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class SearchStickerSet extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "name": name,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SearchStickerSet copyWith({
     String? name,
@@ -38,8 +39,11 @@ class SearchStickerSet extends TdFunction {
     name: name ?? this.name,
   );
 
-  static const String constructor = 'searchStickerSet';
-  
+  static const String objectType = 'searchStickerSet';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

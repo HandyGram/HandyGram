@@ -1,16 +1,16 @@
 part of '../tdapi.dart';
 
 /// **GetWebAppUrl** *(getWebAppUrl)* - TDLib function
-  ///
-  /// Returns an HTTPS URL of a Web App to open after keyboardButtonTypeWebApp button is pressed.
-  ///
-  /// * [botUserId]: Identifier of the target bot.
-  /// * [url]: The URL from the keyboardButtonTypeWebApp button.
-  /// * [theme]: Preferred Web App theme; pass null to use the default theme *(optional)*.
-  /// * [applicationName]: Short name of the application; 0-64 English letters, digits, and underscores.
-  ///
-  /// [HttpUrl] is returned on completion.
-class GetWebAppUrl extends TdFunction {
+///
+/// Returns an HTTPS URL of a Web App to open after keyboardButtonTypeWebApp button is pressed.
+///
+/// * [botUserId]: Identifier of the target bot.
+/// * [url]: The URL from the keyboardButtonTypeWebApp button.
+/// * [theme]: Preferred Web App theme; pass null to use the default theme *(optional)*.
+/// * [applicationName]: Short name of the application; 0-64 English letters, digits, and underscores.
+///
+/// [HttpUrl] is returned on completion.
+final class GetWebAppUrl extends TdFunction {
   
   /// **GetWebAppUrl** *(getWebAppUrl)* - TDLib function
   ///
@@ -43,15 +43,16 @@ class GetWebAppUrl extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "bot_user_id": botUserId,
       "url": url,
       "theme": theme?.toJson(),
       "application_name": applicationName,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetWebAppUrl copyWith({
     int? botUserId,
@@ -65,8 +66,11 @@ class GetWebAppUrl extends TdFunction {
     applicationName: applicationName ?? this.applicationName,
   );
 
-  static const String constructor = 'getWebAppUrl';
-  
+  static const String objectType = 'getWebAppUrl';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

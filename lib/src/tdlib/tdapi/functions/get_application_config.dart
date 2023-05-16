@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **GetApplicationConfig** *(getApplicationConfig)* - TDLib function
-  ///
-  /// Returns application config, provided by the server. Can be called before authorization.
-  ///
-  /// [JsonValue] is returned on completion.
-class GetApplicationConfig extends TdFunction {
+///
+/// Returns application config, provided by the server. Can be called before authorization.
+///
+/// [JsonValue] is returned on completion.
+final class GetApplicationConfig extends TdFunction {
   
   /// **GetApplicationConfig** *(getApplicationConfig)* - TDLib function
   ///
@@ -17,16 +17,20 @@ class GetApplicationConfig extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetApplicationConfig copyWith() => const GetApplicationConfig();
 
-  static const String constructor = 'getApplicationConfig';
-  
+  static const String objectType = 'getApplicationConfig';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

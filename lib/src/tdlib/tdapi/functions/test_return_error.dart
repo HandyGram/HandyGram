@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **TestReturnError** *(testReturnError)* - TDLib function
-  ///
-  /// Returns the specified error and ensures that the Error object is used; for testing only. Can be called synchronously.
-  ///
-  /// * [error]: The error to be returned.
-  ///
-  /// [Error] is returned on completion.
-class TestReturnError extends TdFunction {
+///
+/// Returns the specified error and ensures that the Error object is used; for testing only. Can be called synchronously.
+///
+/// * [error]: The error to be returned.
+///
+/// [Error] is returned on completion.
+final class TestReturnError extends TdFunction {
   
   /// **TestReturnError** *(testReturnError)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class TestReturnError extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "error": error.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   TestReturnError copyWith({
     TdError? error,
@@ -38,8 +39,11 @@ class TestReturnError extends TdFunction {
     error: error ?? this.error,
   );
 
-  static const String constructor = 'testReturnError';
-  
+  static const String objectType = 'testReturnError';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

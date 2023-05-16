@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **PushReceiverId** *(pushReceiverId)* - basic class
-  ///
-  /// Contains a globally unique push receiver identifier, which can be used to identify which account has received a push notification.
-  ///
-  /// * [id]: The globally unique identifier of push notification subscription.
-class PushReceiverId extends TdObject {
+///
+/// Contains a globally unique push receiver identifier, which can be used to identify which account has received a push notification.
+///
+/// * [id]: The globally unique identifier of push notification subscription.
+final class PushReceiverId extends TdObject {
   
   /// **PushReceiverId** *(pushReceiverId)* - basic class
   ///
@@ -38,12 +38,13 @@ class PushReceiverId extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
-    };
-  }
+		};
+	}
+
   
   PushReceiverId copyWith({
     int? id,
@@ -55,8 +56,11 @@ class PushReceiverId extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'pushReceiverId';
-  
+  static const String objectType = 'pushReceiverId';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

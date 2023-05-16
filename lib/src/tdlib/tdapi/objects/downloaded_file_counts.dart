@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **DownloadedFileCounts** *(downloadedFileCounts)* - basic class
-  ///
-  /// Contains number of being downloaded and recently downloaded files found.
-  ///
-  /// * [activeCount]: Number of active file downloads found, including paused.
-  /// * [pausedCount]: Number of paused file downloads found.
-  /// * [completedCount]: Number of completed file downloads found.
-class DownloadedFileCounts extends TdObject {
+///
+/// Contains number of being downloaded and recently downloaded files found.
+///
+/// * [activeCount]: Number of active file downloads found, including paused.
+/// * [pausedCount]: Number of paused file downloads found.
+/// * [completedCount]: Number of completed file downloads found.
+final class DownloadedFileCounts extends TdObject {
   
   /// **DownloadedFileCounts** *(downloadedFileCounts)* - basic class
   ///
@@ -40,14 +40,15 @@ class DownloadedFileCounts extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "active_count": activeCount,
       "paused_count": pausedCount,
       "completed_count": completedCount,
-    };
-  }
+		};
+	}
+
   
   DownloadedFileCounts copyWith({
     int? activeCount,
@@ -59,8 +60,11 @@ class DownloadedFileCounts extends TdObject {
     completedCount: completedCount ?? this.completedCount,
   );
 
-  static const String constructor = 'downloadedFileCounts';
-  
+  static const String objectType = 'downloadedFileCounts';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

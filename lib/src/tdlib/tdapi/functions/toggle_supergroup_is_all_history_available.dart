@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **ToggleSupergroupIsAllHistoryAvailable** *(toggleSupergroupIsAllHistoryAvailable)* - TDLib function
-  ///
-  /// Toggles whether the message history of a supergroup is available to new members; requires can_change_info administrator right.
-  ///
-  /// * [supergroupId]: The identifier of the supergroup.
-  /// * [isAllHistoryAvailable]: The new value of is_all_history_available.
-  ///
-  /// [Ok] is returned on completion.
-class ToggleSupergroupIsAllHistoryAvailable extends TdFunction {
+///
+/// Toggles whether the message history of a supergroup is available to new members; requires can_change_info administrator right.
+///
+/// * [supergroupId]: The identifier of the supergroup.
+/// * [isAllHistoryAvailable]: The new value of is_all_history_available.
+///
+/// [Ok] is returned on completion.
+final class ToggleSupergroupIsAllHistoryAvailable extends TdFunction {
   
   /// **ToggleSupergroupIsAllHistoryAvailable** *(toggleSupergroupIsAllHistoryAvailable)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class ToggleSupergroupIsAllHistoryAvailable extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "supergroup_id": supergroupId,
       "is_all_history_available": isAllHistoryAvailable,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ToggleSupergroupIsAllHistoryAvailable copyWith({
     int? supergroupId,
@@ -47,8 +48,11 @@ class ToggleSupergroupIsAllHistoryAvailable extends TdFunction {
     isAllHistoryAvailable: isAllHistoryAvailable ?? this.isAllHistoryAvailable,
   );
 
-  static const String constructor = 'toggleSupergroupIsAllHistoryAvailable';
-  
+  static const String objectType = 'toggleSupergroupIsAllHistoryAvailable';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

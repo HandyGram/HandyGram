@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **DeleteFile** *(deleteFile)* - TDLib function
-  ///
-  /// Deletes a file from the TDLib file cache.
-  ///
-  /// * [fileId]: Identifier of the file to delete.
-  ///
-  /// [Ok] is returned on completion.
-class DeleteFile extends TdFunction {
+///
+/// Deletes a file from the TDLib file cache.
+///
+/// * [fileId]: Identifier of the file to delete.
+///
+/// [Ok] is returned on completion.
+final class DeleteFile extends TdFunction {
   
   /// **DeleteFile** *(deleteFile)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class DeleteFile extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "file_id": fileId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   DeleteFile copyWith({
     int? fileId,
@@ -38,8 +39,11 @@ class DeleteFile extends TdFunction {
     fileId: fileId ?? this.fileId,
   );
 
-  static const String constructor = 'deleteFile';
-  
+  static const String objectType = 'deleteFile';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

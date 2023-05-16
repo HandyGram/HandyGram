@@ -1,49 +1,49 @@
 part of '../tdapi.dart';
 
 /// **Message** *(message)* - basic class
-  ///
-  /// Describes a message.
-  ///
-  /// * [id]: Message identifier; unique for the chat to which the message belongs.
-  /// * [senderId]: Identifier of the sender of the message.
-  /// * [chatId]: Chat identifier.
-  /// * [sendingState]: The sending state of the message; may be null *(optional)*.
-  /// * [schedulingState]: The scheduling state of the message; may be null *(optional)*.
-  /// * [isOutgoing]: True, if the message is outgoing.
-  /// * [isPinned]: True, if the message is pinned.
-  /// * [canBeEdited]: True, if the message can be edited. For live location and poll messages this fields shows whether editMessageLiveLocation or stopPoll can be used with this message by the application.
-  /// * [canBeForwarded]: True, if the message can be forwarded.
-  /// * [canBeSaved]: True, if content of the message can be saved locally or copied.
-  /// * [canBeDeletedOnlyForSelf]: True, if the message can be deleted only for the current user while other users will continue to see it.
-  /// * [canBeDeletedForAllUsers]: True, if the message can be deleted for all users.
-  /// * [canGetAddedReactions]: True, if the list of added reactions is available through getMessageAddedReactions.
-  /// * [canGetStatistics]: True, if the message statistics are available through getMessageStatistics.
-  /// * [canGetMessageThread]: True, if information about the message thread is available through getMessageThread and getMessageThreadHistory.
-  /// * [canGetViewers]: True, if chat members already viewed the message can be received through getMessageViewers.
-  /// * [canGetMediaTimestampLinks]: True, if media timestamp links can be generated for media timestamp entities in the message text, caption or web page description through getMessageLink.
-  /// * [canReportReactions]: True, if reactions on the message can be reported through reportMessageReactions.
-  /// * [hasTimestampedMedia]: True, if media timestamp entities refers to a media in this message as opposed to a media in the replied message.
-  /// * [isChannelPost]: True, if the message is a channel post. All messages to channels are channel posts, all other messages are not channel posts.
-  /// * [isTopicMessage]: True, if the message is a forum topic message.
-  /// * [containsUnreadMention]: True, if the message contains an unread mention for the current user.
-  /// * [date]: Point in time (Unix timestamp) when the message was sent.
-  /// * [editDate]: Point in time (Unix timestamp) when the message was last edited.
-  /// * [forwardInfo]: Information about the initial message sender; may be null *(optional)*.
-  /// * [interactionInfo]: Information about interactions with the message; may be null *(optional)*.
-  /// * [unreadReactions]: Information about unread reactions added to the message.
-  /// * [replyInChatId]: If non-zero, the identifier of the chat to which the replied message belongs; Currently, only messages in the Replies chat can have different reply_in_chat_id and chat_id.
-  /// * [replyToMessageId]: If non-zero, the identifier of the message this message is replying to; can be the identifier of a deleted message.
-  /// * [messageThreadId]: If non-zero, the identifier of the message thread the message belongs to; unique within the chat to which the message belongs.
-  /// * [selfDestructTime]: The message's self-destruct time, in seconds; 0 if none. TDLib will send updateDeleteMessages or updateMessageContent once the time expires.
-  /// * [selfDestructIn]: Time left before the message self-destruct timer expires, in seconds. If the self-destruct timer isn't started yet, equals to the value of the self_destruct_time field.
-  /// * [autoDeleteIn]: Time left before the message will be automatically deleted by message_auto_delete_time setting of the chat, in seconds; 0 if never. TDLib will send updateDeleteMessages or updateMessageContent once the time expires.
-  /// * [viaBotUserId]: If non-zero, the user identifier of the bot through which this message was sent.
-  /// * [authorSignature]: For channel posts and anonymous group messages, optional author signature.
-  /// * [mediaAlbumId]: Unique identifier of an album this message belongs to. Only audios, documents, photos and videos can be grouped together in albums.
-  /// * [restrictionReason]: If non-empty, contains a human-readable description of the reason why access to this message must be restricted.
-  /// * [content]: Content of the message.
-  /// * [replyMarkup]: Reply markup for the message; may be null *(optional)*.
-class Message extends TdObject {
+///
+/// Describes a message.
+///
+/// * [id]: Message identifier; unique for the chat to which the message belongs.
+/// * [senderId]: Identifier of the sender of the message.
+/// * [chatId]: Chat identifier.
+/// * [sendingState]: The sending state of the message; may be null *(optional)*.
+/// * [schedulingState]: The scheduling state of the message; may be null *(optional)*.
+/// * [isOutgoing]: True, if the message is outgoing.
+/// * [isPinned]: True, if the message is pinned.
+/// * [canBeEdited]: True, if the message can be edited. For live location and poll messages this fields shows whether editMessageLiveLocation or stopPoll can be used with this message by the application.
+/// * [canBeForwarded]: True, if the message can be forwarded.
+/// * [canBeSaved]: True, if content of the message can be saved locally or copied.
+/// * [canBeDeletedOnlyForSelf]: True, if the message can be deleted only for the current user while other users will continue to see it.
+/// * [canBeDeletedForAllUsers]: True, if the message can be deleted for all users.
+/// * [canGetAddedReactions]: True, if the list of added reactions is available through getMessageAddedReactions.
+/// * [canGetStatistics]: True, if the message statistics are available through getMessageStatistics.
+/// * [canGetMessageThread]: True, if information about the message thread is available through getMessageThread and getMessageThreadHistory.
+/// * [canGetViewers]: True, if chat members already viewed the message can be received through getMessageViewers.
+/// * [canGetMediaTimestampLinks]: True, if media timestamp links can be generated for media timestamp entities in the message text, caption or web page description through getMessageLink.
+/// * [canReportReactions]: True, if reactions on the message can be reported through reportMessageReactions.
+/// * [hasTimestampedMedia]: True, if media timestamp entities refers to a media in this message as opposed to a media in the replied message.
+/// * [isChannelPost]: True, if the message is a channel post. All messages to channels are channel posts, all other messages are not channel posts.
+/// * [isTopicMessage]: True, if the message is a forum topic message.
+/// * [containsUnreadMention]: True, if the message contains an unread mention for the current user.
+/// * [date]: Point in time (Unix timestamp) when the message was sent.
+/// * [editDate]: Point in time (Unix timestamp) when the message was last edited.
+/// * [forwardInfo]: Information about the initial message sender; may be null *(optional)*.
+/// * [interactionInfo]: Information about interactions with the message; may be null *(optional)*.
+/// * [unreadReactions]: Information about unread reactions added to the message.
+/// * [replyInChatId]: If non-zero, the identifier of the chat to which the replied message belongs; Currently, only messages in the Replies chat can have different reply_in_chat_id and chat_id.
+/// * [replyToMessageId]: If non-zero, the identifier of the message this message is replying to; can be the identifier of a deleted message.
+/// * [messageThreadId]: If non-zero, the identifier of the message thread the message belongs to; unique within the chat to which the message belongs.
+/// * [selfDestructTime]: The message's self-destruct time, in seconds; 0 if none. TDLib will send updateDeleteMessages or updateMessageContent once the time expires.
+/// * [selfDestructIn]: Time left before the message self-destruct timer expires, in seconds. If the self-destruct timer isn't started yet, equals to the value of the self_destruct_time field.
+/// * [autoDeleteIn]: Time left before the message will be automatically deleted by message_auto_delete_time setting of the chat, in seconds; 0 if never. TDLib will send updateDeleteMessages or updateMessageContent once the time expires.
+/// * [viaBotUserId]: If non-zero, the user identifier of the bot through which this message was sent.
+/// * [authorSignature]: For channel posts and anonymous group messages, optional author signature.
+/// * [mediaAlbumId]: Unique identifier of an album this message belongs to. Only audios, documents, photos and videos can be grouped together in albums.
+/// * [restrictionReason]: If non-empty, contains a human-readable description of the reason why access to this message must be restricted.
+/// * [content]: Content of the message.
+/// * [replyMarkup]: Reply markup for the message; may be null *(optional)*.
+final class Message extends TdObject {
   
   /// **Message** *(message)* - basic class
   ///
@@ -304,9 +304,9 @@ class Message extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "sender_id": senderId.toJson(),
       "chat_id": chatId,
@@ -346,8 +346,9 @@ class Message extends TdObject {
       "restriction_reason": restrictionReason,
       "content": content.toJson(),
       "reply_markup": replyMarkup?.toJson(),
-    };
-  }
+		};
+	}
+
   
   Message copyWith({
     int? id,
@@ -435,8 +436,11 @@ class Message extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'message';
-  
+  static const String objectType = 'message';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

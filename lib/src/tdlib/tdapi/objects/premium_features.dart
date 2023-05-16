@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **PremiumFeatures** *(premiumFeatures)* - basic class
-  ///
-  /// Contains information about features, available to Premium users.
-  ///
-  /// * [features]: The list of available features.
-  /// * [limits]: The list of limits, increased for Premium users.
-  /// * [paymentLink]: An internal link to be opened to pay for Telegram Premium if store payment isn't possible; may be null if direct payment isn't available *(optional)*.
-class PremiumFeatures extends TdObject {
+///
+/// Contains information about features, available to Premium users.
+///
+/// * [features]: The list of available features.
+/// * [limits]: The list of limits, increased for Premium users.
+/// * [paymentLink]: An internal link to be opened to pay for Telegram Premium if store payment isn't possible; may be null if direct payment isn't available *(optional)*.
+final class PremiumFeatures extends TdObject {
   
   /// **PremiumFeatures** *(premiumFeatures)* - basic class
   ///
@@ -52,14 +52,15 @@ class PremiumFeatures extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "features": features.map((i) => i.toJson()).toList(),
       "limits": limits.map((i) => i.toJson()).toList(),
       "payment_link": paymentLink?.toJson(),
-    };
-  }
+		};
+	}
+
   
   PremiumFeatures copyWith({
     List<PremiumFeature>? features,
@@ -75,8 +76,11 @@ class PremiumFeatures extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'premiumFeatures';
-  
+  static const String objectType = 'premiumFeatures';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

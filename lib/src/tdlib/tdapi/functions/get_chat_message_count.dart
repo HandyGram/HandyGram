@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **GetChatMessageCount** *(getChatMessageCount)* - TDLib function
-  ///
-  /// Returns approximate number of messages of the specified type in the chat.
-  ///
-  /// * [chatId]: Identifier of the chat in which to count messages.
-  /// * [filter]: Filter for message content; searchMessagesFilterEmpty is unsupported in this function.
-  /// * [returnLocal]: Pass true to get the number of messages without sending network requests, or -1 if the number of messages is unknown locally.
-  ///
-  /// [Count] is returned on completion.
-class GetChatMessageCount extends TdFunction {
+///
+/// Returns approximate number of messages of the specified type in the chat.
+///
+/// * [chatId]: Identifier of the chat in which to count messages.
+/// * [filter]: Filter for message content; searchMessagesFilterEmpty is unsupported in this function.
+/// * [returnLocal]: Pass true to get the number of messages without sending network requests, or -1 if the number of messages is unknown locally.
+///
+/// [Count] is returned on completion.
+final class GetChatMessageCount extends TdFunction {
   
   /// **GetChatMessageCount** *(getChatMessageCount)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class GetChatMessageCount extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "filter": filter.toJson(),
       "return_local": returnLocal,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetChatMessageCount copyWith({
     int? chatId,
@@ -56,8 +57,11 @@ class GetChatMessageCount extends TdFunction {
     returnLocal: returnLocal ?? this.returnLocal,
   );
 
-  static const String constructor = 'getChatMessageCount';
-  
+  static const String objectType = 'getChatMessageCount';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

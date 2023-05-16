@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **GetChatNotificationSettingsExceptions** *(getChatNotificationSettingsExceptions)* - TDLib function
-  ///
-  /// Returns list of chats with non-default notification settings.
-  ///
-  /// * [scope]: If specified, only chats from the scope will be returned; pass null to return chats from all scopes *(optional)*.
-  /// * [compareSound]: Pass true to include in the response chats with only non-default sound.
-  ///
-  /// [Chats] is returned on completion.
-class GetChatNotificationSettingsExceptions extends TdFunction {
+///
+/// Returns list of chats with non-default notification settings.
+///
+/// * [scope]: If specified, only chats from the scope will be returned; pass null to return chats from all scopes *(optional)*.
+/// * [compareSound]: Pass true to include in the response chats with only non-default sound.
+///
+/// [Chats] is returned on completion.
+final class GetChatNotificationSettingsExceptions extends TdFunction {
   
   /// **GetChatNotificationSettingsExceptions** *(getChatNotificationSettingsExceptions)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class GetChatNotificationSettingsExceptions extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "scope": scope?.toJson(),
       "compare_sound": compareSound,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetChatNotificationSettingsExceptions copyWith({
     NotificationSettingsScope? scope,
@@ -47,8 +48,11 @@ class GetChatNotificationSettingsExceptions extends TdFunction {
     compareSound: compareSound ?? this.compareSound,
   );
 
-  static const String constructor = 'getChatNotificationSettingsExceptions';
-  
+  static const String objectType = 'getChatNotificationSettingsExceptions';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

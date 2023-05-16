@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **UnpinChatMessage** *(unpinChatMessage)* - TDLib function
-  ///
-  /// Removes a pinned message from a chat; requires can_pin_messages rights in the group or can_edit_messages rights in the channel.
-  ///
-  /// * [chatId]: Identifier of the chat.
-  /// * [messageId]: Identifier of the removed pinned message.
-  ///
-  /// [Ok] is returned on completion.
-class UnpinChatMessage extends TdFunction {
+///
+/// Removes a pinned message from a chat; requires can_pin_messages rights in the group or can_edit_messages rights in the channel.
+///
+/// * [chatId]: Identifier of the chat.
+/// * [messageId]: Identifier of the removed pinned message.
+///
+/// [Ok] is returned on completion.
+final class UnpinChatMessage extends TdFunction {
   
   /// **UnpinChatMessage** *(unpinChatMessage)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class UnpinChatMessage extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   UnpinChatMessage copyWith({
     int? chatId,
@@ -47,8 +48,11 @@ class UnpinChatMessage extends TdFunction {
     messageId: messageId ?? this.messageId,
   );
 
-  static const String constructor = 'unpinChatMessage';
-  
+  static const String objectType = 'unpinChatMessage';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

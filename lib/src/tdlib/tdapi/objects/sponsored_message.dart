@@ -1,17 +1,17 @@
 part of '../tdapi.dart';
 
 /// **SponsoredMessage** *(sponsoredMessage)* - basic class
-  ///
-  /// Describes a sponsored message.
-  ///
-  /// * [messageId]: Message identifier; unique for the chat to which the sponsored message belongs among both ordinary and sponsored messages.
-  /// * [isRecommended]: True, if the message needs to be labeled as "recommended" instead of "sponsored".
-  /// * [sponsorChatId]: Sponsor chat identifier; 0 if the sponsor chat is accessible through an invite link.
-  /// * [sponsorChatInfo]: Information about the sponsor chat; may be null unless sponsor_chat_id == 0 *(optional)*.
-  /// * [showChatPhoto]: True, if the sponsor's chat photo must be shown.
-  /// * [link]: An internal link to be opened when the sponsored message is clicked; may be null if the sponsor chat needs to be opened instead *(optional)*.
-  /// * [content]: Content of the message. Currently, can be only of the type messageText.
-class SponsoredMessage extends TdObject {
+///
+/// Describes a sponsored message.
+///
+/// * [messageId]: Message identifier; unique for the chat to which the sponsored message belongs among both ordinary and sponsored messages.
+/// * [isRecommended]: True, if the message needs to be labeled as "recommended" instead of "sponsored".
+/// * [sponsorChatId]: Sponsor chat identifier; 0 if the sponsor chat is accessible through an invite link.
+/// * [sponsorChatInfo]: Information about the sponsor chat; may be null unless sponsor_chat_id == 0 *(optional)*.
+/// * [showChatPhoto]: True, if the sponsor's chat photo must be shown.
+/// * [link]: An internal link to be opened when the sponsored message is clicked; may be null if the sponsor chat needs to be opened instead *(optional)*.
+/// * [content]: Content of the message. Currently, can be only of the type messageText.
+final class SponsoredMessage extends TdObject {
   
   /// **SponsoredMessage** *(sponsoredMessage)* - basic class
   ///
@@ -68,9 +68,9 @@ class SponsoredMessage extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "message_id": messageId,
       "is_recommended": isRecommended,
       "sponsor_chat_id": sponsorChatId,
@@ -78,8 +78,9 @@ class SponsoredMessage extends TdObject {
       "show_chat_photo": showChatPhoto,
       "link": link?.toJson(),
       "content": content.toJson(),
-    };
-  }
+		};
+	}
+
   
   SponsoredMessage copyWith({
     int? messageId,
@@ -99,8 +100,11 @@ class SponsoredMessage extends TdObject {
     content: content ?? this.content,
   );
 
-  static const String constructor = 'sponsoredMessage';
-  
+  static const String objectType = 'sponsoredMessage';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

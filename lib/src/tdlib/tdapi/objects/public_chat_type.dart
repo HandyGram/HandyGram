@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **PublicChatType** *(publicChatType)* - parent
-  ///
-  /// Describes a type of public chats.
-class PublicChatType extends TdObject {
+///
+/// Describes a type of public chats.
+sealed class PublicChatType extends TdObject {
   
   /// **PublicChatType** *(publicChatType)* - parent
   ///
@@ -15,35 +15,38 @@ class PublicChatType extends TdObject {
   /// * [PublicChatTypeIsLocationBased]
   factory PublicChatType.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case PublicChatTypeHasUsername.constructor:
+      case PublicChatTypeHasUsername.objectType:
         return PublicChatTypeHasUsername.fromJson(json);
-      case PublicChatTypeIsLocationBased.constructor:
+      case PublicChatTypeIsLocationBased.objectType:
         return PublicChatTypeIsLocationBased.fromJson(json);
       default:
-        return const PublicChatType();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of PublicChatType)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  PublicChatType copyWith() => const PublicChatType();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'publicChatType';
   
+  PublicChatType copyWith();
+
+  static const String objectType = 'publicChatType';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PublicChatTypeHasUsername** *(publicChatTypeHasUsername)* - child of PublicChatType
-  ///
-  /// The chat is public, because it has an active username.
-class PublicChatTypeHasUsername extends PublicChatType {
+///
+/// The chat is public, because it has an active username.
+final class PublicChatTypeHasUsername extends PublicChatType {
   
   /// **PublicChatTypeHasUsername** *(publicChatTypeHasUsername)* - child of PublicChatType
   ///
@@ -54,26 +57,30 @@ class PublicChatTypeHasUsername extends PublicChatType {
   factory PublicChatTypeHasUsername.fromJson(Map<String, dynamic> json) => const PublicChatTypeHasUsername();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PublicChatTypeHasUsername copyWith() => const PublicChatTypeHasUsername();
 
-  static const String constructor = 'publicChatTypeHasUsername';
-  
+  static const String objectType = 'publicChatTypeHasUsername';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PublicChatTypeIsLocationBased** *(publicChatTypeIsLocationBased)* - child of PublicChatType
-  ///
-  /// The chat is public, because it is a location-based supergroup.
-class PublicChatTypeIsLocationBased extends PublicChatType {
+///
+/// The chat is public, because it is a location-based supergroup.
+final class PublicChatTypeIsLocationBased extends PublicChatType {
   
   /// **PublicChatTypeIsLocationBased** *(publicChatTypeIsLocationBased)* - child of PublicChatType
   ///
@@ -84,17 +91,21 @@ class PublicChatTypeIsLocationBased extends PublicChatType {
   factory PublicChatTypeIsLocationBased.fromJson(Map<String, dynamic> json) => const PublicChatTypeIsLocationBased();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PublicChatTypeIsLocationBased copyWith() => const PublicChatTypeIsLocationBased();
 
-  static const String constructor = 'publicChatTypeIsLocationBased';
-  
+  static const String objectType = 'publicChatTypeIsLocationBased';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

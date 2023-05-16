@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **PreliminaryUploadFile** *(preliminaryUploadFile)* - TDLib function
-  ///
-  /// Preliminary uploads a file to the cloud before sending it in a message, which can be useful for uploading of being recorded voice and video notes. Updates updateFile will be used. to notify about upload progress and successful completion of the upload. The file will not have a persistent remote identifier until it will be sent in a message.
-  ///
-  /// * [file]: File to upload.
-  /// * [fileType]: File type; pass null if unknown *(optional)*.
-  /// * [priority]: Priority of the upload (1-32). The higher the priority, the earlier the file will be uploaded. If the priorities of two files are equal, then the first one for which preliminaryUploadFile was called will be uploaded first.
-  ///
-  /// [File] is returned on completion.
-class PreliminaryUploadFile extends TdFunction {
+///
+/// Preliminary uploads a file to the cloud before sending it in a message, which can be useful for uploading of being recorded voice and video notes. Updates updateFile will be used. to notify about upload progress and successful completion of the upload. The file will not have a persistent remote identifier until it will be sent in a message.
+///
+/// * [file]: File to upload.
+/// * [fileType]: File type; pass null if unknown *(optional)*.
+/// * [priority]: Priority of the upload (1-32). The higher the priority, the earlier the file will be uploaded. If the priorities of two files are equal, then the first one for which preliminaryUploadFile was called will be uploaded first.
+///
+/// [File] is returned on completion.
+final class PreliminaryUploadFile extends TdFunction {
   
   /// **PreliminaryUploadFile** *(preliminaryUploadFile)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class PreliminaryUploadFile extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "file": file.toJson(),
       "file_type": fileType?.toJson(),
       "priority": priority,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   PreliminaryUploadFile copyWith({
     InputFile? file,
@@ -56,8 +57,11 @@ class PreliminaryUploadFile extends TdFunction {
     priority: priority ?? this.priority,
   );
 
-  static const String constructor = 'preliminaryUploadFile';
-  
+  static const String objectType = 'preliminaryUploadFile';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

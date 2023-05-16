@@ -1,16 +1,16 @@
 part of '../tdapi.dart';
 
 /// **GetChatInviteLinkMembers** *(getChatInviteLinkMembers)* - TDLib function
-  ///
-  /// Returns chat members joined a chat via an invite link. Requires administrator privileges and can_invite_users right in the chat for own links and owner privileges for other links.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [inviteLink]: Invite link for which to return chat members.
-  /// * [offsetMember]: A chat member from which to return next chat members; pass null to get results from the beginning *(optional)*.
-  /// * [limit]: The maximum number of chat members to return; up to 100.
-  ///
-  /// [ChatInviteLinkMembers] is returned on completion.
-class GetChatInviteLinkMembers extends TdFunction {
+///
+/// Returns chat members joined a chat via an invite link. Requires administrator privileges and can_invite_users right in the chat for own links and owner privileges for other links.
+///
+/// * [chatId]: Chat identifier.
+/// * [inviteLink]: Invite link for which to return chat members.
+/// * [offsetMember]: A chat member from which to return next chat members; pass null to get results from the beginning *(optional)*.
+/// * [limit]: The maximum number of chat members to return; up to 100.
+///
+/// [ChatInviteLinkMembers] is returned on completion.
+final class GetChatInviteLinkMembers extends TdFunction {
   
   /// **GetChatInviteLinkMembers** *(getChatInviteLinkMembers)* - TDLib function
   ///
@@ -43,15 +43,16 @@ class GetChatInviteLinkMembers extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "invite_link": inviteLink,
       "offset_member": offsetMember?.toJson(),
       "limit": limit,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetChatInviteLinkMembers copyWith({
     int? chatId,
@@ -65,8 +66,11 @@ class GetChatInviteLinkMembers extends TdFunction {
     limit: limit ?? this.limit,
   );
 
-  static const String constructor = 'getChatInviteLinkMembers';
-  
+  static const String objectType = 'getChatInviteLinkMembers';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

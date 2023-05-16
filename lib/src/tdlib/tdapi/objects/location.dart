@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **Location** *(location)* - basic class
-  ///
-  /// Describes a location on planet Earth.
-  ///
-  /// * [latitude]: Latitude of the location in degrees; as defined by the sender.
-  /// * [longitude]: Longitude of the location, in degrees; as defined by the sender.
-  /// * [horizontalAccuracy]: The estimated horizontal accuracy of the location, in meters; as defined by the sender. 0 if unknown.
-class Location extends TdObject {
+///
+/// Describes a location on planet Earth.
+///
+/// * [latitude]: Latitude of the location in degrees; as defined by the sender.
+/// * [longitude]: Longitude of the location, in degrees; as defined by the sender.
+/// * [horizontalAccuracy]: The estimated horizontal accuracy of the location, in meters; as defined by the sender. 0 if unknown.
+final class Location extends TdObject {
   
   /// **Location** *(location)* - basic class
   ///
@@ -40,14 +40,15 @@ class Location extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "latitude": latitude,
       "longitude": longitude,
       "horizontal_accuracy": horizontalAccuracy,
-    };
-  }
+		};
+	}
+
   
   Location copyWith({
     double? latitude,
@@ -59,8 +60,11 @@ class Location extends TdObject {
     horizontalAccuracy: horizontalAccuracy ?? this.horizontalAccuracy,
   );
 
-  static const String constructor = 'location';
-  
+  static const String objectType = 'location';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

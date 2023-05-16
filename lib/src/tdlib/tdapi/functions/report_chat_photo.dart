@@ -1,16 +1,16 @@
 part of '../tdapi.dart';
 
 /// **ReportChatPhoto** *(reportChatPhoto)* - TDLib function
-  ///
-  /// Reports a chat photo to the Telegram moderators. A chat photo can be reported only if chat.can_be_reported.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [fileId]: Identifier of the photo to report. Only full photos from chatPhoto can be reported.
-  /// * [reason]: The reason for reporting the chat photo.
-  /// * [text]: Additional report details; 0-1024 characters.
-  ///
-  /// [Ok] is returned on completion.
-class ReportChatPhoto extends TdFunction {
+///
+/// Reports a chat photo to the Telegram moderators. A chat photo can be reported only if chat.can_be_reported.
+///
+/// * [chatId]: Chat identifier.
+/// * [fileId]: Identifier of the photo to report. Only full photos from chatPhoto can be reported.
+/// * [reason]: The reason for reporting the chat photo.
+/// * [text]: Additional report details; 0-1024 characters.
+///
+/// [Ok] is returned on completion.
+final class ReportChatPhoto extends TdFunction {
   
   /// **ReportChatPhoto** *(reportChatPhoto)* - TDLib function
   ///
@@ -43,15 +43,16 @@ class ReportChatPhoto extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "file_id": fileId,
       "reason": reason.toJson(),
       "text": text,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ReportChatPhoto copyWith({
     int? chatId,
@@ -65,8 +66,11 @@ class ReportChatPhoto extends TdFunction {
     text: text ?? this.text,
   );
 
-  static const String constructor = 'reportChatPhoto';
-  
+  static const String objectType = 'reportChatPhoto';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,16 +1,16 @@
 part of '../tdapi.dart';
 
 /// **GetMessagePublicForwards** *(getMessagePublicForwards)* - TDLib function
-  ///
-  /// Returns forwarded copies of a channel message to different public channels. For optimal performance, the number of returned messages is chosen by TDLib.
-  ///
-  /// * [chatId]: Chat identifier of the message.
-  /// * [messageId]: Message identifier.
-  /// * [offset]: Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results.
-  /// * [limit]: The maximum number of messages to be returned; must be positive and can't be greater than 100. For optimal performance, the number of returned messages is chosen by TDLib and can be smaller than the specified limit.
-  ///
-  /// [FoundMessages] is returned on completion.
-class GetMessagePublicForwards extends TdFunction {
+///
+/// Returns forwarded copies of a channel message to different public channels. For optimal performance, the number of returned messages is chosen by TDLib.
+///
+/// * [chatId]: Chat identifier of the message.
+/// * [messageId]: Message identifier.
+/// * [offset]: Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results.
+/// * [limit]: The maximum number of messages to be returned; must be positive and can't be greater than 100. For optimal performance, the number of returned messages is chosen by TDLib and can be smaller than the specified limit.
+///
+/// [FoundMessages] is returned on completion.
+final class GetMessagePublicForwards extends TdFunction {
   
   /// **GetMessagePublicForwards** *(getMessagePublicForwards)* - TDLib function
   ///
@@ -43,15 +43,16 @@ class GetMessagePublicForwards extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "offset": offset,
       "limit": limit,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetMessagePublicForwards copyWith({
     int? chatId,
@@ -65,8 +66,11 @@ class GetMessagePublicForwards extends TdFunction {
     limit: limit ?? this.limit,
   );
 
-  static const String constructor = 'getMessagePublicForwards';
-  
+  static const String objectType = 'getMessagePublicForwards';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

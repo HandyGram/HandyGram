@@ -1,23 +1,23 @@
 part of '../tdapi.dart';
 
 /// **ChatEventLogFilters** *(chatEventLogFilters)* - basic class
-  ///
-  /// Represents a set of filters used to obtain a chat event log.
-  ///
-  /// * [messageEdits]: True, if message edits need to be returned.
-  /// * [messageDeletions]: True, if message deletions need to be returned.
-  /// * [messagePins]: True, if pin/unpin events need to be returned.
-  /// * [memberJoins]: True, if members joining events need to be returned.
-  /// * [memberLeaves]: True, if members leaving events need to be returned.
-  /// * [memberInvites]: True, if invited member events need to be returned.
-  /// * [memberPromotions]: True, if member promotion/demotion events need to be returned.
-  /// * [memberRestrictions]: True, if member restricted/unrestricted/banned/unbanned events need to be returned.
-  /// * [infoChanges]: True, if changes in chat information need to be returned.
-  /// * [settingChanges]: True, if changes in chat settings need to be returned.
-  /// * [inviteLinkChanges]: True, if changes to invite links need to be returned.
-  /// * [videoChatChanges]: True, if video chat actions need to be returned.
-  /// * [forumChanges]: True, if forum-related actions need to be returned.
-class ChatEventLogFilters extends TdObject {
+///
+/// Represents a set of filters used to obtain a chat event log.
+///
+/// * [messageEdits]: True, if message edits need to be returned.
+/// * [messageDeletions]: True, if message deletions need to be returned.
+/// * [messagePins]: True, if pin/unpin events need to be returned.
+/// * [memberJoins]: True, if members joining events need to be returned.
+/// * [memberLeaves]: True, if members leaving events need to be returned.
+/// * [memberInvites]: True, if invited member events need to be returned.
+/// * [memberPromotions]: True, if member promotion/demotion events need to be returned.
+/// * [memberRestrictions]: True, if member restricted/unrestricted/banned/unbanned events need to be returned.
+/// * [infoChanges]: True, if changes in chat information need to be returned.
+/// * [settingChanges]: True, if changes in chat settings need to be returned.
+/// * [inviteLinkChanges]: True, if changes to invite links need to be returned.
+/// * [videoChatChanges]: True, if video chat actions need to be returned.
+/// * [forumChanges]: True, if forum-related actions need to be returned.
+final class ChatEventLogFilters extends TdObject {
   
   /// **ChatEventLogFilters** *(chatEventLogFilters)* - basic class
   ///
@@ -110,9 +110,9 @@ class ChatEventLogFilters extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "message_edits": messageEdits,
       "message_deletions": messageDeletions,
       "message_pins": messagePins,
@@ -126,8 +126,9 @@ class ChatEventLogFilters extends TdObject {
       "invite_link_changes": inviteLinkChanges,
       "video_chat_changes": videoChatChanges,
       "forum_changes": forumChanges,
-    };
-  }
+		};
+	}
+
   
   ChatEventLogFilters copyWith({
     bool? messageEdits,
@@ -159,8 +160,11 @@ class ChatEventLogFilters extends TdObject {
     forumChanges: forumChanges ?? this.forumChanges,
   );
 
-  static const String constructor = 'chatEventLogFilters';
-  
+  static const String objectType = 'chatEventLogFilters';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

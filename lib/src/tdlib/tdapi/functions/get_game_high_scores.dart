@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **GetGameHighScores** *(getGameHighScores)* - TDLib function
-  ///
-  /// Returns the high scores for a game and some part of the high score table in the range of the specified user; for bots only.
-  ///
-  /// * [chatId]: The chat that contains the message with the game.
-  /// * [messageId]: Identifier of the message.
-  /// * [userId]: User identifier.
-  ///
-  /// [GameHighScores] is returned on completion.
-class GetGameHighScores extends TdFunction {
+///
+/// Returns the high scores for a game and some part of the high score table in the range of the specified user; for bots only.
+///
+/// * [chatId]: The chat that contains the message with the game.
+/// * [messageId]: Identifier of the message.
+/// * [userId]: User identifier.
+///
+/// [GameHighScores] is returned on completion.
+final class GetGameHighScores extends TdFunction {
   
   /// **GetGameHighScores** *(getGameHighScores)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class GetGameHighScores extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "user_id": userId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetGameHighScores copyWith({
     int? chatId,
@@ -56,8 +57,11 @@ class GetGameHighScores extends TdFunction {
     userId: userId ?? this.userId,
   );
 
-  static const String constructor = 'getGameHighScores';
-  
+  static const String objectType = 'getGameHighScores';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

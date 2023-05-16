@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **Thumbnail** *(thumbnail)* - basic class
-  ///
-  /// Represents a thumbnail.
-  ///
-  /// * [format]: Thumbnail format.
-  /// * [width]: Thumbnail width.
-  /// * [height]: Thumbnail height.
-  /// * [file]: The thumbnail.
-class Thumbnail extends TdObject {
+///
+/// Represents a thumbnail.
+///
+/// * [format]: Thumbnail format.
+/// * [width]: Thumbnail width.
+/// * [height]: Thumbnail height.
+/// * [file]: The thumbnail.
+final class Thumbnail extends TdObject {
   
   /// **Thumbnail** *(thumbnail)* - basic class
   ///
@@ -47,15 +47,16 @@ class Thumbnail extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "format": format.toJson(),
       "width": width,
       "height": height,
       "file": file.toJson(),
-    };
-  }
+		};
+	}
+
   
   Thumbnail copyWith({
     ThumbnailFormat? format,
@@ -69,8 +70,11 @@ class Thumbnail extends TdObject {
     file: file ?? this.file,
   );
 
-  static const String constructor = 'thumbnail';
-  
+  static const String objectType = 'thumbnail';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

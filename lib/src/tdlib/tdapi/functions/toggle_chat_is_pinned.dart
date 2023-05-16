@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **ToggleChatIsPinned** *(toggleChatIsPinned)* - TDLib function
-  ///
-  /// Changes the pinned state of a chat. There can be up to getOption("pinned_chat_count_max")/getOption("pinned_archived_chat_count_max") pinned non-secret chats and the same number of secret chats in the main/archive chat list. The limit can be increased with Telegram Premium.
-  ///
-  /// * [chatList]: Chat list in which to change the pinned state of the chat.
-  /// * [chatId]: Chat identifier.
-  /// * [isPinned]: Pass true to pin the chat; pass false to unpin it.
-  ///
-  /// [Ok] is returned on completion.
-class ToggleChatIsPinned extends TdFunction {
+///
+/// Changes the pinned state of a chat. There can be up to getOption("pinned_chat_count_max")/getOption("pinned_archived_chat_count_max") pinned non-secret chats and the same number of secret chats in the main/archive chat list. The limit can be increased with Telegram Premium.
+///
+/// * [chatList]: Chat list in which to change the pinned state of the chat.
+/// * [chatId]: Chat identifier.
+/// * [isPinned]: Pass true to pin the chat; pass false to unpin it.
+///
+/// [Ok] is returned on completion.
+final class ToggleChatIsPinned extends TdFunction {
   
   /// **ToggleChatIsPinned** *(toggleChatIsPinned)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class ToggleChatIsPinned extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_list": chatList.toJson(),
       "chat_id": chatId,
       "is_pinned": isPinned,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ToggleChatIsPinned copyWith({
     ChatList? chatList,
@@ -56,8 +57,11 @@ class ToggleChatIsPinned extends TdFunction {
     isPinned: isPinned ?? this.isPinned,
   );
 
-  static const String constructor = 'toggleChatIsPinned';
-  
+  static const String objectType = 'toggleChatIsPinned';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

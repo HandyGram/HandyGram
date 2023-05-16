@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **SearchHashtags** *(searchHashtags)* - TDLib function
-  ///
-  /// Searches for recently used hashtags by their prefix.
-  ///
-  /// * [prefix]: Hashtag prefix to search for.
-  /// * [limit]: The maximum number of hashtags to be returned.
-  ///
-  /// [Hashtags] is returned on completion.
-class SearchHashtags extends TdFunction {
+///
+/// Searches for recently used hashtags by their prefix.
+///
+/// * [prefix]: Hashtag prefix to search for.
+/// * [limit]: The maximum number of hashtags to be returned.
+///
+/// [Hashtags] is returned on completion.
+final class SearchHashtags extends TdFunction {
   
   /// **SearchHashtags** *(searchHashtags)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class SearchHashtags extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "prefix": prefix,
       "limit": limit,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SearchHashtags copyWith({
     String? prefix,
@@ -47,8 +48,11 @@ class SearchHashtags extends TdFunction {
     limit: limit ?? this.limit,
   );
 
-  static const String constructor = 'searchHashtags';
-  
+  static const String objectType = 'searchHashtags';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

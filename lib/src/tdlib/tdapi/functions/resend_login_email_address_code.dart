@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **ResendLoginEmailAddressCode** *(resendLoginEmailAddressCode)* - TDLib function
-  ///
-  /// Resends the login email address verification code.
-  ///
-  /// [EmailAddressAuthenticationCodeInfo] is returned on completion.
-class ResendLoginEmailAddressCode extends TdFunction {
+///
+/// Resends the login email address verification code.
+///
+/// [EmailAddressAuthenticationCodeInfo] is returned on completion.
+final class ResendLoginEmailAddressCode extends TdFunction {
   
   /// **ResendLoginEmailAddressCode** *(resendLoginEmailAddressCode)* - TDLib function
   ///
@@ -17,16 +17,20 @@ class ResendLoginEmailAddressCode extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ResendLoginEmailAddressCode copyWith() => const ResendLoginEmailAddressCode();
 
-  static const String constructor = 'resendLoginEmailAddressCode';
-  
+  static const String objectType = 'resendLoginEmailAddressCode';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

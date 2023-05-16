@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **CallState** *(callState)* - parent
-  ///
-  /// Describes the current call state.
-class CallState extends TdObject {
+///
+/// Describes the current call state.
+sealed class CallState extends TdObject {
   
   /// **CallState** *(callState)* - parent
   ///
@@ -19,46 +19,49 @@ class CallState extends TdObject {
   /// * [CallStateError]
   factory CallState.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case CallStatePending.constructor:
+      case CallStatePending.objectType:
         return CallStatePending.fromJson(json);
-      case CallStateExchangingKeys.constructor:
+      case CallStateExchangingKeys.objectType:
         return CallStateExchangingKeys.fromJson(json);
-      case CallStateReady.constructor:
+      case CallStateReady.objectType:
         return CallStateReady.fromJson(json);
-      case CallStateHangingUp.constructor:
+      case CallStateHangingUp.objectType:
         return CallStateHangingUp.fromJson(json);
-      case CallStateDiscarded.constructor:
+      case CallStateDiscarded.objectType:
         return CallStateDiscarded.fromJson(json);
-      case CallStateError.constructor:
+      case CallStateError.objectType:
         return CallStateError.fromJson(json);
       default:
-        return const CallState();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of CallState)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  CallState copyWith() => const CallState();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'callState';
   
+  CallState copyWith();
+
+  static const String objectType = 'callState';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **CallStatePending** *(callStatePending)* - child of CallState
-  ///
-  /// The call is pending, waiting to be accepted by a user.
-  ///
-  /// * [isCreated]: True, if the call has already been created by the server.
-  /// * [isReceived]: True, if the call has already been received by the other party.
-class CallStatePending extends CallState {
+///
+/// The call is pending, waiting to be accepted by a user.
+///
+/// * [isCreated]: True, if the call has already been created by the server.
+/// * [isReceived]: True, if the call has already been received by the other party.
+final class CallStatePending extends CallState {
   
   /// **CallStatePending** *(callStatePending)* - child of CallState
   ///
@@ -85,13 +88,14 @@ class CallStatePending extends CallState {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "is_created": isCreated,
       "is_received": isReceived,
-    };
-  }
+		};
+	}
+
   
   @override
   CallStatePending copyWith({
@@ -102,17 +106,20 @@ class CallStatePending extends CallState {
     isReceived: isReceived ?? this.isReceived,
   );
 
-  static const String constructor = 'callStatePending';
-  
+  static const String objectType = 'callStatePending';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **CallStateExchangingKeys** *(callStateExchangingKeys)* - child of CallState
-  ///
-  /// The call has been answered and encryption keys are being exchanged.
-class CallStateExchangingKeys extends CallState {
+///
+/// The call has been answered and encryption keys are being exchanged.
+final class CallStateExchangingKeys extends CallState {
   
   /// **CallStateExchangingKeys** *(callStateExchangingKeys)* - child of CallState
   ///
@@ -123,33 +130,37 @@ class CallStateExchangingKeys extends CallState {
   factory CallStateExchangingKeys.fromJson(Map<String, dynamic> json) => const CallStateExchangingKeys();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   CallStateExchangingKeys copyWith() => const CallStateExchangingKeys();
 
-  static const String constructor = 'callStateExchangingKeys';
-  
+  static const String objectType = 'callStateExchangingKeys';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **CallStateReady** *(callStateReady)* - child of CallState
-  ///
-  /// The call is ready to use.
-  ///
-  /// * [protocol]: Call protocols supported by the peer.
-  /// * [servers]: List of available call servers.
-  /// * [config]: A JSON-encoded call config.
-  /// * [encryptionKey]: Call encryption key.
-  /// * [emojis]: Encryption key emojis fingerprint.
-  /// * [allowP2p]: True, if peer-to-peer connection is allowed by users privacy settings.
-class CallStateReady extends CallState {
+///
+/// The call is ready to use.
+///
+/// * [protocol]: Call protocols supported by the peer.
+/// * [servers]: List of available call servers.
+/// * [config]: A JSON-encoded call config.
+/// * [encryptionKey]: Call encryption key.
+/// * [emojis]: Encryption key emojis fingerprint.
+/// * [allowP2p]: True, if peer-to-peer connection is allowed by users privacy settings.
+final class CallStateReady extends CallState {
   
   /// **CallStateReady** *(callStateReady)* - child of CallState
   ///
@@ -200,17 +211,18 @@ class CallStateReady extends CallState {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "protocol": protocol.toJson(),
       "servers": servers.map((i) => i.toJson()).toList(),
       "config": config,
       "encryption_key": encryptionKey,
       "emojis": emojis.map((i) => i).toList(),
       "allow_p2p": allowP2p,
-    };
-  }
+		};
+	}
+
   
   @override
   CallStateReady copyWith({
@@ -229,17 +241,20 @@ class CallStateReady extends CallState {
     allowP2p: allowP2p ?? this.allowP2p,
   );
 
-  static const String constructor = 'callStateReady';
-  
+  static const String objectType = 'callStateReady';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **CallStateHangingUp** *(callStateHangingUp)* - child of CallState
-  ///
-  /// The call is hanging up after discardCall has been called.
-class CallStateHangingUp extends CallState {
+///
+/// The call is hanging up after discardCall has been called.
+final class CallStateHangingUp extends CallState {
   
   /// **CallStateHangingUp** *(callStateHangingUp)* - child of CallState
   ///
@@ -250,31 +265,35 @@ class CallStateHangingUp extends CallState {
   factory CallStateHangingUp.fromJson(Map<String, dynamic> json) => const CallStateHangingUp();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   CallStateHangingUp copyWith() => const CallStateHangingUp();
 
-  static const String constructor = 'callStateHangingUp';
-  
+  static const String objectType = 'callStateHangingUp';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **CallStateDiscarded** *(callStateDiscarded)* - child of CallState
-  ///
-  /// The call has ended successfully.
-  ///
-  /// * [reason]: The reason, why the call has ended.
-  /// * [needRating]: True, if the call rating must be sent to the server.
-  /// * [needDebugInformation]: True, if the call debug information must be sent to the server.
-  /// * [needLog]: True, if the call log must be sent to the server.
-class CallStateDiscarded extends CallState {
+///
+/// The call has ended successfully.
+///
+/// * [reason]: The reason, why the call has ended.
+/// * [needRating]: True, if the call rating must be sent to the server.
+/// * [needDebugInformation]: True, if the call debug information must be sent to the server.
+/// * [needLog]: True, if the call log must be sent to the server.
+final class CallStateDiscarded extends CallState {
   
   /// **CallStateDiscarded** *(callStateDiscarded)* - child of CallState
   ///
@@ -313,15 +332,16 @@ class CallStateDiscarded extends CallState {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "reason": reason.toJson(),
       "need_rating": needRating,
       "need_debug_information": needDebugInformation,
       "need_log": needLog,
-    };
-  }
+		};
+	}
+
   
   @override
   CallStateDiscarded copyWith({
@@ -336,19 +356,22 @@ class CallStateDiscarded extends CallState {
     needLog: needLog ?? this.needLog,
   );
 
-  static const String constructor = 'callStateDiscarded';
-  
+  static const String objectType = 'callStateDiscarded';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **CallStateError** *(callStateError)* - child of CallState
-  ///
-  /// The call has ended with an error.
-  ///
-  /// * [error]: Error. An error with the code 4005000 will be returned if an outgoing call is missed because of an expired timeout.
-class CallStateError extends CallState {
+///
+/// The call has ended with an error.
+///
+/// * [error]: Error. An error with the code 4005000 will be returned if an outgoing call is missed because of an expired timeout.
+final class CallStateError extends CallState {
   
   /// **CallStateError** *(callStateError)* - child of CallState
   ///
@@ -369,12 +392,13 @@ class CallStateError extends CallState {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "error": error.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   CallStateError copyWith({
@@ -383,8 +407,11 @@ class CallStateError extends CallState {
     error: error ?? this.error,
   );
 
-  static const String constructor = 'callStateError';
-  
+  static const String objectType = 'callStateError';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

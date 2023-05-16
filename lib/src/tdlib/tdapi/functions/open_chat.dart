@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **OpenChat** *(openChat)* - TDLib function
-  ///
-  /// Informs TDLib that the chat is opened by the user. Many useful activities depend on the chat being opened or closed (e.g., in supergroups and channels all updates are received only for opened chats).
-  ///
-  /// * [chatId]: Chat identifier.
-  ///
-  /// [Ok] is returned on completion.
-class OpenChat extends TdFunction {
+///
+/// Informs TDLib that the chat is opened by the user. Many useful activities depend on the chat being opened or closed (e.g., in supergroups and channels all updates are received only for opened chats).
+///
+/// * [chatId]: Chat identifier.
+///
+/// [Ok] is returned on completion.
+final class OpenChat extends TdFunction {
   
   /// **OpenChat** *(openChat)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class OpenChat extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   OpenChat copyWith({
     int? chatId,
@@ -38,8 +39,11 @@ class OpenChat extends TdFunction {
     chatId: chatId ?? this.chatId,
   );
 
-  static const String constructor = 'openChat';
-  
+  static const String objectType = 'openChat';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

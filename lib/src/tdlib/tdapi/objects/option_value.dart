@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **OptionValue** *(optionValue)* - parent
-  ///
-  /// Represents the value of an option.
-class OptionValue extends TdObject {
+///
+/// Represents the value of an option.
+sealed class OptionValue extends TdObject {
   
   /// **OptionValue** *(optionValue)* - parent
   ///
@@ -17,41 +17,44 @@ class OptionValue extends TdObject {
   /// * [OptionValueString]
   factory OptionValue.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case OptionValueBoolean.constructor:
+      case OptionValueBoolean.objectType:
         return OptionValueBoolean.fromJson(json);
-      case OptionValueEmpty.constructor:
+      case OptionValueEmpty.objectType:
         return OptionValueEmpty.fromJson(json);
-      case OptionValueInteger.constructor:
+      case OptionValueInteger.objectType:
         return OptionValueInteger.fromJson(json);
-      case OptionValueString.constructor:
+      case OptionValueString.objectType:
         return OptionValueString.fromJson(json);
       default:
-        return const OptionValue();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of OptionValue)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  OptionValue copyWith() => const OptionValue();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'optionValue';
   
+  OptionValue copyWith();
+
+  static const String objectType = 'optionValue';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **OptionValueBoolean** *(optionValueBoolean)* - child of OptionValue
-  ///
-  /// Represents a boolean option.
-  ///
-  /// * [value]: The value of the option.
-class OptionValueBoolean extends OptionValue {
+///
+/// Represents a boolean option.
+///
+/// * [value]: The value of the option.
+final class OptionValueBoolean extends OptionValue {
   
   /// **OptionValueBoolean** *(optionValueBoolean)* - child of OptionValue
   ///
@@ -84,12 +87,13 @@ class OptionValueBoolean extends OptionValue {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "value": value,
-    };
-  }
+		};
+	}
+
   
   @override
   OptionValueBoolean copyWith({
@@ -102,17 +106,20 @@ class OptionValueBoolean extends OptionValue {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'optionValueBoolean';
-  
+  static const String objectType = 'optionValueBoolean';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **OptionValueEmpty** *(optionValueEmpty)* - child of OptionValue
-  ///
-  /// Represents an unknown option or an option which has a default value.
-class OptionValueEmpty extends OptionValue {
+///
+/// Represents an unknown option or an option which has a default value.
+final class OptionValueEmpty extends OptionValue {
   
   /// **OptionValueEmpty** *(optionValueEmpty)* - child of OptionValue
   ///
@@ -138,11 +145,12 @@ class OptionValueEmpty extends OptionValue {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   OptionValueEmpty copyWith({
@@ -153,19 +161,22 @@ class OptionValueEmpty extends OptionValue {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'optionValueEmpty';
-  
+  static const String objectType = 'optionValueEmpty';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **OptionValueInteger** *(optionValueInteger)* - child of OptionValue
-  ///
-  /// Represents an integer option.
-  ///
-  /// * [value]: The value of the option.
-class OptionValueInteger extends OptionValue {
+///
+/// Represents an integer option.
+///
+/// * [value]: The value of the option.
+final class OptionValueInteger extends OptionValue {
   
   /// **OptionValueInteger** *(optionValueInteger)* - child of OptionValue
   ///
@@ -198,12 +209,13 @@ class OptionValueInteger extends OptionValue {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "value": value,
-    };
-  }
+		};
+	}
+
   
   @override
   OptionValueInteger copyWith({
@@ -216,19 +228,22 @@ class OptionValueInteger extends OptionValue {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'optionValueInteger';
-  
+  static const String objectType = 'optionValueInteger';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **OptionValueString** *(optionValueString)* - child of OptionValue
-  ///
-  /// Represents a string option.
-  ///
-  /// * [value]: The value of the option.
-class OptionValueString extends OptionValue {
+///
+/// Represents a string option.
+///
+/// * [value]: The value of the option.
+final class OptionValueString extends OptionValue {
   
   /// **OptionValueString** *(optionValueString)* - child of OptionValue
   ///
@@ -261,12 +276,13 @@ class OptionValueString extends OptionValue {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "value": value,
-    };
-  }
+		};
+	}
+
   
   @override
   OptionValueString copyWith({
@@ -279,8 +295,11 @@ class OptionValueString extends OptionValue {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'optionValueString';
-  
+  static const String objectType = 'optionValueString';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

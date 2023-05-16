@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **ToggleAllDownloadsArePaused** *(toggleAllDownloadsArePaused)* - TDLib function
-  ///
-  /// Changes pause state of all files in the file download list.
-  ///
-  /// * [arePaused]: Pass true to pause all downloads; pass false to unpause them.
-  ///
-  /// [Ok] is returned on completion.
-class ToggleAllDownloadsArePaused extends TdFunction {
+///
+/// Changes pause state of all files in the file download list.
+///
+/// * [arePaused]: Pass true to pause all downloads; pass false to unpause them.
+///
+/// [Ok] is returned on completion.
+final class ToggleAllDownloadsArePaused extends TdFunction {
   
   /// **ToggleAllDownloadsArePaused** *(toggleAllDownloadsArePaused)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class ToggleAllDownloadsArePaused extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "are_paused": arePaused,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ToggleAllDownloadsArePaused copyWith({
     bool? arePaused,
@@ -38,8 +39,11 @@ class ToggleAllDownloadsArePaused extends TdFunction {
     arePaused: arePaused ?? this.arePaused,
   );
 
-  static const String constructor = 'toggleAllDownloadsArePaused';
-  
+  static const String objectType = 'toggleAllDownloadsArePaused';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,16 +1,16 @@
 part of '../tdapi.dart';
 
 /// **GetPassportAuthorizationForm** *(getPassportAuthorizationForm)* - TDLib function
-  ///
-  /// Returns a Telegram Passport authorization form for sharing data with a service.
-  ///
-  /// * [botUserId]: User identifier of the service's bot.
-  /// * [scope]: Telegram Passport element types requested by the service.
-  /// * [publicKey]: Service's public key.
-  /// * [nonce]: Unique request identifier provided by the service.
-  ///
-  /// [PassportAuthorizationForm] is returned on completion.
-class GetPassportAuthorizationForm extends TdFunction {
+///
+/// Returns a Telegram Passport authorization form for sharing data with a service.
+///
+/// * [botUserId]: User identifier of the service's bot.
+/// * [scope]: Telegram Passport element types requested by the service.
+/// * [publicKey]: Service's public key.
+/// * [nonce]: Unique request identifier provided by the service.
+///
+/// [PassportAuthorizationForm] is returned on completion.
+final class GetPassportAuthorizationForm extends TdFunction {
   
   /// **GetPassportAuthorizationForm** *(getPassportAuthorizationForm)* - TDLib function
   ///
@@ -43,15 +43,16 @@ class GetPassportAuthorizationForm extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "bot_user_id": botUserId,
       "scope": scope,
       "public_key": publicKey,
       "nonce": nonce,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetPassportAuthorizationForm copyWith({
     int? botUserId,
@@ -65,8 +66,11 @@ class GetPassportAuthorizationForm extends TdFunction {
     nonce: nonce ?? this.nonce,
   );
 
-  static const String constructor = 'getPassportAuthorizationForm';
-  
+  static const String objectType = 'getPassportAuthorizationForm';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

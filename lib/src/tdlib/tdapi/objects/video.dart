@@ -1,20 +1,20 @@
 part of '../tdapi.dart';
 
 /// **Video** *(video)* - basic class
-  ///
-  /// Describes a video file.
-  ///
-  /// * [duration]: Duration of the video, in seconds; as defined by the sender.
-  /// * [width]: Video width; as defined by the sender.
-  /// * [height]: Video height; as defined by the sender.
-  /// * [fileName]: Original name of the file; as defined by the sender.
-  /// * [mimeType]: MIME type of the file; as defined by the sender.
-  /// * [hasStickers]: True, if stickers were added to the video. The list of corresponding sticker sets can be received using getAttachedStickerSets.
-  /// * [supportsStreaming]: True, if the video is supposed to be streamed.
-  /// * [minithumbnail]: Video minithumbnail; may be null *(optional)*.
-  /// * [thumbnail]: Video thumbnail in JPEG or MPEG4 format; as defined by the sender; may be null *(optional)*.
-  /// * [video]: File containing the video.
-class Video extends TdObject {
+///
+/// Describes a video file.
+///
+/// * [duration]: Duration of the video, in seconds; as defined by the sender.
+/// * [width]: Video width; as defined by the sender.
+/// * [height]: Video height; as defined by the sender.
+/// * [fileName]: Original name of the file; as defined by the sender.
+/// * [mimeType]: MIME type of the file; as defined by the sender.
+/// * [hasStickers]: True, if stickers were added to the video. The list of corresponding sticker sets can be received using getAttachedStickerSets.
+/// * [supportsStreaming]: True, if the video is supposed to be streamed.
+/// * [minithumbnail]: Video minithumbnail; may be null *(optional)*.
+/// * [thumbnail]: Video thumbnail in JPEG or MPEG4 format; as defined by the sender; may be null *(optional)*.
+/// * [video]: File containing the video.
+final class Video extends TdObject {
   
   /// **Video** *(video)* - basic class
   ///
@@ -89,9 +89,9 @@ class Video extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "duration": duration,
       "width": width,
       "height": height,
@@ -102,8 +102,9 @@ class Video extends TdObject {
       "minithumbnail": minithumbnail?.toJson(),
       "thumbnail": thumbnail?.toJson(),
       "video": video.toJson(),
-    };
-  }
+		};
+	}
+
   
   Video copyWith({
     int? duration,
@@ -129,8 +130,11 @@ class Video extends TdObject {
     video: video ?? this.video,
   );
 
-  static const String constructor = 'video';
-  
+  static const String objectType = 'video';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

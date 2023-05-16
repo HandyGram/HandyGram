@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **ValidatedOrderInfo** *(validatedOrderInfo)* - basic class
-  ///
-  /// Contains a temporary identifier of validated order information, which is stored for one hour, and the available shipping options.
-  ///
-  /// * [orderInfoId]: Temporary identifier of the order information.
-  /// * [shippingOptions]: Available shipping options.
-class ValidatedOrderInfo extends TdObject {
+///
+/// Contains a temporary identifier of validated order information, which is stored for one hour, and the available shipping options.
+///
+/// * [orderInfoId]: Temporary identifier of the order information.
+/// * [shippingOptions]: Available shipping options.
+final class ValidatedOrderInfo extends TdObject {
   
   /// **ValidatedOrderInfo** *(validatedOrderInfo)* - basic class
   ///
@@ -45,13 +45,14 @@ class ValidatedOrderInfo extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "order_info_id": orderInfoId,
       "shipping_options": shippingOptions.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   ValidatedOrderInfo copyWith({
     String? orderInfoId,
@@ -65,8 +66,11 @@ class ValidatedOrderInfo extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'validatedOrderInfo';
-  
+  static const String objectType = 'validatedOrderInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

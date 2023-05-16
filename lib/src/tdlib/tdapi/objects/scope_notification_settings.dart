@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **ScopeNotificationSettings** *(scopeNotificationSettings)* - basic class
-  ///
-  /// Contains information about notification settings for several chats.
-  ///
-  /// * [muteFor]: Time left before notifications will be unmuted, in seconds.
-  /// * [soundId]: Identifier of the notification sound to be played; 0 if sound is disabled.
-  /// * [showPreview]: True, if message content must be displayed in notifications.
-  /// * [disablePinnedMessageNotifications]: True, if notifications for incoming pinned messages will be created as for an ordinary unread message.
-  /// * [disableMentionNotifications]: True, if notifications for messages with mentions will be created as for an ordinary unread message.
-class ScopeNotificationSettings extends TdObject {
+///
+/// Contains information about notification settings for several chats.
+///
+/// * [muteFor]: Time left before notifications will be unmuted, in seconds.
+/// * [soundId]: Identifier of the notification sound to be played; 0 if sound is disabled.
+/// * [showPreview]: True, if message content must be displayed in notifications.
+/// * [disablePinnedMessageNotifications]: True, if notifications for incoming pinned messages will be created as for an ordinary unread message.
+/// * [disableMentionNotifications]: True, if notifications for messages with mentions will be created as for an ordinary unread message.
+final class ScopeNotificationSettings extends TdObject {
   
   /// **ScopeNotificationSettings** *(scopeNotificationSettings)* - basic class
   ///
@@ -66,16 +66,17 @@ class ScopeNotificationSettings extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "mute_for": muteFor,
       "sound_id": soundId,
       "show_preview": showPreview,
       "disable_pinned_message_notifications": disablePinnedMessageNotifications,
       "disable_mention_notifications": disableMentionNotifications,
-    };
-  }
+		};
+	}
+
   
   ScopeNotificationSettings copyWith({
     int? muteFor,
@@ -95,8 +96,11 @@ class ScopeNotificationSettings extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'scopeNotificationSettings';
-  
+  static const String objectType = 'scopeNotificationSettings';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

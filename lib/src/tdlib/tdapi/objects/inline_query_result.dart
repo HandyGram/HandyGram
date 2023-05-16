@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **InlineQueryResult** *(inlineQueryResult)* - parent
-  ///
-  /// Represents a single result of an inline query.
-class InlineQueryResult extends TdObject {
+///
+/// Represents a single result of an inline query.
+sealed class InlineQueryResult extends TdObject {
   
   /// **InlineQueryResult** *(inlineQueryResult)* - parent
   ///
@@ -25,62 +25,65 @@ class InlineQueryResult extends TdObject {
   /// * [InlineQueryResultVoiceNote]
   factory InlineQueryResult.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case InlineQueryResultArticle.constructor:
+      case InlineQueryResultArticle.objectType:
         return InlineQueryResultArticle.fromJson(json);
-      case InlineQueryResultContact.constructor:
+      case InlineQueryResultContact.objectType:
         return InlineQueryResultContact.fromJson(json);
-      case InlineQueryResultLocation.constructor:
+      case InlineQueryResultLocation.objectType:
         return InlineQueryResultLocation.fromJson(json);
-      case InlineQueryResultVenue.constructor:
+      case InlineQueryResultVenue.objectType:
         return InlineQueryResultVenue.fromJson(json);
-      case InlineQueryResultGame.constructor:
+      case InlineQueryResultGame.objectType:
         return InlineQueryResultGame.fromJson(json);
-      case InlineQueryResultAnimation.constructor:
+      case InlineQueryResultAnimation.objectType:
         return InlineQueryResultAnimation.fromJson(json);
-      case InlineQueryResultAudio.constructor:
+      case InlineQueryResultAudio.objectType:
         return InlineQueryResultAudio.fromJson(json);
-      case InlineQueryResultDocument.constructor:
+      case InlineQueryResultDocument.objectType:
         return InlineQueryResultDocument.fromJson(json);
-      case InlineQueryResultPhoto.constructor:
+      case InlineQueryResultPhoto.objectType:
         return InlineQueryResultPhoto.fromJson(json);
-      case InlineQueryResultSticker.constructor:
+      case InlineQueryResultSticker.objectType:
         return InlineQueryResultSticker.fromJson(json);
-      case InlineQueryResultVideo.constructor:
+      case InlineQueryResultVideo.objectType:
         return InlineQueryResultVideo.fromJson(json);
-      case InlineQueryResultVoiceNote.constructor:
+      case InlineQueryResultVoiceNote.objectType:
         return InlineQueryResultVoiceNote.fromJson(json);
       default:
-        return const InlineQueryResult();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of InlineQueryResult)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  InlineQueryResult copyWith() => const InlineQueryResult();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'inlineQueryResult';
   
+  InlineQueryResult copyWith();
+
+  static const String objectType = 'inlineQueryResult';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InlineQueryResultArticle** *(inlineQueryResultArticle)* - child of InlineQueryResult
-  ///
-  /// Represents a link to an article or web page.
-  ///
-  /// * [id]: Unique identifier of the query result.
-  /// * [url]: URL of the result, if it exists.
-  /// * [hideUrl]: True, if the URL must be not shown.
-  /// * [title]: Title of the result.
-  /// * [description]: A short description of the result.
-  /// * [thumbnail]: Result thumbnail in JPEG format; may be null *(optional)*.
-class InlineQueryResultArticle extends InlineQueryResult {
+///
+/// Represents a link to an article or web page.
+///
+/// * [id]: Unique identifier of the query result.
+/// * [url]: URL of the result, if it exists.
+/// * [hideUrl]: True, if the URL must be not shown.
+/// * [title]: Title of the result.
+/// * [description]: A short description of the result.
+/// * [thumbnail]: Result thumbnail in JPEG format; may be null *(optional)*.
+final class InlineQueryResultArticle extends InlineQueryResult {
   
   /// **InlineQueryResultArticle** *(inlineQueryResultArticle)* - child of InlineQueryResult
   ///
@@ -131,17 +134,18 @@ class InlineQueryResultArticle extends InlineQueryResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "url": url,
       "hide_url": hideUrl,
       "title": title,
       "description": description,
       "thumbnail": thumbnail?.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   InlineQueryResultArticle copyWith({
@@ -160,21 +164,24 @@ class InlineQueryResultArticle extends InlineQueryResult {
     thumbnail: thumbnail ?? this.thumbnail,
   );
 
-  static const String constructor = 'inlineQueryResultArticle';
-  
+  static const String objectType = 'inlineQueryResultArticle';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InlineQueryResultContact** *(inlineQueryResultContact)* - child of InlineQueryResult
-  ///
-  /// Represents a user contact.
-  ///
-  /// * [id]: Unique identifier of the query result.
-  /// * [contact]: A user contact.
-  /// * [thumbnail]: Result thumbnail in JPEG format; may be null *(optional)*.
-class InlineQueryResultContact extends InlineQueryResult {
+///
+/// Represents a user contact.
+///
+/// * [id]: Unique identifier of the query result.
+/// * [contact]: A user contact.
+/// * [thumbnail]: Result thumbnail in JPEG format; may be null *(optional)*.
+final class InlineQueryResultContact extends InlineQueryResult {
   
   /// **InlineQueryResultContact** *(inlineQueryResultContact)* - child of InlineQueryResult
   ///
@@ -207,14 +214,15 @@ class InlineQueryResultContact extends InlineQueryResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "contact": contact.toJson(),
       "thumbnail": thumbnail?.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   InlineQueryResultContact copyWith({
@@ -227,22 +235,25 @@ class InlineQueryResultContact extends InlineQueryResult {
     thumbnail: thumbnail ?? this.thumbnail,
   );
 
-  static const String constructor = 'inlineQueryResultContact';
-  
+  static const String objectType = 'inlineQueryResultContact';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InlineQueryResultLocation** *(inlineQueryResultLocation)* - child of InlineQueryResult
-  ///
-  /// Represents a point on the map.
-  ///
-  /// * [id]: Unique identifier of the query result.
-  /// * [location]: Location result.
-  /// * [title]: Title of the result.
-  /// * [thumbnail]: Result thumbnail in JPEG format; may be null *(optional)*.
-class InlineQueryResultLocation extends InlineQueryResult {
+///
+/// Represents a point on the map.
+///
+/// * [id]: Unique identifier of the query result.
+/// * [location]: Location result.
+/// * [title]: Title of the result.
+/// * [thumbnail]: Result thumbnail in JPEG format; may be null *(optional)*.
+final class InlineQueryResultLocation extends InlineQueryResult {
   
   /// **InlineQueryResultLocation** *(inlineQueryResultLocation)* - child of InlineQueryResult
   ///
@@ -281,15 +292,16 @@ class InlineQueryResultLocation extends InlineQueryResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "location": location.toJson(),
       "title": title,
       "thumbnail": thumbnail?.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   InlineQueryResultLocation copyWith({
@@ -304,21 +316,24 @@ class InlineQueryResultLocation extends InlineQueryResult {
     thumbnail: thumbnail ?? this.thumbnail,
   );
 
-  static const String constructor = 'inlineQueryResultLocation';
-  
+  static const String objectType = 'inlineQueryResultLocation';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InlineQueryResultVenue** *(inlineQueryResultVenue)* - child of InlineQueryResult
-  ///
-  /// Represents information about a venue.
-  ///
-  /// * [id]: Unique identifier of the query result.
-  /// * [venue]: Venue result.
-  /// * [thumbnail]: Result thumbnail in JPEG format; may be null *(optional)*.
-class InlineQueryResultVenue extends InlineQueryResult {
+///
+/// Represents information about a venue.
+///
+/// * [id]: Unique identifier of the query result.
+/// * [venue]: Venue result.
+/// * [thumbnail]: Result thumbnail in JPEG format; may be null *(optional)*.
+final class InlineQueryResultVenue extends InlineQueryResult {
   
   /// **InlineQueryResultVenue** *(inlineQueryResultVenue)* - child of InlineQueryResult
   ///
@@ -351,14 +366,15 @@ class InlineQueryResultVenue extends InlineQueryResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "venue": venue.toJson(),
       "thumbnail": thumbnail?.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   InlineQueryResultVenue copyWith({
@@ -371,20 +387,23 @@ class InlineQueryResultVenue extends InlineQueryResult {
     thumbnail: thumbnail ?? this.thumbnail,
   );
 
-  static const String constructor = 'inlineQueryResultVenue';
-  
+  static const String objectType = 'inlineQueryResultVenue';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InlineQueryResultGame** *(inlineQueryResultGame)* - child of InlineQueryResult
-  ///
-  /// Represents information about a game.
-  ///
-  /// * [id]: Unique identifier of the query result.
-  /// * [game]: Game result.
-class InlineQueryResultGame extends InlineQueryResult {
+///
+/// Represents information about a game.
+///
+/// * [id]: Unique identifier of the query result.
+/// * [game]: Game result.
+final class InlineQueryResultGame extends InlineQueryResult {
   
   /// **InlineQueryResultGame** *(inlineQueryResultGame)* - child of InlineQueryResult
   ///
@@ -411,13 +430,14 @@ class InlineQueryResultGame extends InlineQueryResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "game": game.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   InlineQueryResultGame copyWith({
@@ -428,21 +448,24 @@ class InlineQueryResultGame extends InlineQueryResult {
     game: game ?? this.game,
   );
 
-  static const String constructor = 'inlineQueryResultGame';
-  
+  static const String objectType = 'inlineQueryResultGame';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InlineQueryResultAnimation** *(inlineQueryResultAnimation)* - child of InlineQueryResult
-  ///
-  /// Represents an animation file.
-  ///
-  /// * [id]: Unique identifier of the query result.
-  /// * [animation]: Animation file.
-  /// * [title]: Animation title.
-class InlineQueryResultAnimation extends InlineQueryResult {
+///
+/// Represents an animation file.
+///
+/// * [id]: Unique identifier of the query result.
+/// * [animation]: Animation file.
+/// * [title]: Animation title.
+final class InlineQueryResultAnimation extends InlineQueryResult {
   
   /// **InlineQueryResultAnimation** *(inlineQueryResultAnimation)* - child of InlineQueryResult
   ///
@@ -475,14 +498,15 @@ class InlineQueryResultAnimation extends InlineQueryResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "animation": animation.toJson(),
       "title": title,
-    };
-  }
+		};
+	}
+
   
   @override
   InlineQueryResultAnimation copyWith({
@@ -495,20 +519,23 @@ class InlineQueryResultAnimation extends InlineQueryResult {
     title: title ?? this.title,
   );
 
-  static const String constructor = 'inlineQueryResultAnimation';
-  
+  static const String objectType = 'inlineQueryResultAnimation';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InlineQueryResultAudio** *(inlineQueryResultAudio)* - child of InlineQueryResult
-  ///
-  /// Represents an audio file.
-  ///
-  /// * [id]: Unique identifier of the query result.
-  /// * [audio]: Audio file.
-class InlineQueryResultAudio extends InlineQueryResult {
+///
+/// Represents an audio file.
+///
+/// * [id]: Unique identifier of the query result.
+/// * [audio]: Audio file.
+final class InlineQueryResultAudio extends InlineQueryResult {
   
   /// **InlineQueryResultAudio** *(inlineQueryResultAudio)* - child of InlineQueryResult
   ///
@@ -535,13 +562,14 @@ class InlineQueryResultAudio extends InlineQueryResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "audio": audio.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   InlineQueryResultAudio copyWith({
@@ -552,22 +580,25 @@ class InlineQueryResultAudio extends InlineQueryResult {
     audio: audio ?? this.audio,
   );
 
-  static const String constructor = 'inlineQueryResultAudio';
-  
+  static const String objectType = 'inlineQueryResultAudio';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InlineQueryResultDocument** *(inlineQueryResultDocument)* - child of InlineQueryResult
-  ///
-  /// Represents a document.
-  ///
-  /// * [id]: Unique identifier of the query result.
-  /// * [document]: Document.
-  /// * [title]: Document title.
-  /// * [description]: Document description.
-class InlineQueryResultDocument extends InlineQueryResult {
+///
+/// Represents a document.
+///
+/// * [id]: Unique identifier of the query result.
+/// * [document]: Document.
+/// * [title]: Document title.
+/// * [description]: Document description.
+final class InlineQueryResultDocument extends InlineQueryResult {
   
   /// **InlineQueryResultDocument** *(inlineQueryResultDocument)* - child of InlineQueryResult
   ///
@@ -606,15 +637,16 @@ class InlineQueryResultDocument extends InlineQueryResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "document": document.toJson(),
       "title": title,
       "description": description,
-    };
-  }
+		};
+	}
+
   
   @override
   InlineQueryResultDocument copyWith({
@@ -629,22 +661,25 @@ class InlineQueryResultDocument extends InlineQueryResult {
     description: description ?? this.description,
   );
 
-  static const String constructor = 'inlineQueryResultDocument';
-  
+  static const String objectType = 'inlineQueryResultDocument';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InlineQueryResultPhoto** *(inlineQueryResultPhoto)* - child of InlineQueryResult
-  ///
-  /// Represents a photo.
-  ///
-  /// * [id]: Unique identifier of the query result.
-  /// * [photo]: Photo.
-  /// * [title]: Title of the result, if known.
-  /// * [description]: A short description of the result, if known.
-class InlineQueryResultPhoto extends InlineQueryResult {
+///
+/// Represents a photo.
+///
+/// * [id]: Unique identifier of the query result.
+/// * [photo]: Photo.
+/// * [title]: Title of the result, if known.
+/// * [description]: A short description of the result, if known.
+final class InlineQueryResultPhoto extends InlineQueryResult {
   
   /// **InlineQueryResultPhoto** *(inlineQueryResultPhoto)* - child of InlineQueryResult
   ///
@@ -683,15 +718,16 @@ class InlineQueryResultPhoto extends InlineQueryResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "photo": photo.toJson(),
       "title": title,
       "description": description,
-    };
-  }
+		};
+	}
+
   
   @override
   InlineQueryResultPhoto copyWith({
@@ -706,20 +742,23 @@ class InlineQueryResultPhoto extends InlineQueryResult {
     description: description ?? this.description,
   );
 
-  static const String constructor = 'inlineQueryResultPhoto';
-  
+  static const String objectType = 'inlineQueryResultPhoto';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InlineQueryResultSticker** *(inlineQueryResultSticker)* - child of InlineQueryResult
-  ///
-  /// Represents a sticker.
-  ///
-  /// * [id]: Unique identifier of the query result.
-  /// * [sticker]: Sticker.
-class InlineQueryResultSticker extends InlineQueryResult {
+///
+/// Represents a sticker.
+///
+/// * [id]: Unique identifier of the query result.
+/// * [sticker]: Sticker.
+final class InlineQueryResultSticker extends InlineQueryResult {
   
   /// **InlineQueryResultSticker** *(inlineQueryResultSticker)* - child of InlineQueryResult
   ///
@@ -746,13 +785,14 @@ class InlineQueryResultSticker extends InlineQueryResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "sticker": sticker.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   InlineQueryResultSticker copyWith({
@@ -763,22 +803,25 @@ class InlineQueryResultSticker extends InlineQueryResult {
     sticker: sticker ?? this.sticker,
   );
 
-  static const String constructor = 'inlineQueryResultSticker';
-  
+  static const String objectType = 'inlineQueryResultSticker';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InlineQueryResultVideo** *(inlineQueryResultVideo)* - child of InlineQueryResult
-  ///
-  /// Represents a video.
-  ///
-  /// * [id]: Unique identifier of the query result.
-  /// * [video]: Video.
-  /// * [title]: Title of the video.
-  /// * [description]: Description of the video.
-class InlineQueryResultVideo extends InlineQueryResult {
+///
+/// Represents a video.
+///
+/// * [id]: Unique identifier of the query result.
+/// * [video]: Video.
+/// * [title]: Title of the video.
+/// * [description]: Description of the video.
+final class InlineQueryResultVideo extends InlineQueryResult {
   
   /// **InlineQueryResultVideo** *(inlineQueryResultVideo)* - child of InlineQueryResult
   ///
@@ -817,15 +860,16 @@ class InlineQueryResultVideo extends InlineQueryResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "video": video.toJson(),
       "title": title,
       "description": description,
-    };
-  }
+		};
+	}
+
   
   @override
   InlineQueryResultVideo copyWith({
@@ -840,21 +884,24 @@ class InlineQueryResultVideo extends InlineQueryResult {
     description: description ?? this.description,
   );
 
-  static const String constructor = 'inlineQueryResultVideo';
-  
+  static const String objectType = 'inlineQueryResultVideo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InlineQueryResultVoiceNote** *(inlineQueryResultVoiceNote)* - child of InlineQueryResult
-  ///
-  /// Represents a voice note.
-  ///
-  /// * [id]: Unique identifier of the query result.
-  /// * [voiceNote]: Voice note.
-  /// * [title]: Title of the voice note.
-class InlineQueryResultVoiceNote extends InlineQueryResult {
+///
+/// Represents a voice note.
+///
+/// * [id]: Unique identifier of the query result.
+/// * [voiceNote]: Voice note.
+/// * [title]: Title of the voice note.
+final class InlineQueryResultVoiceNote extends InlineQueryResult {
   
   /// **InlineQueryResultVoiceNote** *(inlineQueryResultVoiceNote)* - child of InlineQueryResult
   ///
@@ -887,14 +934,15 @@ class InlineQueryResultVoiceNote extends InlineQueryResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "voice_note": voiceNote.toJson(),
       "title": title,
-    };
-  }
+		};
+	}
+
   
   @override
   InlineQueryResultVoiceNote copyWith({
@@ -907,8 +955,11 @@ class InlineQueryResultVoiceNote extends InlineQueryResult {
     title: title ?? this.title,
   );
 
-  static const String constructor = 'inlineQueryResultVoiceNote';
-  
+  static const String objectType = 'inlineQueryResultVoiceNote';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

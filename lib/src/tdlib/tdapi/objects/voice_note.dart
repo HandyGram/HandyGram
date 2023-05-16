@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **VoiceNote** *(voiceNote)* - basic class
-  ///
-  /// Describes a voice note. The voice note must be encoded with the Opus codec, and stored inside an OGG container. Voice notes can have only a single audio channel.
-  ///
-  /// * [duration]: Duration of the voice note, in seconds; as defined by the sender.
-  /// * [waveform]: A waveform representation of the voice note in 5-bit format.
-  /// * [mimeType]: MIME type of the file; as defined by the sender.
-  /// * [speechRecognitionResult]: Result of speech recognition in the voice note; may be null *(optional)*.
-  /// * [voice]: File containing the voice note.
-class VoiceNote extends TdObject {
+///
+/// Describes a voice note. The voice note must be encoded with the Opus codec, and stored inside an OGG container. Voice notes can have only a single audio channel.
+///
+/// * [duration]: Duration of the voice note, in seconds; as defined by the sender.
+/// * [waveform]: A waveform representation of the voice note in 5-bit format.
+/// * [mimeType]: MIME type of the file; as defined by the sender.
+/// * [speechRecognitionResult]: Result of speech recognition in the voice note; may be null *(optional)*.
+/// * [voice]: File containing the voice note.
+final class VoiceNote extends TdObject {
   
   /// **VoiceNote** *(voiceNote)* - basic class
   ///
@@ -54,16 +54,17 @@ class VoiceNote extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "duration": duration,
       "waveform": waveform,
       "mime_type": mimeType,
       "speech_recognition_result": speechRecognitionResult?.toJson(),
       "voice": voice.toJson(),
-    };
-  }
+		};
+	}
+
   
   VoiceNote copyWith({
     int? duration,
@@ -79,8 +80,11 @@ class VoiceNote extends TdObject {
     voice: voice ?? this.voice,
   );
 
-  static const String constructor = 'voiceNote';
-  
+  static const String objectType = 'voiceNote';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

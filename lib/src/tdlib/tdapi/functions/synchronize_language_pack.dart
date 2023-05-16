@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **SynchronizeLanguagePack** *(synchronizeLanguagePack)* - TDLib function
-  ///
-  /// Fetches the latest versions of all strings from a language pack in the current localization target from the server. This method doesn't need to be called explicitly for the current used/base language packs. Can be called before authorization.
-  ///
-  /// * [languagePackId]: Language pack identifier.
-  ///
-  /// [Ok] is returned on completion.
-class SynchronizeLanguagePack extends TdFunction {
+///
+/// Fetches the latest versions of all strings from a language pack in the current localization target from the server. This method doesn't need to be called explicitly for the current used/base language packs. Can be called before authorization.
+///
+/// * [languagePackId]: Language pack identifier.
+///
+/// [Ok] is returned on completion.
+final class SynchronizeLanguagePack extends TdFunction {
   
   /// **SynchronizeLanguagePack** *(synchronizeLanguagePack)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class SynchronizeLanguagePack extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "language_pack_id": languagePackId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SynchronizeLanguagePack copyWith({
     String? languagePackId,
@@ -38,8 +39,11 @@ class SynchronizeLanguagePack extends TdFunction {
     languagePackId: languagePackId ?? this.languagePackId,
   );
 
-  static const String constructor = 'synchronizeLanguagePack';
-  
+  static const String objectType = 'synchronizeLanguagePack';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

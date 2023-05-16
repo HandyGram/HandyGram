@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **ToggleGroupCallEnabledStartNotification** *(toggleGroupCallEnabledStartNotification)* - TDLib function
-  ///
-  /// Toggles whether the current user will receive a notification when the group call will start; scheduled group calls only.
-  ///
-  /// * [groupCallId]: Group call identifier.
-  /// * [enabledStartNotification]: New value of the enabled_start_notification setting.
-  ///
-  /// [Ok] is returned on completion.
-class ToggleGroupCallEnabledStartNotification extends TdFunction {
+///
+/// Toggles whether the current user will receive a notification when the group call will start; scheduled group calls only.
+///
+/// * [groupCallId]: Group call identifier.
+/// * [enabledStartNotification]: New value of the enabled_start_notification setting.
+///
+/// [Ok] is returned on completion.
+final class ToggleGroupCallEnabledStartNotification extends TdFunction {
   
   /// **ToggleGroupCallEnabledStartNotification** *(toggleGroupCallEnabledStartNotification)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class ToggleGroupCallEnabledStartNotification extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "group_call_id": groupCallId,
       "enabled_start_notification": enabledStartNotification,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ToggleGroupCallEnabledStartNotification copyWith({
     int? groupCallId,
@@ -47,8 +48,11 @@ class ToggleGroupCallEnabledStartNotification extends TdFunction {
     enabledStartNotification: enabledStartNotification ?? this.enabledStartNotification,
   );
 
-  static const String constructor = 'toggleGroupCallEnabledStartNotification';
-  
+  static const String objectType = 'toggleGroupCallEnabledStartNotification';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

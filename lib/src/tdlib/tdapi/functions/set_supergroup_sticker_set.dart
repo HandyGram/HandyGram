@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **SetSupergroupStickerSet** *(setSupergroupStickerSet)* - TDLib function
-  ///
-  /// Changes the sticker set of a supergroup; requires can_change_info administrator right.
-  ///
-  /// * [supergroupId]: Identifier of the supergroup.
-  /// * [stickerSetId]: New value of the supergroup sticker set identifier. Use 0 to remove the supergroup sticker set.
-  ///
-  /// [Ok] is returned on completion.
-class SetSupergroupStickerSet extends TdFunction {
+///
+/// Changes the sticker set of a supergroup; requires can_change_info administrator right.
+///
+/// * [supergroupId]: Identifier of the supergroup.
+/// * [stickerSetId]: New value of the supergroup sticker set identifier. Use 0 to remove the supergroup sticker set.
+///
+/// [Ok] is returned on completion.
+final class SetSupergroupStickerSet extends TdFunction {
   
   /// **SetSupergroupStickerSet** *(setSupergroupStickerSet)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class SetSupergroupStickerSet extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "supergroup_id": supergroupId,
       "sticker_set_id": stickerSetId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetSupergroupStickerSet copyWith({
     int? supergroupId,
@@ -47,8 +48,11 @@ class SetSupergroupStickerSet extends TdFunction {
     stickerSetId: stickerSetId ?? this.stickerSetId,
   );
 
-  static const String constructor = 'setSupergroupStickerSet';
-  
+  static const String objectType = 'setSupergroupStickerSet';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

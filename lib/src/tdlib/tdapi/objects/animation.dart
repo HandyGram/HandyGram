@@ -1,19 +1,19 @@
 part of '../tdapi.dart';
 
 /// **Animation** *(animation)* - basic class
-  ///
-  /// Describes an animation file. The animation must be encoded in GIF or MPEG4 format.
-  ///
-  /// * [duration]: Duration of the animation, in seconds; as defined by the sender.
-  /// * [width]: Width of the animation.
-  /// * [height]: Height of the animation.
-  /// * [fileName]: Original name of the file; as defined by the sender.
-  /// * [mimeType]: MIME type of the file, usually "image/gif" or "video/mp4".
-  /// * [hasStickers]: True, if stickers were added to the animation. The list of corresponding sticker set can be received using getAttachedStickerSets.
-  /// * [minithumbnail]: Animation minithumbnail; may be null *(optional)*.
-  /// * [thumbnail]: Animation thumbnail in JPEG or MPEG4 format; may be null *(optional)*.
-  /// * [animation]: File containing the animation.
-class Animation extends TdObject {
+///
+/// Describes an animation file. The animation must be encoded in GIF or MPEG4 format.
+///
+/// * [duration]: Duration of the animation, in seconds; as defined by the sender.
+/// * [width]: Width of the animation.
+/// * [height]: Height of the animation.
+/// * [fileName]: Original name of the file; as defined by the sender.
+/// * [mimeType]: MIME type of the file, usually "image/gif" or "video/mp4".
+/// * [hasStickers]: True, if stickers were added to the animation. The list of corresponding sticker set can be received using getAttachedStickerSets.
+/// * [minithumbnail]: Animation minithumbnail; may be null *(optional)*.
+/// * [thumbnail]: Animation thumbnail in JPEG or MPEG4 format; may be null *(optional)*.
+/// * [animation]: File containing the animation.
+final class Animation extends TdObject {
   
   /// **Animation** *(animation)* - basic class
   ///
@@ -82,9 +82,9 @@ class Animation extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "duration": duration,
       "width": width,
       "height": height,
@@ -94,8 +94,9 @@ class Animation extends TdObject {
       "minithumbnail": minithumbnail?.toJson(),
       "thumbnail": thumbnail?.toJson(),
       "animation": animation.toJson(),
-    };
-  }
+		};
+	}
+
   
   Animation copyWith({
     int? duration,
@@ -119,8 +120,11 @@ class Animation extends TdObject {
     animation: animation ?? this.animation,
   );
 
-  static const String constructor = 'animation';
-  
+  static const String objectType = 'animation';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

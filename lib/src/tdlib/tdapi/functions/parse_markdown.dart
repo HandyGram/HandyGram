@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **ParseMarkdown** *(parseMarkdown)* - TDLib function
-  ///
-  /// Parses Markdown entities in a human-friendly format, ignoring markup errors. Can be called synchronously.
-  ///
-  /// * [text]: The text to parse. For example, "__italic__.
-  ///
-  /// [FormattedText] is returned on completion.
-class ParseMarkdown extends TdFunction {
+///
+/// Parses Markdown entities in a human-friendly format, ignoring markup errors. Can be called synchronously.
+///
+/// * [text]: The text to parse. For example, "__italic__.
+///
+/// [FormattedText] is returned on completion.
+final class ParseMarkdown extends TdFunction {
   
   /// **ParseMarkdown** *(parseMarkdown)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class ParseMarkdown extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "text": text.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ParseMarkdown copyWith({
     FormattedText? text,
@@ -38,8 +39,11 @@ class ParseMarkdown extends TdFunction {
     text: text ?? this.text,
   );
 
-  static const String constructor = 'parseMarkdown';
-  
+  static const String objectType = 'parseMarkdown';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

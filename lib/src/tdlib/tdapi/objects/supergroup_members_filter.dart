@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **SupergroupMembersFilter** *(supergroupMembersFilter)* - parent
-  ///
-  /// Specifies the kind of chat members to return in getSupergroupMembers.
-class SupergroupMembersFilter extends TdObject {
+///
+/// Specifies the kind of chat members to return in getSupergroupMembers.
+sealed class SupergroupMembersFilter extends TdObject {
   
   /// **SupergroupMembersFilter** *(supergroupMembersFilter)* - parent
   ///
@@ -21,47 +21,50 @@ class SupergroupMembersFilter extends TdObject {
   /// * [SupergroupMembersFilterBots]
   factory SupergroupMembersFilter.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case SupergroupMembersFilterRecent.constructor:
+      case SupergroupMembersFilterRecent.objectType:
         return SupergroupMembersFilterRecent.fromJson(json);
-      case SupergroupMembersFilterContacts.constructor:
+      case SupergroupMembersFilterContacts.objectType:
         return SupergroupMembersFilterContacts.fromJson(json);
-      case SupergroupMembersFilterAdministrators.constructor:
+      case SupergroupMembersFilterAdministrators.objectType:
         return SupergroupMembersFilterAdministrators.fromJson(json);
-      case SupergroupMembersFilterSearch.constructor:
+      case SupergroupMembersFilterSearch.objectType:
         return SupergroupMembersFilterSearch.fromJson(json);
-      case SupergroupMembersFilterRestricted.constructor:
+      case SupergroupMembersFilterRestricted.objectType:
         return SupergroupMembersFilterRestricted.fromJson(json);
-      case SupergroupMembersFilterBanned.constructor:
+      case SupergroupMembersFilterBanned.objectType:
         return SupergroupMembersFilterBanned.fromJson(json);
-      case SupergroupMembersFilterMention.constructor:
+      case SupergroupMembersFilterMention.objectType:
         return SupergroupMembersFilterMention.fromJson(json);
-      case SupergroupMembersFilterBots.constructor:
+      case SupergroupMembersFilterBots.objectType:
         return SupergroupMembersFilterBots.fromJson(json);
       default:
-        return const SupergroupMembersFilter();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of SupergroupMembersFilter)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  SupergroupMembersFilter copyWith() => const SupergroupMembersFilter();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'supergroupMembersFilter';
   
+  SupergroupMembersFilter copyWith();
+
+  static const String objectType = 'supergroupMembersFilter';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SupergroupMembersFilterRecent** *(supergroupMembersFilterRecent)* - child of SupergroupMembersFilter
-  ///
-  /// Returns recently active users in reverse chronological order.
-class SupergroupMembersFilterRecent extends SupergroupMembersFilter {
+///
+/// Returns recently active users in reverse chronological order.
+final class SupergroupMembersFilterRecent extends SupergroupMembersFilter {
   
   /// **SupergroupMembersFilterRecent** *(supergroupMembersFilterRecent)* - child of SupergroupMembersFilter
   ///
@@ -72,28 +75,32 @@ class SupergroupMembersFilterRecent extends SupergroupMembersFilter {
   factory SupergroupMembersFilterRecent.fromJson(Map<String, dynamic> json) => const SupergroupMembersFilterRecent();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SupergroupMembersFilterRecent copyWith() => const SupergroupMembersFilterRecent();
 
-  static const String constructor = 'supergroupMembersFilterRecent';
-  
+  static const String objectType = 'supergroupMembersFilterRecent';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SupergroupMembersFilterContacts** *(supergroupMembersFilterContacts)* - child of SupergroupMembersFilter
-  ///
-  /// Returns contacts of the user, which are members of the supergroup or channel.
-  ///
-  /// * [query]: Query to search for.
-class SupergroupMembersFilterContacts extends SupergroupMembersFilter {
+///
+/// Returns contacts of the user, which are members of the supergroup or channel.
+///
+/// * [query]: Query to search for.
+final class SupergroupMembersFilterContacts extends SupergroupMembersFilter {
   
   /// **SupergroupMembersFilterContacts** *(supergroupMembersFilterContacts)* - child of SupergroupMembersFilter
   ///
@@ -114,12 +121,13 @@ class SupergroupMembersFilterContacts extends SupergroupMembersFilter {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "query": query,
-    };
-  }
+		};
+	}
+
   
   @override
   SupergroupMembersFilterContacts copyWith({
@@ -128,17 +136,20 @@ class SupergroupMembersFilterContacts extends SupergroupMembersFilter {
     query: query ?? this.query,
   );
 
-  static const String constructor = 'supergroupMembersFilterContacts';
-  
+  static const String objectType = 'supergroupMembersFilterContacts';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SupergroupMembersFilterAdministrators** *(supergroupMembersFilterAdministrators)* - child of SupergroupMembersFilter
-  ///
-  /// Returns the owner and administrators.
-class SupergroupMembersFilterAdministrators extends SupergroupMembersFilter {
+///
+/// Returns the owner and administrators.
+final class SupergroupMembersFilterAdministrators extends SupergroupMembersFilter {
   
   /// **SupergroupMembersFilterAdministrators** *(supergroupMembersFilterAdministrators)* - child of SupergroupMembersFilter
   ///
@@ -149,28 +160,32 @@ class SupergroupMembersFilterAdministrators extends SupergroupMembersFilter {
   factory SupergroupMembersFilterAdministrators.fromJson(Map<String, dynamic> json) => const SupergroupMembersFilterAdministrators();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SupergroupMembersFilterAdministrators copyWith() => const SupergroupMembersFilterAdministrators();
 
-  static const String constructor = 'supergroupMembersFilterAdministrators';
-  
+  static const String objectType = 'supergroupMembersFilterAdministrators';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SupergroupMembersFilterSearch** *(supergroupMembersFilterSearch)* - child of SupergroupMembersFilter
-  ///
-  /// Used to search for supergroup or channel members via a (string) query.
-  ///
-  /// * [query]: Query to search for.
-class SupergroupMembersFilterSearch extends SupergroupMembersFilter {
+///
+/// Used to search for supergroup or channel members via a (string) query.
+///
+/// * [query]: Query to search for.
+final class SupergroupMembersFilterSearch extends SupergroupMembersFilter {
   
   /// **SupergroupMembersFilterSearch** *(supergroupMembersFilterSearch)* - child of SupergroupMembersFilter
   ///
@@ -191,12 +206,13 @@ class SupergroupMembersFilterSearch extends SupergroupMembersFilter {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "query": query,
-    };
-  }
+		};
+	}
+
   
   @override
   SupergroupMembersFilterSearch copyWith({
@@ -205,19 +221,22 @@ class SupergroupMembersFilterSearch extends SupergroupMembersFilter {
     query: query ?? this.query,
   );
 
-  static const String constructor = 'supergroupMembersFilterSearch';
-  
+  static const String objectType = 'supergroupMembersFilterSearch';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SupergroupMembersFilterRestricted** *(supergroupMembersFilterRestricted)* - child of SupergroupMembersFilter
-  ///
-  /// Returns restricted supergroup members; can be used only by administrators.
-  ///
-  /// * [query]: Query to search for.
-class SupergroupMembersFilterRestricted extends SupergroupMembersFilter {
+///
+/// Returns restricted supergroup members; can be used only by administrators.
+///
+/// * [query]: Query to search for.
+final class SupergroupMembersFilterRestricted extends SupergroupMembersFilter {
   
   /// **SupergroupMembersFilterRestricted** *(supergroupMembersFilterRestricted)* - child of SupergroupMembersFilter
   ///
@@ -238,12 +257,13 @@ class SupergroupMembersFilterRestricted extends SupergroupMembersFilter {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "query": query,
-    };
-  }
+		};
+	}
+
   
   @override
   SupergroupMembersFilterRestricted copyWith({
@@ -252,19 +272,22 @@ class SupergroupMembersFilterRestricted extends SupergroupMembersFilter {
     query: query ?? this.query,
   );
 
-  static const String constructor = 'supergroupMembersFilterRestricted';
-  
+  static const String objectType = 'supergroupMembersFilterRestricted';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SupergroupMembersFilterBanned** *(supergroupMembersFilterBanned)* - child of SupergroupMembersFilter
-  ///
-  /// Returns users banned from the supergroup or channel; can be used only by administrators.
-  ///
-  /// * [query]: Query to search for.
-class SupergroupMembersFilterBanned extends SupergroupMembersFilter {
+///
+/// Returns users banned from the supergroup or channel; can be used only by administrators.
+///
+/// * [query]: Query to search for.
+final class SupergroupMembersFilterBanned extends SupergroupMembersFilter {
   
   /// **SupergroupMembersFilterBanned** *(supergroupMembersFilterBanned)* - child of SupergroupMembersFilter
   ///
@@ -285,12 +308,13 @@ class SupergroupMembersFilterBanned extends SupergroupMembersFilter {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "query": query,
-    };
-  }
+		};
+	}
+
   
   @override
   SupergroupMembersFilterBanned copyWith({
@@ -299,20 +323,23 @@ class SupergroupMembersFilterBanned extends SupergroupMembersFilter {
     query: query ?? this.query,
   );
 
-  static const String constructor = 'supergroupMembersFilterBanned';
-  
+  static const String objectType = 'supergroupMembersFilterBanned';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SupergroupMembersFilterMention** *(supergroupMembersFilterMention)* - child of SupergroupMembersFilter
-  ///
-  /// Returns users which can be mentioned in the supergroup.
-  ///
-  /// * [query]: Query to search for.
-  /// * [messageThreadId]: If non-zero, the identifier of the current message thread.
-class SupergroupMembersFilterMention extends SupergroupMembersFilter {
+///
+/// Returns users which can be mentioned in the supergroup.
+///
+/// * [query]: Query to search for.
+/// * [messageThreadId]: If non-zero, the identifier of the current message thread.
+final class SupergroupMembersFilterMention extends SupergroupMembersFilter {
   
   /// **SupergroupMembersFilterMention** *(supergroupMembersFilterMention)* - child of SupergroupMembersFilter
   ///
@@ -339,13 +366,14 @@ class SupergroupMembersFilterMention extends SupergroupMembersFilter {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "query": query,
       "message_thread_id": messageThreadId,
-    };
-  }
+		};
+	}
+
   
   @override
   SupergroupMembersFilterMention copyWith({
@@ -356,17 +384,20 @@ class SupergroupMembersFilterMention extends SupergroupMembersFilter {
     messageThreadId: messageThreadId ?? this.messageThreadId,
   );
 
-  static const String constructor = 'supergroupMembersFilterMention';
-  
+  static const String objectType = 'supergroupMembersFilterMention';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SupergroupMembersFilterBots** *(supergroupMembersFilterBots)* - child of SupergroupMembersFilter
-  ///
-  /// Returns bot members of the supergroup or channel.
-class SupergroupMembersFilterBots extends SupergroupMembersFilter {
+///
+/// Returns bot members of the supergroup or channel.
+final class SupergroupMembersFilterBots extends SupergroupMembersFilter {
   
   /// **SupergroupMembersFilterBots** *(supergroupMembersFilterBots)* - child of SupergroupMembersFilter
   ///
@@ -377,17 +408,21 @@ class SupergroupMembersFilterBots extends SupergroupMembersFilter {
   factory SupergroupMembersFilterBots.fromJson(Map<String, dynamic> json) => const SupergroupMembersFilterBots();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SupergroupMembersFilterBots copyWith() => const SupergroupMembersFilterBots();
 
-  static const String constructor = 'supergroupMembersFilterBots';
-  
+  static const String objectType = 'supergroupMembersFilterBots';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

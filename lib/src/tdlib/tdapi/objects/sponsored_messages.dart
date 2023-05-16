@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **SponsoredMessages** *(sponsoredMessages)* - basic class
-  ///
-  /// Contains a list of sponsored messages.
-  ///
-  /// * [messages]: List of sponsored messages.
-  /// * [messagesBetween]: The minimum number of messages between shown sponsored messages, or 0 if only one sponsored message must be shown after all ordinary messages.
-class SponsoredMessages extends TdObject {
+///
+/// Contains a list of sponsored messages.
+///
+/// * [messages]: List of sponsored messages.
+/// * [messagesBetween]: The minimum number of messages between shown sponsored messages, or 0 if only one sponsored message must be shown after all ordinary messages.
+final class SponsoredMessages extends TdObject {
   
   /// **SponsoredMessages** *(sponsoredMessages)* - basic class
   ///
@@ -45,13 +45,14 @@ class SponsoredMessages extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "messages": messages.map((i) => i.toJson()).toList(),
       "messages_between": messagesBetween,
-    };
-  }
+		};
+	}
+
   
   SponsoredMessages copyWith({
     List<SponsoredMessage>? messages,
@@ -65,8 +66,11 @@ class SponsoredMessages extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'sponsoredMessages';
-  
+  static const String objectType = 'sponsoredMessages';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

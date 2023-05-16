@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **PassportSuitableElement** *(passportSuitableElement)* - basic class
-  ///
-  /// Contains information about a Telegram Passport element that was requested by a service.
-  ///
-  /// * [type]: Type of the element.
-  /// * [isSelfieRequired]: True, if a selfie is required with the identity document.
-  /// * [isTranslationRequired]: True, if a certified English translation is required with the document.
-  /// * [isNativeNameRequired]: True, if personal details must include the user's name in the language of their country of residence.
-class PassportSuitableElement extends TdObject {
+///
+/// Contains information about a Telegram Passport element that was requested by a service.
+///
+/// * [type]: Type of the element.
+/// * [isSelfieRequired]: True, if a selfie is required with the identity document.
+/// * [isTranslationRequired]: True, if a certified English translation is required with the document.
+/// * [isNativeNameRequired]: True, if personal details must include the user's name in the language of their country of residence.
+final class PassportSuitableElement extends TdObject {
   
   /// **PassportSuitableElement** *(passportSuitableElement)* - basic class
   ///
@@ -47,15 +47,16 @@ class PassportSuitableElement extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "type": type.toJson(),
       "is_selfie_required": isSelfieRequired,
       "is_translation_required": isTranslationRequired,
       "is_native_name_required": isNativeNameRequired,
-    };
-  }
+		};
+	}
+
   
   PassportSuitableElement copyWith({
     PassportElementType? type,
@@ -69,8 +70,11 @@ class PassportSuitableElement extends TdObject {
     isNativeNameRequired: isNativeNameRequired ?? this.isNativeNameRequired,
   );
 
-  static const String constructor = 'passportSuitableElement';
-  
+  static const String objectType = 'passportSuitableElement';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

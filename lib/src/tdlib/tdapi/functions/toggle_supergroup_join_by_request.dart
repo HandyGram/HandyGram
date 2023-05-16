@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **ToggleSupergroupJoinByRequest** *(toggleSupergroupJoinByRequest)* - TDLib function
-  ///
-  /// Toggles whether all users directly joining the supergroup need to be approved by supergroup administrators; requires can_restrict_members administrator right.
-  ///
-  /// * [supergroupId]: Identifier of the channel.
-  /// * [joinByRequest]: New value of join_by_request.
-  ///
-  /// [Ok] is returned on completion.
-class ToggleSupergroupJoinByRequest extends TdFunction {
+///
+/// Toggles whether all users directly joining the supergroup need to be approved by supergroup administrators; requires can_restrict_members administrator right.
+///
+/// * [supergroupId]: Identifier of the channel.
+/// * [joinByRequest]: New value of join_by_request.
+///
+/// [Ok] is returned on completion.
+final class ToggleSupergroupJoinByRequest extends TdFunction {
   
   /// **ToggleSupergroupJoinByRequest** *(toggleSupergroupJoinByRequest)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class ToggleSupergroupJoinByRequest extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "supergroup_id": supergroupId,
       "join_by_request": joinByRequest,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ToggleSupergroupJoinByRequest copyWith({
     int? supergroupId,
@@ -47,8 +48,11 @@ class ToggleSupergroupJoinByRequest extends TdFunction {
     joinByRequest: joinByRequest ?? this.joinByRequest,
   );
 
-  static const String constructor = 'toggleSupergroupJoinByRequest';
-  
+  static const String objectType = 'toggleSupergroupJoinByRequest';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

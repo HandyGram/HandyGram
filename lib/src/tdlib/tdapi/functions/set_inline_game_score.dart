@@ -1,17 +1,17 @@
 part of '../tdapi.dart';
 
 /// **SetInlineGameScore** *(setInlineGameScore)* - TDLib function
-  ///
-  /// Updates the game score of the specified user in a game; for bots only.
-  ///
-  /// * [inlineMessageId]: Inline message identifier.
-  /// * [editMessage]: Pass true to edit the game message to include the current scoreboard.
-  /// * [userId]: User identifier.
-  /// * [score]: The new score.
-  /// * [force]: Pass true to update the score even if it decreases. If the score is 0, the user will be deleted from the high score table.
-  ///
-  /// [Ok] is returned on completion.
-class SetInlineGameScore extends TdFunction {
+///
+/// Updates the game score of the specified user in a game; for bots only.
+///
+/// * [inlineMessageId]: Inline message identifier.
+/// * [editMessage]: Pass true to edit the game message to include the current scoreboard.
+/// * [userId]: User identifier.
+/// * [score]: The new score.
+/// * [force]: Pass true to update the score even if it decreases. If the score is 0, the user will be deleted from the high score table.
+///
+/// [Ok] is returned on completion.
+final class SetInlineGameScore extends TdFunction {
   
   /// **SetInlineGameScore** *(setInlineGameScore)* - TDLib function
   ///
@@ -49,16 +49,17 @@ class SetInlineGameScore extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "inline_message_id": inlineMessageId,
       "edit_message": editMessage,
       "user_id": userId,
       "score": score,
       "force": force,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetInlineGameScore copyWith({
     String? inlineMessageId,
@@ -74,8 +75,11 @@ class SetInlineGameScore extends TdFunction {
     force: force ?? this.force,
   );
 
-  static const String constructor = 'setInlineGameScore';
-  
+  static const String objectType = 'setInlineGameScore';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

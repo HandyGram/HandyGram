@@ -1,19 +1,19 @@
 part of '../tdapi.dart';
 
 /// **EncryptedPassportElement** *(encryptedPassportElement)* - basic class
-  ///
-  /// Contains information about an encrypted Telegram Passport element; for bots only.
-  ///
-  /// * [type]: Type of Telegram Passport element.
-  /// * [data]: Encrypted JSON-encoded data about the user.
-  /// * [frontSide]: The front side of an identity document.
-  /// * [reverseSide]: The reverse side of an identity document; may be null *(optional)*.
-  /// * [selfie]: Selfie with the document; may be null *(optional)*.
-  /// * [translation]: List of files containing a certified English translation of the document.
-  /// * [files]: List of attached files.
-  /// * [value]: Unencrypted data, phone number or email address.
-  /// * [hash]: Hash of the entire element.
-class EncryptedPassportElement extends TdObject {
+///
+/// Contains information about an encrypted Telegram Passport element; for bots only.
+///
+/// * [type]: Type of Telegram Passport element.
+/// * [data]: Encrypted JSON-encoded data about the user.
+/// * [frontSide]: The front side of an identity document.
+/// * [reverseSide]: The reverse side of an identity document; may be null *(optional)*.
+/// * [selfie]: Selfie with the document; may be null *(optional)*.
+/// * [translation]: List of files containing a certified English translation of the document.
+/// * [files]: List of attached files.
+/// * [value]: Unencrypted data, phone number or email address.
+/// * [hash]: Hash of the entire element.
+final class EncryptedPassportElement extends TdObject {
   
   /// **EncryptedPassportElement** *(encryptedPassportElement)* - basic class
   ///
@@ -82,9 +82,9 @@ class EncryptedPassportElement extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "type": type.toJson(),
       "data": data,
       "front_side": frontSide.toJson(),
@@ -94,8 +94,9 @@ class EncryptedPassportElement extends TdObject {
       "files": files.map((i) => i.toJson()).toList(),
       "value": value,
       "hash": hash,
-    };
-  }
+		};
+	}
+
   
   EncryptedPassportElement copyWith({
     PassportElementType? type,
@@ -119,8 +120,11 @@ class EncryptedPassportElement extends TdObject {
     hash: hash ?? this.hash,
   );
 
-  static const String constructor = 'encryptedPassportElement';
-  
+  static const String objectType = 'encryptedPassportElement';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

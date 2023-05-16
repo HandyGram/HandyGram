@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **ToggleSupergroupSignMessages** *(toggleSupergroupSignMessages)* - TDLib function
-  ///
-  /// Toggles whether sender signature is added to sent messages in a channel; requires can_change_info administrator right.
-  ///
-  /// * [supergroupId]: Identifier of the channel.
-  /// * [signMessages]: New value of sign_messages.
-  ///
-  /// [Ok] is returned on completion.
-class ToggleSupergroupSignMessages extends TdFunction {
+///
+/// Toggles whether sender signature is added to sent messages in a channel; requires can_change_info administrator right.
+///
+/// * [supergroupId]: Identifier of the channel.
+/// * [signMessages]: New value of sign_messages.
+///
+/// [Ok] is returned on completion.
+final class ToggleSupergroupSignMessages extends TdFunction {
   
   /// **ToggleSupergroupSignMessages** *(toggleSupergroupSignMessages)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class ToggleSupergroupSignMessages extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "supergroup_id": supergroupId,
       "sign_messages": signMessages,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ToggleSupergroupSignMessages copyWith({
     int? supergroupId,
@@ -47,8 +48,11 @@ class ToggleSupergroupSignMessages extends TdFunction {
     signMessages: signMessages ?? this.signMessages,
   );
 
-  static const String constructor = 'toggleSupergroupSignMessages';
-  
+  static const String objectType = 'toggleSupergroupSignMessages';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

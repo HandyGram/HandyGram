@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **FoundChatMessages** *(foundChatMessages)* - basic class
-  ///
-  /// Contains a list of messages found by a search in a given chat.
-  ///
-  /// * [totalCount]: Approximate total number of messages found; -1 if unknown.
-  /// * [messages]: List of messages.
-  /// * [nextFromMessageId]: The offset for the next request. If 0, there are no more results.
-class FoundChatMessages extends TdObject {
+///
+/// Contains a list of messages found by a search in a given chat.
+///
+/// * [totalCount]: Approximate total number of messages found; -1 if unknown.
+/// * [messages]: List of messages.
+/// * [nextFromMessageId]: The offset for the next request. If 0, there are no more results.
+final class FoundChatMessages extends TdObject {
   
   /// **FoundChatMessages** *(foundChatMessages)* - basic class
   ///
@@ -52,14 +52,15 @@ class FoundChatMessages extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "total_count": totalCount,
       "messages": messages.map((i) => i.toJson()).toList(),
       "next_from_message_id": nextFromMessageId,
-    };
-  }
+		};
+	}
+
   
   FoundChatMessages copyWith({
     int? totalCount,
@@ -75,8 +76,11 @@ class FoundChatMessages extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'foundChatMessages';
-  
+  static const String objectType = 'foundChatMessages';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

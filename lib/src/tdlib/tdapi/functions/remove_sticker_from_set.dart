@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **RemoveStickerFromSet** *(removeStickerFromSet)* - TDLib function
-  ///
-  /// Removes a sticker from the set to which it belongs; for bots only. The sticker set must have been created by the bot.
-  ///
-  /// * [sticker]: Sticker.
-  ///
-  /// [Ok] is returned on completion.
-class RemoveStickerFromSet extends TdFunction {
+///
+/// Removes a sticker from the set to which it belongs; for bots only. The sticker set must have been created by the bot.
+///
+/// * [sticker]: Sticker.
+///
+/// [Ok] is returned on completion.
+final class RemoveStickerFromSet extends TdFunction {
   
   /// **RemoveStickerFromSet** *(removeStickerFromSet)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class RemoveStickerFromSet extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "sticker": sticker.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   RemoveStickerFromSet copyWith({
     InputFile? sticker,
@@ -38,8 +39,11 @@ class RemoveStickerFromSet extends TdFunction {
     sticker: sticker ?? this.sticker,
   );
 
-  static const String constructor = 'removeStickerFromSet';
-  
+  static const String objectType = 'removeStickerFromSet';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

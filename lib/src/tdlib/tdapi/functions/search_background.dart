@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **SearchBackground** *(searchBackground)* - TDLib function
-  ///
-  /// Searches for a background by its name.
-  ///
-  /// * [name]: The name of the background.
-  ///
-  /// [Background] is returned on completion.
-class SearchBackground extends TdFunction {
+///
+/// Searches for a background by its name.
+///
+/// * [name]: The name of the background.
+///
+/// [Background] is returned on completion.
+final class SearchBackground extends TdFunction {
   
   /// **SearchBackground** *(searchBackground)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class SearchBackground extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "name": name,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SearchBackground copyWith({
     String? name,
@@ -38,8 +39,11 @@ class SearchBackground extends TdFunction {
     name: name ?? this.name,
   );
 
-  static const String constructor = 'searchBackground';
-  
+  static const String objectType = 'searchBackground';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

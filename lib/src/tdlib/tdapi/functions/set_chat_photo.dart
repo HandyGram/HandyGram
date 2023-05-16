@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **SetChatPhoto** *(setChatPhoto)* - TDLib function
-  ///
-  /// Changes the photo of a chat. Supported only for basic groups, supergroups and channels. Requires can_change_info administrator right.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [photo]: New chat photo; pass null to delete the chat photo *(optional)*.
-  ///
-  /// [Ok] is returned on completion.
-class SetChatPhoto extends TdFunction {
+///
+/// Changes the photo of a chat. Supported only for basic groups, supergroups and channels. Requires can_change_info administrator right.
+///
+/// * [chatId]: Chat identifier.
+/// * [photo]: New chat photo; pass null to delete the chat photo *(optional)*.
+///
+/// [Ok] is returned on completion.
+final class SetChatPhoto extends TdFunction {
   
   /// **SetChatPhoto** *(setChatPhoto)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class SetChatPhoto extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "photo": photo?.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetChatPhoto copyWith({
     int? chatId,
@@ -47,8 +48,11 @@ class SetChatPhoto extends TdFunction {
     photo: photo ?? this.photo,
   );
 
-  static const String constructor = 'setChatPhoto';
-  
+  static const String objectType = 'setChatPhoto';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

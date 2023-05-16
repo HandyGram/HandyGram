@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **GetRecommendedChatFilters** *(getRecommendedChatFilters)* - TDLib function
-  ///
-  /// Returns recommended chat filters for the current user.
-  ///
-  /// [RecommendedChatFilters] is returned on completion.
-class GetRecommendedChatFilters extends TdFunction {
+///
+/// Returns recommended chat filters for the current user.
+///
+/// [RecommendedChatFilters] is returned on completion.
+final class GetRecommendedChatFilters extends TdFunction {
   
   /// **GetRecommendedChatFilters** *(getRecommendedChatFilters)* - TDLib function
   ///
@@ -17,16 +17,20 @@ class GetRecommendedChatFilters extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetRecommendedChatFilters copyWith() => const GetRecommendedChatFilters();
 
-  static const String constructor = 'getRecommendedChatFilters';
-  
+  static const String objectType = 'getRecommendedChatFilters';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **ChatFilterInfo** *(chatFilterInfo)* - basic class
-  ///
-  /// Contains basic information about a chat filter.
-  ///
-  /// * [id]: Unique chat filter identifier.
-  /// * [title]: The title of the filter; 1-12 characters without line feeds.
-  /// * [iconName]: The chosen or default icon name for short filter representation. One of "All", "Unread", "Unmuted", "Bots", "Channels", "Groups", "Private", "Custom", "Setup", "Cat", "Crown",. "Favorite", "Flower", "Game", "Home", "Love", "Mask", "Party", "Sport", "Study", "Trade", "Travel", "Work", "Airplane", "Book", "Light", "Like", "Money", "Note", "Palette".
-class ChatFilterInfo extends TdObject {
+///
+/// Contains basic information about a chat filter.
+///
+/// * [id]: Unique chat filter identifier.
+/// * [title]: The title of the filter; 1-12 characters without line feeds.
+/// * [iconName]: The chosen or default icon name for short filter representation. One of "All", "Unread", "Unmuted", "Bots", "Channels", "Groups", "Private", "Custom", "Setup", "Cat", "Crown",. "Favorite", "Flower", "Game", "Home", "Love", "Mask", "Party", "Sport", "Study", "Trade", "Travel", "Work", "Airplane", "Book", "Light", "Like", "Money", "Note", "Palette".
+final class ChatFilterInfo extends TdObject {
   
   /// **ChatFilterInfo** *(chatFilterInfo)* - basic class
   ///
@@ -52,14 +52,15 @@ class ChatFilterInfo extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "title": title,
       "icon_name": iconName,
-    };
-  }
+		};
+	}
+
   
   ChatFilterInfo copyWith({
     int? id,
@@ -75,8 +76,11 @@ class ChatFilterInfo extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'chatFilterInfo';
-  
+  static const String objectType = 'chatFilterInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

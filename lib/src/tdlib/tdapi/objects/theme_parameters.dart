@@ -1,17 +1,17 @@
 part of '../tdapi.dart';
 
 /// **ThemeParameters** *(themeParameters)* - basic class
-  ///
-  /// Contains parameters of the application theme.
-  ///
-  /// * [backgroundColor]: A color of the background in the RGB24 format.
-  /// * [secondaryBackgroundColor]: A secondary color for the background in the RGB24 format.
-  /// * [textColor]: A color of text in the RGB24 format.
-  /// * [hintColor]: A color of hints in the RGB24 format.
-  /// * [linkColor]: A color of links in the RGB24 format.
-  /// * [buttonColor]: A color of the buttons in the RGB24 format.
-  /// * [buttonTextColor]: A color of text on the buttons in the RGB24 format.
-class ThemeParameters extends TdObject {
+///
+/// Contains parameters of the application theme.
+///
+/// * [backgroundColor]: A color of the background in the RGB24 format.
+/// * [secondaryBackgroundColor]: A secondary color for the background in the RGB24 format.
+/// * [textColor]: A color of text in the RGB24 format.
+/// * [hintColor]: A color of hints in the RGB24 format.
+/// * [linkColor]: A color of links in the RGB24 format.
+/// * [buttonColor]: A color of the buttons in the RGB24 format.
+/// * [buttonTextColor]: A color of text on the buttons in the RGB24 format.
+final class ThemeParameters extends TdObject {
   
   /// **ThemeParameters** *(themeParameters)* - basic class
   ///
@@ -68,9 +68,9 @@ class ThemeParameters extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "background_color": backgroundColor,
       "secondary_background_color": secondaryBackgroundColor,
       "text_color": textColor,
@@ -78,8 +78,9 @@ class ThemeParameters extends TdObject {
       "link_color": linkColor,
       "button_color": buttonColor,
       "button_text_color": buttonTextColor,
-    };
-  }
+		};
+	}
+
   
   ThemeParameters copyWith({
     int? backgroundColor,
@@ -99,8 +100,11 @@ class ThemeParameters extends TdObject {
     buttonTextColor: buttonTextColor ?? this.buttonTextColor,
   );
 
-  static const String constructor = 'themeParameters';
-  
+  static const String objectType = 'themeParameters';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

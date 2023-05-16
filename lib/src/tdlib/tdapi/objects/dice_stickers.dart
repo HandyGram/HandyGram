@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **DiceStickers** *(diceStickers)* - parent
-  ///
-  /// Contains animated stickers which must be used for dice animation rendering.
-class DiceStickers extends TdObject {
+///
+/// Contains animated stickers which must be used for dice animation rendering.
+sealed class DiceStickers extends TdObject {
   
   /// **DiceStickers** *(diceStickers)* - parent
   ///
@@ -15,37 +15,40 @@ class DiceStickers extends TdObject {
   /// * [DiceStickersSlotMachine]
   factory DiceStickers.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case DiceStickersRegular.constructor:
+      case DiceStickersRegular.objectType:
         return DiceStickersRegular.fromJson(json);
-      case DiceStickersSlotMachine.constructor:
+      case DiceStickersSlotMachine.objectType:
         return DiceStickersSlotMachine.fromJson(json);
       default:
-        return const DiceStickers();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of DiceStickers)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  DiceStickers copyWith() => const DiceStickers();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'diceStickers';
   
+  DiceStickers copyWith();
+
+  static const String objectType = 'diceStickers';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **DiceStickersRegular** *(diceStickersRegular)* - child of DiceStickers
-  ///
-  /// A regular animated sticker.
-  ///
-  /// * [sticker]: The animated sticker with the dice animation.
-class DiceStickersRegular extends DiceStickers {
+///
+/// A regular animated sticker.
+///
+/// * [sticker]: The animated sticker with the dice animation.
+final class DiceStickersRegular extends DiceStickers {
   
   /// **DiceStickersRegular** *(diceStickersRegular)* - child of DiceStickers
   ///
@@ -66,12 +69,13 @@ class DiceStickersRegular extends DiceStickers {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "sticker": sticker.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   DiceStickersRegular copyWith({
@@ -80,23 +84,26 @@ class DiceStickersRegular extends DiceStickers {
     sticker: sticker ?? this.sticker,
   );
 
-  static const String constructor = 'diceStickersRegular';
-  
+  static const String objectType = 'diceStickersRegular';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **DiceStickersSlotMachine** *(diceStickersSlotMachine)* - child of DiceStickers
-  ///
-  /// Animated stickers to be combined into a slot machine.
-  ///
-  /// * [background]: The animated sticker with the slot machine background. The background animation must start playing after all reel animations finish.
-  /// * [lever]: The animated sticker with the lever animation. The lever animation must play once in the initial dice state.
-  /// * [leftReel]: The animated sticker with the left reel.
-  /// * [centerReel]: The animated sticker with the center reel.
-  /// * [rightReel]: The animated sticker with the right reel.
-class DiceStickersSlotMachine extends DiceStickers {
+///
+/// Animated stickers to be combined into a slot machine.
+///
+/// * [background]: The animated sticker with the slot machine background. The background animation must start playing after all reel animations finish.
+/// * [lever]: The animated sticker with the lever animation. The lever animation must play once in the initial dice state.
+/// * [leftReel]: The animated sticker with the left reel.
+/// * [centerReel]: The animated sticker with the center reel.
+/// * [rightReel]: The animated sticker with the right reel.
+final class DiceStickersSlotMachine extends DiceStickers {
   
   /// **DiceStickersSlotMachine** *(diceStickersSlotMachine)* - child of DiceStickers
   ///
@@ -141,16 +148,17 @@ class DiceStickersSlotMachine extends DiceStickers {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "background": background.toJson(),
       "lever": lever.toJson(),
       "left_reel": leftReel.toJson(),
       "center_reel": centerReel.toJson(),
       "right_reel": rightReel.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   DiceStickersSlotMachine copyWith({
@@ -167,8 +175,11 @@ class DiceStickersSlotMachine extends DiceStickers {
     rightReel: rightReel ?? this.rightReel,
   );
 
-  static const String constructor = 'diceStickersSlotMachine';
-  
+  static const String objectType = 'diceStickersSlotMachine';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

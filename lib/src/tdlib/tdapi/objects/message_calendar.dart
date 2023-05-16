@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **MessageCalendar** *(messageCalendar)* - basic class
-  ///
-  /// Contains information about found messages, split by days according to the option "utc_time_offset".
-  ///
-  /// * [totalCount]: Total number of found messages.
-  /// * [days]: Information about messages sent.
-class MessageCalendar extends TdObject {
+///
+/// Contains information about found messages, split by days according to the option "utc_time_offset".
+///
+/// * [totalCount]: Total number of found messages.
+/// * [days]: Information about messages sent.
+final class MessageCalendar extends TdObject {
   
   /// **MessageCalendar** *(messageCalendar)* - basic class
   ///
@@ -45,13 +45,14 @@ class MessageCalendar extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "total_count": totalCount,
       "days": days.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   MessageCalendar copyWith({
     int? totalCount,
@@ -65,8 +66,11 @@ class MessageCalendar extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'messageCalendar';
-  
+  static const String objectType = 'messageCalendar';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

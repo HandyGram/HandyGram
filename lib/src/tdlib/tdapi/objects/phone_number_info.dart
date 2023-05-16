@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **PhoneNumberInfo** *(phoneNumberInfo)* - basic class
-  ///
-  /// Contains information about a phone number.
-  ///
-  /// * [country]: Information about the country to which the phone number belongs; may be null *(optional)*.
-  /// * [countryCallingCode]: The part of the phone number denoting country calling code or its part.
-  /// * [formattedPhoneNumber]: The phone number without country calling code formatted accordingly to local rules. Expected digits are returned as '-', but even more digits might be entered by the user.
-  /// * [isAnonymous]: True, if the phone number was bought on Fragment and isn't tied to a SIM card.
-class PhoneNumberInfo extends TdObject {
+///
+/// Contains information about a phone number.
+///
+/// * [country]: Information about the country to which the phone number belongs; may be null *(optional)*.
+/// * [countryCallingCode]: The part of the phone number denoting country calling code or its part.
+/// * [formattedPhoneNumber]: The phone number without country calling code formatted accordingly to local rules. Expected digits are returned as '-', but even more digits might be entered by the user.
+/// * [isAnonymous]: True, if the phone number was bought on Fragment and isn't tied to a SIM card.
+final class PhoneNumberInfo extends TdObject {
   
   /// **PhoneNumberInfo** *(phoneNumberInfo)* - basic class
   ///
@@ -59,15 +59,16 @@ class PhoneNumberInfo extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "country": country?.toJson(),
       "country_calling_code": countryCallingCode,
       "formatted_phone_number": formattedPhoneNumber,
       "is_anonymous": isAnonymous,
-    };
-  }
+		};
+	}
+
   
   PhoneNumberInfo copyWith({
     CountryInfo? country,
@@ -85,8 +86,11 @@ class PhoneNumberInfo extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'phoneNumberInfo';
-  
+  static const String objectType = 'phoneNumberInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

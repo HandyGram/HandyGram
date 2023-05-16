@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetSupergroup** *(getSupergroup)* - TDLib function
-  ///
-  /// Returns information about a supergroup or a channel by its identifier. This is an offline request if the current user is not a bot.
-  ///
-  /// * [supergroupId]: Supergroup or channel identifier.
-  ///
-  /// [Supergroup] is returned on completion.
-class GetSupergroup extends TdFunction {
+///
+/// Returns information about a supergroup or a channel by its identifier. This is an offline request if the current user is not a bot.
+///
+/// * [supergroupId]: Supergroup or channel identifier.
+///
+/// [Supergroup] is returned on completion.
+final class GetSupergroup extends TdFunction {
   
   /// **GetSupergroup** *(getSupergroup)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetSupergroup extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "supergroup_id": supergroupId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetSupergroup copyWith({
     int? supergroupId,
@@ -38,8 +39,11 @@ class GetSupergroup extends TdFunction {
     supergroupId: supergroupId ?? this.supergroupId,
   );
 
-  static const String constructor = 'getSupergroup';
-  
+  static const String objectType = 'getSupergroup';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

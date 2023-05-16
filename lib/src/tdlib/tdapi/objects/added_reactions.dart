@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **AddedReactions** *(addedReactions)* - basic class
-  ///
-  /// Represents a list of reactions added to a message.
-  ///
-  /// * [totalCount]: The total number of found reactions.
-  /// * [reactions]: The list of added reactions.
-  /// * [nextOffset]: The offset for the next request. If empty, there are no more results.
-class AddedReactions extends TdObject {
+///
+/// Represents a list of reactions added to a message.
+///
+/// * [totalCount]: The total number of found reactions.
+/// * [reactions]: The list of added reactions.
+/// * [nextOffset]: The offset for the next request. If empty, there are no more results.
+final class AddedReactions extends TdObject {
   
   /// **AddedReactions** *(addedReactions)* - basic class
   ///
@@ -52,14 +52,15 @@ class AddedReactions extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "total_count": totalCount,
       "reactions": reactions.map((i) => i.toJson()).toList(),
       "next_offset": nextOffset,
-    };
-  }
+		};
+	}
+
   
   AddedReactions copyWith({
     int? totalCount,
@@ -75,8 +76,11 @@ class AddedReactions extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'addedReactions';
-  
+  static const String objectType = 'addedReactions';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

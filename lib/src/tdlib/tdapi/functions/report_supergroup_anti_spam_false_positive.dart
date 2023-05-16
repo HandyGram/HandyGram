@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **ReportSupergroupAntiSpamFalsePositive** *(reportSupergroupAntiSpamFalsePositive)* - TDLib function
-  ///
-  /// Reports a false deletion of a message by aggressive anti-spam checks; requires administrator rights in the supergroup. Can be called only for messages from chatEventMessageDeleted with can_report_anti_spam_false_positive == true.
-  ///
-  /// * [supergroupId]: Supergroup identifier.
-  /// * [messageId]: Identifier of the erroneously deleted message.
-  ///
-  /// [Ok] is returned on completion.
-class ReportSupergroupAntiSpamFalsePositive extends TdFunction {
+///
+/// Reports a false deletion of a message by aggressive anti-spam checks; requires administrator rights in the supergroup. Can be called only for messages from chatEventMessageDeleted with can_report_anti_spam_false_positive == true.
+///
+/// * [supergroupId]: Supergroup identifier.
+/// * [messageId]: Identifier of the erroneously deleted message.
+///
+/// [Ok] is returned on completion.
+final class ReportSupergroupAntiSpamFalsePositive extends TdFunction {
   
   /// **ReportSupergroupAntiSpamFalsePositive** *(reportSupergroupAntiSpamFalsePositive)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class ReportSupergroupAntiSpamFalsePositive extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "supergroup_id": supergroupId,
       "message_id": messageId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ReportSupergroupAntiSpamFalsePositive copyWith({
     int? supergroupId,
@@ -47,8 +48,11 @@ class ReportSupergroupAntiSpamFalsePositive extends TdFunction {
     messageId: messageId ?? this.messageId,
   );
 
-  static const String constructor = 'reportSupergroupAntiSpamFalsePositive';
-  
+  static const String objectType = 'reportSupergroupAntiSpamFalsePositive';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **SetAutoDownloadSettings** *(setAutoDownloadSettings)* - TDLib function
-  ///
-  /// Sets auto-download settings.
-  ///
-  /// * [settings]: New user auto-download settings.
-  /// * [type]: Type of the network for which the new settings are relevant.
-  ///
-  /// [Ok] is returned on completion.
-class SetAutoDownloadSettings extends TdFunction {
+///
+/// Sets auto-download settings.
+///
+/// * [settings]: New user auto-download settings.
+/// * [type]: Type of the network for which the new settings are relevant.
+///
+/// [Ok] is returned on completion.
+final class SetAutoDownloadSettings extends TdFunction {
   
   /// **SetAutoDownloadSettings** *(setAutoDownloadSettings)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class SetAutoDownloadSettings extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "settings": settings.toJson(),
       "type": type.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetAutoDownloadSettings copyWith({
     AutoDownloadSettings? settings,
@@ -47,8 +48,11 @@ class SetAutoDownloadSettings extends TdFunction {
     type: type ?? this.type,
   );
 
-  static const String constructor = 'setAutoDownloadSettings';
-  
+  static const String objectType = 'setAutoDownloadSettings';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

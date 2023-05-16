@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **SetBackground** *(setBackground)* - TDLib function
-  ///
-  /// Changes the background selected by the user; adds background to the list of installed backgrounds.
-  ///
-  /// * [background]: The input background to use; pass null to create a new filled backgrounds or to remove the current background *(optional)*.
-  /// * [type]: Background type; pass null to use the default type of the remote background or to remove the current background *(optional)*.
-  /// * [forDarkTheme]: Pass true if the background is changed for a dark theme.
-  ///
-  /// [Background] is returned on completion.
-class SetBackground extends TdFunction {
+///
+/// Changes the background selected by the user; adds background to the list of installed backgrounds.
+///
+/// * [background]: The input background to use; pass null to create a new filled backgrounds or to remove the current background *(optional)*.
+/// * [type]: Background type; pass null to use the default type of the remote background or to remove the current background *(optional)*.
+/// * [forDarkTheme]: Pass true if the background is changed for a dark theme.
+///
+/// [Background] is returned on completion.
+final class SetBackground extends TdFunction {
   
   /// **SetBackground** *(setBackground)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class SetBackground extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "background": background?.toJson(),
       "type": type?.toJson(),
       "for_dark_theme": forDarkTheme,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetBackground copyWith({
     InputBackground? background,
@@ -56,8 +57,11 @@ class SetBackground extends TdFunction {
     forDarkTheme: forDarkTheme ?? this.forDarkTheme,
   );
 
-  static const String constructor = 'setBackground';
-  
+  static const String objectType = 'setBackground';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

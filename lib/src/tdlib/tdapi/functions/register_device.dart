@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **RegisterDevice** *(registerDevice)* - TDLib function
-  ///
-  /// Registers the currently used device for receiving push notifications. Returns a globally unique identifier of the push notification subscription.
-  ///
-  /// * [deviceToken]: Device token.
-  /// * [otherUserIds]: List of user identifiers of other users currently using the application.
-  ///
-  /// [PushReceiverId] is returned on completion.
-class RegisterDevice extends TdFunction {
+///
+/// Registers the currently used device for receiving push notifications. Returns a globally unique identifier of the push notification subscription.
+///
+/// * [deviceToken]: Device token.
+/// * [otherUserIds]: List of user identifiers of other users currently using the application.
+///
+/// [PushReceiverId] is returned on completion.
+final class RegisterDevice extends TdFunction {
   
   /// **RegisterDevice** *(registerDevice)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class RegisterDevice extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "device_token": deviceToken.toJson(),
       "other_user_ids": otherUserIds.map((i) => i).toList(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   RegisterDevice copyWith({
     DeviceToken? deviceToken,
@@ -47,8 +48,11 @@ class RegisterDevice extends TdFunction {
     otherUserIds: otherUserIds ?? this.otherUserIds,
   );
 
-  static const String constructor = 'registerDevice';
-  
+  static const String objectType = 'registerDevice';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,20 +1,20 @@
 part of '../tdapi.dart';
 
 /// **PersonalDetails** *(personalDetails)* - basic class
-  ///
-  /// Contains the user's personal details.
-  ///
-  /// * [firstName]: First name of the user written in English; 1-255 characters.
-  /// * [middleName]: Middle name of the user written in English; 0-255 characters.
-  /// * [lastName]: Last name of the user written in English; 1-255 characters.
-  /// * [nativeFirstName]: Native first name of the user; 1-255 characters.
-  /// * [nativeMiddleName]: Native middle name of the user; 0-255 characters.
-  /// * [nativeLastName]: Native last name of the user; 1-255 characters.
-  /// * [birthdate]: Birthdate of the user.
-  /// * [gender]: Gender of the user, "male" or "female".
-  /// * [countryCode]: A two-letter ISO 3166-1 alpha-2 country code of the user's country.
-  /// * [residenceCountryCode]: A two-letter ISO 3166-1 alpha-2 country code of the user's residence country.
-class PersonalDetails extends TdObject {
+///
+/// Contains the user's personal details.
+///
+/// * [firstName]: First name of the user written in English; 1-255 characters.
+/// * [middleName]: Middle name of the user written in English; 0-255 characters.
+/// * [lastName]: Last name of the user written in English; 1-255 characters.
+/// * [nativeFirstName]: Native first name of the user; 1-255 characters.
+/// * [nativeMiddleName]: Native middle name of the user; 0-255 characters.
+/// * [nativeLastName]: Native last name of the user; 1-255 characters.
+/// * [birthdate]: Birthdate of the user.
+/// * [gender]: Gender of the user, "male" or "female".
+/// * [countryCode]: A two-letter ISO 3166-1 alpha-2 country code of the user's country.
+/// * [residenceCountryCode]: A two-letter ISO 3166-1 alpha-2 country code of the user's residence country.
+final class PersonalDetails extends TdObject {
   
   /// **PersonalDetails** *(personalDetails)* - basic class
   ///
@@ -89,9 +89,9 @@ class PersonalDetails extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "first_name": firstName,
       "middle_name": middleName,
       "last_name": lastName,
@@ -102,8 +102,9 @@ class PersonalDetails extends TdObject {
       "gender": gender,
       "country_code": countryCode,
       "residence_country_code": residenceCountryCode,
-    };
-  }
+		};
+	}
+
   
   PersonalDetails copyWith({
     String? firstName,
@@ -129,8 +130,11 @@ class PersonalDetails extends TdObject {
     residenceCountryCode: residenceCountryCode ?? this.residenceCountryCode,
   );
 
-  static const String constructor = 'personalDetails';
-  
+  static const String objectType = 'personalDetails';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

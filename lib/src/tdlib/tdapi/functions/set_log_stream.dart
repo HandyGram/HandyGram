@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **SetLogStream** *(setLogStream)* - TDLib function
-  ///
-  /// Sets new log stream for internal logging of TDLib. Can be called synchronously.
-  ///
-  /// * [logStream]: New log stream.
-  ///
-  /// [Ok] is returned on completion.
-class SetLogStream extends TdFunction {
+///
+/// Sets new log stream for internal logging of TDLib. Can be called synchronously.
+///
+/// * [logStream]: New log stream.
+///
+/// [Ok] is returned on completion.
+final class SetLogStream extends TdFunction {
   
   /// **SetLogStream** *(setLogStream)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class SetLogStream extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "log_stream": logStream.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetLogStream copyWith({
     LogStream? logStream,
@@ -38,8 +39,11 @@ class SetLogStream extends TdFunction {
     logStream: logStream ?? this.logStream,
   );
 
-  static const String constructor = 'setLogStream';
-  
+  static const String objectType = 'setLogStream';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **WebAppInfo** *(webAppInfo)* - basic class
-  ///
-  /// Contains information about a Web App.
-  ///
-  /// * [launchId]: Unique identifier for the Web App launch.
-  /// * [url]: A Web App URL to open in a web view.
-class WebAppInfo extends TdObject {
+///
+/// Contains information about a Web App.
+///
+/// * [launchId]: Unique identifier for the Web App launch.
+/// * [url]: A Web App URL to open in a web view.
+final class WebAppInfo extends TdObject {
   
   /// **WebAppInfo** *(webAppInfo)* - basic class
   ///
@@ -45,13 +45,14 @@ class WebAppInfo extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "launch_id": launchId,
       "url": url,
-    };
-  }
+		};
+	}
+
   
   WebAppInfo copyWith({
     int? launchId,
@@ -65,8 +66,11 @@ class WebAppInfo extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'webAppInfo';
-  
+  static const String objectType = 'webAppInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

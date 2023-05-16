@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **SetChatLocation** *(setChatLocation)* - TDLib function
-  ///
-  /// Changes the location of a chat. Available only for some location-based supergroups, use supergroupFullInfo.can_set_location to check whether the method is allowed to use.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [location]: New location for the chat; must be valid and not null.
-  ///
-  /// [Ok] is returned on completion.
-class SetChatLocation extends TdFunction {
+///
+/// Changes the location of a chat. Available only for some location-based supergroups, use supergroupFullInfo.can_set_location to check whether the method is allowed to use.
+///
+/// * [chatId]: Chat identifier.
+/// * [location]: New location for the chat; must be valid and not null.
+///
+/// [Ok] is returned on completion.
+final class SetChatLocation extends TdFunction {
   
   /// **SetChatLocation** *(setChatLocation)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class SetChatLocation extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "location": location.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetChatLocation copyWith({
     int? chatId,
@@ -47,8 +48,11 @@ class SetChatLocation extends TdFunction {
     location: location ?? this.location,
   );
 
-  static const String constructor = 'setChatLocation';
-  
+  static const String objectType = 'setChatLocation';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

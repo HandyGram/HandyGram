@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **SetScopeNotificationSettings** *(setScopeNotificationSettings)* - TDLib function
-  ///
-  /// Changes notification settings for chats of a given type.
-  ///
-  /// * [scope]: Types of chats for which to change the notification settings.
-  /// * [notificationSettings]: The new notification settings for the given scope.
-  ///
-  /// [Ok] is returned on completion.
-class SetScopeNotificationSettings extends TdFunction {
+///
+/// Changes notification settings for chats of a given type.
+///
+/// * [scope]: Types of chats for which to change the notification settings.
+/// * [notificationSettings]: The new notification settings for the given scope.
+///
+/// [Ok] is returned on completion.
+final class SetScopeNotificationSettings extends TdFunction {
   
   /// **SetScopeNotificationSettings** *(setScopeNotificationSettings)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class SetScopeNotificationSettings extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "scope": scope.toJson(),
       "notification_settings": notificationSettings.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetScopeNotificationSettings copyWith({
     NotificationSettingsScope? scope,
@@ -47,8 +48,11 @@ class SetScopeNotificationSettings extends TdFunction {
     notificationSettings: notificationSettings ?? this.notificationSettings,
   );
 
-  static const String constructor = 'setScopeNotificationSettings';
-  
+  static const String objectType = 'setScopeNotificationSettings';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

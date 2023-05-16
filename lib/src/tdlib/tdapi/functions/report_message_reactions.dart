@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **ReportMessageReactions** *(reportMessageReactions)* - TDLib function
-  ///
-  /// Reports reactions set on a message to the Telegram moderators. Reactions on a message can be reported only if message.can_report_reactions.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [messageId]: Message identifier.
-  /// * [senderId]: Identifier of the sender, which added the reaction.
-  ///
-  /// [Ok] is returned on completion.
-class ReportMessageReactions extends TdFunction {
+///
+/// Reports reactions set on a message to the Telegram moderators. Reactions on a message can be reported only if message.can_report_reactions.
+///
+/// * [chatId]: Chat identifier.
+/// * [messageId]: Message identifier.
+/// * [senderId]: Identifier of the sender, which added the reaction.
+///
+/// [Ok] is returned on completion.
+final class ReportMessageReactions extends TdFunction {
   
   /// **ReportMessageReactions** *(reportMessageReactions)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class ReportMessageReactions extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "sender_id": senderId.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ReportMessageReactions copyWith({
     int? chatId,
@@ -56,8 +57,11 @@ class ReportMessageReactions extends TdFunction {
     senderId: senderId ?? this.senderId,
   );
 
-  static const String constructor = 'reportMessageReactions';
-  
+  static const String objectType = 'reportMessageReactions';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

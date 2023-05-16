@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **ResetNetworkStatistics** *(resetNetworkStatistics)* - TDLib function
-  ///
-  /// Resets all network data usage statistics to zero. Can be called before authorization.
-  ///
-  /// [Ok] is returned on completion.
-class ResetNetworkStatistics extends TdFunction {
+///
+/// Resets all network data usage statistics to zero. Can be called before authorization.
+///
+/// [Ok] is returned on completion.
+final class ResetNetworkStatistics extends TdFunction {
   
   /// **ResetNetworkStatistics** *(resetNetworkStatistics)* - TDLib function
   ///
@@ -17,16 +17,20 @@ class ResetNetworkStatistics extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ResetNetworkStatistics copyWith() => const ResetNetworkStatistics();
 
-  static const String constructor = 'resetNetworkStatistics';
-  
+  static const String objectType = 'resetNetworkStatistics';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

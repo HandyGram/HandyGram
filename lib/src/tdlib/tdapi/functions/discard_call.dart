@@ -1,17 +1,17 @@
 part of '../tdapi.dart';
 
 /// **DiscardCall** *(discardCall)* - TDLib function
-  ///
-  /// Discards a call.
-  ///
-  /// * [callId]: Call identifier.
-  /// * [isDisconnected]: Pass true if the user was disconnected.
-  /// * [duration]: The call duration, in seconds.
-  /// * [isVideo]: Pass true if the call was a video call.
-  /// * [connectionId]: Identifier of the connection used during the call.
-  ///
-  /// [Ok] is returned on completion.
-class DiscardCall extends TdFunction {
+///
+/// Discards a call.
+///
+/// * [callId]: Call identifier.
+/// * [isDisconnected]: Pass true if the user was disconnected.
+/// * [duration]: The call duration, in seconds.
+/// * [isVideo]: Pass true if the call was a video call.
+/// * [connectionId]: Identifier of the connection used during the call.
+///
+/// [Ok] is returned on completion.
+final class DiscardCall extends TdFunction {
   
   /// **DiscardCall** *(discardCall)* - TDLib function
   ///
@@ -49,16 +49,17 @@ class DiscardCall extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "call_id": callId,
       "is_disconnected": isDisconnected,
       "duration": duration,
       "is_video": isVideo,
       "connection_id": connectionId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   DiscardCall copyWith({
     int? callId,
@@ -74,8 +75,11 @@ class DiscardCall extends TdFunction {
     connectionId: connectionId ?? this.connectionId,
   );
 
-  static const String constructor = 'discardCall';
-  
+  static const String objectType = 'discardCall';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

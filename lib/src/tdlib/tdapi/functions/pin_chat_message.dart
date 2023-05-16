@@ -1,16 +1,16 @@
 part of '../tdapi.dart';
 
 /// **PinChatMessage** *(pinChatMessage)* - TDLib function
-  ///
-  /// Pins a message in a chat; requires can_pin_messages rights or can_edit_messages rights in the channel.
-  ///
-  /// * [chatId]: Identifier of the chat.
-  /// * [messageId]: Identifier of the new pinned message.
-  /// * [disableNotification]: Pass true to disable notification about the pinned message. Notifications are always disabled in channels and private chats.
-  /// * [onlyForSelf]: Pass true to pin the message only for self; private chats only.
-  ///
-  /// [Ok] is returned on completion.
-class PinChatMessage extends TdFunction {
+///
+/// Pins a message in a chat; requires can_pin_messages rights or can_edit_messages rights in the channel.
+///
+/// * [chatId]: Identifier of the chat.
+/// * [messageId]: Identifier of the new pinned message.
+/// * [disableNotification]: Pass true to disable notification about the pinned message. Notifications are always disabled in channels and private chats.
+/// * [onlyForSelf]: Pass true to pin the message only for self; private chats only.
+///
+/// [Ok] is returned on completion.
+final class PinChatMessage extends TdFunction {
   
   /// **PinChatMessage** *(pinChatMessage)* - TDLib function
   ///
@@ -43,15 +43,16 @@ class PinChatMessage extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "disable_notification": disableNotification,
       "only_for_self": onlyForSelf,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   PinChatMessage copyWith({
     int? chatId,
@@ -65,8 +66,11 @@ class PinChatMessage extends TdFunction {
     onlyForSelf: onlyForSelf ?? this.onlyForSelf,
   );
 
-  static const String constructor = 'pinChatMessage';
-  
+  static const String objectType = 'pinChatMessage';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

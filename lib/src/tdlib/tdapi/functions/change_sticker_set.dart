@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **ChangeStickerSet** *(changeStickerSet)* - TDLib function
-  ///
-  /// Installs/uninstalls or activates/archives a sticker set.
-  ///
-  /// * [setId]: Identifier of the sticker set.
-  /// * [isInstalled]: The new value of is_installed.
-  /// * [isArchived]: The new value of is_archived. A sticker set can't be installed and archived simultaneously.
-  ///
-  /// [Ok] is returned on completion.
-class ChangeStickerSet extends TdFunction {
+///
+/// Installs/uninstalls or activates/archives a sticker set.
+///
+/// * [setId]: Identifier of the sticker set.
+/// * [isInstalled]: The new value of is_installed.
+/// * [isArchived]: The new value of is_archived. A sticker set can't be installed and archived simultaneously.
+///
+/// [Ok] is returned on completion.
+final class ChangeStickerSet extends TdFunction {
   
   /// **ChangeStickerSet** *(changeStickerSet)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class ChangeStickerSet extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "set_id": setId,
       "is_installed": isInstalled,
       "is_archived": isArchived,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ChangeStickerSet copyWith({
     int? setId,
@@ -56,8 +57,11 @@ class ChangeStickerSet extends TdFunction {
     isArchived: isArchived ?? this.isArchived,
   );
 
-  static const String constructor = 'changeStickerSet';
-  
+  static const String objectType = 'changeStickerSet';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

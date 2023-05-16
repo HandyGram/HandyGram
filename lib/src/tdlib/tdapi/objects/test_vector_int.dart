@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **TestVectorInt** *(testVectorInt)* - basic class
-  ///
-  /// A simple object containing a vector of numbers; for testing only.
-  ///
-  /// * [value]: Vector of numbers.
-class TestVectorInt extends TdObject {
+///
+/// A simple object containing a vector of numbers; for testing only.
+///
+/// * [value]: Vector of numbers.
+final class TestVectorInt extends TdObject {
   
   /// **TestVectorInt** *(testVectorInt)* - basic class
   ///
@@ -38,12 +38,13 @@ class TestVectorInt extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "value": value.map((i) => i).toList(),
-    };
-  }
+		};
+	}
+
   
   TestVectorInt copyWith({
     List<int>? value,
@@ -55,8 +56,11 @@ class TestVectorInt extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'testVectorInt';
-  
+  static const String objectType = 'testVectorInt';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **InputBackground** *(inputBackground)* - parent
-  ///
-  /// Contains information about background to set.
-class InputBackground extends TdObject {
+///
+/// Contains information about background to set.
+sealed class InputBackground extends TdObject {
   
   /// **InputBackground** *(inputBackground)* - parent
   ///
@@ -15,37 +15,40 @@ class InputBackground extends TdObject {
   /// * [InputBackgroundRemote]
   factory InputBackground.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case InputBackgroundLocal.constructor:
+      case InputBackgroundLocal.objectType:
         return InputBackgroundLocal.fromJson(json);
-      case InputBackgroundRemote.constructor:
+      case InputBackgroundRemote.objectType:
         return InputBackgroundRemote.fromJson(json);
       default:
-        return const InputBackground();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of InputBackground)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  InputBackground copyWith() => const InputBackground();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'inputBackground';
   
+  InputBackground copyWith();
+
+  static const String objectType = 'inputBackground';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InputBackgroundLocal** *(inputBackgroundLocal)* - child of InputBackground
-  ///
-  /// A background from a local file.
-  ///
-  /// * [background]: Background file to use. Only inputFileLocal and inputFileGenerated are supported. The file must be in JPEG format for wallpapers and in PNG format for patterns.
-class InputBackgroundLocal extends InputBackground {
+///
+/// A background from a local file.
+///
+/// * [background]: Background file to use. Only inputFileLocal and inputFileGenerated are supported. The file must be in JPEG format for wallpapers and in PNG format for patterns.
+final class InputBackgroundLocal extends InputBackground {
   
   /// **InputBackgroundLocal** *(inputBackgroundLocal)* - child of InputBackground
   ///
@@ -66,12 +69,13 @@ class InputBackgroundLocal extends InputBackground {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "background": background.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   InputBackgroundLocal copyWith({
@@ -80,19 +84,22 @@ class InputBackgroundLocal extends InputBackground {
     background: background ?? this.background,
   );
 
-  static const String constructor = 'inputBackgroundLocal';
-  
+  static const String objectType = 'inputBackgroundLocal';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InputBackgroundRemote** *(inputBackgroundRemote)* - child of InputBackground
-  ///
-  /// A background from the server.
-  ///
-  /// * [backgroundId]: The background identifier.
-class InputBackgroundRemote extends InputBackground {
+///
+/// A background from the server.
+///
+/// * [backgroundId]: The background identifier.
+final class InputBackgroundRemote extends InputBackground {
   
   /// **InputBackgroundRemote** *(inputBackgroundRemote)* - child of InputBackground
   ///
@@ -113,12 +120,13 @@ class InputBackgroundRemote extends InputBackground {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "background_id": backgroundId,
-    };
-  }
+		};
+	}
+
   
   @override
   InputBackgroundRemote copyWith({
@@ -127,8 +135,11 @@ class InputBackgroundRemote extends InputBackground {
     backgroundId: backgroundId ?? this.backgroundId,
   );
 
-  static const String constructor = 'inputBackgroundRemote';
-  
+  static const String objectType = 'inputBackgroundRemote';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

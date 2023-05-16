@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **GetFileDownloadedPrefixSize** *(getFileDownloadedPrefixSize)* - TDLib function
-  ///
-  /// Returns file downloaded prefix size from a given offset, in bytes.
-  ///
-  /// * [fileId]: Identifier of the file.
-  /// * [offset]: Offset from which downloaded prefix size needs to be calculated.
-  ///
-  /// [FileDownloadedPrefixSize] is returned on completion.
-class GetFileDownloadedPrefixSize extends TdFunction {
+///
+/// Returns file downloaded prefix size from a given offset, in bytes.
+///
+/// * [fileId]: Identifier of the file.
+/// * [offset]: Offset from which downloaded prefix size needs to be calculated.
+///
+/// [FileDownloadedPrefixSize] is returned on completion.
+final class GetFileDownloadedPrefixSize extends TdFunction {
   
   /// **GetFileDownloadedPrefixSize** *(getFileDownloadedPrefixSize)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class GetFileDownloadedPrefixSize extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "file_id": fileId,
       "offset": offset,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetFileDownloadedPrefixSize copyWith({
     int? fileId,
@@ -47,8 +48,11 @@ class GetFileDownloadedPrefixSize extends TdFunction {
     offset: offset ?? this.offset,
   );
 
-  static const String constructor = 'getFileDownloadedPrefixSize';
-  
+  static const String objectType = 'getFileDownloadedPrefixSize';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

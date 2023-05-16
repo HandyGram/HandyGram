@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **RemoveBackground** *(removeBackground)* - TDLib function
-  ///
-  /// Removes background from the list of installed backgrounds.
-  ///
-  /// * [backgroundId]: The background identifier.
-  ///
-  /// [Ok] is returned on completion.
-class RemoveBackground extends TdFunction {
+///
+/// Removes background from the list of installed backgrounds.
+///
+/// * [backgroundId]: The background identifier.
+///
+/// [Ok] is returned on completion.
+final class RemoveBackground extends TdFunction {
   
   /// **RemoveBackground** *(removeBackground)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class RemoveBackground extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "background_id": backgroundId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   RemoveBackground copyWith({
     int? backgroundId,
@@ -38,8 +39,11 @@ class RemoveBackground extends TdFunction {
     backgroundId: backgroundId ?? this.backgroundId,
   );
 
-  static const String constructor = 'removeBackground';
-  
+  static const String objectType = 'removeBackground';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

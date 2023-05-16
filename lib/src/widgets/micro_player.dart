@@ -43,7 +43,7 @@ class _MicroPlayerState extends State<MicroPlayer> {
   void initState() {
     super.initState();
     if (heavyPreviewFormats.contains(
-      widget.thumb.format.getConstructor(),
+      widget.thumb.format.instanceType,
     )) {
       preview = const LoadingContainer();
       state = MicroPlayerState.preview;
@@ -183,7 +183,7 @@ class _MicroPlayerState extends State<MicroPlayer> {
             ),
           ),
         if (state == MicroPlayerState.preview &&
-            heavyPreviewFormats.contains(widget.thumb.format.getConstructor()))
+            heavyPreviewFormats.contains(widget.thumb.format.instanceType))
           SizedBox.expand(
             child: Align(
               alignment: Alignment.topRight,

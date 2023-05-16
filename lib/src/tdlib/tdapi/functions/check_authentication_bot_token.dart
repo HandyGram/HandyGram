@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **CheckAuthenticationBotToken** *(checkAuthenticationBotToken)* - TDLib function
-  ///
-  /// Checks the authentication token of a bot; to log in as a bot. Works only when the current authorization state is authorizationStateWaitPhoneNumber. Can be used instead of setAuthenticationPhoneNumber and checkAuthenticationCode to log in.
-  ///
-  /// * [token]: The bot token.
-  ///
-  /// [Ok] is returned on completion.
-class CheckAuthenticationBotToken extends TdFunction {
+///
+/// Checks the authentication token of a bot; to log in as a bot. Works only when the current authorization state is authorizationStateWaitPhoneNumber. Can be used instead of setAuthenticationPhoneNumber and checkAuthenticationCode to log in.
+///
+/// * [token]: The bot token.
+///
+/// [Ok] is returned on completion.
+final class CheckAuthenticationBotToken extends TdFunction {
   
   /// **CheckAuthenticationBotToken** *(checkAuthenticationBotToken)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class CheckAuthenticationBotToken extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "token": token,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   CheckAuthenticationBotToken copyWith({
     String? token,
@@ -38,8 +39,11 @@ class CheckAuthenticationBotToken extends TdFunction {
     token: token ?? this.token,
   );
 
-  static const String constructor = 'checkAuthenticationBotToken';
-  
+  static const String objectType = 'checkAuthenticationBotToken';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

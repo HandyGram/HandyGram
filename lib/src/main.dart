@@ -11,6 +11,7 @@ import 'package:handygram/src/pages/login.dart';
 import 'package:handygram/src/pages/pre_settings.dart';
 import 'package:handygram/src/pages/settings.dart';
 import 'package:handygram/src/pages/tdlib_loader.dart';
+import 'package:handygram/src/telegram/session.dart';
 
 class HandyGram extends StatelessWidget {
   const HandyGram({super.key});
@@ -24,9 +25,16 @@ class HandyGram extends StatelessWidget {
       ).copyWith(
         scaffoldBackgroundColor: Colors.black,
       ),
-      onGenerateRoute: (settings) {
+      onGenerateRoute: (s) {
         Widget page;
-        switch (settings.name) {
+        String? name = s.name;
+
+        // Skip loading TDLib if it was already done
+        if (name == "/load_tdlib" && sessionReady) {
+          name = "/home";
+        }
+
+        switch (name) {
           case "/login":
             page = const LoginPage();
             break;
@@ -47,7 +55,7 @@ class HandyGram extends StatelessWidget {
             break;
           case "/chat":
             page = ChatPage(
-              args: settings.arguments as Map<String, dynamic>,
+              args: s.arguments as Map<String, dynamic>,
             );
             break;
           case "/settings":
@@ -58,12 +66,12 @@ class HandyGram extends StatelessWidget {
             break;
           case "/chat_menu":
             page = ChatMenuPage(
-              args: settings.arguments as Map<String, dynamic>,
+              args: s.arguments as Map<String, dynamic>,
             );
             break;
           case "/chat_info":
             page = ChatInfoPage(
-              args: settings.arguments as Map<String, dynamic>,
+              args: s.arguments as Map<String, dynamic>,
             );
             break;
           default:
@@ -82,7 +90,7 @@ class HandyGram extends StatelessWidget {
         );
       },
       // Loads the TDLib and checks auth status
-      initialRoute: '/load_tdlib',
+      initialRoute: sessionReady ? '/home' : '/load_tdlib',
     );
   }
 }

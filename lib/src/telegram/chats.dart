@@ -32,29 +32,11 @@ enum TgChatListType {
   main,
 }
 
-TgChatListType stringToChatType(String type) {
-  switch (type) {
-    case 'chatListArchive':
-      return TgChatListType.archive;
-    case 'chatListFilter':
-      return TgChatListType.folder;
-    case 'chatListMain':
-    default:
-      return TgChatListType.main;
-  }
-}
-
-String chatTypeToString(TgChatListType type) {
-  switch (type) {
-    case TgChatListType.archive:
-      return 'chatListArchive';
-    case TgChatListType.folder:
-      return 'chatListFilter';
-    case TgChatListType.main:
-    default:
-      return 'chatListMain';
-  }
-}
+TgChatListType chatListToChatType(tdlib.ChatList type) => switch (type) {
+      tdlib.ChatListMain() => TgChatListType.main,
+      tdlib.ChatListArchive() => TgChatListType.archive,
+      tdlib.ChatListFilter() => TgChatListType.folder,
+    };
 
 class TgChatList extends ChangeNotifier {
   late final TgChatListType type;
@@ -223,7 +205,7 @@ Future<void> updateChatListImpl(
   if (pos == null) {
     return;
   } else {
-    TgChatListType t = stringToChatType(pos.list.getConstructor());
+    TgChatListType t = chatListToChatType(pos.list);
     if (t == TgChatListType.folder) {
       // TODO: folders
       return;
@@ -237,121 +219,69 @@ Future<void> updateChatListImpl(
   }
 }
 
-String messageContentToString(tdlib.MessageContent content) {
-  switch (content.getConstructor()) {
-    case "messageAnimatedEmoji":
-      content as tdlib.MessageAnimatedEmoji;
-      return content.animatedEmoji.sticker!.emoji;
-    case "messageAnimation":
-      content as tdlib.MessageAnimation;
-      return "🖼 ${content.caption.text.isEmpty ? "GIF" : content.caption.text}";
-    case "messageAudio":
-      content as tdlib.MessageAudio;
-      return "💿 ${content.caption.text.isEmpty ? "Audio" : content.caption.text}";
-    case "messageDocument":
-      content as tdlib.MessageDocument;
-      return "📄 ${content.caption.text.isEmpty ? "Document" : content.caption.text}";
-    case "messageVideo":
-      content as tdlib.MessageVideo;
-      return "🎥 ${content.caption.text.isEmpty ? "Video" : content.caption.text}";
-    case "messagePhoto":
-      content as tdlib.MessagePhoto;
-      return "🖼 ${content.caption.text.isEmpty ? "Photo" : content.caption.text}";
-    case "messageBasicGroupCreate":
-    case "messageSupergroupChatCreate":
-      return "Group was created";
-    case "messageCall":
-      content as tdlib.MessageCall;
-      return "${content.isVideo ? "Video" : "Voice"} call (${Duration(seconds: content.duration).toString()})";
-    case "messageChatAddMembers":
-      return "Someone was added to chat";
-    case "messageChatChangePhoto":
-      return "Photo was changed";
-    case "messageChatChangeTitle":
-      return "Title was changed";
-    case "messageCallDeleteMember":
-      return "Someone left the call";
-    case "messageChatDeletePhoto":
-      return "Chat photo was deleted";
-    case "messageChatJoinByLink":
-      return "Someone joined the chat by link";
-    case "messageChatJoinByRequest":
-      return "Someone's join request was accepted";
-    case "messageChatSetTheme":
-      return "Chat theme was changed";
-    case "messageChatSetTtl":
-      return "Message time-to-live was changed";
-    case "messageChatUpgradeFrom":
-      return "Chat became a supergroup";
-    case "messageChatUpgradeTo":
-      return "Basic group became a supergroup";
-    case "messageContact":
-      return "Contact";
-    case "messageContactRegistered":
-      return "User has joined Telegram!";
-    case "messageCustomServiceAction":
-      content as tdlib.MessageCustomServiceAction;
-      return content.text;
-    case "messageDice":
-      content as tdlib.MessageDice;
-      return "${content.emoji} ${content.value == 0 ? "is spinning" : "gave ${content.value}"}";
-    case "messageExpiredPhoto":
-      return "Photo has self-destructed";
-    case "messageExpiredVideo":
-      return "Video has self-destructed";
-    case "messageGame":
-      content as tdlib.MessageGame;
-      return content.game.title;
-    case "messageGameScore":
-      return "Game highest score was increased";
-    case "messageInviteVideoChatParticipants":
-      return "Someone was invited to join the video chat";
-    case "messageInvoice":
-      return "INVOICE";
-    case "messageLocation":
-      return "Location";
-    case "messagePassportDataReceived":
-      return "Telegram Passport";
-    case "messagePassportDataSent":
-      return "Telegram Passport was sent";
-    case "messagePaymentSuccessful":
-    case "messagePaymentSuccessfulBot":
-      return "Payment was successful";
-    case "messagePinMessage":
-      return "Message was pinned";
-    case "messagePoll":
-      return "Poll";
-    case "messageProximityAlertTriggered":
-      return "Proximity alert";
-    case "messageScreenshotTaken":
-      return "Screenshot was taken";
-    case "messageSticker":
-      content as tdlib.MessageSticker;
-      return "Sticker ${content.sticker.emoji}";
-    case "messageText":
-      content as tdlib.MessageText;
-      return content.text.text;
-    case "messageUnsupported":
-      return "Unsupported by TDlib";
-    case "messageVenue":
-      return "Venue";
-    case "messageVideoChatEnded":
-      return "Video chat ended";
-    case "messageVideoChatScheduled":
-      return "New scheduled video chat";
-    case "messageVideoChatStarted":
-      return "Video chat started";
-    case "messageVideoNote":
-      content as tdlib.MessageVideoNote;
-      return "Video message (${Duration(milliseconds: content.videoNote.duration).toString()})";
-    case "messageVoiceNote":
-      content as tdlib.MessageVoiceNote;
-      return "Voice message (${Duration(milliseconds: content.voiceNote.duration).toString()})";
-    case "messageWebsiteConnected":
-      return "Website connected";
-  }
-  return "Unknown message";
-}
+String messageContentToString(tdlib.MessageContent content) =>
+    switch (content) {
+      tdlib.MessageAnimatedEmoji() => content.animatedEmoji.sticker!.emoji,
+      tdlib.MessageAnimation() =>
+        "🖼 ${content.caption.text.isEmpty ? "GIF" : content.caption.text}",
+      tdlib.MessageAudio() =>
+        "💿 ${content.caption.text.isEmpty ? "Audio" : content.caption.text}",
+      tdlib.MessageDocument() =>
+        "📄 ${content.caption.text.isEmpty ? "Document" : content.caption.text}",
+      tdlib.MessageVideo() =>
+        "🎥 ${content.caption.text.isEmpty ? "Video" : content.caption.text}",
+      tdlib.MessagePhoto() =>
+        "🖼 ${content.caption.text.isEmpty ? "Photo" : content.caption.text}",
+      tdlib.MessageBasicGroupChatCreate() => "Group was created",
+      tdlib.MessageSupergroupChatCreate() => "Group was created",
+      tdlib.MessageCall() =>
+        "${content.isVideo ? "Video" : "Voice"} call (${Duration(seconds: content.duration).toString()})",
+      tdlib.MessageChatAddMembers() => "Someone was added to chat",
+      tdlib.MessageChatChangePhoto() => "Photo was changed",
+      tdlib.MessageChatChangeTitle() => "Title was changed",
+      tdlib.MessageChatDeletePhoto() => "Chat photo was deleted",
+      tdlib.MessageChatJoinByLink() => "Someone joined the chat by link",
+      tdlib.MessageChatJoinByRequest() => "Someone's join request was accepted",
+      tdlib.MessageChatSetTheme() => "Chat theme was changed",
+      tdlib.MessageChatSetMessageAutoDeleteTime() =>
+        "Message time-to-live was changed",
+      tdlib.MessageChatUpgradeFrom() => "Chat became a supergroup",
+      tdlib.MessageChatUpgradeTo() => "Basic group became a supergroup",
+      tdlib.MessageContact() => "Contact",
+      tdlib.MessageContactRegistered() => "User has joined Telegram!",
+      tdlib.MessageCustomServiceAction() => content.text,
+      tdlib.MessageDice() =>
+        "${content.emoji} ${content.value == 0 ? "is spinning" : "gave ${content.value}"}",
+      tdlib.MessageExpiredPhoto() => "Photo has self-destructed",
+      tdlib.MessageExpiredVideo() => "Video has self-destructed",
+      tdlib.MessageGame() => content.game.title,
+      tdlib.MessageGameScore() => "Game highest score was increased",
+      tdlib.MessageInviteVideoChatParticipants() =>
+        "Someone was invited to join the video chat",
+      tdlib.MessageInvoice() => "INVOICE",
+      tdlib.MessageLocation() => "Location",
+      tdlib.MessagePassportDataReceived() => "Telegram Passport",
+      tdlib.MessagePassportDataSent() => "Telegram Passport was sent",
+      tdlib.MessagePaymentSuccessful() => "Payment was successful",
+      tdlib.MessagePaymentSuccessfulBot() => "Payment was successful",
+      tdlib.MessagePinMessage() => "Message was pinned",
+      tdlib.MessagePoll() => "Poll",
+      tdlib.MessageProximityAlertTriggered() => "Proximity alert",
+      tdlib.MessageScreenshotTaken() => "Screenshot was taken",
+      tdlib.MessageSticker() => "Sticker ${content.sticker.emoji}",
+      tdlib.MessageText() => content.text.text,
+      tdlib.MessageUnsupported() => "Unsupported by TDlib",
+      tdlib.MessageVenue() => "Venue",
+      tdlib.MessageVideoChatEnded() => "Video chat ended",
+      tdlib.MessageVideoChatScheduled() => "New scheduled video chat",
+      tdlib.MessageVideoChatStarted() => "Video chat started",
+      tdlib.MessageVideoNote() =>
+        "Video message (${Duration(milliseconds: content.videoNote.duration).toString()})",
+      tdlib.MessageVoiceNote() =>
+        "Voice message (${Duration(milliseconds: content.voiceNote.duration).toString()})",
+      tdlib.MessageWebsiteConnected() => "Website connected",
+      _ => "Unknown message",
+    };
 
 // Saves all chats info, manages it and gives us
 // ability to synchronously (maybe)get chat info.
@@ -724,96 +654,77 @@ class TgBasicGroupFullInfoCache extends ChangeNotifier {
 }
 
 void chatsHandler(tdlib.TdObject object, TgSession session) async {
-  if (object.getConstructor() == tdlib.UpdateChatLastMessage.constructor) {
-    object as tdlib.UpdateChatLastMessage;
-    if (object.positions.isNotEmpty) {
-      for (var i in object.positions) {
-        session.updateChatList(
-          object.chatId,
-          chat: i,
-          lastMessage: object.lastMessage,
-        );
+  switch (object) {
+    case tdlib.UpdateChatLastMessage(
+        chatId: var id,
+        positions: var pos,
+        lastMessage: var lastMsg,
+      ):
+      if (pos.isNotEmpty) {
+        for (var i in pos) {
+          await session.updateChatList(id, chat: i, lastMessage: lastMsg);
+        }
+      } else {
+        await session.updateChatList(id, lastMessage: lastMsg);
       }
-    } else {
-      session.updateChatList(
-        object.chatId,
-        lastMessage: object.lastMessage,
-      );
-    }
-    session.chatsInfoCache.update(
-      object.chatId,
-      lastMessage: object.lastMessage,
-    );
-  } else if (object.getConstructor() ==
-      tdlib.UpdateChatDraftMessage.constructor) {
-    object as tdlib.UpdateChatDraftMessage;
-    if (object.positions.isNotEmpty) {
-      for (var i in object.positions) {
-        session.updateChatList(
-          object.chatId,
-          chat: i,
-          draft: object.draftMessage,
-        );
+      session.chatsInfoCache.update(id, lastMessage: lastMsg);
+      break;
+    case tdlib.UpdateChatDraftMessage(
+        positions: var pos,
+        chatId: var id,
+        draftMessage: var draftMsg,
+      ):
+      if (pos.isNotEmpty) {
+        for (var i in pos) {
+          await session.updateChatList(id, chat: i, draft: draftMsg);
+        }
+      } else {
+        await session.updateChatList(id, draft: draftMsg);
       }
-    } else {
-      session.updateChatList(
-        object.chatId,
-        draft: object.draftMessage,
-      );
-    }
-    session.chatsInfoCache.update(
-      object.chatId,
-      draft: object.draftMessage,
-    );
-  } else if (object.getConstructor() == tdlib.UpdateChatPosition.constructor) {
-    object as tdlib.UpdateChatPosition;
-    session.updateChatList(
-      object.chatId,
-      chat: object.position,
-    );
-  } else if (object.getConstructor() == tdlib.UpdateChatReadInbox.constructor) {
-    object as tdlib.UpdateChatReadInbox;
-    session.chatsInfoCache.update(
-      object.chatId,
-      lastReadInboxMessageId: object.lastReadInboxMessageId,
-      unreadCount: object.unreadCount,
-    );
-  } else if (object.getConstructor() ==
-      tdlib.UpdateChatReadOutbox.constructor) {
-    object as tdlib.UpdateChatReadOutbox;
-    session.chatsInfoCache.update(
-      object.chatId,
-      lastReadOutboxMessageId: object.lastReadOutboxMessageId,
-    );
-  } else if (object.getConstructor() == tdlib.UpdateChatPhoto.constructor) {
-    object as tdlib.UpdateChatPhoto;
-    session.chatsInfoCache.update(
-      object.chatId,
-      photo: object.photo,
-    );
-  } else if (object.getConstructor() == tdlib.UpdateSupergroup.constructor) {
-    object as tdlib.UpdateSupergroup;
-    session.supergroups.update(
-      object.supergroup,
-    );
-  } else if (object.getConstructor() ==
-      tdlib.UpdateSupergroupFullInfo.constructor) {
-    object as tdlib.UpdateSupergroupFullInfo;
-    session.supergroupsFullInfo.update(
-      object.supergroupFullInfo,
-      object.supergroupId,
-    );
-  } else if (object.getConstructor() == tdlib.UpdateBasicGroup.constructor) {
-    object as tdlib.UpdateBasicGroup;
-    session.basicGroups.update(
-      object.basicGroup,
-    );
-  } else if (object.getConstructor() ==
-      tdlib.UpdateBasicGroupFullInfo.constructor) {
-    object as tdlib.UpdateBasicGroupFullInfo;
-    session.basicGroupsFullInfo.update(
-      object.basicGroupFullInfo,
-      object.basicGroupId,
-    );
+      session.chatsInfoCache.update(id, draft: draftMsg);
+      break;
+    case tdlib.UpdateChatPosition(
+        chatId: var id,
+        position: var pos,
+      ):
+      await session.updateChatList(id, chat: pos);
+      break;
+    case tdlib.UpdateChatReadInbox(
+        chatId: var id,
+        lastReadInboxMessageId: var msg,
+        unreadCount: var unread,
+      ):
+      session.chatsInfoCache
+          .update(id, lastReadInboxMessageId: msg, unreadCount: unread);
+      break;
+    case tdlib.UpdateChatReadOutbox(
+        chatId: var id,
+        lastReadOutboxMessageId: var msg,
+      ):
+      session.chatsInfoCache.update(id, lastReadOutboxMessageId: msg);
+      break;
+    case tdlib.UpdateChatPhoto(chatId: var id, photo: var photo):
+      session.chatsInfoCache.update(id, photo: photo);
+      break;
+    case tdlib.UpdateSupergroup(supergroup: var sg):
+      session.supergroups.update(sg);
+      break;
+    case tdlib.UpdateSupergroupFullInfo(
+        supergroupFullInfo: var fi,
+        supergroupId: var id,
+      ):
+      session.supergroupsFullInfo.update(fi, id);
+      break;
+    case tdlib.UpdateBasicGroup(basicGroup: var bi):
+      session.basicGroups.update(bi);
+      break;
+    case tdlib.UpdateBasicGroupFullInfo(
+        basicGroupId: var id,
+        basicGroupFullInfo: var fi,
+      ):
+      session.basicGroupsFullInfo.update(fi, id);
+      break;
+    default:
+      return;
   }
 }

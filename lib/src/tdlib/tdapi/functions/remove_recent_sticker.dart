@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **RemoveRecentSticker** *(removeRecentSticker)* - TDLib function
-  ///
-  /// Removes a sticker from the list of recently used stickers.
-  ///
-  /// * [isAttached]: Pass true to remove the sticker from the list of stickers recently attached to photo or video files; pass false to remove the sticker from the list of recently sent stickers.
-  /// * [sticker]: Sticker file to delete.
-  ///
-  /// [Ok] is returned on completion.
-class RemoveRecentSticker extends TdFunction {
+///
+/// Removes a sticker from the list of recently used stickers.
+///
+/// * [isAttached]: Pass true to remove the sticker from the list of stickers recently attached to photo or video files; pass false to remove the sticker from the list of recently sent stickers.
+/// * [sticker]: Sticker file to delete.
+///
+/// [Ok] is returned on completion.
+final class RemoveRecentSticker extends TdFunction {
   
   /// **RemoveRecentSticker** *(removeRecentSticker)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class RemoveRecentSticker extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "is_attached": isAttached,
       "sticker": sticker.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   RemoveRecentSticker copyWith({
     bool? isAttached,
@@ -47,8 +48,11 @@ class RemoveRecentSticker extends TdFunction {
     sticker: sticker ?? this.sticker,
   );
 
-  static const String constructor = 'removeRecentSticker';
-  
+  static const String objectType = 'removeRecentSticker';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

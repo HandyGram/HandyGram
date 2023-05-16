@@ -1,16 +1,16 @@
 part of '../tdapi.dart';
 
 /// **AddFileToDownloads** *(addFileToDownloads)* - TDLib function
-  ///
-  /// Adds a file from a message to the list of file downloads. Download progress and completion of the download will be notified through updateFile updates.. If message database is used, the list of file downloads is persistent across application restarts. The downloading is independent from download using downloadFile, i.e. it continues if downloadFile is canceled or is used to download a part of the file.
-  ///
-  /// * [fileId]: Identifier of the file to download.
-  /// * [chatId]: Chat identifier of the message with the file.
-  /// * [messageId]: Message identifier.
-  /// * [priority]: Priority of the download (1-32). The higher the priority, the earlier the file will be downloaded. If the priorities of two files are equal, then the last one for which downloadFile/addFileToDownloads was called will be downloaded first.
-  ///
-  /// [File] is returned on completion.
-class AddFileToDownloads extends TdFunction {
+///
+/// Adds a file from a message to the list of file downloads. Download progress and completion of the download will be notified through updateFile updates.. If message database is used, the list of file downloads is persistent across application restarts. The downloading is independent from download using downloadFile, i.e. it continues if downloadFile is canceled or is used to download a part of the file.
+///
+/// * [fileId]: Identifier of the file to download.
+/// * [chatId]: Chat identifier of the message with the file.
+/// * [messageId]: Message identifier.
+/// * [priority]: Priority of the download (1-32). The higher the priority, the earlier the file will be downloaded. If the priorities of two files are equal, then the last one for which downloadFile/addFileToDownloads was called will be downloaded first.
+///
+/// [File] is returned on completion.
+final class AddFileToDownloads extends TdFunction {
   
   /// **AddFileToDownloads** *(addFileToDownloads)* - TDLib function
   ///
@@ -43,15 +43,16 @@ class AddFileToDownloads extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "file_id": fileId,
       "chat_id": chatId,
       "message_id": messageId,
       "priority": priority,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   AddFileToDownloads copyWith({
     int? fileId,
@@ -65,8 +66,11 @@ class AddFileToDownloads extends TdFunction {
     priority: priority ?? this.priority,
   );
 
-  static const String constructor = 'addFileToDownloads';
-  
+  static const String objectType = 'addFileToDownloads';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

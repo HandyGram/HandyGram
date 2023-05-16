@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetMessageFileType** *(getMessageFileType)* - TDLib function
-  ///
-  /// Returns information about a file with messages exported from another application.
-  ///
-  /// * [messageFileHead]: Beginning of the message file; up to 100 first lines.
-  ///
-  /// [MessageFileType] is returned on completion.
-class GetMessageFileType extends TdFunction {
+///
+/// Returns information about a file with messages exported from another application.
+///
+/// * [messageFileHead]: Beginning of the message file; up to 100 first lines.
+///
+/// [MessageFileType] is returned on completion.
+final class GetMessageFileType extends TdFunction {
   
   /// **GetMessageFileType** *(getMessageFileType)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetMessageFileType extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "message_file_head": messageFileHead,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetMessageFileType copyWith({
     String? messageFileHead,
@@ -38,8 +39,11 @@ class GetMessageFileType extends TdFunction {
     messageFileHead: messageFileHead ?? this.messageFileHead,
   );
 
-  static const String constructor = 'getMessageFileType';
-  
+  static const String objectType = 'getMessageFileType';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

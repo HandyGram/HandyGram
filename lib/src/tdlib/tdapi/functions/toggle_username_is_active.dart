@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **ToggleUsernameIsActive** *(toggleUsernameIsActive)* - TDLib function
-  ///
-  /// Changes active state for a username of the current user. The editable username can't be disabled. May return an error with a message "USERNAMES_ACTIVE_TOO_MUCH" if the maximum number of active usernames has been reached.
-  ///
-  /// * [username]: The username to change.
-  /// * [isActive]: Pass true to activate the username; pass false to disable it.
-  ///
-  /// [Ok] is returned on completion.
-class ToggleUsernameIsActive extends TdFunction {
+///
+/// Changes active state for a username of the current user. The editable username can't be disabled. May return an error with a message "USERNAMES_ACTIVE_TOO_MUCH" if the maximum number of active usernames has been reached.
+///
+/// * [username]: The username to change.
+/// * [isActive]: Pass true to activate the username; pass false to disable it.
+///
+/// [Ok] is returned on completion.
+final class ToggleUsernameIsActive extends TdFunction {
   
   /// **ToggleUsernameIsActive** *(toggleUsernameIsActive)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class ToggleUsernameIsActive extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "username": username,
       "is_active": isActive,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ToggleUsernameIsActive copyWith({
     String? username,
@@ -47,8 +48,11 @@ class ToggleUsernameIsActive extends TdFunction {
     isActive: isActive ?? this.isActive,
   );
 
-  static const String constructor = 'toggleUsernameIsActive';
-  
+  static const String objectType = 'toggleUsernameIsActive';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

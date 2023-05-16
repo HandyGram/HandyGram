@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **EditChatFilter** *(editChatFilter)* - TDLib function
-  ///
-  /// Edits existing chat filter. Returns information about the edited chat filter.
-  ///
-  /// * [chatFilterId]: Chat filter identifier.
-  /// * [filter]: The edited chat filter.
-  ///
-  /// [ChatFilterInfo] is returned on completion.
-class EditChatFilter extends TdFunction {
+///
+/// Edits existing chat filter. Returns information about the edited chat filter.
+///
+/// * [chatFilterId]: Chat filter identifier.
+/// * [filter]: The edited chat filter.
+///
+/// [ChatFilterInfo] is returned on completion.
+final class EditChatFilter extends TdFunction {
   
   /// **EditChatFilter** *(editChatFilter)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class EditChatFilter extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_filter_id": chatFilterId,
       "filter": filter.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   EditChatFilter copyWith({
     int? chatFilterId,
@@ -47,8 +48,11 @@ class EditChatFilter extends TdFunction {
     filter: filter ?? this.filter,
   );
 
-  static const String constructor = 'editChatFilter';
-  
+  static const String objectType = 'editChatFilter';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

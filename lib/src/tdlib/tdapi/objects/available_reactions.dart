@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **AvailableReactions** *(availableReactions)* - basic class
-  ///
-  /// Represents a list of reactions that can be added to a message.
-  ///
-  /// * [topReactions]: List of reactions to be shown at the top.
-  /// * [recentReactions]: List of recently used reactions.
-  /// * [popularReactions]: List of popular reactions.
-  /// * [allowCustomEmoji]: True, if custom emoji reactions could be added by Telegram Premium subscribers.
-class AvailableReactions extends TdObject {
+///
+/// Represents a list of reactions that can be added to a message.
+///
+/// * [topReactions]: List of reactions to be shown at the top.
+/// * [recentReactions]: List of recently used reactions.
+/// * [popularReactions]: List of popular reactions.
+/// * [allowCustomEmoji]: True, if custom emoji reactions could be added by Telegram Premium subscribers.
+final class AvailableReactions extends TdObject {
   
   /// **AvailableReactions** *(availableReactions)* - basic class
   ///
@@ -59,15 +59,16 @@ class AvailableReactions extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "top_reactions": topReactions.map((i) => i.toJson()).toList(),
       "recent_reactions": recentReactions.map((i) => i.toJson()).toList(),
       "popular_reactions": popularReactions.map((i) => i.toJson()).toList(),
       "allow_custom_emoji": allowCustomEmoji,
-    };
-  }
+		};
+	}
+
   
   AvailableReactions copyWith({
     List<AvailableReaction>? topReactions,
@@ -85,8 +86,11 @@ class AvailableReactions extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'availableReactions';
-  
+  static const String objectType = 'availableReactions';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

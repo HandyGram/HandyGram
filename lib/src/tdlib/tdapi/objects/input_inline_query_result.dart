@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **InputInlineQueryResult** *(inputInlineQueryResult)* - parent
-  ///
-  /// Represents a single result of an inline query; for bots only.
-class InputInlineQueryResult extends TdObject {
+///
+/// Represents a single result of an inline query; for bots only.
+sealed class InputInlineQueryResult extends TdObject {
   
   /// **InputInlineQueryResult** *(inputInlineQueryResult)* - parent
   ///
@@ -25,67 +25,70 @@ class InputInlineQueryResult extends TdObject {
   /// * [InputInlineQueryResultVoiceNote]
   factory InputInlineQueryResult.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case InputInlineQueryResultAnimation.constructor:
+      case InputInlineQueryResultAnimation.objectType:
         return InputInlineQueryResultAnimation.fromJson(json);
-      case InputInlineQueryResultArticle.constructor:
+      case InputInlineQueryResultArticle.objectType:
         return InputInlineQueryResultArticle.fromJson(json);
-      case InputInlineQueryResultAudio.constructor:
+      case InputInlineQueryResultAudio.objectType:
         return InputInlineQueryResultAudio.fromJson(json);
-      case InputInlineQueryResultContact.constructor:
+      case InputInlineQueryResultContact.objectType:
         return InputInlineQueryResultContact.fromJson(json);
-      case InputInlineQueryResultDocument.constructor:
+      case InputInlineQueryResultDocument.objectType:
         return InputInlineQueryResultDocument.fromJson(json);
-      case InputInlineQueryResultGame.constructor:
+      case InputInlineQueryResultGame.objectType:
         return InputInlineQueryResultGame.fromJson(json);
-      case InputInlineQueryResultLocation.constructor:
+      case InputInlineQueryResultLocation.objectType:
         return InputInlineQueryResultLocation.fromJson(json);
-      case InputInlineQueryResultPhoto.constructor:
+      case InputInlineQueryResultPhoto.objectType:
         return InputInlineQueryResultPhoto.fromJson(json);
-      case InputInlineQueryResultSticker.constructor:
+      case InputInlineQueryResultSticker.objectType:
         return InputInlineQueryResultSticker.fromJson(json);
-      case InputInlineQueryResultVenue.constructor:
+      case InputInlineQueryResultVenue.objectType:
         return InputInlineQueryResultVenue.fromJson(json);
-      case InputInlineQueryResultVideo.constructor:
+      case InputInlineQueryResultVideo.objectType:
         return InputInlineQueryResultVideo.fromJson(json);
-      case InputInlineQueryResultVoiceNote.constructor:
+      case InputInlineQueryResultVoiceNote.objectType:
         return InputInlineQueryResultVoiceNote.fromJson(json);
       default:
-        return const InputInlineQueryResult();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of InputInlineQueryResult)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  InputInlineQueryResult copyWith() => const InputInlineQueryResult();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'inputInlineQueryResult';
   
+  InputInlineQueryResult copyWith();
+
+  static const String objectType = 'inputInlineQueryResult';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InputInlineQueryResultAnimation** *(inputInlineQueryResultAnimation)* - child of InputInlineQueryResult
-  ///
-  /// Represents a link to an animated GIF or an animated (i.e., without sound) H.264/MPEG-4 AVC video.
-  ///
-  /// * [id]: Unique identifier of the query result.
-  /// * [title]: Title of the query result.
-  /// * [thumbnailUrl]: URL of the result thumbnail (JPEG, GIF, or MPEG4), if it exists.
-  /// * [thumbnailMimeType]: MIME type of the video thumbnail. If non-empty, must be one of "image/jpeg", "image/gif" and "video/mp4".
-  /// * [videoUrl]: The URL of the video file (file size must not exceed 1MB).
-  /// * [videoMimeType]: MIME type of the video file. Must be one of "image/gif" and "video/mp4".
-  /// * [videoDuration]: Duration of the video, in seconds.
-  /// * [videoWidth]: Width of the video.
-  /// * [videoHeight]: Height of the video.
-  /// * [replyMarkup]: The message reply markup; pass null if none. Must be of type replyMarkupInlineKeyboard or null *(optional)*.
-  /// * [inputMessageContent]: The content of the message to be sent. Must be one of the following types: inputMessageText, inputMessageAnimation, inputMessageInvoice, inputMessageLocation, inputMessageVenue or inputMessageContact.
-class InputInlineQueryResultAnimation extends InputInlineQueryResult {
+///
+/// Represents a link to an animated GIF or an animated (i.e., without sound) H.264/MPEG-4 AVC video.
+///
+/// * [id]: Unique identifier of the query result.
+/// * [title]: Title of the query result.
+/// * [thumbnailUrl]: URL of the result thumbnail (JPEG, GIF, or MPEG4), if it exists.
+/// * [thumbnailMimeType]: MIME type of the video thumbnail. If non-empty, must be one of "image/jpeg", "image/gif" and "video/mp4".
+/// * [videoUrl]: The URL of the video file (file size must not exceed 1MB).
+/// * [videoMimeType]: MIME type of the video file. Must be one of "image/gif" and "video/mp4".
+/// * [videoDuration]: Duration of the video, in seconds.
+/// * [videoWidth]: Width of the video.
+/// * [videoHeight]: Height of the video.
+/// * [replyMarkup]: The message reply markup; pass null if none. Must be of type replyMarkupInlineKeyboard or null *(optional)*.
+/// * [inputMessageContent]: The content of the message to be sent. Must be one of the following types: inputMessageText, inputMessageAnimation, inputMessageInvoice, inputMessageLocation, inputMessageVenue or inputMessageContact.
+final class InputInlineQueryResultAnimation extends InputInlineQueryResult {
   
   /// **InputInlineQueryResultAnimation** *(inputInlineQueryResultAnimation)* - child of InputInlineQueryResult
   ///
@@ -166,9 +169,9 @@ class InputInlineQueryResultAnimation extends InputInlineQueryResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "title": title,
       "thumbnail_url": thumbnailUrl,
@@ -180,8 +183,9 @@ class InputInlineQueryResultAnimation extends InputInlineQueryResult {
       "video_height": videoHeight,
       "reply_markup": replyMarkup?.toJson(),
       "input_message_content": inputMessageContent.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   InputInlineQueryResultAnimation copyWith({
@@ -210,28 +214,31 @@ class InputInlineQueryResultAnimation extends InputInlineQueryResult {
     inputMessageContent: inputMessageContent ?? this.inputMessageContent,
   );
 
-  static const String constructor = 'inputInlineQueryResultAnimation';
-  
+  static const String objectType = 'inputInlineQueryResultAnimation';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InputInlineQueryResultArticle** *(inputInlineQueryResultArticle)* - child of InputInlineQueryResult
-  ///
-  /// Represents a link to an article or web page.
-  ///
-  /// * [id]: Unique identifier of the query result.
-  /// * [url]: URL of the result, if it exists.
-  /// * [hideUrl]: True, if the URL must be not shown.
-  /// * [title]: Title of the result.
-  /// * [description]: A short description of the result.
-  /// * [thumbnailUrl]: URL of the result thumbnail, if it exists.
-  /// * [thumbnailWidth]: Thumbnail width, if known.
-  /// * [thumbnailHeight]: Thumbnail height, if known.
-  /// * [replyMarkup]: The message reply markup; pass null if none. Must be of type replyMarkupInlineKeyboard or null *(optional)*.
-  /// * [inputMessageContent]: The content of the message to be sent. Must be one of the following types: inputMessageText, inputMessageInvoice, inputMessageLocation, inputMessageVenue or inputMessageContact.
-class InputInlineQueryResultArticle extends InputInlineQueryResult {
+///
+/// Represents a link to an article or web page.
+///
+/// * [id]: Unique identifier of the query result.
+/// * [url]: URL of the result, if it exists.
+/// * [hideUrl]: True, if the URL must be not shown.
+/// * [title]: Title of the result.
+/// * [description]: A short description of the result.
+/// * [thumbnailUrl]: URL of the result thumbnail, if it exists.
+/// * [thumbnailWidth]: Thumbnail width, if known.
+/// * [thumbnailHeight]: Thumbnail height, if known.
+/// * [replyMarkup]: The message reply markup; pass null if none. Must be of type replyMarkupInlineKeyboard or null *(optional)*.
+/// * [inputMessageContent]: The content of the message to be sent. Must be one of the following types: inputMessageText, inputMessageInvoice, inputMessageLocation, inputMessageVenue or inputMessageContact.
+final class InputInlineQueryResultArticle extends InputInlineQueryResult {
   
   /// **InputInlineQueryResultArticle** *(inputInlineQueryResultArticle)* - child of InputInlineQueryResult
   ///
@@ -306,9 +313,9 @@ class InputInlineQueryResultArticle extends InputInlineQueryResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "url": url,
       "hide_url": hideUrl,
@@ -319,8 +326,9 @@ class InputInlineQueryResultArticle extends InputInlineQueryResult {
       "thumbnail_height": thumbnailHeight,
       "reply_markup": replyMarkup?.toJson(),
       "input_message_content": inputMessageContent.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   InputInlineQueryResultArticle copyWith({
@@ -347,25 +355,28 @@ class InputInlineQueryResultArticle extends InputInlineQueryResult {
     inputMessageContent: inputMessageContent ?? this.inputMessageContent,
   );
 
-  static const String constructor = 'inputInlineQueryResultArticle';
-  
+  static const String objectType = 'inputInlineQueryResultArticle';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InputInlineQueryResultAudio** *(inputInlineQueryResultAudio)* - child of InputInlineQueryResult
-  ///
-  /// Represents a link to an MP3 audio file.
-  ///
-  /// * [id]: Unique identifier of the query result.
-  /// * [title]: Title of the audio file.
-  /// * [performer]: Performer of the audio file.
-  /// * [audioUrl]: The URL of the audio file.
-  /// * [audioDuration]: Audio file duration, in seconds.
-  /// * [replyMarkup]: The message reply markup; pass null if none. Must be of type replyMarkupInlineKeyboard or null *(optional)*.
-  /// * [inputMessageContent]: The content of the message to be sent. Must be one of the following types: inputMessageText, inputMessageAudio, inputMessageInvoice, inputMessageLocation, inputMessageVenue or inputMessageContact.
-class InputInlineQueryResultAudio extends InputInlineQueryResult {
+///
+/// Represents a link to an MP3 audio file.
+///
+/// * [id]: Unique identifier of the query result.
+/// * [title]: Title of the audio file.
+/// * [performer]: Performer of the audio file.
+/// * [audioUrl]: The URL of the audio file.
+/// * [audioDuration]: Audio file duration, in seconds.
+/// * [replyMarkup]: The message reply markup; pass null if none. Must be of type replyMarkupInlineKeyboard or null *(optional)*.
+/// * [inputMessageContent]: The content of the message to be sent. Must be one of the following types: inputMessageText, inputMessageAudio, inputMessageInvoice, inputMessageLocation, inputMessageVenue or inputMessageContact.
+final class InputInlineQueryResultAudio extends InputInlineQueryResult {
   
   /// **InputInlineQueryResultAudio** *(inputInlineQueryResultAudio)* - child of InputInlineQueryResult
   ///
@@ -422,9 +433,9 @@ class InputInlineQueryResultAudio extends InputInlineQueryResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "title": title,
       "performer": performer,
@@ -432,8 +443,9 @@ class InputInlineQueryResultAudio extends InputInlineQueryResult {
       "audio_duration": audioDuration,
       "reply_markup": replyMarkup?.toJson(),
       "input_message_content": inputMessageContent.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   InputInlineQueryResultAudio copyWith({
@@ -454,25 +466,28 @@ class InputInlineQueryResultAudio extends InputInlineQueryResult {
     inputMessageContent: inputMessageContent ?? this.inputMessageContent,
   );
 
-  static const String constructor = 'inputInlineQueryResultAudio';
-  
+  static const String objectType = 'inputInlineQueryResultAudio';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InputInlineQueryResultContact** *(inputInlineQueryResultContact)* - child of InputInlineQueryResult
-  ///
-  /// Represents a user contact.
-  ///
-  /// * [id]: Unique identifier of the query result.
-  /// * [contact]: User contact.
-  /// * [thumbnailUrl]: URL of the result thumbnail, if it exists.
-  /// * [thumbnailWidth]: Thumbnail width, if known.
-  /// * [thumbnailHeight]: Thumbnail height, if known.
-  /// * [replyMarkup]: The message reply markup; pass null if none. Must be of type replyMarkupInlineKeyboard or null *(optional)*.
-  /// * [inputMessageContent]: The content of the message to be sent. Must be one of the following types: inputMessageText, inputMessageInvoice, inputMessageLocation, inputMessageVenue or inputMessageContact.
-class InputInlineQueryResultContact extends InputInlineQueryResult {
+///
+/// Represents a user contact.
+///
+/// * [id]: Unique identifier of the query result.
+/// * [contact]: User contact.
+/// * [thumbnailUrl]: URL of the result thumbnail, if it exists.
+/// * [thumbnailWidth]: Thumbnail width, if known.
+/// * [thumbnailHeight]: Thumbnail height, if known.
+/// * [replyMarkup]: The message reply markup; pass null if none. Must be of type replyMarkupInlineKeyboard or null *(optional)*.
+/// * [inputMessageContent]: The content of the message to be sent. Must be one of the following types: inputMessageText, inputMessageInvoice, inputMessageLocation, inputMessageVenue or inputMessageContact.
+final class InputInlineQueryResultContact extends InputInlineQueryResult {
   
   /// **InputInlineQueryResultContact** *(inputInlineQueryResultContact)* - child of InputInlineQueryResult
   ///
@@ -529,9 +544,9 @@ class InputInlineQueryResultContact extends InputInlineQueryResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "contact": contact.toJson(),
       "thumbnail_url": thumbnailUrl,
@@ -539,8 +554,9 @@ class InputInlineQueryResultContact extends InputInlineQueryResult {
       "thumbnail_height": thumbnailHeight,
       "reply_markup": replyMarkup?.toJson(),
       "input_message_content": inputMessageContent.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   InputInlineQueryResultContact copyWith({
@@ -561,28 +577,31 @@ class InputInlineQueryResultContact extends InputInlineQueryResult {
     inputMessageContent: inputMessageContent ?? this.inputMessageContent,
   );
 
-  static const String constructor = 'inputInlineQueryResultContact';
-  
+  static const String objectType = 'inputInlineQueryResultContact';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InputInlineQueryResultDocument** *(inputInlineQueryResultDocument)* - child of InputInlineQueryResult
-  ///
-  /// Represents a link to a file.
-  ///
-  /// * [id]: Unique identifier of the query result.
-  /// * [title]: Title of the resulting file.
-  /// * [description]: Short description of the result, if known.
-  /// * [documentUrl]: URL of the file.
-  /// * [mimeType]: MIME type of the file content; only "application/pdf" and "application/zip" are currently allowed.
-  /// * [thumbnailUrl]: The URL of the file thumbnail, if it exists.
-  /// * [thumbnailWidth]: Width of the thumbnail.
-  /// * [thumbnailHeight]: Height of the thumbnail.
-  /// * [replyMarkup]: The message reply markup; pass null if none. Must be of type replyMarkupInlineKeyboard or null *(optional)*.
-  /// * [inputMessageContent]: The content of the message to be sent. Must be one of the following types: inputMessageText, inputMessageDocument, inputMessageInvoice, inputMessageLocation, inputMessageVenue or inputMessageContact.
-class InputInlineQueryResultDocument extends InputInlineQueryResult {
+///
+/// Represents a link to a file.
+///
+/// * [id]: Unique identifier of the query result.
+/// * [title]: Title of the resulting file.
+/// * [description]: Short description of the result, if known.
+/// * [documentUrl]: URL of the file.
+/// * [mimeType]: MIME type of the file content; only "application/pdf" and "application/zip" are currently allowed.
+/// * [thumbnailUrl]: The URL of the file thumbnail, if it exists.
+/// * [thumbnailWidth]: Width of the thumbnail.
+/// * [thumbnailHeight]: Height of the thumbnail.
+/// * [replyMarkup]: The message reply markup; pass null if none. Must be of type replyMarkupInlineKeyboard or null *(optional)*.
+/// * [inputMessageContent]: The content of the message to be sent. Must be one of the following types: inputMessageText, inputMessageDocument, inputMessageInvoice, inputMessageLocation, inputMessageVenue or inputMessageContact.
+final class InputInlineQueryResultDocument extends InputInlineQueryResult {
   
   /// **InputInlineQueryResultDocument** *(inputInlineQueryResultDocument)* - child of InputInlineQueryResult
   ///
@@ -657,9 +676,9 @@ class InputInlineQueryResultDocument extends InputInlineQueryResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "title": title,
       "description": description,
@@ -670,8 +689,9 @@ class InputInlineQueryResultDocument extends InputInlineQueryResult {
       "thumbnail_height": thumbnailHeight,
       "reply_markup": replyMarkup?.toJson(),
       "input_message_content": inputMessageContent.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   InputInlineQueryResultDocument copyWith({
@@ -698,21 +718,24 @@ class InputInlineQueryResultDocument extends InputInlineQueryResult {
     inputMessageContent: inputMessageContent ?? this.inputMessageContent,
   );
 
-  static const String constructor = 'inputInlineQueryResultDocument';
-  
+  static const String objectType = 'inputInlineQueryResultDocument';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InputInlineQueryResultGame** *(inputInlineQueryResultGame)* - child of InputInlineQueryResult
-  ///
-  /// Represents a game.
-  ///
-  /// * [id]: Unique identifier of the query result.
-  /// * [gameShortName]: Short name of the game.
-  /// * [replyMarkup]: The message reply markup; pass null if none. Must be of type replyMarkupInlineKeyboard or null *(optional)*.
-class InputInlineQueryResultGame extends InputInlineQueryResult {
+///
+/// Represents a game.
+///
+/// * [id]: Unique identifier of the query result.
+/// * [gameShortName]: Short name of the game.
+/// * [replyMarkup]: The message reply markup; pass null if none. Must be of type replyMarkupInlineKeyboard or null *(optional)*.
+final class InputInlineQueryResultGame extends InputInlineQueryResult {
   
   /// **InputInlineQueryResultGame** *(inputInlineQueryResultGame)* - child of InputInlineQueryResult
   ///
@@ -745,14 +768,15 @@ class InputInlineQueryResultGame extends InputInlineQueryResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "game_short_name": gameShortName,
       "reply_markup": replyMarkup?.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   InputInlineQueryResultGame copyWith({
@@ -765,27 +789,30 @@ class InputInlineQueryResultGame extends InputInlineQueryResult {
     replyMarkup: replyMarkup ?? this.replyMarkup,
   );
 
-  static const String constructor = 'inputInlineQueryResultGame';
-  
+  static const String objectType = 'inputInlineQueryResultGame';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InputInlineQueryResultLocation** *(inputInlineQueryResultLocation)* - child of InputInlineQueryResult
-  ///
-  /// Represents a point on the map.
-  ///
-  /// * [id]: Unique identifier of the query result.
-  /// * [location]: Location result.
-  /// * [livePeriod]: Amount of time relative to the message sent time until the location can be updated, in seconds.
-  /// * [title]: Title of the result.
-  /// * [thumbnailUrl]: URL of the result thumbnail, if it exists.
-  /// * [thumbnailWidth]: Thumbnail width, if known.
-  /// * [thumbnailHeight]: Thumbnail height, if known.
-  /// * [replyMarkup]: The message reply markup; pass null if none. Must be of type replyMarkupInlineKeyboard or null *(optional)*.
-  /// * [inputMessageContent]: The content of the message to be sent. Must be one of the following types: inputMessageText, inputMessageInvoice, inputMessageLocation, inputMessageVenue or inputMessageContact.
-class InputInlineQueryResultLocation extends InputInlineQueryResult {
+///
+/// Represents a point on the map.
+///
+/// * [id]: Unique identifier of the query result.
+/// * [location]: Location result.
+/// * [livePeriod]: Amount of time relative to the message sent time until the location can be updated, in seconds.
+/// * [title]: Title of the result.
+/// * [thumbnailUrl]: URL of the result thumbnail, if it exists.
+/// * [thumbnailWidth]: Thumbnail width, if known.
+/// * [thumbnailHeight]: Thumbnail height, if known.
+/// * [replyMarkup]: The message reply markup; pass null if none. Must be of type replyMarkupInlineKeyboard or null *(optional)*.
+/// * [inputMessageContent]: The content of the message to be sent. Must be one of the following types: inputMessageText, inputMessageInvoice, inputMessageLocation, inputMessageVenue or inputMessageContact.
+final class InputInlineQueryResultLocation extends InputInlineQueryResult {
   
   /// **InputInlineQueryResultLocation** *(inputInlineQueryResultLocation)* - child of InputInlineQueryResult
   ///
@@ -854,9 +881,9 @@ class InputInlineQueryResultLocation extends InputInlineQueryResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "location": location.toJson(),
       "live_period": livePeriod,
@@ -866,8 +893,9 @@ class InputInlineQueryResultLocation extends InputInlineQueryResult {
       "thumbnail_height": thumbnailHeight,
       "reply_markup": replyMarkup?.toJson(),
       "input_message_content": inputMessageContent.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   InputInlineQueryResultLocation copyWith({
@@ -892,27 +920,30 @@ class InputInlineQueryResultLocation extends InputInlineQueryResult {
     inputMessageContent: inputMessageContent ?? this.inputMessageContent,
   );
 
-  static const String constructor = 'inputInlineQueryResultLocation';
-  
+  static const String objectType = 'inputInlineQueryResultLocation';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InputInlineQueryResultPhoto** *(inputInlineQueryResultPhoto)* - child of InputInlineQueryResult
-  ///
-  /// Represents link to a JPEG image.
-  ///
-  /// * [id]: Unique identifier of the query result.
-  /// * [title]: Title of the result, if known.
-  /// * [description]: A short description of the result, if known.
-  /// * [thumbnailUrl]: URL of the photo thumbnail, if it exists.
-  /// * [photoUrl]: The URL of the JPEG photo (photo size must not exceed 5MB).
-  /// * [photoWidth]: Width of the photo.
-  /// * [photoHeight]: Height of the photo.
-  /// * [replyMarkup]: The message reply markup; pass null if none. Must be of type replyMarkupInlineKeyboard or null *(optional)*.
-  /// * [inputMessageContent]: The content of the message to be sent. Must be one of the following types: inputMessageText, inputMessagePhoto, inputMessageInvoice, inputMessageLocation, inputMessageVenue or inputMessageContact.
-class InputInlineQueryResultPhoto extends InputInlineQueryResult {
+///
+/// Represents link to a JPEG image.
+///
+/// * [id]: Unique identifier of the query result.
+/// * [title]: Title of the result, if known.
+/// * [description]: A short description of the result, if known.
+/// * [thumbnailUrl]: URL of the photo thumbnail, if it exists.
+/// * [photoUrl]: The URL of the JPEG photo (photo size must not exceed 5MB).
+/// * [photoWidth]: Width of the photo.
+/// * [photoHeight]: Height of the photo.
+/// * [replyMarkup]: The message reply markup; pass null if none. Must be of type replyMarkupInlineKeyboard or null *(optional)*.
+/// * [inputMessageContent]: The content of the message to be sent. Must be one of the following types: inputMessageText, inputMessagePhoto, inputMessageInvoice, inputMessageLocation, inputMessageVenue or inputMessageContact.
+final class InputInlineQueryResultPhoto extends InputInlineQueryResult {
   
   /// **InputInlineQueryResultPhoto** *(inputInlineQueryResultPhoto)* - child of InputInlineQueryResult
   ///
@@ -981,9 +1012,9 @@ class InputInlineQueryResultPhoto extends InputInlineQueryResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "title": title,
       "description": description,
@@ -993,8 +1024,9 @@ class InputInlineQueryResultPhoto extends InputInlineQueryResult {
       "photo_height": photoHeight,
       "reply_markup": replyMarkup?.toJson(),
       "input_message_content": inputMessageContent.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   InputInlineQueryResultPhoto copyWith({
@@ -1019,25 +1051,28 @@ class InputInlineQueryResultPhoto extends InputInlineQueryResult {
     inputMessageContent: inputMessageContent ?? this.inputMessageContent,
   );
 
-  static const String constructor = 'inputInlineQueryResultPhoto';
-  
+  static const String objectType = 'inputInlineQueryResultPhoto';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InputInlineQueryResultSticker** *(inputInlineQueryResultSticker)* - child of InputInlineQueryResult
-  ///
-  /// Represents a link to a WEBP, TGS, or WEBM sticker.
-  ///
-  /// * [id]: Unique identifier of the query result.
-  /// * [thumbnailUrl]: URL of the sticker thumbnail, if it exists.
-  /// * [stickerUrl]: The URL of the WEBP, TGS, or WEBM sticker (sticker file size must not exceed 5MB).
-  /// * [stickerWidth]: Width of the sticker.
-  /// * [stickerHeight]: Height of the sticker.
-  /// * [replyMarkup]: The message reply markup; pass null if none. Must be of type replyMarkupInlineKeyboard or null *(optional)*.
-  /// * [inputMessageContent]: The content of the message to be sent. Must be one of the following types: inputMessageText, inputMessageSticker, inputMessageInvoice, inputMessageLocation, inputMessageVenue or inputMessageContact.
-class InputInlineQueryResultSticker extends InputInlineQueryResult {
+///
+/// Represents a link to a WEBP, TGS, or WEBM sticker.
+///
+/// * [id]: Unique identifier of the query result.
+/// * [thumbnailUrl]: URL of the sticker thumbnail, if it exists.
+/// * [stickerUrl]: The URL of the WEBP, TGS, or WEBM sticker (sticker file size must not exceed 5MB).
+/// * [stickerWidth]: Width of the sticker.
+/// * [stickerHeight]: Height of the sticker.
+/// * [replyMarkup]: The message reply markup; pass null if none. Must be of type replyMarkupInlineKeyboard or null *(optional)*.
+/// * [inputMessageContent]: The content of the message to be sent. Must be one of the following types: inputMessageText, inputMessageSticker, inputMessageInvoice, inputMessageLocation, inputMessageVenue or inputMessageContact.
+final class InputInlineQueryResultSticker extends InputInlineQueryResult {
   
   /// **InputInlineQueryResultSticker** *(inputInlineQueryResultSticker)* - child of InputInlineQueryResult
   ///
@@ -1094,9 +1129,9 @@ class InputInlineQueryResultSticker extends InputInlineQueryResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "thumbnail_url": thumbnailUrl,
       "sticker_url": stickerUrl,
@@ -1104,8 +1139,9 @@ class InputInlineQueryResultSticker extends InputInlineQueryResult {
       "sticker_height": stickerHeight,
       "reply_markup": replyMarkup?.toJson(),
       "input_message_content": inputMessageContent.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   InputInlineQueryResultSticker copyWith({
@@ -1126,25 +1162,28 @@ class InputInlineQueryResultSticker extends InputInlineQueryResult {
     inputMessageContent: inputMessageContent ?? this.inputMessageContent,
   );
 
-  static const String constructor = 'inputInlineQueryResultSticker';
-  
+  static const String objectType = 'inputInlineQueryResultSticker';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InputInlineQueryResultVenue** *(inputInlineQueryResultVenue)* - child of InputInlineQueryResult
-  ///
-  /// Represents information about a venue.
-  ///
-  /// * [id]: Unique identifier of the query result.
-  /// * [venue]: Venue result.
-  /// * [thumbnailUrl]: URL of the result thumbnail, if it exists.
-  /// * [thumbnailWidth]: Thumbnail width, if known.
-  /// * [thumbnailHeight]: Thumbnail height, if known.
-  /// * [replyMarkup]: The message reply markup; pass null if none. Must be of type replyMarkupInlineKeyboard or null *(optional)*.
-  /// * [inputMessageContent]: The content of the message to be sent. Must be one of the following types: inputMessageText, inputMessageInvoice, inputMessageLocation, inputMessageVenue or inputMessageContact.
-class InputInlineQueryResultVenue extends InputInlineQueryResult {
+///
+/// Represents information about a venue.
+///
+/// * [id]: Unique identifier of the query result.
+/// * [venue]: Venue result.
+/// * [thumbnailUrl]: URL of the result thumbnail, if it exists.
+/// * [thumbnailWidth]: Thumbnail width, if known.
+/// * [thumbnailHeight]: Thumbnail height, if known.
+/// * [replyMarkup]: The message reply markup; pass null if none. Must be of type replyMarkupInlineKeyboard or null *(optional)*.
+/// * [inputMessageContent]: The content of the message to be sent. Must be one of the following types: inputMessageText, inputMessageInvoice, inputMessageLocation, inputMessageVenue or inputMessageContact.
+final class InputInlineQueryResultVenue extends InputInlineQueryResult {
   
   /// **InputInlineQueryResultVenue** *(inputInlineQueryResultVenue)* - child of InputInlineQueryResult
   ///
@@ -1201,9 +1240,9 @@ class InputInlineQueryResultVenue extends InputInlineQueryResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "venue": venue.toJson(),
       "thumbnail_url": thumbnailUrl,
@@ -1211,8 +1250,9 @@ class InputInlineQueryResultVenue extends InputInlineQueryResult {
       "thumbnail_height": thumbnailHeight,
       "reply_markup": replyMarkup?.toJson(),
       "input_message_content": inputMessageContent.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   InputInlineQueryResultVenue copyWith({
@@ -1233,29 +1273,32 @@ class InputInlineQueryResultVenue extends InputInlineQueryResult {
     inputMessageContent: inputMessageContent ?? this.inputMessageContent,
   );
 
-  static const String constructor = 'inputInlineQueryResultVenue';
-  
+  static const String objectType = 'inputInlineQueryResultVenue';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InputInlineQueryResultVideo** *(inputInlineQueryResultVideo)* - child of InputInlineQueryResult
-  ///
-  /// Represents a link to a page containing an embedded video player or a video file.
-  ///
-  /// * [id]: Unique identifier of the query result.
-  /// * [title]: Title of the result.
-  /// * [description]: A short description of the result, if known.
-  /// * [thumbnailUrl]: The URL of the video thumbnail (JPEG), if it exists.
-  /// * [videoUrl]: URL of the embedded video player or video file.
-  /// * [mimeType]: MIME type of the content of the video URL, only "text/html" or "video/mp4" are currently supported.
-  /// * [videoWidth]: Width of the video.
-  /// * [videoHeight]: Height of the video.
-  /// * [videoDuration]: Video duration, in seconds.
-  /// * [replyMarkup]: The message reply markup; pass null if none. Must be of type replyMarkupInlineKeyboard or null *(optional)*.
-  /// * [inputMessageContent]: The content of the message to be sent. Must be one of the following types: inputMessageText, inputMessageVideo, inputMessageInvoice, inputMessageLocation, inputMessageVenue or inputMessageContact.
-class InputInlineQueryResultVideo extends InputInlineQueryResult {
+///
+/// Represents a link to a page containing an embedded video player or a video file.
+///
+/// * [id]: Unique identifier of the query result.
+/// * [title]: Title of the result.
+/// * [description]: A short description of the result, if known.
+/// * [thumbnailUrl]: The URL of the video thumbnail (JPEG), if it exists.
+/// * [videoUrl]: URL of the embedded video player or video file.
+/// * [mimeType]: MIME type of the content of the video URL, only "text/html" or "video/mp4" are currently supported.
+/// * [videoWidth]: Width of the video.
+/// * [videoHeight]: Height of the video.
+/// * [videoDuration]: Video duration, in seconds.
+/// * [replyMarkup]: The message reply markup; pass null if none. Must be of type replyMarkupInlineKeyboard or null *(optional)*.
+/// * [inputMessageContent]: The content of the message to be sent. Must be one of the following types: inputMessageText, inputMessageVideo, inputMessageInvoice, inputMessageLocation, inputMessageVenue or inputMessageContact.
+final class InputInlineQueryResultVideo extends InputInlineQueryResult {
   
   /// **InputInlineQueryResultVideo** *(inputInlineQueryResultVideo)* - child of InputInlineQueryResult
   ///
@@ -1336,9 +1379,9 @@ class InputInlineQueryResultVideo extends InputInlineQueryResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "title": title,
       "description": description,
@@ -1350,8 +1393,9 @@ class InputInlineQueryResultVideo extends InputInlineQueryResult {
       "video_duration": videoDuration,
       "reply_markup": replyMarkup?.toJson(),
       "input_message_content": inputMessageContent.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   InputInlineQueryResultVideo copyWith({
@@ -1380,24 +1424,27 @@ class InputInlineQueryResultVideo extends InputInlineQueryResult {
     inputMessageContent: inputMessageContent ?? this.inputMessageContent,
   );
 
-  static const String constructor = 'inputInlineQueryResultVideo';
-  
+  static const String objectType = 'inputInlineQueryResultVideo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InputInlineQueryResultVoiceNote** *(inputInlineQueryResultVoiceNote)* - child of InputInlineQueryResult
-  ///
-  /// Represents a link to an opus-encoded audio file within an OGG container, single channel audio.
-  ///
-  /// * [id]: Unique identifier of the query result.
-  /// * [title]: Title of the voice note.
-  /// * [voiceNoteUrl]: The URL of the voice note file.
-  /// * [voiceNoteDuration]: Duration of the voice note, in seconds.
-  /// * [replyMarkup]: The message reply markup; pass null if none. Must be of type replyMarkupInlineKeyboard or null *(optional)*.
-  /// * [inputMessageContent]: The content of the message to be sent. Must be one of the following types: inputMessageText, inputMessageVoiceNote, inputMessageInvoice, inputMessageLocation, inputMessageVenue or inputMessageContact.
-class InputInlineQueryResultVoiceNote extends InputInlineQueryResult {
+///
+/// Represents a link to an opus-encoded audio file within an OGG container, single channel audio.
+///
+/// * [id]: Unique identifier of the query result.
+/// * [title]: Title of the voice note.
+/// * [voiceNoteUrl]: The URL of the voice note file.
+/// * [voiceNoteDuration]: Duration of the voice note, in seconds.
+/// * [replyMarkup]: The message reply markup; pass null if none. Must be of type replyMarkupInlineKeyboard or null *(optional)*.
+/// * [inputMessageContent]: The content of the message to be sent. Must be one of the following types: inputMessageText, inputMessageVoiceNote, inputMessageInvoice, inputMessageLocation, inputMessageVenue or inputMessageContact.
+final class InputInlineQueryResultVoiceNote extends InputInlineQueryResult {
   
   /// **InputInlineQueryResultVoiceNote** *(inputInlineQueryResultVoiceNote)* - child of InputInlineQueryResult
   ///
@@ -1448,17 +1495,18 @@ class InputInlineQueryResultVoiceNote extends InputInlineQueryResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "title": title,
       "voice_note_url": voiceNoteUrl,
       "voice_note_duration": voiceNoteDuration,
       "reply_markup": replyMarkup?.toJson(),
       "input_message_content": inputMessageContent.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   InputInlineQueryResultVoiceNote copyWith({
@@ -1477,8 +1525,11 @@ class InputInlineQueryResultVoiceNote extends InputInlineQueryResult {
     inputMessageContent: inputMessageContent ?? this.inputMessageContent,
   );
 
-  static const String constructor = 'inputInlineQueryResultVoiceNote';
-  
+  static const String objectType = 'inputInlineQueryResultVoiceNote';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

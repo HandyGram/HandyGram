@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **MessageReaction** *(messageReaction)* - basic class
-  ///
-  /// Contains information about a reaction to a message.
-  ///
-  /// * [type]: Type of the reaction.
-  /// * [totalCount]: Number of times the reaction was added.
-  /// * [isChosen]: True, if the reaction is chosen by the current user.
-  /// * [recentSenderIds]: Identifiers of at most 3 recent message senders, added the reaction; available in private, basic group and supergroup chats.
-class MessageReaction extends TdObject {
+///
+/// Contains information about a reaction to a message.
+///
+/// * [type]: Type of the reaction.
+/// * [totalCount]: Number of times the reaction was added.
+/// * [isChosen]: True, if the reaction is chosen by the current user.
+/// * [recentSenderIds]: Identifiers of at most 3 recent message senders, added the reaction; available in private, basic group and supergroup chats.
+final class MessageReaction extends TdObject {
   
   /// **MessageReaction** *(messageReaction)* - basic class
   ///
@@ -47,15 +47,16 @@ class MessageReaction extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "type": type.toJson(),
       "total_count": totalCount,
       "is_chosen": isChosen,
       "recent_sender_ids": recentSenderIds.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   MessageReaction copyWith({
     ReactionType? type,
@@ -69,8 +70,11 @@ class MessageReaction extends TdObject {
     recentSenderIds: recentSenderIds ?? this.recentSenderIds,
   );
 
-  static const String constructor = 'messageReaction';
-  
+  static const String objectType = 'messageReaction';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **EditInlineMessageCaption** *(editInlineMessageCaption)* - TDLib function
-  ///
-  /// Edits the caption of an inline message sent via a bot; for bots only.
-  ///
-  /// * [inlineMessageId]: Inline message identifier.
-  /// * [replyMarkup]: The new message reply markup; pass null if none *(optional)*.
-  /// * [caption]: New message content caption; pass null to remove caption; 0-getOption("message_caption_length_max") characters *(optional)*.
-  ///
-  /// [Ok] is returned on completion.
-class EditInlineMessageCaption extends TdFunction {
+///
+/// Edits the caption of an inline message sent via a bot; for bots only.
+///
+/// * [inlineMessageId]: Inline message identifier.
+/// * [replyMarkup]: The new message reply markup; pass null if none *(optional)*.
+/// * [caption]: New message content caption; pass null to remove caption; 0-getOption("message_caption_length_max") characters *(optional)*.
+///
+/// [Ok] is returned on completion.
+final class EditInlineMessageCaption extends TdFunction {
   
   /// **EditInlineMessageCaption** *(editInlineMessageCaption)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class EditInlineMessageCaption extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "inline_message_id": inlineMessageId,
       "reply_markup": replyMarkup?.toJson(),
       "caption": caption?.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   EditInlineMessageCaption copyWith({
     String? inlineMessageId,
@@ -56,8 +57,11 @@ class EditInlineMessageCaption extends TdFunction {
     caption: caption ?? this.caption,
   );
 
-  static const String constructor = 'editInlineMessageCaption';
-  
+  static const String objectType = 'editInlineMessageCaption';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

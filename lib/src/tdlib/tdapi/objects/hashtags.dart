@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **Hashtags** *(hashtags)* - basic class
-  ///
-  /// Contains a list of hashtags.
-  ///
-  /// * [hashtags]: A list of hashtags.
-class Hashtags extends TdObject {
+///
+/// Contains a list of hashtags.
+///
+/// * [hashtags]: A list of hashtags.
+final class Hashtags extends TdObject {
   
   /// **Hashtags** *(hashtags)* - basic class
   ///
@@ -38,12 +38,13 @@ class Hashtags extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "hashtags": hashtags.map((i) => i).toList(),
-    };
-  }
+		};
+	}
+
   
   Hashtags copyWith({
     List<String>? hashtags,
@@ -55,8 +56,11 @@ class Hashtags extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'hashtags';
-  
+  static const String objectType = 'hashtags';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

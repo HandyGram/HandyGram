@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **Countries** *(countries)* - basic class
-  ///
-  /// Contains information about countries.
-  ///
-  /// * [countries]: The list of countries.
-class Countries extends TdObject {
+///
+/// Contains information about countries.
+///
+/// * [countries]: The list of countries.
+final class Countries extends TdObject {
   
   /// **Countries** *(countries)* - basic class
   ///
@@ -38,12 +38,13 @@ class Countries extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "countries": countries.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   Countries copyWith({
     List<CountryInfo>? countries,
@@ -55,8 +56,11 @@ class Countries extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'countries';
-  
+  static const String objectType = 'countries';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

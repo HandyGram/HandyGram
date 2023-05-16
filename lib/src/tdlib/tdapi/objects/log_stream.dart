@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **LogStream** *(logStream)* - parent
-  ///
-  /// Describes a stream to which TDLib internal log is written.
-class LogStream extends TdObject {
+///
+/// Describes a stream to which TDLib internal log is written.
+sealed class LogStream extends TdObject {
   
   /// **LogStream** *(logStream)* - parent
   ///
@@ -16,37 +16,40 @@ class LogStream extends TdObject {
   /// * [LogStreamEmpty]
   factory LogStream.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case LogStreamDefault.constructor:
+      case LogStreamDefault.objectType:
         return LogStreamDefault.fromJson(json);
-      case LogStreamFile.constructor:
+      case LogStreamFile.objectType:
         return LogStreamFile.fromJson(json);
-      case LogStreamEmpty.constructor:
+      case LogStreamEmpty.objectType:
         return LogStreamEmpty.fromJson(json);
       default:
-        return const LogStream();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of LogStream)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  LogStream copyWith() => const LogStream();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'logStream';
   
+  LogStream copyWith();
+
+  static const String objectType = 'logStream';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **LogStreamDefault** *(logStreamDefault)* - child of LogStream
-  ///
-  /// The log is written to stderr or an OS specific log.
-class LogStreamDefault extends LogStream {
+///
+/// The log is written to stderr or an OS specific log.
+final class LogStreamDefault extends LogStream {
   
   /// **LogStreamDefault** *(logStreamDefault)* - child of LogStream
   ///
@@ -72,11 +75,12 @@ class LogStreamDefault extends LogStream {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   LogStreamDefault copyWith({
@@ -87,21 +91,24 @@ class LogStreamDefault extends LogStream {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'logStreamDefault';
-  
+  static const String objectType = 'logStreamDefault';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **LogStreamFile** *(logStreamFile)* - child of LogStream
-  ///
-  /// The log is written to a file.
-  ///
-  /// * [path]: Path to the file to where the internal TDLib log will be written.
-  /// * [maxFileSize]: The maximum size of the file to where the internal TDLib log is written before the file will automatically be rotated, in bytes.
-  /// * [redirectStderr]: Pass true to additionally redirect stderr to the log file. Ignored on Windows.
-class LogStreamFile extends LogStream {
+///
+/// The log is written to a file.
+///
+/// * [path]: Path to the file to where the internal TDLib log will be written.
+/// * [maxFileSize]: The maximum size of the file to where the internal TDLib log is written before the file will automatically be rotated, in bytes.
+/// * [redirectStderr]: Pass true to additionally redirect stderr to the log file. Ignored on Windows.
+final class LogStreamFile extends LogStream {
   
   /// **LogStreamFile** *(logStreamFile)* - child of LogStream
   ///
@@ -146,14 +153,15 @@ class LogStreamFile extends LogStream {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "path": path,
       "max_file_size": maxFileSize,
       "redirect_stderr": redirectStderr,
-    };
-  }
+		};
+	}
+
   
   @override
   LogStreamFile copyWith({
@@ -170,17 +178,20 @@ class LogStreamFile extends LogStream {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'logStreamFile';
-  
+  static const String objectType = 'logStreamFile';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **LogStreamEmpty** *(logStreamEmpty)* - child of LogStream
-  ///
-  /// The log is written nowhere.
-class LogStreamEmpty extends LogStream {
+///
+/// The log is written nowhere.
+final class LogStreamEmpty extends LogStream {
   
   /// **LogStreamEmpty** *(logStreamEmpty)* - child of LogStream
   ///
@@ -206,11 +217,12 @@ class LogStreamEmpty extends LogStream {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   LogStreamEmpty copyWith({
@@ -221,8 +233,11 @@ class LogStreamEmpty extends LogStream {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'logStreamEmpty';
-  
+  static const String objectType = 'logStreamEmpty';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

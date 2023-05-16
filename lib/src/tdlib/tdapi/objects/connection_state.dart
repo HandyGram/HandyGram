@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **ConnectionState** *(connectionState)* - parent
-  ///
-  /// Describes the current state of the connection to Telegram servers.
-class ConnectionState extends TdObject {
+///
+/// Describes the current state of the connection to Telegram servers.
+sealed class ConnectionState extends TdObject {
   
   /// **ConnectionState** *(connectionState)* - parent
   ///
@@ -18,41 +18,44 @@ class ConnectionState extends TdObject {
   /// * [ConnectionStateReady]
   factory ConnectionState.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case ConnectionStateWaitingForNetwork.constructor:
+      case ConnectionStateWaitingForNetwork.objectType:
         return ConnectionStateWaitingForNetwork.fromJson(json);
-      case ConnectionStateConnectingToProxy.constructor:
+      case ConnectionStateConnectingToProxy.objectType:
         return ConnectionStateConnectingToProxy.fromJson(json);
-      case ConnectionStateConnecting.constructor:
+      case ConnectionStateConnecting.objectType:
         return ConnectionStateConnecting.fromJson(json);
-      case ConnectionStateUpdating.constructor:
+      case ConnectionStateUpdating.objectType:
         return ConnectionStateUpdating.fromJson(json);
-      case ConnectionStateReady.constructor:
+      case ConnectionStateReady.objectType:
         return ConnectionStateReady.fromJson(json);
       default:
-        return const ConnectionState();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of ConnectionState)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  ConnectionState copyWith() => const ConnectionState();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'connectionState';
   
+  ConnectionState copyWith();
+
+  static const String objectType = 'connectionState';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ConnectionStateWaitingForNetwork** *(connectionStateWaitingForNetwork)* - child of ConnectionState
-  ///
-  /// Currently waiting for the network to become available. Use setNetworkType to change the available network type.
-class ConnectionStateWaitingForNetwork extends ConnectionState {
+///
+/// Currently waiting for the network to become available. Use setNetworkType to change the available network type.
+final class ConnectionStateWaitingForNetwork extends ConnectionState {
   
   /// **ConnectionStateWaitingForNetwork** *(connectionStateWaitingForNetwork)* - child of ConnectionState
   ///
@@ -63,26 +66,30 @@ class ConnectionStateWaitingForNetwork extends ConnectionState {
   factory ConnectionStateWaitingForNetwork.fromJson(Map<String, dynamic> json) => const ConnectionStateWaitingForNetwork();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   ConnectionStateWaitingForNetwork copyWith() => const ConnectionStateWaitingForNetwork();
 
-  static const String constructor = 'connectionStateWaitingForNetwork';
-  
+  static const String objectType = 'connectionStateWaitingForNetwork';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ConnectionStateConnectingToProxy** *(connectionStateConnectingToProxy)* - child of ConnectionState
-  ///
-  /// Currently establishing a connection with a proxy server.
-class ConnectionStateConnectingToProxy extends ConnectionState {
+///
+/// Currently establishing a connection with a proxy server.
+final class ConnectionStateConnectingToProxy extends ConnectionState {
   
   /// **ConnectionStateConnectingToProxy** *(connectionStateConnectingToProxy)* - child of ConnectionState
   ///
@@ -93,26 +100,30 @@ class ConnectionStateConnectingToProxy extends ConnectionState {
   factory ConnectionStateConnectingToProxy.fromJson(Map<String, dynamic> json) => const ConnectionStateConnectingToProxy();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   ConnectionStateConnectingToProxy copyWith() => const ConnectionStateConnectingToProxy();
 
-  static const String constructor = 'connectionStateConnectingToProxy';
-  
+  static const String objectType = 'connectionStateConnectingToProxy';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ConnectionStateConnecting** *(connectionStateConnecting)* - child of ConnectionState
-  ///
-  /// Currently establishing a connection to the Telegram servers.
-class ConnectionStateConnecting extends ConnectionState {
+///
+/// Currently establishing a connection to the Telegram servers.
+final class ConnectionStateConnecting extends ConnectionState {
   
   /// **ConnectionStateConnecting** *(connectionStateConnecting)* - child of ConnectionState
   ///
@@ -123,26 +134,30 @@ class ConnectionStateConnecting extends ConnectionState {
   factory ConnectionStateConnecting.fromJson(Map<String, dynamic> json) => const ConnectionStateConnecting();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   ConnectionStateConnecting copyWith() => const ConnectionStateConnecting();
 
-  static const String constructor = 'connectionStateConnecting';
-  
+  static const String objectType = 'connectionStateConnecting';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ConnectionStateUpdating** *(connectionStateUpdating)* - child of ConnectionState
-  ///
-  /// Downloading data received while the application was offline.
-class ConnectionStateUpdating extends ConnectionState {
+///
+/// Downloading data received while the application was offline.
+final class ConnectionStateUpdating extends ConnectionState {
   
   /// **ConnectionStateUpdating** *(connectionStateUpdating)* - child of ConnectionState
   ///
@@ -153,26 +168,30 @@ class ConnectionStateUpdating extends ConnectionState {
   factory ConnectionStateUpdating.fromJson(Map<String, dynamic> json) => const ConnectionStateUpdating();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   ConnectionStateUpdating copyWith() => const ConnectionStateUpdating();
 
-  static const String constructor = 'connectionStateUpdating';
-  
+  static const String objectType = 'connectionStateUpdating';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ConnectionStateReady** *(connectionStateReady)* - child of ConnectionState
-  ///
-  /// There is a working connection to the Telegram servers.
-class ConnectionStateReady extends ConnectionState {
+///
+/// There is a working connection to the Telegram servers.
+final class ConnectionStateReady extends ConnectionState {
   
   /// **ConnectionStateReady** *(connectionStateReady)* - child of ConnectionState
   ///
@@ -183,17 +202,21 @@ class ConnectionStateReady extends ConnectionState {
   factory ConnectionStateReady.fromJson(Map<String, dynamic> json) => const ConnectionStateReady();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   ConnectionStateReady copyWith() => const ConnectionStateReady();
 
-  static const String constructor = 'connectionStateReady';
-  
+  static const String objectType = 'connectionStateReady';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

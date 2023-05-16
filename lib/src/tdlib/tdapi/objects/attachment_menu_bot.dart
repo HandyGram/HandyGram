@@ -1,27 +1,27 @@
 part of '../tdapi.dart';
 
 /// **AttachmentMenuBot** *(attachmentMenuBot)* - basic class
-  ///
-  /// Represents a bot, which can be added to attachment menu.
-  ///
-  /// * [botUserId]: User identifier of the bot added to attachment menu.
-  /// * [supportsSelfChat]: True, if the bot supports opening from attachment menu in the chat with the bot.
-  /// * [supportsUserChats]: True, if the bot supports opening from attachment menu in private chats with ordinary users.
-  /// * [supportsBotChats]: True, if the bot supports opening from attachment menu in private chats with other bots.
-  /// * [supportsGroupChats]: True, if the bot supports opening from attachment menu in basic group and supergroup chats.
-  /// * [supportsChannelChats]: True, if the bot supports opening from attachment menu in channel chats.
-  /// * [supportsSettings]: True, if the bot supports "settings_button_pressed" event.
-  /// * [requestWriteAccess]: True, if the user needs to be requested to give the permission to the bot to send them messages.
-  /// * [name]: Name for the bot in attachment menu.
-  /// * [nameColor]: Color to highlight selected name of the bot if appropriate; may be null *(optional)*.
-  /// * [defaultIcon]: Default attachment menu icon for the bot in SVG format; may be null *(optional)*.
-  /// * [iosStaticIcon]: Attachment menu icon for the bot in SVG format for the official iOS app; may be null *(optional)*.
-  /// * [iosAnimatedIcon]: Attachment menu icon for the bot in TGS format for the official iOS app; may be null *(optional)*.
-  /// * [androidIcon]: Attachment menu icon for the bot in TGS format for the official Android app; may be null *(optional)*.
-  /// * [macosIcon]: Attachment menu icon for the bot in TGS format for the official native macOS app; may be null *(optional)*.
-  /// * [iconColor]: Color to highlight selected icon of the bot if appropriate; may be null *(optional)*.
-  /// * [webAppPlaceholder]: Default placeholder for opened Web Apps in SVG format; may be null *(optional)*.
-class AttachmentMenuBot extends TdObject {
+///
+/// Represents a bot, which can be added to attachment menu.
+///
+/// * [botUserId]: User identifier of the bot added to attachment menu.
+/// * [supportsSelfChat]: True, if the bot supports opening from attachment menu in the chat with the bot.
+/// * [supportsUserChats]: True, if the bot supports opening from attachment menu in private chats with ordinary users.
+/// * [supportsBotChats]: True, if the bot supports opening from attachment menu in private chats with other bots.
+/// * [supportsGroupChats]: True, if the bot supports opening from attachment menu in basic group and supergroup chats.
+/// * [supportsChannelChats]: True, if the bot supports opening from attachment menu in channel chats.
+/// * [supportsSettings]: True, if the bot supports "settings_button_pressed" event.
+/// * [requestWriteAccess]: True, if the user needs to be requested to give the permission to the bot to send them messages.
+/// * [name]: Name for the bot in attachment menu.
+/// * [nameColor]: Color to highlight selected name of the bot if appropriate; may be null *(optional)*.
+/// * [defaultIcon]: Default attachment menu icon for the bot in SVG format; may be null *(optional)*.
+/// * [iosStaticIcon]: Attachment menu icon for the bot in SVG format for the official iOS app; may be null *(optional)*.
+/// * [iosAnimatedIcon]: Attachment menu icon for the bot in TGS format for the official iOS app; may be null *(optional)*.
+/// * [androidIcon]: Attachment menu icon for the bot in TGS format for the official Android app; may be null *(optional)*.
+/// * [macosIcon]: Attachment menu icon for the bot in TGS format for the official native macOS app; may be null *(optional)*.
+/// * [iconColor]: Color to highlight selected icon of the bot if appropriate; may be null *(optional)*.
+/// * [webAppPlaceholder]: Default placeholder for opened Web Apps in SVG format; may be null *(optional)*.
+final class AttachmentMenuBot extends TdObject {
   
   /// **AttachmentMenuBot** *(attachmentMenuBot)* - basic class
   ///
@@ -150,9 +150,9 @@ class AttachmentMenuBot extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "bot_user_id": botUserId,
       "supports_self_chat": supportsSelfChat,
       "supports_user_chats": supportsUserChats,
@@ -170,8 +170,9 @@ class AttachmentMenuBot extends TdObject {
       "macos_icon": macosIcon?.toJson(),
       "icon_color": iconColor?.toJson(),
       "web_app_placeholder": webAppPlaceholder?.toJson(),
-    };
-  }
+		};
+	}
+
   
   AttachmentMenuBot copyWith({
     int? botUserId,
@@ -215,8 +216,11 @@ class AttachmentMenuBot extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'attachmentMenuBot';
-  
+  static const String objectType = 'attachmentMenuBot';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

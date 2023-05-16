@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **PageBlockHorizontalAlignment** *(pageBlockHorizontalAlignment)* - parent
-  ///
-  /// Describes a horizontal alignment of a table cell content.
-class PageBlockHorizontalAlignment extends TdObject {
+///
+/// Describes a horizontal alignment of a table cell content.
+sealed class PageBlockHorizontalAlignment extends TdObject {
   
   /// **PageBlockHorizontalAlignment** *(pageBlockHorizontalAlignment)* - parent
   ///
@@ -16,37 +16,40 @@ class PageBlockHorizontalAlignment extends TdObject {
   /// * [PageBlockHorizontalAlignmentRight]
   factory PageBlockHorizontalAlignment.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case PageBlockHorizontalAlignmentLeft.constructor:
+      case PageBlockHorizontalAlignmentLeft.objectType:
         return PageBlockHorizontalAlignmentLeft.fromJson(json);
-      case PageBlockHorizontalAlignmentCenter.constructor:
+      case PageBlockHorizontalAlignmentCenter.objectType:
         return PageBlockHorizontalAlignmentCenter.fromJson(json);
-      case PageBlockHorizontalAlignmentRight.constructor:
+      case PageBlockHorizontalAlignmentRight.objectType:
         return PageBlockHorizontalAlignmentRight.fromJson(json);
       default:
-        return const PageBlockHorizontalAlignment();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of PageBlockHorizontalAlignment)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  PageBlockHorizontalAlignment copyWith() => const PageBlockHorizontalAlignment();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'pageBlockHorizontalAlignment';
   
+  PageBlockHorizontalAlignment copyWith();
+
+  static const String objectType = 'pageBlockHorizontalAlignment';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PageBlockHorizontalAlignmentLeft** *(pageBlockHorizontalAlignmentLeft)* - child of PageBlockHorizontalAlignment
-  ///
-  /// The content must be left-aligned.
-class PageBlockHorizontalAlignmentLeft extends PageBlockHorizontalAlignment {
+///
+/// The content must be left-aligned.
+final class PageBlockHorizontalAlignmentLeft extends PageBlockHorizontalAlignment {
   
   /// **PageBlockHorizontalAlignmentLeft** *(pageBlockHorizontalAlignmentLeft)* - child of PageBlockHorizontalAlignment
   ///
@@ -57,26 +60,30 @@ class PageBlockHorizontalAlignmentLeft extends PageBlockHorizontalAlignment {
   factory PageBlockHorizontalAlignmentLeft.fromJson(Map<String, dynamic> json) => const PageBlockHorizontalAlignmentLeft();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PageBlockHorizontalAlignmentLeft copyWith() => const PageBlockHorizontalAlignmentLeft();
 
-  static const String constructor = 'pageBlockHorizontalAlignmentLeft';
-  
+  static const String objectType = 'pageBlockHorizontalAlignmentLeft';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PageBlockHorizontalAlignmentCenter** *(pageBlockHorizontalAlignmentCenter)* - child of PageBlockHorizontalAlignment
-  ///
-  /// The content must be center-aligned.
-class PageBlockHorizontalAlignmentCenter extends PageBlockHorizontalAlignment {
+///
+/// The content must be center-aligned.
+final class PageBlockHorizontalAlignmentCenter extends PageBlockHorizontalAlignment {
   
   /// **PageBlockHorizontalAlignmentCenter** *(pageBlockHorizontalAlignmentCenter)* - child of PageBlockHorizontalAlignment
   ///
@@ -87,26 +94,30 @@ class PageBlockHorizontalAlignmentCenter extends PageBlockHorizontalAlignment {
   factory PageBlockHorizontalAlignmentCenter.fromJson(Map<String, dynamic> json) => const PageBlockHorizontalAlignmentCenter();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PageBlockHorizontalAlignmentCenter copyWith() => const PageBlockHorizontalAlignmentCenter();
 
-  static const String constructor = 'pageBlockHorizontalAlignmentCenter';
-  
+  static const String objectType = 'pageBlockHorizontalAlignmentCenter';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PageBlockHorizontalAlignmentRight** *(pageBlockHorizontalAlignmentRight)* - child of PageBlockHorizontalAlignment
-  ///
-  /// The content must be right-aligned.
-class PageBlockHorizontalAlignmentRight extends PageBlockHorizontalAlignment {
+///
+/// The content must be right-aligned.
+final class PageBlockHorizontalAlignmentRight extends PageBlockHorizontalAlignment {
   
   /// **PageBlockHorizontalAlignmentRight** *(pageBlockHorizontalAlignmentRight)* - child of PageBlockHorizontalAlignment
   ///
@@ -117,17 +128,21 @@ class PageBlockHorizontalAlignmentRight extends PageBlockHorizontalAlignment {
   factory PageBlockHorizontalAlignmentRight.fromJson(Map<String, dynamic> json) => const PageBlockHorizontalAlignmentRight();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PageBlockHorizontalAlignmentRight copyWith() => const PageBlockHorizontalAlignmentRight();
 
-  static const String constructor = 'pageBlockHorizontalAlignmentRight';
-  
+  static const String objectType = 'pageBlockHorizontalAlignmentRight';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

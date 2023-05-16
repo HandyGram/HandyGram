@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **StorageStatisticsFast** *(storageStatisticsFast)* - basic class
-  ///
-  /// Contains approximate storage usage statistics, excluding files of unknown file type.
-  ///
-  /// * [filesSize]: Approximate total size of files, in bytes.
-  /// * [fileCount]: Approximate number of files.
-  /// * [databaseSize]: Size of the database.
-  /// * [languagePackDatabaseSize]: Size of the language pack database.
-  /// * [logSize]: Size of the TDLib internal log.
-class StorageStatisticsFast extends TdObject {
+///
+/// Contains approximate storage usage statistics, excluding files of unknown file type.
+///
+/// * [filesSize]: Approximate total size of files, in bytes.
+/// * [fileCount]: Approximate number of files.
+/// * [databaseSize]: Size of the database.
+/// * [languagePackDatabaseSize]: Size of the language pack database.
+/// * [logSize]: Size of the TDLib internal log.
+final class StorageStatisticsFast extends TdObject {
   
   /// **StorageStatisticsFast** *(storageStatisticsFast)* - basic class
   ///
@@ -66,16 +66,17 @@ class StorageStatisticsFast extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "files_size": filesSize,
       "file_count": fileCount,
       "database_size": databaseSize,
       "language_pack_database_size": languagePackDatabaseSize,
       "log_size": logSize,
-    };
-  }
+		};
+	}
+
   
   StorageStatisticsFast copyWith({
     int? filesSize,
@@ -95,8 +96,11 @@ class StorageStatisticsFast extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'storageStatisticsFast';
-  
+  static const String objectType = 'storageStatisticsFast';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

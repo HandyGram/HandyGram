@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **PageBlockCaption** *(pageBlockCaption)* - basic class
-  ///
-  /// Contains a caption of an instant view web page block, consisting of a text and a trailing credit.
-  ///
-  /// * [text]: Content of the caption.
-  /// * [credit]: Block credit (like HTML tag <cite>).
-class PageBlockCaption extends TdObject {
+///
+/// Contains a caption of an instant view web page block, consisting of a text and a trailing credit.
+///
+/// * [text]: Content of the caption.
+/// * [credit]: Block credit (like HTML tag <cite>).
+final class PageBlockCaption extends TdObject {
   
   /// **PageBlockCaption** *(pageBlockCaption)* - basic class
   ///
@@ -33,13 +33,14 @@ class PageBlockCaption extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text.toJson(),
       "credit": credit.toJson(),
-    };
-  }
+		};
+	}
+
   
   PageBlockCaption copyWith({
     RichText? text,
@@ -49,8 +50,11 @@ class PageBlockCaption extends TdObject {
     credit: credit ?? this.credit,
   );
 
-  static const String constructor = 'pageBlockCaption';
-  
+  static const String objectType = 'pageBlockCaption';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

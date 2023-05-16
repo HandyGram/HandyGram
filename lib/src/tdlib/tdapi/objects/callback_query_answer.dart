@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **CallbackQueryAnswer** *(callbackQueryAnswer)* - basic class
-  ///
-  /// Contains a bot's answer to a callback query.
-  ///
-  /// * [text]: Text of the answer.
-  /// * [showAlert]: True, if an alert must be shown to the user instead of a toast notification.
-  /// * [url]: URL to be opened.
-class CallbackQueryAnswer extends TdObject {
+///
+/// Contains a bot's answer to a callback query.
+///
+/// * [text]: Text of the answer.
+/// * [showAlert]: True, if an alert must be shown to the user instead of a toast notification.
+/// * [url]: URL to be opened.
+final class CallbackQueryAnswer extends TdObject {
   
   /// **CallbackQueryAnswer** *(callbackQueryAnswer)* - basic class
   ///
@@ -52,14 +52,15 @@ class CallbackQueryAnswer extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text,
       "show_alert": showAlert,
       "url": url,
-    };
-  }
+		};
+	}
+
   
   CallbackQueryAnswer copyWith({
     String? text,
@@ -75,8 +76,11 @@ class CallbackQueryAnswer extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'callbackQueryAnswer';
-  
+  static const String objectType = 'callbackQueryAnswer';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

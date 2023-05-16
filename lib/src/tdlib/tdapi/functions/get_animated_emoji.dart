@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetAnimatedEmoji** *(getAnimatedEmoji)* - TDLib function
-  ///
-  /// Returns an animated emoji corresponding to a given emoji. Returns a 404 error if the emoji has no animated emoji.
-  ///
-  /// * [emoji]: The emoji.
-  ///
-  /// [AnimatedEmoji] is returned on completion.
-class GetAnimatedEmoji extends TdFunction {
+///
+/// Returns an animated emoji corresponding to a given emoji. Returns a 404 error if the emoji has no animated emoji.
+///
+/// * [emoji]: The emoji.
+///
+/// [AnimatedEmoji] is returned on completion.
+final class GetAnimatedEmoji extends TdFunction {
   
   /// **GetAnimatedEmoji** *(getAnimatedEmoji)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetAnimatedEmoji extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "emoji": emoji,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetAnimatedEmoji copyWith({
     String? emoji,
@@ -38,8 +39,11 @@ class GetAnimatedEmoji extends TdFunction {
     emoji: emoji ?? this.emoji,
   );
 
-  static const String constructor = 'getAnimatedEmoji';
-  
+  static const String objectType = 'getAnimatedEmoji';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetAllPassportElements** *(getAllPassportElements)* - TDLib function
-  ///
-  /// Returns all available Telegram Passport elements.
-  ///
-  /// * [password]: The 2-step verification password of the current user.
-  ///
-  /// [PassportElements] is returned on completion.
-class GetAllPassportElements extends TdFunction {
+///
+/// Returns all available Telegram Passport elements.
+///
+/// * [password]: The 2-step verification password of the current user.
+///
+/// [PassportElements] is returned on completion.
+final class GetAllPassportElements extends TdFunction {
   
   /// **GetAllPassportElements** *(getAllPassportElements)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetAllPassportElements extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "password": password,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetAllPassportElements copyWith({
     String? password,
@@ -38,8 +39,11 @@ class GetAllPassportElements extends TdFunction {
     password: password ?? this.password,
   );
 
-  static const String constructor = 'getAllPassportElements';
-  
+  static const String objectType = 'getAllPassportElements';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

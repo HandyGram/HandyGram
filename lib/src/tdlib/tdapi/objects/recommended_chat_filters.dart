@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **RecommendedChatFilters** *(recommendedChatFilters)* - basic class
-  ///
-  /// Contains a list of recommended chat filters.
-  ///
-  /// * [chatFilters]: List of recommended chat filters.
-class RecommendedChatFilters extends TdObject {
+///
+/// Contains a list of recommended chat filters.
+///
+/// * [chatFilters]: List of recommended chat filters.
+final class RecommendedChatFilters extends TdObject {
   
   /// **RecommendedChatFilters** *(recommendedChatFilters)* - basic class
   ///
@@ -38,12 +38,13 @@ class RecommendedChatFilters extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_filters": chatFilters.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   RecommendedChatFilters copyWith({
     List<RecommendedChatFilter>? chatFilters,
@@ -55,8 +56,11 @@ class RecommendedChatFilters extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'recommendedChatFilters';
-  
+  static const String objectType = 'recommendedChatFilters';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

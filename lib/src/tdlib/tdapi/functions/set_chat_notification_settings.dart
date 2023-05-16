@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **SetChatNotificationSettings** *(setChatNotificationSettings)* - TDLib function
-  ///
-  /// Changes the notification settings of a chat. Notification settings of a chat with the current user (Saved Messages) can't be changed.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [notificationSettings]: New notification settings for the chat. If the chat is muted for more than 366 days, it is considered to be muted forever.
-  ///
-  /// [Ok] is returned on completion.
-class SetChatNotificationSettings extends TdFunction {
+///
+/// Changes the notification settings of a chat. Notification settings of a chat with the current user (Saved Messages) can't be changed.
+///
+/// * [chatId]: Chat identifier.
+/// * [notificationSettings]: New notification settings for the chat. If the chat is muted for more than 366 days, it is considered to be muted forever.
+///
+/// [Ok] is returned on completion.
+final class SetChatNotificationSettings extends TdFunction {
   
   /// **SetChatNotificationSettings** *(setChatNotificationSettings)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class SetChatNotificationSettings extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "notification_settings": notificationSettings.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetChatNotificationSettings copyWith({
     int? chatId,
@@ -47,8 +48,11 @@ class SetChatNotificationSettings extends TdFunction {
     notificationSettings: notificationSettings ?? this.notificationSettings,
   );
 
-  static const String constructor = 'setChatNotificationSettings';
-  
+  static const String objectType = 'setChatNotificationSettings';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

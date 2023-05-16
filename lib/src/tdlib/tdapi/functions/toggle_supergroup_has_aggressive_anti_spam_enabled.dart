@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **ToggleSupergroupHasAggressiveAntiSpamEnabled** *(toggleSupergroupHasAggressiveAntiSpamEnabled)* - TDLib function
-  ///
-  /// Toggles whether aggressive anti-spam checks are enabled in the supergroup. Can be called only if supergroupFullInfo.can_toggle_aggressive_anti_spam == true.
-  ///
-  /// * [supergroupId]: The identifier of the supergroup, which isn't a broadcast group.
-  /// * [hasAggressiveAntiSpamEnabled]: The new value of has_aggressive_anti_spam_enabled.
-  ///
-  /// [Ok] is returned on completion.
-class ToggleSupergroupHasAggressiveAntiSpamEnabled extends TdFunction {
+///
+/// Toggles whether aggressive anti-spam checks are enabled in the supergroup. Can be called only if supergroupFullInfo.can_toggle_aggressive_anti_spam == true.
+///
+/// * [supergroupId]: The identifier of the supergroup, which isn't a broadcast group.
+/// * [hasAggressiveAntiSpamEnabled]: The new value of has_aggressive_anti_spam_enabled.
+///
+/// [Ok] is returned on completion.
+final class ToggleSupergroupHasAggressiveAntiSpamEnabled extends TdFunction {
   
   /// **ToggleSupergroupHasAggressiveAntiSpamEnabled** *(toggleSupergroupHasAggressiveAntiSpamEnabled)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class ToggleSupergroupHasAggressiveAntiSpamEnabled extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "supergroup_id": supergroupId,
       "has_aggressive_anti_spam_enabled": hasAggressiveAntiSpamEnabled,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ToggleSupergroupHasAggressiveAntiSpamEnabled copyWith({
     int? supergroupId,
@@ -47,8 +48,11 @@ class ToggleSupergroupHasAggressiveAntiSpamEnabled extends TdFunction {
     hasAggressiveAntiSpamEnabled: hasAggressiveAntiSpamEnabled ?? this.hasAggressiveAntiSpamEnabled,
   );
 
-  static const String constructor = 'toggleSupergroupHasAggressiveAntiSpamEnabled';
-  
+  static const String objectType = 'toggleSupergroupHasAggressiveAntiSpamEnabled';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

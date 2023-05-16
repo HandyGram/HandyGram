@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **TopChatCategory** *(topChatCategory)* - parent
-  ///
-  /// Represents the categories of chats for which a list of frequently used chats can be retrieved.
-class TopChatCategory extends TdObject {
+///
+/// Represents the categories of chats for which a list of frequently used chats can be retrieved.
+sealed class TopChatCategory extends TdObject {
   
   /// **TopChatCategory** *(topChatCategory)* - parent
   ///
@@ -20,45 +20,48 @@ class TopChatCategory extends TdObject {
   /// * [TopChatCategoryForwardChats]
   factory TopChatCategory.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case TopChatCategoryUsers.constructor:
+      case TopChatCategoryUsers.objectType:
         return TopChatCategoryUsers.fromJson(json);
-      case TopChatCategoryBots.constructor:
+      case TopChatCategoryBots.objectType:
         return TopChatCategoryBots.fromJson(json);
-      case TopChatCategoryGroups.constructor:
+      case TopChatCategoryGroups.objectType:
         return TopChatCategoryGroups.fromJson(json);
-      case TopChatCategoryChannels.constructor:
+      case TopChatCategoryChannels.objectType:
         return TopChatCategoryChannels.fromJson(json);
-      case TopChatCategoryInlineBots.constructor:
+      case TopChatCategoryInlineBots.objectType:
         return TopChatCategoryInlineBots.fromJson(json);
-      case TopChatCategoryCalls.constructor:
+      case TopChatCategoryCalls.objectType:
         return TopChatCategoryCalls.fromJson(json);
-      case TopChatCategoryForwardChats.constructor:
+      case TopChatCategoryForwardChats.objectType:
         return TopChatCategoryForwardChats.fromJson(json);
       default:
-        return const TopChatCategory();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of TopChatCategory)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  TopChatCategory copyWith() => const TopChatCategory();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'topChatCategory';
   
+  TopChatCategory copyWith();
+
+  static const String objectType = 'topChatCategory';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **TopChatCategoryUsers** *(topChatCategoryUsers)* - child of TopChatCategory
-  ///
-  /// A category containing frequently used private chats with non-bot users.
-class TopChatCategoryUsers extends TopChatCategory {
+///
+/// A category containing frequently used private chats with non-bot users.
+final class TopChatCategoryUsers extends TopChatCategory {
   
   /// **TopChatCategoryUsers** *(topChatCategoryUsers)* - child of TopChatCategory
   ///
@@ -69,26 +72,30 @@ class TopChatCategoryUsers extends TopChatCategory {
   factory TopChatCategoryUsers.fromJson(Map<String, dynamic> json) => const TopChatCategoryUsers();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   TopChatCategoryUsers copyWith() => const TopChatCategoryUsers();
 
-  static const String constructor = 'topChatCategoryUsers';
-  
+  static const String objectType = 'topChatCategoryUsers';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **TopChatCategoryBots** *(topChatCategoryBots)* - child of TopChatCategory
-  ///
-  /// A category containing frequently used private chats with bot users.
-class TopChatCategoryBots extends TopChatCategory {
+///
+/// A category containing frequently used private chats with bot users.
+final class TopChatCategoryBots extends TopChatCategory {
   
   /// **TopChatCategoryBots** *(topChatCategoryBots)* - child of TopChatCategory
   ///
@@ -99,26 +106,30 @@ class TopChatCategoryBots extends TopChatCategory {
   factory TopChatCategoryBots.fromJson(Map<String, dynamic> json) => const TopChatCategoryBots();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   TopChatCategoryBots copyWith() => const TopChatCategoryBots();
 
-  static const String constructor = 'topChatCategoryBots';
-  
+  static const String objectType = 'topChatCategoryBots';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **TopChatCategoryGroups** *(topChatCategoryGroups)* - child of TopChatCategory
-  ///
-  /// A category containing frequently used basic groups and supergroups.
-class TopChatCategoryGroups extends TopChatCategory {
+///
+/// A category containing frequently used basic groups and supergroups.
+final class TopChatCategoryGroups extends TopChatCategory {
   
   /// **TopChatCategoryGroups** *(topChatCategoryGroups)* - child of TopChatCategory
   ///
@@ -129,26 +140,30 @@ class TopChatCategoryGroups extends TopChatCategory {
   factory TopChatCategoryGroups.fromJson(Map<String, dynamic> json) => const TopChatCategoryGroups();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   TopChatCategoryGroups copyWith() => const TopChatCategoryGroups();
 
-  static const String constructor = 'topChatCategoryGroups';
-  
+  static const String objectType = 'topChatCategoryGroups';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **TopChatCategoryChannels** *(topChatCategoryChannels)* - child of TopChatCategory
-  ///
-  /// A category containing frequently used channels.
-class TopChatCategoryChannels extends TopChatCategory {
+///
+/// A category containing frequently used channels.
+final class TopChatCategoryChannels extends TopChatCategory {
   
   /// **TopChatCategoryChannels** *(topChatCategoryChannels)* - child of TopChatCategory
   ///
@@ -159,26 +174,30 @@ class TopChatCategoryChannels extends TopChatCategory {
   factory TopChatCategoryChannels.fromJson(Map<String, dynamic> json) => const TopChatCategoryChannels();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   TopChatCategoryChannels copyWith() => const TopChatCategoryChannels();
 
-  static const String constructor = 'topChatCategoryChannels';
-  
+  static const String objectType = 'topChatCategoryChannels';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **TopChatCategoryInlineBots** *(topChatCategoryInlineBots)* - child of TopChatCategory
-  ///
-  /// A category containing frequently used chats with inline bots sorted by their usage in inline mode.
-class TopChatCategoryInlineBots extends TopChatCategory {
+///
+/// A category containing frequently used chats with inline bots sorted by their usage in inline mode.
+final class TopChatCategoryInlineBots extends TopChatCategory {
   
   /// **TopChatCategoryInlineBots** *(topChatCategoryInlineBots)* - child of TopChatCategory
   ///
@@ -189,26 +208,30 @@ class TopChatCategoryInlineBots extends TopChatCategory {
   factory TopChatCategoryInlineBots.fromJson(Map<String, dynamic> json) => const TopChatCategoryInlineBots();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   TopChatCategoryInlineBots copyWith() => const TopChatCategoryInlineBots();
 
-  static const String constructor = 'topChatCategoryInlineBots';
-  
+  static const String objectType = 'topChatCategoryInlineBots';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **TopChatCategoryCalls** *(topChatCategoryCalls)* - child of TopChatCategory
-  ///
-  /// A category containing frequently used chats used for calls.
-class TopChatCategoryCalls extends TopChatCategory {
+///
+/// A category containing frequently used chats used for calls.
+final class TopChatCategoryCalls extends TopChatCategory {
   
   /// **TopChatCategoryCalls** *(topChatCategoryCalls)* - child of TopChatCategory
   ///
@@ -219,26 +242,30 @@ class TopChatCategoryCalls extends TopChatCategory {
   factory TopChatCategoryCalls.fromJson(Map<String, dynamic> json) => const TopChatCategoryCalls();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   TopChatCategoryCalls copyWith() => const TopChatCategoryCalls();
 
-  static const String constructor = 'topChatCategoryCalls';
-  
+  static const String objectType = 'topChatCategoryCalls';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **TopChatCategoryForwardChats** *(topChatCategoryForwardChats)* - child of TopChatCategory
-  ///
-  /// A category containing frequently used chats used to forward messages.
-class TopChatCategoryForwardChats extends TopChatCategory {
+///
+/// A category containing frequently used chats used to forward messages.
+final class TopChatCategoryForwardChats extends TopChatCategory {
   
   /// **TopChatCategoryForwardChats** *(topChatCategoryForwardChats)* - child of TopChatCategory
   ///
@@ -249,17 +276,21 @@ class TopChatCategoryForwardChats extends TopChatCategory {
   factory TopChatCategoryForwardChats.fromJson(Map<String, dynamic> json) => const TopChatCategoryForwardChats();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   TopChatCategoryForwardChats copyWith() => const TopChatCategoryForwardChats();
 
-  static const String constructor = 'topChatCategoryForwardChats';
-  
+  static const String objectType = 'topChatCategoryForwardChats';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

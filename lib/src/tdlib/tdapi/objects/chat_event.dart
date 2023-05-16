@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **ChatEvent** *(chatEvent)* - basic class
-  ///
-  /// Represents a chat event.
-  ///
-  /// * [id]: Chat event identifier.
-  /// * [date]: Point in time (Unix timestamp) when the event happened.
-  /// * [memberId]: Identifier of the user or chat who performed the action.
-  /// * [action]: The action.
-class ChatEvent extends TdObject {
+///
+/// Represents a chat event.
+///
+/// * [id]: Chat event identifier.
+/// * [date]: Point in time (Unix timestamp) when the event happened.
+/// * [memberId]: Identifier of the user or chat who performed the action.
+/// * [action]: The action.
+final class ChatEvent extends TdObject {
   
   /// **ChatEvent** *(chatEvent)* - basic class
   ///
@@ -47,15 +47,16 @@ class ChatEvent extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "date": date,
       "member_id": memberId.toJson(),
       "action": action.toJson(),
-    };
-  }
+		};
+	}
+
   
   ChatEvent copyWith({
     int? id,
@@ -69,8 +70,11 @@ class ChatEvent extends TdObject {
     action: action ?? this.action,
   );
 
-  static const String constructor = 'chatEvent';
-  
+  static const String objectType = 'chatEvent';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

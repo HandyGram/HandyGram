@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **DateRange** *(dateRange)* - basic class
-  ///
-  /// Represents a date range.
-  ///
-  /// * [startDate]: Point in time (Unix timestamp) at which the date range begins.
-  /// * [endDate]: Point in time (Unix timestamp) at which the date range ends.
-class DateRange extends TdObject {
+///
+/// Represents a date range.
+///
+/// * [startDate]: Point in time (Unix timestamp) at which the date range begins.
+/// * [endDate]: Point in time (Unix timestamp) at which the date range ends.
+final class DateRange extends TdObject {
   
   /// **DateRange** *(dateRange)* - basic class
   ///
@@ -33,13 +33,14 @@ class DateRange extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "start_date": startDate,
       "end_date": endDate,
-    };
-  }
+		};
+	}
+
   
   DateRange copyWith({
     int? startDate,
@@ -49,8 +50,11 @@ class DateRange extends TdObject {
     endDate: endDate ?? this.endDate,
   );
 
-  static const String constructor = 'dateRange';
-  
+  static const String objectType = 'dateRange';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **ToggleSessionCanAcceptSecretChats** *(toggleSessionCanAcceptSecretChats)* - TDLib function
-  ///
-  /// Toggles whether a session can accept incoming secret chats.
-  ///
-  /// * [sessionId]: Session identifier.
-  /// * [canAcceptSecretChats]: Pass true to allow accepring secret chats by the session; pass false otherwise.
-  ///
-  /// [Ok] is returned on completion.
-class ToggleSessionCanAcceptSecretChats extends TdFunction {
+///
+/// Toggles whether a session can accept incoming secret chats.
+///
+/// * [sessionId]: Session identifier.
+/// * [canAcceptSecretChats]: Pass true to allow accepring secret chats by the session; pass false otherwise.
+///
+/// [Ok] is returned on completion.
+final class ToggleSessionCanAcceptSecretChats extends TdFunction {
   
   /// **ToggleSessionCanAcceptSecretChats** *(toggleSessionCanAcceptSecretChats)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class ToggleSessionCanAcceptSecretChats extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "session_id": sessionId,
       "can_accept_secret_chats": canAcceptSecretChats,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ToggleSessionCanAcceptSecretChats copyWith({
     int? sessionId,
@@ -47,8 +48,11 @@ class ToggleSessionCanAcceptSecretChats extends TdFunction {
     canAcceptSecretChats: canAcceptSecretChats ?? this.canAcceptSecretChats,
   );
 
-  static const String constructor = 'toggleSessionCanAcceptSecretChats';
-  
+  static const String objectType = 'toggleSessionCanAcceptSecretChats';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

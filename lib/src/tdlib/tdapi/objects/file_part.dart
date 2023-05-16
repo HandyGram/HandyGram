@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **FilePart** *(filePart)* - basic class
-  ///
-  /// Contains a part of a file.
-  ///
-  /// * [data]: File bytes.
-class FilePart extends TdObject {
+///
+/// Contains a part of a file.
+///
+/// * [data]: File bytes.
+final class FilePart extends TdObject {
   
   /// **FilePart** *(filePart)* - basic class
   ///
@@ -38,12 +38,13 @@ class FilePart extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "data": data,
-    };
-  }
+		};
+	}
+
   
   FilePart copyWith({
     String? data,
@@ -55,8 +56,11 @@ class FilePart extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'filePart';
-  
+  static const String objectType = 'filePart';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,16 +1,16 @@
 part of '../tdapi.dart';
 
 /// **WebPageInstantView** *(webPageInstantView)* - basic class
-  ///
-  /// Describes an instant view page for a web page.
-  ///
-  /// * [pageBlocks]: Content of the web page.
-  /// * [viewCount]: Number of the instant view views; 0 if unknown.
-  /// * [version]: Version of the instant view; currently, can be 1 or 2.
-  /// * [isRtl]: True, if the instant view must be shown from right to left.
-  /// * [isFull]: True, if the instant view contains the full page. A network request might be needed to get the full web page instant view.
-  /// * [feedbackLink]: An internal link to be opened to leave feedback about the instant view.
-class WebPageInstantView extends TdObject {
+///
+/// Describes an instant view page for a web page.
+///
+/// * [pageBlocks]: Content of the web page.
+/// * [viewCount]: Number of the instant view views; 0 if unknown.
+/// * [version]: Version of the instant view; currently, can be 1 or 2.
+/// * [isRtl]: True, if the instant view must be shown from right to left.
+/// * [isFull]: True, if the instant view contains the full page. A network request might be needed to get the full web page instant view.
+/// * [feedbackLink]: An internal link to be opened to leave feedback about the instant view.
+final class WebPageInstantView extends TdObject {
   
   /// **WebPageInstantView** *(webPageInstantView)* - basic class
   ///
@@ -73,17 +73,18 @@ class WebPageInstantView extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "page_blocks": pageBlocks.map((i) => i.toJson()).toList(),
       "view_count": viewCount,
       "version": version,
       "is_rtl": isRtl,
       "is_full": isFull,
       "feedback_link": feedbackLink.toJson(),
-    };
-  }
+		};
+	}
+
   
   WebPageInstantView copyWith({
     List<PageBlock>? pageBlocks,
@@ -105,8 +106,11 @@ class WebPageInstantView extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'webPageInstantView';
-  
+  static const String objectType = 'webPageInstantView';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

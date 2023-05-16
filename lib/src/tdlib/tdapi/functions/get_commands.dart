@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **GetCommands** *(getCommands)* - TDLib function
-  ///
-  /// Returns the list of commands supported by the bot for the given user scope and language; for bots only.
-  ///
-  /// * [scope]: The scope to which the commands are relevant; pass null to get commands in the default bot command scope *(optional)*.
-  /// * [languageCode]: A two-letter ISO 639-1 language code or an empty string.
-  ///
-  /// [BotCommands] is returned on completion.
-class GetCommands extends TdFunction {
+///
+/// Returns the list of commands supported by the bot for the given user scope and language; for bots only.
+///
+/// * [scope]: The scope to which the commands are relevant; pass null to get commands in the default bot command scope *(optional)*.
+/// * [languageCode]: A two-letter ISO 639-1 language code or an empty string.
+///
+/// [BotCommands] is returned on completion.
+final class GetCommands extends TdFunction {
   
   /// **GetCommands** *(getCommands)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class GetCommands extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "scope": scope?.toJson(),
       "language_code": languageCode,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetCommands copyWith({
     BotCommandScope? scope,
@@ -47,8 +48,11 @@ class GetCommands extends TdFunction {
     languageCode: languageCode ?? this.languageCode,
   );
 
-  static const String constructor = 'getCommands';
-  
+  static const String objectType = 'getCommands';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

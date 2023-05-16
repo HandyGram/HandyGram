@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **CanPurchasePremium** *(canPurchasePremium)* - TDLib function
-  ///
-  /// Checks whether Telegram Premium purchase is possible. Must be called before in-store Premium purchase.
-  ///
-  /// * [purpose]: Transaction purpose.
-  ///
-  /// [Ok] is returned on completion.
-class CanPurchasePremium extends TdFunction {
+///
+/// Checks whether Telegram Premium purchase is possible. Must be called before in-store Premium purchase.
+///
+/// * [purpose]: Transaction purpose.
+///
+/// [Ok] is returned on completion.
+final class CanPurchasePremium extends TdFunction {
   
   /// **CanPurchasePremium** *(canPurchasePremium)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class CanPurchasePremium extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "purpose": purpose.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   CanPurchasePremium copyWith({
     StorePaymentPurpose? purpose,
@@ -38,8 +39,11 @@ class CanPurchasePremium extends TdFunction {
     purpose: purpose ?? this.purpose,
   );
 
-  static const String constructor = 'canPurchasePremium';
-  
+  static const String objectType = 'canPurchasePremium';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

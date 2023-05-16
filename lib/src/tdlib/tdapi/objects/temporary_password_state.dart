@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **TemporaryPasswordState** *(temporaryPasswordState)* - basic class
-  ///
-  /// Returns information about the availability of a temporary password, which can be used for payments.
-  ///
-  /// * [hasPassword]: True, if a temporary password is available.
-  /// * [validFor]: Time left before the temporary password expires, in seconds.
-class TemporaryPasswordState extends TdObject {
+///
+/// Returns information about the availability of a temporary password, which can be used for payments.
+///
+/// * [hasPassword]: True, if a temporary password is available.
+/// * [validFor]: Time left before the temporary password expires, in seconds.
+final class TemporaryPasswordState extends TdObject {
   
   /// **TemporaryPasswordState** *(temporaryPasswordState)* - basic class
   ///
@@ -45,13 +45,14 @@ class TemporaryPasswordState extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "has_password": hasPassword,
       "valid_for": validFor,
-    };
-  }
+		};
+	}
+
   
   TemporaryPasswordState copyWith({
     bool? hasPassword,
@@ -65,8 +66,11 @@ class TemporaryPasswordState extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'temporaryPasswordState';
-  
+  static const String objectType = 'temporaryPasswordState';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

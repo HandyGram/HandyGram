@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **FinishFileGeneration** *(finishFileGeneration)* - TDLib function
-  ///
-  /// Finishes the file generation.
-  ///
-  /// * [generationId]: The identifier of the generation process.
-  /// * [error]: If passed, the file generation has failed and must be terminated; pass null if the file generation succeeded *(optional)*.
-  ///
-  /// [Ok] is returned on completion.
-class FinishFileGeneration extends TdFunction {
+///
+/// Finishes the file generation.
+///
+/// * [generationId]: The identifier of the generation process.
+/// * [error]: If passed, the file generation has failed and must be terminated; pass null if the file generation succeeded *(optional)*.
+///
+/// [Ok] is returned on completion.
+final class FinishFileGeneration extends TdFunction {
   
   /// **FinishFileGeneration** *(finishFileGeneration)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class FinishFileGeneration extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "generation_id": generationId,
       "error": error?.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   FinishFileGeneration copyWith({
     int? generationId,
@@ -47,8 +48,11 @@ class FinishFileGeneration extends TdFunction {
     error: error ?? this.error,
   );
 
-  static const String constructor = 'finishFileGeneration';
-  
+  static const String objectType = 'finishFileGeneration';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

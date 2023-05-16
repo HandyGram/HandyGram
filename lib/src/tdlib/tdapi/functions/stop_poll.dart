@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **StopPoll** *(stopPoll)* - TDLib function
-  ///
-  /// Stops a poll. A poll in a message can be stopped when the message has can_be_edited flag set.
-  ///
-  /// * [chatId]: Identifier of the chat to which the poll belongs.
-  /// * [messageId]: Identifier of the message containing the poll.
-  /// * [replyMarkup]: The new message reply markup; pass null if none; for bots only *(optional)*.
-  ///
-  /// [Ok] is returned on completion.
-class StopPoll extends TdFunction {
+///
+/// Stops a poll. A poll in a message can be stopped when the message has can_be_edited flag set.
+///
+/// * [chatId]: Identifier of the chat to which the poll belongs.
+/// * [messageId]: Identifier of the message containing the poll.
+/// * [replyMarkup]: The new message reply markup; pass null if none; for bots only *(optional)*.
+///
+/// [Ok] is returned on completion.
+final class StopPoll extends TdFunction {
   
   /// **StopPoll** *(stopPoll)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class StopPoll extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "reply_markup": replyMarkup?.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   StopPoll copyWith({
     int? chatId,
@@ -56,8 +57,11 @@ class StopPoll extends TdFunction {
     replyMarkup: replyMarkup ?? this.replyMarkup,
   );
 
-  static const String constructor = 'stopPoll';
-  
+  static const String objectType = 'stopPoll';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

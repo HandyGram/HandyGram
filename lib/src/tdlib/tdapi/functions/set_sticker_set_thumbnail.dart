@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **SetStickerSetThumbnail** *(setStickerSetThumbnail)* - TDLib function
-  ///
-  /// Sets a sticker set thumbnail; for bots only. Returns the sticker set.
-  ///
-  /// * [userId]: Sticker set owner.
-  /// * [name]: Sticker set name.
-  /// * [thumbnail]: Thumbnail to set in PNG, TGS, or WEBM format; pass null to remove the sticker set thumbnail. Thumbnail format must match the format of stickers in the set *(optional)*.
-  ///
-  /// [StickerSet] is returned on completion.
-class SetStickerSetThumbnail extends TdFunction {
+///
+/// Sets a sticker set thumbnail; for bots only. Returns the sticker set.
+///
+/// * [userId]: Sticker set owner.
+/// * [name]: Sticker set name.
+/// * [thumbnail]: Thumbnail to set in PNG, TGS, or WEBM format; pass null to remove the sticker set thumbnail. Thumbnail format must match the format of stickers in the set *(optional)*.
+///
+/// [StickerSet] is returned on completion.
+final class SetStickerSetThumbnail extends TdFunction {
   
   /// **SetStickerSetThumbnail** *(setStickerSetThumbnail)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class SetStickerSetThumbnail extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "user_id": userId,
       "name": name,
       "thumbnail": thumbnail?.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetStickerSetThumbnail copyWith({
     int? userId,
@@ -56,8 +57,11 @@ class SetStickerSetThumbnail extends TdFunction {
     thumbnail: thumbnail ?? this.thumbnail,
   );
 
-  static const String constructor = 'setStickerSetThumbnail';
-  
+  static const String objectType = 'setStickerSetThumbnail';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,17 +1,17 @@
 part of '../tdapi.dart';
 
 /// **PasswordState** *(passwordState)* - basic class
-  ///
-  /// Represents the current state of 2-step verification.
-  ///
-  /// * [hasPassword]: True, if a 2-step verification password is set.
-  /// * [passwordHint]: Hint for the password; may be empty.
-  /// * [hasRecoveryEmailAddress]: True, if a recovery email is set.
-  /// * [hasPassportData]: True, if some Telegram Passport elements were saved.
-  /// * [recoveryEmailAddressCodeInfo]: Information about the recovery email address to which the confirmation email was sent; may be null *(optional)*.
-  /// * [loginEmailAddressPattern]: Pattern of the email address set up for logging in.
-  /// * [pendingResetDate]: If not 0, point in time (Unix timestamp) after which the 2-step verification password can be reset immediately using resetPassword.
-class PasswordState extends TdObject {
+///
+/// Represents the current state of 2-step verification.
+///
+/// * [hasPassword]: True, if a 2-step verification password is set.
+/// * [passwordHint]: Hint for the password; may be empty.
+/// * [hasRecoveryEmailAddress]: True, if a recovery email is set.
+/// * [hasPassportData]: True, if some Telegram Passport elements were saved.
+/// * [recoveryEmailAddressCodeInfo]: Information about the recovery email address to which the confirmation email was sent; may be null *(optional)*.
+/// * [loginEmailAddressPattern]: Pattern of the email address set up for logging in.
+/// * [pendingResetDate]: If not 0, point in time (Unix timestamp) after which the 2-step verification password can be reset immediately using resetPassword.
+final class PasswordState extends TdObject {
   
   /// **PasswordState** *(passwordState)* - basic class
   ///
@@ -80,9 +80,9 @@ class PasswordState extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "has_password": hasPassword,
       "password_hint": passwordHint,
       "has_recovery_email_address": hasRecoveryEmailAddress,
@@ -90,8 +90,9 @@ class PasswordState extends TdObject {
       "recovery_email_address_code_info": recoveryEmailAddressCodeInfo?.toJson(),
       "login_email_address_pattern": loginEmailAddressPattern,
       "pending_reset_date": pendingResetDate,
-    };
-  }
+		};
+	}
+
   
   PasswordState copyWith({
     bool? hasPassword,
@@ -115,8 +116,11 @@ class PasswordState extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'passwordState';
-  
+  static const String objectType = 'passwordState';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **StorageStatistics** *(storageStatistics)* - basic class
-  ///
-  /// Contains the exact storage usage statistics split by chats and file type.
-  ///
-  /// * [size]: Total size of files, in bytes.
-  /// * [count]: Total number of files.
-  /// * [byChat]: Statistics split by chats.
-class StorageStatistics extends TdObject {
+///
+/// Contains the exact storage usage statistics split by chats and file type.
+///
+/// * [size]: Total size of files, in bytes.
+/// * [count]: Total number of files.
+/// * [byChat]: Statistics split by chats.
+final class StorageStatistics extends TdObject {
   
   /// **StorageStatistics** *(storageStatistics)* - basic class
   ///
@@ -52,14 +52,15 @@ class StorageStatistics extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "size": size,
       "count": count,
       "by_chat": byChat.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   StorageStatistics copyWith({
     int? size,
@@ -75,8 +76,11 @@ class StorageStatistics extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'storageStatistics';
-  
+  static const String objectType = 'storageStatistics';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

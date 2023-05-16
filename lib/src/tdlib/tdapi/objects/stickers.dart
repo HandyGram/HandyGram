@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **Stickers** *(stickers)* - basic class
-  ///
-  /// Represents a list of stickers.
-  ///
-  /// * [stickers]: List of stickers.
-class Stickers extends TdObject {
+///
+/// Represents a list of stickers.
+///
+/// * [stickers]: List of stickers.
+final class Stickers extends TdObject {
   
   /// **Stickers** *(stickers)* - basic class
   ///
@@ -38,12 +38,13 @@ class Stickers extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "stickers": stickers.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   Stickers copyWith({
     List<Sticker>? stickers,
@@ -55,8 +56,11 @@ class Stickers extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'stickers';
-  
+  static const String objectType = 'stickers';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **DeleteMessages** *(deleteMessages)* - TDLib function
-  ///
-  /// Deletes messages.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [messageIds]: Identifiers of the messages to be deleted.
-  /// * [revoke]: Pass true to delete messages for all chat members. Always true for supergroups, channels and secret chats.
-  ///
-  /// [Ok] is returned on completion.
-class DeleteMessages extends TdFunction {
+///
+/// Deletes messages.
+///
+/// * [chatId]: Chat identifier.
+/// * [messageIds]: Identifiers of the messages to be deleted.
+/// * [revoke]: Pass true to delete messages for all chat members. Always true for supergroups, channels and secret chats.
+///
+/// [Ok] is returned on completion.
+final class DeleteMessages extends TdFunction {
   
   /// **DeleteMessages** *(deleteMessages)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class DeleteMessages extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_ids": messageIds.map((i) => i).toList(),
       "revoke": revoke,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   DeleteMessages copyWith({
     int? chatId,
@@ -56,8 +57,11 @@ class DeleteMessages extends TdFunction {
     revoke: revoke ?? this.revoke,
   );
 
-  static const String constructor = 'deleteMessages';
-  
+  static const String objectType = 'deleteMessages';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

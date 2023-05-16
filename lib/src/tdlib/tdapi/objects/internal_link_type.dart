@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **InternalLinkType** *(internalLinkType)* - parent
-  ///
-  /// Describes an internal https://t.me or tg: link, which must be processed by the application in a special way.
-class InternalLinkType extends TdObject {
+///
+/// Describes an internal https://t.me or tg: link, which must be processed by the application in a special way.
+sealed class InternalLinkType extends TdObject {
   
   /// **InternalLinkType** *(internalLinkType)* - parent
   ///
@@ -49,103 +49,106 @@ class InternalLinkType extends TdObject {
   /// * [InternalLinkTypeVideoChat]
   factory InternalLinkType.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case InternalLinkTypeActiveSessions.constructor:
+      case InternalLinkTypeActiveSessions.objectType:
         return InternalLinkTypeActiveSessions.fromJson(json);
-      case InternalLinkTypeAttachmentMenuBot.constructor:
+      case InternalLinkTypeAttachmentMenuBot.objectType:
         return InternalLinkTypeAttachmentMenuBot.fromJson(json);
-      case InternalLinkTypeAuthenticationCode.constructor:
+      case InternalLinkTypeAuthenticationCode.objectType:
         return InternalLinkTypeAuthenticationCode.fromJson(json);
-      case InternalLinkTypeBackground.constructor:
+      case InternalLinkTypeBackground.objectType:
         return InternalLinkTypeBackground.fromJson(json);
-      case InternalLinkTypeBotStart.constructor:
+      case InternalLinkTypeBotStart.objectType:
         return InternalLinkTypeBotStart.fromJson(json);
-      case InternalLinkTypeBotStartInGroup.constructor:
+      case InternalLinkTypeBotStartInGroup.objectType:
         return InternalLinkTypeBotStartInGroup.fromJson(json);
-      case InternalLinkTypeBotAddToChannel.constructor:
+      case InternalLinkTypeBotAddToChannel.objectType:
         return InternalLinkTypeBotAddToChannel.fromJson(json);
-      case InternalLinkTypeChangePhoneNumber.constructor:
+      case InternalLinkTypeChangePhoneNumber.objectType:
         return InternalLinkTypeChangePhoneNumber.fromJson(json);
-      case InternalLinkTypeChatInvite.constructor:
+      case InternalLinkTypeChatInvite.objectType:
         return InternalLinkTypeChatInvite.fromJson(json);
-      case InternalLinkTypeDefaultMessageAutoDeleteTimerSettings.constructor:
+      case InternalLinkTypeDefaultMessageAutoDeleteTimerSettings.objectType:
         return InternalLinkTypeDefaultMessageAutoDeleteTimerSettings.fromJson(json);
-      case InternalLinkTypeEditProfileSettings.constructor:
+      case InternalLinkTypeEditProfileSettings.objectType:
         return InternalLinkTypeEditProfileSettings.fromJson(json);
-      case InternalLinkTypeFilterSettings.constructor:
+      case InternalLinkTypeFilterSettings.objectType:
         return InternalLinkTypeFilterSettings.fromJson(json);
-      case InternalLinkTypeGame.constructor:
+      case InternalLinkTypeGame.objectType:
         return InternalLinkTypeGame.fromJson(json);
-      case InternalLinkTypeInstantView.constructor:
+      case InternalLinkTypeInstantView.objectType:
         return InternalLinkTypeInstantView.fromJson(json);
-      case InternalLinkTypeInvoice.constructor:
+      case InternalLinkTypeInvoice.objectType:
         return InternalLinkTypeInvoice.fromJson(json);
-      case InternalLinkTypeLanguagePack.constructor:
+      case InternalLinkTypeLanguagePack.objectType:
         return InternalLinkTypeLanguagePack.fromJson(json);
-      case InternalLinkTypeLanguageSettings.constructor:
+      case InternalLinkTypeLanguageSettings.objectType:
         return InternalLinkTypeLanguageSettings.fromJson(json);
-      case InternalLinkTypeMessage.constructor:
+      case InternalLinkTypeMessage.objectType:
         return InternalLinkTypeMessage.fromJson(json);
-      case InternalLinkTypeMessageDraft.constructor:
+      case InternalLinkTypeMessageDraft.objectType:
         return InternalLinkTypeMessageDraft.fromJson(json);
-      case InternalLinkTypePassportDataRequest.constructor:
+      case InternalLinkTypePassportDataRequest.objectType:
         return InternalLinkTypePassportDataRequest.fromJson(json);
-      case InternalLinkTypePhoneNumberConfirmation.constructor:
+      case InternalLinkTypePhoneNumberConfirmation.objectType:
         return InternalLinkTypePhoneNumberConfirmation.fromJson(json);
-      case InternalLinkTypePremiumFeatures.constructor:
+      case InternalLinkTypePremiumFeatures.objectType:
         return InternalLinkTypePremiumFeatures.fromJson(json);
-      case InternalLinkTypePrivacyAndSecuritySettings.constructor:
+      case InternalLinkTypePrivacyAndSecuritySettings.objectType:
         return InternalLinkTypePrivacyAndSecuritySettings.fromJson(json);
-      case InternalLinkTypeProxy.constructor:
+      case InternalLinkTypeProxy.objectType:
         return InternalLinkTypeProxy.fromJson(json);
-      case InternalLinkTypePublicChat.constructor:
+      case InternalLinkTypePublicChat.objectType:
         return InternalLinkTypePublicChat.fromJson(json);
-      case InternalLinkTypeQrCodeAuthentication.constructor:
+      case InternalLinkTypeQrCodeAuthentication.objectType:
         return InternalLinkTypeQrCodeAuthentication.fromJson(json);
-      case InternalLinkTypeRestorePurchases.constructor:
+      case InternalLinkTypeRestorePurchases.objectType:
         return InternalLinkTypeRestorePurchases.fromJson(json);
-      case InternalLinkTypeSettings.constructor:
+      case InternalLinkTypeSettings.objectType:
         return InternalLinkTypeSettings.fromJson(json);
-      case InternalLinkTypeStickerSet.constructor:
+      case InternalLinkTypeStickerSet.objectType:
         return InternalLinkTypeStickerSet.fromJson(json);
-      case InternalLinkTypeTheme.constructor:
+      case InternalLinkTypeTheme.objectType:
         return InternalLinkTypeTheme.fromJson(json);
-      case InternalLinkTypeThemeSettings.constructor:
+      case InternalLinkTypeThemeSettings.objectType:
         return InternalLinkTypeThemeSettings.fromJson(json);
-      case InternalLinkTypeUnknownDeepLink.constructor:
+      case InternalLinkTypeUnknownDeepLink.objectType:
         return InternalLinkTypeUnknownDeepLink.fromJson(json);
-      case InternalLinkTypeUnsupportedProxy.constructor:
+      case InternalLinkTypeUnsupportedProxy.objectType:
         return InternalLinkTypeUnsupportedProxy.fromJson(json);
-      case InternalLinkTypeUserPhoneNumber.constructor:
+      case InternalLinkTypeUserPhoneNumber.objectType:
         return InternalLinkTypeUserPhoneNumber.fromJson(json);
-      case InternalLinkTypeUserToken.constructor:
+      case InternalLinkTypeUserToken.objectType:
         return InternalLinkTypeUserToken.fromJson(json);
-      case InternalLinkTypeVideoChat.constructor:
+      case InternalLinkTypeVideoChat.objectType:
         return InternalLinkTypeVideoChat.fromJson(json);
       default:
-        return const InternalLinkType();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of InternalLinkType)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  InternalLinkType copyWith() => const InternalLinkType();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'internalLinkType';
   
+  InternalLinkType copyWith();
+
+  static const String objectType = 'internalLinkType';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeActiveSessions** *(internalLinkTypeActiveSessions)* - child of InternalLinkType
-  ///
-  /// The link is a link to the active sessions section of the application. Use getActiveSessions to handle the link.
-class InternalLinkTypeActiveSessions extends InternalLinkType {
+///
+/// The link is a link to the active sessions section of the application. Use getActiveSessions to handle the link.
+final class InternalLinkTypeActiveSessions extends InternalLinkType {
   
   /// **InternalLinkTypeActiveSessions** *(internalLinkTypeActiveSessions)* - child of InternalLinkType
   ///
@@ -171,11 +174,12 @@ class InternalLinkTypeActiveSessions extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   InternalLinkTypeActiveSessions copyWith({
@@ -186,21 +190,24 @@ class InternalLinkTypeActiveSessions extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeActiveSessions';
-  
+  static const String objectType = 'internalLinkTypeActiveSessions';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeAttachmentMenuBot** *(internalLinkTypeAttachmentMenuBot)* - child of InternalLinkType
-  ///
-  /// The link is a link to an attachment menu bot to be opened in the specified or a chosen chat. Process given target_chat to open the chat.. Then, call searchPublicChat with the given bot username, check that the user is a bot and can be added to attachment menu. Then, use getAttachmentMenuBot to receive information about the bot.. If the bot isn't added to attachment menu, then user needs to confirm adding the bot to attachment menu. If user confirms adding, then use toggleBotIsAddedToAttachmentMenu to add it.. If the attachment menu bot can't be used in the opened chat, show an error to the user. If the bot is added to attachment menu and can be used in the chat, then use openWebApp with the given URL.
-  ///
-  /// * [targetChat]: Target chat to be opened.
-  /// * [botUsername]: Username of the bot.
-  /// * [url]: URL to be passed to openWebApp.
-class InternalLinkTypeAttachmentMenuBot extends InternalLinkType {
+///
+/// The link is a link to an attachment menu bot to be opened in the specified or a chosen chat. Process given target_chat to open the chat.. Then, call searchPublicChat with the given bot username, check that the user is a bot and can be added to attachment menu. Then, use getAttachmentMenuBot to receive information about the bot.. If the bot isn't added to attachment menu, then user needs to confirm adding the bot to attachment menu. If user confirms adding, then use toggleBotIsAddedToAttachmentMenu to add it.. If the attachment menu bot can't be used in the opened chat, show an error to the user. If the bot is added to attachment menu and can be used in the chat, then use openWebApp with the given URL.
+///
+/// * [targetChat]: Target chat to be opened.
+/// * [botUsername]: Username of the bot.
+/// * [url]: URL to be passed to openWebApp.
+final class InternalLinkTypeAttachmentMenuBot extends InternalLinkType {
   
   /// **InternalLinkTypeAttachmentMenuBot** *(internalLinkTypeAttachmentMenuBot)* - child of InternalLinkType
   ///
@@ -245,14 +252,15 @@ class InternalLinkTypeAttachmentMenuBot extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "target_chat": targetChat.toJson(),
       "bot_username": botUsername,
       "url": url,
-    };
-  }
+		};
+	}
+
   
   @override
   InternalLinkTypeAttachmentMenuBot copyWith({
@@ -269,19 +277,22 @@ class InternalLinkTypeAttachmentMenuBot extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeAttachmentMenuBot';
-  
+  static const String objectType = 'internalLinkTypeAttachmentMenuBot';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeAuthenticationCode** *(internalLinkTypeAuthenticationCode)* - child of InternalLinkType
-  ///
-  /// The link contains an authentication code. Call checkAuthenticationCode with the code if the current authorization state is authorizationStateWaitCode.
-  ///
-  /// * [code]: The authentication code.
-class InternalLinkTypeAuthenticationCode extends InternalLinkType {
+///
+/// The link contains an authentication code. Call checkAuthenticationCode with the code if the current authorization state is authorizationStateWaitCode.
+///
+/// * [code]: The authentication code.
+final class InternalLinkTypeAuthenticationCode extends InternalLinkType {
   
   /// **InternalLinkTypeAuthenticationCode** *(internalLinkTypeAuthenticationCode)* - child of InternalLinkType
   ///
@@ -314,12 +325,13 @@ class InternalLinkTypeAuthenticationCode extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "code": code,
-    };
-  }
+		};
+	}
+
   
   @override
   InternalLinkTypeAuthenticationCode copyWith({
@@ -332,19 +344,22 @@ class InternalLinkTypeAuthenticationCode extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeAuthenticationCode';
-  
+  static const String objectType = 'internalLinkTypeAuthenticationCode';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeBackground** *(internalLinkTypeBackground)* - child of InternalLinkType
-  ///
-  /// The link is a link to a background. Call searchBackground with the given background name to process the link.
-  ///
-  /// * [backgroundName]: Name of the background.
-class InternalLinkTypeBackground extends InternalLinkType {
+///
+/// The link is a link to a background. Call searchBackground with the given background name to process the link.
+///
+/// * [backgroundName]: Name of the background.
+final class InternalLinkTypeBackground extends InternalLinkType {
   
   /// **InternalLinkTypeBackground** *(internalLinkTypeBackground)* - child of InternalLinkType
   ///
@@ -377,12 +392,13 @@ class InternalLinkTypeBackground extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "background_name": backgroundName,
-    };
-  }
+		};
+	}
+
   
   @override
   InternalLinkTypeBackground copyWith({
@@ -395,21 +411,24 @@ class InternalLinkTypeBackground extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeBackground';
-  
+  static const String objectType = 'internalLinkTypeBackground';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeBotStart** *(internalLinkTypeBotStart)* - child of InternalLinkType
-  ///
-  /// The link is a link to a chat with a Telegram bot. Call searchPublicChat with the given bot username, check that the user is a bot, show START button in the chat with the bot,. and then call sendBotStartMessage with the given start parameter after the button is pressed.
-  ///
-  /// * [botUsername]: Username of the bot.
-  /// * [startParameter]: The parameter to be passed to sendBotStartMessage.
-  /// * [autostart]: True, if sendBotStartMessage must be called automatically without showing the START button.
-class InternalLinkTypeBotStart extends InternalLinkType {
+///
+/// The link is a link to a chat with a Telegram bot. Call searchPublicChat with the given bot username, check that the user is a bot, show START button in the chat with the bot,. and then call sendBotStartMessage with the given start parameter after the button is pressed.
+///
+/// * [botUsername]: Username of the bot.
+/// * [startParameter]: The parameter to be passed to sendBotStartMessage.
+/// * [autostart]: True, if sendBotStartMessage must be called automatically without showing the START button.
+final class InternalLinkTypeBotStart extends InternalLinkType {
   
   /// **InternalLinkTypeBotStart** *(internalLinkTypeBotStart)* - child of InternalLinkType
   ///
@@ -454,14 +473,15 @@ class InternalLinkTypeBotStart extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "bot_username": botUsername,
       "start_parameter": startParameter,
       "autostart": autostart,
-    };
-  }
+		};
+	}
+
   
   @override
   InternalLinkTypeBotStart copyWith({
@@ -478,21 +498,24 @@ class InternalLinkTypeBotStart extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeBotStart';
-  
+  static const String objectType = 'internalLinkTypeBotStart';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeBotStartInGroup** *(internalLinkTypeBotStartInGroup)* - child of InternalLinkType
-  ///
-  /// The link is a link to a Telegram bot, which is supposed to be added to a group chat. Call searchPublicChat with the given bot username, check that the user is a bot and can be added to groups,. ask the current user to select a basic group or a supergroup chat to add the bot to, taking into account that bots can be added to a public supergroup only by administrators of the supergroup.. If administrator rights are provided by the link, call getChatMember to receive the current bot rights in the chat and if the bot already is an administrator,. check that the current user can edit its administrator rights, combine received rights with the requested administrator rights, show confirmation box to the user,. and call setChatMemberStatus with the chosen chat and confirmed administrator rights. Before call to setChatMemberStatus it may be required to upgrade the chosen basic group chat to a supergroup chat.. Then, if start_parameter isn't empty, call sendBotStartMessage with the given start parameter and the chosen chat; otherwise, just send /start message with bot's username added to the chat.
-  ///
-  /// * [botUsername]: Username of the bot.
-  /// * [startParameter]: The parameter to be passed to sendBotStartMessage.
-  /// * [administratorRights]: Expected administrator rights for the bot; may be null *(optional)*.
-class InternalLinkTypeBotStartInGroup extends InternalLinkType {
+///
+/// The link is a link to a Telegram bot, which is supposed to be added to a group chat. Call searchPublicChat with the given bot username, check that the user is a bot and can be added to groups,. ask the current user to select a basic group or a supergroup chat to add the bot to, taking into account that bots can be added to a public supergroup only by administrators of the supergroup.. If administrator rights are provided by the link, call getChatMember to receive the current bot rights in the chat and if the bot already is an administrator,. check that the current user can edit its administrator rights, combine received rights with the requested administrator rights, show confirmation box to the user,. and call setChatMemberStatus with the chosen chat and confirmed administrator rights. Before call to setChatMemberStatus it may be required to upgrade the chosen basic group chat to a supergroup chat.. Then, if start_parameter isn't empty, call sendBotStartMessage with the given start parameter and the chosen chat; otherwise, just send /start message with bot's username added to the chat.
+///
+/// * [botUsername]: Username of the bot.
+/// * [startParameter]: The parameter to be passed to sendBotStartMessage.
+/// * [administratorRights]: Expected administrator rights for the bot; may be null *(optional)*.
+final class InternalLinkTypeBotStartInGroup extends InternalLinkType {
   
   /// **InternalLinkTypeBotStartInGroup** *(internalLinkTypeBotStartInGroup)* - child of InternalLinkType
   ///
@@ -537,14 +560,15 @@ class InternalLinkTypeBotStartInGroup extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "bot_username": botUsername,
       "start_parameter": startParameter,
       "administrator_rights": administratorRights?.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   InternalLinkTypeBotStartInGroup copyWith({
@@ -561,20 +585,23 @@ class InternalLinkTypeBotStartInGroup extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeBotStartInGroup';
-  
+  static const String objectType = 'internalLinkTypeBotStartInGroup';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeBotAddToChannel** *(internalLinkTypeBotAddToChannel)* - child of InternalLinkType
-  ///
-  /// The link is a link to a Telegram bot, which is supposed to be added to a channel chat as an administrator. Call searchPublicChat with the given bot username and check that the user is a bot,. ask the current user to select a channel chat to add the bot to as an administrator. Then, call getChatMember to receive the current bot rights in the chat and if the bot already is an administrator,. check that the current user can edit its administrator rights and combine received rights with the requested administrator rights. Then, show confirmation box to the user, and call setChatMemberStatus with the chosen chat and confirmed rights.
-  ///
-  /// * [botUsername]: Username of the bot.
-  /// * [administratorRights]: Expected administrator rights for the bot.
-class InternalLinkTypeBotAddToChannel extends InternalLinkType {
+///
+/// The link is a link to a Telegram bot, which is supposed to be added to a channel chat as an administrator. Call searchPublicChat with the given bot username and check that the user is a bot,. ask the current user to select a channel chat to add the bot to as an administrator. Then, call getChatMember to receive the current bot rights in the chat and if the bot already is an administrator,. check that the current user can edit its administrator rights and combine received rights with the requested administrator rights. Then, show confirmation box to the user, and call setChatMemberStatus with the chosen chat and confirmed rights.
+///
+/// * [botUsername]: Username of the bot.
+/// * [administratorRights]: Expected administrator rights for the bot.
+final class InternalLinkTypeBotAddToChannel extends InternalLinkType {
   
   /// **InternalLinkTypeBotAddToChannel** *(internalLinkTypeBotAddToChannel)* - child of InternalLinkType
   ///
@@ -613,13 +640,14 @@ class InternalLinkTypeBotAddToChannel extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "bot_username": botUsername,
       "administrator_rights": administratorRights.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   InternalLinkTypeBotAddToChannel copyWith({
@@ -634,17 +662,20 @@ class InternalLinkTypeBotAddToChannel extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeBotAddToChannel';
-  
+  static const String objectType = 'internalLinkTypeBotAddToChannel';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeChangePhoneNumber** *(internalLinkTypeChangePhoneNumber)* - child of InternalLinkType
-  ///
-  /// The link is a link to the change phone number section of the app.
-class InternalLinkTypeChangePhoneNumber extends InternalLinkType {
+///
+/// The link is a link to the change phone number section of the app.
+final class InternalLinkTypeChangePhoneNumber extends InternalLinkType {
   
   /// **InternalLinkTypeChangePhoneNumber** *(internalLinkTypeChangePhoneNumber)* - child of InternalLinkType
   ///
@@ -670,11 +701,12 @@ class InternalLinkTypeChangePhoneNumber extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   InternalLinkTypeChangePhoneNumber copyWith({
@@ -685,19 +717,22 @@ class InternalLinkTypeChangePhoneNumber extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeChangePhoneNumber';
-  
+  static const String objectType = 'internalLinkTypeChangePhoneNumber';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeChatInvite** *(internalLinkTypeChatInvite)* - child of InternalLinkType
-  ///
-  /// The link is a chat invite link. Call checkChatInviteLink with the given invite link to process the link.
-  ///
-  /// * [inviteLink]: Internal representation of the invite link.
-class InternalLinkTypeChatInvite extends InternalLinkType {
+///
+/// The link is a chat invite link. Call checkChatInviteLink with the given invite link to process the link.
+///
+/// * [inviteLink]: Internal representation of the invite link.
+final class InternalLinkTypeChatInvite extends InternalLinkType {
   
   /// **InternalLinkTypeChatInvite** *(internalLinkTypeChatInvite)* - child of InternalLinkType
   ///
@@ -730,12 +765,13 @@ class InternalLinkTypeChatInvite extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "invite_link": inviteLink,
-    };
-  }
+		};
+	}
+
   
   @override
   InternalLinkTypeChatInvite copyWith({
@@ -748,17 +784,20 @@ class InternalLinkTypeChatInvite extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeChatInvite';
-  
+  static const String objectType = 'internalLinkTypeChatInvite';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeDefaultMessageAutoDeleteTimerSettings** *(internalLinkTypeDefaultMessageAutoDeleteTimerSettings)* - child of InternalLinkType
-  ///
-  /// The link is a link to the default message auto-delete timer settings section of the app settings.
-class InternalLinkTypeDefaultMessageAutoDeleteTimerSettings extends InternalLinkType {
+///
+/// The link is a link to the default message auto-delete timer settings section of the app settings.
+final class InternalLinkTypeDefaultMessageAutoDeleteTimerSettings extends InternalLinkType {
   
   /// **InternalLinkTypeDefaultMessageAutoDeleteTimerSettings** *(internalLinkTypeDefaultMessageAutoDeleteTimerSettings)* - child of InternalLinkType
   ///
@@ -784,11 +823,12 @@ class InternalLinkTypeDefaultMessageAutoDeleteTimerSettings extends InternalLink
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   InternalLinkTypeDefaultMessageAutoDeleteTimerSettings copyWith({
@@ -799,17 +839,20 @@ class InternalLinkTypeDefaultMessageAutoDeleteTimerSettings extends InternalLink
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeDefaultMessageAutoDeleteTimerSettings';
-  
+  static const String objectType = 'internalLinkTypeDefaultMessageAutoDeleteTimerSettings';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeEditProfileSettings** *(internalLinkTypeEditProfileSettings)* - child of InternalLinkType
-  ///
-  /// The link is a link to the edit profile section of the app settings.
-class InternalLinkTypeEditProfileSettings extends InternalLinkType {
+///
+/// The link is a link to the edit profile section of the app settings.
+final class InternalLinkTypeEditProfileSettings extends InternalLinkType {
   
   /// **InternalLinkTypeEditProfileSettings** *(internalLinkTypeEditProfileSettings)* - child of InternalLinkType
   ///
@@ -835,11 +878,12 @@ class InternalLinkTypeEditProfileSettings extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   InternalLinkTypeEditProfileSettings copyWith({
@@ -850,17 +894,20 @@ class InternalLinkTypeEditProfileSettings extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeEditProfileSettings';
-  
+  static const String objectType = 'internalLinkTypeEditProfileSettings';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeFilterSettings** *(internalLinkTypeFilterSettings)* - child of InternalLinkType
-  ///
-  /// The link is a link to the filter section of the app settings.
-class InternalLinkTypeFilterSettings extends InternalLinkType {
+///
+/// The link is a link to the filter section of the app settings.
+final class InternalLinkTypeFilterSettings extends InternalLinkType {
   
   /// **InternalLinkTypeFilterSettings** *(internalLinkTypeFilterSettings)* - child of InternalLinkType
   ///
@@ -886,11 +933,12 @@ class InternalLinkTypeFilterSettings extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   InternalLinkTypeFilterSettings copyWith({
@@ -901,20 +949,23 @@ class InternalLinkTypeFilterSettings extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeFilterSettings';
-  
+  static const String objectType = 'internalLinkTypeFilterSettings';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeGame** *(internalLinkTypeGame)* - child of InternalLinkType
-  ///
-  /// The link is a link to a game. Call searchPublicChat with the given bot username, check that the user is a bot, ask the current user to select a chat to send the game, and then call sendMessage with inputMessageGame.
-  ///
-  /// * [botUsername]: Username of the bot that owns the game.
-  /// * [gameShortName]: Short name of the game.
-class InternalLinkTypeGame extends InternalLinkType {
+///
+/// The link is a link to a game. Call searchPublicChat with the given bot username, check that the user is a bot, ask the current user to select a chat to send the game, and then call sendMessage with inputMessageGame.
+///
+/// * [botUsername]: Username of the bot that owns the game.
+/// * [gameShortName]: Short name of the game.
+final class InternalLinkTypeGame extends InternalLinkType {
   
   /// **InternalLinkTypeGame** *(internalLinkTypeGame)* - child of InternalLinkType
   ///
@@ -953,13 +1004,14 @@ class InternalLinkTypeGame extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "bot_username": botUsername,
       "game_short_name": gameShortName,
-    };
-  }
+		};
+	}
+
   
   @override
   InternalLinkTypeGame copyWith({
@@ -974,20 +1026,23 @@ class InternalLinkTypeGame extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeGame';
-  
+  static const String objectType = 'internalLinkTypeGame';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeInstantView** *(internalLinkTypeInstantView)* - child of InternalLinkType
-  ///
-  /// The link must be opened in an Instant View. Call getWebPageInstantView with the given URL to process the link.
-  ///
-  /// * [url]: URL to be passed to getWebPageInstantView.
-  /// * [fallbackUrl]: An URL to open if getWebPageInstantView fails.
-class InternalLinkTypeInstantView extends InternalLinkType {
+///
+/// The link must be opened in an Instant View. Call getWebPageInstantView with the given URL to process the link.
+///
+/// * [url]: URL to be passed to getWebPageInstantView.
+/// * [fallbackUrl]: An URL to open if getWebPageInstantView fails.
+final class InternalLinkTypeInstantView extends InternalLinkType {
   
   /// **InternalLinkTypeInstantView** *(internalLinkTypeInstantView)* - child of InternalLinkType
   ///
@@ -1026,13 +1081,14 @@ class InternalLinkTypeInstantView extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "url": url,
       "fallback_url": fallbackUrl,
-    };
-  }
+		};
+	}
+
   
   @override
   InternalLinkTypeInstantView copyWith({
@@ -1047,19 +1103,22 @@ class InternalLinkTypeInstantView extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeInstantView';
-  
+  static const String objectType = 'internalLinkTypeInstantView';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeInvoice** *(internalLinkTypeInvoice)* - child of InternalLinkType
-  ///
-  /// The link is a link to an invoice. Call getPaymentForm with the given invoice name to process the link.
-  ///
-  /// * [invoiceName]: Name of the invoice.
-class InternalLinkTypeInvoice extends InternalLinkType {
+///
+/// The link is a link to an invoice. Call getPaymentForm with the given invoice name to process the link.
+///
+/// * [invoiceName]: Name of the invoice.
+final class InternalLinkTypeInvoice extends InternalLinkType {
   
   /// **InternalLinkTypeInvoice** *(internalLinkTypeInvoice)* - child of InternalLinkType
   ///
@@ -1092,12 +1151,13 @@ class InternalLinkTypeInvoice extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "invoice_name": invoiceName,
-    };
-  }
+		};
+	}
+
   
   @override
   InternalLinkTypeInvoice copyWith({
@@ -1110,19 +1170,22 @@ class InternalLinkTypeInvoice extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeInvoice';
-  
+  static const String objectType = 'internalLinkTypeInvoice';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeLanguagePack** *(internalLinkTypeLanguagePack)* - child of InternalLinkType
-  ///
-  /// The link is a link to a language pack. Call getLanguagePackInfo with the given language pack identifier to process the link.
-  ///
-  /// * [languagePackId]: Language pack identifier.
-class InternalLinkTypeLanguagePack extends InternalLinkType {
+///
+/// The link is a link to a language pack. Call getLanguagePackInfo with the given language pack identifier to process the link.
+///
+/// * [languagePackId]: Language pack identifier.
+final class InternalLinkTypeLanguagePack extends InternalLinkType {
   
   /// **InternalLinkTypeLanguagePack** *(internalLinkTypeLanguagePack)* - child of InternalLinkType
   ///
@@ -1155,12 +1218,13 @@ class InternalLinkTypeLanguagePack extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "language_pack_id": languagePackId,
-    };
-  }
+		};
+	}
+
   
   @override
   InternalLinkTypeLanguagePack copyWith({
@@ -1173,17 +1237,20 @@ class InternalLinkTypeLanguagePack extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeLanguagePack';
-  
+  static const String objectType = 'internalLinkTypeLanguagePack';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeLanguageSettings** *(internalLinkTypeLanguageSettings)* - child of InternalLinkType
-  ///
-  /// The link is a link to the language section of the app settings.
-class InternalLinkTypeLanguageSettings extends InternalLinkType {
+///
+/// The link is a link to the language section of the app settings.
+final class InternalLinkTypeLanguageSettings extends InternalLinkType {
   
   /// **InternalLinkTypeLanguageSettings** *(internalLinkTypeLanguageSettings)* - child of InternalLinkType
   ///
@@ -1209,11 +1276,12 @@ class InternalLinkTypeLanguageSettings extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   InternalLinkTypeLanguageSettings copyWith({
@@ -1224,19 +1292,22 @@ class InternalLinkTypeLanguageSettings extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeLanguageSettings';
-  
+  static const String objectType = 'internalLinkTypeLanguageSettings';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeMessage** *(internalLinkTypeMessage)* - child of InternalLinkType
-  ///
-  /// The link is a link to a Telegram message or a forum topic. Call getMessageLinkInfo with the given URL to process the link.
-  ///
-  /// * [url]: URL to be passed to getMessageLinkInfo.
-class InternalLinkTypeMessage extends InternalLinkType {
+///
+/// The link is a link to a Telegram message or a forum topic. Call getMessageLinkInfo with the given URL to process the link.
+///
+/// * [url]: URL to be passed to getMessageLinkInfo.
+final class InternalLinkTypeMessage extends InternalLinkType {
   
   /// **InternalLinkTypeMessage** *(internalLinkTypeMessage)* - child of InternalLinkType
   ///
@@ -1269,12 +1340,13 @@ class InternalLinkTypeMessage extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "url": url,
-    };
-  }
+		};
+	}
+
   
   @override
   InternalLinkTypeMessage copyWith({
@@ -1287,20 +1359,23 @@ class InternalLinkTypeMessage extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeMessage';
-  
+  static const String objectType = 'internalLinkTypeMessage';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeMessageDraft** *(internalLinkTypeMessageDraft)* - child of InternalLinkType
-  ///
-  /// The link contains a message draft text. A share screen needs to be shown to the user, then the chosen chat must be opened and the text is added to the input field.
-  ///
-  /// * [text]: Message draft text.
-  /// * [containsLink]: True, if the first line of the text contains a link. If true, the input field needs to be focused and the text after the link must be selected.
-class InternalLinkTypeMessageDraft extends InternalLinkType {
+///
+/// The link contains a message draft text. A share screen needs to be shown to the user, then the chosen chat must be opened and the text is added to the input field.
+///
+/// * [text]: Message draft text.
+/// * [containsLink]: True, if the first line of the text contains a link. If true, the input field needs to be focused and the text after the link must be selected.
+final class InternalLinkTypeMessageDraft extends InternalLinkType {
   
   /// **InternalLinkTypeMessageDraft** *(internalLinkTypeMessageDraft)* - child of InternalLinkType
   ///
@@ -1339,13 +1414,14 @@ class InternalLinkTypeMessageDraft extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text.toJson(),
       "contains_link": containsLink,
-    };
-  }
+		};
+	}
+
   
   @override
   InternalLinkTypeMessageDraft copyWith({
@@ -1360,23 +1436,26 @@ class InternalLinkTypeMessageDraft extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeMessageDraft';
-  
+  static const String objectType = 'internalLinkTypeMessageDraft';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypePassportDataRequest** *(internalLinkTypePassportDataRequest)* - child of InternalLinkType
-  ///
-  /// The link contains a request of Telegram passport data. Call getPassportAuthorizationForm with the given parameters to process the link if the link was received from outside of the application; otherwise, ignore it.
-  ///
-  /// * [botUserId]: User identifier of the service's bot.
-  /// * [scope]: Telegram Passport element types requested by the service.
-  /// * [publicKey]: Service's public key.
-  /// * [nonce]: Unique request identifier provided by the service.
-  /// * [callbackUrl]: An HTTP URL to open once the request is finished, canceled, or failed with the parameters tg_passport=success, tg_passport=cancel, or tg_passport=error&error=... respectively.. If empty, then onActivityResult method must be used to return response on Android, or the link tgbot{bot_user_id}://passport/success or tgbot{bot_user_id}://passport/cancel must be opened otherwise.
-class InternalLinkTypePassportDataRequest extends InternalLinkType {
+///
+/// The link contains a request of Telegram passport data. Call getPassportAuthorizationForm with the given parameters to process the link if the link was received from outside of the application; otherwise, ignore it.
+///
+/// * [botUserId]: User identifier of the service's bot.
+/// * [scope]: Telegram Passport element types requested by the service.
+/// * [publicKey]: Service's public key.
+/// * [nonce]: Unique request identifier provided by the service.
+/// * [callbackUrl]: An HTTP URL to open once the request is finished, canceled, or failed with the parameters tg_passport=success, tg_passport=cancel, or tg_passport=error&error=... respectively.. If empty, then onActivityResult method must be used to return response on Android, or the link tgbot{bot_user_id}://passport/success or tgbot{bot_user_id}://passport/cancel must be opened otherwise.
+final class InternalLinkTypePassportDataRequest extends InternalLinkType {
   
   /// **InternalLinkTypePassportDataRequest** *(internalLinkTypePassportDataRequest)* - child of InternalLinkType
   ///
@@ -1433,16 +1512,17 @@ class InternalLinkTypePassportDataRequest extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "bot_user_id": botUserId,
       "scope": scope,
       "public_key": publicKey,
       "nonce": nonce,
       "callback_url": callbackUrl,
-    };
-  }
+		};
+	}
+
   
   @override
   InternalLinkTypePassportDataRequest copyWith({
@@ -1463,20 +1543,23 @@ class InternalLinkTypePassportDataRequest extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypePassportDataRequest';
-  
+  static const String objectType = 'internalLinkTypePassportDataRequest';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypePhoneNumberConfirmation** *(internalLinkTypePhoneNumberConfirmation)* - child of InternalLinkType
-  ///
-  /// The link can be used to confirm ownership of a phone number to prevent account deletion. Call sendPhoneNumberConfirmationCode with the given hash and phone number to process the link.
-  ///
-  /// * [hash]: Hash value from the link.
-  /// * [phoneNumber]: Phone number value from the link.
-class InternalLinkTypePhoneNumberConfirmation extends InternalLinkType {
+///
+/// The link can be used to confirm ownership of a phone number to prevent account deletion. Call sendPhoneNumberConfirmationCode with the given hash and phone number to process the link.
+///
+/// * [hash]: Hash value from the link.
+/// * [phoneNumber]: Phone number value from the link.
+final class InternalLinkTypePhoneNumberConfirmation extends InternalLinkType {
   
   /// **InternalLinkTypePhoneNumberConfirmation** *(internalLinkTypePhoneNumberConfirmation)* - child of InternalLinkType
   ///
@@ -1515,13 +1598,14 @@ class InternalLinkTypePhoneNumberConfirmation extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "hash": hash,
       "phone_number": phoneNumber,
-    };
-  }
+		};
+	}
+
   
   @override
   InternalLinkTypePhoneNumberConfirmation copyWith({
@@ -1536,19 +1620,22 @@ class InternalLinkTypePhoneNumberConfirmation extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypePhoneNumberConfirmation';
-  
+  static const String objectType = 'internalLinkTypePhoneNumberConfirmation';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypePremiumFeatures** *(internalLinkTypePremiumFeatures)* - child of InternalLinkType
-  ///
-  /// The link is a link to the Premium features screen of the applcation from which the user can subscribe to Telegram Premium. Call getPremiumFeatures with the given referrer to process the link.
-  ///
-  /// * [referrer]: Referrer specified in the link.
-class InternalLinkTypePremiumFeatures extends InternalLinkType {
+///
+/// The link is a link to the Premium features screen of the applcation from which the user can subscribe to Telegram Premium. Call getPremiumFeatures with the given referrer to process the link.
+///
+/// * [referrer]: Referrer specified in the link.
+final class InternalLinkTypePremiumFeatures extends InternalLinkType {
   
   /// **InternalLinkTypePremiumFeatures** *(internalLinkTypePremiumFeatures)* - child of InternalLinkType
   ///
@@ -1581,12 +1668,13 @@ class InternalLinkTypePremiumFeatures extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "referrer": referrer,
-    };
-  }
+		};
+	}
+
   
   @override
   InternalLinkTypePremiumFeatures copyWith({
@@ -1599,17 +1687,20 @@ class InternalLinkTypePremiumFeatures extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypePremiumFeatures';
-  
+  static const String objectType = 'internalLinkTypePremiumFeatures';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypePrivacyAndSecuritySettings** *(internalLinkTypePrivacyAndSecuritySettings)* - child of InternalLinkType
-  ///
-  /// The link is a link to the privacy and security section of the app settings.
-class InternalLinkTypePrivacyAndSecuritySettings extends InternalLinkType {
+///
+/// The link is a link to the privacy and security section of the app settings.
+final class InternalLinkTypePrivacyAndSecuritySettings extends InternalLinkType {
   
   /// **InternalLinkTypePrivacyAndSecuritySettings** *(internalLinkTypePrivacyAndSecuritySettings)* - child of InternalLinkType
   ///
@@ -1635,11 +1726,12 @@ class InternalLinkTypePrivacyAndSecuritySettings extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   InternalLinkTypePrivacyAndSecuritySettings copyWith({
@@ -1650,21 +1742,24 @@ class InternalLinkTypePrivacyAndSecuritySettings extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypePrivacyAndSecuritySettings';
-  
+  static const String objectType = 'internalLinkTypePrivacyAndSecuritySettings';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeProxy** *(internalLinkTypeProxy)* - child of InternalLinkType
-  ///
-  /// The link is a link to a proxy. Call addProxy with the given parameters to process the link and add the proxy.
-  ///
-  /// * [server]: Proxy server IP address.
-  /// * [port]: Proxy server port.
-  /// * [type]: Type of the proxy.
-class InternalLinkTypeProxy extends InternalLinkType {
+///
+/// The link is a link to a proxy. Call addProxy with the given parameters to process the link and add the proxy.
+///
+/// * [server]: Proxy server IP address.
+/// * [port]: Proxy server port.
+/// * [type]: Type of the proxy.
+final class InternalLinkTypeProxy extends InternalLinkType {
   
   /// **InternalLinkTypeProxy** *(internalLinkTypeProxy)* - child of InternalLinkType
   ///
@@ -1709,14 +1804,15 @@ class InternalLinkTypeProxy extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "server": server,
       "port": port,
       "type": type.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   InternalLinkTypeProxy copyWith({
@@ -1733,19 +1829,22 @@ class InternalLinkTypeProxy extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeProxy';
-  
+  static const String objectType = 'internalLinkTypeProxy';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypePublicChat** *(internalLinkTypePublicChat)* - child of InternalLinkType
-  ///
-  /// The link is a link to a chat by its username. Call searchPublicChat with the given chat username to process the link.
-  ///
-  /// * [chatUsername]: Username of the chat.
-class InternalLinkTypePublicChat extends InternalLinkType {
+///
+/// The link is a link to a chat by its username. Call searchPublicChat with the given chat username to process the link.
+///
+/// * [chatUsername]: Username of the chat.
+final class InternalLinkTypePublicChat extends InternalLinkType {
   
   /// **InternalLinkTypePublicChat** *(internalLinkTypePublicChat)* - child of InternalLinkType
   ///
@@ -1778,12 +1877,13 @@ class InternalLinkTypePublicChat extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_username": chatUsername,
-    };
-  }
+		};
+	}
+
   
   @override
   InternalLinkTypePublicChat copyWith({
@@ -1796,17 +1896,20 @@ class InternalLinkTypePublicChat extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypePublicChat';
-  
+  static const String objectType = 'internalLinkTypePublicChat';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeQrCodeAuthentication** *(internalLinkTypeQrCodeAuthentication)* - child of InternalLinkType
-  ///
-  /// The link can be used to login the current user on another device, but it must be scanned from QR-code using in-app camera. An alert similar to. "This code can be used to allow someone to log in to your Telegram account. To confirm Telegram login, please go to Settings.
-class InternalLinkTypeQrCodeAuthentication extends InternalLinkType {
+///
+/// The link can be used to login the current user on another device, but it must be scanned from QR-code using in-app camera. An alert similar to. "This code can be used to allow someone to log in to your Telegram account. To confirm Telegram login, please go to Settings.
+final class InternalLinkTypeQrCodeAuthentication extends InternalLinkType {
   
   /// **InternalLinkTypeQrCodeAuthentication** *(internalLinkTypeQrCodeAuthentication)* - child of InternalLinkType
   ///
@@ -1832,11 +1935,12 @@ class InternalLinkTypeQrCodeAuthentication extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   InternalLinkTypeQrCodeAuthentication copyWith({
@@ -1847,17 +1951,20 @@ class InternalLinkTypeQrCodeAuthentication extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeQrCodeAuthentication';
-  
+  static const String objectType = 'internalLinkTypeQrCodeAuthentication';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeRestorePurchases** *(internalLinkTypeRestorePurchases)* - child of InternalLinkType
-  ///
-  /// The link forces restore of App Store purchases when opened. For official iOS application only.
-class InternalLinkTypeRestorePurchases extends InternalLinkType {
+///
+/// The link forces restore of App Store purchases when opened. For official iOS application only.
+final class InternalLinkTypeRestorePurchases extends InternalLinkType {
   
   /// **InternalLinkTypeRestorePurchases** *(internalLinkTypeRestorePurchases)* - child of InternalLinkType
   ///
@@ -1883,11 +1990,12 @@ class InternalLinkTypeRestorePurchases extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   InternalLinkTypeRestorePurchases copyWith({
@@ -1898,17 +2006,20 @@ class InternalLinkTypeRestorePurchases extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeRestorePurchases';
-  
+  static const String objectType = 'internalLinkTypeRestorePurchases';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeSettings** *(internalLinkTypeSettings)* - child of InternalLinkType
-  ///
-  /// The link is a link to application settings.
-class InternalLinkTypeSettings extends InternalLinkType {
+///
+/// The link is a link to application settings.
+final class InternalLinkTypeSettings extends InternalLinkType {
   
   /// **InternalLinkTypeSettings** *(internalLinkTypeSettings)* - child of InternalLinkType
   ///
@@ -1934,11 +2045,12 @@ class InternalLinkTypeSettings extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   InternalLinkTypeSettings copyWith({
@@ -1949,20 +2061,23 @@ class InternalLinkTypeSettings extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeSettings';
-  
+  static const String objectType = 'internalLinkTypeSettings';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeStickerSet** *(internalLinkTypeStickerSet)* - child of InternalLinkType
-  ///
-  /// The link is a link to a sticker set. Call searchStickerSet with the given sticker set name to process the link and show the sticker set.
-  ///
-  /// * [stickerSetName]: Name of the sticker set.
-  /// * [expectCustomEmoji]: True, if the sticker set is expected to contain custom emoji.
-class InternalLinkTypeStickerSet extends InternalLinkType {
+///
+/// The link is a link to a sticker set. Call searchStickerSet with the given sticker set name to process the link and show the sticker set.
+///
+/// * [stickerSetName]: Name of the sticker set.
+/// * [expectCustomEmoji]: True, if the sticker set is expected to contain custom emoji.
+final class InternalLinkTypeStickerSet extends InternalLinkType {
   
   /// **InternalLinkTypeStickerSet** *(internalLinkTypeStickerSet)* - child of InternalLinkType
   ///
@@ -2001,13 +2116,14 @@ class InternalLinkTypeStickerSet extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "sticker_set_name": stickerSetName,
       "expect_custom_emoji": expectCustomEmoji,
-    };
-  }
+		};
+	}
+
   
   @override
   InternalLinkTypeStickerSet copyWith({
@@ -2022,19 +2138,22 @@ class InternalLinkTypeStickerSet extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeStickerSet';
-  
+  static const String objectType = 'internalLinkTypeStickerSet';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeTheme** *(internalLinkTypeTheme)* - child of InternalLinkType
-  ///
-  /// The link is a link to a theme. TDLib has no theme support yet.
-  ///
-  /// * [themeName]: Name of the theme.
-class InternalLinkTypeTheme extends InternalLinkType {
+///
+/// The link is a link to a theme. TDLib has no theme support yet.
+///
+/// * [themeName]: Name of the theme.
+final class InternalLinkTypeTheme extends InternalLinkType {
   
   /// **InternalLinkTypeTheme** *(internalLinkTypeTheme)* - child of InternalLinkType
   ///
@@ -2067,12 +2186,13 @@ class InternalLinkTypeTheme extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "theme_name": themeName,
-    };
-  }
+		};
+	}
+
   
   @override
   InternalLinkTypeTheme copyWith({
@@ -2085,17 +2205,20 @@ class InternalLinkTypeTheme extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeTheme';
-  
+  static const String objectType = 'internalLinkTypeTheme';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeThemeSettings** *(internalLinkTypeThemeSettings)* - child of InternalLinkType
-  ///
-  /// The link is a link to the theme section of the app settings.
-class InternalLinkTypeThemeSettings extends InternalLinkType {
+///
+/// The link is a link to the theme section of the app settings.
+final class InternalLinkTypeThemeSettings extends InternalLinkType {
   
   /// **InternalLinkTypeThemeSettings** *(internalLinkTypeThemeSettings)* - child of InternalLinkType
   ///
@@ -2121,11 +2244,12 @@ class InternalLinkTypeThemeSettings extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   InternalLinkTypeThemeSettings copyWith({
@@ -2136,19 +2260,22 @@ class InternalLinkTypeThemeSettings extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeThemeSettings';
-  
+  static const String objectType = 'internalLinkTypeThemeSettings';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeUnknownDeepLink** *(internalLinkTypeUnknownDeepLink)* - child of InternalLinkType
-  ///
-  /// The link is an unknown tg: link. Call getDeepLinkInfo to process the link.
-  ///
-  /// * [link]: Link to be passed to getDeepLinkInfo.
-class InternalLinkTypeUnknownDeepLink extends InternalLinkType {
+///
+/// The link is an unknown tg: link. Call getDeepLinkInfo to process the link.
+///
+/// * [link]: Link to be passed to getDeepLinkInfo.
+final class InternalLinkTypeUnknownDeepLink extends InternalLinkType {
   
   /// **InternalLinkTypeUnknownDeepLink** *(internalLinkTypeUnknownDeepLink)* - child of InternalLinkType
   ///
@@ -2181,12 +2308,13 @@ class InternalLinkTypeUnknownDeepLink extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "link": link,
-    };
-  }
+		};
+	}
+
   
   @override
   InternalLinkTypeUnknownDeepLink copyWith({
@@ -2199,17 +2327,20 @@ class InternalLinkTypeUnknownDeepLink extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeUnknownDeepLink';
-  
+  static const String objectType = 'internalLinkTypeUnknownDeepLink';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeUnsupportedProxy** *(internalLinkTypeUnsupportedProxy)* - child of InternalLinkType
-  ///
-  /// The link is a link to an unsupported proxy. An alert can be shown to the user.
-class InternalLinkTypeUnsupportedProxy extends InternalLinkType {
+///
+/// The link is a link to an unsupported proxy. An alert can be shown to the user.
+final class InternalLinkTypeUnsupportedProxy extends InternalLinkType {
   
   /// **InternalLinkTypeUnsupportedProxy** *(internalLinkTypeUnsupportedProxy)* - child of InternalLinkType
   ///
@@ -2235,11 +2366,12 @@ class InternalLinkTypeUnsupportedProxy extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   InternalLinkTypeUnsupportedProxy copyWith({
@@ -2250,19 +2382,22 @@ class InternalLinkTypeUnsupportedProxy extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeUnsupportedProxy';
-  
+  static const String objectType = 'internalLinkTypeUnsupportedProxy';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeUserPhoneNumber** *(internalLinkTypeUserPhoneNumber)* - child of InternalLinkType
-  ///
-  /// The link is a link to a user by its phone number. Call searchUserByPhoneNumber with the given phone number to process the link.
-  ///
-  /// * [phoneNumber]: Phone number of the user.
-class InternalLinkTypeUserPhoneNumber extends InternalLinkType {
+///
+/// The link is a link to a user by its phone number. Call searchUserByPhoneNumber with the given phone number to process the link.
+///
+/// * [phoneNumber]: Phone number of the user.
+final class InternalLinkTypeUserPhoneNumber extends InternalLinkType {
   
   /// **InternalLinkTypeUserPhoneNumber** *(internalLinkTypeUserPhoneNumber)* - child of InternalLinkType
   ///
@@ -2295,12 +2430,13 @@ class InternalLinkTypeUserPhoneNumber extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "phone_number": phoneNumber,
-    };
-  }
+		};
+	}
+
   
   @override
   InternalLinkTypeUserPhoneNumber copyWith({
@@ -2313,19 +2449,22 @@ class InternalLinkTypeUserPhoneNumber extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeUserPhoneNumber';
-  
+  static const String objectType = 'internalLinkTypeUserPhoneNumber';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeUserToken** *(internalLinkTypeUserToken)* - child of InternalLinkType
-  ///
-  /// The link is a link to a user by a temporary token. Call searchUserByToken with the given token to process the link.
-  ///
-  /// * [token]: The token.
-class InternalLinkTypeUserToken extends InternalLinkType {
+///
+/// The link is a link to a user by a temporary token. Call searchUserByToken with the given token to process the link.
+///
+/// * [token]: The token.
+final class InternalLinkTypeUserToken extends InternalLinkType {
   
   /// **InternalLinkTypeUserToken** *(internalLinkTypeUserToken)* - child of InternalLinkType
   ///
@@ -2358,12 +2497,13 @@ class InternalLinkTypeUserToken extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "token": token,
-    };
-  }
+		};
+	}
+
   
   @override
   InternalLinkTypeUserToken copyWith({
@@ -2376,21 +2516,24 @@ class InternalLinkTypeUserToken extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeUserToken';
-  
+  static const String objectType = 'internalLinkTypeUserToken';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InternalLinkTypeVideoChat** *(internalLinkTypeVideoChat)* - child of InternalLinkType
-  ///
-  /// The link is a link to a video chat. Call searchPublicChat with the given chat username, and then joinGroupCall with the given invite hash to process the link.
-  ///
-  /// * [chatUsername]: Username of the chat with the video chat.
-  /// * [inviteHash]: If non-empty, invite hash to be used to join the video chat without being muted by administrators.
-  /// * [isLiveStream]: True, if the video chat is expected to be a live stream in a channel or a broadcast group.
-class InternalLinkTypeVideoChat extends InternalLinkType {
+///
+/// The link is a link to a video chat. Call searchPublicChat with the given chat username, and then joinGroupCall with the given invite hash to process the link.
+///
+/// * [chatUsername]: Username of the chat with the video chat.
+/// * [inviteHash]: If non-empty, invite hash to be used to join the video chat without being muted by administrators.
+/// * [isLiveStream]: True, if the video chat is expected to be a live stream in a channel or a broadcast group.
+final class InternalLinkTypeVideoChat extends InternalLinkType {
   
   /// **InternalLinkTypeVideoChat** *(internalLinkTypeVideoChat)* - child of InternalLinkType
   ///
@@ -2435,14 +2578,15 @@ class InternalLinkTypeVideoChat extends InternalLinkType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_username": chatUsername,
       "invite_hash": inviteHash,
       "is_live_stream": isLiveStream,
-    };
-  }
+		};
+	}
+
   
   @override
   InternalLinkTypeVideoChat copyWith({
@@ -2459,8 +2603,11 @@ class InternalLinkTypeVideoChat extends InternalLinkType {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'internalLinkTypeVideoChat';
-  
+  static const String objectType = 'internalLinkTypeVideoChat';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

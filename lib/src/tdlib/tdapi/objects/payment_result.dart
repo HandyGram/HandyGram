@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **PaymentResult** *(paymentResult)* - basic class
-  ///
-  /// Contains the result of a payment request.
-  ///
-  /// * [success]: True, if the payment request was successful; otherwise, the verification_url will be non-empty.
-  /// * [verificationUrl]: URL for additional payment credentials verification.
-class PaymentResult extends TdObject {
+///
+/// Contains the result of a payment request.
+///
+/// * [success]: True, if the payment request was successful; otherwise, the verification_url will be non-empty.
+/// * [verificationUrl]: URL for additional payment credentials verification.
+final class PaymentResult extends TdObject {
   
   /// **PaymentResult** *(paymentResult)* - basic class
   ///
@@ -45,13 +45,14 @@ class PaymentResult extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "success": success,
       "verification_url": verificationUrl,
-    };
-  }
+		};
+	}
+
   
   PaymentResult copyWith({
     bool? success,
@@ -65,8 +66,11 @@ class PaymentResult extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'paymentResult';
-  
+  static const String objectType = 'paymentResult';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

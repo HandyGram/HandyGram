@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **ChatType** *(chatType)* - parent
-  ///
-  /// Describes the type of a chat.
-class ChatType extends TdObject {
+///
+/// Describes the type of a chat.
+sealed class ChatType extends TdObject {
   
   /// **ChatType** *(chatType)* - parent
   ///
@@ -17,41 +17,44 @@ class ChatType extends TdObject {
   /// * [ChatTypeSecret]
   factory ChatType.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case ChatTypePrivate.constructor:
+      case ChatTypePrivate.objectType:
         return ChatTypePrivate.fromJson(json);
-      case ChatTypeBasicGroup.constructor:
+      case ChatTypeBasicGroup.objectType:
         return ChatTypeBasicGroup.fromJson(json);
-      case ChatTypeSupergroup.constructor:
+      case ChatTypeSupergroup.objectType:
         return ChatTypeSupergroup.fromJson(json);
-      case ChatTypeSecret.constructor:
+      case ChatTypeSecret.objectType:
         return ChatTypeSecret.fromJson(json);
       default:
-        return const ChatType();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of ChatType)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  ChatType copyWith() => const ChatType();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'chatType';
   
+  ChatType copyWith();
+
+  static const String objectType = 'chatType';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatTypePrivate** *(chatTypePrivate)* - child of ChatType
-  ///
-  /// An ordinary chat with a user.
-  ///
-  /// * [userId]: User identifier.
-class ChatTypePrivate extends ChatType {
+///
+/// An ordinary chat with a user.
+///
+/// * [userId]: User identifier.
+final class ChatTypePrivate extends ChatType {
   
   /// **ChatTypePrivate** *(chatTypePrivate)* - child of ChatType
   ///
@@ -72,12 +75,13 @@ class ChatTypePrivate extends ChatType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "user_id": userId,
-    };
-  }
+		};
+	}
+
   
   @override
   ChatTypePrivate copyWith({
@@ -86,19 +90,22 @@ class ChatTypePrivate extends ChatType {
     userId: userId ?? this.userId,
   );
 
-  static const String constructor = 'chatTypePrivate';
-  
+  static const String objectType = 'chatTypePrivate';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatTypeBasicGroup** *(chatTypeBasicGroup)* - child of ChatType
-  ///
-  /// A basic group (a chat with 0-200 other users).
-  ///
-  /// * [basicGroupId]: Basic group identifier.
-class ChatTypeBasicGroup extends ChatType {
+///
+/// A basic group (a chat with 0-200 other users).
+///
+/// * [basicGroupId]: Basic group identifier.
+final class ChatTypeBasicGroup extends ChatType {
   
   /// **ChatTypeBasicGroup** *(chatTypeBasicGroup)* - child of ChatType
   ///
@@ -119,12 +126,13 @@ class ChatTypeBasicGroup extends ChatType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "basic_group_id": basicGroupId,
-    };
-  }
+		};
+	}
+
   
   @override
   ChatTypeBasicGroup copyWith({
@@ -133,20 +141,23 @@ class ChatTypeBasicGroup extends ChatType {
     basicGroupId: basicGroupId ?? this.basicGroupId,
   );
 
-  static const String constructor = 'chatTypeBasicGroup';
-  
+  static const String objectType = 'chatTypeBasicGroup';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatTypeSupergroup** *(chatTypeSupergroup)* - child of ChatType
-  ///
-  /// A supergroup or channel (with unlimited members).
-  ///
-  /// * [supergroupId]: Supergroup or channel identifier.
-  /// * [isChannel]: True, if the supergroup is a channel.
-class ChatTypeSupergroup extends ChatType {
+///
+/// A supergroup or channel (with unlimited members).
+///
+/// * [supergroupId]: Supergroup or channel identifier.
+/// * [isChannel]: True, if the supergroup is a channel.
+final class ChatTypeSupergroup extends ChatType {
   
   /// **ChatTypeSupergroup** *(chatTypeSupergroup)* - child of ChatType
   ///
@@ -173,13 +184,14 @@ class ChatTypeSupergroup extends ChatType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "supergroup_id": supergroupId,
       "is_channel": isChannel,
-    };
-  }
+		};
+	}
+
   
   @override
   ChatTypeSupergroup copyWith({
@@ -190,20 +202,23 @@ class ChatTypeSupergroup extends ChatType {
     isChannel: isChannel ?? this.isChannel,
   );
 
-  static const String constructor = 'chatTypeSupergroup';
-  
+  static const String objectType = 'chatTypeSupergroup';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatTypeSecret** *(chatTypeSecret)* - child of ChatType
-  ///
-  /// A secret chat with a user.
-  ///
-  /// * [secretChatId]: Secret chat identifier.
-  /// * [userId]: User identifier of the secret chat peer.
-class ChatTypeSecret extends ChatType {
+///
+/// A secret chat with a user.
+///
+/// * [secretChatId]: Secret chat identifier.
+/// * [userId]: User identifier of the secret chat peer.
+final class ChatTypeSecret extends ChatType {
   
   /// **ChatTypeSecret** *(chatTypeSecret)* - child of ChatType
   ///
@@ -230,13 +245,14 @@ class ChatTypeSecret extends ChatType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "secret_chat_id": secretChatId,
       "user_id": userId,
-    };
-  }
+		};
+	}
+
   
   @override
   ChatTypeSecret copyWith({
@@ -247,8 +263,11 @@ class ChatTypeSecret extends ChatType {
     userId: userId ?? this.userId,
   );
 
-  static const String constructor = 'chatTypeSecret';
-  
+  static const String objectType = 'chatTypeSecret';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

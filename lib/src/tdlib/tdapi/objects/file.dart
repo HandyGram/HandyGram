@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **File** *(file)* - basic class
-  ///
-  /// Represents a file.
-  ///
-  /// * [id]: Unique file identifier.
-  /// * [size]: File size, in bytes; 0 if unknown.
-  /// * [expectedSize]: Approximate file size in bytes in case the exact file size is unknown. Can be used to show download/upload progress.
-  /// * [local]: Information about the local copy of the file.
-  /// * [remote]: Information about the remote copy of the file.
-class File extends TdObject {
+///
+/// Represents a file.
+///
+/// * [id]: Unique file identifier.
+/// * [size]: File size, in bytes; 0 if unknown.
+/// * [expectedSize]: Approximate file size in bytes in case the exact file size is unknown. Can be used to show download/upload progress.
+/// * [local]: Information about the local copy of the file.
+/// * [remote]: Information about the remote copy of the file.
+final class File extends TdObject {
   
   /// **File** *(file)* - basic class
   ///
@@ -66,16 +66,17 @@ class File extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "size": size,
       "expected_size": expectedSize,
       "local": local.toJson(),
       "remote": remote.toJson(),
-    };
-  }
+		};
+	}
+
   
   File copyWith({
     int? id,
@@ -95,8 +96,11 @@ class File extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'file';
-  
+  static const String objectType = 'file';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **SetLoginEmailAddress** *(setLoginEmailAddress)* - TDLib function
-  ///
-  /// Changes the login email address of the user. The change will not be applied until the new login email address is confirmed with checkLoginEmailAddressCode.. To use Apple setLoginEmailAddress/Google setLoginEmailAddress instead of a email address, call checkLoginEmailAddressCode directly.
-  ///
-  /// * [newLoginEmailAddress]: New login email address.
-  ///
-  /// [EmailAddressAuthenticationCodeInfo] is returned on completion.
-class SetLoginEmailAddress extends TdFunction {
+///
+/// Changes the login email address of the user. The change will not be applied until the new login email address is confirmed with checkLoginEmailAddressCode.. To use Apple setLoginEmailAddress/Google setLoginEmailAddress instead of a email address, call checkLoginEmailAddressCode directly.
+///
+/// * [newLoginEmailAddress]: New login email address.
+///
+/// [EmailAddressAuthenticationCodeInfo] is returned on completion.
+final class SetLoginEmailAddress extends TdFunction {
   
   /// **SetLoginEmailAddress** *(setLoginEmailAddress)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class SetLoginEmailAddress extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "new_login_email_address": newLoginEmailAddress,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetLoginEmailAddress copyWith({
     String? newLoginEmailAddress,
@@ -38,8 +39,11 @@ class SetLoginEmailAddress extends TdFunction {
     newLoginEmailAddress: newLoginEmailAddress ?? this.newLoginEmailAddress,
   );
 
-  static const String constructor = 'setLoginEmailAddress';
-  
+  static const String objectType = 'setLoginEmailAddress';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

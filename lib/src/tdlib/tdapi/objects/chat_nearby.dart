@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **ChatNearby** *(chatNearby)* - basic class
-  ///
-  /// Describes a chat located nearby.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [distance]: Distance to the chat location, in meters.
-class ChatNearby extends TdObject {
+///
+/// Describes a chat located nearby.
+///
+/// * [chatId]: Chat identifier.
+/// * [distance]: Distance to the chat location, in meters.
+final class ChatNearby extends TdObject {
   
   /// **ChatNearby** *(chatNearby)* - basic class
   ///
@@ -33,13 +33,14 @@ class ChatNearby extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "distance": distance,
-    };
-  }
+		};
+	}
+
   
   ChatNearby copyWith({
     int? chatId,
@@ -49,8 +50,11 @@ class ChatNearby extends TdObject {
     distance: distance ?? this.distance,
   );
 
-  static const String constructor = 'chatNearby';
-  
+  static const String objectType = 'chatNearby';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

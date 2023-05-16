@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **LanguagePackStrings** *(languagePackStrings)* - basic class
-  ///
-  /// Contains a list of language pack strings.
-  ///
-  /// * [strings]: A list of language pack strings.
-class LanguagePackStrings extends TdObject {
+///
+/// Contains a list of language pack strings.
+///
+/// * [strings]: A list of language pack strings.
+final class LanguagePackStrings extends TdObject {
   
   /// **LanguagePackStrings** *(languagePackStrings)* - basic class
   ///
@@ -38,12 +38,13 @@ class LanguagePackStrings extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "strings": strings.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   LanguagePackStrings copyWith({
     List<LanguagePackString>? strings,
@@ -55,8 +56,11 @@ class LanguagePackStrings extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'languagePackStrings';
-  
+  static const String objectType = 'languagePackStrings';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

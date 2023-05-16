@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **LanguagePackStringValue** *(languagePackStringValue)* - parent
-  ///
-  /// Represents the value of a string in a language pack.
-class LanguagePackStringValue extends TdObject {
+///
+/// Represents the value of a string in a language pack.
+sealed class LanguagePackStringValue extends TdObject {
   
   /// **LanguagePackStringValue** *(languagePackStringValue)* - parent
   ///
@@ -16,39 +16,42 @@ class LanguagePackStringValue extends TdObject {
   /// * [LanguagePackStringValueDeleted]
   factory LanguagePackStringValue.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case LanguagePackStringValueOrdinary.constructor:
+      case LanguagePackStringValueOrdinary.objectType:
         return LanguagePackStringValueOrdinary.fromJson(json);
-      case LanguagePackStringValuePluralized.constructor:
+      case LanguagePackStringValuePluralized.objectType:
         return LanguagePackStringValuePluralized.fromJson(json);
-      case LanguagePackStringValueDeleted.constructor:
+      case LanguagePackStringValueDeleted.objectType:
         return LanguagePackStringValueDeleted.fromJson(json);
       default:
-        return const LanguagePackStringValue();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of LanguagePackStringValue)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  LanguagePackStringValue copyWith() => const LanguagePackStringValue();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'languagePackStringValue';
   
+  LanguagePackStringValue copyWith();
+
+  static const String objectType = 'languagePackStringValue';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **LanguagePackStringValueOrdinary** *(languagePackStringValueOrdinary)* - child of LanguagePackStringValue
-  ///
-  /// An ordinary language pack string.
-  ///
-  /// * [value]: String value.
-class LanguagePackStringValueOrdinary extends LanguagePackStringValue {
+///
+/// An ordinary language pack string.
+///
+/// * [value]: String value.
+final class LanguagePackStringValueOrdinary extends LanguagePackStringValue {
   
   /// **LanguagePackStringValueOrdinary** *(languagePackStringValueOrdinary)* - child of LanguagePackStringValue
   ///
@@ -81,12 +84,13 @@ class LanguagePackStringValueOrdinary extends LanguagePackStringValue {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "value": value,
-    };
-  }
+		};
+	}
+
   
   @override
   LanguagePackStringValueOrdinary copyWith({
@@ -99,24 +103,27 @@ class LanguagePackStringValueOrdinary extends LanguagePackStringValue {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'languagePackStringValueOrdinary';
-  
+  static const String objectType = 'languagePackStringValueOrdinary';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **LanguagePackStringValuePluralized** *(languagePackStringValuePluralized)* - child of LanguagePackStringValue
-  ///
-  /// A language pack string which has different forms based on the number of some object it mentions. See https://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html for more information.
-  ///
-  /// * [zeroValue]: Value for zero objects.
-  /// * [oneValue]: Value for one object.
-  /// * [twoValue]: Value for two objects.
-  /// * [fewValue]: Value for few objects.
-  /// * [manyValue]: Value for many objects.
-  /// * [otherValue]: Default value.
-class LanguagePackStringValuePluralized extends LanguagePackStringValue {
+///
+/// A language pack string which has different forms based on the number of some object it mentions. See https://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html for more information.
+///
+/// * [zeroValue]: Value for zero objects.
+/// * [oneValue]: Value for one object.
+/// * [twoValue]: Value for two objects.
+/// * [fewValue]: Value for few objects.
+/// * [manyValue]: Value for many objects.
+/// * [otherValue]: Default value.
+final class LanguagePackStringValuePluralized extends LanguagePackStringValue {
   
   /// **LanguagePackStringValuePluralized** *(languagePackStringValuePluralized)* - child of LanguagePackStringValue
   ///
@@ -179,17 +186,18 @@ class LanguagePackStringValuePluralized extends LanguagePackStringValue {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "zero_value": zeroValue,
       "one_value": oneValue,
       "two_value": twoValue,
       "few_value": fewValue,
       "many_value": manyValue,
       "other_value": otherValue,
-    };
-  }
+		};
+	}
+
   
   @override
   LanguagePackStringValuePluralized copyWith({
@@ -212,17 +220,20 @@ class LanguagePackStringValuePluralized extends LanguagePackStringValue {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'languagePackStringValuePluralized';
-  
+  static const String objectType = 'languagePackStringValuePluralized';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **LanguagePackStringValueDeleted** *(languagePackStringValueDeleted)* - child of LanguagePackStringValue
-  ///
-  /// A deleted language pack string, the value must be taken from the built-in English language pack.
-class LanguagePackStringValueDeleted extends LanguagePackStringValue {
+///
+/// A deleted language pack string, the value must be taken from the built-in English language pack.
+final class LanguagePackStringValueDeleted extends LanguagePackStringValue {
   
   /// **LanguagePackStringValueDeleted** *(languagePackStringValueDeleted)* - child of LanguagePackStringValue
   ///
@@ -248,11 +259,12 @@ class LanguagePackStringValueDeleted extends LanguagePackStringValue {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   LanguagePackStringValueDeleted copyWith({
@@ -263,8 +275,11 @@ class LanguagePackStringValueDeleted extends LanguagePackStringValue {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'languagePackStringValueDeleted';
-  
+  static const String objectType = 'languagePackStringValueDeleted';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

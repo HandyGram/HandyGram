@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GroupCallParticipantVideoInfo** *(groupCallParticipantVideoInfo)* - basic class
-  ///
-  /// Contains information about a group call participant's video channel.
-  ///
-  /// * [sourceGroups]: List of synchronization source groups of the video.
-  /// * [endpointId]: Video channel endpoint identifier.
-  /// * [isPaused]: True, if the video is paused. This flag needs to be ignored, if new video frames are received.
-class GroupCallParticipantVideoInfo extends TdObject {
+///
+/// Contains information about a group call participant's video channel.
+///
+/// * [sourceGroups]: List of synchronization source groups of the video.
+/// * [endpointId]: Video channel endpoint identifier.
+/// * [isPaused]: True, if the video is paused. This flag needs to be ignored, if new video frames are received.
+final class GroupCallParticipantVideoInfo extends TdObject {
   
   /// **GroupCallParticipantVideoInfo** *(groupCallParticipantVideoInfo)* - basic class
   ///
@@ -40,14 +40,15 @@ class GroupCallParticipantVideoInfo extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "source_groups": sourceGroups.map((i) => i.toJson()).toList(),
       "endpoint_id": endpointId,
       "is_paused": isPaused,
-    };
-  }
+		};
+	}
+
   
   GroupCallParticipantVideoInfo copyWith({
     List<GroupCallVideoSourceGroup>? sourceGroups,
@@ -59,8 +60,11 @@ class GroupCallParticipantVideoInfo extends TdObject {
     isPaused: isPaused ?? this.isPaused,
   );
 
-  static const String constructor = 'groupCallParticipantVideoInfo';
-  
+  static const String objectType = 'groupCallParticipantVideoInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

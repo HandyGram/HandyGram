@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **DraftMessage** *(draftMessage)* - basic class
-  ///
-  /// Contains information about a message draft.
-  ///
-  /// * [replyToMessageId]: Identifier of the replied message; 0 if none.
-  /// * [date]: Point in time (Unix timestamp) when the draft was created.
-  /// * [inputMessageText]: Content of the message draft; must be of the type inputMessageText.
-class DraftMessage extends TdObject {
+///
+/// Contains information about a message draft.
+///
+/// * [replyToMessageId]: Identifier of the replied message; 0 if none.
+/// * [date]: Point in time (Unix timestamp) when the draft was created.
+/// * [inputMessageText]: Content of the message draft; must be of the type inputMessageText.
+final class DraftMessage extends TdObject {
   
   /// **DraftMessage** *(draftMessage)* - basic class
   ///
@@ -40,14 +40,15 @@ class DraftMessage extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "reply_to_message_id": replyToMessageId,
       "date": date,
       "input_message_text": inputMessageText.toJson(),
-    };
-  }
+		};
+	}
+
   
   DraftMessage copyWith({
     int? replyToMessageId,
@@ -59,8 +60,11 @@ class DraftMessage extends TdObject {
     inputMessageText: inputMessageText ?? this.inputMessageText,
   );
 
-  static const String constructor = 'draftMessage';
-  
+  static const String objectType = 'draftMessage';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

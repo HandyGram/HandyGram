@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **SetStickerPositionInSet** *(setStickerPositionInSet)* - TDLib function
-  ///
-  /// Changes the position of a sticker in the set to which it belongs; for bots only. The sticker set must have been created by the bot.
-  ///
-  /// * [sticker]: Sticker.
-  /// * [position]: New position of the sticker in the set, 0-based.
-  ///
-  /// [Ok] is returned on completion.
-class SetStickerPositionInSet extends TdFunction {
+///
+/// Changes the position of a sticker in the set to which it belongs; for bots only. The sticker set must have been created by the bot.
+///
+/// * [sticker]: Sticker.
+/// * [position]: New position of the sticker in the set, 0-based.
+///
+/// [Ok] is returned on completion.
+final class SetStickerPositionInSet extends TdFunction {
   
   /// **SetStickerPositionInSet** *(setStickerPositionInSet)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class SetStickerPositionInSet extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "sticker": sticker.toJson(),
       "position": position,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetStickerPositionInSet copyWith({
     InputFile? sticker,
@@ -47,8 +48,11 @@ class SetStickerPositionInSet extends TdFunction {
     position: position ?? this.position,
   );
 
-  static const String constructor = 'setStickerPositionInSet';
-  
+  static const String objectType = 'setStickerPositionInSet';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **CreateNewBasicGroupChat** *(createNewBasicGroupChat)* - TDLib function
-  ///
-  /// Creates a new basic group and sends a corresponding messageBasicGroupChatCreate. Returns the newly created chat.
-  ///
-  /// * [userIds]: Identifiers of users to be added to the basic group.
-  /// * [title]: Title of the new basic group; 1-128 characters.
-  /// * [messageAutoDeleteTime]: Message auto-delete time value, in seconds; must be from 0 up to 365 * 86400 and be divisible by 86400. If 0, then messages aren't deleted automatically.
-  ///
-  /// [Chat] is returned on completion.
-class CreateNewBasicGroupChat extends TdFunction {
+///
+/// Creates a new basic group and sends a corresponding messageBasicGroupChatCreate. Returns the newly created chat.
+///
+/// * [userIds]: Identifiers of users to be added to the basic group.
+/// * [title]: Title of the new basic group; 1-128 characters.
+/// * [messageAutoDeleteTime]: Message auto-delete time value, in seconds; must be from 0 up to 365 * 86400 and be divisible by 86400. If 0, then messages aren't deleted automatically.
+///
+/// [Chat] is returned on completion.
+final class CreateNewBasicGroupChat extends TdFunction {
   
   /// **CreateNewBasicGroupChat** *(createNewBasicGroupChat)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class CreateNewBasicGroupChat extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "user_ids": userIds.map((i) => i).toList(),
       "title": title,
       "message_auto_delete_time": messageAutoDeleteTime,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   CreateNewBasicGroupChat copyWith({
     List<int>? userIds,
@@ -56,8 +57,11 @@ class CreateNewBasicGroupChat extends TdFunction {
     messageAutoDeleteTime: messageAutoDeleteTime ?? this.messageAutoDeleteTime,
   );
 
-  static const String constructor = 'createNewBasicGroupChat';
-  
+  static const String objectType = 'createNewBasicGroupChat';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

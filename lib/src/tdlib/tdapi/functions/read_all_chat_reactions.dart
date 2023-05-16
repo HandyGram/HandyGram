@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **ReadAllChatReactions** *(readAllChatReactions)* - TDLib function
-  ///
-  /// Marks all reactions in a chat or a forum topic as read.
-  ///
-  /// * [chatId]: Chat identifier.
-  ///
-  /// [Ok] is returned on completion.
-class ReadAllChatReactions extends TdFunction {
+///
+/// Marks all reactions in a chat or a forum topic as read.
+///
+/// * [chatId]: Chat identifier.
+///
+/// [Ok] is returned on completion.
+final class ReadAllChatReactions extends TdFunction {
   
   /// **ReadAllChatReactions** *(readAllChatReactions)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class ReadAllChatReactions extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ReadAllChatReactions copyWith({
     int? chatId,
@@ -38,8 +39,11 @@ class ReadAllChatReactions extends TdFunction {
     chatId: chatId ?? this.chatId,
   );
 
-  static const String constructor = 'readAllChatReactions';
-  
+  static const String objectType = 'readAllChatReactions';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

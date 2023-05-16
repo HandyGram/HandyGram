@@ -1,16 +1,16 @@
 part of '../tdapi.dart';
 
 /// **InputIdentityDocument** *(inputIdentityDocument)* - basic class
-  ///
-  /// An identity document to be saved to Telegram Passport.
-  ///
-  /// * [number]: Document number; 1-24 characters.
-  /// * [expiryDate]: Document expiry date; pass null if not applicable *(optional)*.
-  /// * [frontSide]: Front side of the document.
-  /// * [reverseSide]: Reverse side of the document; only for driver license and identity card; pass null otherwise *(optional)*.
-  /// * [selfie]: Selfie with the document; pass null if unavailable *(optional)*.
-  /// * [translation]: List of files containing a certified English translation of the document.
-class InputIdentityDocument extends TdObject {
+///
+/// An identity document to be saved to Telegram Passport.
+///
+/// * [number]: Document number; 1-24 characters.
+/// * [expiryDate]: Document expiry date; pass null if not applicable *(optional)*.
+/// * [frontSide]: Front side of the document.
+/// * [reverseSide]: Reverse side of the document; only for driver license and identity card; pass null otherwise *(optional)*.
+/// * [selfie]: Selfie with the document; pass null if unavailable *(optional)*.
+/// * [translation]: List of files containing a certified English translation of the document.
+final class InputIdentityDocument extends TdObject {
   
   /// **InputIdentityDocument** *(inputIdentityDocument)* - basic class
   ///
@@ -61,17 +61,18 @@ class InputIdentityDocument extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "number": number,
       "expiry_date": expiryDate?.toJson(),
       "front_side": frontSide.toJson(),
       "reverse_side": reverseSide?.toJson(),
       "selfie": selfie?.toJson(),
       "translation": translation.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   InputIdentityDocument copyWith({
     String? number,
@@ -89,8 +90,11 @@ class InputIdentityDocument extends TdObject {
     translation: translation ?? this.translation,
   );
 
-  static const String constructor = 'inputIdentityDocument';
-  
+  static const String objectType = 'inputIdentityDocument';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

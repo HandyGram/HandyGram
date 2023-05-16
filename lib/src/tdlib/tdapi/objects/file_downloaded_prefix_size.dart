@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **FileDownloadedPrefixSize** *(fileDownloadedPrefixSize)* - basic class
-  ///
-  /// Contains size of downloaded prefix of a file.
-  ///
-  /// * [size]: The prefix size, in bytes.
-class FileDownloadedPrefixSize extends TdObject {
+///
+/// Contains size of downloaded prefix of a file.
+///
+/// * [size]: The prefix size, in bytes.
+final class FileDownloadedPrefixSize extends TdObject {
   
   /// **FileDownloadedPrefixSize** *(fileDownloadedPrefixSize)* - basic class
   ///
@@ -38,12 +38,13 @@ class FileDownloadedPrefixSize extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "size": size,
-    };
-  }
+		};
+	}
+
   
   FileDownloadedPrefixSize copyWith({
     int? size,
@@ -55,8 +56,11 @@ class FileDownloadedPrefixSize extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'fileDownloadedPrefixSize';
-  
+  static const String objectType = 'fileDownloadedPrefixSize';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

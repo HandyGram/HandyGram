@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetVideoChatRtmpUrl** *(getVideoChatRtmpUrl)* - TDLib function
-  ///
-  /// Returns RTMP URL for streaming to the chat; requires creator privileges.
-  ///
-  /// * [chatId]: Chat identifier.
-  ///
-  /// [RtmpUrl] is returned on completion.
-class GetVideoChatRtmpUrl extends TdFunction {
+///
+/// Returns RTMP URL for streaming to the chat; requires creator privileges.
+///
+/// * [chatId]: Chat identifier.
+///
+/// [RtmpUrl] is returned on completion.
+final class GetVideoChatRtmpUrl extends TdFunction {
   
   /// **GetVideoChatRtmpUrl** *(getVideoChatRtmpUrl)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetVideoChatRtmpUrl extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetVideoChatRtmpUrl copyWith({
     int? chatId,
@@ -38,8 +39,11 @@ class GetVideoChatRtmpUrl extends TdFunction {
     chatId: chatId ?? this.chatId,
   );
 
-  static const String constructor = 'getVideoChatRtmpUrl';
-  
+  static const String objectType = 'getVideoChatRtmpUrl';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

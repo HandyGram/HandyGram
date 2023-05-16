@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **CheckLoginEmailAddressCode** *(checkLoginEmailAddressCode)* - TDLib function
-  ///
-  /// Checks the login email address authentication.
-  ///
-  /// * [code]: Email address authentication to check.
-  ///
-  /// [Ok] is returned on completion.
-class CheckLoginEmailAddressCode extends TdFunction {
+///
+/// Checks the login email address authentication.
+///
+/// * [code]: Email address authentication to check.
+///
+/// [Ok] is returned on completion.
+final class CheckLoginEmailAddressCode extends TdFunction {
   
   /// **CheckLoginEmailAddressCode** *(checkLoginEmailAddressCode)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class CheckLoginEmailAddressCode extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "code": code.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   CheckLoginEmailAddressCode copyWith({
     EmailAddressAuthentication? code,
@@ -38,8 +39,11 @@ class CheckLoginEmailAddressCode extends TdFunction {
     code: code ?? this.code,
   );
 
-  static const String constructor = 'checkLoginEmailAddressCode';
-  
+  static const String objectType = 'checkLoginEmailAddressCode';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

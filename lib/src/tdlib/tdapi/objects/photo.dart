@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **Photo** *(photo)* - basic class
-  ///
-  /// Describes a photo.
-  ///
-  /// * [hasStickers]: True, if stickers were added to the photo. The list of corresponding sticker sets can be received using getAttachedStickerSets.
-  /// * [minithumbnail]: Photo minithumbnail; may be null *(optional)*.
-  /// * [sizes]: Available variants of the photo, in different sizes.
-class Photo extends TdObject {
+///
+/// Describes a photo.
+///
+/// * [hasStickers]: True, if stickers were added to the photo. The list of corresponding sticker sets can be received using getAttachedStickerSets.
+/// * [minithumbnail]: Photo minithumbnail; may be null *(optional)*.
+/// * [sizes]: Available variants of the photo, in different sizes.
+final class Photo extends TdObject {
   
   /// **Photo** *(photo)* - basic class
   ///
@@ -40,14 +40,15 @@ class Photo extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "has_stickers": hasStickers,
       "minithumbnail": minithumbnail?.toJson(),
       "sizes": sizes.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   Photo copyWith({
     bool? hasStickers,
@@ -59,8 +60,11 @@ class Photo extends TdObject {
     sizes: sizes ?? this.sizes,
   );
 
-  static const String constructor = 'photo';
-  
+  static const String objectType = 'photo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

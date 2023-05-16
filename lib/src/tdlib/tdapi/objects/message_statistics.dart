@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **MessageStatistics** *(messageStatistics)* - basic class
-  ///
-  /// A detailed statistics about a message.
-  ///
-  /// * [messageInteractionGraph]: A graph containing number of message views and shares.
-class MessageStatistics extends TdObject {
+///
+/// A detailed statistics about a message.
+///
+/// * [messageInteractionGraph]: A graph containing number of message views and shares.
+final class MessageStatistics extends TdObject {
   
   /// **MessageStatistics** *(messageStatistics)* - basic class
   ///
@@ -38,12 +38,13 @@ class MessageStatistics extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "message_interaction_graph": messageInteractionGraph.toJson(),
-    };
-  }
+		};
+	}
+
   
   MessageStatistics copyWith({
     StatisticalGraph? messageInteractionGraph,
@@ -55,8 +56,11 @@ class MessageStatistics extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'messageStatistics';
-  
+  static const String objectType = 'messageStatistics';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetGroupCallStreams** *(getGroupCallStreams)* - TDLib function
-  ///
-  /// Returns information about available group call streams.
-  ///
-  /// * [groupCallId]: Group call identifier.
-  ///
-  /// [GroupCallStreams] is returned on completion.
-class GetGroupCallStreams extends TdFunction {
+///
+/// Returns information about available group call streams.
+///
+/// * [groupCallId]: Group call identifier.
+///
+/// [GroupCallStreams] is returned on completion.
+final class GetGroupCallStreams extends TdFunction {
   
   /// **GetGroupCallStreams** *(getGroupCallStreams)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetGroupCallStreams extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "group_call_id": groupCallId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetGroupCallStreams copyWith({
     int? groupCallId,
@@ -38,8 +39,11 @@ class GetGroupCallStreams extends TdFunction {
     groupCallId: groupCallId ?? this.groupCallId,
   );
 
-  static const String constructor = 'getGroupCallStreams';
-  
+  static const String objectType = 'getGroupCallStreams';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

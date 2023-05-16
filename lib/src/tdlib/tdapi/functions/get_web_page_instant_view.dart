@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **GetWebPageInstantView** *(getWebPageInstantView)* - TDLib function
-  ///
-  /// Returns an instant view version of a web page if available. Returns a 404 error if the web page has no instant view page.
-  ///
-  /// * [url]: The web page URL.
-  /// * [forceFull]: Pass true to get full instant view for the web page.
-  ///
-  /// [WebPageInstantView] is returned on completion.
-class GetWebPageInstantView extends TdFunction {
+///
+/// Returns an instant view version of a web page if available. Returns a 404 error if the web page has no instant view page.
+///
+/// * [url]: The web page URL.
+/// * [forceFull]: Pass true to get full instant view for the web page.
+///
+/// [WebPageInstantView] is returned on completion.
+final class GetWebPageInstantView extends TdFunction {
   
   /// **GetWebPageInstantView** *(getWebPageInstantView)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class GetWebPageInstantView extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "url": url,
       "force_full": forceFull,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetWebPageInstantView copyWith({
     String? url,
@@ -47,8 +48,11 @@ class GetWebPageInstantView extends TdFunction {
     forceFull: forceFull ?? this.forceFull,
   );
 
-  static const String constructor = 'getWebPageInstantView';
-  
+  static const String objectType = 'getWebPageInstantView';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

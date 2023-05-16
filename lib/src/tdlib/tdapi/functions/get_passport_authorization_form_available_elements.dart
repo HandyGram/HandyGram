@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **GetPassportAuthorizationFormAvailableElements** *(getPassportAuthorizationFormAvailableElements)* - TDLib function
-  ///
-  /// Returns already available Telegram Passport elements suitable for completing a Telegram Passport authorization form. Result can be received only once for each authorization form.
-  ///
-  /// * [authorizationFormId]: Authorization form identifier.
-  /// * [password]: The 2-step verification password of the current user.
-  ///
-  /// [PassportElementsWithErrors] is returned on completion.
-class GetPassportAuthorizationFormAvailableElements extends TdFunction {
+///
+/// Returns already available Telegram Passport elements suitable for completing a Telegram Passport authorization form. Result can be received only once for each authorization form.
+///
+/// * [authorizationFormId]: Authorization form identifier.
+/// * [password]: The 2-step verification password of the current user.
+///
+/// [PassportElementsWithErrors] is returned on completion.
+final class GetPassportAuthorizationFormAvailableElements extends TdFunction {
   
   /// **GetPassportAuthorizationFormAvailableElements** *(getPassportAuthorizationFormAvailableElements)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class GetPassportAuthorizationFormAvailableElements extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "authorization_form_id": authorizationFormId,
       "password": password,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetPassportAuthorizationFormAvailableElements copyWith({
     int? authorizationFormId,
@@ -47,8 +48,11 @@ class GetPassportAuthorizationFormAvailableElements extends TdFunction {
     password: password ?? this.password,
   );
 
-  static const String constructor = 'getPassportAuthorizationFormAvailableElements';
-  
+  static const String objectType = 'getPassportAuthorizationFormAvailableElements';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

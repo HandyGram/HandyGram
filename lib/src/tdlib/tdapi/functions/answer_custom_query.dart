@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **AnswerCustomQuery** *(answerCustomQuery)* - TDLib function
-  ///
-  /// Answers a custom query; for bots only.
-  ///
-  /// * [customQueryId]: Identifier of a custom query.
-  /// * [data]: JSON-serialized answer to the query.
-  ///
-  /// [Ok] is returned on completion.
-class AnswerCustomQuery extends TdFunction {
+///
+/// Answers a custom query; for bots only.
+///
+/// * [customQueryId]: Identifier of a custom query.
+/// * [data]: JSON-serialized answer to the query.
+///
+/// [Ok] is returned on completion.
+final class AnswerCustomQuery extends TdFunction {
   
   /// **AnswerCustomQuery** *(answerCustomQuery)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class AnswerCustomQuery extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "custom_query_id": customQueryId,
       "data": data,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   AnswerCustomQuery copyWith({
     int? customQueryId,
@@ -47,8 +48,11 @@ class AnswerCustomQuery extends TdFunction {
     data: data ?? this.data,
   );
 
-  static const String constructor = 'answerCustomQuery';
-  
+  static const String objectType = 'answerCustomQuery';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

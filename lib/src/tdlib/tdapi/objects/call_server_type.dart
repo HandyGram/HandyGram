@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **CallServerType** *(callServerType)* - parent
-  ///
-  /// Describes the type of a call server.
-class CallServerType extends TdObject {
+///
+/// Describes the type of a call server.
+sealed class CallServerType extends TdObject {
   
   /// **CallServerType** *(callServerType)* - parent
   ///
@@ -15,38 +15,41 @@ class CallServerType extends TdObject {
   /// * [CallServerTypeWebrtc]
   factory CallServerType.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case CallServerTypeTelegramReflector.constructor:
+      case CallServerTypeTelegramReflector.objectType:
         return CallServerTypeTelegramReflector.fromJson(json);
-      case CallServerTypeWebrtc.constructor:
+      case CallServerTypeWebrtc.objectType:
         return CallServerTypeWebrtc.fromJson(json);
       default:
-        return const CallServerType();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of CallServerType)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  CallServerType copyWith() => const CallServerType();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'callServerType';
   
+  CallServerType copyWith();
+
+  static const String objectType = 'callServerType';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **CallServerTypeTelegramReflector** *(callServerTypeTelegramReflector)* - child of CallServerType
-  ///
-  /// A Telegram call reflector.
-  ///
-  /// * [peerTag]: A peer tag to be used with the reflector.
-  /// * [isTcp]: True, if the server uses TCP instead of UDP.
-class CallServerTypeTelegramReflector extends CallServerType {
+///
+/// A Telegram call reflector.
+///
+/// * [peerTag]: A peer tag to be used with the reflector.
+/// * [isTcp]: True, if the server uses TCP instead of UDP.
+final class CallServerTypeTelegramReflector extends CallServerType {
   
   /// **CallServerTypeTelegramReflector** *(callServerTypeTelegramReflector)* - child of CallServerType
   ///
@@ -73,13 +76,14 @@ class CallServerTypeTelegramReflector extends CallServerType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "peer_tag": peerTag,
       "is_tcp": isTcp,
-    };
-  }
+		};
+	}
+
   
   @override
   CallServerTypeTelegramReflector copyWith({
@@ -90,22 +94,25 @@ class CallServerTypeTelegramReflector extends CallServerType {
     isTcp: isTcp ?? this.isTcp,
   );
 
-  static const String constructor = 'callServerTypeTelegramReflector';
-  
+  static const String objectType = 'callServerTypeTelegramReflector';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **CallServerTypeWebrtc** *(callServerTypeWebrtc)* - child of CallServerType
-  ///
-  /// A WebRTC server.
-  ///
-  /// * [username]: Username to be used for authentication.
-  /// * [password]: Authentication password.
-  /// * [supportsTurn]: True, if the server supports TURN.
-  /// * [supportsStun]: True, if the server supports STUN.
-class CallServerTypeWebrtc extends CallServerType {
+///
+/// A WebRTC server.
+///
+/// * [username]: Username to be used for authentication.
+/// * [password]: Authentication password.
+/// * [supportsTurn]: True, if the server supports TURN.
+/// * [supportsStun]: True, if the server supports STUN.
+final class CallServerTypeWebrtc extends CallServerType {
   
   /// **CallServerTypeWebrtc** *(callServerTypeWebrtc)* - child of CallServerType
   ///
@@ -144,15 +151,16 @@ class CallServerTypeWebrtc extends CallServerType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "username": username,
       "password": password,
       "supports_turn": supportsTurn,
       "supports_stun": supportsStun,
-    };
-  }
+		};
+	}
+
   
   @override
   CallServerTypeWebrtc copyWith({
@@ -167,8 +175,11 @@ class CallServerTypeWebrtc extends CallServerType {
     supportsStun: supportsStun ?? this.supportsStun,
   );
 
-  static const String constructor = 'callServerTypeWebrtc';
-  
+  static const String objectType = 'callServerTypeWebrtc';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

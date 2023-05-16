@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **PaymentOption** *(paymentOption)* - basic class
-  ///
-  /// Describes an additional payment option.
-  ///
-  /// * [title]: Title for the payment option.
-  /// * [url]: Payment form URL to be opened in a web view.
-class PaymentOption extends TdObject {
+///
+/// Describes an additional payment option.
+///
+/// * [title]: Title for the payment option.
+/// * [url]: Payment form URL to be opened in a web view.
+final class PaymentOption extends TdObject {
   
   /// **PaymentOption** *(paymentOption)* - basic class
   ///
@@ -33,13 +33,14 @@ class PaymentOption extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "title": title,
       "url": url,
-    };
-  }
+		};
+	}
+
   
   PaymentOption copyWith({
     String? title,
@@ -49,8 +50,11 @@ class PaymentOption extends TdObject {
     url: url ?? this.url,
   );
 
-  static const String constructor = 'paymentOption';
-  
+  static const String objectType = 'paymentOption';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

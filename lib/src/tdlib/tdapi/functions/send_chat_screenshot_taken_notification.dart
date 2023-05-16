@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **SendChatScreenshotTakenNotification** *(sendChatScreenshotTakenNotification)* - TDLib function
-  ///
-  /// Sends a notification about a screenshot taken in a chat. Supported only in private and secret chats.
-  ///
-  /// * [chatId]: Chat identifier.
-  ///
-  /// [Ok] is returned on completion.
-class SendChatScreenshotTakenNotification extends TdFunction {
+///
+/// Sends a notification about a screenshot taken in a chat. Supported only in private and secret chats.
+///
+/// * [chatId]: Chat identifier.
+///
+/// [Ok] is returned on completion.
+final class SendChatScreenshotTakenNotification extends TdFunction {
   
   /// **SendChatScreenshotTakenNotification** *(sendChatScreenshotTakenNotification)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class SendChatScreenshotTakenNotification extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SendChatScreenshotTakenNotification copyWith({
     int? chatId,
@@ -38,8 +39,11 @@ class SendChatScreenshotTakenNotification extends TdFunction {
     chatId: chatId ?? this.chatId,
   );
 
-  static const String constructor = 'sendChatScreenshotTakenNotification';
-  
+  static const String objectType = 'sendChatScreenshotTakenNotification';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

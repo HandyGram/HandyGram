@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **GetSavedOrderInfo** *(getSavedOrderInfo)* - TDLib function
-  ///
-  /// Returns saved order information. Returns a 404 error if there is no saved order information.
-  ///
-  /// [OrderInfo] is returned on completion.
-class GetSavedOrderInfo extends TdFunction {
+///
+/// Returns saved order information. Returns a 404 error if there is no saved order information.
+///
+/// [OrderInfo] is returned on completion.
+final class GetSavedOrderInfo extends TdFunction {
   
   /// **GetSavedOrderInfo** *(getSavedOrderInfo)* - TDLib function
   ///
@@ -17,16 +17,20 @@ class GetSavedOrderInfo extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetSavedOrderInfo copyWith() => const GetSavedOrderInfo();
 
-  static const String constructor = 'getSavedOrderInfo';
-  
+  static const String objectType = 'getSavedOrderInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

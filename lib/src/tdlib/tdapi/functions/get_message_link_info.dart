@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetMessageLinkInfo** *(getMessageLinkInfo)* - TDLib function
-  ///
-  /// Returns information about a public or private message link. Can be called for any internal link of the type internalLinkTypeMessage.
-  ///
-  /// * [url]: The message link.
-  ///
-  /// [MessageLinkInfo] is returned on completion.
-class GetMessageLinkInfo extends TdFunction {
+///
+/// Returns information about a public or private message link. Can be called for any internal link of the type internalLinkTypeMessage.
+///
+/// * [url]: The message link.
+///
+/// [MessageLinkInfo] is returned on completion.
+final class GetMessageLinkInfo extends TdFunction {
   
   /// **GetMessageLinkInfo** *(getMessageLinkInfo)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetMessageLinkInfo extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "url": url,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetMessageLinkInfo copyWith({
     String? url,
@@ -38,8 +39,11 @@ class GetMessageLinkInfo extends TdFunction {
     url: url ?? this.url,
   );
 
-  static const String constructor = 'getMessageLinkInfo';
-  
+  static const String objectType = 'getMessageLinkInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

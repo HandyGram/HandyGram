@@ -1,28 +1,28 @@
 part of '../tdapi.dart';
 
 /// **Session** *(session)* - basic class
-  ///
-  /// Contains information about one session in a Telegram application used by the current user. Sessions must be shown to the user in the returned order.
-  ///
-  /// * [id]: Session identifier.
-  /// * [isCurrent]: True, if this session is the current session.
-  /// * [isPasswordPending]: True, if a 2-step verification password is needed to complete authorization of the session.
-  /// * [canAcceptSecretChats]: True, if incoming secret chats can be accepted by the session.
-  /// * [canAcceptCalls]: True, if incoming calls can be accepted by the session.
-  /// * [type]: Session type based on the system and application version, which can be used to display a corresponding icon.
-  /// * [apiId]: Telegram API identifier, as provided by the application.
-  /// * [applicationName]: Name of the application, as provided by the application.
-  /// * [applicationVersion]: The version of the application, as provided by the application.
-  /// * [isOfficialApplication]: True, if the application is an official application or uses the api_id of an official application.
-  /// * [deviceModel]: Model of the device the application has been run or is running on, as provided by the application.
-  /// * [platform]: Operating system the application has been run or is running on, as provided by the application.
-  /// * [systemVersion]: Version of the operating system the application has been run or is running on, as provided by the application.
-  /// * [logInDate]: Point in time (Unix timestamp) when the user has logged in.
-  /// * [lastActiveDate]: Point in time (Unix timestamp) when the session was last used.
-  /// * [ip]: IP address from which the session was created, in human-readable format.
-  /// * [country]: A two-letter country code for the country from which the session was created, based on the IP address.
-  /// * [region]: Region code from which the session was created, based on the IP address.
-class Session extends TdObject {
+///
+/// Contains information about one session in a Telegram application used by the current user. Sessions must be shown to the user in the returned order.
+///
+/// * [id]: Session identifier.
+/// * [isCurrent]: True, if this session is the current session.
+/// * [isPasswordPending]: True, if a 2-step verification password is needed to complete authorization of the session.
+/// * [canAcceptSecretChats]: True, if incoming secret chats can be accepted by the session.
+/// * [canAcceptCalls]: True, if incoming calls can be accepted by the session.
+/// * [type]: Session type based on the system and application version, which can be used to display a corresponding icon.
+/// * [apiId]: Telegram API identifier, as provided by the application.
+/// * [applicationName]: Name of the application, as provided by the application.
+/// * [applicationVersion]: The version of the application, as provided by the application.
+/// * [isOfficialApplication]: True, if the application is an official application or uses the api_id of an official application.
+/// * [deviceModel]: Model of the device the application has been run or is running on, as provided by the application.
+/// * [platform]: Operating system the application has been run or is running on, as provided by the application.
+/// * [systemVersion]: Version of the operating system the application has been run or is running on, as provided by the application.
+/// * [logInDate]: Point in time (Unix timestamp) when the user has logged in.
+/// * [lastActiveDate]: Point in time (Unix timestamp) when the session was last used.
+/// * [ip]: IP address from which the session was created, in human-readable format.
+/// * [country]: A two-letter country code for the country from which the session was created, based on the IP address.
+/// * [region]: Region code from which the session was created, based on the IP address.
+final class Session extends TdObject {
   
   /// **Session** *(session)* - basic class
   ///
@@ -157,9 +157,9 @@ class Session extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "is_current": isCurrent,
       "is_password_pending": isPasswordPending,
@@ -178,8 +178,9 @@ class Session extends TdObject {
       "ip": ip,
       "country": country,
       "region": region,
-    };
-  }
+		};
+	}
+
   
   Session copyWith({
     int? id,
@@ -225,8 +226,11 @@ class Session extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'session';
-  
+  static const String objectType = 'session';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

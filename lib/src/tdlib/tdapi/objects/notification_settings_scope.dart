@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **NotificationSettingsScope** *(notificationSettingsScope)* - parent
-  ///
-  /// Describes the types of chats to which notification settings are relevant.
-class NotificationSettingsScope extends TdObject {
+///
+/// Describes the types of chats to which notification settings are relevant.
+sealed class NotificationSettingsScope extends TdObject {
   
   /// **NotificationSettingsScope** *(notificationSettingsScope)* - parent
   ///
@@ -16,37 +16,40 @@ class NotificationSettingsScope extends TdObject {
   /// * [NotificationSettingsScopeChannelChats]
   factory NotificationSettingsScope.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case NotificationSettingsScopePrivateChats.constructor:
+      case NotificationSettingsScopePrivateChats.objectType:
         return NotificationSettingsScopePrivateChats.fromJson(json);
-      case NotificationSettingsScopeGroupChats.constructor:
+      case NotificationSettingsScopeGroupChats.objectType:
         return NotificationSettingsScopeGroupChats.fromJson(json);
-      case NotificationSettingsScopeChannelChats.constructor:
+      case NotificationSettingsScopeChannelChats.objectType:
         return NotificationSettingsScopeChannelChats.fromJson(json);
       default:
-        return const NotificationSettingsScope();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of NotificationSettingsScope)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  NotificationSettingsScope copyWith() => const NotificationSettingsScope();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'notificationSettingsScope';
   
+  NotificationSettingsScope copyWith();
+
+  static const String objectType = 'notificationSettingsScope';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **NotificationSettingsScopePrivateChats** *(notificationSettingsScopePrivateChats)* - child of NotificationSettingsScope
-  ///
-  /// Notification settings applied to all private and secret chats when the corresponding chat setting has a default value.
-class NotificationSettingsScopePrivateChats extends NotificationSettingsScope {
+///
+/// Notification settings applied to all private and secret chats when the corresponding chat setting has a default value.
+final class NotificationSettingsScopePrivateChats extends NotificationSettingsScope {
   
   /// **NotificationSettingsScopePrivateChats** *(notificationSettingsScopePrivateChats)* - child of NotificationSettingsScope
   ///
@@ -57,26 +60,30 @@ class NotificationSettingsScopePrivateChats extends NotificationSettingsScope {
   factory NotificationSettingsScopePrivateChats.fromJson(Map<String, dynamic> json) => const NotificationSettingsScopePrivateChats();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   NotificationSettingsScopePrivateChats copyWith() => const NotificationSettingsScopePrivateChats();
 
-  static const String constructor = 'notificationSettingsScopePrivateChats';
-  
+  static const String objectType = 'notificationSettingsScopePrivateChats';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **NotificationSettingsScopeGroupChats** *(notificationSettingsScopeGroupChats)* - child of NotificationSettingsScope
-  ///
-  /// Notification settings applied to all basic group and supergroup chats when the corresponding chat setting has a default value.
-class NotificationSettingsScopeGroupChats extends NotificationSettingsScope {
+///
+/// Notification settings applied to all basic group and supergroup chats when the corresponding chat setting has a default value.
+final class NotificationSettingsScopeGroupChats extends NotificationSettingsScope {
   
   /// **NotificationSettingsScopeGroupChats** *(notificationSettingsScopeGroupChats)* - child of NotificationSettingsScope
   ///
@@ -87,26 +94,30 @@ class NotificationSettingsScopeGroupChats extends NotificationSettingsScope {
   factory NotificationSettingsScopeGroupChats.fromJson(Map<String, dynamic> json) => const NotificationSettingsScopeGroupChats();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   NotificationSettingsScopeGroupChats copyWith() => const NotificationSettingsScopeGroupChats();
 
-  static const String constructor = 'notificationSettingsScopeGroupChats';
-  
+  static const String objectType = 'notificationSettingsScopeGroupChats';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **NotificationSettingsScopeChannelChats** *(notificationSettingsScopeChannelChats)* - child of NotificationSettingsScope
-  ///
-  /// Notification settings applied to all channel chats when the corresponding chat setting has a default value.
-class NotificationSettingsScopeChannelChats extends NotificationSettingsScope {
+///
+/// Notification settings applied to all channel chats when the corresponding chat setting has a default value.
+final class NotificationSettingsScopeChannelChats extends NotificationSettingsScope {
   
   /// **NotificationSettingsScopeChannelChats** *(notificationSettingsScopeChannelChats)* - child of NotificationSettingsScope
   ///
@@ -117,17 +128,21 @@ class NotificationSettingsScopeChannelChats extends NotificationSettingsScope {
   factory NotificationSettingsScopeChannelChats.fromJson(Map<String, dynamic> json) => const NotificationSettingsScopeChannelChats();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   NotificationSettingsScopeChannelChats copyWith() => const NotificationSettingsScopeChannelChats();
 
-  static const String constructor = 'notificationSettingsScopeChannelChats';
-  
+  static const String objectType = 'notificationSettingsScopeChannelChats';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

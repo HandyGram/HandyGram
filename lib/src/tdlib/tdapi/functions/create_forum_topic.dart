@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **CreateForumTopic** *(createForumTopic)* - TDLib function
-  ///
-  /// Creates a topic in a forum supergroup chat; requires can_manage_topics rights in the supergroup.
-  ///
-  /// * [chatId]: Identifier of the chat.
-  /// * [name]: Name of the topic; 1-128 characters.
-  /// * [icon]: Icon of the topic. Icon color must be one of 0x6FB9F0, 0xFFD67E, 0xCB86DB, 0x8EEE98, 0xFF93B2, or 0xFB6F5F. Telegram Premium users can use any custom emoji as topic icon, other users can use only a custom emoji returned by getForumTopicDefaultIcons.
-  ///
-  /// [ForumTopicInfo] is returned on completion.
-class CreateForumTopic extends TdFunction {
+///
+/// Creates a topic in a forum supergroup chat; requires can_manage_topics rights in the supergroup.
+///
+/// * [chatId]: Identifier of the chat.
+/// * [name]: Name of the topic; 1-128 characters.
+/// * [icon]: Icon of the topic. Icon color must be one of 0x6FB9F0, 0xFFD67E, 0xCB86DB, 0x8EEE98, 0xFF93B2, or 0xFB6F5F. Telegram Premium users can use any custom emoji as topic icon, other users can use only a custom emoji returned by getForumTopicDefaultIcons.
+///
+/// [ForumTopicInfo] is returned on completion.
+final class CreateForumTopic extends TdFunction {
   
   /// **CreateForumTopic** *(createForumTopic)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class CreateForumTopic extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "name": name,
       "icon": icon.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   CreateForumTopic copyWith({
     int? chatId,
@@ -56,8 +57,11 @@ class CreateForumTopic extends TdFunction {
     icon: icon ?? this.icon,
   );
 
-  static const String constructor = 'createForumTopic';
-  
+  static const String objectType = 'createForumTopic';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

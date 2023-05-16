@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **CreateSupergroupChat** *(createSupergroupChat)* - TDLib function
-  ///
-  /// Returns an existing chat corresponding to a known supergroup or channel.
-  ///
-  /// * [supergroupId]: Supergroup or channel identifier.
-  /// * [force]: Pass true to create the chat without a network request. In this case all information about the chat except its type, title and photo can be incorrect.
-  ///
-  /// [Chat] is returned on completion.
-class CreateSupergroupChat extends TdFunction {
+///
+/// Returns an existing chat corresponding to a known supergroup or channel.
+///
+/// * [supergroupId]: Supergroup or channel identifier.
+/// * [force]: Pass true to create the chat without a network request. In this case all information about the chat except its type, title and photo can be incorrect.
+///
+/// [Chat] is returned on completion.
+final class CreateSupergroupChat extends TdFunction {
   
   /// **CreateSupergroupChat** *(createSupergroupChat)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class CreateSupergroupChat extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "supergroup_id": supergroupId,
       "force": force,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   CreateSupergroupChat copyWith({
     int? supergroupId,
@@ -47,8 +48,11 @@ class CreateSupergroupChat extends TdFunction {
     force: force ?? this.force,
   );
 
-  static const String constructor = 'createSupergroupChat';
-  
+  static const String objectType = 'createSupergroupChat';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

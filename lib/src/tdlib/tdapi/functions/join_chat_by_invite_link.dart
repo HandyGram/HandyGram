@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **JoinChatByInviteLink** *(joinChatByInviteLink)* - TDLib function
-  ///
-  /// Uses an invite link to add the current user to the chat if possible. May return an error with a message "INVITE_REQUEST_SENT" if only a join request was created.
-  ///
-  /// * [inviteLink]: Invite link to use.
-  ///
-  /// [Chat] is returned on completion.
-class JoinChatByInviteLink extends TdFunction {
+///
+/// Uses an invite link to add the current user to the chat if possible. May return an error with a message "INVITE_REQUEST_SENT" if only a join request was created.
+///
+/// * [inviteLink]: Invite link to use.
+///
+/// [Chat] is returned on completion.
+final class JoinChatByInviteLink extends TdFunction {
   
   /// **JoinChatByInviteLink** *(joinChatByInviteLink)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class JoinChatByInviteLink extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "invite_link": inviteLink,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   JoinChatByInviteLink copyWith({
     String? inviteLink,
@@ -38,8 +39,11 @@ class JoinChatByInviteLink extends TdFunction {
     inviteLink: inviteLink ?? this.inviteLink,
   );
 
-  static const String constructor = 'joinChatByInviteLink';
-  
+  static const String objectType = 'joinChatByInviteLink';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **DatabaseStatistics** *(databaseStatistics)* - basic class
-  ///
-  /// Contains database statistics.
-  ///
-  /// * [statistics]: Database statistics in an unspecified human-readable format.
-class DatabaseStatistics extends TdObject {
+///
+/// Contains database statistics.
+///
+/// * [statistics]: Database statistics in an unspecified human-readable format.
+final class DatabaseStatistics extends TdObject {
   
   /// **DatabaseStatistics** *(databaseStatistics)* - basic class
   ///
@@ -38,12 +38,13 @@ class DatabaseStatistics extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "statistics": statistics,
-    };
-  }
+		};
+	}
+
   
   DatabaseStatistics copyWith({
     String? statistics,
@@ -55,8 +56,11 @@ class DatabaseStatistics extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'databaseStatistics';
-  
+  static const String objectType = 'databaseStatistics';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

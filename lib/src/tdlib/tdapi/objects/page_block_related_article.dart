@@ -1,16 +1,16 @@
 part of '../tdapi.dart';
 
 /// **PageBlockRelatedArticle** *(pageBlockRelatedArticle)* - basic class
-  ///
-  /// Contains information about a related article.
-  ///
-  /// * [url]: Related article URL.
-  /// * [title]: Article title; may be empty.
-  /// * [description]: Article description; may be empty.
-  /// * [photo]: Article photo; may be null *(optional)*.
-  /// * [author]: Article author; may be empty.
-  /// * [publishDate]: Point in time (Unix timestamp) when the article was published; 0 if unknown.
-class PageBlockRelatedArticle extends TdObject {
+///
+/// Contains information about a related article.
+///
+/// * [url]: Related article URL.
+/// * [title]: Article title; may be empty.
+/// * [description]: Article description; may be empty.
+/// * [photo]: Article photo; may be null *(optional)*.
+/// * [author]: Article author; may be empty.
+/// * [publishDate]: Point in time (Unix timestamp) when the article was published; 0 if unknown.
+final class PageBlockRelatedArticle extends TdObject {
   
   /// **PageBlockRelatedArticle** *(pageBlockRelatedArticle)* - basic class
   ///
@@ -61,17 +61,18 @@ class PageBlockRelatedArticle extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "url": url,
       "title": title,
       "description": description,
       "photo": photo?.toJson(),
       "author": author,
       "publish_date": publishDate,
-    };
-  }
+		};
+	}
+
   
   PageBlockRelatedArticle copyWith({
     String? url,
@@ -89,8 +90,11 @@ class PageBlockRelatedArticle extends TdObject {
     publishDate: publishDate ?? this.publishDate,
   );
 
-  static const String constructor = 'pageBlockRelatedArticle';
-  
+  static const String objectType = 'pageBlockRelatedArticle';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

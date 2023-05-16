@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **MessageExtendedMedia** *(messageExtendedMedia)* - parent
-  ///
-  /// Describes a media, which is attached to an invoice.
-class MessageExtendedMedia extends TdObject {
+///
+/// Describes a media, which is attached to an invoice.
+sealed class MessageExtendedMedia extends TdObject {
   
   /// **MessageExtendedMedia** *(messageExtendedMedia)* - parent
   ///
@@ -17,45 +17,48 @@ class MessageExtendedMedia extends TdObject {
   /// * [MessageExtendedMediaUnsupported]
   factory MessageExtendedMedia.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case MessageExtendedMediaPreview.constructor:
+      case MessageExtendedMediaPreview.objectType:
         return MessageExtendedMediaPreview.fromJson(json);
-      case MessageExtendedMediaPhoto.constructor:
+      case MessageExtendedMediaPhoto.objectType:
         return MessageExtendedMediaPhoto.fromJson(json);
-      case MessageExtendedMediaVideo.constructor:
+      case MessageExtendedMediaVideo.objectType:
         return MessageExtendedMediaVideo.fromJson(json);
-      case MessageExtendedMediaUnsupported.constructor:
+      case MessageExtendedMediaUnsupported.objectType:
         return MessageExtendedMediaUnsupported.fromJson(json);
       default:
-        return const MessageExtendedMedia();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of MessageExtendedMedia)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  MessageExtendedMedia copyWith() => const MessageExtendedMedia();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'messageExtendedMedia';
   
+  MessageExtendedMedia copyWith();
+
+  static const String objectType = 'messageExtendedMedia';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageExtendedMediaPreview** *(messageExtendedMediaPreview)* - child of MessageExtendedMedia
-  ///
-  /// The media is hidden until the invoice is paid.
-  ///
-  /// * [width]: Media width; 0 if unknown.
-  /// * [height]: Media height; 0 if unknown.
-  /// * [duration]: Media duration; 0 if unknown.
-  /// * [minithumbnail]: Media minithumbnail; may be null *(optional)*.
-  /// * [caption]: Media caption.
-class MessageExtendedMediaPreview extends MessageExtendedMedia {
+///
+/// The media is hidden until the invoice is paid.
+///
+/// * [width]: Media width; 0 if unknown.
+/// * [height]: Media height; 0 if unknown.
+/// * [duration]: Media duration; 0 if unknown.
+/// * [minithumbnail]: Media minithumbnail; may be null *(optional)*.
+/// * [caption]: Media caption.
+final class MessageExtendedMediaPreview extends MessageExtendedMedia {
   
   /// **MessageExtendedMediaPreview** *(messageExtendedMediaPreview)* - child of MessageExtendedMedia
   ///
@@ -100,16 +103,17 @@ class MessageExtendedMediaPreview extends MessageExtendedMedia {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "width": width,
       "height": height,
       "duration": duration,
       "minithumbnail": minithumbnail?.toJson(),
       "caption": caption.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   MessageExtendedMediaPreview copyWith({
@@ -126,20 +130,23 @@ class MessageExtendedMediaPreview extends MessageExtendedMedia {
     caption: caption ?? this.caption,
   );
 
-  static const String constructor = 'messageExtendedMediaPreview';
-  
+  static const String objectType = 'messageExtendedMediaPreview';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageExtendedMediaPhoto** *(messageExtendedMediaPhoto)* - child of MessageExtendedMedia
-  ///
-  /// The media is a photo.
-  ///
-  /// * [photo]: The photo.
-  /// * [caption]: Photo caption.
-class MessageExtendedMediaPhoto extends MessageExtendedMedia {
+///
+/// The media is a photo.
+///
+/// * [photo]: The photo.
+/// * [caption]: Photo caption.
+final class MessageExtendedMediaPhoto extends MessageExtendedMedia {
   
   /// **MessageExtendedMediaPhoto** *(messageExtendedMediaPhoto)* - child of MessageExtendedMedia
   ///
@@ -166,13 +173,14 @@ class MessageExtendedMediaPhoto extends MessageExtendedMedia {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "photo": photo.toJson(),
       "caption": caption.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   MessageExtendedMediaPhoto copyWith({
@@ -183,20 +191,23 @@ class MessageExtendedMediaPhoto extends MessageExtendedMedia {
     caption: caption ?? this.caption,
   );
 
-  static const String constructor = 'messageExtendedMediaPhoto';
-  
+  static const String objectType = 'messageExtendedMediaPhoto';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageExtendedMediaVideo** *(messageExtendedMediaVideo)* - child of MessageExtendedMedia
-  ///
-  /// The media is a video.
-  ///
-  /// * [video]: The video.
-  /// * [caption]: Photo caption.
-class MessageExtendedMediaVideo extends MessageExtendedMedia {
+///
+/// The media is a video.
+///
+/// * [video]: The video.
+/// * [caption]: Photo caption.
+final class MessageExtendedMediaVideo extends MessageExtendedMedia {
   
   /// **MessageExtendedMediaVideo** *(messageExtendedMediaVideo)* - child of MessageExtendedMedia
   ///
@@ -223,13 +234,14 @@ class MessageExtendedMediaVideo extends MessageExtendedMedia {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "video": video.toJson(),
       "caption": caption.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   MessageExtendedMediaVideo copyWith({
@@ -240,19 +252,22 @@ class MessageExtendedMediaVideo extends MessageExtendedMedia {
     caption: caption ?? this.caption,
   );
 
-  static const String constructor = 'messageExtendedMediaVideo';
-  
+  static const String objectType = 'messageExtendedMediaVideo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **MessageExtendedMediaUnsupported** *(messageExtendedMediaUnsupported)* - child of MessageExtendedMedia
-  ///
-  /// The media is unuspported.
-  ///
-  /// * [caption]: Media caption.
-class MessageExtendedMediaUnsupported extends MessageExtendedMedia {
+///
+/// The media is unuspported.
+///
+/// * [caption]: Media caption.
+final class MessageExtendedMediaUnsupported extends MessageExtendedMedia {
   
   /// **MessageExtendedMediaUnsupported** *(messageExtendedMediaUnsupported)* - child of MessageExtendedMedia
   ///
@@ -273,12 +288,13 @@ class MessageExtendedMediaUnsupported extends MessageExtendedMedia {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "caption": caption.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   MessageExtendedMediaUnsupported copyWith({
@@ -287,8 +303,11 @@ class MessageExtendedMediaUnsupported extends MessageExtendedMedia {
     caption: caption ?? this.caption,
   );
 
-  static const String constructor = 'messageExtendedMediaUnsupported';
-  
+  static const String objectType = 'messageExtendedMediaUnsupported';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

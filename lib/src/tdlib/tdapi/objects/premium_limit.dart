@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **PremiumLimit** *(premiumLimit)* - basic class
-  ///
-  /// Contains information about a limit, increased for Premium users.
-  ///
-  /// * [type]: The type of the limit.
-  /// * [defaultValue]: Default value of the limit.
-  /// * [premiumValue]: Value of the limit for Premium users.
-class PremiumLimit extends TdObject {
+///
+/// Contains information about a limit, increased for Premium users.
+///
+/// * [type]: The type of the limit.
+/// * [defaultValue]: Default value of the limit.
+/// * [premiumValue]: Value of the limit for Premium users.
+final class PremiumLimit extends TdObject {
   
   /// **PremiumLimit** *(premiumLimit)* - basic class
   ///
@@ -52,14 +52,15 @@ class PremiumLimit extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "type": type.toJson(),
       "default_value": defaultValue,
       "premium_value": premiumValue,
-    };
-  }
+		};
+	}
+
   
   PremiumLimit copyWith({
     PremiumLimitType? type,
@@ -75,8 +76,11 @@ class PremiumLimit extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'premiumLimit';
-  
+  static const String objectType = 'premiumLimit';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

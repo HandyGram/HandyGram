@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **SendCallLog** *(sendCallLog)* - TDLib function
-  ///
-  /// Sends log file for a call to Telegram servers.
-  ///
-  /// * [callId]: Call identifier.
-  /// * [logFile]: Call log file. Only inputFileLocal and inputFileGenerated are supported.
-  ///
-  /// [Ok] is returned on completion.
-class SendCallLog extends TdFunction {
+///
+/// Sends log file for a call to Telegram servers.
+///
+/// * [callId]: Call identifier.
+/// * [logFile]: Call log file. Only inputFileLocal and inputFileGenerated are supported.
+///
+/// [Ok] is returned on completion.
+final class SendCallLog extends TdFunction {
   
   /// **SendCallLog** *(sendCallLog)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class SendCallLog extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "call_id": callId,
       "log_file": logFile.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SendCallLog copyWith({
     int? callId,
@@ -47,8 +48,11 @@ class SendCallLog extends TdFunction {
     logFile: logFile ?? this.logFile,
   );
 
-  static const String constructor = 'sendCallLog';
-  
+  static const String objectType = 'sendCallLog';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

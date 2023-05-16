@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **GetChatInviteLink** *(getChatInviteLink)* - TDLib function
-  ///
-  /// Returns information about an invite link. Requires administrator privileges and can_invite_users right in the chat to get own links and owner privileges to get other links.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [inviteLink]: Invite link to get.
-  ///
-  /// [ChatInviteLink] is returned on completion.
-class GetChatInviteLink extends TdFunction {
+///
+/// Returns information about an invite link. Requires administrator privileges and can_invite_users right in the chat to get own links and owner privileges to get other links.
+///
+/// * [chatId]: Chat identifier.
+/// * [inviteLink]: Invite link to get.
+///
+/// [ChatInviteLink] is returned on completion.
+final class GetChatInviteLink extends TdFunction {
   
   /// **GetChatInviteLink** *(getChatInviteLink)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class GetChatInviteLink extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "invite_link": inviteLink,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetChatInviteLink copyWith({
     int? chatId,
@@ -47,8 +48,11 @@ class GetChatInviteLink extends TdFunction {
     inviteLink: inviteLink ?? this.inviteLink,
   );
 
-  static const String constructor = 'getChatInviteLink';
-  
+  static const String objectType = 'getChatInviteLink';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

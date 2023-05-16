@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **Usernames** *(usernames)* - basic class
-  ///
-  /// Describes usernames assigned to a user, a supergroup, or a channel.
-  ///
-  /// * [activeUsernames]: List of active usernames; the first one must be shown as the primary username. The order of active usernames can be changed with reorderActiveUsernames or reorderSupergroupActiveUsernames.
-  /// * [disabledUsernames]: List of currently disabled usernames; the username can be activated with toggleUsernameIsActive/toggleSupergroupUsernameIsActive.
-  /// * [editableUsername]: The active username, which can be changed with setUsername/setSupergroupUsername.
-class Usernames extends TdObject {
+///
+/// Describes usernames assigned to a user, a supergroup, or a channel.
+///
+/// * [activeUsernames]: List of active usernames; the first one must be shown as the primary username. The order of active usernames can be changed with reorderActiveUsernames or reorderSupergroupActiveUsernames.
+/// * [disabledUsernames]: List of currently disabled usernames; the username can be activated with toggleUsernameIsActive/toggleSupergroupUsernameIsActive.
+/// * [editableUsername]: The active username, which can be changed with setUsername/setSupergroupUsername.
+final class Usernames extends TdObject {
   
   /// **Usernames** *(usernames)* - basic class
   ///
@@ -40,14 +40,15 @@ class Usernames extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "active_usernames": activeUsernames.map((i) => i).toList(),
       "disabled_usernames": disabledUsernames.map((i) => i).toList(),
       "editable_username": editableUsername,
-    };
-  }
+		};
+	}
+
   
   Usernames copyWith({
     List<String>? activeUsernames,
@@ -59,8 +60,11 @@ class Usernames extends TdObject {
     editableUsername: editableUsername ?? this.editableUsername,
   );
 
-  static const String constructor = 'usernames';
-  
+  static const String objectType = 'usernames';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

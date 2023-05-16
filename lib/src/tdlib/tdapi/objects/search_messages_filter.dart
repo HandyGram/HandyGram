@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **SearchMessagesFilter** *(searchMessagesFilter)* - parent
-  ///
-  /// Represents a filter for message search results.
-class SearchMessagesFilter extends TdObject {
+///
+/// Represents a filter for message search results.
+sealed class SearchMessagesFilter extends TdObject {
   
   /// **SearchMessagesFilter** *(searchMessagesFilter)* - parent
   ///
@@ -30,65 +30,68 @@ class SearchMessagesFilter extends TdObject {
   /// * [SearchMessagesFilterPinned]
   factory SearchMessagesFilter.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case SearchMessagesFilterEmpty.constructor:
+      case SearchMessagesFilterEmpty.objectType:
         return SearchMessagesFilterEmpty.fromJson(json);
-      case SearchMessagesFilterAnimation.constructor:
+      case SearchMessagesFilterAnimation.objectType:
         return SearchMessagesFilterAnimation.fromJson(json);
-      case SearchMessagesFilterAudio.constructor:
+      case SearchMessagesFilterAudio.objectType:
         return SearchMessagesFilterAudio.fromJson(json);
-      case SearchMessagesFilterDocument.constructor:
+      case SearchMessagesFilterDocument.objectType:
         return SearchMessagesFilterDocument.fromJson(json);
-      case SearchMessagesFilterPhoto.constructor:
+      case SearchMessagesFilterPhoto.objectType:
         return SearchMessagesFilterPhoto.fromJson(json);
-      case SearchMessagesFilterVideo.constructor:
+      case SearchMessagesFilterVideo.objectType:
         return SearchMessagesFilterVideo.fromJson(json);
-      case SearchMessagesFilterVoiceNote.constructor:
+      case SearchMessagesFilterVoiceNote.objectType:
         return SearchMessagesFilterVoiceNote.fromJson(json);
-      case SearchMessagesFilterPhotoAndVideo.constructor:
+      case SearchMessagesFilterPhotoAndVideo.objectType:
         return SearchMessagesFilterPhotoAndVideo.fromJson(json);
-      case SearchMessagesFilterUrl.constructor:
+      case SearchMessagesFilterUrl.objectType:
         return SearchMessagesFilterUrl.fromJson(json);
-      case SearchMessagesFilterChatPhoto.constructor:
+      case SearchMessagesFilterChatPhoto.objectType:
         return SearchMessagesFilterChatPhoto.fromJson(json);
-      case SearchMessagesFilterVideoNote.constructor:
+      case SearchMessagesFilterVideoNote.objectType:
         return SearchMessagesFilterVideoNote.fromJson(json);
-      case SearchMessagesFilterVoiceAndVideoNote.constructor:
+      case SearchMessagesFilterVoiceAndVideoNote.objectType:
         return SearchMessagesFilterVoiceAndVideoNote.fromJson(json);
-      case SearchMessagesFilterMention.constructor:
+      case SearchMessagesFilterMention.objectType:
         return SearchMessagesFilterMention.fromJson(json);
-      case SearchMessagesFilterUnreadMention.constructor:
+      case SearchMessagesFilterUnreadMention.objectType:
         return SearchMessagesFilterUnreadMention.fromJson(json);
-      case SearchMessagesFilterUnreadReaction.constructor:
+      case SearchMessagesFilterUnreadReaction.objectType:
         return SearchMessagesFilterUnreadReaction.fromJson(json);
-      case SearchMessagesFilterFailedToSend.constructor:
+      case SearchMessagesFilterFailedToSend.objectType:
         return SearchMessagesFilterFailedToSend.fromJson(json);
-      case SearchMessagesFilterPinned.constructor:
+      case SearchMessagesFilterPinned.objectType:
         return SearchMessagesFilterPinned.fromJson(json);
       default:
-        return const SearchMessagesFilter();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of SearchMessagesFilter)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  SearchMessagesFilter copyWith() => const SearchMessagesFilter();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'searchMessagesFilter';
   
+  SearchMessagesFilter copyWith();
+
+  static const String objectType = 'searchMessagesFilter';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SearchMessagesFilterEmpty** *(searchMessagesFilterEmpty)* - child of SearchMessagesFilter
-  ///
-  /// Returns all found messages, no filter is applied.
-class SearchMessagesFilterEmpty extends SearchMessagesFilter {
+///
+/// Returns all found messages, no filter is applied.
+final class SearchMessagesFilterEmpty extends SearchMessagesFilter {
   
   /// **SearchMessagesFilterEmpty** *(searchMessagesFilterEmpty)* - child of SearchMessagesFilter
   ///
@@ -99,26 +102,30 @@ class SearchMessagesFilterEmpty extends SearchMessagesFilter {
   factory SearchMessagesFilterEmpty.fromJson(Map<String, dynamic> json) => const SearchMessagesFilterEmpty();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SearchMessagesFilterEmpty copyWith() => const SearchMessagesFilterEmpty();
 
-  static const String constructor = 'searchMessagesFilterEmpty';
-  
+  static const String objectType = 'searchMessagesFilterEmpty';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SearchMessagesFilterAnimation** *(searchMessagesFilterAnimation)* - child of SearchMessagesFilter
-  ///
-  /// Returns only animation messages.
-class SearchMessagesFilterAnimation extends SearchMessagesFilter {
+///
+/// Returns only animation messages.
+final class SearchMessagesFilterAnimation extends SearchMessagesFilter {
   
   /// **SearchMessagesFilterAnimation** *(searchMessagesFilterAnimation)* - child of SearchMessagesFilter
   ///
@@ -129,26 +136,30 @@ class SearchMessagesFilterAnimation extends SearchMessagesFilter {
   factory SearchMessagesFilterAnimation.fromJson(Map<String, dynamic> json) => const SearchMessagesFilterAnimation();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SearchMessagesFilterAnimation copyWith() => const SearchMessagesFilterAnimation();
 
-  static const String constructor = 'searchMessagesFilterAnimation';
-  
+  static const String objectType = 'searchMessagesFilterAnimation';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SearchMessagesFilterAudio** *(searchMessagesFilterAudio)* - child of SearchMessagesFilter
-  ///
-  /// Returns only audio messages.
-class SearchMessagesFilterAudio extends SearchMessagesFilter {
+///
+/// Returns only audio messages.
+final class SearchMessagesFilterAudio extends SearchMessagesFilter {
   
   /// **SearchMessagesFilterAudio** *(searchMessagesFilterAudio)* - child of SearchMessagesFilter
   ///
@@ -159,26 +170,30 @@ class SearchMessagesFilterAudio extends SearchMessagesFilter {
   factory SearchMessagesFilterAudio.fromJson(Map<String, dynamic> json) => const SearchMessagesFilterAudio();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SearchMessagesFilterAudio copyWith() => const SearchMessagesFilterAudio();
 
-  static const String constructor = 'searchMessagesFilterAudio';
-  
+  static const String objectType = 'searchMessagesFilterAudio';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SearchMessagesFilterDocument** *(searchMessagesFilterDocument)* - child of SearchMessagesFilter
-  ///
-  /// Returns only document messages.
-class SearchMessagesFilterDocument extends SearchMessagesFilter {
+///
+/// Returns only document messages.
+final class SearchMessagesFilterDocument extends SearchMessagesFilter {
   
   /// **SearchMessagesFilterDocument** *(searchMessagesFilterDocument)* - child of SearchMessagesFilter
   ///
@@ -189,26 +204,30 @@ class SearchMessagesFilterDocument extends SearchMessagesFilter {
   factory SearchMessagesFilterDocument.fromJson(Map<String, dynamic> json) => const SearchMessagesFilterDocument();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SearchMessagesFilterDocument copyWith() => const SearchMessagesFilterDocument();
 
-  static const String constructor = 'searchMessagesFilterDocument';
-  
+  static const String objectType = 'searchMessagesFilterDocument';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SearchMessagesFilterPhoto** *(searchMessagesFilterPhoto)* - child of SearchMessagesFilter
-  ///
-  /// Returns only photo messages.
-class SearchMessagesFilterPhoto extends SearchMessagesFilter {
+///
+/// Returns only photo messages.
+final class SearchMessagesFilterPhoto extends SearchMessagesFilter {
   
   /// **SearchMessagesFilterPhoto** *(searchMessagesFilterPhoto)* - child of SearchMessagesFilter
   ///
@@ -219,26 +238,30 @@ class SearchMessagesFilterPhoto extends SearchMessagesFilter {
   factory SearchMessagesFilterPhoto.fromJson(Map<String, dynamic> json) => const SearchMessagesFilterPhoto();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SearchMessagesFilterPhoto copyWith() => const SearchMessagesFilterPhoto();
 
-  static const String constructor = 'searchMessagesFilterPhoto';
-  
+  static const String objectType = 'searchMessagesFilterPhoto';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SearchMessagesFilterVideo** *(searchMessagesFilterVideo)* - child of SearchMessagesFilter
-  ///
-  /// Returns only video messages.
-class SearchMessagesFilterVideo extends SearchMessagesFilter {
+///
+/// Returns only video messages.
+final class SearchMessagesFilterVideo extends SearchMessagesFilter {
   
   /// **SearchMessagesFilterVideo** *(searchMessagesFilterVideo)* - child of SearchMessagesFilter
   ///
@@ -249,26 +272,30 @@ class SearchMessagesFilterVideo extends SearchMessagesFilter {
   factory SearchMessagesFilterVideo.fromJson(Map<String, dynamic> json) => const SearchMessagesFilterVideo();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SearchMessagesFilterVideo copyWith() => const SearchMessagesFilterVideo();
 
-  static const String constructor = 'searchMessagesFilterVideo';
-  
+  static const String objectType = 'searchMessagesFilterVideo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SearchMessagesFilterVoiceNote** *(searchMessagesFilterVoiceNote)* - child of SearchMessagesFilter
-  ///
-  /// Returns only voice note messages.
-class SearchMessagesFilterVoiceNote extends SearchMessagesFilter {
+///
+/// Returns only voice note messages.
+final class SearchMessagesFilterVoiceNote extends SearchMessagesFilter {
   
   /// **SearchMessagesFilterVoiceNote** *(searchMessagesFilterVoiceNote)* - child of SearchMessagesFilter
   ///
@@ -279,26 +306,30 @@ class SearchMessagesFilterVoiceNote extends SearchMessagesFilter {
   factory SearchMessagesFilterVoiceNote.fromJson(Map<String, dynamic> json) => const SearchMessagesFilterVoiceNote();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SearchMessagesFilterVoiceNote copyWith() => const SearchMessagesFilterVoiceNote();
 
-  static const String constructor = 'searchMessagesFilterVoiceNote';
-  
+  static const String objectType = 'searchMessagesFilterVoiceNote';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SearchMessagesFilterPhotoAndVideo** *(searchMessagesFilterPhotoAndVideo)* - child of SearchMessagesFilter
-  ///
-  /// Returns only photo and video messages.
-class SearchMessagesFilterPhotoAndVideo extends SearchMessagesFilter {
+///
+/// Returns only photo and video messages.
+final class SearchMessagesFilterPhotoAndVideo extends SearchMessagesFilter {
   
   /// **SearchMessagesFilterPhotoAndVideo** *(searchMessagesFilterPhotoAndVideo)* - child of SearchMessagesFilter
   ///
@@ -309,26 +340,30 @@ class SearchMessagesFilterPhotoAndVideo extends SearchMessagesFilter {
   factory SearchMessagesFilterPhotoAndVideo.fromJson(Map<String, dynamic> json) => const SearchMessagesFilterPhotoAndVideo();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SearchMessagesFilterPhotoAndVideo copyWith() => const SearchMessagesFilterPhotoAndVideo();
 
-  static const String constructor = 'searchMessagesFilterPhotoAndVideo';
-  
+  static const String objectType = 'searchMessagesFilterPhotoAndVideo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SearchMessagesFilterUrl** *(searchMessagesFilterUrl)* - child of SearchMessagesFilter
-  ///
-  /// Returns only messages containing URLs.
-class SearchMessagesFilterUrl extends SearchMessagesFilter {
+///
+/// Returns only messages containing URLs.
+final class SearchMessagesFilterUrl extends SearchMessagesFilter {
   
   /// **SearchMessagesFilterUrl** *(searchMessagesFilterUrl)* - child of SearchMessagesFilter
   ///
@@ -339,26 +374,30 @@ class SearchMessagesFilterUrl extends SearchMessagesFilter {
   factory SearchMessagesFilterUrl.fromJson(Map<String, dynamic> json) => const SearchMessagesFilterUrl();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SearchMessagesFilterUrl copyWith() => const SearchMessagesFilterUrl();
 
-  static const String constructor = 'searchMessagesFilterUrl';
-  
+  static const String objectType = 'searchMessagesFilterUrl';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SearchMessagesFilterChatPhoto** *(searchMessagesFilterChatPhoto)* - child of SearchMessagesFilter
-  ///
-  /// Returns only messages containing chat photos.
-class SearchMessagesFilterChatPhoto extends SearchMessagesFilter {
+///
+/// Returns only messages containing chat photos.
+final class SearchMessagesFilterChatPhoto extends SearchMessagesFilter {
   
   /// **SearchMessagesFilterChatPhoto** *(searchMessagesFilterChatPhoto)* - child of SearchMessagesFilter
   ///
@@ -369,26 +408,30 @@ class SearchMessagesFilterChatPhoto extends SearchMessagesFilter {
   factory SearchMessagesFilterChatPhoto.fromJson(Map<String, dynamic> json) => const SearchMessagesFilterChatPhoto();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SearchMessagesFilterChatPhoto copyWith() => const SearchMessagesFilterChatPhoto();
 
-  static const String constructor = 'searchMessagesFilterChatPhoto';
-  
+  static const String objectType = 'searchMessagesFilterChatPhoto';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SearchMessagesFilterVideoNote** *(searchMessagesFilterVideoNote)* - child of SearchMessagesFilter
-  ///
-  /// Returns only video note messages.
-class SearchMessagesFilterVideoNote extends SearchMessagesFilter {
+///
+/// Returns only video note messages.
+final class SearchMessagesFilterVideoNote extends SearchMessagesFilter {
   
   /// **SearchMessagesFilterVideoNote** *(searchMessagesFilterVideoNote)* - child of SearchMessagesFilter
   ///
@@ -399,26 +442,30 @@ class SearchMessagesFilterVideoNote extends SearchMessagesFilter {
   factory SearchMessagesFilterVideoNote.fromJson(Map<String, dynamic> json) => const SearchMessagesFilterVideoNote();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SearchMessagesFilterVideoNote copyWith() => const SearchMessagesFilterVideoNote();
 
-  static const String constructor = 'searchMessagesFilterVideoNote';
-  
+  static const String objectType = 'searchMessagesFilterVideoNote';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SearchMessagesFilterVoiceAndVideoNote** *(searchMessagesFilterVoiceAndVideoNote)* - child of SearchMessagesFilter
-  ///
-  /// Returns only voice and video note messages.
-class SearchMessagesFilterVoiceAndVideoNote extends SearchMessagesFilter {
+///
+/// Returns only voice and video note messages.
+final class SearchMessagesFilterVoiceAndVideoNote extends SearchMessagesFilter {
   
   /// **SearchMessagesFilterVoiceAndVideoNote** *(searchMessagesFilterVoiceAndVideoNote)* - child of SearchMessagesFilter
   ///
@@ -429,26 +476,30 @@ class SearchMessagesFilterVoiceAndVideoNote extends SearchMessagesFilter {
   factory SearchMessagesFilterVoiceAndVideoNote.fromJson(Map<String, dynamic> json) => const SearchMessagesFilterVoiceAndVideoNote();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SearchMessagesFilterVoiceAndVideoNote copyWith() => const SearchMessagesFilterVoiceAndVideoNote();
 
-  static const String constructor = 'searchMessagesFilterVoiceAndVideoNote';
-  
+  static const String objectType = 'searchMessagesFilterVoiceAndVideoNote';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SearchMessagesFilterMention** *(searchMessagesFilterMention)* - child of SearchMessagesFilter
-  ///
-  /// Returns only messages with mentions of the current user, or messages that are replies to their messages.
-class SearchMessagesFilterMention extends SearchMessagesFilter {
+///
+/// Returns only messages with mentions of the current user, or messages that are replies to their messages.
+final class SearchMessagesFilterMention extends SearchMessagesFilter {
   
   /// **SearchMessagesFilterMention** *(searchMessagesFilterMention)* - child of SearchMessagesFilter
   ///
@@ -459,26 +510,30 @@ class SearchMessagesFilterMention extends SearchMessagesFilter {
   factory SearchMessagesFilterMention.fromJson(Map<String, dynamic> json) => const SearchMessagesFilterMention();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SearchMessagesFilterMention copyWith() => const SearchMessagesFilterMention();
 
-  static const String constructor = 'searchMessagesFilterMention';
-  
+  static const String objectType = 'searchMessagesFilterMention';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SearchMessagesFilterUnreadMention** *(searchMessagesFilterUnreadMention)* - child of SearchMessagesFilter
-  ///
-  /// Returns only messages with unread mentions of the current user, or messages that are replies to their messages. When using this filter the results can't be additionally filtered by a query, a message thread or by the sending user.
-class SearchMessagesFilterUnreadMention extends SearchMessagesFilter {
+///
+/// Returns only messages with unread mentions of the current user, or messages that are replies to their messages. When using this filter the results can't be additionally filtered by a query, a message thread or by the sending user.
+final class SearchMessagesFilterUnreadMention extends SearchMessagesFilter {
   
   /// **SearchMessagesFilterUnreadMention** *(searchMessagesFilterUnreadMention)* - child of SearchMessagesFilter
   ///
@@ -489,26 +544,30 @@ class SearchMessagesFilterUnreadMention extends SearchMessagesFilter {
   factory SearchMessagesFilterUnreadMention.fromJson(Map<String, dynamic> json) => const SearchMessagesFilterUnreadMention();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SearchMessagesFilterUnreadMention copyWith() => const SearchMessagesFilterUnreadMention();
 
-  static const String constructor = 'searchMessagesFilterUnreadMention';
-  
+  static const String objectType = 'searchMessagesFilterUnreadMention';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SearchMessagesFilterUnreadReaction** *(searchMessagesFilterUnreadReaction)* - child of SearchMessagesFilter
-  ///
-  /// Returns only messages with unread reactions for the current user. When using this filter the results can't be additionally filtered by a query, a message thread or by the sending user.
-class SearchMessagesFilterUnreadReaction extends SearchMessagesFilter {
+///
+/// Returns only messages with unread reactions for the current user. When using this filter the results can't be additionally filtered by a query, a message thread or by the sending user.
+final class SearchMessagesFilterUnreadReaction extends SearchMessagesFilter {
   
   /// **SearchMessagesFilterUnreadReaction** *(searchMessagesFilterUnreadReaction)* - child of SearchMessagesFilter
   ///
@@ -519,26 +578,30 @@ class SearchMessagesFilterUnreadReaction extends SearchMessagesFilter {
   factory SearchMessagesFilterUnreadReaction.fromJson(Map<String, dynamic> json) => const SearchMessagesFilterUnreadReaction();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SearchMessagesFilterUnreadReaction copyWith() => const SearchMessagesFilterUnreadReaction();
 
-  static const String constructor = 'searchMessagesFilterUnreadReaction';
-  
+  static const String objectType = 'searchMessagesFilterUnreadReaction';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SearchMessagesFilterFailedToSend** *(searchMessagesFilterFailedToSend)* - child of SearchMessagesFilter
-  ///
-  /// Returns only failed to send messages. This filter can be used only if the message database is used.
-class SearchMessagesFilterFailedToSend extends SearchMessagesFilter {
+///
+/// Returns only failed to send messages. This filter can be used only if the message database is used.
+final class SearchMessagesFilterFailedToSend extends SearchMessagesFilter {
   
   /// **SearchMessagesFilterFailedToSend** *(searchMessagesFilterFailedToSend)* - child of SearchMessagesFilter
   ///
@@ -549,26 +612,30 @@ class SearchMessagesFilterFailedToSend extends SearchMessagesFilter {
   factory SearchMessagesFilterFailedToSend.fromJson(Map<String, dynamic> json) => const SearchMessagesFilterFailedToSend();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SearchMessagesFilterFailedToSend copyWith() => const SearchMessagesFilterFailedToSend();
 
-  static const String constructor = 'searchMessagesFilterFailedToSend';
-  
+  static const String objectType = 'searchMessagesFilterFailedToSend';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SearchMessagesFilterPinned** *(searchMessagesFilterPinned)* - child of SearchMessagesFilter
-  ///
-  /// Returns only pinned messages.
-class SearchMessagesFilterPinned extends SearchMessagesFilter {
+///
+/// Returns only pinned messages.
+final class SearchMessagesFilterPinned extends SearchMessagesFilter {
   
   /// **SearchMessagesFilterPinned** *(searchMessagesFilterPinned)* - child of SearchMessagesFilter
   ///
@@ -579,17 +646,21 @@ class SearchMessagesFilterPinned extends SearchMessagesFilter {
   factory SearchMessagesFilterPinned.fromJson(Map<String, dynamic> json) => const SearchMessagesFilterPinned();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SearchMessagesFilterPinned copyWith() => const SearchMessagesFilterPinned();
 
-  static const String constructor = 'searchMessagesFilterPinned';
-  
+  static const String objectType = 'searchMessagesFilterPinned';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

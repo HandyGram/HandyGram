@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **TextEntities** *(textEntities)* - basic class
-  ///
-  /// Contains a list of text entities.
-  ///
-  /// * [entities]: List of text entities.
-class TextEntities extends TdObject {
+///
+/// Contains a list of text entities.
+///
+/// * [entities]: List of text entities.
+final class TextEntities extends TdObject {
   
   /// **TextEntities** *(textEntities)* - basic class
   ///
@@ -38,12 +38,13 @@ class TextEntities extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "entities": entities.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   TextEntities copyWith({
     List<TextEntity>? entities,
@@ -55,8 +56,11 @@ class TextEntities extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'textEntities';
-  
+  static const String objectType = 'textEntities';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

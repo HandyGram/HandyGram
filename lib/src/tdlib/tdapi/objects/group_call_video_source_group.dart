@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **GroupCallVideoSourceGroup** *(groupCallVideoSourceGroup)* - basic class
-  ///
-  /// Describes a group of video synchronization source identifiers.
-  ///
-  /// * [semantics]: The semantics of sources, one of "SIM" or "FgroupCallVideoSourceGroup".
-  /// * [sourceIds]: The list of synchronization source identifiers.
-class GroupCallVideoSourceGroup extends TdObject {
+///
+/// Describes a group of video synchronization source identifiers.
+///
+/// * [semantics]: The semantics of sources, one of "SIM" or "FgroupCallVideoSourceGroup".
+/// * [sourceIds]: The list of synchronization source identifiers.
+final class GroupCallVideoSourceGroup extends TdObject {
   
   /// **GroupCallVideoSourceGroup** *(groupCallVideoSourceGroup)* - basic class
   ///
@@ -33,13 +33,14 @@ class GroupCallVideoSourceGroup extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "semantics": semantics,
       "source_ids": sourceIds.map((i) => i).toList(),
-    };
-  }
+		};
+	}
+
   
   GroupCallVideoSourceGroup copyWith({
     String? semantics,
@@ -49,8 +50,11 @@ class GroupCallVideoSourceGroup extends TdObject {
     sourceIds: sourceIds ?? this.sourceIds,
   );
 
-  static const String constructor = 'groupCallVideoSourceGroup';
-  
+  static const String objectType = 'groupCallVideoSourceGroup';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

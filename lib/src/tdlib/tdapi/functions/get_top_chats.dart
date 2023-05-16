@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **GetTopChats** *(getTopChats)* - TDLib function
-  ///
-  /// Returns a list of frequently used chats. Supported only if the chat info database is enabled.
-  ///
-  /// * [category]: Category of chats to be returned.
-  /// * [limit]: The maximum number of chats to be returned; up to 30.
-  ///
-  /// [Chats] is returned on completion.
-class GetTopChats extends TdFunction {
+///
+/// Returns a list of frequently used chats. Supported only if the chat info database is enabled.
+///
+/// * [category]: Category of chats to be returned.
+/// * [limit]: The maximum number of chats to be returned; up to 30.
+///
+/// [Chats] is returned on completion.
+final class GetTopChats extends TdFunction {
   
   /// **GetTopChats** *(getTopChats)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class GetTopChats extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "category": category.toJson(),
       "limit": limit,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetTopChats copyWith({
     TopChatCategory? category,
@@ -47,8 +48,11 @@ class GetTopChats extends TdFunction {
     limit: limit ?? this.limit,
   );
 
-  static const String constructor = 'getTopChats';
-  
+  static const String objectType = 'getTopChats';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

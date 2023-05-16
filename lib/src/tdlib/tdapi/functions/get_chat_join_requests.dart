@@ -1,17 +1,17 @@
 part of '../tdapi.dart';
 
 /// **GetChatJoinRequests** *(getChatJoinRequests)* - TDLib function
-  ///
-  /// Returns pending join requests in a chat.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [inviteLink]: Invite link for which to return join requests. If empty, all join requests will be returned. Requires administrator privileges and can_invite_users right in the chat for own links and owner privileges for other links.
-  /// * [query]: A query to search for in the first names, last names and usernames of the users to return.
-  /// * [offsetRequest]: A chat join request from which to return next requests; pass null to get results from the beginning *(optional)*.
-  /// * [limit]: The maximum number of requests to join the chat to return.
-  ///
-  /// [ChatJoinRequests] is returned on completion.
-class GetChatJoinRequests extends TdFunction {
+///
+/// Returns pending join requests in a chat.
+///
+/// * [chatId]: Chat identifier.
+/// * [inviteLink]: Invite link for which to return join requests. If empty, all join requests will be returned. Requires administrator privileges and can_invite_users right in the chat for own links and owner privileges for other links.
+/// * [query]: A query to search for in the first names, last names and usernames of the users to return.
+/// * [offsetRequest]: A chat join request from which to return next requests; pass null to get results from the beginning *(optional)*.
+/// * [limit]: The maximum number of requests to join the chat to return.
+///
+/// [ChatJoinRequests] is returned on completion.
+final class GetChatJoinRequests extends TdFunction {
   
   /// **GetChatJoinRequests** *(getChatJoinRequests)* - TDLib function
   ///
@@ -49,16 +49,17 @@ class GetChatJoinRequests extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "invite_link": inviteLink,
       "query": query,
       "offset_request": offsetRequest?.toJson(),
       "limit": limit,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetChatJoinRequests copyWith({
     int? chatId,
@@ -74,8 +75,11 @@ class GetChatJoinRequests extends TdFunction {
     limit: limit ?? this.limit,
   );
 
-  static const String constructor = 'getChatJoinRequests';
-  
+  static const String objectType = 'getChatJoinRequests';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

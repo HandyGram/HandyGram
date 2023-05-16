@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **LogTags** *(logTags)* - basic class
-  ///
-  /// Contains a list of available TDLib internal log tags.
-  ///
-  /// * [tags]: List of log tags.
-class LogTags extends TdObject {
+///
+/// Contains a list of available TDLib internal log tags.
+///
+/// * [tags]: List of log tags.
+final class LogTags extends TdObject {
   
   /// **LogTags** *(logTags)* - basic class
   ///
@@ -38,12 +38,13 @@ class LogTags extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "tags": tags.map((i) => i).toList(),
-    };
-  }
+		};
+	}
+
   
   LogTags copyWith({
     List<String>? tags,
@@ -55,8 +56,11 @@ class LogTags extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'logTags';
-  
+  static const String objectType = 'logTags';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

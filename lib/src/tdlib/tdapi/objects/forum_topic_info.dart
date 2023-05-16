@@ -1,19 +1,19 @@
 part of '../tdapi.dart';
 
 /// **ForumTopicInfo** *(forumTopicInfo)* - basic class
-  ///
-  /// Contains basic information about a forum topic.
-  ///
-  /// * [messageThreadId]: Message thread identifier of the topic.
-  /// * [name]: Name of the topic.
-  /// * [icon]: Icon of the topic.
-  /// * [creationDate]: Date the topic was created.
-  /// * [creatorId]: Identifier of the creator of the topic.
-  /// * [isGeneral]: True, if the topic is the General topic list.
-  /// * [isOutgoing]: True, if the topic was created by the current user.
-  /// * [isClosed]: True, if the topic is closed.
-  /// * [isHidden]: True, if the topic is hidden above the topic list and closed; for General topic only.
-class ForumTopicInfo extends TdObject {
+///
+/// Contains basic information about a forum topic.
+///
+/// * [messageThreadId]: Message thread identifier of the topic.
+/// * [name]: Name of the topic.
+/// * [icon]: Icon of the topic.
+/// * [creationDate]: Date the topic was created.
+/// * [creatorId]: Identifier of the creator of the topic.
+/// * [isGeneral]: True, if the topic is the General topic list.
+/// * [isOutgoing]: True, if the topic was created by the current user.
+/// * [isClosed]: True, if the topic is closed.
+/// * [isHidden]: True, if the topic is hidden above the topic list and closed; for General topic only.
+final class ForumTopicInfo extends TdObject {
   
   /// **ForumTopicInfo** *(forumTopicInfo)* - basic class
   ///
@@ -94,9 +94,9 @@ class ForumTopicInfo extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "message_thread_id": messageThreadId,
       "name": name,
       "icon": icon.toJson(),
@@ -106,8 +106,9 @@ class ForumTopicInfo extends TdObject {
       "is_outgoing": isOutgoing,
       "is_closed": isClosed,
       "is_hidden": isHidden,
-    };
-  }
+		};
+	}
+
   
   ForumTopicInfo copyWith({
     int? messageThreadId,
@@ -135,8 +136,11 @@ class ForumTopicInfo extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'forumTopicInfo';
-  
+  static const String objectType = 'forumTopicInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

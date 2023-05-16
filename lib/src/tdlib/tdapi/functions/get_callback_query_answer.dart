@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **GetCallbackQueryAnswer** *(getCallbackQueryAnswer)* - TDLib function
-  ///
-  /// Sends a callback query to a bot and returns an answer. Returns an error with code 502 if the bot fails to answer the query before the query timeout expires.
-  ///
-  /// * [chatId]: Identifier of the chat with the message.
-  /// * [messageId]: Identifier of the message from which the query originated.
-  /// * [payload]: Query payload.
-  ///
-  /// [CallbackQueryAnswer] is returned on completion.
-class GetCallbackQueryAnswer extends TdFunction {
+///
+/// Sends a callback query to a bot and returns an answer. Returns an error with code 502 if the bot fails to answer the query before the query timeout expires.
+///
+/// * [chatId]: Identifier of the chat with the message.
+/// * [messageId]: Identifier of the message from which the query originated.
+/// * [payload]: Query payload.
+///
+/// [CallbackQueryAnswer] is returned on completion.
+final class GetCallbackQueryAnswer extends TdFunction {
   
   /// **GetCallbackQueryAnswer** *(getCallbackQueryAnswer)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class GetCallbackQueryAnswer extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "payload": payload.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetCallbackQueryAnswer copyWith({
     int? chatId,
@@ -56,8 +57,11 @@ class GetCallbackQueryAnswer extends TdFunction {
     payload: payload ?? this.payload,
   );
 
-  static const String constructor = 'getCallbackQueryAnswer';
-  
+  static const String objectType = 'getCallbackQueryAnswer';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

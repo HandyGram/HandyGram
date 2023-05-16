@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **SearchCallMessages** *(searchCallMessages)* - TDLib function
-  ///
-  /// Searches for call messages. Returns the results in reverse chronological order (i.e., in order of decreasing message_id). For optimal performance, the number of returned messages is chosen by TDLib.
-  ///
-  /// * [offset]: Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results.
-  /// * [limit]: The maximum number of messages to be returned; up to 100. For optimal performance, the number of returned messages is chosen by TDLib and can be smaller than the specified limit.
-  /// * [onlyMissed]: Pass true to search only for messages with missed/declined calls.
-  ///
-  /// [FoundMessages] is returned on completion.
-class SearchCallMessages extends TdFunction {
+///
+/// Searches for call messages. Returns the results in reverse chronological order (i.e., in order of decreasing message_id). For optimal performance, the number of returned messages is chosen by TDLib.
+///
+/// * [offset]: Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results.
+/// * [limit]: The maximum number of messages to be returned; up to 100. For optimal performance, the number of returned messages is chosen by TDLib and can be smaller than the specified limit.
+/// * [onlyMissed]: Pass true to search only for messages with missed/declined calls.
+///
+/// [FoundMessages] is returned on completion.
+final class SearchCallMessages extends TdFunction {
   
   /// **SearchCallMessages** *(searchCallMessages)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class SearchCallMessages extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "offset": offset,
       "limit": limit,
       "only_missed": onlyMissed,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SearchCallMessages copyWith({
     String? offset,
@@ -56,8 +57,11 @@ class SearchCallMessages extends TdFunction {
     onlyMissed: onlyMissed ?? this.onlyMissed,
   );
 
-  static const String constructor = 'searchCallMessages';
-  
+  static const String objectType = 'searchCallMessages';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

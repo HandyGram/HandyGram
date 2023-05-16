@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetSavedNotificationSound** *(getSavedNotificationSound)* - TDLib function
-  ///
-  /// Returns saved notification sound by its identifier. Returns a 404 error if there is no saved notification sound with the specified identifier.
-  ///
-  /// * [notificationSoundId]: Identifier of the notification sound.
-  ///
-  /// [NotificationSounds] is returned on completion.
-class GetSavedNotificationSound extends TdFunction {
+///
+/// Returns saved notification sound by its identifier. Returns a 404 error if there is no saved notification sound with the specified identifier.
+///
+/// * [notificationSoundId]: Identifier of the notification sound.
+///
+/// [NotificationSounds] is returned on completion.
+final class GetSavedNotificationSound extends TdFunction {
   
   /// **GetSavedNotificationSound** *(getSavedNotificationSound)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetSavedNotificationSound extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "notification_sound_id": notificationSoundId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetSavedNotificationSound copyWith({
     int? notificationSoundId,
@@ -38,8 +39,11 @@ class GetSavedNotificationSound extends TdFunction {
     notificationSoundId: notificationSoundId ?? this.notificationSoundId,
   );
 
-  static const String constructor = 'getSavedNotificationSound';
-  
+  static const String objectType = 'getSavedNotificationSound';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

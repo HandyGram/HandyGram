@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **AcceptCall** *(acceptCall)* - TDLib function
-  ///
-  /// Accepts an incoming call.
-  ///
-  /// * [callId]: Call identifier.
-  /// * [protocol]: The call protocols supported by the application.
-  ///
-  /// [Ok] is returned on completion.
-class AcceptCall extends TdFunction {
+///
+/// Accepts an incoming call.
+///
+/// * [callId]: Call identifier.
+/// * [protocol]: The call protocols supported by the application.
+///
+/// [Ok] is returned on completion.
+final class AcceptCall extends TdFunction {
   
   /// **AcceptCall** *(acceptCall)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class AcceptCall extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "call_id": callId,
       "protocol": protocol.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   AcceptCall copyWith({
     int? callId,
@@ -47,8 +48,11 @@ class AcceptCall extends TdFunction {
     protocol: protocol ?? this.protocol,
   );
 
-  static const String constructor = 'acceptCall';
-  
+  static const String objectType = 'acceptCall';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

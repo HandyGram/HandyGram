@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **StorageStatisticsByFileType** *(storageStatisticsByFileType)* - basic class
-  ///
-  /// Contains the storage usage statistics for a specific file type.
-  ///
-  /// * [fileType]: File type.
-  /// * [size]: Total size of the files, in bytes.
-  /// * [count]: Total number of files.
-class StorageStatisticsByFileType extends TdObject {
+///
+/// Contains the storage usage statistics for a specific file type.
+///
+/// * [fileType]: File type.
+/// * [size]: Total size of the files, in bytes.
+/// * [count]: Total number of files.
+final class StorageStatisticsByFileType extends TdObject {
   
   /// **StorageStatisticsByFileType** *(storageStatisticsByFileType)* - basic class
   ///
@@ -40,14 +40,15 @@ class StorageStatisticsByFileType extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "file_type": fileType.toJson(),
       "size": size,
       "count": count,
-    };
-  }
+		};
+	}
+
   
   StorageStatisticsByFileType copyWith({
     FileType? fileType,
@@ -59,8 +60,11 @@ class StorageStatisticsByFileType extends TdObject {
     count: count ?? this.count,
   );
 
-  static const String constructor = 'storageStatisticsByFileType';
-  
+  static const String objectType = 'storageStatisticsByFileType';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

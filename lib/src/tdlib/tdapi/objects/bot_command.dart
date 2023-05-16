@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **BotCommand** *(botCommand)* - basic class
-  ///
-  /// Represents a command supported by a bot.
-  ///
-  /// * [command]: Text of the bot command.
-  /// * [description]: Description of the bot command.
-class BotCommand extends TdObject {
+///
+/// Represents a command supported by a bot.
+///
+/// * [command]: Text of the bot command.
+/// * [description]: Description of the bot command.
+final class BotCommand extends TdObject {
   
   /// **BotCommand** *(botCommand)* - basic class
   ///
@@ -33,13 +33,14 @@ class BotCommand extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "command": command,
       "description": description,
-    };
-  }
+		};
+	}
+
   
   BotCommand copyWith({
     String? command,
@@ -49,8 +50,11 @@ class BotCommand extends TdObject {
     description: description ?? this.description,
   );
 
-  static const String constructor = 'botCommand';
-  
+  static const String objectType = 'botCommand';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

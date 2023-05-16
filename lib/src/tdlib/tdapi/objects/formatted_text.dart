@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **FormattedText** *(formattedText)* - basic class
-  ///
-  /// A text with some entities.
-  ///
-  /// * [text]: The text.
-  /// * [entities]: Entities contained in the text. Entities can be nested, but must not mutually intersect with each other.. Pre, Code and PreCode entities can't contain other entities. Bold, Italic, Underline, Strikethrough, and Spoiler entities can contain and can be part of any other entities. All other entities can't contain each other.
-class FormattedText extends TdObject {
+///
+/// A text with some entities.
+///
+/// * [text]: The text.
+/// * [entities]: Entities contained in the text. Entities can be nested, but must not mutually intersect with each other.. Pre, Code and PreCode entities can't contain other entities. Bold, Italic, Underline, Strikethrough, and Spoiler entities can contain and can be part of any other entities. All other entities can't contain each other.
+final class FormattedText extends TdObject {
   
   /// **FormattedText** *(formattedText)* - basic class
   ///
@@ -45,13 +45,14 @@ class FormattedText extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text,
       "entities": entities.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   FormattedText copyWith({
     String? text,
@@ -65,8 +66,11 @@ class FormattedText extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'formattedText';
-  
+  static const String objectType = 'formattedText';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,19 +1,19 @@
 part of '../tdapi.dart';
 
 /// **ChatPermissions** *(chatPermissions)* - basic class
-  ///
-  /// Describes actions that a user is allowed to take in a chat.
-  ///
-  /// * [canSendMessages]: True, if the user can send text messages, contacts, invoices, locations, and venues.
-  /// * [canSendMediaMessages]: True, if the user can send audio files, documents, photos, videos, video notes, and voice notes. Implies can_send_messages permissions.
-  /// * [canSendPolls]: True, if the user can send polls. Implies can_send_messages permissions.
-  /// * [canSendOtherMessages]: True, if the user can send animations, games, stickers, and dice and use inline bots. Implies can_send_messages permissions.
-  /// * [canAddWebPagePreviews]: True, if the user may add a web page preview to their messages. Implies can_send_messages permissions.
-  /// * [canChangeInfo]: True, if the user can change the chat title, photo, and other settings.
-  /// * [canInviteUsers]: True, if the user can invite new users to the chat.
-  /// * [canPinMessages]: True, if the user can pin messages.
-  /// * [canManageTopics]: True, if the user can manage topics.
-class ChatPermissions extends TdObject {
+///
+/// Describes actions that a user is allowed to take in a chat.
+///
+/// * [canSendMessages]: True, if the user can send text messages, contacts, invoices, locations, and venues.
+/// * [canSendMediaMessages]: True, if the user can send audio files, documents, photos, videos, video notes, and voice notes. Implies can_send_messages permissions.
+/// * [canSendPolls]: True, if the user can send polls. Implies can_send_messages permissions.
+/// * [canSendOtherMessages]: True, if the user can send animations, games, stickers, and dice and use inline bots. Implies can_send_messages permissions.
+/// * [canAddWebPagePreviews]: True, if the user may add a web page preview to their messages. Implies can_send_messages permissions.
+/// * [canChangeInfo]: True, if the user can change the chat title, photo, and other settings.
+/// * [canInviteUsers]: True, if the user can invite new users to the chat.
+/// * [canPinMessages]: True, if the user can pin messages.
+/// * [canManageTopics]: True, if the user can manage topics.
+final class ChatPermissions extends TdObject {
   
   /// **ChatPermissions** *(chatPermissions)* - basic class
   ///
@@ -82,9 +82,9 @@ class ChatPermissions extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "can_send_messages": canSendMessages,
       "can_send_media_messages": canSendMediaMessages,
       "can_send_polls": canSendPolls,
@@ -94,8 +94,9 @@ class ChatPermissions extends TdObject {
       "can_invite_users": canInviteUsers,
       "can_pin_messages": canPinMessages,
       "can_manage_topics": canManageTopics,
-    };
-  }
+		};
+	}
+
   
   ChatPermissions copyWith({
     bool? canSendMessages,
@@ -119,8 +120,11 @@ class ChatPermissions extends TdObject {
     canManageTopics: canManageTopics ?? this.canManageTopics,
   );
 
-  static const String constructor = 'chatPermissions';
-  
+  static const String objectType = 'chatPermissions';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

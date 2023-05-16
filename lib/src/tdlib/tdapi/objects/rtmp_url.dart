@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **RtmpUrl** *(rtmpUrl)* - basic class
-  ///
-  /// Represents an RTMP URL.
-  ///
-  /// * [url]: The URL.
-  /// * [streamKey]: Stream key.
-class RtmpUrl extends TdObject {
+///
+/// Represents an RTMP URL.
+///
+/// * [url]: The URL.
+/// * [streamKey]: Stream key.
+final class RtmpUrl extends TdObject {
   
   /// **RtmpUrl** *(rtmpUrl)* - basic class
   ///
@@ -45,13 +45,14 @@ class RtmpUrl extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "url": url,
       "stream_key": streamKey,
-    };
-  }
+		};
+	}
+
   
   RtmpUrl copyWith({
     String? url,
@@ -65,8 +66,11 @@ class RtmpUrl extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'rtmpUrl';
-  
+  static const String objectType = 'rtmpUrl';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

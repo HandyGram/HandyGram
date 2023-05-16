@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **PaymentProvider** *(paymentProvider)* - parent
-  ///
-  /// Contains information about a payment provider.
-class PaymentProvider extends TdObject {
+///
+/// Contains information about a payment provider.
+sealed class PaymentProvider extends TdObject {
   
   /// **PaymentProvider** *(paymentProvider)* - parent
   ///
@@ -16,39 +16,42 @@ class PaymentProvider extends TdObject {
   /// * [PaymentProviderOther]
   factory PaymentProvider.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case PaymentProviderSmartGlocal.constructor:
+      case PaymentProviderSmartGlocal.objectType:
         return PaymentProviderSmartGlocal.fromJson(json);
-      case PaymentProviderStripe.constructor:
+      case PaymentProviderStripe.objectType:
         return PaymentProviderStripe.fromJson(json);
-      case PaymentProviderOther.constructor:
+      case PaymentProviderOther.objectType:
         return PaymentProviderOther.fromJson(json);
       default:
-        return const PaymentProvider();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of PaymentProvider)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  PaymentProvider copyWith() => const PaymentProvider();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'paymentProvider';
   
+  PaymentProvider copyWith();
+
+  static const String objectType = 'paymentProvider';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PaymentProviderSmartGlocal** *(paymentProviderSmartGlocal)* - child of PaymentProvider
-  ///
-  /// Smart Glocal payment provider.
-  ///
-  /// * [publicToken]: Public payment token.
-class PaymentProviderSmartGlocal extends PaymentProvider {
+///
+/// Smart Glocal payment provider.
+///
+/// * [publicToken]: Public payment token.
+final class PaymentProviderSmartGlocal extends PaymentProvider {
   
   /// **PaymentProviderSmartGlocal** *(paymentProviderSmartGlocal)* - child of PaymentProvider
   ///
@@ -69,12 +72,13 @@ class PaymentProviderSmartGlocal extends PaymentProvider {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "public_token": publicToken,
-    };
-  }
+		};
+	}
+
   
   @override
   PaymentProviderSmartGlocal copyWith({
@@ -83,22 +87,25 @@ class PaymentProviderSmartGlocal extends PaymentProvider {
     publicToken: publicToken ?? this.publicToken,
   );
 
-  static const String constructor = 'paymentProviderSmartGlocal';
-  
+  static const String objectType = 'paymentProviderSmartGlocal';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PaymentProviderStripe** *(paymentProviderStripe)* - child of PaymentProvider
-  ///
-  /// Stripe payment provider.
-  ///
-  /// * [publishableKey]: Stripe API publishable key.
-  /// * [needCountry]: True, if the user country must be provided.
-  /// * [needPostalCode]: True, if the user ZIP/postal code must be provided.
-  /// * [needCardholderName]: True, if the cardholder name must be provided.
-class PaymentProviderStripe extends PaymentProvider {
+///
+/// Stripe payment provider.
+///
+/// * [publishableKey]: Stripe API publishable key.
+/// * [needCountry]: True, if the user country must be provided.
+/// * [needPostalCode]: True, if the user ZIP/postal code must be provided.
+/// * [needCardholderName]: True, if the cardholder name must be provided.
+final class PaymentProviderStripe extends PaymentProvider {
   
   /// **PaymentProviderStripe** *(paymentProviderStripe)* - child of PaymentProvider
   ///
@@ -137,15 +144,16 @@ class PaymentProviderStripe extends PaymentProvider {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "publishable_key": publishableKey,
       "need_country": needCountry,
       "need_postal_code": needPostalCode,
       "need_cardholder_name": needCardholderName,
-    };
-  }
+		};
+	}
+
   
   @override
   PaymentProviderStripe copyWith({
@@ -160,19 +168,22 @@ class PaymentProviderStripe extends PaymentProvider {
     needCardholderName: needCardholderName ?? this.needCardholderName,
   );
 
-  static const String constructor = 'paymentProviderStripe';
-  
+  static const String objectType = 'paymentProviderStripe';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PaymentProviderOther** *(paymentProviderOther)* - child of PaymentProvider
-  ///
-  /// Some other payment provider, for which a web payment form must be shown.
-  ///
-  /// * [url]: Payment form URL.
-class PaymentProviderOther extends PaymentProvider {
+///
+/// Some other payment provider, for which a web payment form must be shown.
+///
+/// * [url]: Payment form URL.
+final class PaymentProviderOther extends PaymentProvider {
   
   /// **PaymentProviderOther** *(paymentProviderOther)* - child of PaymentProvider
   ///
@@ -193,12 +204,13 @@ class PaymentProviderOther extends PaymentProvider {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "url": url,
-    };
-  }
+		};
+	}
+
   
   @override
   PaymentProviderOther copyWith({
@@ -207,8 +219,11 @@ class PaymentProviderOther extends PaymentProvider {
     url: url ?? this.url,
   );
 
-  static const String constructor = 'paymentProviderOther';
-  
+  static const String objectType = 'paymentProviderOther';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

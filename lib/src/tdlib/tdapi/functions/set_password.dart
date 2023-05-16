@@ -1,17 +1,17 @@
 part of '../tdapi.dart';
 
 /// **SetPassword** *(setPassword)* - TDLib function
-  ///
-  /// Changes the 2-step verification password for the current user. If a new recovery email address is specified, then the change will not be applied until the new recovery email address is confirmed.
-  ///
-  /// * [oldPassword]: Previous 2-step verification password of the user.
-  /// * [newPassword]: New 2-step verification password of the user; may be empty to remove the password.
-  /// * [newHint]: New password hint; may be empty.
-  /// * [setRecoveryEmailAddress]: Pass true to change also the recovery email address.
-  /// * [newRecoveryEmailAddress]: New recovery email address; may be empty.
-  ///
-  /// [PasswordState] is returned on completion.
-class SetPassword extends TdFunction {
+///
+/// Changes the 2-step verification password for the current user. If a new recovery email address is specified, then the change will not be applied until the new recovery email address is confirmed.
+///
+/// * [oldPassword]: Previous 2-step verification password of the user.
+/// * [newPassword]: New 2-step verification password of the user; may be empty to remove the password.
+/// * [newHint]: New password hint; may be empty.
+/// * [setRecoveryEmailAddress]: Pass true to change also the recovery email address.
+/// * [newRecoveryEmailAddress]: New recovery email address; may be empty.
+///
+/// [PasswordState] is returned on completion.
+final class SetPassword extends TdFunction {
   
   /// **SetPassword** *(setPassword)* - TDLib function
   ///
@@ -49,16 +49,17 @@ class SetPassword extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "old_password": oldPassword,
       "new_password": newPassword,
       "new_hint": newHint,
       "set_recovery_email_address": setRecoveryEmailAddress,
       "new_recovery_email_address": newRecoveryEmailAddress,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetPassword copyWith({
     String? oldPassword,
@@ -74,8 +75,11 @@ class SetPassword extends TdFunction {
     newRecoveryEmailAddress: newRecoveryEmailAddress ?? this.newRecoveryEmailAddress,
   );
 
-  static const String constructor = 'setPassword';
-  
+  static const String objectType = 'setPassword';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

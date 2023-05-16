@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **RemoveTopChat** *(removeTopChat)* - TDLib function
-  ///
-  /// Removes a chat from the list of frequently used chats. Supported only if the chat info database is enabled.
-  ///
-  /// * [category]: Category of frequently used chats.
-  /// * [chatId]: Chat identifier.
-  ///
-  /// [Ok] is returned on completion.
-class RemoveTopChat extends TdFunction {
+///
+/// Removes a chat from the list of frequently used chats. Supported only if the chat info database is enabled.
+///
+/// * [category]: Category of frequently used chats.
+/// * [chatId]: Chat identifier.
+///
+/// [Ok] is returned on completion.
+final class RemoveTopChat extends TdFunction {
   
   /// **RemoveTopChat** *(removeTopChat)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class RemoveTopChat extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "category": category.toJson(),
       "chat_id": chatId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   RemoveTopChat copyWith({
     TopChatCategory? category,
@@ -47,8 +48,11 @@ class RemoveTopChat extends TdFunction {
     chatId: chatId ?? this.chatId,
   );
 
-  static const String constructor = 'removeTopChat';
-  
+  static const String objectType = 'removeTopChat';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **ChatEventAction** *(chatEventAction)* - parent
-  ///
-  /// Represents a chat event.
-class ChatEventAction extends TdObject {
+///
+/// Represents a chat event.
+sealed class ChatEventAction extends TdObject {
   
   /// **ChatEventAction** *(chatEventAction)* - parent
   ///
@@ -57,122 +57,125 @@ class ChatEventAction extends TdObject {
   /// * [ChatEventForumTopicPinned]
   factory ChatEventAction.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case ChatEventMessageEdited.constructor:
+      case ChatEventMessageEdited.objectType:
         return ChatEventMessageEdited.fromJson(json);
-      case ChatEventMessageDeleted.constructor:
+      case ChatEventMessageDeleted.objectType:
         return ChatEventMessageDeleted.fromJson(json);
-      case ChatEventMessagePinned.constructor:
+      case ChatEventMessagePinned.objectType:
         return ChatEventMessagePinned.fromJson(json);
-      case ChatEventMessageUnpinned.constructor:
+      case ChatEventMessageUnpinned.objectType:
         return ChatEventMessageUnpinned.fromJson(json);
-      case ChatEventPollStopped.constructor:
+      case ChatEventPollStopped.objectType:
         return ChatEventPollStopped.fromJson(json);
-      case ChatEventMemberJoined.constructor:
+      case ChatEventMemberJoined.objectType:
         return ChatEventMemberJoined.fromJson(json);
-      case ChatEventMemberJoinedByInviteLink.constructor:
+      case ChatEventMemberJoinedByInviteLink.objectType:
         return ChatEventMemberJoinedByInviteLink.fromJson(json);
-      case ChatEventMemberJoinedByRequest.constructor:
+      case ChatEventMemberJoinedByRequest.objectType:
         return ChatEventMemberJoinedByRequest.fromJson(json);
-      case ChatEventMemberInvited.constructor:
+      case ChatEventMemberInvited.objectType:
         return ChatEventMemberInvited.fromJson(json);
-      case ChatEventMemberLeft.constructor:
+      case ChatEventMemberLeft.objectType:
         return ChatEventMemberLeft.fromJson(json);
-      case ChatEventMemberPromoted.constructor:
+      case ChatEventMemberPromoted.objectType:
         return ChatEventMemberPromoted.fromJson(json);
-      case ChatEventMemberRestricted.constructor:
+      case ChatEventMemberRestricted.objectType:
         return ChatEventMemberRestricted.fromJson(json);
-      case ChatEventAvailableReactionsChanged.constructor:
+      case ChatEventAvailableReactionsChanged.objectType:
         return ChatEventAvailableReactionsChanged.fromJson(json);
-      case ChatEventDescriptionChanged.constructor:
+      case ChatEventDescriptionChanged.objectType:
         return ChatEventDescriptionChanged.fromJson(json);
-      case ChatEventLinkedChatChanged.constructor:
+      case ChatEventLinkedChatChanged.objectType:
         return ChatEventLinkedChatChanged.fromJson(json);
-      case ChatEventLocationChanged.constructor:
+      case ChatEventLocationChanged.objectType:
         return ChatEventLocationChanged.fromJson(json);
-      case ChatEventMessageAutoDeleteTimeChanged.constructor:
+      case ChatEventMessageAutoDeleteTimeChanged.objectType:
         return ChatEventMessageAutoDeleteTimeChanged.fromJson(json);
-      case ChatEventPermissionsChanged.constructor:
+      case ChatEventPermissionsChanged.objectType:
         return ChatEventPermissionsChanged.fromJson(json);
-      case ChatEventPhotoChanged.constructor:
+      case ChatEventPhotoChanged.objectType:
         return ChatEventPhotoChanged.fromJson(json);
-      case ChatEventSlowModeDelayChanged.constructor:
+      case ChatEventSlowModeDelayChanged.objectType:
         return ChatEventSlowModeDelayChanged.fromJson(json);
-      case ChatEventStickerSetChanged.constructor:
+      case ChatEventStickerSetChanged.objectType:
         return ChatEventStickerSetChanged.fromJson(json);
-      case ChatEventTitleChanged.constructor:
+      case ChatEventTitleChanged.objectType:
         return ChatEventTitleChanged.fromJson(json);
-      case ChatEventUsernameChanged.constructor:
+      case ChatEventUsernameChanged.objectType:
         return ChatEventUsernameChanged.fromJson(json);
-      case ChatEventActiveUsernamesChanged.constructor:
+      case ChatEventActiveUsernamesChanged.objectType:
         return ChatEventActiveUsernamesChanged.fromJson(json);
-      case ChatEventHasProtectedContentToggled.constructor:
+      case ChatEventHasProtectedContentToggled.objectType:
         return ChatEventHasProtectedContentToggled.fromJson(json);
-      case ChatEventInvitesToggled.constructor:
+      case ChatEventInvitesToggled.objectType:
         return ChatEventInvitesToggled.fromJson(json);
-      case ChatEventIsAllHistoryAvailableToggled.constructor:
+      case ChatEventIsAllHistoryAvailableToggled.objectType:
         return ChatEventIsAllHistoryAvailableToggled.fromJson(json);
-      case ChatEventHasAggressiveAntiSpamEnabledToggled.constructor:
+      case ChatEventHasAggressiveAntiSpamEnabledToggled.objectType:
         return ChatEventHasAggressiveAntiSpamEnabledToggled.fromJson(json);
-      case ChatEventSignMessagesToggled.constructor:
+      case ChatEventSignMessagesToggled.objectType:
         return ChatEventSignMessagesToggled.fromJson(json);
-      case ChatEventInviteLinkEdited.constructor:
+      case ChatEventInviteLinkEdited.objectType:
         return ChatEventInviteLinkEdited.fromJson(json);
-      case ChatEventInviteLinkRevoked.constructor:
+      case ChatEventInviteLinkRevoked.objectType:
         return ChatEventInviteLinkRevoked.fromJson(json);
-      case ChatEventInviteLinkDeleted.constructor:
+      case ChatEventInviteLinkDeleted.objectType:
         return ChatEventInviteLinkDeleted.fromJson(json);
-      case ChatEventVideoChatCreated.constructor:
+      case ChatEventVideoChatCreated.objectType:
         return ChatEventVideoChatCreated.fromJson(json);
-      case ChatEventVideoChatEnded.constructor:
+      case ChatEventVideoChatEnded.objectType:
         return ChatEventVideoChatEnded.fromJson(json);
-      case ChatEventVideoChatMuteNewParticipantsToggled.constructor:
+      case ChatEventVideoChatMuteNewParticipantsToggled.objectType:
         return ChatEventVideoChatMuteNewParticipantsToggled.fromJson(json);
-      case ChatEventVideoChatParticipantIsMutedToggled.constructor:
+      case ChatEventVideoChatParticipantIsMutedToggled.objectType:
         return ChatEventVideoChatParticipantIsMutedToggled.fromJson(json);
-      case ChatEventVideoChatParticipantVolumeLevelChanged.constructor:
+      case ChatEventVideoChatParticipantVolumeLevelChanged.objectType:
         return ChatEventVideoChatParticipantVolumeLevelChanged.fromJson(json);
-      case ChatEventIsForumToggled.constructor:
+      case ChatEventIsForumToggled.objectType:
         return ChatEventIsForumToggled.fromJson(json);
-      case ChatEventForumTopicCreated.constructor:
+      case ChatEventForumTopicCreated.objectType:
         return ChatEventForumTopicCreated.fromJson(json);
-      case ChatEventForumTopicEdited.constructor:
+      case ChatEventForumTopicEdited.objectType:
         return ChatEventForumTopicEdited.fromJson(json);
-      case ChatEventForumTopicToggleIsClosed.constructor:
+      case ChatEventForumTopicToggleIsClosed.objectType:
         return ChatEventForumTopicToggleIsClosed.fromJson(json);
-      case ChatEventForumTopicToggleIsHidden.constructor:
+      case ChatEventForumTopicToggleIsHidden.objectType:
         return ChatEventForumTopicToggleIsHidden.fromJson(json);
-      case ChatEventForumTopicDeleted.constructor:
+      case ChatEventForumTopicDeleted.objectType:
         return ChatEventForumTopicDeleted.fromJson(json);
-      case ChatEventForumTopicPinned.constructor:
+      case ChatEventForumTopicPinned.objectType:
         return ChatEventForumTopicPinned.fromJson(json);
       default:
-        return const ChatEventAction();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of ChatEventAction)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  ChatEventAction copyWith() => const ChatEventAction();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'chatEventAction';
   
+  ChatEventAction copyWith();
+
+  static const String objectType = 'chatEventAction';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventMessageEdited** *(chatEventMessageEdited)* - child of ChatEventAction
-  ///
-  /// A message was edited.
-  ///
-  /// * [oldMessage]: The original message before the edit.
-  /// * [newMessage]: The message after it was edited.
-class ChatEventMessageEdited extends ChatEventAction {
+///
+/// A message was edited.
+///
+/// * [oldMessage]: The original message before the edit.
+/// * [newMessage]: The message after it was edited.
+final class ChatEventMessageEdited extends ChatEventAction {
   
   /// **ChatEventMessageEdited** *(chatEventMessageEdited)* - child of ChatEventAction
   ///
@@ -199,13 +202,14 @@ class ChatEventMessageEdited extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "old_message": oldMessage.toJson(),
       "new_message": newMessage.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventMessageEdited copyWith({
@@ -216,20 +220,23 @@ class ChatEventMessageEdited extends ChatEventAction {
     newMessage: newMessage ?? this.newMessage,
   );
 
-  static const String constructor = 'chatEventMessageEdited';
-  
+  static const String objectType = 'chatEventMessageEdited';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventMessageDeleted** *(chatEventMessageDeleted)* - child of ChatEventAction
-  ///
-  /// A message was deleted.
-  ///
-  /// * [message]: Deleted message.
-  /// * [canReportAntiSpamFalsePositive]: True, if the message deletion can be reported via reportSupergroupAntiSpamFalsePositive.
-class ChatEventMessageDeleted extends ChatEventAction {
+///
+/// A message was deleted.
+///
+/// * [message]: Deleted message.
+/// * [canReportAntiSpamFalsePositive]: True, if the message deletion can be reported via reportSupergroupAntiSpamFalsePositive.
+final class ChatEventMessageDeleted extends ChatEventAction {
   
   /// **ChatEventMessageDeleted** *(chatEventMessageDeleted)* - child of ChatEventAction
   ///
@@ -256,13 +263,14 @@ class ChatEventMessageDeleted extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "message": message.toJson(),
       "can_report_anti_spam_false_positive": canReportAntiSpamFalsePositive,
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventMessageDeleted copyWith({
@@ -273,19 +281,22 @@ class ChatEventMessageDeleted extends ChatEventAction {
     canReportAntiSpamFalsePositive: canReportAntiSpamFalsePositive ?? this.canReportAntiSpamFalsePositive,
   );
 
-  static const String constructor = 'chatEventMessageDeleted';
-  
+  static const String objectType = 'chatEventMessageDeleted';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventMessagePinned** *(chatEventMessagePinned)* - child of ChatEventAction
-  ///
-  /// A message was pinned.
-  ///
-  /// * [message]: Pinned message.
-class ChatEventMessagePinned extends ChatEventAction {
+///
+/// A message was pinned.
+///
+/// * [message]: Pinned message.
+final class ChatEventMessagePinned extends ChatEventAction {
   
   /// **ChatEventMessagePinned** *(chatEventMessagePinned)* - child of ChatEventAction
   ///
@@ -306,12 +317,13 @@ class ChatEventMessagePinned extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "message": message.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventMessagePinned copyWith({
@@ -320,19 +332,22 @@ class ChatEventMessagePinned extends ChatEventAction {
     message: message ?? this.message,
   );
 
-  static const String constructor = 'chatEventMessagePinned';
-  
+  static const String objectType = 'chatEventMessagePinned';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventMessageUnpinned** *(chatEventMessageUnpinned)* - child of ChatEventAction
-  ///
-  /// A message was unpinned.
-  ///
-  /// * [message]: Unpinned message.
-class ChatEventMessageUnpinned extends ChatEventAction {
+///
+/// A message was unpinned.
+///
+/// * [message]: Unpinned message.
+final class ChatEventMessageUnpinned extends ChatEventAction {
   
   /// **ChatEventMessageUnpinned** *(chatEventMessageUnpinned)* - child of ChatEventAction
   ///
@@ -353,12 +368,13 @@ class ChatEventMessageUnpinned extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "message": message.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventMessageUnpinned copyWith({
@@ -367,19 +383,22 @@ class ChatEventMessageUnpinned extends ChatEventAction {
     message: message ?? this.message,
   );
 
-  static const String constructor = 'chatEventMessageUnpinned';
-  
+  static const String objectType = 'chatEventMessageUnpinned';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventPollStopped** *(chatEventPollStopped)* - child of ChatEventAction
-  ///
-  /// A poll in a message was stopped.
-  ///
-  /// * [message]: The message with the poll.
-class ChatEventPollStopped extends ChatEventAction {
+///
+/// A poll in a message was stopped.
+///
+/// * [message]: The message with the poll.
+final class ChatEventPollStopped extends ChatEventAction {
   
   /// **ChatEventPollStopped** *(chatEventPollStopped)* - child of ChatEventAction
   ///
@@ -400,12 +419,13 @@ class ChatEventPollStopped extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "message": message.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventPollStopped copyWith({
@@ -414,17 +434,20 @@ class ChatEventPollStopped extends ChatEventAction {
     message: message ?? this.message,
   );
 
-  static const String constructor = 'chatEventPollStopped';
-  
+  static const String objectType = 'chatEventPollStopped';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventMemberJoined** *(chatEventMemberJoined)* - child of ChatEventAction
-  ///
-  /// A new member joined the chat.
-class ChatEventMemberJoined extends ChatEventAction {
+///
+/// A new member joined the chat.
+final class ChatEventMemberJoined extends ChatEventAction {
   
   /// **ChatEventMemberJoined** *(chatEventMemberJoined)* - child of ChatEventAction
   ///
@@ -435,28 +458,32 @@ class ChatEventMemberJoined extends ChatEventAction {
   factory ChatEventMemberJoined.fromJson(Map<String, dynamic> json) => const ChatEventMemberJoined();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   ChatEventMemberJoined copyWith() => const ChatEventMemberJoined();
 
-  static const String constructor = 'chatEventMemberJoined';
-  
+  static const String objectType = 'chatEventMemberJoined';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventMemberJoinedByInviteLink** *(chatEventMemberJoinedByInviteLink)* - child of ChatEventAction
-  ///
-  /// A new member joined the chat via an invite link.
-  ///
-  /// * [inviteLink]: Invite link used to join the chat.
-class ChatEventMemberJoinedByInviteLink extends ChatEventAction {
+///
+/// A new member joined the chat via an invite link.
+///
+/// * [inviteLink]: Invite link used to join the chat.
+final class ChatEventMemberJoinedByInviteLink extends ChatEventAction {
   
   /// **ChatEventMemberJoinedByInviteLink** *(chatEventMemberJoinedByInviteLink)* - child of ChatEventAction
   ///
@@ -477,12 +504,13 @@ class ChatEventMemberJoinedByInviteLink extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "invite_link": inviteLink.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventMemberJoinedByInviteLink copyWith({
@@ -491,20 +519,23 @@ class ChatEventMemberJoinedByInviteLink extends ChatEventAction {
     inviteLink: inviteLink ?? this.inviteLink,
   );
 
-  static const String constructor = 'chatEventMemberJoinedByInviteLink';
-  
+  static const String objectType = 'chatEventMemberJoinedByInviteLink';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventMemberJoinedByRequest** *(chatEventMemberJoinedByRequest)* - child of ChatEventAction
-  ///
-  /// A new member was accepted to the chat by an administrator.
-  ///
-  /// * [approverUserId]: User identifier of the chat administrator, approved user join request.
-  /// * [inviteLink]: Invite link used to join the chat; may be null *(optional)*.
-class ChatEventMemberJoinedByRequest extends ChatEventAction {
+///
+/// A new member was accepted to the chat by an administrator.
+///
+/// * [approverUserId]: User identifier of the chat administrator, approved user join request.
+/// * [inviteLink]: Invite link used to join the chat; may be null *(optional)*.
+final class ChatEventMemberJoinedByRequest extends ChatEventAction {
   
   /// **ChatEventMemberJoinedByRequest** *(chatEventMemberJoinedByRequest)* - child of ChatEventAction
   ///
@@ -531,13 +562,14 @@ class ChatEventMemberJoinedByRequest extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "approver_user_id": approverUserId,
       "invite_link": inviteLink?.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventMemberJoinedByRequest copyWith({
@@ -548,20 +580,23 @@ class ChatEventMemberJoinedByRequest extends ChatEventAction {
     inviteLink: inviteLink ?? this.inviteLink,
   );
 
-  static const String constructor = 'chatEventMemberJoinedByRequest';
-  
+  static const String objectType = 'chatEventMemberJoinedByRequest';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventMemberInvited** *(chatEventMemberInvited)* - child of ChatEventAction
-  ///
-  /// A new chat member was invited.
-  ///
-  /// * [userId]: New member user identifier.
-  /// * [status]: New member status.
-class ChatEventMemberInvited extends ChatEventAction {
+///
+/// A new chat member was invited.
+///
+/// * [userId]: New member user identifier.
+/// * [status]: New member status.
+final class ChatEventMemberInvited extends ChatEventAction {
   
   /// **ChatEventMemberInvited** *(chatEventMemberInvited)* - child of ChatEventAction
   ///
@@ -588,13 +623,14 @@ class ChatEventMemberInvited extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "user_id": userId,
       "status": status.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventMemberInvited copyWith({
@@ -605,17 +641,20 @@ class ChatEventMemberInvited extends ChatEventAction {
     status: status ?? this.status,
   );
 
-  static const String constructor = 'chatEventMemberInvited';
-  
+  static const String objectType = 'chatEventMemberInvited';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventMemberLeft** *(chatEventMemberLeft)* - child of ChatEventAction
-  ///
-  /// A member left the chat.
-class ChatEventMemberLeft extends ChatEventAction {
+///
+/// A member left the chat.
+final class ChatEventMemberLeft extends ChatEventAction {
   
   /// **ChatEventMemberLeft** *(chatEventMemberLeft)* - child of ChatEventAction
   ///
@@ -626,30 +665,34 @@ class ChatEventMemberLeft extends ChatEventAction {
   factory ChatEventMemberLeft.fromJson(Map<String, dynamic> json) => const ChatEventMemberLeft();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   ChatEventMemberLeft copyWith() => const ChatEventMemberLeft();
 
-  static const String constructor = 'chatEventMemberLeft';
-  
+  static const String objectType = 'chatEventMemberLeft';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventMemberPromoted** *(chatEventMemberPromoted)* - child of ChatEventAction
-  ///
-  /// A chat member has gained/lost administrator status, or the list of their administrator privileges has changed.
-  ///
-  /// * [userId]: Affected chat member user identifier.
-  /// * [oldStatus]: Previous status of the chat member.
-  /// * [newStatus]: New status of the chat member.
-class ChatEventMemberPromoted extends ChatEventAction {
+///
+/// A chat member has gained/lost administrator status, or the list of their administrator privileges has changed.
+///
+/// * [userId]: Affected chat member user identifier.
+/// * [oldStatus]: Previous status of the chat member.
+/// * [newStatus]: New status of the chat member.
+final class ChatEventMemberPromoted extends ChatEventAction {
   
   /// **ChatEventMemberPromoted** *(chatEventMemberPromoted)* - child of ChatEventAction
   ///
@@ -682,14 +725,15 @@ class ChatEventMemberPromoted extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "user_id": userId,
       "old_status": oldStatus.toJson(),
       "new_status": newStatus.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventMemberPromoted copyWith({
@@ -702,21 +746,24 @@ class ChatEventMemberPromoted extends ChatEventAction {
     newStatus: newStatus ?? this.newStatus,
   );
 
-  static const String constructor = 'chatEventMemberPromoted';
-  
+  static const String objectType = 'chatEventMemberPromoted';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventMemberRestricted** *(chatEventMemberRestricted)* - child of ChatEventAction
-  ///
-  /// A chat member was restricted/unrestricted or banned/unbanned, or the list of their restrictions has changed.
-  ///
-  /// * [memberId]: Affected chat member identifier.
-  /// * [oldStatus]: Previous status of the chat member.
-  /// * [newStatus]: New status of the chat member.
-class ChatEventMemberRestricted extends ChatEventAction {
+///
+/// A chat member was restricted/unrestricted or banned/unbanned, or the list of their restrictions has changed.
+///
+/// * [memberId]: Affected chat member identifier.
+/// * [oldStatus]: Previous status of the chat member.
+/// * [newStatus]: New status of the chat member.
+final class ChatEventMemberRestricted extends ChatEventAction {
   
   /// **ChatEventMemberRestricted** *(chatEventMemberRestricted)* - child of ChatEventAction
   ///
@@ -749,14 +796,15 @@ class ChatEventMemberRestricted extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "member_id": memberId.toJson(),
       "old_status": oldStatus.toJson(),
       "new_status": newStatus.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventMemberRestricted copyWith({
@@ -769,20 +817,23 @@ class ChatEventMemberRestricted extends ChatEventAction {
     newStatus: newStatus ?? this.newStatus,
   );
 
-  static const String constructor = 'chatEventMemberRestricted';
-  
+  static const String objectType = 'chatEventMemberRestricted';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventAvailableReactionsChanged** *(chatEventAvailableReactionsChanged)* - child of ChatEventAction
-  ///
-  /// The chat available reactions were changed.
-  ///
-  /// * [oldAvailableReactions]: Previous chat available reactions.
-  /// * [newAvailableReactions]: New chat available reactions.
-class ChatEventAvailableReactionsChanged extends ChatEventAction {
+///
+/// The chat available reactions were changed.
+///
+/// * [oldAvailableReactions]: Previous chat available reactions.
+/// * [newAvailableReactions]: New chat available reactions.
+final class ChatEventAvailableReactionsChanged extends ChatEventAction {
   
   /// **ChatEventAvailableReactionsChanged** *(chatEventAvailableReactionsChanged)* - child of ChatEventAction
   ///
@@ -809,13 +860,14 @@ class ChatEventAvailableReactionsChanged extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "old_available_reactions": oldAvailableReactions.toJson(),
       "new_available_reactions": newAvailableReactions.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventAvailableReactionsChanged copyWith({
@@ -826,20 +878,23 @@ class ChatEventAvailableReactionsChanged extends ChatEventAction {
     newAvailableReactions: newAvailableReactions ?? this.newAvailableReactions,
   );
 
-  static const String constructor = 'chatEventAvailableReactionsChanged';
-  
+  static const String objectType = 'chatEventAvailableReactionsChanged';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventDescriptionChanged** *(chatEventDescriptionChanged)* - child of ChatEventAction
-  ///
-  /// The chat description was changed.
-  ///
-  /// * [oldDescription]: Previous chat description.
-  /// * [newDescription]: New chat description.
-class ChatEventDescriptionChanged extends ChatEventAction {
+///
+/// The chat description was changed.
+///
+/// * [oldDescription]: Previous chat description.
+/// * [newDescription]: New chat description.
+final class ChatEventDescriptionChanged extends ChatEventAction {
   
   /// **ChatEventDescriptionChanged** *(chatEventDescriptionChanged)* - child of ChatEventAction
   ///
@@ -866,13 +921,14 @@ class ChatEventDescriptionChanged extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "old_description": oldDescription,
       "new_description": newDescription,
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventDescriptionChanged copyWith({
@@ -883,20 +939,23 @@ class ChatEventDescriptionChanged extends ChatEventAction {
     newDescription: newDescription ?? this.newDescription,
   );
 
-  static const String constructor = 'chatEventDescriptionChanged';
-  
+  static const String objectType = 'chatEventDescriptionChanged';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventLinkedChatChanged** *(chatEventLinkedChatChanged)* - child of ChatEventAction
-  ///
-  /// The linked chat of a supergroup was changed.
-  ///
-  /// * [oldLinkedChatId]: Previous supergroup linked chat identifier.
-  /// * [newLinkedChatId]: New supergroup linked chat identifier.
-class ChatEventLinkedChatChanged extends ChatEventAction {
+///
+/// The linked chat of a supergroup was changed.
+///
+/// * [oldLinkedChatId]: Previous supergroup linked chat identifier.
+/// * [newLinkedChatId]: New supergroup linked chat identifier.
+final class ChatEventLinkedChatChanged extends ChatEventAction {
   
   /// **ChatEventLinkedChatChanged** *(chatEventLinkedChatChanged)* - child of ChatEventAction
   ///
@@ -923,13 +982,14 @@ class ChatEventLinkedChatChanged extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "old_linked_chat_id": oldLinkedChatId,
       "new_linked_chat_id": newLinkedChatId,
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventLinkedChatChanged copyWith({
@@ -940,20 +1000,23 @@ class ChatEventLinkedChatChanged extends ChatEventAction {
     newLinkedChatId: newLinkedChatId ?? this.newLinkedChatId,
   );
 
-  static const String constructor = 'chatEventLinkedChatChanged';
-  
+  static const String objectType = 'chatEventLinkedChatChanged';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventLocationChanged** *(chatEventLocationChanged)* - child of ChatEventAction
-  ///
-  /// The supergroup location was changed.
-  ///
-  /// * [oldLocation]: Previous location; may be null *(optional)*.
-  /// * [newLocation]: New location; may be null *(optional)*.
-class ChatEventLocationChanged extends ChatEventAction {
+///
+/// The supergroup location was changed.
+///
+/// * [oldLocation]: Previous location; may be null *(optional)*.
+/// * [newLocation]: New location; may be null *(optional)*.
+final class ChatEventLocationChanged extends ChatEventAction {
   
   /// **ChatEventLocationChanged** *(chatEventLocationChanged)* - child of ChatEventAction
   ///
@@ -980,13 +1043,14 @@ class ChatEventLocationChanged extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "old_location": oldLocation?.toJson(),
       "new_location": newLocation?.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventLocationChanged copyWith({
@@ -997,20 +1061,23 @@ class ChatEventLocationChanged extends ChatEventAction {
     newLocation: newLocation ?? this.newLocation,
   );
 
-  static const String constructor = 'chatEventLocationChanged';
-  
+  static const String objectType = 'chatEventLocationChanged';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventMessageAutoDeleteTimeChanged** *(chatEventMessageAutoDeleteTimeChanged)* - child of ChatEventAction
-  ///
-  /// The message auto-delete timer was changed.
-  ///
-  /// * [oldMessageAutoDeleteTime]: Previous value of message_auto_delete_time.
-  /// * [newMessageAutoDeleteTime]: New value of message_auto_delete_time.
-class ChatEventMessageAutoDeleteTimeChanged extends ChatEventAction {
+///
+/// The message auto-delete timer was changed.
+///
+/// * [oldMessageAutoDeleteTime]: Previous value of message_auto_delete_time.
+/// * [newMessageAutoDeleteTime]: New value of message_auto_delete_time.
+final class ChatEventMessageAutoDeleteTimeChanged extends ChatEventAction {
   
   /// **ChatEventMessageAutoDeleteTimeChanged** *(chatEventMessageAutoDeleteTimeChanged)* - child of ChatEventAction
   ///
@@ -1037,13 +1104,14 @@ class ChatEventMessageAutoDeleteTimeChanged extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "old_message_auto_delete_time": oldMessageAutoDeleteTime,
       "new_message_auto_delete_time": newMessageAutoDeleteTime,
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventMessageAutoDeleteTimeChanged copyWith({
@@ -1054,20 +1122,23 @@ class ChatEventMessageAutoDeleteTimeChanged extends ChatEventAction {
     newMessageAutoDeleteTime: newMessageAutoDeleteTime ?? this.newMessageAutoDeleteTime,
   );
 
-  static const String constructor = 'chatEventMessageAutoDeleteTimeChanged';
-  
+  static const String objectType = 'chatEventMessageAutoDeleteTimeChanged';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventPermissionsChanged** *(chatEventPermissionsChanged)* - child of ChatEventAction
-  ///
-  /// The chat permissions was changed.
-  ///
-  /// * [oldPermissions]: Previous chat permissions.
-  /// * [newPermissions]: New chat permissions.
-class ChatEventPermissionsChanged extends ChatEventAction {
+///
+/// The chat permissions was changed.
+///
+/// * [oldPermissions]: Previous chat permissions.
+/// * [newPermissions]: New chat permissions.
+final class ChatEventPermissionsChanged extends ChatEventAction {
   
   /// **ChatEventPermissionsChanged** *(chatEventPermissionsChanged)* - child of ChatEventAction
   ///
@@ -1094,13 +1165,14 @@ class ChatEventPermissionsChanged extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "old_permissions": oldPermissions.toJson(),
       "new_permissions": newPermissions.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventPermissionsChanged copyWith({
@@ -1111,20 +1183,23 @@ class ChatEventPermissionsChanged extends ChatEventAction {
     newPermissions: newPermissions ?? this.newPermissions,
   );
 
-  static const String constructor = 'chatEventPermissionsChanged';
-  
+  static const String objectType = 'chatEventPermissionsChanged';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventPhotoChanged** *(chatEventPhotoChanged)* - child of ChatEventAction
-  ///
-  /// The chat photo was changed.
-  ///
-  /// * [oldPhoto]: Previous chat photo value; may be null *(optional)*.
-  /// * [newPhoto]: New chat photo value; may be null *(optional)*.
-class ChatEventPhotoChanged extends ChatEventAction {
+///
+/// The chat photo was changed.
+///
+/// * [oldPhoto]: Previous chat photo value; may be null *(optional)*.
+/// * [newPhoto]: New chat photo value; may be null *(optional)*.
+final class ChatEventPhotoChanged extends ChatEventAction {
   
   /// **ChatEventPhotoChanged** *(chatEventPhotoChanged)* - child of ChatEventAction
   ///
@@ -1151,13 +1226,14 @@ class ChatEventPhotoChanged extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "old_photo": oldPhoto?.toJson(),
       "new_photo": newPhoto?.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventPhotoChanged copyWith({
@@ -1168,20 +1244,23 @@ class ChatEventPhotoChanged extends ChatEventAction {
     newPhoto: newPhoto ?? this.newPhoto,
   );
 
-  static const String constructor = 'chatEventPhotoChanged';
-  
+  static const String objectType = 'chatEventPhotoChanged';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventSlowModeDelayChanged** *(chatEventSlowModeDelayChanged)* - child of ChatEventAction
-  ///
-  /// The slow_mode_delay setting of a supergroup was changed.
-  ///
-  /// * [oldSlowModeDelay]: Previous value of slow_mode_delay, in seconds.
-  /// * [newSlowModeDelay]: New value of slow_mode_delay, in seconds.
-class ChatEventSlowModeDelayChanged extends ChatEventAction {
+///
+/// The slow_mode_delay setting of a supergroup was changed.
+///
+/// * [oldSlowModeDelay]: Previous value of slow_mode_delay, in seconds.
+/// * [newSlowModeDelay]: New value of slow_mode_delay, in seconds.
+final class ChatEventSlowModeDelayChanged extends ChatEventAction {
   
   /// **ChatEventSlowModeDelayChanged** *(chatEventSlowModeDelayChanged)* - child of ChatEventAction
   ///
@@ -1208,13 +1287,14 @@ class ChatEventSlowModeDelayChanged extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "old_slow_mode_delay": oldSlowModeDelay,
       "new_slow_mode_delay": newSlowModeDelay,
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventSlowModeDelayChanged copyWith({
@@ -1225,20 +1305,23 @@ class ChatEventSlowModeDelayChanged extends ChatEventAction {
     newSlowModeDelay: newSlowModeDelay ?? this.newSlowModeDelay,
   );
 
-  static const String constructor = 'chatEventSlowModeDelayChanged';
-  
+  static const String objectType = 'chatEventSlowModeDelayChanged';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventStickerSetChanged** *(chatEventStickerSetChanged)* - child of ChatEventAction
-  ///
-  /// The supergroup sticker set was changed.
-  ///
-  /// * [oldStickerSetId]: Previous identifier of the chat sticker set; 0 if none.
-  /// * [newStickerSetId]: New identifier of the chat sticker set; 0 if none.
-class ChatEventStickerSetChanged extends ChatEventAction {
+///
+/// The supergroup sticker set was changed.
+///
+/// * [oldStickerSetId]: Previous identifier of the chat sticker set; 0 if none.
+/// * [newStickerSetId]: New identifier of the chat sticker set; 0 if none.
+final class ChatEventStickerSetChanged extends ChatEventAction {
   
   /// **ChatEventStickerSetChanged** *(chatEventStickerSetChanged)* - child of ChatEventAction
   ///
@@ -1265,13 +1348,14 @@ class ChatEventStickerSetChanged extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "old_sticker_set_id": oldStickerSetId,
       "new_sticker_set_id": newStickerSetId,
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventStickerSetChanged copyWith({
@@ -1282,20 +1366,23 @@ class ChatEventStickerSetChanged extends ChatEventAction {
     newStickerSetId: newStickerSetId ?? this.newStickerSetId,
   );
 
-  static const String constructor = 'chatEventStickerSetChanged';
-  
+  static const String objectType = 'chatEventStickerSetChanged';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventTitleChanged** *(chatEventTitleChanged)* - child of ChatEventAction
-  ///
-  /// The chat title was changed.
-  ///
-  /// * [oldTitle]: Previous chat title.
-  /// * [newTitle]: New chat title.
-class ChatEventTitleChanged extends ChatEventAction {
+///
+/// The chat title was changed.
+///
+/// * [oldTitle]: Previous chat title.
+/// * [newTitle]: New chat title.
+final class ChatEventTitleChanged extends ChatEventAction {
   
   /// **ChatEventTitleChanged** *(chatEventTitleChanged)* - child of ChatEventAction
   ///
@@ -1322,13 +1409,14 @@ class ChatEventTitleChanged extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "old_title": oldTitle,
       "new_title": newTitle,
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventTitleChanged copyWith({
@@ -1339,20 +1427,23 @@ class ChatEventTitleChanged extends ChatEventAction {
     newTitle: newTitle ?? this.newTitle,
   );
 
-  static const String constructor = 'chatEventTitleChanged';
-  
+  static const String objectType = 'chatEventTitleChanged';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventUsernameChanged** *(chatEventUsernameChanged)* - child of ChatEventAction
-  ///
-  /// The chat editable username was changed.
-  ///
-  /// * [oldUsername]: Previous chat username.
-  /// * [newUsername]: New chat username.
-class ChatEventUsernameChanged extends ChatEventAction {
+///
+/// The chat editable username was changed.
+///
+/// * [oldUsername]: Previous chat username.
+/// * [newUsername]: New chat username.
+final class ChatEventUsernameChanged extends ChatEventAction {
   
   /// **ChatEventUsernameChanged** *(chatEventUsernameChanged)* - child of ChatEventAction
   ///
@@ -1379,13 +1470,14 @@ class ChatEventUsernameChanged extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "old_username": oldUsername,
       "new_username": newUsername,
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventUsernameChanged copyWith({
@@ -1396,20 +1488,23 @@ class ChatEventUsernameChanged extends ChatEventAction {
     newUsername: newUsername ?? this.newUsername,
   );
 
-  static const String constructor = 'chatEventUsernameChanged';
-  
+  static const String objectType = 'chatEventUsernameChanged';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventActiveUsernamesChanged** *(chatEventActiveUsernamesChanged)* - child of ChatEventAction
-  ///
-  /// The chat active usernames were changed.
-  ///
-  /// * [oldUsernames]: Previous list of active usernames.
-  /// * [newUsernames]: New list of active usernames.
-class ChatEventActiveUsernamesChanged extends ChatEventAction {
+///
+/// The chat active usernames were changed.
+///
+/// * [oldUsernames]: Previous list of active usernames.
+/// * [newUsernames]: New list of active usernames.
+final class ChatEventActiveUsernamesChanged extends ChatEventAction {
   
   /// **ChatEventActiveUsernamesChanged** *(chatEventActiveUsernamesChanged)* - child of ChatEventAction
   ///
@@ -1436,13 +1531,14 @@ class ChatEventActiveUsernamesChanged extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "old_usernames": oldUsernames.map((i) => i).toList(),
       "new_usernames": newUsernames.map((i) => i).toList(),
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventActiveUsernamesChanged copyWith({
@@ -1453,19 +1549,22 @@ class ChatEventActiveUsernamesChanged extends ChatEventAction {
     newUsernames: newUsernames ?? this.newUsernames,
   );
 
-  static const String constructor = 'chatEventActiveUsernamesChanged';
-  
+  static const String objectType = 'chatEventActiveUsernamesChanged';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventHasProtectedContentToggled** *(chatEventHasProtectedContentToggled)* - child of ChatEventAction
-  ///
-  /// The has_protected_content setting of a channel was toggled.
-  ///
-  /// * [hasProtectedContent]: New value of has_protected_content.
-class ChatEventHasProtectedContentToggled extends ChatEventAction {
+///
+/// The has_protected_content setting of a channel was toggled.
+///
+/// * [hasProtectedContent]: New value of has_protected_content.
+final class ChatEventHasProtectedContentToggled extends ChatEventAction {
   
   /// **ChatEventHasProtectedContentToggled** *(chatEventHasProtectedContentToggled)* - child of ChatEventAction
   ///
@@ -1486,12 +1585,13 @@ class ChatEventHasProtectedContentToggled extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "has_protected_content": hasProtectedContent,
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventHasProtectedContentToggled copyWith({
@@ -1500,19 +1600,22 @@ class ChatEventHasProtectedContentToggled extends ChatEventAction {
     hasProtectedContent: hasProtectedContent ?? this.hasProtectedContent,
   );
 
-  static const String constructor = 'chatEventHasProtectedContentToggled';
-  
+  static const String objectType = 'chatEventHasProtectedContentToggled';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventInvitesToggled** *(chatEventInvitesToggled)* - child of ChatEventAction
-  ///
-  /// The can_invite_users permission of a supergroup chat was toggled.
-  ///
-  /// * [canInviteUsers]: New value of can_invite_users permission.
-class ChatEventInvitesToggled extends ChatEventAction {
+///
+/// The can_invite_users permission of a supergroup chat was toggled.
+///
+/// * [canInviteUsers]: New value of can_invite_users permission.
+final class ChatEventInvitesToggled extends ChatEventAction {
   
   /// **ChatEventInvitesToggled** *(chatEventInvitesToggled)* - child of ChatEventAction
   ///
@@ -1533,12 +1636,13 @@ class ChatEventInvitesToggled extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "can_invite_users": canInviteUsers,
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventInvitesToggled copyWith({
@@ -1547,19 +1651,22 @@ class ChatEventInvitesToggled extends ChatEventAction {
     canInviteUsers: canInviteUsers ?? this.canInviteUsers,
   );
 
-  static const String constructor = 'chatEventInvitesToggled';
-  
+  static const String objectType = 'chatEventInvitesToggled';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventIsAllHistoryAvailableToggled** *(chatEventIsAllHistoryAvailableToggled)* - child of ChatEventAction
-  ///
-  /// The is_all_history_available setting of a supergroup was toggled.
-  ///
-  /// * [isAllHistoryAvailable]: New value of is_all_history_available.
-class ChatEventIsAllHistoryAvailableToggled extends ChatEventAction {
+///
+/// The is_all_history_available setting of a supergroup was toggled.
+///
+/// * [isAllHistoryAvailable]: New value of is_all_history_available.
+final class ChatEventIsAllHistoryAvailableToggled extends ChatEventAction {
   
   /// **ChatEventIsAllHistoryAvailableToggled** *(chatEventIsAllHistoryAvailableToggled)* - child of ChatEventAction
   ///
@@ -1580,12 +1687,13 @@ class ChatEventIsAllHistoryAvailableToggled extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "is_all_history_available": isAllHistoryAvailable,
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventIsAllHistoryAvailableToggled copyWith({
@@ -1594,19 +1702,22 @@ class ChatEventIsAllHistoryAvailableToggled extends ChatEventAction {
     isAllHistoryAvailable: isAllHistoryAvailable ?? this.isAllHistoryAvailable,
   );
 
-  static const String constructor = 'chatEventIsAllHistoryAvailableToggled';
-  
+  static const String objectType = 'chatEventIsAllHistoryAvailableToggled';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventHasAggressiveAntiSpamEnabledToggled** *(chatEventHasAggressiveAntiSpamEnabledToggled)* - child of ChatEventAction
-  ///
-  /// The has_aggressive_anti_spam_enabled setting of a supergroup was toggled.
-  ///
-  /// * [hasAggressiveAntiSpamEnabled]: New value of has_aggressive_anti_spam_enabled.
-class ChatEventHasAggressiveAntiSpamEnabledToggled extends ChatEventAction {
+///
+/// The has_aggressive_anti_spam_enabled setting of a supergroup was toggled.
+///
+/// * [hasAggressiveAntiSpamEnabled]: New value of has_aggressive_anti_spam_enabled.
+final class ChatEventHasAggressiveAntiSpamEnabledToggled extends ChatEventAction {
   
   /// **ChatEventHasAggressiveAntiSpamEnabledToggled** *(chatEventHasAggressiveAntiSpamEnabledToggled)* - child of ChatEventAction
   ///
@@ -1627,12 +1738,13 @@ class ChatEventHasAggressiveAntiSpamEnabledToggled extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "has_aggressive_anti_spam_enabled": hasAggressiveAntiSpamEnabled,
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventHasAggressiveAntiSpamEnabledToggled copyWith({
@@ -1641,19 +1753,22 @@ class ChatEventHasAggressiveAntiSpamEnabledToggled extends ChatEventAction {
     hasAggressiveAntiSpamEnabled: hasAggressiveAntiSpamEnabled ?? this.hasAggressiveAntiSpamEnabled,
   );
 
-  static const String constructor = 'chatEventHasAggressiveAntiSpamEnabledToggled';
-  
+  static const String objectType = 'chatEventHasAggressiveAntiSpamEnabledToggled';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventSignMessagesToggled** *(chatEventSignMessagesToggled)* - child of ChatEventAction
-  ///
-  /// The sign_messages setting of a channel was toggled.
-  ///
-  /// * [signMessages]: New value of sign_messages.
-class ChatEventSignMessagesToggled extends ChatEventAction {
+///
+/// The sign_messages setting of a channel was toggled.
+///
+/// * [signMessages]: New value of sign_messages.
+final class ChatEventSignMessagesToggled extends ChatEventAction {
   
   /// **ChatEventSignMessagesToggled** *(chatEventSignMessagesToggled)* - child of ChatEventAction
   ///
@@ -1674,12 +1789,13 @@ class ChatEventSignMessagesToggled extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "sign_messages": signMessages,
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventSignMessagesToggled copyWith({
@@ -1688,20 +1804,23 @@ class ChatEventSignMessagesToggled extends ChatEventAction {
     signMessages: signMessages ?? this.signMessages,
   );
 
-  static const String constructor = 'chatEventSignMessagesToggled';
-  
+  static const String objectType = 'chatEventSignMessagesToggled';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventInviteLinkEdited** *(chatEventInviteLinkEdited)* - child of ChatEventAction
-  ///
-  /// A chat invite link was edited.
-  ///
-  /// * [oldInviteLink]: Previous information about the invite link.
-  /// * [newInviteLink]: New information about the invite link.
-class ChatEventInviteLinkEdited extends ChatEventAction {
+///
+/// A chat invite link was edited.
+///
+/// * [oldInviteLink]: Previous information about the invite link.
+/// * [newInviteLink]: New information about the invite link.
+final class ChatEventInviteLinkEdited extends ChatEventAction {
   
   /// **ChatEventInviteLinkEdited** *(chatEventInviteLinkEdited)* - child of ChatEventAction
   ///
@@ -1728,13 +1847,14 @@ class ChatEventInviteLinkEdited extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "old_invite_link": oldInviteLink.toJson(),
       "new_invite_link": newInviteLink.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventInviteLinkEdited copyWith({
@@ -1745,19 +1865,22 @@ class ChatEventInviteLinkEdited extends ChatEventAction {
     newInviteLink: newInviteLink ?? this.newInviteLink,
   );
 
-  static const String constructor = 'chatEventInviteLinkEdited';
-  
+  static const String objectType = 'chatEventInviteLinkEdited';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventInviteLinkRevoked** *(chatEventInviteLinkRevoked)* - child of ChatEventAction
-  ///
-  /// A chat invite link was revoked.
-  ///
-  /// * [inviteLink]: The invite link.
-class ChatEventInviteLinkRevoked extends ChatEventAction {
+///
+/// A chat invite link was revoked.
+///
+/// * [inviteLink]: The invite link.
+final class ChatEventInviteLinkRevoked extends ChatEventAction {
   
   /// **ChatEventInviteLinkRevoked** *(chatEventInviteLinkRevoked)* - child of ChatEventAction
   ///
@@ -1778,12 +1901,13 @@ class ChatEventInviteLinkRevoked extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "invite_link": inviteLink.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventInviteLinkRevoked copyWith({
@@ -1792,19 +1916,22 @@ class ChatEventInviteLinkRevoked extends ChatEventAction {
     inviteLink: inviteLink ?? this.inviteLink,
   );
 
-  static const String constructor = 'chatEventInviteLinkRevoked';
-  
+  static const String objectType = 'chatEventInviteLinkRevoked';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventInviteLinkDeleted** *(chatEventInviteLinkDeleted)* - child of ChatEventAction
-  ///
-  /// A revoked chat invite link was deleted.
-  ///
-  /// * [inviteLink]: The invite link.
-class ChatEventInviteLinkDeleted extends ChatEventAction {
+///
+/// A revoked chat invite link was deleted.
+///
+/// * [inviteLink]: The invite link.
+final class ChatEventInviteLinkDeleted extends ChatEventAction {
   
   /// **ChatEventInviteLinkDeleted** *(chatEventInviteLinkDeleted)* - child of ChatEventAction
   ///
@@ -1825,12 +1952,13 @@ class ChatEventInviteLinkDeleted extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "invite_link": inviteLink.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventInviteLinkDeleted copyWith({
@@ -1839,19 +1967,22 @@ class ChatEventInviteLinkDeleted extends ChatEventAction {
     inviteLink: inviteLink ?? this.inviteLink,
   );
 
-  static const String constructor = 'chatEventInviteLinkDeleted';
-  
+  static const String objectType = 'chatEventInviteLinkDeleted';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventVideoChatCreated** *(chatEventVideoChatCreated)* - child of ChatEventAction
-  ///
-  /// A video chat was created.
-  ///
-  /// * [groupCallId]: Identifier of the video chat. The video chat can be received through the method getGroupCall.
-class ChatEventVideoChatCreated extends ChatEventAction {
+///
+/// A video chat was created.
+///
+/// * [groupCallId]: Identifier of the video chat. The video chat can be received through the method getGroupCall.
+final class ChatEventVideoChatCreated extends ChatEventAction {
   
   /// **ChatEventVideoChatCreated** *(chatEventVideoChatCreated)* - child of ChatEventAction
   ///
@@ -1872,12 +2003,13 @@ class ChatEventVideoChatCreated extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "group_call_id": groupCallId,
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventVideoChatCreated copyWith({
@@ -1886,19 +2018,22 @@ class ChatEventVideoChatCreated extends ChatEventAction {
     groupCallId: groupCallId ?? this.groupCallId,
   );
 
-  static const String constructor = 'chatEventVideoChatCreated';
-  
+  static const String objectType = 'chatEventVideoChatCreated';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventVideoChatEnded** *(chatEventVideoChatEnded)* - child of ChatEventAction
-  ///
-  /// A video chat was ended.
-  ///
-  /// * [groupCallId]: Identifier of the video chat. The video chat can be received through the method getGroupCall.
-class ChatEventVideoChatEnded extends ChatEventAction {
+///
+/// A video chat was ended.
+///
+/// * [groupCallId]: Identifier of the video chat. The video chat can be received through the method getGroupCall.
+final class ChatEventVideoChatEnded extends ChatEventAction {
   
   /// **ChatEventVideoChatEnded** *(chatEventVideoChatEnded)* - child of ChatEventAction
   ///
@@ -1919,12 +2054,13 @@ class ChatEventVideoChatEnded extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "group_call_id": groupCallId,
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventVideoChatEnded copyWith({
@@ -1933,19 +2069,22 @@ class ChatEventVideoChatEnded extends ChatEventAction {
     groupCallId: groupCallId ?? this.groupCallId,
   );
 
-  static const String constructor = 'chatEventVideoChatEnded';
-  
+  static const String objectType = 'chatEventVideoChatEnded';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventVideoChatMuteNewParticipantsToggled** *(chatEventVideoChatMuteNewParticipantsToggled)* - child of ChatEventAction
-  ///
-  /// The mute_new_participants setting of a video chat was toggled.
-  ///
-  /// * [muteNewParticipants]: New value of the mute_new_participants setting.
-class ChatEventVideoChatMuteNewParticipantsToggled extends ChatEventAction {
+///
+/// The mute_new_participants setting of a video chat was toggled.
+///
+/// * [muteNewParticipants]: New value of the mute_new_participants setting.
+final class ChatEventVideoChatMuteNewParticipantsToggled extends ChatEventAction {
   
   /// **ChatEventVideoChatMuteNewParticipantsToggled** *(chatEventVideoChatMuteNewParticipantsToggled)* - child of ChatEventAction
   ///
@@ -1966,12 +2105,13 @@ class ChatEventVideoChatMuteNewParticipantsToggled extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "mute_new_participants": muteNewParticipants,
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventVideoChatMuteNewParticipantsToggled copyWith({
@@ -1980,20 +2120,23 @@ class ChatEventVideoChatMuteNewParticipantsToggled extends ChatEventAction {
     muteNewParticipants: muteNewParticipants ?? this.muteNewParticipants,
   );
 
-  static const String constructor = 'chatEventVideoChatMuteNewParticipantsToggled';
-  
+  static const String objectType = 'chatEventVideoChatMuteNewParticipantsToggled';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventVideoChatParticipantIsMutedToggled** *(chatEventVideoChatParticipantIsMutedToggled)* - child of ChatEventAction
-  ///
-  /// A video chat participant was muted or unmuted.
-  ///
-  /// * [participantId]: Identifier of the affected group call participant.
-  /// * [isMuted]: New value of is_muted.
-class ChatEventVideoChatParticipantIsMutedToggled extends ChatEventAction {
+///
+/// A video chat participant was muted or unmuted.
+///
+/// * [participantId]: Identifier of the affected group call participant.
+/// * [isMuted]: New value of is_muted.
+final class ChatEventVideoChatParticipantIsMutedToggled extends ChatEventAction {
   
   /// **ChatEventVideoChatParticipantIsMutedToggled** *(chatEventVideoChatParticipantIsMutedToggled)* - child of ChatEventAction
   ///
@@ -2020,13 +2163,14 @@ class ChatEventVideoChatParticipantIsMutedToggled extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "participant_id": participantId.toJson(),
       "is_muted": isMuted,
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventVideoChatParticipantIsMutedToggled copyWith({
@@ -2037,20 +2181,23 @@ class ChatEventVideoChatParticipantIsMutedToggled extends ChatEventAction {
     isMuted: isMuted ?? this.isMuted,
   );
 
-  static const String constructor = 'chatEventVideoChatParticipantIsMutedToggled';
-  
+  static const String objectType = 'chatEventVideoChatParticipantIsMutedToggled';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventVideoChatParticipantVolumeLevelChanged** *(chatEventVideoChatParticipantVolumeLevelChanged)* - child of ChatEventAction
-  ///
-  /// A video chat participant volume level was changed.
-  ///
-  /// * [participantId]: Identifier of the affected group call participant.
-  /// * [volumeLevel]: New value of volume_level; 1-20000 in hundreds of percents.
-class ChatEventVideoChatParticipantVolumeLevelChanged extends ChatEventAction {
+///
+/// A video chat participant volume level was changed.
+///
+/// * [participantId]: Identifier of the affected group call participant.
+/// * [volumeLevel]: New value of volume_level; 1-20000 in hundreds of percents.
+final class ChatEventVideoChatParticipantVolumeLevelChanged extends ChatEventAction {
   
   /// **ChatEventVideoChatParticipantVolumeLevelChanged** *(chatEventVideoChatParticipantVolumeLevelChanged)* - child of ChatEventAction
   ///
@@ -2077,13 +2224,14 @@ class ChatEventVideoChatParticipantVolumeLevelChanged extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "participant_id": participantId.toJson(),
       "volume_level": volumeLevel,
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventVideoChatParticipantVolumeLevelChanged copyWith({
@@ -2094,19 +2242,22 @@ class ChatEventVideoChatParticipantVolumeLevelChanged extends ChatEventAction {
     volumeLevel: volumeLevel ?? this.volumeLevel,
   );
 
-  static const String constructor = 'chatEventVideoChatParticipantVolumeLevelChanged';
-  
+  static const String objectType = 'chatEventVideoChatParticipantVolumeLevelChanged';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventIsForumToggled** *(chatEventIsForumToggled)* - child of ChatEventAction
-  ///
-  /// The is_forum setting of a channel was toggled.
-  ///
-  /// * [isForum]: New value of is_forum.
-class ChatEventIsForumToggled extends ChatEventAction {
+///
+/// The is_forum setting of a channel was toggled.
+///
+/// * [isForum]: New value of is_forum.
+final class ChatEventIsForumToggled extends ChatEventAction {
   
   /// **ChatEventIsForumToggled** *(chatEventIsForumToggled)* - child of ChatEventAction
   ///
@@ -2127,12 +2278,13 @@ class ChatEventIsForumToggled extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "is_forum": isForum,
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventIsForumToggled copyWith({
@@ -2141,19 +2293,22 @@ class ChatEventIsForumToggled extends ChatEventAction {
     isForum: isForum ?? this.isForum,
   );
 
-  static const String constructor = 'chatEventIsForumToggled';
-  
+  static const String objectType = 'chatEventIsForumToggled';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventForumTopicCreated** *(chatEventForumTopicCreated)* - child of ChatEventAction
-  ///
-  /// A new forum topic was created.
-  ///
-  /// * [topicInfo]: Information about the topic.
-class ChatEventForumTopicCreated extends ChatEventAction {
+///
+/// A new forum topic was created.
+///
+/// * [topicInfo]: Information about the topic.
+final class ChatEventForumTopicCreated extends ChatEventAction {
   
   /// **ChatEventForumTopicCreated** *(chatEventForumTopicCreated)* - child of ChatEventAction
   ///
@@ -2174,12 +2329,13 @@ class ChatEventForumTopicCreated extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "topic_info": topicInfo.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventForumTopicCreated copyWith({
@@ -2188,20 +2344,23 @@ class ChatEventForumTopicCreated extends ChatEventAction {
     topicInfo: topicInfo ?? this.topicInfo,
   );
 
-  static const String constructor = 'chatEventForumTopicCreated';
-  
+  static const String objectType = 'chatEventForumTopicCreated';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventForumTopicEdited** *(chatEventForumTopicEdited)* - child of ChatEventAction
-  ///
-  /// A forum topic was edited.
-  ///
-  /// * [oldTopicInfo]: Old information about the topic.
-  /// * [newTopicInfo]: New information about the topic.
-class ChatEventForumTopicEdited extends ChatEventAction {
+///
+/// A forum topic was edited.
+///
+/// * [oldTopicInfo]: Old information about the topic.
+/// * [newTopicInfo]: New information about the topic.
+final class ChatEventForumTopicEdited extends ChatEventAction {
   
   /// **ChatEventForumTopicEdited** *(chatEventForumTopicEdited)* - child of ChatEventAction
   ///
@@ -2228,13 +2387,14 @@ class ChatEventForumTopicEdited extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "old_topic_info": oldTopicInfo.toJson(),
       "new_topic_info": newTopicInfo.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventForumTopicEdited copyWith({
@@ -2245,19 +2405,22 @@ class ChatEventForumTopicEdited extends ChatEventAction {
     newTopicInfo: newTopicInfo ?? this.newTopicInfo,
   );
 
-  static const String constructor = 'chatEventForumTopicEdited';
-  
+  static const String objectType = 'chatEventForumTopicEdited';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventForumTopicToggleIsClosed** *(chatEventForumTopicToggleIsClosed)* - child of ChatEventAction
-  ///
-  /// A forum topic was closed or reopened.
-  ///
-  /// * [topicInfo]: New information about the topic.
-class ChatEventForumTopicToggleIsClosed extends ChatEventAction {
+///
+/// A forum topic was closed or reopened.
+///
+/// * [topicInfo]: New information about the topic.
+final class ChatEventForumTopicToggleIsClosed extends ChatEventAction {
   
   /// **ChatEventForumTopicToggleIsClosed** *(chatEventForumTopicToggleIsClosed)* - child of ChatEventAction
   ///
@@ -2278,12 +2441,13 @@ class ChatEventForumTopicToggleIsClosed extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "topic_info": topicInfo.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventForumTopicToggleIsClosed copyWith({
@@ -2292,19 +2456,22 @@ class ChatEventForumTopicToggleIsClosed extends ChatEventAction {
     topicInfo: topicInfo ?? this.topicInfo,
   );
 
-  static const String constructor = 'chatEventForumTopicToggleIsClosed';
-  
+  static const String objectType = 'chatEventForumTopicToggleIsClosed';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventForumTopicToggleIsHidden** *(chatEventForumTopicToggleIsHidden)* - child of ChatEventAction
-  ///
-  /// The General forum topic was hidden or unhidden.
-  ///
-  /// * [topicInfo]: New information about the topic.
-class ChatEventForumTopicToggleIsHidden extends ChatEventAction {
+///
+/// The General forum topic was hidden or unhidden.
+///
+/// * [topicInfo]: New information about the topic.
+final class ChatEventForumTopicToggleIsHidden extends ChatEventAction {
   
   /// **ChatEventForumTopicToggleIsHidden** *(chatEventForumTopicToggleIsHidden)* - child of ChatEventAction
   ///
@@ -2325,12 +2492,13 @@ class ChatEventForumTopicToggleIsHidden extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "topic_info": topicInfo.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventForumTopicToggleIsHidden copyWith({
@@ -2339,19 +2507,22 @@ class ChatEventForumTopicToggleIsHidden extends ChatEventAction {
     topicInfo: topicInfo ?? this.topicInfo,
   );
 
-  static const String constructor = 'chatEventForumTopicToggleIsHidden';
-  
+  static const String objectType = 'chatEventForumTopicToggleIsHidden';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventForumTopicDeleted** *(chatEventForumTopicDeleted)* - child of ChatEventAction
-  ///
-  /// A forum topic was deleted.
-  ///
-  /// * [topicInfo]: Information about the topic.
-class ChatEventForumTopicDeleted extends ChatEventAction {
+///
+/// A forum topic was deleted.
+///
+/// * [topicInfo]: Information about the topic.
+final class ChatEventForumTopicDeleted extends ChatEventAction {
   
   /// **ChatEventForumTopicDeleted** *(chatEventForumTopicDeleted)* - child of ChatEventAction
   ///
@@ -2372,12 +2543,13 @@ class ChatEventForumTopicDeleted extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "topic_info": topicInfo.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventForumTopicDeleted copyWith({
@@ -2386,20 +2558,23 @@ class ChatEventForumTopicDeleted extends ChatEventAction {
     topicInfo: topicInfo ?? this.topicInfo,
   );
 
-  static const String constructor = 'chatEventForumTopicDeleted';
-  
+  static const String objectType = 'chatEventForumTopicDeleted';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatEventForumTopicPinned** *(chatEventForumTopicPinned)* - child of ChatEventAction
-  ///
-  /// A pinned forum topic was changed.
-  ///
-  /// * [oldTopicInfo]: Information about the old pinned topic; may be null *(optional)*.
-  /// * [newTopicInfo]: Information about the new pinned topic; may be null *(optional)*.
-class ChatEventForumTopicPinned extends ChatEventAction {
+///
+/// A pinned forum topic was changed.
+///
+/// * [oldTopicInfo]: Information about the old pinned topic; may be null *(optional)*.
+/// * [newTopicInfo]: Information about the new pinned topic; may be null *(optional)*.
+final class ChatEventForumTopicPinned extends ChatEventAction {
   
   /// **ChatEventForumTopicPinned** *(chatEventForumTopicPinned)* - child of ChatEventAction
   ///
@@ -2426,13 +2601,14 @@ class ChatEventForumTopicPinned extends ChatEventAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "old_topic_info": oldTopicInfo?.toJson(),
       "new_topic_info": newTopicInfo?.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   ChatEventForumTopicPinned copyWith({
@@ -2443,8 +2619,11 @@ class ChatEventForumTopicPinned extends ChatEventAction {
     newTopicInfo: newTopicInfo ?? this.newTopicInfo,
   );
 
-  static const String constructor = 'chatEventForumTopicPinned';
-  
+  static const String objectType = 'chatEventForumTopicPinned';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

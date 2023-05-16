@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **KeyboardButton** *(keyboardButton)* - basic class
-  ///
-  /// Represents a single button in a bot keyboard.
-  ///
-  /// * [text]: Text of the button.
-  /// * [type]: Type of the button.
-class KeyboardButton extends TdObject {
+///
+/// Represents a single button in a bot keyboard.
+///
+/// * [text]: Text of the button.
+/// * [type]: Type of the button.
+final class KeyboardButton extends TdObject {
   
   /// **KeyboardButton** *(keyboardButton)* - basic class
   ///
@@ -33,13 +33,14 @@ class KeyboardButton extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text,
       "type": type.toJson(),
-    };
-  }
+		};
+	}
+
   
   KeyboardButton copyWith({
     String? text,
@@ -49,8 +50,11 @@ class KeyboardButton extends TdObject {
     type: type ?? this.type,
   );
 
-  static const String constructor = 'keyboardButton';
-  
+  static const String objectType = 'keyboardButton';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

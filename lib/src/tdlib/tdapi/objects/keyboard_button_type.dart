@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **KeyboardButtonType** *(keyboardButtonType)* - parent
-  ///
-  /// Describes a keyboard button type.
-class KeyboardButtonType extends TdObject {
+///
+/// Describes a keyboard button type.
+sealed class KeyboardButtonType extends TdObject {
   
   /// **KeyboardButtonType** *(keyboardButtonType)* - parent
   ///
@@ -18,41 +18,44 @@ class KeyboardButtonType extends TdObject {
   /// * [KeyboardButtonTypeWebApp]
   factory KeyboardButtonType.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case KeyboardButtonTypeText.constructor:
+      case KeyboardButtonTypeText.objectType:
         return KeyboardButtonTypeText.fromJson(json);
-      case KeyboardButtonTypeRequestPhoneNumber.constructor:
+      case KeyboardButtonTypeRequestPhoneNumber.objectType:
         return KeyboardButtonTypeRequestPhoneNumber.fromJson(json);
-      case KeyboardButtonTypeRequestLocation.constructor:
+      case KeyboardButtonTypeRequestLocation.objectType:
         return KeyboardButtonTypeRequestLocation.fromJson(json);
-      case KeyboardButtonTypeRequestPoll.constructor:
+      case KeyboardButtonTypeRequestPoll.objectType:
         return KeyboardButtonTypeRequestPoll.fromJson(json);
-      case KeyboardButtonTypeWebApp.constructor:
+      case KeyboardButtonTypeWebApp.objectType:
         return KeyboardButtonTypeWebApp.fromJson(json);
       default:
-        return const KeyboardButtonType();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of KeyboardButtonType)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  KeyboardButtonType copyWith() => const KeyboardButtonType();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'keyboardButtonType';
   
+  KeyboardButtonType copyWith();
+
+  static const String objectType = 'keyboardButtonType';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **KeyboardButtonTypeText** *(keyboardButtonTypeText)* - child of KeyboardButtonType
-  ///
-  /// A simple button, with text that must be sent when the button is pressed.
-class KeyboardButtonTypeText extends KeyboardButtonType {
+///
+/// A simple button, with text that must be sent when the button is pressed.
+final class KeyboardButtonTypeText extends KeyboardButtonType {
   
   /// **KeyboardButtonTypeText** *(keyboardButtonTypeText)* - child of KeyboardButtonType
   ///
@@ -63,26 +66,30 @@ class KeyboardButtonTypeText extends KeyboardButtonType {
   factory KeyboardButtonTypeText.fromJson(Map<String, dynamic> json) => const KeyboardButtonTypeText();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   KeyboardButtonTypeText copyWith() => const KeyboardButtonTypeText();
 
-  static const String constructor = 'keyboardButtonTypeText';
-  
+  static const String objectType = 'keyboardButtonTypeText';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **KeyboardButtonTypeRequestPhoneNumber** *(keyboardButtonTypeRequestPhoneNumber)* - child of KeyboardButtonType
-  ///
-  /// A button that sends the user's phone number when pressed; available only in private chats.
-class KeyboardButtonTypeRequestPhoneNumber extends KeyboardButtonType {
+///
+/// A button that sends the user's phone number when pressed; available only in private chats.
+final class KeyboardButtonTypeRequestPhoneNumber extends KeyboardButtonType {
   
   /// **KeyboardButtonTypeRequestPhoneNumber** *(keyboardButtonTypeRequestPhoneNumber)* - child of KeyboardButtonType
   ///
@@ -93,26 +100,30 @@ class KeyboardButtonTypeRequestPhoneNumber extends KeyboardButtonType {
   factory KeyboardButtonTypeRequestPhoneNumber.fromJson(Map<String, dynamic> json) => const KeyboardButtonTypeRequestPhoneNumber();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   KeyboardButtonTypeRequestPhoneNumber copyWith() => const KeyboardButtonTypeRequestPhoneNumber();
 
-  static const String constructor = 'keyboardButtonTypeRequestPhoneNumber';
-  
+  static const String objectType = 'keyboardButtonTypeRequestPhoneNumber';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **KeyboardButtonTypeRequestLocation** *(keyboardButtonTypeRequestLocation)* - child of KeyboardButtonType
-  ///
-  /// A button that sends the user's location when pressed; available only in private chats.
-class KeyboardButtonTypeRequestLocation extends KeyboardButtonType {
+///
+/// A button that sends the user's location when pressed; available only in private chats.
+final class KeyboardButtonTypeRequestLocation extends KeyboardButtonType {
   
   /// **KeyboardButtonTypeRequestLocation** *(keyboardButtonTypeRequestLocation)* - child of KeyboardButtonType
   ///
@@ -123,29 +134,33 @@ class KeyboardButtonTypeRequestLocation extends KeyboardButtonType {
   factory KeyboardButtonTypeRequestLocation.fromJson(Map<String, dynamic> json) => const KeyboardButtonTypeRequestLocation();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   KeyboardButtonTypeRequestLocation copyWith() => const KeyboardButtonTypeRequestLocation();
 
-  static const String constructor = 'keyboardButtonTypeRequestLocation';
-  
+  static const String objectType = 'keyboardButtonTypeRequestLocation';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **KeyboardButtonTypeRequestPoll** *(keyboardButtonTypeRequestPoll)* - child of KeyboardButtonType
-  ///
-  /// A button that allows the user to create and send a poll when pressed; available only in private chats.
-  ///
-  /// * [forceRegular]: If true, only regular polls must be allowed to create.
-  /// * [forceQuiz]: If true, only polls in quiz mode must be allowed to create.
-class KeyboardButtonTypeRequestPoll extends KeyboardButtonType {
+///
+/// A button that allows the user to create and send a poll when pressed; available only in private chats.
+///
+/// * [forceRegular]: If true, only regular polls must be allowed to create.
+/// * [forceQuiz]: If true, only polls in quiz mode must be allowed to create.
+final class KeyboardButtonTypeRequestPoll extends KeyboardButtonType {
   
   /// **KeyboardButtonTypeRequestPoll** *(keyboardButtonTypeRequestPoll)* - child of KeyboardButtonType
   ///
@@ -172,13 +187,14 @@ class KeyboardButtonTypeRequestPoll extends KeyboardButtonType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "force_regular": forceRegular,
       "force_quiz": forceQuiz,
-    };
-  }
+		};
+	}
+
   
   @override
   KeyboardButtonTypeRequestPoll copyWith({
@@ -189,19 +205,22 @@ class KeyboardButtonTypeRequestPoll extends KeyboardButtonType {
     forceQuiz: forceQuiz ?? this.forceQuiz,
   );
 
-  static const String constructor = 'keyboardButtonTypeRequestPoll';
-  
+  static const String objectType = 'keyboardButtonTypeRequestPoll';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **KeyboardButtonTypeWebApp** *(keyboardButtonTypeWebApp)* - child of KeyboardButtonType
-  ///
-  /// A button that opens a Web App by calling getWebAppUrl.
-  ///
-  /// * [url]: An HTTP URL to pass to getWebAppUrl.
-class KeyboardButtonTypeWebApp extends KeyboardButtonType {
+///
+/// A button that opens a Web App by calling getWebAppUrl.
+///
+/// * [url]: An HTTP URL to pass to getWebAppUrl.
+final class KeyboardButtonTypeWebApp extends KeyboardButtonType {
   
   /// **KeyboardButtonTypeWebApp** *(keyboardButtonTypeWebApp)* - child of KeyboardButtonType
   ///
@@ -222,12 +241,13 @@ class KeyboardButtonTypeWebApp extends KeyboardButtonType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "url": url,
-    };
-  }
+		};
+	}
+
   
   @override
   KeyboardButtonTypeWebApp copyWith({
@@ -236,8 +256,11 @@ class KeyboardButtonTypeWebApp extends KeyboardButtonType {
     url: url ?? this.url,
   );
 
-  static const String constructor = 'keyboardButtonTypeWebApp';
-  
+  static const String objectType = 'keyboardButtonTypeWebApp';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

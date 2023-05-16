@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **SentWebAppMessage** *(sentWebAppMessage)* - basic class
-  ///
-  /// Information about the message sent by answerWebAppQuery.
-  ///
-  /// * [inlineMessageId]: Identifier of the sent inline message, if known.
-class SentWebAppMessage extends TdObject {
+///
+/// Information about the message sent by answerWebAppQuery.
+///
+/// * [inlineMessageId]: Identifier of the sent inline message, if known.
+final class SentWebAppMessage extends TdObject {
   
   /// **SentWebAppMessage** *(sentWebAppMessage)* - basic class
   ///
@@ -38,12 +38,13 @@ class SentWebAppMessage extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "inline_message_id": inlineMessageId,
-    };
-  }
+		};
+	}
+
   
   SentWebAppMessage copyWith({
     String? inlineMessageId,
@@ -55,8 +56,11 @@ class SentWebAppMessage extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'sentWebAppMessage';
-  
+  static const String objectType = 'sentWebAppMessage';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **GetMessageStatistics** *(getMessageStatistics)* - TDLib function
-  ///
-  /// Returns detailed statistics about a message. Can be used only if message.can_get_statistics == true.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [messageId]: Message identifier.
-  /// * [isDark]: Pass true if a dark theme is used by the application.
-  ///
-  /// [MessageStatistics] is returned on completion.
-class GetMessageStatistics extends TdFunction {
+///
+/// Returns detailed statistics about a message. Can be used only if message.can_get_statistics == true.
+///
+/// * [chatId]: Chat identifier.
+/// * [messageId]: Message identifier.
+/// * [isDark]: Pass true if a dark theme is used by the application.
+///
+/// [MessageStatistics] is returned on completion.
+final class GetMessageStatistics extends TdFunction {
   
   /// **GetMessageStatistics** *(getMessageStatistics)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class GetMessageStatistics extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "is_dark": isDark,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetMessageStatistics copyWith({
     int? chatId,
@@ -56,8 +57,11 @@ class GetMessageStatistics extends TdFunction {
     isDark: isDark ?? this.isDark,
   );
 
-  static const String constructor = 'getMessageStatistics';
-  
+  static const String objectType = 'getMessageStatistics';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

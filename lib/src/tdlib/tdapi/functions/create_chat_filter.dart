@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **CreateChatFilter** *(createChatFilter)* - TDLib function
-  ///
-  /// Creates new chat filter. Returns information about the created chat filter. There can be up to getOption("chat_filter_count_max") chat filters, but the limit can be increased with Telegram Premium.
-  ///
-  /// * [filter]: Chat filter.
-  ///
-  /// [ChatFilterInfo] is returned on completion.
-class CreateChatFilter extends TdFunction {
+///
+/// Creates new chat filter. Returns information about the created chat filter. There can be up to getOption("chat_filter_count_max") chat filters, but the limit can be increased with Telegram Premium.
+///
+/// * [filter]: Chat filter.
+///
+/// [ChatFilterInfo] is returned on completion.
+final class CreateChatFilter extends TdFunction {
   
   /// **CreateChatFilter** *(createChatFilter)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class CreateChatFilter extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "filter": filter.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   CreateChatFilter copyWith({
     ChatFilter? filter,
@@ -38,8 +39,11 @@ class CreateChatFilter extends TdFunction {
     filter: filter ?? this.filter,
   );
 
-  static const String constructor = 'createChatFilter';
-  
+  static const String objectType = 'createChatFilter';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

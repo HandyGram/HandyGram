@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **CreateCall** *(createCall)* - TDLib function
-  ///
-  /// Creates a new call.
-  ///
-  /// * [userId]: Identifier of the user to be called.
-  /// * [protocol]: The call protocols supported by the application.
-  /// * [isVideo]: Pass true to create a video call.
-  ///
-  /// [CallId] is returned on completion.
-class CreateCall extends TdFunction {
+///
+/// Creates a new call.
+///
+/// * [userId]: Identifier of the user to be called.
+/// * [protocol]: The call protocols supported by the application.
+/// * [isVideo]: Pass true to create a video call.
+///
+/// [CallId] is returned on completion.
+final class CreateCall extends TdFunction {
   
   /// **CreateCall** *(createCall)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class CreateCall extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "user_id": userId,
       "protocol": protocol.toJson(),
       "is_video": isVideo,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   CreateCall copyWith({
     int? userId,
@@ -56,8 +57,11 @@ class CreateCall extends TdFunction {
     isVideo: isVideo ?? this.isVideo,
   );
 
-  static const String constructor = 'createCall';
-  
+  static const String objectType = 'createCall';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

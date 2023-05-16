@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetUserSupportInfo** *(getUserSupportInfo)* - TDLib function
-  ///
-  /// Returns support information for the given user; for Telegram support only.
-  ///
-  /// * [userId]: User identifier.
-  ///
-  /// [UserSupportInfo] is returned on completion.
-class GetUserSupportInfo extends TdFunction {
+///
+/// Returns support information for the given user; for Telegram support only.
+///
+/// * [userId]: User identifier.
+///
+/// [UserSupportInfo] is returned on completion.
+final class GetUserSupportInfo extends TdFunction {
   
   /// **GetUserSupportInfo** *(getUserSupportInfo)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetUserSupportInfo extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "user_id": userId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetUserSupportInfo copyWith({
     int? userId,
@@ -38,8 +39,11 @@ class GetUserSupportInfo extends TdFunction {
     userId: userId ?? this.userId,
   );
 
-  static const String constructor = 'getUserSupportInfo';
-  
+  static const String objectType = 'getUserSupportInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

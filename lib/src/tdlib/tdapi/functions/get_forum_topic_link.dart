@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **GetForumTopicLink** *(getForumTopicLink)* - TDLib function
-  ///
-  /// Returns an HTTPS link to a topic in a forum chat. This is an offline request.
-  ///
-  /// * [chatId]: Identifier of the chat.
-  /// * [messageThreadId]: Message thread identifier of the forum topic.
-  ///
-  /// [MessageLink] is returned on completion.
-class GetForumTopicLink extends TdFunction {
+///
+/// Returns an HTTPS link to a topic in a forum chat. This is an offline request.
+///
+/// * [chatId]: Identifier of the chat.
+/// * [messageThreadId]: Message thread identifier of the forum topic.
+///
+/// [MessageLink] is returned on completion.
+final class GetForumTopicLink extends TdFunction {
   
   /// **GetForumTopicLink** *(getForumTopicLink)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class GetForumTopicLink extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_thread_id": messageThreadId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetForumTopicLink copyWith({
     int? chatId,
@@ -47,8 +48,11 @@ class GetForumTopicLink extends TdFunction {
     messageThreadId: messageThreadId ?? this.messageThreadId,
   );
 
-  static const String constructor = 'getForumTopicLink';
-  
+  static const String objectType = 'getForumTopicLink';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

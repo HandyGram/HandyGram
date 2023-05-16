@@ -1,16 +1,16 @@
 part of '../tdapi.dart';
 
 /// **PageBlockTableCell** *(pageBlockTableCell)* - basic class
-  ///
-  /// Represents a cell of a table.
-  ///
-  /// * [text]: Cell text; may be null. If the text is null, then the cell must be invisible *(optional)*.
-  /// * [isHeader]: True, if it is a header cell.
-  /// * [colspan]: The number of columns the cell spans.
-  /// * [rowspan]: The number of rows the cell spans.
-  /// * [align]: Horizontal cell content alignment.
-  /// * [valign]: Vertical cell content alignment.
-class PageBlockTableCell extends TdObject {
+///
+/// Represents a cell of a table.
+///
+/// * [text]: Cell text; may be null. If the text is null, then the cell must be invisible *(optional)*.
+/// * [isHeader]: True, if it is a header cell.
+/// * [colspan]: The number of columns the cell spans.
+/// * [rowspan]: The number of rows the cell spans.
+/// * [align]: Horizontal cell content alignment.
+/// * [valign]: Vertical cell content alignment.
+final class PageBlockTableCell extends TdObject {
   
   /// **PageBlockTableCell** *(pageBlockTableCell)* - basic class
   ///
@@ -61,17 +61,18 @@ class PageBlockTableCell extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text?.toJson(),
       "is_header": isHeader,
       "colspan": colspan,
       "rowspan": rowspan,
       "align": align.toJson(),
       "valign": valign.toJson(),
-    };
-  }
+		};
+	}
+
   
   PageBlockTableCell copyWith({
     RichText? text,
@@ -89,8 +90,11 @@ class PageBlockTableCell extends TdObject {
     valign: valign ?? this.valign,
   );
 
-  static const String constructor = 'pageBlockTableCell';
-  
+  static const String objectType = 'pageBlockTableCell';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

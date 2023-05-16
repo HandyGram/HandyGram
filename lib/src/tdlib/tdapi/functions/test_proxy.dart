@@ -1,17 +1,17 @@
 part of '../tdapi.dart';
 
 /// **TestProxy** *(testProxy)* - TDLib function
-  ///
-  /// Sends a simple network request to the Telegram servers via proxy; for testing only. Can be called before authorization.
-  ///
-  /// * [server]: Proxy server IP address.
-  /// * [port]: Proxy server port.
-  /// * [type]: Proxy type.
-  /// * [dcId]: Identifier of a datacenter with which to test connection.
-  /// * [timeout]: The maximum overall timeout for the request.
-  ///
-  /// [Ok] is returned on completion.
-class TestProxy extends TdFunction {
+///
+/// Sends a simple network request to the Telegram servers via proxy; for testing only. Can be called before authorization.
+///
+/// * [server]: Proxy server IP address.
+/// * [port]: Proxy server port.
+/// * [type]: Proxy type.
+/// * [dcId]: Identifier of a datacenter with which to test connection.
+/// * [timeout]: The maximum overall timeout for the request.
+///
+/// [Ok] is returned on completion.
+final class TestProxy extends TdFunction {
   
   /// **TestProxy** *(testProxy)* - TDLib function
   ///
@@ -49,16 +49,17 @@ class TestProxy extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "server": server,
       "port": port,
       "type": type.toJson(),
       "dc_id": dcId,
       "timeout": timeout,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   TestProxy copyWith({
     String? server,
@@ -74,8 +75,11 @@ class TestProxy extends TdFunction {
     timeout: timeout ?? this.timeout,
   );
 
-  static const String constructor = 'testProxy';
-  
+  static const String objectType = 'testProxy';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

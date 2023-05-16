@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **Update** *(update)* - parent
-  ///
-  /// Contains notifications about data changes.
-class Update extends TdObject {
+///
+/// Contains notifications about data changes.
+sealed class Update extends TdObject {
   
   /// **Update** *(update)* - parent
   ///
@@ -118,243 +118,246 @@ class Update extends TdObject {
   /// * [UpdateNewChatJoinRequest]
   factory Update.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case UpdateAuthorizationState.constructor:
+      case UpdateAuthorizationState.objectType:
         return UpdateAuthorizationState.fromJson(json);
-      case UpdateNewMessage.constructor:
+      case UpdateNewMessage.objectType:
         return UpdateNewMessage.fromJson(json);
-      case UpdateMessageSendAcknowledged.constructor:
+      case UpdateMessageSendAcknowledged.objectType:
         return UpdateMessageSendAcknowledged.fromJson(json);
-      case UpdateMessageSendSucceeded.constructor:
+      case UpdateMessageSendSucceeded.objectType:
         return UpdateMessageSendSucceeded.fromJson(json);
-      case UpdateMessageSendFailed.constructor:
+      case UpdateMessageSendFailed.objectType:
         return UpdateMessageSendFailed.fromJson(json);
-      case UpdateMessageContent.constructor:
+      case UpdateMessageContent.objectType:
         return UpdateMessageContent.fromJson(json);
-      case UpdateMessageEdited.constructor:
+      case UpdateMessageEdited.objectType:
         return UpdateMessageEdited.fromJson(json);
-      case UpdateMessageIsPinned.constructor:
+      case UpdateMessageIsPinned.objectType:
         return UpdateMessageIsPinned.fromJson(json);
-      case UpdateMessageInteractionInfo.constructor:
+      case UpdateMessageInteractionInfo.objectType:
         return UpdateMessageInteractionInfo.fromJson(json);
-      case UpdateMessageContentOpened.constructor:
+      case UpdateMessageContentOpened.objectType:
         return UpdateMessageContentOpened.fromJson(json);
-      case UpdateMessageMentionRead.constructor:
+      case UpdateMessageMentionRead.objectType:
         return UpdateMessageMentionRead.fromJson(json);
-      case UpdateMessageUnreadReactions.constructor:
+      case UpdateMessageUnreadReactions.objectType:
         return UpdateMessageUnreadReactions.fromJson(json);
-      case UpdateMessageLiveLocationViewed.constructor:
+      case UpdateMessageLiveLocationViewed.objectType:
         return UpdateMessageLiveLocationViewed.fromJson(json);
-      case UpdateNewChat.constructor:
+      case UpdateNewChat.objectType:
         return UpdateNewChat.fromJson(json);
-      case UpdateChatTitle.constructor:
+      case UpdateChatTitle.objectType:
         return UpdateChatTitle.fromJson(json);
-      case UpdateChatPhoto.constructor:
+      case UpdateChatPhoto.objectType:
         return UpdateChatPhoto.fromJson(json);
-      case UpdateChatPermissions.constructor:
+      case UpdateChatPermissions.objectType:
         return UpdateChatPermissions.fromJson(json);
-      case UpdateChatLastMessage.constructor:
+      case UpdateChatLastMessage.objectType:
         return UpdateChatLastMessage.fromJson(json);
-      case UpdateChatPosition.constructor:
+      case UpdateChatPosition.objectType:
         return UpdateChatPosition.fromJson(json);
-      case UpdateChatReadInbox.constructor:
+      case UpdateChatReadInbox.objectType:
         return UpdateChatReadInbox.fromJson(json);
-      case UpdateChatReadOutbox.constructor:
+      case UpdateChatReadOutbox.objectType:
         return UpdateChatReadOutbox.fromJson(json);
-      case UpdateChatActionBar.constructor:
+      case UpdateChatActionBar.objectType:
         return UpdateChatActionBar.fromJson(json);
-      case UpdateChatAvailableReactions.constructor:
+      case UpdateChatAvailableReactions.objectType:
         return UpdateChatAvailableReactions.fromJson(json);
-      case UpdateChatDraftMessage.constructor:
+      case UpdateChatDraftMessage.objectType:
         return UpdateChatDraftMessage.fromJson(json);
-      case UpdateChatMessageSender.constructor:
+      case UpdateChatMessageSender.objectType:
         return UpdateChatMessageSender.fromJson(json);
-      case UpdateChatMessageAutoDeleteTime.constructor:
+      case UpdateChatMessageAutoDeleteTime.objectType:
         return UpdateChatMessageAutoDeleteTime.fromJson(json);
-      case UpdateChatNotificationSettings.constructor:
+      case UpdateChatNotificationSettings.objectType:
         return UpdateChatNotificationSettings.fromJson(json);
-      case UpdateChatPendingJoinRequests.constructor:
+      case UpdateChatPendingJoinRequests.objectType:
         return UpdateChatPendingJoinRequests.fromJson(json);
-      case UpdateChatReplyMarkup.constructor:
+      case UpdateChatReplyMarkup.objectType:
         return UpdateChatReplyMarkup.fromJson(json);
-      case UpdateChatTheme.constructor:
+      case UpdateChatTheme.objectType:
         return UpdateChatTheme.fromJson(json);
-      case UpdateChatUnreadMentionCount.constructor:
+      case UpdateChatUnreadMentionCount.objectType:
         return UpdateChatUnreadMentionCount.fromJson(json);
-      case UpdateChatUnreadReactionCount.constructor:
+      case UpdateChatUnreadReactionCount.objectType:
         return UpdateChatUnreadReactionCount.fromJson(json);
-      case UpdateChatVideoChat.constructor:
+      case UpdateChatVideoChat.objectType:
         return UpdateChatVideoChat.fromJson(json);
-      case UpdateChatDefaultDisableNotification.constructor:
+      case UpdateChatDefaultDisableNotification.objectType:
         return UpdateChatDefaultDisableNotification.fromJson(json);
-      case UpdateChatHasProtectedContent.constructor:
+      case UpdateChatHasProtectedContent.objectType:
         return UpdateChatHasProtectedContent.fromJson(json);
-      case UpdateChatHasScheduledMessages.constructor:
+      case UpdateChatHasScheduledMessages.objectType:
         return UpdateChatHasScheduledMessages.fromJson(json);
-      case UpdateChatIsBlocked.constructor:
+      case UpdateChatIsBlocked.objectType:
         return UpdateChatIsBlocked.fromJson(json);
-      case UpdateChatIsMarkedAsUnread.constructor:
+      case UpdateChatIsMarkedAsUnread.objectType:
         return UpdateChatIsMarkedAsUnread.fromJson(json);
-      case UpdateChatFilters.constructor:
+      case UpdateChatFilters.objectType:
         return UpdateChatFilters.fromJson(json);
-      case UpdateChatOnlineMemberCount.constructor:
+      case UpdateChatOnlineMemberCount.objectType:
         return UpdateChatOnlineMemberCount.fromJson(json);
-      case UpdateForumTopicInfo.constructor:
+      case UpdateForumTopicInfo.objectType:
         return UpdateForumTopicInfo.fromJson(json);
-      case UpdateScopeNotificationSettings.constructor:
+      case UpdateScopeNotificationSettings.objectType:
         return UpdateScopeNotificationSettings.fromJson(json);
-      case UpdateNotification.constructor:
+      case UpdateNotification.objectType:
         return UpdateNotification.fromJson(json);
-      case UpdateNotificationGroup.constructor:
+      case UpdateNotificationGroup.objectType:
         return UpdateNotificationGroup.fromJson(json);
-      case UpdateActiveNotifications.constructor:
+      case UpdateActiveNotifications.objectType:
         return UpdateActiveNotifications.fromJson(json);
-      case UpdateHavePendingNotifications.constructor:
+      case UpdateHavePendingNotifications.objectType:
         return UpdateHavePendingNotifications.fromJson(json);
-      case UpdateDeleteMessages.constructor:
+      case UpdateDeleteMessages.objectType:
         return UpdateDeleteMessages.fromJson(json);
-      case UpdateChatAction.constructor:
+      case UpdateChatAction.objectType:
         return UpdateChatAction.fromJson(json);
-      case UpdateUserStatus.constructor:
+      case UpdateUserStatus.objectType:
         return UpdateUserStatus.fromJson(json);
-      case UpdateUser.constructor:
+      case UpdateUser.objectType:
         return UpdateUser.fromJson(json);
-      case UpdateBasicGroup.constructor:
+      case UpdateBasicGroup.objectType:
         return UpdateBasicGroup.fromJson(json);
-      case UpdateSupergroup.constructor:
+      case UpdateSupergroup.objectType:
         return UpdateSupergroup.fromJson(json);
-      case UpdateSecretChat.constructor:
+      case UpdateSecretChat.objectType:
         return UpdateSecretChat.fromJson(json);
-      case UpdateUserFullInfo.constructor:
+      case UpdateUserFullInfo.objectType:
         return UpdateUserFullInfo.fromJson(json);
-      case UpdateBasicGroupFullInfo.constructor:
+      case UpdateBasicGroupFullInfo.objectType:
         return UpdateBasicGroupFullInfo.fromJson(json);
-      case UpdateSupergroupFullInfo.constructor:
+      case UpdateSupergroupFullInfo.objectType:
         return UpdateSupergroupFullInfo.fromJson(json);
-      case UpdateServiceNotification.constructor:
+      case UpdateServiceNotification.objectType:
         return UpdateServiceNotification.fromJson(json);
-      case UpdateFile.constructor:
+      case UpdateFile.objectType:
         return UpdateFile.fromJson(json);
-      case UpdateFileGenerationStart.constructor:
+      case UpdateFileGenerationStart.objectType:
         return UpdateFileGenerationStart.fromJson(json);
-      case UpdateFileGenerationStop.constructor:
+      case UpdateFileGenerationStop.objectType:
         return UpdateFileGenerationStop.fromJson(json);
-      case UpdateFileDownloads.constructor:
+      case UpdateFileDownloads.objectType:
         return UpdateFileDownloads.fromJson(json);
-      case UpdateFileAddedToDownloads.constructor:
+      case UpdateFileAddedToDownloads.objectType:
         return UpdateFileAddedToDownloads.fromJson(json);
-      case UpdateFileDownload.constructor:
+      case UpdateFileDownload.objectType:
         return UpdateFileDownload.fromJson(json);
-      case UpdateFileRemovedFromDownloads.constructor:
+      case UpdateFileRemovedFromDownloads.objectType:
         return UpdateFileRemovedFromDownloads.fromJson(json);
-      case UpdateCall.constructor:
+      case UpdateCall.objectType:
         return UpdateCall.fromJson(json);
-      case UpdateGroupCall.constructor:
+      case UpdateGroupCall.objectType:
         return UpdateGroupCall.fromJson(json);
-      case UpdateGroupCallParticipant.constructor:
+      case UpdateGroupCallParticipant.objectType:
         return UpdateGroupCallParticipant.fromJson(json);
-      case UpdateNewCallSignalingData.constructor:
+      case UpdateNewCallSignalingData.objectType:
         return UpdateNewCallSignalingData.fromJson(json);
-      case UpdateUserPrivacySettingRules.constructor:
+      case UpdateUserPrivacySettingRules.objectType:
         return UpdateUserPrivacySettingRules.fromJson(json);
-      case UpdateUnreadMessageCount.constructor:
+      case UpdateUnreadMessageCount.objectType:
         return UpdateUnreadMessageCount.fromJson(json);
-      case UpdateUnreadChatCount.constructor:
+      case UpdateUnreadChatCount.objectType:
         return UpdateUnreadChatCount.fromJson(json);
-      case UpdateOption.constructor:
+      case UpdateOption.objectType:
         return UpdateOption.fromJson(json);
-      case UpdateStickerSet.constructor:
+      case UpdateStickerSet.objectType:
         return UpdateStickerSet.fromJson(json);
-      case UpdateInstalledStickerSets.constructor:
+      case UpdateInstalledStickerSets.objectType:
         return UpdateInstalledStickerSets.fromJson(json);
-      case UpdateTrendingStickerSets.constructor:
+      case UpdateTrendingStickerSets.objectType:
         return UpdateTrendingStickerSets.fromJson(json);
-      case UpdateRecentStickers.constructor:
+      case UpdateRecentStickers.objectType:
         return UpdateRecentStickers.fromJson(json);
-      case UpdateFavoriteStickers.constructor:
+      case UpdateFavoriteStickers.objectType:
         return UpdateFavoriteStickers.fromJson(json);
-      case UpdateSavedAnimations.constructor:
+      case UpdateSavedAnimations.objectType:
         return UpdateSavedAnimations.fromJson(json);
-      case UpdateSavedNotificationSounds.constructor:
+      case UpdateSavedNotificationSounds.objectType:
         return UpdateSavedNotificationSounds.fromJson(json);
-      case UpdateSelectedBackground.constructor:
+      case UpdateSelectedBackground.objectType:
         return UpdateSelectedBackground.fromJson(json);
-      case UpdateChatThemes.constructor:
+      case UpdateChatThemes.objectType:
         return UpdateChatThemes.fromJson(json);
-      case UpdateLanguagePackStrings.constructor:
+      case UpdateLanguagePackStrings.objectType:
         return UpdateLanguagePackStrings.fromJson(json);
-      case UpdateConnectionState.constructor:
+      case UpdateConnectionState.objectType:
         return UpdateConnectionState.fromJson(json);
-      case UpdateTermsOfService.constructor:
+      case UpdateTermsOfService.objectType:
         return UpdateTermsOfService.fromJson(json);
-      case UpdateUsersNearby.constructor:
+      case UpdateUsersNearby.objectType:
         return UpdateUsersNearby.fromJson(json);
-      case UpdateAttachmentMenuBots.constructor:
+      case UpdateAttachmentMenuBots.objectType:
         return UpdateAttachmentMenuBots.fromJson(json);
-      case UpdateWebAppMessageSent.constructor:
+      case UpdateWebAppMessageSent.objectType:
         return UpdateWebAppMessageSent.fromJson(json);
-      case UpdateActiveEmojiReactions.constructor:
+      case UpdateActiveEmojiReactions.objectType:
         return UpdateActiveEmojiReactions.fromJson(json);
-      case UpdateDefaultReactionType.constructor:
+      case UpdateDefaultReactionType.objectType:
         return UpdateDefaultReactionType.fromJson(json);
-      case UpdateDiceEmojis.constructor:
+      case UpdateDiceEmojis.objectType:
         return UpdateDiceEmojis.fromJson(json);
-      case UpdateAnimatedEmojiMessageClicked.constructor:
+      case UpdateAnimatedEmojiMessageClicked.objectType:
         return UpdateAnimatedEmojiMessageClicked.fromJson(json);
-      case UpdateAnimationSearchParameters.constructor:
+      case UpdateAnimationSearchParameters.objectType:
         return UpdateAnimationSearchParameters.fromJson(json);
-      case UpdateSuggestedActions.constructor:
+      case UpdateSuggestedActions.objectType:
         return UpdateSuggestedActions.fromJson(json);
-      case UpdateNewInlineQuery.constructor:
+      case UpdateNewInlineQuery.objectType:
         return UpdateNewInlineQuery.fromJson(json);
-      case UpdateNewChosenInlineResult.constructor:
+      case UpdateNewChosenInlineResult.objectType:
         return UpdateNewChosenInlineResult.fromJson(json);
-      case UpdateNewCallbackQuery.constructor:
+      case UpdateNewCallbackQuery.objectType:
         return UpdateNewCallbackQuery.fromJson(json);
-      case UpdateNewInlineCallbackQuery.constructor:
+      case UpdateNewInlineCallbackQuery.objectType:
         return UpdateNewInlineCallbackQuery.fromJson(json);
-      case UpdateNewShippingQuery.constructor:
+      case UpdateNewShippingQuery.objectType:
         return UpdateNewShippingQuery.fromJson(json);
-      case UpdateNewPreCheckoutQuery.constructor:
+      case UpdateNewPreCheckoutQuery.objectType:
         return UpdateNewPreCheckoutQuery.fromJson(json);
-      case UpdateNewCustomEvent.constructor:
+      case UpdateNewCustomEvent.objectType:
         return UpdateNewCustomEvent.fromJson(json);
-      case UpdateNewCustomQuery.constructor:
+      case UpdateNewCustomQuery.objectType:
         return UpdateNewCustomQuery.fromJson(json);
-      case UpdatePoll.constructor:
+      case UpdatePoll.objectType:
         return UpdatePoll.fromJson(json);
-      case UpdatePollAnswer.constructor:
+      case UpdatePollAnswer.objectType:
         return UpdatePollAnswer.fromJson(json);
-      case UpdateChatMember.constructor:
+      case UpdateChatMember.objectType:
         return UpdateChatMember.fromJson(json);
-      case UpdateNewChatJoinRequest.constructor:
+      case UpdateNewChatJoinRequest.objectType:
         return UpdateNewChatJoinRequest.fromJson(json);
       default:
-        return const Update();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of Update)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  Update copyWith() => const Update();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'update';
   
+  Update copyWith();
+
+  static const String objectType = 'update';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateAuthorizationState** *(updateAuthorizationState)* - child of Update
-  ///
-  /// The user authorization state has changed.
-  ///
-  /// * [authorizationState]: New authorization state.
-class UpdateAuthorizationState extends Update {
+///
+/// The user authorization state has changed.
+///
+/// * [authorizationState]: New authorization state.
+final class UpdateAuthorizationState extends Update {
   
   /// **UpdateAuthorizationState** *(updateAuthorizationState)* - child of Update
   ///
@@ -387,12 +390,13 @@ class UpdateAuthorizationState extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "authorization_state": authorizationState.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateAuthorizationState copyWith({
@@ -405,19 +409,22 @@ class UpdateAuthorizationState extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateAuthorizationState';
-  
+  static const String objectType = 'updateAuthorizationState';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateNewMessage** *(updateNewMessage)* - child of Update
-  ///
-  /// A new message was received; can also be an outgoing message.
-  ///
-  /// * [message]: The new message.
-class UpdateNewMessage extends Update {
+///
+/// A new message was received; can also be an outgoing message.
+///
+/// * [message]: The new message.
+final class UpdateNewMessage extends Update {
   
   /// **UpdateNewMessage** *(updateNewMessage)* - child of Update
   ///
@@ -450,12 +457,13 @@ class UpdateNewMessage extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "message": message.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateNewMessage copyWith({
@@ -468,20 +476,23 @@ class UpdateNewMessage extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateNewMessage';
-  
+  static const String objectType = 'updateNewMessage';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateMessageSendAcknowledged** *(updateMessageSendAcknowledged)* - child of Update
-  ///
-  /// A request to send a message has reached the Telegram server. This doesn't mean that the message will be sent successfully or even that the send message request will be processed.. This update will be sent only if the option "use_quick_ack" is set to true. This update may be sent multiple times for the same message.
-  ///
-  /// * [chatId]: The chat identifier of the sent message.
-  /// * [messageId]: A temporary message identifier.
-class UpdateMessageSendAcknowledged extends Update {
+///
+/// A request to send a message has reached the Telegram server. This doesn't mean that the message will be sent successfully or even that the send message request will be processed.. This update will be sent only if the option "use_quick_ack" is set to true. This update may be sent multiple times for the same message.
+///
+/// * [chatId]: The chat identifier of the sent message.
+/// * [messageId]: A temporary message identifier.
+final class UpdateMessageSendAcknowledged extends Update {
   
   /// **UpdateMessageSendAcknowledged** *(updateMessageSendAcknowledged)* - child of Update
   ///
@@ -520,13 +531,14 @@ class UpdateMessageSendAcknowledged extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateMessageSendAcknowledged copyWith({
@@ -541,20 +553,23 @@ class UpdateMessageSendAcknowledged extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateMessageSendAcknowledged';
-  
+  static const String objectType = 'updateMessageSendAcknowledged';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateMessageSendSucceeded** *(updateMessageSendSucceeded)* - child of Update
-  ///
-  /// A message has been successfully sent.
-  ///
-  /// * [message]: The sent message. Usually only the message identifier, date, and content are changed, but almost all other fields can also change.
-  /// * [oldMessageId]: The previous temporary message identifier.
-class UpdateMessageSendSucceeded extends Update {
+///
+/// A message has been successfully sent.
+///
+/// * [message]: The sent message. Usually only the message identifier, date, and content are changed, but almost all other fields can also change.
+/// * [oldMessageId]: The previous temporary message identifier.
+final class UpdateMessageSendSucceeded extends Update {
   
   /// **UpdateMessageSendSucceeded** *(updateMessageSendSucceeded)* - child of Update
   ///
@@ -593,13 +608,14 @@ class UpdateMessageSendSucceeded extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "message": message.toJson(),
       "old_message_id": oldMessageId,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateMessageSendSucceeded copyWith({
@@ -614,22 +630,25 @@ class UpdateMessageSendSucceeded extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateMessageSendSucceeded';
-  
+  static const String objectType = 'updateMessageSendSucceeded';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateMessageSendFailed** *(updateMessageSendFailed)* - child of Update
-  ///
-  /// A message failed to send. Be aware that some messages being sent can be irrecoverably deleted, in which case updateDeleteMessages will be received instead of this update.
-  ///
-  /// * [message]: The failed to send message.
-  /// * [oldMessageId]: The previous temporary message identifier.
-  /// * [errorCode]: An error code.
-  /// * [errorMessage]: Error message.
-class UpdateMessageSendFailed extends Update {
+///
+/// A message failed to send. Be aware that some messages being sent can be irrecoverably deleted, in which case updateDeleteMessages will be received instead of this update.
+///
+/// * [message]: The failed to send message.
+/// * [oldMessageId]: The previous temporary message identifier.
+/// * [errorCode]: An error code.
+/// * [errorMessage]: Error message.
+final class UpdateMessageSendFailed extends Update {
   
   /// **UpdateMessageSendFailed** *(updateMessageSendFailed)* - child of Update
   ///
@@ -680,15 +699,16 @@ class UpdateMessageSendFailed extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "message": message.toJson(),
       "old_message_id": oldMessageId,
       "error_code": errorCode,
       "error_message": errorMessage,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateMessageSendFailed copyWith({
@@ -707,21 +727,24 @@ class UpdateMessageSendFailed extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateMessageSendFailed';
-  
+  static const String objectType = 'updateMessageSendFailed';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateMessageContent** *(updateMessageContent)* - child of Update
-  ///
-  /// The message content has changed.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [messageId]: Message identifier.
-  /// * [newContent]: New message content.
-class UpdateMessageContent extends Update {
+///
+/// The message content has changed.
+///
+/// * [chatId]: Chat identifier.
+/// * [messageId]: Message identifier.
+/// * [newContent]: New message content.
+final class UpdateMessageContent extends Update {
   
   /// **UpdateMessageContent** *(updateMessageContent)* - child of Update
   ///
@@ -766,14 +789,15 @@ class UpdateMessageContent extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "new_content": newContent.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateMessageContent copyWith({
@@ -790,22 +814,25 @@ class UpdateMessageContent extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateMessageContent';
-  
+  static const String objectType = 'updateMessageContent';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateMessageEdited** *(updateMessageEdited)* - child of Update
-  ///
-  /// A message was edited. Changes in the message content will come in a separate updateMessageContent.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [messageId]: Message identifier.
-  /// * [editDate]: Point in time (Unix timestamp) when the message was edited.
-  /// * [replyMarkup]: New message reply markup; may be null *(optional)*.
-class UpdateMessageEdited extends Update {
+///
+/// A message was edited. Changes in the message content will come in a separate updateMessageContent.
+///
+/// * [chatId]: Chat identifier.
+/// * [messageId]: Message identifier.
+/// * [editDate]: Point in time (Unix timestamp) when the message was edited.
+/// * [replyMarkup]: New message reply markup; may be null *(optional)*.
+final class UpdateMessageEdited extends Update {
   
   /// **UpdateMessageEdited** *(updateMessageEdited)* - child of Update
   ///
@@ -856,15 +883,16 @@ class UpdateMessageEdited extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "edit_date": editDate,
       "reply_markup": replyMarkup?.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateMessageEdited copyWith({
@@ -883,21 +911,24 @@ class UpdateMessageEdited extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateMessageEdited';
-  
+  static const String objectType = 'updateMessageEdited';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateMessageIsPinned** *(updateMessageIsPinned)* - child of Update
-  ///
-  /// The message pinned state was changed.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [messageId]: The message identifier.
-  /// * [isPinned]: True, if the message is pinned.
-class UpdateMessageIsPinned extends Update {
+///
+/// The message pinned state was changed.
+///
+/// * [chatId]: Chat identifier.
+/// * [messageId]: The message identifier.
+/// * [isPinned]: True, if the message is pinned.
+final class UpdateMessageIsPinned extends Update {
   
   /// **UpdateMessageIsPinned** *(updateMessageIsPinned)* - child of Update
   ///
@@ -942,14 +973,15 @@ class UpdateMessageIsPinned extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "is_pinned": isPinned,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateMessageIsPinned copyWith({
@@ -966,21 +998,24 @@ class UpdateMessageIsPinned extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateMessageIsPinned';
-  
+  static const String objectType = 'updateMessageIsPinned';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateMessageInteractionInfo** *(updateMessageInteractionInfo)* - child of Update
-  ///
-  /// The information about interactions with a message has changed.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [messageId]: Message identifier.
-  /// * [interactionInfo]: New information about interactions with the message; may be null *(optional)*.
-class UpdateMessageInteractionInfo extends Update {
+///
+/// The information about interactions with a message has changed.
+///
+/// * [chatId]: Chat identifier.
+/// * [messageId]: Message identifier.
+/// * [interactionInfo]: New information about interactions with the message; may be null *(optional)*.
+final class UpdateMessageInteractionInfo extends Update {
   
   /// **UpdateMessageInteractionInfo** *(updateMessageInteractionInfo)* - child of Update
   ///
@@ -1025,14 +1060,15 @@ class UpdateMessageInteractionInfo extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "interaction_info": interactionInfo?.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateMessageInteractionInfo copyWith({
@@ -1049,20 +1085,23 @@ class UpdateMessageInteractionInfo extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateMessageInteractionInfo';
-  
+  static const String objectType = 'updateMessageInteractionInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateMessageContentOpened** *(updateMessageContentOpened)* - child of Update
-  ///
-  /// The message content was opened. Updates voice note messages to "listened", video note messages to "viewed" and starts the self-destruct timer.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [messageId]: Message identifier.
-class UpdateMessageContentOpened extends Update {
+///
+/// The message content was opened. Updates voice note messages to "listened", video note messages to "viewed" and starts the self-destruct timer.
+///
+/// * [chatId]: Chat identifier.
+/// * [messageId]: Message identifier.
+final class UpdateMessageContentOpened extends Update {
   
   /// **UpdateMessageContentOpened** *(updateMessageContentOpened)* - child of Update
   ///
@@ -1101,13 +1140,14 @@ class UpdateMessageContentOpened extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateMessageContentOpened copyWith({
@@ -1122,21 +1162,24 @@ class UpdateMessageContentOpened extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateMessageContentOpened';
-  
+  static const String objectType = 'updateMessageContentOpened';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateMessageMentionRead** *(updateMessageMentionRead)* - child of Update
-  ///
-  /// A message with an unread mention was read.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [messageId]: Message identifier.
-  /// * [unreadMentionCount]: The new number of unread mention messages left in the chat.
-class UpdateMessageMentionRead extends Update {
+///
+/// A message with an unread mention was read.
+///
+/// * [chatId]: Chat identifier.
+/// * [messageId]: Message identifier.
+/// * [unreadMentionCount]: The new number of unread mention messages left in the chat.
+final class UpdateMessageMentionRead extends Update {
   
   /// **UpdateMessageMentionRead** *(updateMessageMentionRead)* - child of Update
   ///
@@ -1181,14 +1224,15 @@ class UpdateMessageMentionRead extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "unread_mention_count": unreadMentionCount,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateMessageMentionRead copyWith({
@@ -1205,22 +1249,25 @@ class UpdateMessageMentionRead extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateMessageMentionRead';
-  
+  static const String objectType = 'updateMessageMentionRead';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateMessageUnreadReactions** *(updateMessageUnreadReactions)* - child of Update
-  ///
-  /// The list of unread reactions added to a message was changed.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [messageId]: Message identifier.
-  /// * [unreadReactions]: The new list of unread reactions.
-  /// * [unreadReactionCount]: The new number of messages with unread reactions left in the chat.
-class UpdateMessageUnreadReactions extends Update {
+///
+/// The list of unread reactions added to a message was changed.
+///
+/// * [chatId]: Chat identifier.
+/// * [messageId]: Message identifier.
+/// * [unreadReactions]: The new list of unread reactions.
+/// * [unreadReactionCount]: The new number of messages with unread reactions left in the chat.
+final class UpdateMessageUnreadReactions extends Update {
   
   /// **UpdateMessageUnreadReactions** *(updateMessageUnreadReactions)* - child of Update
   ///
@@ -1271,15 +1318,16 @@ class UpdateMessageUnreadReactions extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "unread_reactions": unreadReactions.map((i) => i.toJson()).toList(),
       "unread_reaction_count": unreadReactionCount,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateMessageUnreadReactions copyWith({
@@ -1298,20 +1346,23 @@ class UpdateMessageUnreadReactions extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateMessageUnreadReactions';
-  
+  static const String objectType = 'updateMessageUnreadReactions';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateMessageLiveLocationViewed** *(updateMessageLiveLocationViewed)* - child of Update
-  ///
-  /// A message with a live location was viewed. When the update is received, the application is supposed to update the live location.
-  ///
-  /// * [chatId]: Identifier of the chat with the live location message.
-  /// * [messageId]: Identifier of the message with live location.
-class UpdateMessageLiveLocationViewed extends Update {
+///
+/// A message with a live location was viewed. When the update is received, the application is supposed to update the live location.
+///
+/// * [chatId]: Identifier of the chat with the live location message.
+/// * [messageId]: Identifier of the message with live location.
+final class UpdateMessageLiveLocationViewed extends Update {
   
   /// **UpdateMessageLiveLocationViewed** *(updateMessageLiveLocationViewed)* - child of Update
   ///
@@ -1350,13 +1401,14 @@ class UpdateMessageLiveLocationViewed extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateMessageLiveLocationViewed copyWith({
@@ -1371,19 +1423,22 @@ class UpdateMessageLiveLocationViewed extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateMessageLiveLocationViewed';
-  
+  static const String objectType = 'updateMessageLiveLocationViewed';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateNewChat** *(updateNewChat)* - child of Update
-  ///
-  /// A new chat has been loaded/created. This update is guaranteed to come before the chat identifier is returned to the application. The chat field changes will be reported through separate updates.
-  ///
-  /// * [chat]: The chat.
-class UpdateNewChat extends Update {
+///
+/// A new chat has been loaded/created. This update is guaranteed to come before the chat identifier is returned to the application. The chat field changes will be reported through separate updates.
+///
+/// * [chat]: The chat.
+final class UpdateNewChat extends Update {
   
   /// **UpdateNewChat** *(updateNewChat)* - child of Update
   ///
@@ -1416,12 +1471,13 @@ class UpdateNewChat extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat": chat.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateNewChat copyWith({
@@ -1434,20 +1490,23 @@ class UpdateNewChat extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateNewChat';
-  
+  static const String objectType = 'updateNewChat';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatTitle** *(updateChatTitle)* - child of Update
-  ///
-  /// The title of a chat was changed.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [title]: The new chat title.
-class UpdateChatTitle extends Update {
+///
+/// The title of a chat was changed.
+///
+/// * [chatId]: Chat identifier.
+/// * [title]: The new chat title.
+final class UpdateChatTitle extends Update {
   
   /// **UpdateChatTitle** *(updateChatTitle)* - child of Update
   ///
@@ -1486,13 +1545,14 @@ class UpdateChatTitle extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "title": title,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatTitle copyWith({
@@ -1507,20 +1567,23 @@ class UpdateChatTitle extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatTitle';
-  
+  static const String objectType = 'updateChatTitle';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatPhoto** *(updateChatPhoto)* - child of Update
-  ///
-  /// A chat photo was changed.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [photo]: The new chat photo; may be null *(optional)*.
-class UpdateChatPhoto extends Update {
+///
+/// A chat photo was changed.
+///
+/// * [chatId]: Chat identifier.
+/// * [photo]: The new chat photo; may be null *(optional)*.
+final class UpdateChatPhoto extends Update {
   
   /// **UpdateChatPhoto** *(updateChatPhoto)* - child of Update
   ///
@@ -1559,13 +1622,14 @@ class UpdateChatPhoto extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "photo": photo?.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatPhoto copyWith({
@@ -1580,20 +1644,23 @@ class UpdateChatPhoto extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatPhoto';
-  
+  static const String objectType = 'updateChatPhoto';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatPermissions** *(updateChatPermissions)* - child of Update
-  ///
-  /// Chat permissions was changed.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [permissions]: The new chat permissions.
-class UpdateChatPermissions extends Update {
+///
+/// Chat permissions was changed.
+///
+/// * [chatId]: Chat identifier.
+/// * [permissions]: The new chat permissions.
+final class UpdateChatPermissions extends Update {
   
   /// **UpdateChatPermissions** *(updateChatPermissions)* - child of Update
   ///
@@ -1632,13 +1699,14 @@ class UpdateChatPermissions extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "permissions": permissions.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatPermissions copyWith({
@@ -1653,21 +1721,24 @@ class UpdateChatPermissions extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatPermissions';
-  
+  static const String objectType = 'updateChatPermissions';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatLastMessage** *(updateChatLastMessage)* - child of Update
-  ///
-  /// The last message of a chat was changed. If last_message is null, then the last message in the chat became unknown. Some new unknown messages might be added to the chat in this case.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [lastMessage]: The new last message in the chat; may be null *(optional)*.
-  /// * [positions]: The new chat positions in the chat lists.
-class UpdateChatLastMessage extends Update {
+///
+/// The last message of a chat was changed. If last_message is null, then the last message in the chat became unknown. Some new unknown messages might be added to the chat in this case.
+///
+/// * [chatId]: Chat identifier.
+/// * [lastMessage]: The new last message in the chat; may be null *(optional)*.
+/// * [positions]: The new chat positions in the chat lists.
+final class UpdateChatLastMessage extends Update {
   
   /// **UpdateChatLastMessage** *(updateChatLastMessage)* - child of Update
   ///
@@ -1712,14 +1783,15 @@ class UpdateChatLastMessage extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "last_message": lastMessage?.toJson(),
       "positions": positions.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatLastMessage copyWith({
@@ -1736,20 +1808,23 @@ class UpdateChatLastMessage extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatLastMessage';
-  
+  static const String objectType = 'updateChatLastMessage';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatPosition** *(updateChatPosition)* - child of Update
-  ///
-  /// The position of a chat in a chat list has changed. An updateChatLastMessage or updateChatDraftMessage update might be sent instead of the update.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [position]: New chat position. If new order is 0, then the chat needs to be removed from the list.
-class UpdateChatPosition extends Update {
+///
+/// The position of a chat in a chat list has changed. An updateChatLastMessage or updateChatDraftMessage update might be sent instead of the update.
+///
+/// * [chatId]: Chat identifier.
+/// * [position]: New chat position. If new order is 0, then the chat needs to be removed from the list.
+final class UpdateChatPosition extends Update {
   
   /// **UpdateChatPosition** *(updateChatPosition)* - child of Update
   ///
@@ -1788,13 +1863,14 @@ class UpdateChatPosition extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "position": position.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatPosition copyWith({
@@ -1809,21 +1885,24 @@ class UpdateChatPosition extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatPosition';
-  
+  static const String objectType = 'updateChatPosition';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatReadInbox** *(updateChatReadInbox)* - child of Update
-  ///
-  /// Incoming messages were read or the number of unread messages has been changed.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [lastReadInboxMessageId]: Identifier of the last read incoming message.
-  /// * [unreadCount]: The number of unread messages left in the chat.
-class UpdateChatReadInbox extends Update {
+///
+/// Incoming messages were read or the number of unread messages has been changed.
+///
+/// * [chatId]: Chat identifier.
+/// * [lastReadInboxMessageId]: Identifier of the last read incoming message.
+/// * [unreadCount]: The number of unread messages left in the chat.
+final class UpdateChatReadInbox extends Update {
   
   /// **UpdateChatReadInbox** *(updateChatReadInbox)* - child of Update
   ///
@@ -1868,14 +1947,15 @@ class UpdateChatReadInbox extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "last_read_inbox_message_id": lastReadInboxMessageId,
       "unread_count": unreadCount,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatReadInbox copyWith({
@@ -1892,20 +1972,23 @@ class UpdateChatReadInbox extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatReadInbox';
-  
+  static const String objectType = 'updateChatReadInbox';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatReadOutbox** *(updateChatReadOutbox)* - child of Update
-  ///
-  /// Outgoing messages were read.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [lastReadOutboxMessageId]: Identifier of last read outgoing message.
-class UpdateChatReadOutbox extends Update {
+///
+/// Outgoing messages were read.
+///
+/// * [chatId]: Chat identifier.
+/// * [lastReadOutboxMessageId]: Identifier of last read outgoing message.
+final class UpdateChatReadOutbox extends Update {
   
   /// **UpdateChatReadOutbox** *(updateChatReadOutbox)* - child of Update
   ///
@@ -1944,13 +2027,14 @@ class UpdateChatReadOutbox extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "last_read_outbox_message_id": lastReadOutboxMessageId,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatReadOutbox copyWith({
@@ -1965,20 +2049,23 @@ class UpdateChatReadOutbox extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatReadOutbox';
-  
+  static const String objectType = 'updateChatReadOutbox';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatActionBar** *(updateChatActionBar)* - child of Update
-  ///
-  /// The chat action bar was changed.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [actionBar]: The new value of the action bar; may be null *(optional)*.
-class UpdateChatActionBar extends Update {
+///
+/// The chat action bar was changed.
+///
+/// * [chatId]: Chat identifier.
+/// * [actionBar]: The new value of the action bar; may be null *(optional)*.
+final class UpdateChatActionBar extends Update {
   
   /// **UpdateChatActionBar** *(updateChatActionBar)* - child of Update
   ///
@@ -2017,13 +2104,14 @@ class UpdateChatActionBar extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "action_bar": actionBar?.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatActionBar copyWith({
@@ -2038,20 +2126,23 @@ class UpdateChatActionBar extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatActionBar';
-  
+  static const String objectType = 'updateChatActionBar';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatAvailableReactions** *(updateChatAvailableReactions)* - child of Update
-  ///
-  /// The chat available reactions were changed.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [availableReactions]: The new reactions, available in the chat.
-class UpdateChatAvailableReactions extends Update {
+///
+/// The chat available reactions were changed.
+///
+/// * [chatId]: Chat identifier.
+/// * [availableReactions]: The new reactions, available in the chat.
+final class UpdateChatAvailableReactions extends Update {
   
   /// **UpdateChatAvailableReactions** *(updateChatAvailableReactions)* - child of Update
   ///
@@ -2090,13 +2181,14 @@ class UpdateChatAvailableReactions extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "available_reactions": availableReactions.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatAvailableReactions copyWith({
@@ -2111,21 +2203,24 @@ class UpdateChatAvailableReactions extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatAvailableReactions';
-  
+  static const String objectType = 'updateChatAvailableReactions';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatDraftMessage** *(updateChatDraftMessage)* - child of Update
-  ///
-  /// A chat draft has changed. Be aware that the update may come in the currently opened chat but with old content of the draft. If the user has changed the content of the draft, this update mustn't be applied.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [draftMessage]: The new draft message; may be null *(optional)*.
-  /// * [positions]: The new chat positions in the chat lists.
-class UpdateChatDraftMessage extends Update {
+///
+/// A chat draft has changed. Be aware that the update may come in the currently opened chat but with old content of the draft. If the user has changed the content of the draft, this update mustn't be applied.
+///
+/// * [chatId]: Chat identifier.
+/// * [draftMessage]: The new draft message; may be null *(optional)*.
+/// * [positions]: The new chat positions in the chat lists.
+final class UpdateChatDraftMessage extends Update {
   
   /// **UpdateChatDraftMessage** *(updateChatDraftMessage)* - child of Update
   ///
@@ -2170,14 +2265,15 @@ class UpdateChatDraftMessage extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "draft_message": draftMessage?.toJson(),
       "positions": positions.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatDraftMessage copyWith({
@@ -2194,20 +2290,23 @@ class UpdateChatDraftMessage extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatDraftMessage';
-  
+  static const String objectType = 'updateChatDraftMessage';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatMessageSender** *(updateChatMessageSender)* - child of Update
-  ///
-  /// The message sender that is selected to send messages in a chat has changed.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [messageSenderId]: New value of message_sender_id; may be null if the user can't change message sender *(optional)*.
-class UpdateChatMessageSender extends Update {
+///
+/// The message sender that is selected to send messages in a chat has changed.
+///
+/// * [chatId]: Chat identifier.
+/// * [messageSenderId]: New value of message_sender_id; may be null if the user can't change message sender *(optional)*.
+final class UpdateChatMessageSender extends Update {
   
   /// **UpdateChatMessageSender** *(updateChatMessageSender)* - child of Update
   ///
@@ -2246,13 +2345,14 @@ class UpdateChatMessageSender extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_sender_id": messageSenderId?.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatMessageSender copyWith({
@@ -2267,20 +2367,23 @@ class UpdateChatMessageSender extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatMessageSender';
-  
+  static const String objectType = 'updateChatMessageSender';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatMessageAutoDeleteTime** *(updateChatMessageAutoDeleteTime)* - child of Update
-  ///
-  /// The message auto-delete or self-destruct timer setting for a chat was changed.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [messageAutoDeleteTime]: New value of message_auto_delete_time.
-class UpdateChatMessageAutoDeleteTime extends Update {
+///
+/// The message auto-delete or self-destruct timer setting for a chat was changed.
+///
+/// * [chatId]: Chat identifier.
+/// * [messageAutoDeleteTime]: New value of message_auto_delete_time.
+final class UpdateChatMessageAutoDeleteTime extends Update {
   
   /// **UpdateChatMessageAutoDeleteTime** *(updateChatMessageAutoDeleteTime)* - child of Update
   ///
@@ -2319,13 +2422,14 @@ class UpdateChatMessageAutoDeleteTime extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_auto_delete_time": messageAutoDeleteTime,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatMessageAutoDeleteTime copyWith({
@@ -2340,20 +2444,23 @@ class UpdateChatMessageAutoDeleteTime extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatMessageAutoDeleteTime';
-  
+  static const String objectType = 'updateChatMessageAutoDeleteTime';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatNotificationSettings** *(updateChatNotificationSettings)* - child of Update
-  ///
-  /// Notification settings for a chat were changed.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [notificationSettings]: The new notification settings.
-class UpdateChatNotificationSettings extends Update {
+///
+/// Notification settings for a chat were changed.
+///
+/// * [chatId]: Chat identifier.
+/// * [notificationSettings]: The new notification settings.
+final class UpdateChatNotificationSettings extends Update {
   
   /// **UpdateChatNotificationSettings** *(updateChatNotificationSettings)* - child of Update
   ///
@@ -2392,13 +2499,14 @@ class UpdateChatNotificationSettings extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "notification_settings": notificationSettings.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatNotificationSettings copyWith({
@@ -2413,20 +2521,23 @@ class UpdateChatNotificationSettings extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatNotificationSettings';
-  
+  static const String objectType = 'updateChatNotificationSettings';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatPendingJoinRequests** *(updateChatPendingJoinRequests)* - child of Update
-  ///
-  /// The chat pending join requests were changed.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [pendingJoinRequests]: The new data about pending join requests; may be null *(optional)*.
-class UpdateChatPendingJoinRequests extends Update {
+///
+/// The chat pending join requests were changed.
+///
+/// * [chatId]: Chat identifier.
+/// * [pendingJoinRequests]: The new data about pending join requests; may be null *(optional)*.
+final class UpdateChatPendingJoinRequests extends Update {
   
   /// **UpdateChatPendingJoinRequests** *(updateChatPendingJoinRequests)* - child of Update
   ///
@@ -2465,13 +2576,14 @@ class UpdateChatPendingJoinRequests extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "pending_join_requests": pendingJoinRequests?.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatPendingJoinRequests copyWith({
@@ -2486,20 +2598,23 @@ class UpdateChatPendingJoinRequests extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatPendingJoinRequests';
-  
+  static const String objectType = 'updateChatPendingJoinRequests';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatReplyMarkup** *(updateChatReplyMarkup)* - child of Update
-  ///
-  /// The default chat reply markup was changed. Can occur because new messages with reply markup were received or because an old reply markup was hidden by the user.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [replyMarkupMessageId]: Identifier of the message from which reply markup needs to be used; 0 if there is no default custom reply markup in the chat.
-class UpdateChatReplyMarkup extends Update {
+///
+/// The default chat reply markup was changed. Can occur because new messages with reply markup were received or because an old reply markup was hidden by the user.
+///
+/// * [chatId]: Chat identifier.
+/// * [replyMarkupMessageId]: Identifier of the message from which reply markup needs to be used; 0 if there is no default custom reply markup in the chat.
+final class UpdateChatReplyMarkup extends Update {
   
   /// **UpdateChatReplyMarkup** *(updateChatReplyMarkup)* - child of Update
   ///
@@ -2538,13 +2653,14 @@ class UpdateChatReplyMarkup extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "reply_markup_message_id": replyMarkupMessageId,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatReplyMarkup copyWith({
@@ -2559,20 +2675,23 @@ class UpdateChatReplyMarkup extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatReplyMarkup';
-  
+  static const String objectType = 'updateChatReplyMarkup';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatTheme** *(updateChatTheme)* - child of Update
-  ///
-  /// The chat theme was changed.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [themeName]: The new name of the chat theme; may be empty if theme was reset to default.
-class UpdateChatTheme extends Update {
+///
+/// The chat theme was changed.
+///
+/// * [chatId]: Chat identifier.
+/// * [themeName]: The new name of the chat theme; may be empty if theme was reset to default.
+final class UpdateChatTheme extends Update {
   
   /// **UpdateChatTheme** *(updateChatTheme)* - child of Update
   ///
@@ -2611,13 +2730,14 @@ class UpdateChatTheme extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "theme_name": themeName,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatTheme copyWith({
@@ -2632,20 +2752,23 @@ class UpdateChatTheme extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatTheme';
-  
+  static const String objectType = 'updateChatTheme';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatUnreadMentionCount** *(updateChatUnreadMentionCount)* - child of Update
-  ///
-  /// The chat unread_mention_count has changed.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [unreadMentionCount]: The number of unread mention messages left in the chat.
-class UpdateChatUnreadMentionCount extends Update {
+///
+/// The chat unread_mention_count has changed.
+///
+/// * [chatId]: Chat identifier.
+/// * [unreadMentionCount]: The number of unread mention messages left in the chat.
+final class UpdateChatUnreadMentionCount extends Update {
   
   /// **UpdateChatUnreadMentionCount** *(updateChatUnreadMentionCount)* - child of Update
   ///
@@ -2684,13 +2807,14 @@ class UpdateChatUnreadMentionCount extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "unread_mention_count": unreadMentionCount,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatUnreadMentionCount copyWith({
@@ -2705,20 +2829,23 @@ class UpdateChatUnreadMentionCount extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatUnreadMentionCount';
-  
+  static const String objectType = 'updateChatUnreadMentionCount';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatUnreadReactionCount** *(updateChatUnreadReactionCount)* - child of Update
-  ///
-  /// The chat unread_reaction_count has changed.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [unreadReactionCount]: The number of messages with unread reactions left in the chat.
-class UpdateChatUnreadReactionCount extends Update {
+///
+/// The chat unread_reaction_count has changed.
+///
+/// * [chatId]: Chat identifier.
+/// * [unreadReactionCount]: The number of messages with unread reactions left in the chat.
+final class UpdateChatUnreadReactionCount extends Update {
   
   /// **UpdateChatUnreadReactionCount** *(updateChatUnreadReactionCount)* - child of Update
   ///
@@ -2757,13 +2884,14 @@ class UpdateChatUnreadReactionCount extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "unread_reaction_count": unreadReactionCount,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatUnreadReactionCount copyWith({
@@ -2778,20 +2906,23 @@ class UpdateChatUnreadReactionCount extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatUnreadReactionCount';
-  
+  static const String objectType = 'updateChatUnreadReactionCount';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatVideoChat** *(updateChatVideoChat)* - child of Update
-  ///
-  /// A chat video chat state has changed.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [videoChat]: New value of video_chat.
-class UpdateChatVideoChat extends Update {
+///
+/// A chat video chat state has changed.
+///
+/// * [chatId]: Chat identifier.
+/// * [videoChat]: New value of video_chat.
+final class UpdateChatVideoChat extends Update {
   
   /// **UpdateChatVideoChat** *(updateChatVideoChat)* - child of Update
   ///
@@ -2830,13 +2961,14 @@ class UpdateChatVideoChat extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "video_chat": videoChat.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatVideoChat copyWith({
@@ -2851,20 +2983,23 @@ class UpdateChatVideoChat extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatVideoChat';
-  
+  static const String objectType = 'updateChatVideoChat';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatDefaultDisableNotification** *(updateChatDefaultDisableNotification)* - child of Update
-  ///
-  /// The value of the default disable_notification parameter, used when a message is sent to the chat, was changed.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [defaultDisableNotification]: The new default_disable_notification value.
-class UpdateChatDefaultDisableNotification extends Update {
+///
+/// The value of the default disable_notification parameter, used when a message is sent to the chat, was changed.
+///
+/// * [chatId]: Chat identifier.
+/// * [defaultDisableNotification]: The new default_disable_notification value.
+final class UpdateChatDefaultDisableNotification extends Update {
   
   /// **UpdateChatDefaultDisableNotification** *(updateChatDefaultDisableNotification)* - child of Update
   ///
@@ -2903,13 +3038,14 @@ class UpdateChatDefaultDisableNotification extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "default_disable_notification": defaultDisableNotification,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatDefaultDisableNotification copyWith({
@@ -2924,20 +3060,23 @@ class UpdateChatDefaultDisableNotification extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatDefaultDisableNotification';
-  
+  static const String objectType = 'updateChatDefaultDisableNotification';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatHasProtectedContent** *(updateChatHasProtectedContent)* - child of Update
-  ///
-  /// A chat content was allowed or restricted for saving.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [hasProtectedContent]: New value of has_protected_content.
-class UpdateChatHasProtectedContent extends Update {
+///
+/// A chat content was allowed or restricted for saving.
+///
+/// * [chatId]: Chat identifier.
+/// * [hasProtectedContent]: New value of has_protected_content.
+final class UpdateChatHasProtectedContent extends Update {
   
   /// **UpdateChatHasProtectedContent** *(updateChatHasProtectedContent)* - child of Update
   ///
@@ -2976,13 +3115,14 @@ class UpdateChatHasProtectedContent extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "has_protected_content": hasProtectedContent,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatHasProtectedContent copyWith({
@@ -2997,20 +3137,23 @@ class UpdateChatHasProtectedContent extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatHasProtectedContent';
-  
+  static const String objectType = 'updateChatHasProtectedContent';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatHasScheduledMessages** *(updateChatHasScheduledMessages)* - child of Update
-  ///
-  /// A chat's has_scheduled_messages field has changed.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [hasScheduledMessages]: New value of has_scheduled_messages.
-class UpdateChatHasScheduledMessages extends Update {
+///
+/// A chat's has_scheduled_messages field has changed.
+///
+/// * [chatId]: Chat identifier.
+/// * [hasScheduledMessages]: New value of has_scheduled_messages.
+final class UpdateChatHasScheduledMessages extends Update {
   
   /// **UpdateChatHasScheduledMessages** *(updateChatHasScheduledMessages)* - child of Update
   ///
@@ -3049,13 +3192,14 @@ class UpdateChatHasScheduledMessages extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "has_scheduled_messages": hasScheduledMessages,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatHasScheduledMessages copyWith({
@@ -3070,20 +3214,23 @@ class UpdateChatHasScheduledMessages extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatHasScheduledMessages';
-  
+  static const String objectType = 'updateChatHasScheduledMessages';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatIsBlocked** *(updateChatIsBlocked)* - child of Update
-  ///
-  /// A chat was blocked or unblocked.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [isBlocked]: New value of is_blocked.
-class UpdateChatIsBlocked extends Update {
+///
+/// A chat was blocked or unblocked.
+///
+/// * [chatId]: Chat identifier.
+/// * [isBlocked]: New value of is_blocked.
+final class UpdateChatIsBlocked extends Update {
   
   /// **UpdateChatIsBlocked** *(updateChatIsBlocked)* - child of Update
   ///
@@ -3122,13 +3269,14 @@ class UpdateChatIsBlocked extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "is_blocked": isBlocked,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatIsBlocked copyWith({
@@ -3143,20 +3291,23 @@ class UpdateChatIsBlocked extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatIsBlocked';
-  
+  static const String objectType = 'updateChatIsBlocked';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatIsMarkedAsUnread** *(updateChatIsMarkedAsUnread)* - child of Update
-  ///
-  /// A chat was marked as unread or was read.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [isMarkedAsUnread]: New value of is_marked_as_unread.
-class UpdateChatIsMarkedAsUnread extends Update {
+///
+/// A chat was marked as unread or was read.
+///
+/// * [chatId]: Chat identifier.
+/// * [isMarkedAsUnread]: New value of is_marked_as_unread.
+final class UpdateChatIsMarkedAsUnread extends Update {
   
   /// **UpdateChatIsMarkedAsUnread** *(updateChatIsMarkedAsUnread)* - child of Update
   ///
@@ -3195,13 +3346,14 @@ class UpdateChatIsMarkedAsUnread extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "is_marked_as_unread": isMarkedAsUnread,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatIsMarkedAsUnread copyWith({
@@ -3216,20 +3368,23 @@ class UpdateChatIsMarkedAsUnread extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatIsMarkedAsUnread';
-  
+  static const String objectType = 'updateChatIsMarkedAsUnread';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatFilters** *(updateChatFilters)* - child of Update
-  ///
-  /// The list of chat filters or a chat filter has changed.
-  ///
-  /// * [chatFilters]: The new list of chat filters.
-  /// * [mainChatListPosition]: Position of the main chat list among chat filters, 0-based.
-class UpdateChatFilters extends Update {
+///
+/// The list of chat filters or a chat filter has changed.
+///
+/// * [chatFilters]: The new list of chat filters.
+/// * [mainChatListPosition]: Position of the main chat list among chat filters, 0-based.
+final class UpdateChatFilters extends Update {
   
   /// **UpdateChatFilters** *(updateChatFilters)* - child of Update
   ///
@@ -3268,13 +3423,14 @@ class UpdateChatFilters extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_filters": chatFilters.map((i) => i.toJson()).toList(),
       "main_chat_list_position": mainChatListPosition,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatFilters copyWith({
@@ -3289,20 +3445,23 @@ class UpdateChatFilters extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatFilters';
-  
+  static const String objectType = 'updateChatFilters';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatOnlineMemberCount** *(updateChatOnlineMemberCount)* - child of Update
-  ///
-  /// The number of online group members has changed. This update with non-zero number of online group members is sent only for currently opened chats.. There is no guarantee that it will be sent just after the number of online users has changed.
-  ///
-  /// * [chatId]: Identifier of the chat.
-  /// * [onlineMemberCount]: New number of online members in the chat, or 0 if unknown.
-class UpdateChatOnlineMemberCount extends Update {
+///
+/// The number of online group members has changed. This update with non-zero number of online group members is sent only for currently opened chats.. There is no guarantee that it will be sent just after the number of online users has changed.
+///
+/// * [chatId]: Identifier of the chat.
+/// * [onlineMemberCount]: New number of online members in the chat, or 0 if unknown.
+final class UpdateChatOnlineMemberCount extends Update {
   
   /// **UpdateChatOnlineMemberCount** *(updateChatOnlineMemberCount)* - child of Update
   ///
@@ -3341,13 +3500,14 @@ class UpdateChatOnlineMemberCount extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "online_member_count": onlineMemberCount,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatOnlineMemberCount copyWith({
@@ -3362,20 +3522,23 @@ class UpdateChatOnlineMemberCount extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatOnlineMemberCount';
-  
+  static const String objectType = 'updateChatOnlineMemberCount';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateForumTopicInfo** *(updateForumTopicInfo)* - child of Update
-  ///
-  /// Basic information about a topic in a forum chat was changed.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [info]: New information about the topic.
-class UpdateForumTopicInfo extends Update {
+///
+/// Basic information about a topic in a forum chat was changed.
+///
+/// * [chatId]: Chat identifier.
+/// * [info]: New information about the topic.
+final class UpdateForumTopicInfo extends Update {
   
   /// **UpdateForumTopicInfo** *(updateForumTopicInfo)* - child of Update
   ///
@@ -3414,13 +3577,14 @@ class UpdateForumTopicInfo extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "info": info.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateForumTopicInfo copyWith({
@@ -3435,20 +3599,23 @@ class UpdateForumTopicInfo extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateForumTopicInfo';
-  
+  static const String objectType = 'updateForumTopicInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateScopeNotificationSettings** *(updateScopeNotificationSettings)* - child of Update
-  ///
-  /// Notification settings for some type of chats were updated.
-  ///
-  /// * [scope]: Types of chats for which notification settings were updated.
-  /// * [notificationSettings]: The new notification settings.
-class UpdateScopeNotificationSettings extends Update {
+///
+/// Notification settings for some type of chats were updated.
+///
+/// * [scope]: Types of chats for which notification settings were updated.
+/// * [notificationSettings]: The new notification settings.
+final class UpdateScopeNotificationSettings extends Update {
   
   /// **UpdateScopeNotificationSettings** *(updateScopeNotificationSettings)* - child of Update
   ///
@@ -3487,13 +3654,14 @@ class UpdateScopeNotificationSettings extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "scope": scope.toJson(),
       "notification_settings": notificationSettings.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateScopeNotificationSettings copyWith({
@@ -3508,20 +3676,23 @@ class UpdateScopeNotificationSettings extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateScopeNotificationSettings';
-  
+  static const String objectType = 'updateScopeNotificationSettings';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateNotification** *(updateNotification)* - child of Update
-  ///
-  /// A notification was changed.
-  ///
-  /// * [notificationGroupId]: Unique notification group identifier.
-  /// * [notification]: Changed notification.
-class UpdateNotification extends Update {
+///
+/// A notification was changed.
+///
+/// * [notificationGroupId]: Unique notification group identifier.
+/// * [notification]: Changed notification.
+final class UpdateNotification extends Update {
   
   /// **UpdateNotification** *(updateNotification)* - child of Update
   ///
@@ -3560,13 +3731,14 @@ class UpdateNotification extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "notification_group_id": notificationGroupId,
       "notification": notification.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateNotification copyWith({
@@ -3581,26 +3753,29 @@ class UpdateNotification extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateNotification';
-  
+  static const String objectType = 'updateNotification';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateNotificationGroup** *(updateNotificationGroup)* - child of Update
-  ///
-  /// A list of active notifications in a notification group has changed.
-  ///
-  /// * [notificationGroupId]: Unique notification group identifier.
-  /// * [type]: New type of the notification group.
-  /// * [chatId]: Identifier of a chat to which all notifications in the group belong.
-  /// * [notificationSettingsChatId]: Chat identifier, which notification settings must be applied to the added notifications.
-  /// * [notificationSoundId]: Identifier of the notification sound to be played; 0 if sound is disabled.
-  /// * [totalCount]: Total number of unread notifications in the group, can be bigger than number of active notifications.
-  /// * [addedNotifications]: List of added group notifications, sorted by notification updateNotificationGroup.
-  /// * [removedNotificationIds]: Identifiers of removed group notifications, sorted by notification updateNotificationGroup.
-class UpdateNotificationGroup extends Update {
+///
+/// A list of active notifications in a notification group has changed.
+///
+/// * [notificationGroupId]: Unique notification group identifier.
+/// * [type]: New type of the notification group.
+/// * [chatId]: Identifier of a chat to which all notifications in the group belong.
+/// * [notificationSettingsChatId]: Chat identifier, which notification settings must be applied to the added notifications.
+/// * [notificationSoundId]: Identifier of the notification sound to be played; 0 if sound is disabled.
+/// * [totalCount]: Total number of unread notifications in the group, can be bigger than number of active notifications.
+/// * [addedNotifications]: List of added group notifications, sorted by notification updateNotificationGroup.
+/// * [removedNotificationIds]: Identifiers of removed group notifications, sorted by notification updateNotificationGroup.
+final class UpdateNotificationGroup extends Update {
   
   /// **UpdateNotificationGroup** *(updateNotificationGroup)* - child of Update
   ///
@@ -3675,9 +3850,9 @@ class UpdateNotificationGroup extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "notification_group_id": notificationGroupId,
       "type": type.toJson(),
       "chat_id": chatId,
@@ -3686,8 +3861,9 @@ class UpdateNotificationGroup extends Update {
       "total_count": totalCount,
       "added_notifications": addedNotifications.map((i) => i.toJson()).toList(),
       "removed_notification_ids": removedNotificationIds.map((i) => i).toList(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateNotificationGroup copyWith({
@@ -3714,19 +3890,22 @@ class UpdateNotificationGroup extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateNotificationGroup';
-  
+  static const String objectType = 'updateNotificationGroup';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateActiveNotifications** *(updateActiveNotifications)* - child of Update
-  ///
-  /// Contains active notifications that was shown on previous application launches. This update is sent only if the message database is used. In that case it comes once before any updateNotification and updateNotificationGroup update.
-  ///
-  /// * [groups]: Lists of active notification groups.
-class UpdateActiveNotifications extends Update {
+///
+/// Contains active notifications that was shown on previous application launches. This update is sent only if the message database is used. In that case it comes once before any updateNotification and updateNotificationGroup update.
+///
+/// * [groups]: Lists of active notification groups.
+final class UpdateActiveNotifications extends Update {
   
   /// **UpdateActiveNotifications** *(updateActiveNotifications)* - child of Update
   ///
@@ -3759,12 +3938,13 @@ class UpdateActiveNotifications extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "groups": groups.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateActiveNotifications copyWith({
@@ -3777,20 +3957,23 @@ class UpdateActiveNotifications extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateActiveNotifications';
-  
+  static const String objectType = 'updateActiveNotifications';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateHavePendingNotifications** *(updateHavePendingNotifications)* - child of Update
-  ///
-  /// Describes whether there are some pending notification updates. Can be used to prevent application from killing, while there are some pending notifications.
-  ///
-  /// * [haveDelayedNotifications]: True, if there are some delayed notification updates, which will be sent soon.
-  /// * [haveUnreceivedNotifications]: True, if there can be some yet unreceived notifications, which are being fetched from the server.
-class UpdateHavePendingNotifications extends Update {
+///
+/// Describes whether there are some pending notification updates. Can be used to prevent application from killing, while there are some pending notifications.
+///
+/// * [haveDelayedNotifications]: True, if there are some delayed notification updates, which will be sent soon.
+/// * [haveUnreceivedNotifications]: True, if there can be some yet unreceived notifications, which are being fetched from the server.
+final class UpdateHavePendingNotifications extends Update {
   
   /// **UpdateHavePendingNotifications** *(updateHavePendingNotifications)* - child of Update
   ///
@@ -3829,13 +4012,14 @@ class UpdateHavePendingNotifications extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "have_delayed_notifications": haveDelayedNotifications,
       "have_unreceived_notifications": haveUnreceivedNotifications,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateHavePendingNotifications copyWith({
@@ -3850,22 +4034,25 @@ class UpdateHavePendingNotifications extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateHavePendingNotifications';
-  
+  static const String objectType = 'updateHavePendingNotifications';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateDeleteMessages** *(updateDeleteMessages)* - child of Update
-  ///
-  /// Some messages were deleted.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [messageIds]: Identifiers of the deleted messages.
-  /// * [isPermanent]: True, if the messages are permanently deleted by a user (as opposed to just becoming inaccessible).
-  /// * [fromCache]: True, if the messages are deleted only from the cache and can possibly be retrieved again in the future.
-class UpdateDeleteMessages extends Update {
+///
+/// Some messages were deleted.
+///
+/// * [chatId]: Chat identifier.
+/// * [messageIds]: Identifiers of the deleted messages.
+/// * [isPermanent]: True, if the messages are permanently deleted by a user (as opposed to just becoming inaccessible).
+/// * [fromCache]: True, if the messages are deleted only from the cache and can possibly be retrieved again in the future.
+final class UpdateDeleteMessages extends Update {
   
   /// **UpdateDeleteMessages** *(updateDeleteMessages)* - child of Update
   ///
@@ -3916,15 +4103,16 @@ class UpdateDeleteMessages extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_ids": messageIds.map((i) => i).toList(),
       "is_permanent": isPermanent,
       "from_cache": fromCache,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateDeleteMessages copyWith({
@@ -3943,22 +4131,25 @@ class UpdateDeleteMessages extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateDeleteMessages';
-  
+  static const String objectType = 'updateDeleteMessages';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatAction** *(updateChatAction)* - child of Update
-  ///
-  /// A message sender activity in the chat has changed.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [messageThreadId]: If not 0, a message thread identifier in which the action was performed.
-  /// * [senderId]: Identifier of a message sender performing the action.
-  /// * [action]: The action.
-class UpdateChatAction extends Update {
+///
+/// A message sender activity in the chat has changed.
+///
+/// * [chatId]: Chat identifier.
+/// * [messageThreadId]: If not 0, a message thread identifier in which the action was performed.
+/// * [senderId]: Identifier of a message sender performing the action.
+/// * [action]: The action.
+final class UpdateChatAction extends Update {
   
   /// **UpdateChatAction** *(updateChatAction)* - child of Update
   ///
@@ -4009,15 +4200,16 @@ class UpdateChatAction extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_thread_id": messageThreadId,
       "sender_id": senderId.toJson(),
       "action": action.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatAction copyWith({
@@ -4036,20 +4228,23 @@ class UpdateChatAction extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatAction';
-  
+  static const String objectType = 'updateChatAction';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateUserStatus** *(updateUserStatus)* - child of Update
-  ///
-  /// The user went online or offline.
-  ///
-  /// * [userId]: User identifier.
-  /// * [status]: New status of the user.
-class UpdateUserStatus extends Update {
+///
+/// The user went online or offline.
+///
+/// * [userId]: User identifier.
+/// * [status]: New status of the user.
+final class UpdateUserStatus extends Update {
   
   /// **UpdateUserStatus** *(updateUserStatus)* - child of Update
   ///
@@ -4088,13 +4283,14 @@ class UpdateUserStatus extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "user_id": userId,
       "status": status.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateUserStatus copyWith({
@@ -4109,19 +4305,22 @@ class UpdateUserStatus extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateUserStatus';
-  
+  static const String objectType = 'updateUserStatus';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateUser** *(updateUser)* - child of Update
-  ///
-  /// Some data of a user has changed. This update is guaranteed to come before the user identifier is returned to the application.
-  ///
-  /// * [user]: New data about the user.
-class UpdateUser extends Update {
+///
+/// Some data of a user has changed. This update is guaranteed to come before the user identifier is returned to the application.
+///
+/// * [user]: New data about the user.
+final class UpdateUser extends Update {
   
   /// **UpdateUser** *(updateUser)* - child of Update
   ///
@@ -4154,12 +4353,13 @@ class UpdateUser extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "user": user.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateUser copyWith({
@@ -4172,19 +4372,22 @@ class UpdateUser extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateUser';
-  
+  static const String objectType = 'updateUser';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateBasicGroup** *(updateBasicGroup)* - child of Update
-  ///
-  /// Some data of a basic group has changed. This update is guaranteed to come before the basic group identifier is returned to the application.
-  ///
-  /// * [basicGroup]: New data about the group.
-class UpdateBasicGroup extends Update {
+///
+/// Some data of a basic group has changed. This update is guaranteed to come before the basic group identifier is returned to the application.
+///
+/// * [basicGroup]: New data about the group.
+final class UpdateBasicGroup extends Update {
   
   /// **UpdateBasicGroup** *(updateBasicGroup)* - child of Update
   ///
@@ -4217,12 +4420,13 @@ class UpdateBasicGroup extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "basic_group": basicGroup.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateBasicGroup copyWith({
@@ -4235,19 +4439,22 @@ class UpdateBasicGroup extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateBasicGroup';
-  
+  static const String objectType = 'updateBasicGroup';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateSupergroup** *(updateSupergroup)* - child of Update
-  ///
-  /// Some data of a supergroup or a channel has changed. This update is guaranteed to come before the supergroup identifier is returned to the application.
-  ///
-  /// * [supergroup]: New data about the supergroup.
-class UpdateSupergroup extends Update {
+///
+/// Some data of a supergroup or a channel has changed. This update is guaranteed to come before the supergroup identifier is returned to the application.
+///
+/// * [supergroup]: New data about the supergroup.
+final class UpdateSupergroup extends Update {
   
   /// **UpdateSupergroup** *(updateSupergroup)* - child of Update
   ///
@@ -4280,12 +4487,13 @@ class UpdateSupergroup extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "supergroup": supergroup.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateSupergroup copyWith({
@@ -4298,19 +4506,22 @@ class UpdateSupergroup extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateSupergroup';
-  
+  static const String objectType = 'updateSupergroup';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateSecretChat** *(updateSecretChat)* - child of Update
-  ///
-  /// Some data of a secret chat has changed. This update is guaranteed to come before the secret chat identifier is returned to the application.
-  ///
-  /// * [secretChat]: New data about the secret chat.
-class UpdateSecretChat extends Update {
+///
+/// Some data of a secret chat has changed. This update is guaranteed to come before the secret chat identifier is returned to the application.
+///
+/// * [secretChat]: New data about the secret chat.
+final class UpdateSecretChat extends Update {
   
   /// **UpdateSecretChat** *(updateSecretChat)* - child of Update
   ///
@@ -4343,12 +4554,13 @@ class UpdateSecretChat extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "secret_chat": secretChat.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateSecretChat copyWith({
@@ -4361,20 +4573,23 @@ class UpdateSecretChat extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateSecretChat';
-  
+  static const String objectType = 'updateSecretChat';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateUserFullInfo** *(updateUserFullInfo)* - child of Update
-  ///
-  /// Some data in userFullInfo has been changed.
-  ///
-  /// * [userId]: User identifier.
-  /// * [userFullInfo]: New full information about the user.
-class UpdateUserFullInfo extends Update {
+///
+/// Some data in userFullInfo has been changed.
+///
+/// * [userId]: User identifier.
+/// * [userFullInfo]: New full information about the user.
+final class UpdateUserFullInfo extends Update {
   
   /// **UpdateUserFullInfo** *(updateUserFullInfo)* - child of Update
   ///
@@ -4413,13 +4628,14 @@ class UpdateUserFullInfo extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "user_id": userId,
       "user_full_info": userFullInfo.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateUserFullInfo copyWith({
@@ -4434,20 +4650,23 @@ class UpdateUserFullInfo extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateUserFullInfo';
-  
+  static const String objectType = 'updateUserFullInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateBasicGroupFullInfo** *(updateBasicGroupFullInfo)* - child of Update
-  ///
-  /// Some data in basicGroupFullInfo has been changed.
-  ///
-  /// * [basicGroupId]: Identifier of a basic group.
-  /// * [basicGroupFullInfo]: New full information about the group.
-class UpdateBasicGroupFullInfo extends Update {
+///
+/// Some data in basicGroupFullInfo has been changed.
+///
+/// * [basicGroupId]: Identifier of a basic group.
+/// * [basicGroupFullInfo]: New full information about the group.
+final class UpdateBasicGroupFullInfo extends Update {
   
   /// **UpdateBasicGroupFullInfo** *(updateBasicGroupFullInfo)* - child of Update
   ///
@@ -4486,13 +4705,14 @@ class UpdateBasicGroupFullInfo extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "basic_group_id": basicGroupId,
       "basic_group_full_info": basicGroupFullInfo.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateBasicGroupFullInfo copyWith({
@@ -4507,20 +4727,23 @@ class UpdateBasicGroupFullInfo extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateBasicGroupFullInfo';
-  
+  static const String objectType = 'updateBasicGroupFullInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateSupergroupFullInfo** *(updateSupergroupFullInfo)* - child of Update
-  ///
-  /// Some data in supergroupFullInfo has been changed.
-  ///
-  /// * [supergroupId]: Identifier of the supergroup or channel.
-  /// * [supergroupFullInfo]: New full information about the supergroup.
-class UpdateSupergroupFullInfo extends Update {
+///
+/// Some data in supergroupFullInfo has been changed.
+///
+/// * [supergroupId]: Identifier of the supergroup or channel.
+/// * [supergroupFullInfo]: New full information about the supergroup.
+final class UpdateSupergroupFullInfo extends Update {
   
   /// **UpdateSupergroupFullInfo** *(updateSupergroupFullInfo)* - child of Update
   ///
@@ -4559,13 +4782,14 @@ class UpdateSupergroupFullInfo extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "supergroup_id": supergroupId,
       "supergroup_full_info": supergroupFullInfo.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateSupergroupFullInfo copyWith({
@@ -4580,20 +4804,23 @@ class UpdateSupergroupFullInfo extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateSupergroupFullInfo';
-  
+  static const String objectType = 'updateSupergroupFullInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateServiceNotification** *(updateServiceNotification)* - child of Update
-  ///
-  /// A service notification from the server was received. Upon receiving this the application must show a popup with the content of the notification.
-  ///
-  /// * [type]: Notification type. If type begins with "AUTH_KEY_DROP_", then two buttons "Cancel" and "Log out" must be shown under notification; if user presses the second, all local data must be destroyed using Destroy method.
-  /// * [content]: Notification content.
-class UpdateServiceNotification extends Update {
+///
+/// A service notification from the server was received. Upon receiving this the application must show a popup with the content of the notification.
+///
+/// * [type]: Notification type. If type begins with "AUTH_KEY_DROP_", then two buttons "Cancel" and "Log out" must be shown under notification; if user presses the second, all local data must be destroyed using Destroy method.
+/// * [content]: Notification content.
+final class UpdateServiceNotification extends Update {
   
   /// **UpdateServiceNotification** *(updateServiceNotification)* - child of Update
   ///
@@ -4632,13 +4859,14 @@ class UpdateServiceNotification extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "type": type,
       "content": content.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateServiceNotification copyWith({
@@ -4653,19 +4881,22 @@ class UpdateServiceNotification extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateServiceNotification';
-  
+  static const String objectType = 'updateServiceNotification';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateFile** *(updateFile)* - child of Update
-  ///
-  /// Information about a file was updated.
-  ///
-  /// * [file]: New data about the file.
-class UpdateFile extends Update {
+///
+/// Information about a file was updated.
+///
+/// * [file]: New data about the file.
+final class UpdateFile extends Update {
   
   /// **UpdateFile** *(updateFile)* - child of Update
   ///
@@ -4698,12 +4929,13 @@ class UpdateFile extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "file": file.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateFile copyWith({
@@ -4716,22 +4948,25 @@ class UpdateFile extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateFile';
-  
+  static const String objectType = 'updateFile';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateFileGenerationStart** *(updateFileGenerationStart)* - child of Update
-  ///
-  /// The file generation process needs to be started by the application.
-  ///
-  /// * [generationId]: Unique identifier for the generation process.
-  /// * [originalPath]: The path to a file from which a new file is generated; may be empty.
-  /// * [destinationPath]: The path to a file that must be created and where the new file is generated.
-  /// * [conversion]: String specifying the conversion applied to the original file. If conversion is "#url#" than original_path contains an HTTP/HTTPS URL of a file, which must be downloaded by the application.
-class UpdateFileGenerationStart extends Update {
+///
+/// The file generation process needs to be started by the application.
+///
+/// * [generationId]: Unique identifier for the generation process.
+/// * [originalPath]: The path to a file from which a new file is generated; may be empty.
+/// * [destinationPath]: The path to a file that must be created and where the new file is generated.
+/// * [conversion]: String specifying the conversion applied to the original file. If conversion is "#url#" than original_path contains an HTTP/HTTPS URL of a file, which must be downloaded by the application.
+final class UpdateFileGenerationStart extends Update {
   
   /// **UpdateFileGenerationStart** *(updateFileGenerationStart)* - child of Update
   ///
@@ -4782,15 +5017,16 @@ class UpdateFileGenerationStart extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "generation_id": generationId,
       "original_path": originalPath,
       "destination_path": destinationPath,
       "conversion": conversion,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateFileGenerationStart copyWith({
@@ -4809,19 +5045,22 @@ class UpdateFileGenerationStart extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateFileGenerationStart';
-  
+  static const String objectType = 'updateFileGenerationStart';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateFileGenerationStop** *(updateFileGenerationStop)* - child of Update
-  ///
-  /// File generation is no longer needed.
-  ///
-  /// * [generationId]: Unique identifier for the generation process.
-class UpdateFileGenerationStop extends Update {
+///
+/// File generation is no longer needed.
+///
+/// * [generationId]: Unique identifier for the generation process.
+final class UpdateFileGenerationStop extends Update {
   
   /// **UpdateFileGenerationStop** *(updateFileGenerationStop)* - child of Update
   ///
@@ -4854,12 +5093,13 @@ class UpdateFileGenerationStop extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "generation_id": generationId,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateFileGenerationStop copyWith({
@@ -4872,21 +5112,24 @@ class UpdateFileGenerationStop extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateFileGenerationStop';
-  
+  static const String objectType = 'updateFileGenerationStop';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateFileDownloads** *(updateFileDownloads)* - child of Update
-  ///
-  /// The state of the file download list has changed.
-  ///
-  /// * [totalSize]: Total size of files in the file download list, in bytes.
-  /// * [totalCount]: Total number of files in the file download list.
-  /// * [downloadedSize]: Total downloaded size of files in the file download list, in bytes.
-class UpdateFileDownloads extends Update {
+///
+/// The state of the file download list has changed.
+///
+/// * [totalSize]: Total size of files in the file download list, in bytes.
+/// * [totalCount]: Total number of files in the file download list.
+/// * [downloadedSize]: Total downloaded size of files in the file download list, in bytes.
+final class UpdateFileDownloads extends Update {
   
   /// **UpdateFileDownloads** *(updateFileDownloads)* - child of Update
   ///
@@ -4931,14 +5174,15 @@ class UpdateFileDownloads extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "total_size": totalSize,
       "total_count": totalCount,
       "downloaded_size": downloadedSize,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateFileDownloads copyWith({
@@ -4955,20 +5199,23 @@ class UpdateFileDownloads extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateFileDownloads';
-  
+  static const String objectType = 'updateFileDownloads';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateFileAddedToDownloads** *(updateFileAddedToDownloads)* - child of Update
-  ///
-  /// A file was added to the file download list. This update is sent only after file download list is loaded for the first time.
-  ///
-  /// * [fileDownload]: The added file download.
-  /// * [counts]: New number of being downloaded and recently downloaded files found.
-class UpdateFileAddedToDownloads extends Update {
+///
+/// A file was added to the file download list. This update is sent only after file download list is loaded for the first time.
+///
+/// * [fileDownload]: The added file download.
+/// * [counts]: New number of being downloaded and recently downloaded files found.
+final class UpdateFileAddedToDownloads extends Update {
   
   /// **UpdateFileAddedToDownloads** *(updateFileAddedToDownloads)* - child of Update
   ///
@@ -5007,13 +5254,14 @@ class UpdateFileAddedToDownloads extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "file_download": fileDownload.toJson(),
       "counts": counts.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateFileAddedToDownloads copyWith({
@@ -5028,22 +5276,25 @@ class UpdateFileAddedToDownloads extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateFileAddedToDownloads';
-  
+  static const String objectType = 'updateFileAddedToDownloads';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateFileDownload** *(updateFileDownload)* - child of Update
-  ///
-  /// A file download was changed. This update is sent only after file download list is loaded for the first time.
-  ///
-  /// * [fileId]: File identifier.
-  /// * [completeDate]: Point in time (Unix timestamp) when the file downloading was completed; 0 if the file downloading isn't completed.
-  /// * [isPaused]: True, if downloading of the file is paused.
-  /// * [counts]: New number of being downloaded and recently downloaded files found.
-class UpdateFileDownload extends Update {
+///
+/// A file download was changed. This update is sent only after file download list is loaded for the first time.
+///
+/// * [fileId]: File identifier.
+/// * [completeDate]: Point in time (Unix timestamp) when the file downloading was completed; 0 if the file downloading isn't completed.
+/// * [isPaused]: True, if downloading of the file is paused.
+/// * [counts]: New number of being downloaded and recently downloaded files found.
+final class UpdateFileDownload extends Update {
   
   /// **UpdateFileDownload** *(updateFileDownload)* - child of Update
   ///
@@ -5094,15 +5345,16 @@ class UpdateFileDownload extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "file_id": fileId,
       "complete_date": completeDate,
       "is_paused": isPaused,
       "counts": counts.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateFileDownload copyWith({
@@ -5121,20 +5373,23 @@ class UpdateFileDownload extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateFileDownload';
-  
+  static const String objectType = 'updateFileDownload';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateFileRemovedFromDownloads** *(updateFileRemovedFromDownloads)* - child of Update
-  ///
-  /// A file was removed from the file download list. This update is sent only after file download list is loaded for the first time.
-  ///
-  /// * [fileId]: File identifier.
-  /// * [counts]: New number of being downloaded and recently downloaded files found.
-class UpdateFileRemovedFromDownloads extends Update {
+///
+/// A file was removed from the file download list. This update is sent only after file download list is loaded for the first time.
+///
+/// * [fileId]: File identifier.
+/// * [counts]: New number of being downloaded and recently downloaded files found.
+final class UpdateFileRemovedFromDownloads extends Update {
   
   /// **UpdateFileRemovedFromDownloads** *(updateFileRemovedFromDownloads)* - child of Update
   ///
@@ -5173,13 +5428,14 @@ class UpdateFileRemovedFromDownloads extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "file_id": fileId,
       "counts": counts.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateFileRemovedFromDownloads copyWith({
@@ -5194,19 +5450,22 @@ class UpdateFileRemovedFromDownloads extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateFileRemovedFromDownloads';
-  
+  static const String objectType = 'updateFileRemovedFromDownloads';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateCall** *(updateCall)* - child of Update
-  ///
-  /// New call was created or information about a call was updated.
-  ///
-  /// * [call]: New data about a call.
-class UpdateCall extends Update {
+///
+/// New call was created or information about a call was updated.
+///
+/// * [call]: New data about a call.
+final class UpdateCall extends Update {
   
   /// **UpdateCall** *(updateCall)* - child of Update
   ///
@@ -5239,12 +5498,13 @@ class UpdateCall extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "call": call.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateCall copyWith({
@@ -5257,19 +5517,22 @@ class UpdateCall extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateCall';
-  
+  static const String objectType = 'updateCall';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateGroupCall** *(updateGroupCall)* - child of Update
-  ///
-  /// Information about a group call was updated.
-  ///
-  /// * [groupCall]: New data about a group call.
-class UpdateGroupCall extends Update {
+///
+/// Information about a group call was updated.
+///
+/// * [groupCall]: New data about a group call.
+final class UpdateGroupCall extends Update {
   
   /// **UpdateGroupCall** *(updateGroupCall)* - child of Update
   ///
@@ -5302,12 +5565,13 @@ class UpdateGroupCall extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "group_call": groupCall.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateGroupCall copyWith({
@@ -5320,20 +5584,23 @@ class UpdateGroupCall extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateGroupCall';
-  
+  static const String objectType = 'updateGroupCall';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateGroupCallParticipant** *(updateGroupCallParticipant)* - child of Update
-  ///
-  /// Information about a group call participant was changed. The updates are sent only after the group call is received through getGroupCall and only if the call is joined or being joined.
-  ///
-  /// * [groupCallId]: Identifier of group call.
-  /// * [participant]: New data about a participant.
-class UpdateGroupCallParticipant extends Update {
+///
+/// Information about a group call participant was changed. The updates are sent only after the group call is received through getGroupCall and only if the call is joined or being joined.
+///
+/// * [groupCallId]: Identifier of group call.
+/// * [participant]: New data about a participant.
+final class UpdateGroupCallParticipant extends Update {
   
   /// **UpdateGroupCallParticipant** *(updateGroupCallParticipant)* - child of Update
   ///
@@ -5372,13 +5639,14 @@ class UpdateGroupCallParticipant extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "group_call_id": groupCallId,
       "participant": participant.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateGroupCallParticipant copyWith({
@@ -5393,20 +5661,23 @@ class UpdateGroupCallParticipant extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateGroupCallParticipant';
-  
+  static const String objectType = 'updateGroupCallParticipant';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateNewCallSignalingData** *(updateNewCallSignalingData)* - child of Update
-  ///
-  /// New call signaling data arrived.
-  ///
-  /// * [callId]: The call identifier.
-  /// * [data]: The data.
-class UpdateNewCallSignalingData extends Update {
+///
+/// New call signaling data arrived.
+///
+/// * [callId]: The call identifier.
+/// * [data]: The data.
+final class UpdateNewCallSignalingData extends Update {
   
   /// **UpdateNewCallSignalingData** *(updateNewCallSignalingData)* - child of Update
   ///
@@ -5445,13 +5716,14 @@ class UpdateNewCallSignalingData extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "call_id": callId,
       "data": data,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateNewCallSignalingData copyWith({
@@ -5466,20 +5738,23 @@ class UpdateNewCallSignalingData extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateNewCallSignalingData';
-  
+  static const String objectType = 'updateNewCallSignalingData';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateUserPrivacySettingRules** *(updateUserPrivacySettingRules)* - child of Update
-  ///
-  /// Some privacy setting rules have been changed.
-  ///
-  /// * [setting]: The privacy setting.
-  /// * [rules]: New privacy rules.
-class UpdateUserPrivacySettingRules extends Update {
+///
+/// Some privacy setting rules have been changed.
+///
+/// * [setting]: The privacy setting.
+/// * [rules]: New privacy rules.
+final class UpdateUserPrivacySettingRules extends Update {
   
   /// **UpdateUserPrivacySettingRules** *(updateUserPrivacySettingRules)* - child of Update
   ///
@@ -5518,13 +5793,14 @@ class UpdateUserPrivacySettingRules extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "setting": setting.toJson(),
       "rules": rules.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateUserPrivacySettingRules copyWith({
@@ -5539,21 +5815,24 @@ class UpdateUserPrivacySettingRules extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateUserPrivacySettingRules';
-  
+  static const String objectType = 'updateUserPrivacySettingRules';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateUnreadMessageCount** *(updateUnreadMessageCount)* - child of Update
-  ///
-  /// Number of unread messages in a chat list has changed. This update is sent only if the message database is used.
-  ///
-  /// * [chatList]: The chat list with changed number of unread messages.
-  /// * [unreadCount]: Total number of unread messages.
-  /// * [unreadUnmutedCount]: Total number of unread messages in unmuted chats.
-class UpdateUnreadMessageCount extends Update {
+///
+/// Number of unread messages in a chat list has changed. This update is sent only if the message database is used.
+///
+/// * [chatList]: The chat list with changed number of unread messages.
+/// * [unreadCount]: Total number of unread messages.
+/// * [unreadUnmutedCount]: Total number of unread messages in unmuted chats.
+final class UpdateUnreadMessageCount extends Update {
   
   /// **UpdateUnreadMessageCount** *(updateUnreadMessageCount)* - child of Update
   ///
@@ -5598,14 +5877,15 @@ class UpdateUnreadMessageCount extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_list": chatList.toJson(),
       "unread_count": unreadCount,
       "unread_unmuted_count": unreadUnmutedCount,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateUnreadMessageCount copyWith({
@@ -5622,24 +5902,27 @@ class UpdateUnreadMessageCount extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateUnreadMessageCount';
-  
+  static const String objectType = 'updateUnreadMessageCount';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateUnreadChatCount** *(updateUnreadChatCount)* - child of Update
-  ///
-  /// Number of unread chats, i.e. with unread messages or marked as unread, has changed. This update is sent only if the message database is used.
-  ///
-  /// * [chatList]: The chat list with changed number of unread messages.
-  /// * [totalCount]: Approximate total number of chats in the chat list.
-  /// * [unreadCount]: Total number of unread chats.
-  /// * [unreadUnmutedCount]: Total number of unread unmuted chats.
-  /// * [markedAsUnreadCount]: Total number of chats marked as unread.
-  /// * [markedAsUnreadUnmutedCount]: Total number of unmuted chats marked as unread.
-class UpdateUnreadChatCount extends Update {
+///
+/// Number of unread chats, i.e. with unread messages or marked as unread, has changed. This update is sent only if the message database is used.
+///
+/// * [chatList]: The chat list with changed number of unread messages.
+/// * [totalCount]: Approximate total number of chats in the chat list.
+/// * [unreadCount]: Total number of unread chats.
+/// * [unreadUnmutedCount]: Total number of unread unmuted chats.
+/// * [markedAsUnreadCount]: Total number of chats marked as unread.
+/// * [markedAsUnreadUnmutedCount]: Total number of unmuted chats marked as unread.
+final class UpdateUnreadChatCount extends Update {
   
   /// **UpdateUnreadChatCount** *(updateUnreadChatCount)* - child of Update
   ///
@@ -5702,17 +5985,18 @@ class UpdateUnreadChatCount extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_list": chatList.toJson(),
       "total_count": totalCount,
       "unread_count": unreadCount,
       "unread_unmuted_count": unreadUnmutedCount,
       "marked_as_unread_count": markedAsUnreadCount,
       "marked_as_unread_unmuted_count": markedAsUnreadUnmutedCount,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateUnreadChatCount copyWith({
@@ -5735,20 +6019,23 @@ class UpdateUnreadChatCount extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateUnreadChatCount';
-  
+  static const String objectType = 'updateUnreadChatCount';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateOption** *(updateOption)* - child of Update
-  ///
-  /// An option changed its value.
-  ///
-  /// * [name]: The option name.
-  /// * [value]: The new option value.
-class UpdateOption extends Update {
+///
+/// An option changed its value.
+///
+/// * [name]: The option name.
+/// * [value]: The new option value.
+final class UpdateOption extends Update {
   
   /// **UpdateOption** *(updateOption)* - child of Update
   ///
@@ -5787,13 +6074,14 @@ class UpdateOption extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "name": name,
       "value": value.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateOption copyWith({
@@ -5808,19 +6096,22 @@ class UpdateOption extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateOption';
-  
+  static const String objectType = 'updateOption';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateStickerSet** *(updateStickerSet)* - child of Update
-  ///
-  /// A sticker set has changed.
-  ///
-  /// * [stickerSet]: The sticker set.
-class UpdateStickerSet extends Update {
+///
+/// A sticker set has changed.
+///
+/// * [stickerSet]: The sticker set.
+final class UpdateStickerSet extends Update {
   
   /// **UpdateStickerSet** *(updateStickerSet)* - child of Update
   ///
@@ -5853,12 +6144,13 @@ class UpdateStickerSet extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "sticker_set": stickerSet.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateStickerSet copyWith({
@@ -5871,20 +6163,23 @@ class UpdateStickerSet extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateStickerSet';
-  
+  static const String objectType = 'updateStickerSet';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateInstalledStickerSets** *(updateInstalledStickerSets)* - child of Update
-  ///
-  /// The list of installed sticker sets was updated.
-  ///
-  /// * [stickerType]: Type of the affected stickers.
-  /// * [stickerSetIds]: The new list of installed ordinary sticker sets.
-class UpdateInstalledStickerSets extends Update {
+///
+/// The list of installed sticker sets was updated.
+///
+/// * [stickerType]: Type of the affected stickers.
+/// * [stickerSetIds]: The new list of installed ordinary sticker sets.
+final class UpdateInstalledStickerSets extends Update {
   
   /// **UpdateInstalledStickerSets** *(updateInstalledStickerSets)* - child of Update
   ///
@@ -5923,13 +6218,14 @@ class UpdateInstalledStickerSets extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "sticker_type": stickerType.toJson(),
       "sticker_set_ids": stickerSetIds.map((i) => i).toList(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateInstalledStickerSets copyWith({
@@ -5944,20 +6240,23 @@ class UpdateInstalledStickerSets extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateInstalledStickerSets';
-  
+  static const String objectType = 'updateInstalledStickerSets';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateTrendingStickerSets** *(updateTrendingStickerSets)* - child of Update
-  ///
-  /// The list of trending sticker sets was updated or some of them were viewed.
-  ///
-  /// * [stickerType]: Type of the affected stickers.
-  /// * [stickerSets]: The prefix of the list of trending sticker sets with the newest trending sticker sets.
-class UpdateTrendingStickerSets extends Update {
+///
+/// The list of trending sticker sets was updated or some of them were viewed.
+///
+/// * [stickerType]: Type of the affected stickers.
+/// * [stickerSets]: The prefix of the list of trending sticker sets with the newest trending sticker sets.
+final class UpdateTrendingStickerSets extends Update {
   
   /// **UpdateTrendingStickerSets** *(updateTrendingStickerSets)* - child of Update
   ///
@@ -5996,13 +6295,14 @@ class UpdateTrendingStickerSets extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "sticker_type": stickerType.toJson(),
       "sticker_sets": stickerSets.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateTrendingStickerSets copyWith({
@@ -6017,20 +6317,23 @@ class UpdateTrendingStickerSets extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateTrendingStickerSets';
-  
+  static const String objectType = 'updateTrendingStickerSets';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateRecentStickers** *(updateRecentStickers)* - child of Update
-  ///
-  /// The list of recently used stickers was updated.
-  ///
-  /// * [isAttached]: True, if the list of stickers attached to photo or video files was updated; otherwise, the list of sent stickers is updated.
-  /// * [stickerIds]: The new list of file identifiers of recently used stickers.
-class UpdateRecentStickers extends Update {
+///
+/// The list of recently used stickers was updated.
+///
+/// * [isAttached]: True, if the list of stickers attached to photo or video files was updated; otherwise, the list of sent stickers is updated.
+/// * [stickerIds]: The new list of file identifiers of recently used stickers.
+final class UpdateRecentStickers extends Update {
   
   /// **UpdateRecentStickers** *(updateRecentStickers)* - child of Update
   ///
@@ -6069,13 +6372,14 @@ class UpdateRecentStickers extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "is_attached": isAttached,
       "sticker_ids": stickerIds.map((i) => i).toList(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateRecentStickers copyWith({
@@ -6090,19 +6394,22 @@ class UpdateRecentStickers extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateRecentStickers';
-  
+  static const String objectType = 'updateRecentStickers';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateFavoriteStickers** *(updateFavoriteStickers)* - child of Update
-  ///
-  /// The list of favorite stickers was updated.
-  ///
-  /// * [stickerIds]: The new list of file identifiers of favorite stickers.
-class UpdateFavoriteStickers extends Update {
+///
+/// The list of favorite stickers was updated.
+///
+/// * [stickerIds]: The new list of file identifiers of favorite stickers.
+final class UpdateFavoriteStickers extends Update {
   
   /// **UpdateFavoriteStickers** *(updateFavoriteStickers)* - child of Update
   ///
@@ -6135,12 +6442,13 @@ class UpdateFavoriteStickers extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "sticker_ids": stickerIds.map((i) => i).toList(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateFavoriteStickers copyWith({
@@ -6153,19 +6461,22 @@ class UpdateFavoriteStickers extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateFavoriteStickers';
-  
+  static const String objectType = 'updateFavoriteStickers';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateSavedAnimations** *(updateSavedAnimations)* - child of Update
-  ///
-  /// The list of saved animations was updated.
-  ///
-  /// * [animationIds]: The new list of file identifiers of saved animations.
-class UpdateSavedAnimations extends Update {
+///
+/// The list of saved animations was updated.
+///
+/// * [animationIds]: The new list of file identifiers of saved animations.
+final class UpdateSavedAnimations extends Update {
   
   /// **UpdateSavedAnimations** *(updateSavedAnimations)* - child of Update
   ///
@@ -6198,12 +6509,13 @@ class UpdateSavedAnimations extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "animation_ids": animationIds.map((i) => i).toList(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateSavedAnimations copyWith({
@@ -6216,19 +6528,22 @@ class UpdateSavedAnimations extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateSavedAnimations';
-  
+  static const String objectType = 'updateSavedAnimations';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateSavedNotificationSounds** *(updateSavedNotificationSounds)* - child of Update
-  ///
-  /// The list of saved notifications sounds was updated. This update may not be sent until information about a notification sound was requested for the first time.
-  ///
-  /// * [notificationSoundIds]: The new list of identifiers of saved notification sounds.
-class UpdateSavedNotificationSounds extends Update {
+///
+/// The list of saved notifications sounds was updated. This update may not be sent until information about a notification sound was requested for the first time.
+///
+/// * [notificationSoundIds]: The new list of identifiers of saved notification sounds.
+final class UpdateSavedNotificationSounds extends Update {
   
   /// **UpdateSavedNotificationSounds** *(updateSavedNotificationSounds)* - child of Update
   ///
@@ -6261,12 +6576,13 @@ class UpdateSavedNotificationSounds extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "notification_sound_ids": notificationSoundIds.map((i) => i).toList(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateSavedNotificationSounds copyWith({
@@ -6279,20 +6595,23 @@ class UpdateSavedNotificationSounds extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateSavedNotificationSounds';
-  
+  static const String objectType = 'updateSavedNotificationSounds';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateSelectedBackground** *(updateSelectedBackground)* - child of Update
-  ///
-  /// The selected background has changed.
-  ///
-  /// * [forDarkTheme]: True, if background for dark theme has changed.
-  /// * [background]: The new selected background; may be null *(optional)*.
-class UpdateSelectedBackground extends Update {
+///
+/// The selected background has changed.
+///
+/// * [forDarkTheme]: True, if background for dark theme has changed.
+/// * [background]: The new selected background; may be null *(optional)*.
+final class UpdateSelectedBackground extends Update {
   
   /// **UpdateSelectedBackground** *(updateSelectedBackground)* - child of Update
   ///
@@ -6331,13 +6650,14 @@ class UpdateSelectedBackground extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "for_dark_theme": forDarkTheme,
       "background": background?.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateSelectedBackground copyWith({
@@ -6352,19 +6672,22 @@ class UpdateSelectedBackground extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateSelectedBackground';
-  
+  static const String objectType = 'updateSelectedBackground';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatThemes** *(updateChatThemes)* - child of Update
-  ///
-  /// The list of available chat themes has changed.
-  ///
-  /// * [chatThemes]: The new list of chat themes.
-class UpdateChatThemes extends Update {
+///
+/// The list of available chat themes has changed.
+///
+/// * [chatThemes]: The new list of chat themes.
+final class UpdateChatThemes extends Update {
   
   /// **UpdateChatThemes** *(updateChatThemes)* - child of Update
   ///
@@ -6397,12 +6720,13 @@ class UpdateChatThemes extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_themes": chatThemes.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatThemes copyWith({
@@ -6415,21 +6739,24 @@ class UpdateChatThemes extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatThemes';
-  
+  static const String objectType = 'updateChatThemes';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateLanguagePackStrings** *(updateLanguagePackStrings)* - child of Update
-  ///
-  /// Some language pack strings have been updated.
-  ///
-  /// * [localizationTarget]: Localization target to which the language pack belongs.
-  /// * [languagePackId]: Identifier of the updated language pack.
-  /// * [strings]: List of changed language pack strings.
-class UpdateLanguagePackStrings extends Update {
+///
+/// Some language pack strings have been updated.
+///
+/// * [localizationTarget]: Localization target to which the language pack belongs.
+/// * [languagePackId]: Identifier of the updated language pack.
+/// * [strings]: List of changed language pack strings.
+final class UpdateLanguagePackStrings extends Update {
   
   /// **UpdateLanguagePackStrings** *(updateLanguagePackStrings)* - child of Update
   ///
@@ -6474,14 +6801,15 @@ class UpdateLanguagePackStrings extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "localization_target": localizationTarget,
       "language_pack_id": languagePackId,
       "strings": strings.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateLanguagePackStrings copyWith({
@@ -6498,19 +6826,22 @@ class UpdateLanguagePackStrings extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateLanguagePackStrings';
-  
+  static const String objectType = 'updateLanguagePackStrings';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateConnectionState** *(updateConnectionState)* - child of Update
-  ///
-  /// The connection state has changed. This update must be used only to show a human-readable description of the connection state.
-  ///
-  /// * [state]: The new connection state.
-class UpdateConnectionState extends Update {
+///
+/// The connection state has changed. This update must be used only to show a human-readable description of the connection state.
+///
+/// * [state]: The new connection state.
+final class UpdateConnectionState extends Update {
   
   /// **UpdateConnectionState** *(updateConnectionState)* - child of Update
   ///
@@ -6543,12 +6874,13 @@ class UpdateConnectionState extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "state": state.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateConnectionState copyWith({
@@ -6561,20 +6893,23 @@ class UpdateConnectionState extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateConnectionState';
-  
+  static const String objectType = 'updateConnectionState';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateTermsOfService** *(updateTermsOfService)* - child of Update
-  ///
-  /// New terms of service must be accepted by the user. If the terms of service are declined, then the deleteAccount method must be called with the reason "Decline ToS update".
-  ///
-  /// * [termsOfServiceId]: Identifier of the terms of service.
-  /// * [termsOfService]: The new terms of service.
-class UpdateTermsOfService extends Update {
+///
+/// New terms of service must be accepted by the user. If the terms of service are declined, then the deleteAccount method must be called with the reason "Decline ToS update".
+///
+/// * [termsOfServiceId]: Identifier of the terms of service.
+/// * [termsOfService]: The new terms of service.
+final class UpdateTermsOfService extends Update {
   
   /// **UpdateTermsOfService** *(updateTermsOfService)* - child of Update
   ///
@@ -6613,13 +6948,14 @@ class UpdateTermsOfService extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "terms_of_service_id": termsOfServiceId,
       "terms_of_service": termsOfService.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateTermsOfService copyWith({
@@ -6634,19 +6970,22 @@ class UpdateTermsOfService extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateTermsOfService';
-  
+  static const String objectType = 'updateTermsOfService';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateUsersNearby** *(updateUsersNearby)* - child of Update
-  ///
-  /// The list of users nearby has changed. The update is guaranteed to be sent only 60 seconds after a successful searchChatsNearby request.
-  ///
-  /// * [usersNearby]: The new list of users nearby.
-class UpdateUsersNearby extends Update {
+///
+/// The list of users nearby has changed. The update is guaranteed to be sent only 60 seconds after a successful searchChatsNearby request.
+///
+/// * [usersNearby]: The new list of users nearby.
+final class UpdateUsersNearby extends Update {
   
   /// **UpdateUsersNearby** *(updateUsersNearby)* - child of Update
   ///
@@ -6679,12 +7018,13 @@ class UpdateUsersNearby extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "users_nearby": usersNearby.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateUsersNearby copyWith({
@@ -6697,19 +7037,22 @@ class UpdateUsersNearby extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateUsersNearby';
-  
+  static const String objectType = 'updateUsersNearby';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateAttachmentMenuBots** *(updateAttachmentMenuBots)* - child of Update
-  ///
-  /// The list of bots added to attachment menu has changed.
-  ///
-  /// * [bots]: The new list of bots added to attachment menu. The bots must not be shown on scheduled messages screen.
-class UpdateAttachmentMenuBots extends Update {
+///
+/// The list of bots added to attachment menu has changed.
+///
+/// * [bots]: The new list of bots added to attachment menu. The bots must not be shown on scheduled messages screen.
+final class UpdateAttachmentMenuBots extends Update {
   
   /// **UpdateAttachmentMenuBots** *(updateAttachmentMenuBots)* - child of Update
   ///
@@ -6742,12 +7085,13 @@ class UpdateAttachmentMenuBots extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "bots": bots.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateAttachmentMenuBots copyWith({
@@ -6760,19 +7104,22 @@ class UpdateAttachmentMenuBots extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateAttachmentMenuBots';
-  
+  static const String objectType = 'updateAttachmentMenuBots';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateWebAppMessageSent** *(updateWebAppMessageSent)* - child of Update
-  ///
-  /// A message was sent by an opened Web App, so the Web App needs to be closed.
-  ///
-  /// * [webAppLaunchId]: Identifier of Web App launch.
-class UpdateWebAppMessageSent extends Update {
+///
+/// A message was sent by an opened Web App, so the Web App needs to be closed.
+///
+/// * [webAppLaunchId]: Identifier of Web App launch.
+final class UpdateWebAppMessageSent extends Update {
   
   /// **UpdateWebAppMessageSent** *(updateWebAppMessageSent)* - child of Update
   ///
@@ -6805,12 +7152,13 @@ class UpdateWebAppMessageSent extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "web_app_launch_id": webAppLaunchId,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateWebAppMessageSent copyWith({
@@ -6823,19 +7171,22 @@ class UpdateWebAppMessageSent extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateWebAppMessageSent';
-  
+  static const String objectType = 'updateWebAppMessageSent';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateActiveEmojiReactions** *(updateActiveEmojiReactions)* - child of Update
-  ///
-  /// The list of active emoji reactions has changed.
-  ///
-  /// * [emojis]: The new list of active emoji reactions.
-class UpdateActiveEmojiReactions extends Update {
+///
+/// The list of active emoji reactions has changed.
+///
+/// * [emojis]: The new list of active emoji reactions.
+final class UpdateActiveEmojiReactions extends Update {
   
   /// **UpdateActiveEmojiReactions** *(updateActiveEmojiReactions)* - child of Update
   ///
@@ -6868,12 +7219,13 @@ class UpdateActiveEmojiReactions extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "emojis": emojis.map((i) => i).toList(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateActiveEmojiReactions copyWith({
@@ -6886,19 +7238,22 @@ class UpdateActiveEmojiReactions extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateActiveEmojiReactions';
-  
+  static const String objectType = 'updateActiveEmojiReactions';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateDefaultReactionType** *(updateDefaultReactionType)* - child of Update
-  ///
-  /// The type of default reaction has changed.
-  ///
-  /// * [reactionType]: The new type of the default reaction.
-class UpdateDefaultReactionType extends Update {
+///
+/// The type of default reaction has changed.
+///
+/// * [reactionType]: The new type of the default reaction.
+final class UpdateDefaultReactionType extends Update {
   
   /// **UpdateDefaultReactionType** *(updateDefaultReactionType)* - child of Update
   ///
@@ -6931,12 +7286,13 @@ class UpdateDefaultReactionType extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "reaction_type": reactionType.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateDefaultReactionType copyWith({
@@ -6949,19 +7305,22 @@ class UpdateDefaultReactionType extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateDefaultReactionType';
-  
+  static const String objectType = 'updateDefaultReactionType';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateDiceEmojis** *(updateDiceEmojis)* - child of Update
-  ///
-  /// The list of supported dice emojis has changed.
-  ///
-  /// * [emojis]: The new list of supported dice emojis.
-class UpdateDiceEmojis extends Update {
+///
+/// The list of supported dice emojis has changed.
+///
+/// * [emojis]: The new list of supported dice emojis.
+final class UpdateDiceEmojis extends Update {
   
   /// **UpdateDiceEmojis** *(updateDiceEmojis)* - child of Update
   ///
@@ -6994,12 +7353,13 @@ class UpdateDiceEmojis extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "emojis": emojis.map((i) => i).toList(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateDiceEmojis copyWith({
@@ -7012,21 +7372,24 @@ class UpdateDiceEmojis extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateDiceEmojis';
-  
+  static const String objectType = 'updateDiceEmojis';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateAnimatedEmojiMessageClicked** *(updateAnimatedEmojiMessageClicked)* - child of Update
-  ///
-  /// Some animated emoji message was clicked and a big animated sticker must be played if the message is visible on the screen. chatActionWatchingAnimations with the text of the message needs to be sent if the sticker is played.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [messageId]: Message identifier.
-  /// * [sticker]: The animated sticker to be played.
-class UpdateAnimatedEmojiMessageClicked extends Update {
+///
+/// Some animated emoji message was clicked and a big animated sticker must be played if the message is visible on the screen. chatActionWatchingAnimations with the text of the message needs to be sent if the sticker is played.
+///
+/// * [chatId]: Chat identifier.
+/// * [messageId]: Message identifier.
+/// * [sticker]: The animated sticker to be played.
+final class UpdateAnimatedEmojiMessageClicked extends Update {
   
   /// **UpdateAnimatedEmojiMessageClicked** *(updateAnimatedEmojiMessageClicked)* - child of Update
   ///
@@ -7071,14 +7434,15 @@ class UpdateAnimatedEmojiMessageClicked extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "sticker": sticker.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateAnimatedEmojiMessageClicked copyWith({
@@ -7095,20 +7459,23 @@ class UpdateAnimatedEmojiMessageClicked extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateAnimatedEmojiMessageClicked';
-  
+  static const String objectType = 'updateAnimatedEmojiMessageClicked';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateAnimationSearchParameters** *(updateAnimationSearchParameters)* - child of Update
-  ///
-  /// The parameters of animation search through getOption("animation_search_bot_username") bot has changed.
-  ///
-  /// * [provider]: Name of the animation search provider.
-  /// * [emojis]: The new list of emojis suggested for searching.
-class UpdateAnimationSearchParameters extends Update {
+///
+/// The parameters of animation search through getOption("animation_search_bot_username") bot has changed.
+///
+/// * [provider]: Name of the animation search provider.
+/// * [emojis]: The new list of emojis suggested for searching.
+final class UpdateAnimationSearchParameters extends Update {
   
   /// **UpdateAnimationSearchParameters** *(updateAnimationSearchParameters)* - child of Update
   ///
@@ -7147,13 +7514,14 @@ class UpdateAnimationSearchParameters extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "provider": provider,
       "emojis": emojis.map((i) => i).toList(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateAnimationSearchParameters copyWith({
@@ -7168,20 +7536,23 @@ class UpdateAnimationSearchParameters extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateAnimationSearchParameters';
-  
+  static const String objectType = 'updateAnimationSearchParameters';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateSuggestedActions** *(updateSuggestedActions)* - child of Update
-  ///
-  /// The list of suggested to the user actions has changed.
-  ///
-  /// * [addedActions]: Added suggested actions.
-  /// * [removedActions]: Removed suggested actions.
-class UpdateSuggestedActions extends Update {
+///
+/// The list of suggested to the user actions has changed.
+///
+/// * [addedActions]: Added suggested actions.
+/// * [removedActions]: Removed suggested actions.
+final class UpdateSuggestedActions extends Update {
   
   /// **UpdateSuggestedActions** *(updateSuggestedActions)* - child of Update
   ///
@@ -7220,13 +7591,14 @@ class UpdateSuggestedActions extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "added_actions": addedActions.map((i) => i.toJson()).toList(),
       "removed_actions": removedActions.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateSuggestedActions copyWith({
@@ -7241,24 +7613,27 @@ class UpdateSuggestedActions extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateSuggestedActions';
-  
+  static const String objectType = 'updateSuggestedActions';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateNewInlineQuery** *(updateNewInlineQuery)* - child of Update
-  ///
-  /// A new incoming inline query; for bots only.
-  ///
-  /// * [id]: Unique query identifier.
-  /// * [senderUserId]: Identifier of the user who sent the query.
-  /// * [userLocation]: User location; may be null *(optional)*.
-  /// * [chatType]: The type of the chat from which the query originated; may be null if unknown *(optional)*.
-  /// * [query]: Text of the query.
-  /// * [offset]: Offset of the first entry to return.
-class UpdateNewInlineQuery extends Update {
+///
+/// A new incoming inline query; for bots only.
+///
+/// * [id]: Unique query identifier.
+/// * [senderUserId]: Identifier of the user who sent the query.
+/// * [userLocation]: User location; may be null *(optional)*.
+/// * [chatType]: The type of the chat from which the query originated; may be null if unknown *(optional)*.
+/// * [query]: Text of the query.
+/// * [offset]: Offset of the first entry to return.
+final class UpdateNewInlineQuery extends Update {
   
   /// **UpdateNewInlineQuery** *(updateNewInlineQuery)* - child of Update
   ///
@@ -7321,17 +7696,18 @@ class UpdateNewInlineQuery extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "sender_user_id": senderUserId,
       "user_location": userLocation?.toJson(),
       "chat_type": chatType?.toJson(),
       "query": query,
       "offset": offset,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateNewInlineQuery copyWith({
@@ -7354,23 +7730,26 @@ class UpdateNewInlineQuery extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateNewInlineQuery';
-  
+  static const String objectType = 'updateNewInlineQuery';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateNewChosenInlineResult** *(updateNewChosenInlineResult)* - child of Update
-  ///
-  /// The user has chosen a result of an inline query; for bots only.
-  ///
-  /// * [senderUserId]: Identifier of the user who sent the query.
-  /// * [userLocation]: User location; may be null *(optional)*.
-  /// * [query]: Text of the query.
-  /// * [resultId]: Identifier of the chosen result.
-  /// * [inlineMessageId]: Identifier of the sent inline message, if known.
-class UpdateNewChosenInlineResult extends Update {
+///
+/// The user has chosen a result of an inline query; for bots only.
+///
+/// * [senderUserId]: Identifier of the user who sent the query.
+/// * [userLocation]: User location; may be null *(optional)*.
+/// * [query]: Text of the query.
+/// * [resultId]: Identifier of the chosen result.
+/// * [inlineMessageId]: Identifier of the sent inline message, if known.
+final class UpdateNewChosenInlineResult extends Update {
   
   /// **UpdateNewChosenInlineResult** *(updateNewChosenInlineResult)* - child of Update
   ///
@@ -7427,16 +7806,17 @@ class UpdateNewChosenInlineResult extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "sender_user_id": senderUserId,
       "user_location": userLocation?.toJson(),
       "query": query,
       "result_id": resultId,
       "inline_message_id": inlineMessageId,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateNewChosenInlineResult copyWith({
@@ -7457,24 +7837,27 @@ class UpdateNewChosenInlineResult extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateNewChosenInlineResult';
-  
+  static const String objectType = 'updateNewChosenInlineResult';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateNewCallbackQuery** *(updateNewCallbackQuery)* - child of Update
-  ///
-  /// A new incoming callback query; for bots only.
-  ///
-  /// * [id]: Unique query identifier.
-  /// * [senderUserId]: Identifier of the user who sent the query.
-  /// * [chatId]: Identifier of the chat where the query was sent.
-  /// * [messageId]: Identifier of the message from which the query originated.
-  /// * [chatInstance]: Identifier that uniquely corresponds to the chat to which the message was sent.
-  /// * [payload]: Query payload.
-class UpdateNewCallbackQuery extends Update {
+///
+/// A new incoming callback query; for bots only.
+///
+/// * [id]: Unique query identifier.
+/// * [senderUserId]: Identifier of the user who sent the query.
+/// * [chatId]: Identifier of the chat where the query was sent.
+/// * [messageId]: Identifier of the message from which the query originated.
+/// * [chatInstance]: Identifier that uniquely corresponds to the chat to which the message was sent.
+/// * [payload]: Query payload.
+final class UpdateNewCallbackQuery extends Update {
   
   /// **UpdateNewCallbackQuery** *(updateNewCallbackQuery)* - child of Update
   ///
@@ -7537,17 +7920,18 @@ class UpdateNewCallbackQuery extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "sender_user_id": senderUserId,
       "chat_id": chatId,
       "message_id": messageId,
       "chat_instance": chatInstance,
       "payload": payload.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateNewCallbackQuery copyWith({
@@ -7570,23 +7954,26 @@ class UpdateNewCallbackQuery extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateNewCallbackQuery';
-  
+  static const String objectType = 'updateNewCallbackQuery';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateNewInlineCallbackQuery** *(updateNewInlineCallbackQuery)* - child of Update
-  ///
-  /// A new incoming callback query from a message sent via a bot; for bots only.
-  ///
-  /// * [id]: Unique query identifier.
-  /// * [senderUserId]: Identifier of the user who sent the query.
-  /// * [inlineMessageId]: Identifier of the inline message from which the query originated.
-  /// * [chatInstance]: An identifier uniquely corresponding to the chat a message was sent to.
-  /// * [payload]: Query payload.
-class UpdateNewInlineCallbackQuery extends Update {
+///
+/// A new incoming callback query from a message sent via a bot; for bots only.
+///
+/// * [id]: Unique query identifier.
+/// * [senderUserId]: Identifier of the user who sent the query.
+/// * [inlineMessageId]: Identifier of the inline message from which the query originated.
+/// * [chatInstance]: An identifier uniquely corresponding to the chat a message was sent to.
+/// * [payload]: Query payload.
+final class UpdateNewInlineCallbackQuery extends Update {
   
   /// **UpdateNewInlineCallbackQuery** *(updateNewInlineCallbackQuery)* - child of Update
   ///
@@ -7643,16 +8030,17 @@ class UpdateNewInlineCallbackQuery extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "sender_user_id": senderUserId,
       "inline_message_id": inlineMessageId,
       "chat_instance": chatInstance,
       "payload": payload.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateNewInlineCallbackQuery copyWith({
@@ -7673,22 +8061,25 @@ class UpdateNewInlineCallbackQuery extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateNewInlineCallbackQuery';
-  
+  static const String objectType = 'updateNewInlineCallbackQuery';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateNewShippingQuery** *(updateNewShippingQuery)* - child of Update
-  ///
-  /// A new incoming shipping query; for bots only. Only for invoices with flexible price.
-  ///
-  /// * [id]: Unique query identifier.
-  /// * [senderUserId]: Identifier of the user who sent the query.
-  /// * [invoicePayload]: Invoice payload.
-  /// * [shippingAddress]: User shipping address.
-class UpdateNewShippingQuery extends Update {
+///
+/// A new incoming shipping query; for bots only. Only for invoices with flexible price.
+///
+/// * [id]: Unique query identifier.
+/// * [senderUserId]: Identifier of the user who sent the query.
+/// * [invoicePayload]: Invoice payload.
+/// * [shippingAddress]: User shipping address.
+final class UpdateNewShippingQuery extends Update {
   
   /// **UpdateNewShippingQuery** *(updateNewShippingQuery)* - child of Update
   ///
@@ -7739,15 +8130,16 @@ class UpdateNewShippingQuery extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "sender_user_id": senderUserId,
       "invoice_payload": invoicePayload,
       "shipping_address": shippingAddress.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateNewShippingQuery copyWith({
@@ -7766,25 +8158,28 @@ class UpdateNewShippingQuery extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateNewShippingQuery';
-  
+  static const String objectType = 'updateNewShippingQuery';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateNewPreCheckoutQuery** *(updateNewPreCheckoutQuery)* - child of Update
-  ///
-  /// A new incoming pre-checkout query; for bots only. Contains full information about a checkout.
-  ///
-  /// * [id]: Unique query identifier.
-  /// * [senderUserId]: Identifier of the user who sent the query.
-  /// * [currency]: Currency for the product price.
-  /// * [totalAmount]: Total price for the product, in the smallest units of the currency.
-  /// * [invoicePayload]: Invoice payload.
-  /// * [shippingOptionId]: Identifier of a shipping option chosen by the user; may be empty if not applicable.
-  /// * [orderInfo]: Information about the order; may be null *(optional)*.
-class UpdateNewPreCheckoutQuery extends Update {
+///
+/// A new incoming pre-checkout query; for bots only. Contains full information about a checkout.
+///
+/// * [id]: Unique query identifier.
+/// * [senderUserId]: Identifier of the user who sent the query.
+/// * [currency]: Currency for the product price.
+/// * [totalAmount]: Total price for the product, in the smallest units of the currency.
+/// * [invoicePayload]: Invoice payload.
+/// * [shippingOptionId]: Identifier of a shipping option chosen by the user; may be empty if not applicable.
+/// * [orderInfo]: Information about the order; may be null *(optional)*.
+final class UpdateNewPreCheckoutQuery extends Update {
   
   /// **UpdateNewPreCheckoutQuery** *(updateNewPreCheckoutQuery)* - child of Update
   ///
@@ -7853,9 +8248,9 @@ class UpdateNewPreCheckoutQuery extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "sender_user_id": senderUserId,
       "currency": currency,
@@ -7863,8 +8258,9 @@ class UpdateNewPreCheckoutQuery extends Update {
       "invoice_payload": invoicePayload,
       "shipping_option_id": shippingOptionId,
       "order_info": orderInfo?.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateNewPreCheckoutQuery copyWith({
@@ -7889,19 +8285,22 @@ class UpdateNewPreCheckoutQuery extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateNewPreCheckoutQuery';
-  
+  static const String objectType = 'updateNewPreCheckoutQuery';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateNewCustomEvent** *(updateNewCustomEvent)* - child of Update
-  ///
-  /// A new incoming event; for bots only.
-  ///
-  /// * [event]: A JSON-serialized event.
-class UpdateNewCustomEvent extends Update {
+///
+/// A new incoming event; for bots only.
+///
+/// * [event]: A JSON-serialized event.
+final class UpdateNewCustomEvent extends Update {
   
   /// **UpdateNewCustomEvent** *(updateNewCustomEvent)* - child of Update
   ///
@@ -7934,12 +8333,13 @@ class UpdateNewCustomEvent extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "event": event,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateNewCustomEvent copyWith({
@@ -7952,21 +8352,24 @@ class UpdateNewCustomEvent extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateNewCustomEvent';
-  
+  static const String objectType = 'updateNewCustomEvent';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateNewCustomQuery** *(updateNewCustomQuery)* - child of Update
-  ///
-  /// A new incoming query; for bots only.
-  ///
-  /// * [id]: The query identifier.
-  /// * [data]: JSON-serialized query data.
-  /// * [timeout]: Query timeout.
-class UpdateNewCustomQuery extends Update {
+///
+/// A new incoming query; for bots only.
+///
+/// * [id]: The query identifier.
+/// * [data]: JSON-serialized query data.
+/// * [timeout]: Query timeout.
+final class UpdateNewCustomQuery extends Update {
   
   /// **UpdateNewCustomQuery** *(updateNewCustomQuery)* - child of Update
   ///
@@ -8011,14 +8414,15 @@ class UpdateNewCustomQuery extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "data": data,
       "timeout": timeout,
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateNewCustomQuery copyWith({
@@ -8035,19 +8439,22 @@ class UpdateNewCustomQuery extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateNewCustomQuery';
-  
+  static const String objectType = 'updateNewCustomQuery';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdatePoll** *(updatePoll)* - child of Update
-  ///
-  /// A poll was updated; for bots only.
-  ///
-  /// * [poll]: New data about the poll.
-class UpdatePoll extends Update {
+///
+/// A poll was updated; for bots only.
+///
+/// * [poll]: New data about the poll.
+final class UpdatePoll extends Update {
   
   /// **UpdatePoll** *(updatePoll)* - child of Update
   ///
@@ -8080,12 +8487,13 @@ class UpdatePoll extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "poll": poll.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdatePoll copyWith({
@@ -8098,21 +8506,24 @@ class UpdatePoll extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updatePoll';
-  
+  static const String objectType = 'updatePoll';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdatePollAnswer** *(updatePollAnswer)* - child of Update
-  ///
-  /// A user changed the answer to a poll; for bots only.
-  ///
-  /// * [pollId]: Unique poll identifier.
-  /// * [userId]: The user, who changed the answer to the poll.
-  /// * [optionIds]: 0-based identifiers of answer options, chosen by the user.
-class UpdatePollAnswer extends Update {
+///
+/// A user changed the answer to a poll; for bots only.
+///
+/// * [pollId]: Unique poll identifier.
+/// * [userId]: The user, who changed the answer to the poll.
+/// * [optionIds]: 0-based identifiers of answer options, chosen by the user.
+final class UpdatePollAnswer extends Update {
   
   /// **UpdatePollAnswer** *(updatePollAnswer)* - child of Update
   ///
@@ -8157,14 +8568,15 @@ class UpdatePollAnswer extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "poll_id": pollId,
       "user_id": userId,
       "option_ids": optionIds.map((i) => i).toList(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdatePollAnswer copyWith({
@@ -8181,24 +8593,27 @@ class UpdatePollAnswer extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updatePollAnswer';
-  
+  static const String objectType = 'updatePollAnswer';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateChatMember** *(updateChatMember)* - child of Update
-  ///
-  /// User rights changed in a chat; for bots only.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [actorUserId]: Identifier of the user, changing the rights.
-  /// * [date]: Point in time (Unix timestamp) when the user rights was changed.
-  /// * [inviteLink]: If user has joined the chat using an invite link, the invite link; may be null *(optional)*.
-  /// * [oldChatMember]: Previous chat member.
-  /// * [newChatMember]: New chat member.
-class UpdateChatMember extends Update {
+///
+/// User rights changed in a chat; for bots only.
+///
+/// * [chatId]: Chat identifier.
+/// * [actorUserId]: Identifier of the user, changing the rights.
+/// * [date]: Point in time (Unix timestamp) when the user rights was changed.
+/// * [inviteLink]: If user has joined the chat using an invite link, the invite link; may be null *(optional)*.
+/// * [oldChatMember]: Previous chat member.
+/// * [newChatMember]: New chat member.
+final class UpdateChatMember extends Update {
   
   /// **UpdateChatMember** *(updateChatMember)* - child of Update
   ///
@@ -8261,17 +8676,18 @@ class UpdateChatMember extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "actor_user_id": actorUserId,
       "date": date,
       "invite_link": inviteLink?.toJson(),
       "old_chat_member": oldChatMember.toJson(),
       "new_chat_member": newChatMember.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateChatMember copyWith({
@@ -8294,21 +8710,24 @@ class UpdateChatMember extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateChatMember';
-  
+  static const String objectType = 'updateChatMember';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **UpdateNewChatJoinRequest** *(updateNewChatJoinRequest)* - child of Update
-  ///
-  /// A user sent a join request to a chat; for bots only.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [request]: Join request.
-  /// * [inviteLink]: The invite link, which was used to send join request; may be null *(optional)*.
-class UpdateNewChatJoinRequest extends Update {
+///
+/// A user sent a join request to a chat; for bots only.
+///
+/// * [chatId]: Chat identifier.
+/// * [request]: Join request.
+/// * [inviteLink]: The invite link, which was used to send join request; may be null *(optional)*.
+final class UpdateNewChatJoinRequest extends Update {
   
   /// **UpdateNewChatJoinRequest** *(updateNewChatJoinRequest)* - child of Update
   ///
@@ -8353,14 +8772,15 @@ class UpdateNewChatJoinRequest extends Update {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "request": request.toJson(),
       "invite_link": inviteLink?.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   UpdateNewChatJoinRequest copyWith({
@@ -8377,8 +8797,11 @@ class UpdateNewChatJoinRequest extends Update {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'updateNewChatJoinRequest';
-  
+  static const String objectType = 'updateNewChatJoinRequest';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

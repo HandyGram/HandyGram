@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **Notification** *(notification)* - basic class
-  ///
-  /// Contains information about a notification.
-  ///
-  /// * [id]: Unique persistent identifier of this notification.
-  /// * [date]: Notification date.
-  /// * [isSilent]: True, if the notification was explicitly sent without sound.
-  /// * [type]: Notification type.
-class Notification extends TdObject {
+///
+/// Contains information about a notification.
+///
+/// * [id]: Unique persistent identifier of this notification.
+/// * [date]: Notification date.
+/// * [isSilent]: True, if the notification was explicitly sent without sound.
+/// * [type]: Notification type.
+final class Notification extends TdObject {
   
   /// **Notification** *(notification)* - basic class
   ///
@@ -47,15 +47,16 @@ class Notification extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "date": date,
       "is_silent": isSilent,
       "type": type.toJson(),
-    };
-  }
+		};
+	}
+
   
   Notification copyWith({
     int? id,
@@ -69,8 +70,11 @@ class Notification extends TdObject {
     type: type ?? this.type,
   );
 
-  static const String constructor = 'notification';
-  
+  static const String objectType = 'notification';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

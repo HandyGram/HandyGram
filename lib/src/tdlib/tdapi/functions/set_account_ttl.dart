@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **SetAccountTtl** *(setAccountTtl)* - TDLib function
-  ///
-  /// Changes the period of inactivity after which the account of the current user will automatically be deleted.
-  ///
-  /// * [ttl]: New account TTL.
-  ///
-  /// [Ok] is returned on completion.
-class SetAccountTtl extends TdFunction {
+///
+/// Changes the period of inactivity after which the account of the current user will automatically be deleted.
+///
+/// * [ttl]: New account TTL.
+///
+/// [Ok] is returned on completion.
+final class SetAccountTtl extends TdFunction {
   
   /// **SetAccountTtl** *(setAccountTtl)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class SetAccountTtl extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "ttl": ttl.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetAccountTtl copyWith({
     AccountTtl? ttl,
@@ -38,8 +39,11 @@ class SetAccountTtl extends TdFunction {
     ttl: ttl ?? this.ttl,
   );
 
-  static const String constructor = 'setAccountTtl';
-  
+  static const String objectType = 'setAccountTtl';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

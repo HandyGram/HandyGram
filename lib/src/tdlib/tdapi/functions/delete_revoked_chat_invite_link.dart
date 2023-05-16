@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **DeleteRevokedChatInviteLink** *(deleteRevokedChatInviteLink)* - TDLib function
-  ///
-  /// Deletes revoked chat invite links. Requires administrator privileges and can_invite_users right in the chat for own links and owner privileges for other links.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [inviteLink]: Invite link to revoke.
-  ///
-  /// [Ok] is returned on completion.
-class DeleteRevokedChatInviteLink extends TdFunction {
+///
+/// Deletes revoked chat invite links. Requires administrator privileges and can_invite_users right in the chat for own links and owner privileges for other links.
+///
+/// * [chatId]: Chat identifier.
+/// * [inviteLink]: Invite link to revoke.
+///
+/// [Ok] is returned on completion.
+final class DeleteRevokedChatInviteLink extends TdFunction {
   
   /// **DeleteRevokedChatInviteLink** *(deleteRevokedChatInviteLink)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class DeleteRevokedChatInviteLink extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "invite_link": inviteLink,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   DeleteRevokedChatInviteLink copyWith({
     int? chatId,
@@ -47,8 +48,11 @@ class DeleteRevokedChatInviteLink extends TdFunction {
     inviteLink: inviteLink ?? this.inviteLink,
   );
 
-  static const String constructor = 'deleteRevokedChatInviteLink';
-  
+  static const String objectType = 'deleteRevokedChatInviteLink';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

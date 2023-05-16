@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **PassportAuthorizationForm** *(passportAuthorizationForm)* - basic class
-  ///
-  /// Contains information about a Telegram Passport authorization form that was requested.
-  ///
-  /// * [id]: Unique identifier of the authorization form.
-  /// * [requiredElements]: Telegram Passport elements that must be provided to complete the form.
-  /// * [privacyPolicyUrl]: URL for the privacy policy of the service; may be empty.
-class PassportAuthorizationForm extends TdObject {
+///
+/// Contains information about a Telegram Passport authorization form that was requested.
+///
+/// * [id]: Unique identifier of the authorization form.
+/// * [requiredElements]: Telegram Passport elements that must be provided to complete the form.
+/// * [privacyPolicyUrl]: URL for the privacy policy of the service; may be empty.
+final class PassportAuthorizationForm extends TdObject {
   
   /// **PassportAuthorizationForm** *(passportAuthorizationForm)* - basic class
   ///
@@ -52,14 +52,15 @@ class PassportAuthorizationForm extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "required_elements": requiredElements.map((i) => i.toJson()).toList(),
       "privacy_policy_url": privacyPolicyUrl,
-    };
-  }
+		};
+	}
+
   
   PassportAuthorizationForm copyWith({
     int? id,
@@ -75,8 +76,11 @@ class PassportAuthorizationForm extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'passportAuthorizationForm';
-  
+  static const String objectType = 'passportAuthorizationForm';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

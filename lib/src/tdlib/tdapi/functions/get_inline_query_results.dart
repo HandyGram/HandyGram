@@ -1,17 +1,17 @@
 part of '../tdapi.dart';
 
 /// **GetInlineQueryResults** *(getInlineQueryResults)* - TDLib function
-  ///
-  /// Sends an inline query to a bot and returns its results. Returns an error with code 502 if the bot fails to answer the query before the query timeout expires.
-  ///
-  /// * [botUserId]: The identifier of the target bot.
-  /// * [chatId]: Identifier of the chat where the query was sent.
-  /// * [userLocation]: Location of the user; pass null if unknown or the bot doesn't need user's location *(optional)*.
-  /// * [query]: Text of the query.
-  /// * [offset]: Offset of the first entry to return.
-  ///
-  /// [InlineQueryResults] is returned on completion.
-class GetInlineQueryResults extends TdFunction {
+///
+/// Sends an inline query to a bot and returns its results. Returns an error with code 502 if the bot fails to answer the query before the query timeout expires.
+///
+/// * [botUserId]: The identifier of the target bot.
+/// * [chatId]: Identifier of the chat where the query was sent.
+/// * [userLocation]: Location of the user; pass null if unknown or the bot doesn't need user's location *(optional)*.
+/// * [query]: Text of the query.
+/// * [offset]: Offset of the first entry to return.
+///
+/// [InlineQueryResults] is returned on completion.
+final class GetInlineQueryResults extends TdFunction {
   
   /// **GetInlineQueryResults** *(getInlineQueryResults)* - TDLib function
   ///
@@ -49,16 +49,17 @@ class GetInlineQueryResults extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "bot_user_id": botUserId,
       "chat_id": chatId,
       "user_location": userLocation?.toJson(),
       "query": query,
       "offset": offset,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetInlineQueryResults copyWith({
     int? botUserId,
@@ -74,8 +75,11 @@ class GetInlineQueryResults extends TdFunction {
     offset: offset ?? this.offset,
   );
 
-  static const String constructor = 'getInlineQueryResults';
-  
+  static const String objectType = 'getInlineQueryResults';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

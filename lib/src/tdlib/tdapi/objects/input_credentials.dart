@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **InputCredentials** *(inputCredentials)* - parent
-  ///
-  /// Contains information about the payment method chosen by the user.
-class InputCredentials extends TdObject {
+///
+/// Contains information about the payment method chosen by the user.
+sealed class InputCredentials extends TdObject {
   
   /// **InputCredentials** *(inputCredentials)* - parent
   ///
@@ -17,41 +17,44 @@ class InputCredentials extends TdObject {
   /// * [InputCredentialsGooglePay]
   factory InputCredentials.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case InputCredentialsSaved.constructor:
+      case InputCredentialsSaved.objectType:
         return InputCredentialsSaved.fromJson(json);
-      case InputCredentialsNew.constructor:
+      case InputCredentialsNew.objectType:
         return InputCredentialsNew.fromJson(json);
-      case InputCredentialsApplePay.constructor:
+      case InputCredentialsApplePay.objectType:
         return InputCredentialsApplePay.fromJson(json);
-      case InputCredentialsGooglePay.constructor:
+      case InputCredentialsGooglePay.objectType:
         return InputCredentialsGooglePay.fromJson(json);
       default:
-        return const InputCredentials();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of InputCredentials)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  InputCredentials copyWith() => const InputCredentials();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'inputCredentials';
   
+  InputCredentials copyWith();
+
+  static const String objectType = 'inputCredentials';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InputCredentialsSaved** *(inputCredentialsSaved)* - child of InputCredentials
-  ///
-  /// Applies if a user chooses some previously saved payment credentials. To use their previously saved credentials, the user must have a valid temporary password.
-  ///
-  /// * [savedCredentialsId]: Identifier of the saved credentials.
-class InputCredentialsSaved extends InputCredentials {
+///
+/// Applies if a user chooses some previously saved payment credentials. To use their previously saved credentials, the user must have a valid temporary password.
+///
+/// * [savedCredentialsId]: Identifier of the saved credentials.
+final class InputCredentialsSaved extends InputCredentials {
   
   /// **InputCredentialsSaved** *(inputCredentialsSaved)* - child of InputCredentials
   ///
@@ -72,12 +75,13 @@ class InputCredentialsSaved extends InputCredentials {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "saved_credentials_id": savedCredentialsId,
-    };
-  }
+		};
+	}
+
   
   @override
   InputCredentialsSaved copyWith({
@@ -86,20 +90,23 @@ class InputCredentialsSaved extends InputCredentials {
     savedCredentialsId: savedCredentialsId ?? this.savedCredentialsId,
   );
 
-  static const String constructor = 'inputCredentialsSaved';
-  
+  static const String objectType = 'inputCredentialsSaved';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InputCredentialsNew** *(inputCredentialsNew)* - child of InputCredentials
-  ///
-  /// Applies if a user enters new credentials on a payment provider website.
-  ///
-  /// * [data]: JSON-encoded data with the credential identifier from the payment provider.
-  /// * [allowSave]: True, if the credential identifier can be saved on the server side.
-class InputCredentialsNew extends InputCredentials {
+///
+/// Applies if a user enters new credentials on a payment provider website.
+///
+/// * [data]: JSON-encoded data with the credential identifier from the payment provider.
+/// * [allowSave]: True, if the credential identifier can be saved on the server side.
+final class InputCredentialsNew extends InputCredentials {
   
   /// **InputCredentialsNew** *(inputCredentialsNew)* - child of InputCredentials
   ///
@@ -126,13 +133,14 @@ class InputCredentialsNew extends InputCredentials {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "data": data,
       "allow_save": allowSave,
-    };
-  }
+		};
+	}
+
   
   @override
   InputCredentialsNew copyWith({
@@ -143,19 +151,22 @@ class InputCredentialsNew extends InputCredentials {
     allowSave: allowSave ?? this.allowSave,
   );
 
-  static const String constructor = 'inputCredentialsNew';
-  
+  static const String objectType = 'inputCredentialsNew';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InputCredentialsApplePay** *(inputCredentialsApplePay)* - child of InputCredentials
-  ///
-  /// Applies if a user enters new credentials using Apple Pay.
-  ///
-  /// * [data]: JSON-encoded data with the credential identifier.
-class InputCredentialsApplePay extends InputCredentials {
+///
+/// Applies if a user enters new credentials using Apple Pay.
+///
+/// * [data]: JSON-encoded data with the credential identifier.
+final class InputCredentialsApplePay extends InputCredentials {
   
   /// **InputCredentialsApplePay** *(inputCredentialsApplePay)* - child of InputCredentials
   ///
@@ -176,12 +187,13 @@ class InputCredentialsApplePay extends InputCredentials {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "data": data,
-    };
-  }
+		};
+	}
+
   
   @override
   InputCredentialsApplePay copyWith({
@@ -190,19 +202,22 @@ class InputCredentialsApplePay extends InputCredentials {
     data: data ?? this.data,
   );
 
-  static const String constructor = 'inputCredentialsApplePay';
-  
+  static const String objectType = 'inputCredentialsApplePay';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InputCredentialsGooglePay** *(inputCredentialsGooglePay)* - child of InputCredentials
-  ///
-  /// Applies if a user enters new credentials using Google Pay.
-  ///
-  /// * [data]: JSON-encoded data with the credential identifier.
-class InputCredentialsGooglePay extends InputCredentials {
+///
+/// Applies if a user enters new credentials using Google Pay.
+///
+/// * [data]: JSON-encoded data with the credential identifier.
+final class InputCredentialsGooglePay extends InputCredentials {
   
   /// **InputCredentialsGooglePay** *(inputCredentialsGooglePay)* - child of InputCredentials
   ///
@@ -223,12 +238,13 @@ class InputCredentialsGooglePay extends InputCredentials {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "data": data,
-    };
-  }
+		};
+	}
+
   
   @override
   InputCredentialsGooglePay copyWith({
@@ -237,8 +253,11 @@ class InputCredentialsGooglePay extends InputCredentials {
     data: data ?? this.data,
   );
 
-  static const String constructor = 'inputCredentialsGooglePay';
-  
+  static const String objectType = 'inputCredentialsGooglePay';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

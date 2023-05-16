@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **ValidateOrderInfo** *(validateOrderInfo)* - TDLib function
-  ///
-  /// Validates the order information provided by a user and returns the available shipping options for a flexible invoice.
-  ///
-  /// * [inputInvoice]: The invoice.
-  /// * [orderInfo]: The order information, provided by the user; pass null if empty *(optional)*.
-  /// * [allowSave]: Pass true to save the order information.
-  ///
-  /// [ValidatedOrderInfo] is returned on completion.
-class ValidateOrderInfo extends TdFunction {
+///
+/// Validates the order information provided by a user and returns the available shipping options for a flexible invoice.
+///
+/// * [inputInvoice]: The invoice.
+/// * [orderInfo]: The order information, provided by the user; pass null if empty *(optional)*.
+/// * [allowSave]: Pass true to save the order information.
+///
+/// [ValidatedOrderInfo] is returned on completion.
+final class ValidateOrderInfo extends TdFunction {
   
   /// **ValidateOrderInfo** *(validateOrderInfo)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class ValidateOrderInfo extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "input_invoice": inputInvoice.toJson(),
       "order_info": orderInfo?.toJson(),
       "allow_save": allowSave,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ValidateOrderInfo copyWith({
     InputInvoice? inputInvoice,
@@ -56,8 +57,11 @@ class ValidateOrderInfo extends TdFunction {
     allowSave: allowSave ?? this.allowSave,
   );
 
-  static const String constructor = 'validateOrderInfo';
-  
+  static const String objectType = 'validateOrderInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

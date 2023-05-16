@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetFile** *(getFile)* - TDLib function
-  ///
-  /// Returns information about a file; this is an offline request.
-  ///
-  /// * [fileId]: Identifier of the file to get.
-  ///
-  /// [File] is returned on completion.
-class GetFile extends TdFunction {
+///
+/// Returns information about a file; this is an offline request.
+///
+/// * [fileId]: Identifier of the file to get.
+///
+/// [File] is returned on completion.
+final class GetFile extends TdFunction {
   
   /// **GetFile** *(getFile)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetFile extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "file_id": fileId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetFile copyWith({
     int? fileId,
@@ -38,8 +39,11 @@ class GetFile extends TdFunction {
     fileId: fileId ?? this.fileId,
   );
 
-  static const String constructor = 'getFile';
-  
+  static const String objectType = 'getFile';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

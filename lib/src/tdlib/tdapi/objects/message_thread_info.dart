@@ -1,16 +1,16 @@
 part of '../tdapi.dart';
 
 /// **MessageThreadInfo** *(messageThreadInfo)* - basic class
-  ///
-  /// Contains information about a message thread.
-  ///
-  /// * [chatId]: Identifier of the chat to which the message thread belongs.
-  /// * [messageThreadId]: Message thread identifier, unique within the chat.
-  /// * [replyInfo]: Information about the message thread; may be null for forum topic threads *(optional)*.
-  /// * [unreadMessageCount]: Approximate number of unread messages in the message thread.
-  /// * [messages]: The messages from which the thread starts. The messages are returned in a reverse chronological order (i.e., in order of decreasing message_id).
-  /// * [draftMessage]: A draft of a message in the message thread; may be null *(optional)*.
-class MessageThreadInfo extends TdObject {
+///
+/// Contains information about a message thread.
+///
+/// * [chatId]: Identifier of the chat to which the message thread belongs.
+/// * [messageThreadId]: Message thread identifier, unique within the chat.
+/// * [replyInfo]: Information about the message thread; may be null for forum topic threads *(optional)*.
+/// * [unreadMessageCount]: Approximate number of unread messages in the message thread.
+/// * [messages]: The messages from which the thread starts. The messages are returned in a reverse chronological order (i.e., in order of decreasing message_id).
+/// * [draftMessage]: A draft of a message in the message thread; may be null *(optional)*.
+final class MessageThreadInfo extends TdObject {
   
   /// **MessageThreadInfo** *(messageThreadInfo)* - basic class
   ///
@@ -73,17 +73,18 @@ class MessageThreadInfo extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_thread_id": messageThreadId,
       "reply_info": replyInfo?.toJson(),
       "unread_message_count": unreadMessageCount,
       "messages": messages.map((i) => i.toJson()).toList(),
       "draft_message": draftMessage?.toJson(),
-    };
-  }
+		};
+	}
+
   
   MessageThreadInfo copyWith({
     int? chatId,
@@ -105,8 +106,11 @@ class MessageThreadInfo extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'messageThreadInfo';
-  
+  static const String objectType = 'messageThreadInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

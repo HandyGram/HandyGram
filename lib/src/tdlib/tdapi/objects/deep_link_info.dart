@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **DeepLinkInfo** *(deepLinkInfo)* - basic class
-  ///
-  /// Contains information about a tg: deep link.
-  ///
-  /// * [text]: Text to be shown to the user.
-  /// * [needUpdateApplication]: True, if the user must be asked to update the application.
-class DeepLinkInfo extends TdObject {
+///
+/// Contains information about a tg: deep link.
+///
+/// * [text]: Text to be shown to the user.
+/// * [needUpdateApplication]: True, if the user must be asked to update the application.
+final class DeepLinkInfo extends TdObject {
   
   /// **DeepLinkInfo** *(deepLinkInfo)* - basic class
   ///
@@ -45,13 +45,14 @@ class DeepLinkInfo extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text.toJson(),
       "need_update_application": needUpdateApplication,
-    };
-  }
+		};
+	}
+
   
   DeepLinkInfo copyWith({
     FormattedText? text,
@@ -65,8 +66,11 @@ class DeepLinkInfo extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'deepLinkInfo';
-  
+  static const String objectType = 'deepLinkInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

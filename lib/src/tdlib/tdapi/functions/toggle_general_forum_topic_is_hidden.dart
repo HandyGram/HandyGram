@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **ToggleGeneralForumTopicIsHidden** *(toggleGeneralForumTopicIsHidden)* - TDLib function
-  ///
-  /// Toggles whether a General topic is hidden in a forum supergroup chat; requires can_manage_topics administrator right in the supergroup.
-  ///
-  /// * [chatId]: Identifier of the chat.
-  /// * [isHidden]: Pass true to hide and close the General topic; pass false to unhide it.
-  ///
-  /// [Ok] is returned on completion.
-class ToggleGeneralForumTopicIsHidden extends TdFunction {
+///
+/// Toggles whether a General topic is hidden in a forum supergroup chat; requires can_manage_topics administrator right in the supergroup.
+///
+/// * [chatId]: Identifier of the chat.
+/// * [isHidden]: Pass true to hide and close the General topic; pass false to unhide it.
+///
+/// [Ok] is returned on completion.
+final class ToggleGeneralForumTopicIsHidden extends TdFunction {
   
   /// **ToggleGeneralForumTopicIsHidden** *(toggleGeneralForumTopicIsHidden)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class ToggleGeneralForumTopicIsHidden extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "is_hidden": isHidden,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ToggleGeneralForumTopicIsHidden copyWith({
     int? chatId,
@@ -47,8 +48,11 @@ class ToggleGeneralForumTopicIsHidden extends TdFunction {
     isHidden: isHidden ?? this.isHidden,
   );
 
-  static const String constructor = 'toggleGeneralForumTopicIsHidden';
-  
+  static const String objectType = 'toggleGeneralForumTopicIsHidden';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

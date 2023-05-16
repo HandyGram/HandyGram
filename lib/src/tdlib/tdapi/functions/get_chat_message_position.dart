@@ -1,16 +1,16 @@
 part of '../tdapi.dart';
 
 /// **GetChatMessagePosition** *(getChatMessagePosition)* - TDLib function
-  ///
-  /// Returns approximate 1-based position of a message among messages, which can be found by the specified filter in the chat. Cannot be used in secret chats.
-  ///
-  /// * [chatId]: Identifier of the chat in which to find message position.
-  /// * [messageId]: Message identifier.
-  /// * [filter]: Filter for message content; searchMessagesFilterEmpty, searchMessagesFilterUnreadMention, searchMessagesFilterUnreadReaction, and searchMessagesFilterFailedToSend are unsupported in this function.
-  /// * [messageThreadId]: If not 0, only messages in the specified thread will be considered; supergroups only.
-  ///
-  /// [Count] is returned on completion.
-class GetChatMessagePosition extends TdFunction {
+///
+/// Returns approximate 1-based position of a message among messages, which can be found by the specified filter in the chat. Cannot be used in secret chats.
+///
+/// * [chatId]: Identifier of the chat in which to find message position.
+/// * [messageId]: Message identifier.
+/// * [filter]: Filter for message content; searchMessagesFilterEmpty, searchMessagesFilterUnreadMention, searchMessagesFilterUnreadReaction, and searchMessagesFilterFailedToSend are unsupported in this function.
+/// * [messageThreadId]: If not 0, only messages in the specified thread will be considered; supergroups only.
+///
+/// [Count] is returned on completion.
+final class GetChatMessagePosition extends TdFunction {
   
   /// **GetChatMessagePosition** *(getChatMessagePosition)* - TDLib function
   ///
@@ -43,15 +43,16 @@ class GetChatMessagePosition extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "filter": filter.toJson(),
       "message_thread_id": messageThreadId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetChatMessagePosition copyWith({
     int? chatId,
@@ -65,8 +66,11 @@ class GetChatMessagePosition extends TdFunction {
     messageThreadId: messageThreadId ?? this.messageThreadId,
   );
 
-  static const String constructor = 'getChatMessagePosition';
-  
+  static const String objectType = 'getChatMessagePosition';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

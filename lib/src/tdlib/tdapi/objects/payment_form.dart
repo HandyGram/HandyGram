@@ -1,23 +1,23 @@
 part of '../tdapi.dart';
 
 /// **PaymentForm** *(paymentForm)* - basic class
-  ///
-  /// Contains information about an invoice payment form.
-  ///
-  /// * [id]: The payment form identifier.
-  /// * [invoice]: Full information about the invoice.
-  /// * [sellerBotUserId]: User identifier of the seller bot.
-  /// * [paymentProviderUserId]: User identifier of the payment provider bot.
-  /// * [paymentProvider]: Information about the payment provider.
-  /// * [additionalPaymentOptions]: The list of additional payment options.
-  /// * [savedOrderInfo]: Saved server-side order information; may be null *(optional)*.
-  /// * [savedCredentials]: The list of saved payment credentials.
-  /// * [canSaveCredentials]: True, if the user can choose to save credentials.
-  /// * [needPassword]: True, if the user will be able to save credentials, if sets up a 2-step verification password.
-  /// * [productTitle]: Product title.
-  /// * [productDescription]: Product description.
-  /// * [productPhoto]: Product photo; may be null *(optional)*.
-class PaymentForm extends TdObject {
+///
+/// Contains information about an invoice payment form.
+///
+/// * [id]: The payment form identifier.
+/// * [invoice]: Full information about the invoice.
+/// * [sellerBotUserId]: User identifier of the seller bot.
+/// * [paymentProviderUserId]: User identifier of the payment provider bot.
+/// * [paymentProvider]: Information about the payment provider.
+/// * [additionalPaymentOptions]: The list of additional payment options.
+/// * [savedOrderInfo]: Saved server-side order information; may be null *(optional)*.
+/// * [savedCredentials]: The list of saved payment credentials.
+/// * [canSaveCredentials]: True, if the user can choose to save credentials.
+/// * [needPassword]: True, if the user will be able to save credentials, if sets up a 2-step verification password.
+/// * [productTitle]: Product title.
+/// * [productDescription]: Product description.
+/// * [productPhoto]: Product photo; may be null *(optional)*.
+final class PaymentForm extends TdObject {
   
   /// **PaymentForm** *(paymentForm)* - basic class
   ///
@@ -122,9 +122,9 @@ class PaymentForm extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "invoice": invoice.toJson(),
       "seller_bot_user_id": sellerBotUserId,
@@ -138,8 +138,9 @@ class PaymentForm extends TdObject {
       "product_title": productTitle,
       "product_description": productDescription.toJson(),
       "product_photo": productPhoto?.toJson(),
-    };
-  }
+		};
+	}
+
   
   PaymentForm copyWith({
     int? id,
@@ -175,8 +176,11 @@ class PaymentForm extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'paymentForm';
-  
+  static const String objectType = 'paymentForm';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

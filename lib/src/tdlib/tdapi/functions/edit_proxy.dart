@@ -1,17 +1,17 @@
 part of '../tdapi.dart';
 
 /// **EditProxy** *(editProxy)* - TDLib function
-  ///
-  /// Edits an existing proxy server for network requests. Can be called before authorization.
-  ///
-  /// * [proxyId]: Proxy identifier.
-  /// * [server]: Proxy server IP address.
-  /// * [port]: Proxy server port.
-  /// * [enable]: Pass true to immediately enable the proxy.
-  /// * [type]: Proxy type.
-  ///
-  /// [Proxy] is returned on completion.
-class EditProxy extends TdFunction {
+///
+/// Edits an existing proxy server for network requests. Can be called before authorization.
+///
+/// * [proxyId]: Proxy identifier.
+/// * [server]: Proxy server IP address.
+/// * [port]: Proxy server port.
+/// * [enable]: Pass true to immediately enable the proxy.
+/// * [type]: Proxy type.
+///
+/// [Proxy] is returned on completion.
+final class EditProxy extends TdFunction {
   
   /// **EditProxy** *(editProxy)* - TDLib function
   ///
@@ -49,16 +49,17 @@ class EditProxy extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "proxy_id": proxyId,
       "server": server,
       "port": port,
       "enable": enable,
       "type": type.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   EditProxy copyWith({
     int? proxyId,
@@ -74,8 +75,11 @@ class EditProxy extends TdFunction {
     type: type ?? this.type,
   );
 
-  static const String constructor = 'editProxy';
-  
+  static const String objectType = 'editProxy';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

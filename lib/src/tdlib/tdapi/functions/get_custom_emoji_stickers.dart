@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetCustomEmojiStickers** *(getCustomEmojiStickers)* - TDLib function
-  ///
-  /// Returns list of custom emoji stickers by their identifiers. Stickers are returned in arbitrary order. Only found stickers are returned.
-  ///
-  /// * [customEmojiIds]: Identifiers of custom emoji stickers. At most 200 custom emoji stickers can be received simultaneously.
-  ///
-  /// [Stickers] is returned on completion.
-class GetCustomEmojiStickers extends TdFunction {
+///
+/// Returns list of custom emoji stickers by their identifiers. Stickers are returned in arbitrary order. Only found stickers are returned.
+///
+/// * [customEmojiIds]: Identifiers of custom emoji stickers. At most 200 custom emoji stickers can be received simultaneously.
+///
+/// [Stickers] is returned on completion.
+final class GetCustomEmojiStickers extends TdFunction {
   
   /// **GetCustomEmojiStickers** *(getCustomEmojiStickers)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetCustomEmojiStickers extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "custom_emoji_ids": customEmojiIds.map((i) => i).toList(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetCustomEmojiStickers copyWith({
     List<int>? customEmojiIds,
@@ -38,8 +39,11 @@ class GetCustomEmojiStickers extends TdFunction {
     customEmojiIds: customEmojiIds ?? this.customEmojiIds,
   );
 
-  static const String constructor = 'getCustomEmojiStickers';
-  
+  static const String objectType = 'getCustomEmojiStickers';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

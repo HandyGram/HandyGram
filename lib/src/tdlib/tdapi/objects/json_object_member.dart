@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **JsonObjectMember** *(jsonObjectMember)* - basic class
-  ///
-  /// Represents one member of a JSON object.
-  ///
-  /// * [key]: Member's key.
-  /// * [value]: Member's value.
-class JsonObjectMember extends TdObject {
+///
+/// Represents one member of a JSON object.
+///
+/// * [key]: Member's key.
+/// * [value]: Member's value.
+final class JsonObjectMember extends TdObject {
   
   /// **JsonObjectMember** *(jsonObjectMember)* - basic class
   ///
@@ -33,13 +33,14 @@ class JsonObjectMember extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "key": key,
       "value": value.toJson(),
-    };
-  }
+		};
+	}
+
   
   JsonObjectMember copyWith({
     String? key,
@@ -49,8 +50,11 @@ class JsonObjectMember extends TdObject {
     value: value ?? this.value,
   );
 
-  static const String constructor = 'jsonObjectMember';
-  
+  static const String objectType = 'jsonObjectMember';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

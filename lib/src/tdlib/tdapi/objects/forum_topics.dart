@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **ForumTopics** *(forumTopics)* - basic class
-  ///
-  /// Describes a list of forum topics.
-  ///
-  /// * [totalCount]: Approximate total number of forum topics found.
-  /// * [topics]: List of forum topics.
-  /// * [nextOffsetDate]: Offset date for the next getForumTopics request.
-  /// * [nextOffsetMessageId]: Offset message identifier for the next getForumTopics request.
-  /// * [nextOffsetMessageThreadId]: Offset message thread identifier for the next getForumTopics request.
-class ForumTopics extends TdObject {
+///
+/// Describes a list of forum topics.
+///
+/// * [totalCount]: Approximate total number of forum topics found.
+/// * [topics]: List of forum topics.
+/// * [nextOffsetDate]: Offset date for the next getForumTopics request.
+/// * [nextOffsetMessageId]: Offset message identifier for the next getForumTopics request.
+/// * [nextOffsetMessageThreadId]: Offset message thread identifier for the next getForumTopics request.
+final class ForumTopics extends TdObject {
   
   /// **ForumTopics** *(forumTopics)* - basic class
   ///
@@ -66,16 +66,17 @@ class ForumTopics extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "total_count": totalCount,
       "topics": topics.map((i) => i.toJson()).toList(),
       "next_offset_date": nextOffsetDate,
       "next_offset_message_id": nextOffsetMessageId,
       "next_offset_message_thread_id": nextOffsetMessageThreadId,
-    };
-  }
+		};
+	}
+
   
   ForumTopics copyWith({
     int? totalCount,
@@ -95,8 +96,11 @@ class ForumTopics extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'forumTopics';
-  
+  static const String objectType = 'forumTopics';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

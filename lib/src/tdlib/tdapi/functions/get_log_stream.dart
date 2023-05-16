@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **GetLogStream** *(getLogStream)* - TDLib function
-  ///
-  /// Returns information about currently used log stream for internal logging of TDLib. Can be called synchronously.
-  ///
-  /// [LogStream] is returned on completion.
-class GetLogStream extends TdFunction {
+///
+/// Returns information about currently used log stream for internal logging of TDLib. Can be called synchronously.
+///
+/// [LogStream] is returned on completion.
+final class GetLogStream extends TdFunction {
   
   /// **GetLogStream** *(getLogStream)* - TDLib function
   ///
@@ -17,16 +17,20 @@ class GetLogStream extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetLogStream copyWith() => const GetLogStream();
 
-  static const String constructor = 'getLogStream';
-  
+  static const String objectType = 'getLogStream';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

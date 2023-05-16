@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **EditInlineMessageMedia** *(editInlineMessageMedia)* - TDLib function
-  ///
-  /// Edits the content of a message with an animation, an audio, a document, a photo or a video in an inline message sent via a bot; for bots only.
-  ///
-  /// * [inlineMessageId]: Inline message identifier.
-  /// * [replyMarkup]: The new message reply markup; pass null if none; for bots only *(optional)*.
-  /// * [inputMessageContent]: New content of the message. Must be one of the following types: inputMessageAnimation, inputMessageAudio, inputMessageDocument, inputMessagePhoto or inputMessageVideo.
-  ///
-  /// [Ok] is returned on completion.
-class EditInlineMessageMedia extends TdFunction {
+///
+/// Edits the content of a message with an animation, an audio, a document, a photo or a video in an inline message sent via a bot; for bots only.
+///
+/// * [inlineMessageId]: Inline message identifier.
+/// * [replyMarkup]: The new message reply markup; pass null if none; for bots only *(optional)*.
+/// * [inputMessageContent]: New content of the message. Must be one of the following types: inputMessageAnimation, inputMessageAudio, inputMessageDocument, inputMessagePhoto or inputMessageVideo.
+///
+/// [Ok] is returned on completion.
+final class EditInlineMessageMedia extends TdFunction {
   
   /// **EditInlineMessageMedia** *(editInlineMessageMedia)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class EditInlineMessageMedia extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "inline_message_id": inlineMessageId,
       "reply_markup": replyMarkup?.toJson(),
       "input_message_content": inputMessageContent.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   EditInlineMessageMedia copyWith({
     String? inlineMessageId,
@@ -56,8 +57,11 @@ class EditInlineMessageMedia extends TdFunction {
     inputMessageContent: inputMessageContent ?? this.inputMessageContent,
   );
 
-  static const String constructor = 'editInlineMessageMedia';
-  
+  static const String objectType = 'editInlineMessageMedia';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

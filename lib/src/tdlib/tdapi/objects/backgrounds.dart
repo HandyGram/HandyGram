@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **Backgrounds** *(backgrounds)* - basic class
-  ///
-  /// Contains a list of backgrounds.
-  ///
-  /// * [backgrounds]: A list of backgrounds.
-class Backgrounds extends TdObject {
+///
+/// Contains a list of backgrounds.
+///
+/// * [backgrounds]: A list of backgrounds.
+final class Backgrounds extends TdObject {
   
   /// **Backgrounds** *(backgrounds)* - basic class
   ///
@@ -38,12 +38,13 @@ class Backgrounds extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "backgrounds": backgrounds.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   Backgrounds copyWith({
     List<Background>? backgrounds,
@@ -55,8 +56,11 @@ class Backgrounds extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'backgrounds';
-  
+  static const String objectType = 'backgrounds';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **SendPhoneNumberVerificationCode** *(sendPhoneNumberVerificationCode)* - TDLib function
-  ///
-  /// Sends a code to verify a phone number to be added to a user's Telegram Passport.
-  ///
-  /// * [phoneNumber]: The phone number of the user, in international format.
-  /// * [settings]: Settings for the authentication of the user's phone number; pass null to use default settings *(optional)*.
-  ///
-  /// [AuthenticationCodeInfo] is returned on completion.
-class SendPhoneNumberVerificationCode extends TdFunction {
+///
+/// Sends a code to verify a phone number to be added to a user's Telegram Passport.
+///
+/// * [phoneNumber]: The phone number of the user, in international format.
+/// * [settings]: Settings for the authentication of the user's phone number; pass null to use default settings *(optional)*.
+///
+/// [AuthenticationCodeInfo] is returned on completion.
+final class SendPhoneNumberVerificationCode extends TdFunction {
   
   /// **SendPhoneNumberVerificationCode** *(sendPhoneNumberVerificationCode)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class SendPhoneNumberVerificationCode extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "phone_number": phoneNumber,
       "settings": settings?.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SendPhoneNumberVerificationCode copyWith({
     String? phoneNumber,
@@ -47,8 +48,11 @@ class SendPhoneNumberVerificationCode extends TdFunction {
     settings: settings ?? this.settings,
   );
 
-  static const String constructor = 'sendPhoneNumberVerificationCode';
-  
+  static const String objectType = 'sendPhoneNumberVerificationCode';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

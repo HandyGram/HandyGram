@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetPreferredCountryLanguage** *(getPreferredCountryLanguage)* - TDLib function
-  ///
-  /// Returns an IETF language tag of the language preferred in the country, which must be used to fill native fields in Telegram Passport personal details. Returns a 404 error if unknown.
-  ///
-  /// * [countryCode]: A two-letter ISO 3166-1 alpha-2 country code.
-  ///
-  /// [Text] is returned on completion.
-class GetPreferredCountryLanguage extends TdFunction {
+///
+/// Returns an IETF language tag of the language preferred in the country, which must be used to fill native fields in Telegram Passport personal details. Returns a 404 error if unknown.
+///
+/// * [countryCode]: A two-letter ISO 3166-1 alpha-2 country code.
+///
+/// [Text] is returned on completion.
+final class GetPreferredCountryLanguage extends TdFunction {
   
   /// **GetPreferredCountryLanguage** *(getPreferredCountryLanguage)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetPreferredCountryLanguage extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "country_code": countryCode,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetPreferredCountryLanguage copyWith({
     String? countryCode,
@@ -38,8 +39,11 @@ class GetPreferredCountryLanguage extends TdFunction {
     countryCode: countryCode ?? this.countryCode,
   );
 
-  static const String constructor = 'getPreferredCountryLanguage';
-  
+  static const String objectType = 'getPreferredCountryLanguage';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

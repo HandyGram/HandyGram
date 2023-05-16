@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **DeleteProfilePhoto** *(deleteProfilePhoto)* - TDLib function
-  ///
-  /// Deletes a profile photo.
-  ///
-  /// * [profilePhotoId]: Identifier of the profile photo to delete.
-  ///
-  /// [Ok] is returned on completion.
-class DeleteProfilePhoto extends TdFunction {
+///
+/// Deletes a profile photo.
+///
+/// * [profilePhotoId]: Identifier of the profile photo to delete.
+///
+/// [Ok] is returned on completion.
+final class DeleteProfilePhoto extends TdFunction {
   
   /// **DeleteProfilePhoto** *(deleteProfilePhoto)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class DeleteProfilePhoto extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "profile_photo_id": profilePhotoId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   DeleteProfilePhoto copyWith({
     int? profilePhotoId,
@@ -38,8 +39,11 @@ class DeleteProfilePhoto extends TdFunction {
     profilePhotoId: profilePhotoId ?? this.profilePhotoId,
   );
 
-  static const String constructor = 'deleteProfilePhoto';
-  
+  static const String objectType = 'deleteProfilePhoto';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

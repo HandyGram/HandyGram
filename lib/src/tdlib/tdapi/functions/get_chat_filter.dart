@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetChatFilter** *(getChatFilter)* - TDLib function
-  ///
-  /// Returns information about a chat filter by its identifier.
-  ///
-  /// * [chatFilterId]: Chat filter identifier.
-  ///
-  /// [ChatFilter] is returned on completion.
-class GetChatFilter extends TdFunction {
+///
+/// Returns information about a chat filter by its identifier.
+///
+/// * [chatFilterId]: Chat filter identifier.
+///
+/// [ChatFilter] is returned on completion.
+final class GetChatFilter extends TdFunction {
   
   /// **GetChatFilter** *(getChatFilter)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetChatFilter extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_filter_id": chatFilterId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetChatFilter copyWith({
     int? chatFilterId,
@@ -38,8 +39,11 @@ class GetChatFilter extends TdFunction {
     chatFilterId: chatFilterId ?? this.chatFilterId,
   );
 
-  static const String constructor = 'getChatFilter';
-  
+  static const String objectType = 'getChatFilter';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

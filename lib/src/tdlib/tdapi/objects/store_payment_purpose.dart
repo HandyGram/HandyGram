@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **StorePaymentPurpose** *(storePaymentPurpose)* - parent
-  ///
-  /// Describes a purpose of an in-store payment.
-class StorePaymentPurpose extends TdObject {
+///
+/// Describes a purpose of an in-store payment.
+sealed class StorePaymentPurpose extends TdObject {
   
   /// **StorePaymentPurpose** *(storePaymentPurpose)* - parent
   ///
@@ -15,37 +15,40 @@ class StorePaymentPurpose extends TdObject {
   /// * [StorePaymentPurposeGiftedPremium]
   factory StorePaymentPurpose.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case StorePaymentPurposePremiumSubscription.constructor:
+      case StorePaymentPurposePremiumSubscription.objectType:
         return StorePaymentPurposePremiumSubscription.fromJson(json);
-      case StorePaymentPurposeGiftedPremium.constructor:
+      case StorePaymentPurposeGiftedPremium.objectType:
         return StorePaymentPurposeGiftedPremium.fromJson(json);
       default:
-        return const StorePaymentPurpose();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of StorePaymentPurpose)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  StorePaymentPurpose copyWith() => const StorePaymentPurpose();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'storePaymentPurpose';
   
+  StorePaymentPurpose copyWith();
+
+  static const String objectType = 'storePaymentPurpose';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **StorePaymentPurposePremiumSubscription** *(storePaymentPurposePremiumSubscription)* - child of StorePaymentPurpose
-  ///
-  /// The user subscribed to Telegram Premium.
-  ///
-  /// * [isRestore]: Pass true if this is a restore of a Telegram Premium purchase; only for App Store.
-class StorePaymentPurposePremiumSubscription extends StorePaymentPurpose {
+///
+/// The user subscribed to Telegram Premium.
+///
+/// * [isRestore]: Pass true if this is a restore of a Telegram Premium purchase; only for App Store.
+final class StorePaymentPurposePremiumSubscription extends StorePaymentPurpose {
   
   /// **StorePaymentPurposePremiumSubscription** *(storePaymentPurposePremiumSubscription)* - child of StorePaymentPurpose
   ///
@@ -66,12 +69,13 @@ class StorePaymentPurposePremiumSubscription extends StorePaymentPurpose {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "is_restore": isRestore,
-    };
-  }
+		};
+	}
+
   
   @override
   StorePaymentPurposePremiumSubscription copyWith({
@@ -80,21 +84,24 @@ class StorePaymentPurposePremiumSubscription extends StorePaymentPurpose {
     isRestore: isRestore ?? this.isRestore,
   );
 
-  static const String constructor = 'storePaymentPurposePremiumSubscription';
-  
+  static const String objectType = 'storePaymentPurposePremiumSubscription';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **StorePaymentPurposeGiftedPremium** *(storePaymentPurposeGiftedPremium)* - child of StorePaymentPurpose
-  ///
-  /// The user gifted Telegram Premium to another user.
-  ///
-  /// * [userId]: Identifier of the user for which Premium was gifted.
-  /// * [currency]: ISO 4217 currency code of the payment currency.
-  /// * [amount]: Paid amount, in the smallest units of the currency.
-class StorePaymentPurposeGiftedPremium extends StorePaymentPurpose {
+///
+/// The user gifted Telegram Premium to another user.
+///
+/// * [userId]: Identifier of the user for which Premium was gifted.
+/// * [currency]: ISO 4217 currency code of the payment currency.
+/// * [amount]: Paid amount, in the smallest units of the currency.
+final class StorePaymentPurposeGiftedPremium extends StorePaymentPurpose {
   
   /// **StorePaymentPurposeGiftedPremium** *(storePaymentPurposeGiftedPremium)* - child of StorePaymentPurpose
   ///
@@ -127,14 +134,15 @@ class StorePaymentPurposeGiftedPremium extends StorePaymentPurpose {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "user_id": userId,
       "currency": currency,
       "amount": amount,
-    };
-  }
+		};
+	}
+
   
   @override
   StorePaymentPurposeGiftedPremium copyWith({
@@ -147,8 +155,11 @@ class StorePaymentPurposeGiftedPremium extends StorePaymentPurpose {
     amount: amount ?? this.amount,
   );
 
-  static const String constructor = 'storePaymentPurposeGiftedPremium';
-  
+  static const String objectType = 'storePaymentPurposeGiftedPremium';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

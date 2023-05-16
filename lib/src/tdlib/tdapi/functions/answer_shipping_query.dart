@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **AnswerShippingQuery** *(answerShippingQuery)* - TDLib function
-  ///
-  /// Sets the result of a shipping query; for bots only.
-  ///
-  /// * [shippingQueryId]: Identifier of the shipping query.
-  /// * [shippingOptions]: Available shipping options.
-  /// * [errorMessage]: An error message, empty on success.
-  ///
-  /// [Ok] is returned on completion.
-class AnswerShippingQuery extends TdFunction {
+///
+/// Sets the result of a shipping query; for bots only.
+///
+/// * [shippingQueryId]: Identifier of the shipping query.
+/// * [shippingOptions]: Available shipping options.
+/// * [errorMessage]: An error message, empty on success.
+///
+/// [Ok] is returned on completion.
+final class AnswerShippingQuery extends TdFunction {
   
   /// **AnswerShippingQuery** *(answerShippingQuery)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class AnswerShippingQuery extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "shipping_query_id": shippingQueryId,
       "shipping_options": shippingOptions.map((i) => i.toJson()).toList(),
       "error_message": errorMessage,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   AnswerShippingQuery copyWith({
     int? shippingQueryId,
@@ -56,8 +57,11 @@ class AnswerShippingQuery extends TdFunction {
     errorMessage: errorMessage ?? this.errorMessage,
   );
 
-  static const String constructor = 'answerShippingQuery';
-  
+  static const String objectType = 'answerShippingQuery';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

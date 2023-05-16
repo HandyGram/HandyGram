@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **GetPremiumState** *(getPremiumState)* - TDLib function
-  ///
-  /// Returns state of Telegram Premium subscription and promotion videos for Premium features.
-  ///
-  /// [PremiumState] is returned on completion.
-class GetPremiumState extends TdFunction {
+///
+/// Returns state of Telegram Premium subscription and promotion videos for Premium features.
+///
+/// [PremiumState] is returned on completion.
+final class GetPremiumState extends TdFunction {
   
   /// **GetPremiumState** *(getPremiumState)* - TDLib function
   ///
@@ -17,16 +17,20 @@ class GetPremiumState extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetPremiumState copyWith() => const GetPremiumState();
 
-  static const String constructor = 'getPremiumState';
-  
+  static const String objectType = 'getPremiumState';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

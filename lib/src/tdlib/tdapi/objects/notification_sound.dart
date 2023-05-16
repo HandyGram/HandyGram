@@ -1,16 +1,16 @@
 part of '../tdapi.dart';
 
 /// **NotificationSound** *(notificationSound)* - basic class
-  ///
-  /// Describes a notification sound in MP3 format.
-  ///
-  /// * [id]: Unique identifier of the notification sound.
-  /// * [duration]: Duration of the sound, in seconds.
-  /// * [date]: Point in time (Unix timestamp) when the sound was created.
-  /// * [title]: Title of the notification sound.
-  /// * [data]: Arbitrary data, defined while the sound was uploaded.
-  /// * [sound]: File containing the sound.
-class NotificationSound extends TdObject {
+///
+/// Describes a notification sound in MP3 format.
+///
+/// * [id]: Unique identifier of the notification sound.
+/// * [duration]: Duration of the sound, in seconds.
+/// * [date]: Point in time (Unix timestamp) when the sound was created.
+/// * [title]: Title of the notification sound.
+/// * [data]: Arbitrary data, defined while the sound was uploaded.
+/// * [sound]: File containing the sound.
+final class NotificationSound extends TdObject {
   
   /// **NotificationSound** *(notificationSound)* - basic class
   ///
@@ -73,17 +73,18 @@ class NotificationSound extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "duration": duration,
       "date": date,
       "title": title,
       "data": data,
       "sound": sound.toJson(),
-    };
-  }
+		};
+	}
+
   
   NotificationSound copyWith({
     int? id,
@@ -105,8 +106,11 @@ class NotificationSound extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'notificationSound';
-  
+  static const String objectType = 'notificationSound';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

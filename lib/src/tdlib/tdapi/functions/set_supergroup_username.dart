@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **SetSupergroupUsername** *(setSupergroupUsername)* - TDLib function
-  ///
-  /// Changes the editable username of a supergroup or channel, requires owner privileges in the supergroup or channel.
-  ///
-  /// * [supergroupId]: Identifier of the supergroup or channel.
-  /// * [username]: New value of the username. Use an empty string to remove the username. The username can't be completely removed if there is another active or disabled username.
-  ///
-  /// [Ok] is returned on completion.
-class SetSupergroupUsername extends TdFunction {
+///
+/// Changes the editable username of a supergroup or channel, requires owner privileges in the supergroup or channel.
+///
+/// * [supergroupId]: Identifier of the supergroup or channel.
+/// * [username]: New value of the username. Use an empty string to remove the username. The username can't be completely removed if there is another active or disabled username.
+///
+/// [Ok] is returned on completion.
+final class SetSupergroupUsername extends TdFunction {
   
   /// **SetSupergroupUsername** *(setSupergroupUsername)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class SetSupergroupUsername extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "supergroup_id": supergroupId,
       "username": username,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetSupergroupUsername copyWith({
     int? supergroupId,
@@ -47,8 +48,11 @@ class SetSupergroupUsername extends TdFunction {
     username: username ?? this.username,
   );
 
-  static const String constructor = 'setSupergroupUsername';
-  
+  static const String objectType = 'setSupergroupUsername';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

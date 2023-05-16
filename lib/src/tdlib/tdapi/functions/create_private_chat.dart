@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **CreatePrivateChat** *(createPrivateChat)* - TDLib function
-  ///
-  /// Returns an existing chat corresponding to a given user.
-  ///
-  /// * [userId]: User identifier.
-  /// * [force]: Pass true to create the chat without a network request. In this case all information about the chat except its type, title and photo can be incorrect.
-  ///
-  /// [Chat] is returned on completion.
-class CreatePrivateChat extends TdFunction {
+///
+/// Returns an existing chat corresponding to a given user.
+///
+/// * [userId]: User identifier.
+/// * [force]: Pass true to create the chat without a network request. In this case all information about the chat except its type, title and photo can be incorrect.
+///
+/// [Chat] is returned on completion.
+final class CreatePrivateChat extends TdFunction {
   
   /// **CreatePrivateChat** *(createPrivateChat)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class CreatePrivateChat extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "user_id": userId,
       "force": force,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   CreatePrivateChat copyWith({
     int? userId,
@@ -47,8 +48,11 @@ class CreatePrivateChat extends TdFunction {
     force: force ?? this.force,
   );
 
-  static const String constructor = 'createPrivateChat';
-  
+  static const String objectType = 'createPrivateChat';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

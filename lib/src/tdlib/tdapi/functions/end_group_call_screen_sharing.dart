@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **EndGroupCallScreenSharing** *(endGroupCallScreenSharing)* - TDLib function
-  ///
-  /// Ends screen sharing in a joined group call.
-  ///
-  /// * [groupCallId]: Group call identifier.
-  ///
-  /// [Ok] is returned on completion.
-class EndGroupCallScreenSharing extends TdFunction {
+///
+/// Ends screen sharing in a joined group call.
+///
+/// * [groupCallId]: Group call identifier.
+///
+/// [Ok] is returned on completion.
+final class EndGroupCallScreenSharing extends TdFunction {
   
   /// **EndGroupCallScreenSharing** *(endGroupCallScreenSharing)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class EndGroupCallScreenSharing extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "group_call_id": groupCallId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   EndGroupCallScreenSharing copyWith({
     int? groupCallId,
@@ -38,8 +39,11 @@ class EndGroupCallScreenSharing extends TdFunction {
     groupCallId: groupCallId ?? this.groupCallId,
   );
 
-  static const String constructor = 'endGroupCallScreenSharing';
-  
+  static const String objectType = 'endGroupCallScreenSharing';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

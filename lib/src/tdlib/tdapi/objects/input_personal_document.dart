@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **InputPersonalDocument** *(inputPersonalDocument)* - basic class
-  ///
-  /// A personal document to be saved to Telegram Passport.
-  ///
-  /// * [files]: List of files containing the pages of the document.
-  /// * [translation]: List of files containing a certified English translation of the document.
-class InputPersonalDocument extends TdObject {
+///
+/// A personal document to be saved to Telegram Passport.
+///
+/// * [files]: List of files containing the pages of the document.
+/// * [translation]: List of files containing a certified English translation of the document.
+final class InputPersonalDocument extends TdObject {
   
   /// **InputPersonalDocument** *(inputPersonalDocument)* - basic class
   ///
@@ -33,13 +33,14 @@ class InputPersonalDocument extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "files": files.map((i) => i.toJson()).toList(),
       "translation": translation.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   InputPersonalDocument copyWith({
     List<InputFile>? files,
@@ -49,8 +50,11 @@ class InputPersonalDocument extends TdObject {
     translation: translation ?? this.translation,
   );
 
-  static const String constructor = 'inputPersonalDocument';
-  
+  static const String objectType = 'inputPersonalDocument';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

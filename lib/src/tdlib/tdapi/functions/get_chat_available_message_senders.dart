@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetChatAvailableMessageSenders** *(getChatAvailableMessageSenders)* - TDLib function
-  ///
-  /// Returns list of message sender identifiers, which can be used to send messages in a chat.
-  ///
-  /// * [chatId]: Chat identifier.
-  ///
-  /// [ChatMessageSenders] is returned on completion.
-class GetChatAvailableMessageSenders extends TdFunction {
+///
+/// Returns list of message sender identifiers, which can be used to send messages in a chat.
+///
+/// * [chatId]: Chat identifier.
+///
+/// [ChatMessageSenders] is returned on completion.
+final class GetChatAvailableMessageSenders extends TdFunction {
   
   /// **GetChatAvailableMessageSenders** *(getChatAvailableMessageSenders)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetChatAvailableMessageSenders extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetChatAvailableMessageSenders copyWith({
     int? chatId,
@@ -38,8 +39,11 @@ class GetChatAvailableMessageSenders extends TdFunction {
     chatId: chatId ?? this.chatId,
   );
 
-  static const String constructor = 'getChatAvailableMessageSenders';
-  
+  static const String objectType = 'getChatAvailableMessageSenders';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

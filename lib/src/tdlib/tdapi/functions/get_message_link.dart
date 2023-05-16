@@ -1,17 +1,17 @@
 part of '../tdapi.dart';
 
 /// **GetMessageLink** *(getMessageLink)* - TDLib function
-  ///
-  /// Returns an HTTPS link to a message in a chat. Available only for already sent messages in supergroups and channels, or if message.can_get_media_timestamp_links and a media timestamp link is generated. This is an offline request.
-  ///
-  /// * [chatId]: Identifier of the chat to which the message belongs.
-  /// * [messageId]: Identifier of the message.
-  /// * [mediaTimestamp]: If not 0, timestamp from which the video/audio/video note/voice note playing must start, in seconds. The media can be in the message content or in its web page preview.
-  /// * [forAlbum]: Pass true to create a link for the whole media album.
-  /// * [inMessageThread]: Pass true to create a link to the message as a channel post comment, in a message thread, or a forum topic.
-  ///
-  /// [MessageLink] is returned on completion.
-class GetMessageLink extends TdFunction {
+///
+/// Returns an HTTPS link to a message in a chat. Available only for already sent messages in supergroups and channels, or if message.can_get_media_timestamp_links and a media timestamp link is generated. This is an offline request.
+///
+/// * [chatId]: Identifier of the chat to which the message belongs.
+/// * [messageId]: Identifier of the message.
+/// * [mediaTimestamp]: If not 0, timestamp from which the video/audio/video note/voice note playing must start, in seconds. The media can be in the message content or in its web page preview.
+/// * [forAlbum]: Pass true to create a link for the whole media album.
+/// * [inMessageThread]: Pass true to create a link to the message as a channel post comment, in a message thread, or a forum topic.
+///
+/// [MessageLink] is returned on completion.
+final class GetMessageLink extends TdFunction {
   
   /// **GetMessageLink** *(getMessageLink)* - TDLib function
   ///
@@ -49,16 +49,17 @@ class GetMessageLink extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "media_timestamp": mediaTimestamp,
       "for_album": forAlbum,
       "in_message_thread": inMessageThread,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetMessageLink copyWith({
     int? chatId,
@@ -74,8 +75,11 @@ class GetMessageLink extends TdFunction {
     inMessageThread: inMessageThread ?? this.inMessageThread,
   );
 
-  static const String constructor = 'getMessageLink';
-  
+  static const String objectType = 'getMessageLink';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

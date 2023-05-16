@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **BasicGroup** *(basicGroup)* - basic class
-  ///
-  /// Represents a basic group of 0-200 users (must be upgraded to a supergroup to accommodate more than 200 users).
-  ///
-  /// * [id]: Group identifier.
-  /// * [memberCount]: Number of members in the group.
-  /// * [status]: Status of the current user in the group.
-  /// * [isActive]: True, if the group is active.
-  /// * [upgradedToSupergroupId]: Identifier of the supergroup to which this group was upgraded; 0 if none.
-class BasicGroup extends TdObject {
+///
+/// Represents a basic group of 0-200 users (must be upgraded to a supergroup to accommodate more than 200 users).
+///
+/// * [id]: Group identifier.
+/// * [memberCount]: Number of members in the group.
+/// * [status]: Status of the current user in the group.
+/// * [isActive]: True, if the group is active.
+/// * [upgradedToSupergroupId]: Identifier of the supergroup to which this group was upgraded; 0 if none.
+final class BasicGroup extends TdObject {
   
   /// **BasicGroup** *(basicGroup)* - basic class
   ///
@@ -66,16 +66,17 @@ class BasicGroup extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "member_count": memberCount,
       "status": status.toJson(),
       "is_active": isActive,
       "upgraded_to_supergroup_id": upgradedToSupergroupId,
-    };
-  }
+		};
+	}
+
   
   BasicGroup copyWith({
     int? id,
@@ -95,8 +96,11 @@ class BasicGroup extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'basicGroup';
-  
+  static const String objectType = 'basicGroup';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

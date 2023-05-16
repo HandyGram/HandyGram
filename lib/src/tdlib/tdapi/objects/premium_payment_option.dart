@@ -1,16 +1,16 @@
 part of '../tdapi.dart';
 
 /// **PremiumPaymentOption** *(premiumPaymentOption)* - basic class
-  ///
-  /// Describes an option for buying Telegram Premium to a user.
-  ///
-  /// * [currency]: ISO 4217 currency code for Telegram Premium subscription payment.
-  /// * [amount]: The amount to pay, in the smallest units of the currency.
-  /// * [discountPercentage]: The discount associated with this option, as a percentage.
-  /// * [monthCount]: Number of month the Telegram Premium subscription will be active.
-  /// * [storeProductId]: Identifier of the store product associated with the option.
-  /// * [paymentLink]: An internal link to be opened for buying Telegram Premium to the user if store payment isn't possible; may be null if direct payment isn't available *(optional)*.
-class PremiumPaymentOption extends TdObject {
+///
+/// Describes an option for buying Telegram Premium to a user.
+///
+/// * [currency]: ISO 4217 currency code for Telegram Premium subscription payment.
+/// * [amount]: The amount to pay, in the smallest units of the currency.
+/// * [discountPercentage]: The discount associated with this option, as a percentage.
+/// * [monthCount]: Number of month the Telegram Premium subscription will be active.
+/// * [storeProductId]: Identifier of the store product associated with the option.
+/// * [paymentLink]: An internal link to be opened for buying Telegram Premium to the user if store payment isn't possible; may be null if direct payment isn't available *(optional)*.
+final class PremiumPaymentOption extends TdObject {
   
   /// **PremiumPaymentOption** *(premiumPaymentOption)* - basic class
   ///
@@ -61,17 +61,18 @@ class PremiumPaymentOption extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "currency": currency,
       "amount": amount,
       "discount_percentage": discountPercentage,
       "month_count": monthCount,
       "store_product_id": storeProductId,
       "payment_link": paymentLink?.toJson(),
-    };
-  }
+		};
+	}
+
   
   PremiumPaymentOption copyWith({
     String? currency,
@@ -89,8 +90,11 @@ class PremiumPaymentOption extends TdObject {
     paymentLink: paymentLink ?? this.paymentLink,
   );
 
-  static const String constructor = 'premiumPaymentOption';
-  
+  static const String objectType = 'premiumPaymentOption';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

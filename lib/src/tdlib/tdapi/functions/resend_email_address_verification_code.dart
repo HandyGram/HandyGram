@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **ResendEmailAddressVerificationCode** *(resendEmailAddressVerificationCode)* - TDLib function
-  ///
-  /// Resends the code to verify an email address to be added to a user's Telegram Passport.
-  ///
-  /// [EmailAddressAuthenticationCodeInfo] is returned on completion.
-class ResendEmailAddressVerificationCode extends TdFunction {
+///
+/// Resends the code to verify an email address to be added to a user's Telegram Passport.
+///
+/// [EmailAddressAuthenticationCodeInfo] is returned on completion.
+final class ResendEmailAddressVerificationCode extends TdFunction {
   
   /// **ResendEmailAddressVerificationCode** *(resendEmailAddressVerificationCode)* - TDLib function
   ///
@@ -17,16 +17,20 @@ class ResendEmailAddressVerificationCode extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ResendEmailAddressVerificationCode copyWith() => const ResendEmailAddressVerificationCode();
 
-  static const String constructor = 'resendEmailAddressVerificationCode';
-  
+  static const String objectType = 'resendEmailAddressVerificationCode';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

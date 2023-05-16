@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **CallId** *(callId)* - basic class
-  ///
-  /// Contains the call identifier.
-  ///
-  /// * [id]: Call identifier.
-class CallId extends TdObject {
+///
+/// Contains the call identifier.
+///
+/// * [id]: Call identifier.
+final class CallId extends TdObject {
   
   /// **CallId** *(callId)* - basic class
   ///
@@ -38,12 +38,13 @@ class CallId extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
-    };
-  }
+		};
+	}
+
   
   CallId copyWith({
     int? id,
@@ -55,8 +56,11 @@ class CallId extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'callId';
-  
+  static const String objectType = 'callId';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

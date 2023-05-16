@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **SetDefaultChannelAdministratorRights** *(setDefaultChannelAdministratorRights)* - TDLib function
-  ///
-  /// Sets default administrator rights for adding the bot to channel chats; for bots only.
-  ///
-  /// * [defaultChannelAdministratorRights]: Default administrator rights for adding the bot to channels; may be null *(optional)*.
-  ///
-  /// [Ok] is returned on completion.
-class SetDefaultChannelAdministratorRights extends TdFunction {
+///
+/// Sets default administrator rights for adding the bot to channel chats; for bots only.
+///
+/// * [defaultChannelAdministratorRights]: Default administrator rights for adding the bot to channels; may be null *(optional)*.
+///
+/// [Ok] is returned on completion.
+final class SetDefaultChannelAdministratorRights extends TdFunction {
   
   /// **SetDefaultChannelAdministratorRights** *(setDefaultChannelAdministratorRights)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class SetDefaultChannelAdministratorRights extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "default_channel_administrator_rights": defaultChannelAdministratorRights?.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetDefaultChannelAdministratorRights copyWith({
     ChatAdministratorRights? defaultChannelAdministratorRights,
@@ -38,8 +39,11 @@ class SetDefaultChannelAdministratorRights extends TdFunction {
     defaultChannelAdministratorRights: defaultChannelAdministratorRights ?? this.defaultChannelAdministratorRights,
   );
 
-  static const String constructor = 'setDefaultChannelAdministratorRights';
-  
+  static const String objectType = 'setDefaultChannelAdministratorRights';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

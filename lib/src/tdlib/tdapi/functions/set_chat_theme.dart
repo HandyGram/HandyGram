@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **SetChatTheme** *(setChatTheme)* - TDLib function
-  ///
-  /// Changes the chat theme. Supported only in private and secret chats.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [themeName]: Name of the new chat theme; pass an empty string to return the default theme.
-  ///
-  /// [Ok] is returned on completion.
-class SetChatTheme extends TdFunction {
+///
+/// Changes the chat theme. Supported only in private and secret chats.
+///
+/// * [chatId]: Chat identifier.
+/// * [themeName]: Name of the new chat theme; pass an empty string to return the default theme.
+///
+/// [Ok] is returned on completion.
+final class SetChatTheme extends TdFunction {
   
   /// **SetChatTheme** *(setChatTheme)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class SetChatTheme extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "theme_name": themeName,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetChatTheme copyWith({
     int? chatId,
@@ -47,8 +48,11 @@ class SetChatTheme extends TdFunction {
     themeName: themeName ?? this.themeName,
   );
 
-  static const String constructor = 'setChatTheme';
-  
+  static const String objectType = 'setChatTheme';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

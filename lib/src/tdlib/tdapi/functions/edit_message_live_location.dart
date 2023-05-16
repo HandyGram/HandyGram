@@ -1,18 +1,18 @@
 part of '../tdapi.dart';
 
 /// **EditMessageLiveLocation** *(editMessageLiveLocation)* - TDLib function
-  ///
-  /// Edits the message content of a live location. Messages can be edited for a limited period of time specified in the live location. Returns the edited message after the edit is completed on the server side.
-  ///
-  /// * [chatId]: The chat the message belongs to.
-  /// * [messageId]: Identifier of the message.
-  /// * [replyMarkup]: The new message reply markup; pass null if none; for bots only *(optional)*.
-  /// * [location]: New location content of the message; pass null to stop sharing the live location *(optional)*.
-  /// * [heading]: The new direction in which the location moves, in degrees; 1-360. Pass 0 if unknown.
-  /// * [proximityAlertRadius]: The new maximum distance for proximity alerts, in meters (0-100000). Pass 0 if the notification is disabled.
-  ///
-  /// [Message] is returned on completion.
-class EditMessageLiveLocation extends TdFunction {
+///
+/// Edits the message content of a live location. Messages can be edited for a limited period of time specified in the live location. Returns the edited message after the edit is completed on the server side.
+///
+/// * [chatId]: The chat the message belongs to.
+/// * [messageId]: Identifier of the message.
+/// * [replyMarkup]: The new message reply markup; pass null if none; for bots only *(optional)*.
+/// * [location]: New location content of the message; pass null to stop sharing the live location *(optional)*.
+/// * [heading]: The new direction in which the location moves, in degrees; 1-360. Pass 0 if unknown.
+/// * [proximityAlertRadius]: The new maximum distance for proximity alerts, in meters (0-100000). Pass 0 if the notification is disabled.
+///
+/// [Message] is returned on completion.
+final class EditMessageLiveLocation extends TdFunction {
   
   /// **EditMessageLiveLocation** *(editMessageLiveLocation)* - TDLib function
   ///
@@ -55,8 +55,8 @@ class EditMessageLiveLocation extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "reply_markup": replyMarkup?.toJson(),
@@ -64,8 +64,9 @@ class EditMessageLiveLocation extends TdFunction {
       "heading": heading,
       "proximity_alert_radius": proximityAlertRadius,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   EditMessageLiveLocation copyWith({
     int? chatId,
@@ -83,8 +84,11 @@ class EditMessageLiveLocation extends TdFunction {
     proximityAlertRadius: proximityAlertRadius ?? this.proximityAlertRadius,
   );
 
-  static const String constructor = 'editMessageLiveLocation';
-  
+  static const String objectType = 'editMessageLiveLocation';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

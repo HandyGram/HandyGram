@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **SavedCredentials** *(savedCredentials)* - basic class
-  ///
-  /// Contains information about saved payment credentials.
-  ///
-  /// * [id]: Unique identifier of the saved credentials.
-  /// * [title]: Title of the saved credentials.
-class SavedCredentials extends TdObject {
+///
+/// Contains information about saved payment credentials.
+///
+/// * [id]: Unique identifier of the saved credentials.
+/// * [title]: Title of the saved credentials.
+final class SavedCredentials extends TdObject {
   
   /// **SavedCredentials** *(savedCredentials)* - basic class
   ///
@@ -33,13 +33,14 @@ class SavedCredentials extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "title": title,
-    };
-  }
+		};
+	}
+
   
   SavedCredentials copyWith({
     String? id,
@@ -49,8 +50,11 @@ class SavedCredentials extends TdObject {
     title: title ?? this.title,
   );
 
-  static const String constructor = 'savedCredentials';
-  
+  static const String objectType = 'savedCredentials';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

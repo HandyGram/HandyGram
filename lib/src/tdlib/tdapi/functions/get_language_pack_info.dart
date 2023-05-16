@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetLanguagePackInfo** *(getLanguagePackInfo)* - TDLib function
-  ///
-  /// Returns information about a language pack. Returned language pack identifier may be different from a provided one. Can be called before authorization.
-  ///
-  /// * [languagePackId]: Language pack identifier.
-  ///
-  /// [LanguagePackInfo] is returned on completion.
-class GetLanguagePackInfo extends TdFunction {
+///
+/// Returns information about a language pack. Returned language pack identifier may be different from a provided one. Can be called before authorization.
+///
+/// * [languagePackId]: Language pack identifier.
+///
+/// [LanguagePackInfo] is returned on completion.
+final class GetLanguagePackInfo extends TdFunction {
   
   /// **GetLanguagePackInfo** *(getLanguagePackInfo)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetLanguagePackInfo extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "language_pack_id": languagePackId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetLanguagePackInfo copyWith({
     String? languagePackId,
@@ -38,8 +39,11 @@ class GetLanguagePackInfo extends TdFunction {
     languagePackId: languagePackId ?? this.languagePackId,
   );
 
-  static const String constructor = 'getLanguagePackInfo';
-  
+  static const String objectType = 'getLanguagePackInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

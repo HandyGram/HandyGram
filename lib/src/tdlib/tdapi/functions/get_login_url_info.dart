@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **GetLoginUrlInfo** *(getLoginUrlInfo)* - TDLib function
-  ///
-  /// Returns information about a button of type inlineKeyboardButtonTypeLoginUrl. The method needs to be called when the user presses the button.
-  ///
-  /// * [chatId]: Chat identifier of the message with the button.
-  /// * [messageId]: Message identifier of the message with the button.
-  /// * [buttonId]: Button identifier.
-  ///
-  /// [LoginUrlInfo] is returned on completion.
-class GetLoginUrlInfo extends TdFunction {
+///
+/// Returns information about a button of type inlineKeyboardButtonTypeLoginUrl. The method needs to be called when the user presses the button.
+///
+/// * [chatId]: Chat identifier of the message with the button.
+/// * [messageId]: Message identifier of the message with the button.
+/// * [buttonId]: Button identifier.
+///
+/// [LoginUrlInfo] is returned on completion.
+final class GetLoginUrlInfo extends TdFunction {
   
   /// **GetLoginUrlInfo** *(getLoginUrlInfo)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class GetLoginUrlInfo extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "button_id": buttonId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetLoginUrlInfo copyWith({
     int? chatId,
@@ -56,8 +57,11 @@ class GetLoginUrlInfo extends TdFunction {
     buttonId: buttonId ?? this.buttonId,
   );
 
-  static const String constructor = 'getLoginUrlInfo';
-  
+  static const String objectType = 'getLoginUrlInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

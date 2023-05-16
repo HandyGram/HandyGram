@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **SearchEmojis** *(searchEmojis)* - TDLib function
-  ///
-  /// Searches for emojis by keywords. Supported only if the file database is enabled.
-  ///
-  /// * [text]: Text to search for.
-  /// * [exactMatch]: Pass true if only emojis, which exactly match the text, needs to be returned.
-  /// * [inputLanguageCodes]: List of possible IETF language tags of the user's input language; may be empty if unknown.
-  ///
-  /// [Emojis] is returned on completion.
-class SearchEmojis extends TdFunction {
+///
+/// Searches for emojis by keywords. Supported only if the file database is enabled.
+///
+/// * [text]: Text to search for.
+/// * [exactMatch]: Pass true if only emojis, which exactly match the text, needs to be returned.
+/// * [inputLanguageCodes]: List of possible IETF language tags of the user's input language; may be empty if unknown.
+///
+/// [Emojis] is returned on completion.
+final class SearchEmojis extends TdFunction {
   
   /// **SearchEmojis** *(searchEmojis)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class SearchEmojis extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "text": text,
       "exact_match": exactMatch,
       "input_language_codes": inputLanguageCodes.map((i) => i).toList(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SearchEmojis copyWith({
     String? text,
@@ -56,8 +57,11 @@ class SearchEmojis extends TdFunction {
     inputLanguageCodes: inputLanguageCodes ?? this.inputLanguageCodes,
   );
 
-  static const String constructor = 'searchEmojis';
-  
+  static const String objectType = 'searchEmojis';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **Date** *(date)* - basic class
-  ///
-  /// Represents a date according to the Gregorian calendar.
-  ///
-  /// * [day]: Day of the month; 1-31.
-  /// * [month]: Month; 1-12.
-  /// * [year]: Year; 1-9999.
-class Date extends TdObject {
+///
+/// Represents a date according to the Gregorian calendar.
+///
+/// * [day]: Day of the month; 1-31.
+/// * [month]: Month; 1-12.
+/// * [year]: Year; 1-9999.
+final class Date extends TdObject {
   
   /// **Date** *(date)* - basic class
   ///
@@ -40,14 +40,15 @@ class Date extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "day": day,
       "month": month,
       "year": year,
-    };
-  }
+		};
+	}
+
   
   Date copyWith({
     int? day,
@@ -59,8 +60,11 @@ class Date extends TdObject {
     year: year ?? this.year,
   );
 
-  static const String constructor = 'date';
-  
+  static const String objectType = 'date';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

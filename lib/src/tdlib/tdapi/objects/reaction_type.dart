@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **ReactionType** *(reactionType)* - parent
-  ///
-  /// Describes type of message reaction.
-class ReactionType extends TdObject {
+///
+/// Describes type of message reaction.
+sealed class ReactionType extends TdObject {
   
   /// **ReactionType** *(reactionType)* - parent
   ///
@@ -15,37 +15,40 @@ class ReactionType extends TdObject {
   /// * [ReactionTypeCustomEmoji]
   factory ReactionType.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case ReactionTypeEmoji.constructor:
+      case ReactionTypeEmoji.objectType:
         return ReactionTypeEmoji.fromJson(json);
-      case ReactionTypeCustomEmoji.constructor:
+      case ReactionTypeCustomEmoji.objectType:
         return ReactionTypeCustomEmoji.fromJson(json);
       default:
-        return const ReactionType();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of ReactionType)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  ReactionType copyWith() => const ReactionType();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'reactionType';
   
+  ReactionType copyWith();
+
+  static const String objectType = 'reactionType';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ReactionTypeEmoji** *(reactionTypeEmoji)* - child of ReactionType
-  ///
-  /// A reaction with an emoji.
-  ///
-  /// * [emoji]: Text representation of the reaction.
-class ReactionTypeEmoji extends ReactionType {
+///
+/// A reaction with an emoji.
+///
+/// * [emoji]: Text representation of the reaction.
+final class ReactionTypeEmoji extends ReactionType {
   
   /// **ReactionTypeEmoji** *(reactionTypeEmoji)* - child of ReactionType
   ///
@@ -66,12 +69,13 @@ class ReactionTypeEmoji extends ReactionType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "emoji": emoji,
-    };
-  }
+		};
+	}
+
   
   @override
   ReactionTypeEmoji copyWith({
@@ -80,19 +84,22 @@ class ReactionTypeEmoji extends ReactionType {
     emoji: emoji ?? this.emoji,
   );
 
-  static const String constructor = 'reactionTypeEmoji';
-  
+  static const String objectType = 'reactionTypeEmoji';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ReactionTypeCustomEmoji** *(reactionTypeCustomEmoji)* - child of ReactionType
-  ///
-  /// A reaction with a custom emoji.
-  ///
-  /// * [customEmojiId]: Unique identifier of the custom emoji.
-class ReactionTypeCustomEmoji extends ReactionType {
+///
+/// A reaction with a custom emoji.
+///
+/// * [customEmojiId]: Unique identifier of the custom emoji.
+final class ReactionTypeCustomEmoji extends ReactionType {
   
   /// **ReactionTypeCustomEmoji** *(reactionTypeCustomEmoji)* - child of ReactionType
   ///
@@ -113,12 +120,13 @@ class ReactionTypeCustomEmoji extends ReactionType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "custom_emoji_id": customEmojiId,
-    };
-  }
+		};
+	}
+
   
   @override
   ReactionTypeCustomEmoji copyWith({
@@ -127,8 +135,11 @@ class ReactionTypeCustomEmoji extends ReactionType {
     customEmojiId: customEmojiId ?? this.customEmojiId,
   );
 
-  static const String constructor = 'reactionTypeCustomEmoji';
-  
+  static const String objectType = 'reactionTypeCustomEmoji';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

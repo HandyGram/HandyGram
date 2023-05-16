@@ -1,23 +1,23 @@
 part of '../tdapi.dart';
 
 /// **LanguagePackInfo** *(languagePackInfo)* - basic class
-  ///
-  /// Contains information about a language pack.
-  ///
-  /// * [id]: Unique language pack identifier.
-  /// * [baseLanguagePackId]: Identifier of a base language pack; may be empty. If a string is missed in the language pack, then it must be fetched from base language pack. Unsupported in custom language packs.
-  /// * [name]: Language name.
-  /// * [nativeName]: Name of the language in that language.
-  /// * [pluralCode]: A language code to be used to apply plural forms. See https://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html for more information.
-  /// * [isOfficial]: True, if the language pack is official.
-  /// * [isRtl]: True, if the language pack strings are RTL.
-  /// * [isBeta]: True, if the language pack is a beta language pack.
-  /// * [isInstalled]: True, if the language pack is installed by the current user.
-  /// * [totalStringCount]: Total number of non-deleted strings from the language pack.
-  /// * [translatedStringCount]: Total number of translated strings from the language pack.
-  /// * [localStringCount]: Total number of non-deleted strings from the language pack available locally.
-  /// * [translationUrl]: Link to language translation interface; empty for custom local language packs.
-class LanguagePackInfo extends TdObject {
+///
+/// Contains information about a language pack.
+///
+/// * [id]: Unique language pack identifier.
+/// * [baseLanguagePackId]: Identifier of a base language pack; may be empty. If a string is missed in the language pack, then it must be fetched from base language pack. Unsupported in custom language packs.
+/// * [name]: Language name.
+/// * [nativeName]: Name of the language in that language.
+/// * [pluralCode]: A language code to be used to apply plural forms. See https://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html for more information.
+/// * [isOfficial]: True, if the language pack is official.
+/// * [isRtl]: True, if the language pack strings are RTL.
+/// * [isBeta]: True, if the language pack is a beta language pack.
+/// * [isInstalled]: True, if the language pack is installed by the current user.
+/// * [totalStringCount]: Total number of non-deleted strings from the language pack.
+/// * [translatedStringCount]: Total number of translated strings from the language pack.
+/// * [localStringCount]: Total number of non-deleted strings from the language pack available locally.
+/// * [translationUrl]: Link to language translation interface; empty for custom local language packs.
+final class LanguagePackInfo extends TdObject {
   
   /// **LanguagePackInfo** *(languagePackInfo)* - basic class
   ///
@@ -122,9 +122,9 @@ class LanguagePackInfo extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "base_language_pack_id": baseLanguagePackId,
       "name": name,
@@ -138,8 +138,9 @@ class LanguagePackInfo extends TdObject {
       "translated_string_count": translatedStringCount,
       "local_string_count": localStringCount,
       "translation_url": translationUrl,
-    };
-  }
+		};
+	}
+
   
   LanguagePackInfo copyWith({
     String? id,
@@ -175,8 +176,11 @@ class LanguagePackInfo extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'languagePackInfo';
-  
+  static const String objectType = 'languagePackInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

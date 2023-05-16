@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **AuthenticationCodeType** *(authenticationCodeType)* - parent
-  ///
-  /// Provides information about the method by which an authentication code is delivered to the user.
-class AuthenticationCodeType extends TdObject {
+///
+/// Provides information about the method by which an authentication code is delivered to the user.
+sealed class AuthenticationCodeType extends TdObject {
   
   /// **AuthenticationCodeType** *(authenticationCodeType)* - parent
   ///
@@ -19,45 +19,48 @@ class AuthenticationCodeType extends TdObject {
   /// * [AuthenticationCodeTypeFragment]
   factory AuthenticationCodeType.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case AuthenticationCodeTypeTelegramMessage.constructor:
+      case AuthenticationCodeTypeTelegramMessage.objectType:
         return AuthenticationCodeTypeTelegramMessage.fromJson(json);
-      case AuthenticationCodeTypeSms.constructor:
+      case AuthenticationCodeTypeSms.objectType:
         return AuthenticationCodeTypeSms.fromJson(json);
-      case AuthenticationCodeTypeCall.constructor:
+      case AuthenticationCodeTypeCall.objectType:
         return AuthenticationCodeTypeCall.fromJson(json);
-      case AuthenticationCodeTypeFlashCall.constructor:
+      case AuthenticationCodeTypeFlashCall.objectType:
         return AuthenticationCodeTypeFlashCall.fromJson(json);
-      case AuthenticationCodeTypeMissedCall.constructor:
+      case AuthenticationCodeTypeMissedCall.objectType:
         return AuthenticationCodeTypeMissedCall.fromJson(json);
-      case AuthenticationCodeTypeFragment.constructor:
+      case AuthenticationCodeTypeFragment.objectType:
         return AuthenticationCodeTypeFragment.fromJson(json);
       default:
-        return const AuthenticationCodeType();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of AuthenticationCodeType)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  AuthenticationCodeType copyWith() => const AuthenticationCodeType();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'authenticationCodeType';
   
+  AuthenticationCodeType copyWith();
+
+  static const String objectType = 'authenticationCodeType';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **AuthenticationCodeTypeTelegramMessage** *(authenticationCodeTypeTelegramMessage)* - child of AuthenticationCodeType
-  ///
-  /// An authentication code is delivered via a private Telegram message, which can be viewed from another active session.
-  ///
-  /// * [length]: Length of the code.
-class AuthenticationCodeTypeTelegramMessage extends AuthenticationCodeType {
+///
+/// An authentication code is delivered via a private Telegram message, which can be viewed from another active session.
+///
+/// * [length]: Length of the code.
+final class AuthenticationCodeTypeTelegramMessage extends AuthenticationCodeType {
   
   /// **AuthenticationCodeTypeTelegramMessage** *(authenticationCodeTypeTelegramMessage)* - child of AuthenticationCodeType
   ///
@@ -78,12 +81,13 @@ class AuthenticationCodeTypeTelegramMessage extends AuthenticationCodeType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "length": length,
-    };
-  }
+		};
+	}
+
   
   @override
   AuthenticationCodeTypeTelegramMessage copyWith({
@@ -92,19 +96,22 @@ class AuthenticationCodeTypeTelegramMessage extends AuthenticationCodeType {
     length: length ?? this.length,
   );
 
-  static const String constructor = 'authenticationCodeTypeTelegramMessage';
-  
+  static const String objectType = 'authenticationCodeTypeTelegramMessage';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **AuthenticationCodeTypeSms** *(authenticationCodeTypeSms)* - child of AuthenticationCodeType
-  ///
-  /// An authentication code is delivered via an SMS message to the specified phone number.
-  ///
-  /// * [length]: Length of the code.
-class AuthenticationCodeTypeSms extends AuthenticationCodeType {
+///
+/// An authentication code is delivered via an SMS message to the specified phone number.
+///
+/// * [length]: Length of the code.
+final class AuthenticationCodeTypeSms extends AuthenticationCodeType {
   
   /// **AuthenticationCodeTypeSms** *(authenticationCodeTypeSms)* - child of AuthenticationCodeType
   ///
@@ -125,12 +132,13 @@ class AuthenticationCodeTypeSms extends AuthenticationCodeType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "length": length,
-    };
-  }
+		};
+	}
+
   
   @override
   AuthenticationCodeTypeSms copyWith({
@@ -139,19 +147,22 @@ class AuthenticationCodeTypeSms extends AuthenticationCodeType {
     length: length ?? this.length,
   );
 
-  static const String constructor = 'authenticationCodeTypeSms';
-  
+  static const String objectType = 'authenticationCodeTypeSms';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **AuthenticationCodeTypeCall** *(authenticationCodeTypeCall)* - child of AuthenticationCodeType
-  ///
-  /// An authentication code is delivered via a phone call to the specified phone number.
-  ///
-  /// * [length]: Length of the code.
-class AuthenticationCodeTypeCall extends AuthenticationCodeType {
+///
+/// An authentication code is delivered via a phone call to the specified phone number.
+///
+/// * [length]: Length of the code.
+final class AuthenticationCodeTypeCall extends AuthenticationCodeType {
   
   /// **AuthenticationCodeTypeCall** *(authenticationCodeTypeCall)* - child of AuthenticationCodeType
   ///
@@ -172,12 +183,13 @@ class AuthenticationCodeTypeCall extends AuthenticationCodeType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "length": length,
-    };
-  }
+		};
+	}
+
   
   @override
   AuthenticationCodeTypeCall copyWith({
@@ -186,19 +198,22 @@ class AuthenticationCodeTypeCall extends AuthenticationCodeType {
     length: length ?? this.length,
   );
 
-  static const String constructor = 'authenticationCodeTypeCall';
-  
+  static const String objectType = 'authenticationCodeTypeCall';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **AuthenticationCodeTypeFlashCall** *(authenticationCodeTypeFlashCall)* - child of AuthenticationCodeType
-  ///
-  /// An authentication code is delivered by an immediately canceled call to the specified phone number. The phone number that calls is the code that must be entered automatically.
-  ///
-  /// * [pattern]: Pattern of the phone number from which the call will be made.
-class AuthenticationCodeTypeFlashCall extends AuthenticationCodeType {
+///
+/// An authentication code is delivered by an immediately canceled call to the specified phone number. The phone number that calls is the code that must be entered automatically.
+///
+/// * [pattern]: Pattern of the phone number from which the call will be made.
+final class AuthenticationCodeTypeFlashCall extends AuthenticationCodeType {
   
   /// **AuthenticationCodeTypeFlashCall** *(authenticationCodeTypeFlashCall)* - child of AuthenticationCodeType
   ///
@@ -219,12 +234,13 @@ class AuthenticationCodeTypeFlashCall extends AuthenticationCodeType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "pattern": pattern,
-    };
-  }
+		};
+	}
+
   
   @override
   AuthenticationCodeTypeFlashCall copyWith({
@@ -233,20 +249,23 @@ class AuthenticationCodeTypeFlashCall extends AuthenticationCodeType {
     pattern: pattern ?? this.pattern,
   );
 
-  static const String constructor = 'authenticationCodeTypeFlashCall';
-  
+  static const String objectType = 'authenticationCodeTypeFlashCall';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **AuthenticationCodeTypeMissedCall** *(authenticationCodeTypeMissedCall)* - child of AuthenticationCodeType
-  ///
-  /// An authentication code is delivered by an immediately canceled call to the specified phone number. The last digits of the phone number that calls are the code that must be entered manually by the user.
-  ///
-  /// * [phoneNumberPrefix]: Prefix of the phone number from which the call will be made.
-  /// * [length]: Number of digits in the code, excluding the prefix.
-class AuthenticationCodeTypeMissedCall extends AuthenticationCodeType {
+///
+/// An authentication code is delivered by an immediately canceled call to the specified phone number. The last digits of the phone number that calls are the code that must be entered manually by the user.
+///
+/// * [phoneNumberPrefix]: Prefix of the phone number from which the call will be made.
+/// * [length]: Number of digits in the code, excluding the prefix.
+final class AuthenticationCodeTypeMissedCall extends AuthenticationCodeType {
   
   /// **AuthenticationCodeTypeMissedCall** *(authenticationCodeTypeMissedCall)* - child of AuthenticationCodeType
   ///
@@ -273,13 +292,14 @@ class AuthenticationCodeTypeMissedCall extends AuthenticationCodeType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "phone_number_prefix": phoneNumberPrefix,
       "length": length,
-    };
-  }
+		};
+	}
+
   
   @override
   AuthenticationCodeTypeMissedCall copyWith({
@@ -290,20 +310,23 @@ class AuthenticationCodeTypeMissedCall extends AuthenticationCodeType {
     length: length ?? this.length,
   );
 
-  static const String constructor = 'authenticationCodeTypeMissedCall';
-  
+  static const String objectType = 'authenticationCodeTypeMissedCall';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **AuthenticationCodeTypeFragment** *(authenticationCodeTypeFragment)* - child of AuthenticationCodeType
-  ///
-  /// An authentication code is delivered to https://fragment.com. The user must be logged in there via a wallet owning the phone number's NFT.
-  ///
-  /// * [url]: URL to open to receive the code.
-  /// * [length]: Length of the code.
-class AuthenticationCodeTypeFragment extends AuthenticationCodeType {
+///
+/// An authentication code is delivered to https://fragment.com. The user must be logged in there via a wallet owning the phone number's NFT.
+///
+/// * [url]: URL to open to receive the code.
+/// * [length]: Length of the code.
+final class AuthenticationCodeTypeFragment extends AuthenticationCodeType {
   
   /// **AuthenticationCodeTypeFragment** *(authenticationCodeTypeFragment)* - child of AuthenticationCodeType
   ///
@@ -330,13 +353,14 @@ class AuthenticationCodeTypeFragment extends AuthenticationCodeType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "url": url,
       "length": length,
-    };
-  }
+		};
+	}
+
   
   @override
   AuthenticationCodeTypeFragment copyWith({
@@ -347,8 +371,11 @@ class AuthenticationCodeTypeFragment extends AuthenticationCodeType {
     length: length ?? this.length,
   );
 
-  static const String constructor = 'authenticationCodeTypeFragment';
-  
+  static const String objectType = 'authenticationCodeTypeFragment';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

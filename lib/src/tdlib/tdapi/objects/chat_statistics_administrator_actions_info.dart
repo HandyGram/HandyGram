@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **ChatStatisticsAdministratorActionsInfo** *(chatStatisticsAdministratorActionsInfo)* - basic class
-  ///
-  /// Contains statistics about administrator actions done by a user.
-  ///
-  /// * [userId]: Administrator user identifier.
-  /// * [deletedMessageCount]: Number of messages deleted by the administrator.
-  /// * [bannedUserCount]: Number of users banned by the administrator.
-  /// * [restrictedUserCount]: Number of users restricted by the administrator.
-class ChatStatisticsAdministratorActionsInfo extends TdObject {
+///
+/// Contains statistics about administrator actions done by a user.
+///
+/// * [userId]: Administrator user identifier.
+/// * [deletedMessageCount]: Number of messages deleted by the administrator.
+/// * [bannedUserCount]: Number of users banned by the administrator.
+/// * [restrictedUserCount]: Number of users restricted by the administrator.
+final class ChatStatisticsAdministratorActionsInfo extends TdObject {
   
   /// **ChatStatisticsAdministratorActionsInfo** *(chatStatisticsAdministratorActionsInfo)* - basic class
   ///
@@ -47,15 +47,16 @@ class ChatStatisticsAdministratorActionsInfo extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "user_id": userId,
       "deleted_message_count": deletedMessageCount,
       "banned_user_count": bannedUserCount,
       "restricted_user_count": restrictedUserCount,
-    };
-  }
+		};
+	}
+
   
   ChatStatisticsAdministratorActionsInfo copyWith({
     int? userId,
@@ -69,8 +70,11 @@ class ChatStatisticsAdministratorActionsInfo extends TdObject {
     restrictedUserCount: restrictedUserCount ?? this.restrictedUserCount,
   );
 
-  static const String constructor = 'chatStatisticsAdministratorActionsInfo';
-  
+  static const String objectType = 'chatStatisticsAdministratorActionsInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

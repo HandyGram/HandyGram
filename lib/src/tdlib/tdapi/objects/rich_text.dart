@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **RichText** *(richText)* - parent
-  ///
-  /// Describes a text object inside an instant-view web page.
-class RichText extends TdObject {
+///
+/// Describes a text object inside an instant-view web page.
+sealed class RichText extends TdObject {
   
   /// **RichText** *(richText)* - parent
   ///
@@ -30,67 +30,70 @@ class RichText extends TdObject {
   /// * [RichTexts]
   factory RichText.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case RichTextPlain.constructor:
+      case RichTextPlain.objectType:
         return RichTextPlain.fromJson(json);
-      case RichTextBold.constructor:
+      case RichTextBold.objectType:
         return RichTextBold.fromJson(json);
-      case RichTextItalic.constructor:
+      case RichTextItalic.objectType:
         return RichTextItalic.fromJson(json);
-      case RichTextUnderline.constructor:
+      case RichTextUnderline.objectType:
         return RichTextUnderline.fromJson(json);
-      case RichTextStrikethrough.constructor:
+      case RichTextStrikethrough.objectType:
         return RichTextStrikethrough.fromJson(json);
-      case RichTextFixed.constructor:
+      case RichTextFixed.objectType:
         return RichTextFixed.fromJson(json);
-      case RichTextUrl.constructor:
+      case RichTextUrl.objectType:
         return RichTextUrl.fromJson(json);
-      case RichTextEmailAddress.constructor:
+      case RichTextEmailAddress.objectType:
         return RichTextEmailAddress.fromJson(json);
-      case RichTextSubscript.constructor:
+      case RichTextSubscript.objectType:
         return RichTextSubscript.fromJson(json);
-      case RichTextSuperscript.constructor:
+      case RichTextSuperscript.objectType:
         return RichTextSuperscript.fromJson(json);
-      case RichTextMarked.constructor:
+      case RichTextMarked.objectType:
         return RichTextMarked.fromJson(json);
-      case RichTextPhoneNumber.constructor:
+      case RichTextPhoneNumber.objectType:
         return RichTextPhoneNumber.fromJson(json);
-      case RichTextIcon.constructor:
+      case RichTextIcon.objectType:
         return RichTextIcon.fromJson(json);
-      case RichTextReference.constructor:
+      case RichTextReference.objectType:
         return RichTextReference.fromJson(json);
-      case RichTextAnchor.constructor:
+      case RichTextAnchor.objectType:
         return RichTextAnchor.fromJson(json);
-      case RichTextAnchorLink.constructor:
+      case RichTextAnchorLink.objectType:
         return RichTextAnchorLink.fromJson(json);
-      case RichTexts.constructor:
+      case RichTexts.objectType:
         return RichTexts.fromJson(json);
       default:
-        return const RichText();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of RichText)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  RichText copyWith() => const RichText();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'richText';
   
+  RichText copyWith();
+
+  static const String objectType = 'richText';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **RichTextPlain** *(richTextPlain)* - child of RichText
-  ///
-  /// A plain text.
-  ///
-  /// * [text]: Text.
-class RichTextPlain extends RichText {
+///
+/// A plain text.
+///
+/// * [text]: Text.
+final class RichTextPlain extends RichText {
   
   /// **RichTextPlain** *(richTextPlain)* - child of RichText
   ///
@@ -111,12 +114,13 @@ class RichTextPlain extends RichText {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text,
-    };
-  }
+		};
+	}
+
   
   @override
   RichTextPlain copyWith({
@@ -125,19 +129,22 @@ class RichTextPlain extends RichText {
     text: text ?? this.text,
   );
 
-  static const String constructor = 'richTextPlain';
-  
+  static const String objectType = 'richTextPlain';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **RichTextBold** *(richTextBold)* - child of RichText
-  ///
-  /// A bold rich text.
-  ///
-  /// * [text]: Text.
-class RichTextBold extends RichText {
+///
+/// A bold rich text.
+///
+/// * [text]: Text.
+final class RichTextBold extends RichText {
   
   /// **RichTextBold** *(richTextBold)* - child of RichText
   ///
@@ -158,12 +165,13 @@ class RichTextBold extends RichText {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   RichTextBold copyWith({
@@ -172,19 +180,22 @@ class RichTextBold extends RichText {
     text: text ?? this.text,
   );
 
-  static const String constructor = 'richTextBold';
-  
+  static const String objectType = 'richTextBold';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **RichTextItalic** *(richTextItalic)* - child of RichText
-  ///
-  /// An italicized rich text.
-  ///
-  /// * [text]: Text.
-class RichTextItalic extends RichText {
+///
+/// An italicized rich text.
+///
+/// * [text]: Text.
+final class RichTextItalic extends RichText {
   
   /// **RichTextItalic** *(richTextItalic)* - child of RichText
   ///
@@ -205,12 +216,13 @@ class RichTextItalic extends RichText {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   RichTextItalic copyWith({
@@ -219,19 +231,22 @@ class RichTextItalic extends RichText {
     text: text ?? this.text,
   );
 
-  static const String constructor = 'richTextItalic';
-  
+  static const String objectType = 'richTextItalic';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **RichTextUnderline** *(richTextUnderline)* - child of RichText
-  ///
-  /// An underlined rich text.
-  ///
-  /// * [text]: Text.
-class RichTextUnderline extends RichText {
+///
+/// An underlined rich text.
+///
+/// * [text]: Text.
+final class RichTextUnderline extends RichText {
   
   /// **RichTextUnderline** *(richTextUnderline)* - child of RichText
   ///
@@ -252,12 +267,13 @@ class RichTextUnderline extends RichText {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   RichTextUnderline copyWith({
@@ -266,19 +282,22 @@ class RichTextUnderline extends RichText {
     text: text ?? this.text,
   );
 
-  static const String constructor = 'richTextUnderline';
-  
+  static const String objectType = 'richTextUnderline';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **RichTextStrikethrough** *(richTextStrikethrough)* - child of RichText
-  ///
-  /// A strikethrough rich text.
-  ///
-  /// * [text]: Text.
-class RichTextStrikethrough extends RichText {
+///
+/// A strikethrough rich text.
+///
+/// * [text]: Text.
+final class RichTextStrikethrough extends RichText {
   
   /// **RichTextStrikethrough** *(richTextStrikethrough)* - child of RichText
   ///
@@ -299,12 +318,13 @@ class RichTextStrikethrough extends RichText {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   RichTextStrikethrough copyWith({
@@ -313,19 +333,22 @@ class RichTextStrikethrough extends RichText {
     text: text ?? this.text,
   );
 
-  static const String constructor = 'richTextStrikethrough';
-  
+  static const String objectType = 'richTextStrikethrough';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **RichTextFixed** *(richTextFixed)* - child of RichText
-  ///
-  /// A fixed-width rich text.
-  ///
-  /// * [text]: Text.
-class RichTextFixed extends RichText {
+///
+/// A fixed-width rich text.
+///
+/// * [text]: Text.
+final class RichTextFixed extends RichText {
   
   /// **RichTextFixed** *(richTextFixed)* - child of RichText
   ///
@@ -346,12 +369,13 @@ class RichTextFixed extends RichText {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   RichTextFixed copyWith({
@@ -360,21 +384,24 @@ class RichTextFixed extends RichText {
     text: text ?? this.text,
   );
 
-  static const String constructor = 'richTextFixed';
-  
+  static const String objectType = 'richTextFixed';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **RichTextUrl** *(richTextUrl)* - child of RichText
-  ///
-  /// A rich text URL link.
-  ///
-  /// * [text]: Text.
-  /// * [url]: URL.
-  /// * [isCached]: True, if the URL has cached instant view server-side.
-class RichTextUrl extends RichText {
+///
+/// A rich text URL link.
+///
+/// * [text]: Text.
+/// * [url]: URL.
+/// * [isCached]: True, if the URL has cached instant view server-side.
+final class RichTextUrl extends RichText {
   
   /// **RichTextUrl** *(richTextUrl)* - child of RichText
   ///
@@ -407,14 +434,15 @@ class RichTextUrl extends RichText {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text.toJson(),
       "url": url,
       "is_cached": isCached,
-    };
-  }
+		};
+	}
+
   
   @override
   RichTextUrl copyWith({
@@ -427,20 +455,23 @@ class RichTextUrl extends RichText {
     isCached: isCached ?? this.isCached,
   );
 
-  static const String constructor = 'richTextUrl';
-  
+  static const String objectType = 'richTextUrl';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **RichTextEmailAddress** *(richTextEmailAddress)* - child of RichText
-  ///
-  /// A rich text email link.
-  ///
-  /// * [text]: Text.
-  /// * [emailAddress]: Email address.
-class RichTextEmailAddress extends RichText {
+///
+/// A rich text email link.
+///
+/// * [text]: Text.
+/// * [emailAddress]: Email address.
+final class RichTextEmailAddress extends RichText {
   
   /// **RichTextEmailAddress** *(richTextEmailAddress)* - child of RichText
   ///
@@ -467,13 +498,14 @@ class RichTextEmailAddress extends RichText {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text.toJson(),
       "email_address": emailAddress,
-    };
-  }
+		};
+	}
+
   
   @override
   RichTextEmailAddress copyWith({
@@ -484,19 +516,22 @@ class RichTextEmailAddress extends RichText {
     emailAddress: emailAddress ?? this.emailAddress,
   );
 
-  static const String constructor = 'richTextEmailAddress';
-  
+  static const String objectType = 'richTextEmailAddress';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **RichTextSubscript** *(richTextSubscript)* - child of RichText
-  ///
-  /// A subscript rich text.
-  ///
-  /// * [text]: Text.
-class RichTextSubscript extends RichText {
+///
+/// A subscript rich text.
+///
+/// * [text]: Text.
+final class RichTextSubscript extends RichText {
   
   /// **RichTextSubscript** *(richTextSubscript)* - child of RichText
   ///
@@ -517,12 +552,13 @@ class RichTextSubscript extends RichText {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   RichTextSubscript copyWith({
@@ -531,19 +567,22 @@ class RichTextSubscript extends RichText {
     text: text ?? this.text,
   );
 
-  static const String constructor = 'richTextSubscript';
-  
+  static const String objectType = 'richTextSubscript';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **RichTextSuperscript** *(richTextSuperscript)* - child of RichText
-  ///
-  /// A superscript rich text.
-  ///
-  /// * [text]: Text.
-class RichTextSuperscript extends RichText {
+///
+/// A superscript rich text.
+///
+/// * [text]: Text.
+final class RichTextSuperscript extends RichText {
   
   /// **RichTextSuperscript** *(richTextSuperscript)* - child of RichText
   ///
@@ -564,12 +603,13 @@ class RichTextSuperscript extends RichText {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   RichTextSuperscript copyWith({
@@ -578,19 +618,22 @@ class RichTextSuperscript extends RichText {
     text: text ?? this.text,
   );
 
-  static const String constructor = 'richTextSuperscript';
-  
+  static const String objectType = 'richTextSuperscript';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **RichTextMarked** *(richTextMarked)* - child of RichText
-  ///
-  /// A marked rich text.
-  ///
-  /// * [text]: Text.
-class RichTextMarked extends RichText {
+///
+/// A marked rich text.
+///
+/// * [text]: Text.
+final class RichTextMarked extends RichText {
   
   /// **RichTextMarked** *(richTextMarked)* - child of RichText
   ///
@@ -611,12 +654,13 @@ class RichTextMarked extends RichText {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   RichTextMarked copyWith({
@@ -625,20 +669,23 @@ class RichTextMarked extends RichText {
     text: text ?? this.text,
   );
 
-  static const String constructor = 'richTextMarked';
-  
+  static const String objectType = 'richTextMarked';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **RichTextPhoneNumber** *(richTextPhoneNumber)* - child of RichText
-  ///
-  /// A rich text phone number.
-  ///
-  /// * [text]: Text.
-  /// * [phoneNumber]: Phone number.
-class RichTextPhoneNumber extends RichText {
+///
+/// A rich text phone number.
+///
+/// * [text]: Text.
+/// * [phoneNumber]: Phone number.
+final class RichTextPhoneNumber extends RichText {
   
   /// **RichTextPhoneNumber** *(richTextPhoneNumber)* - child of RichText
   ///
@@ -665,13 +712,14 @@ class RichTextPhoneNumber extends RichText {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text.toJson(),
       "phone_number": phoneNumber,
-    };
-  }
+		};
+	}
+
   
   @override
   RichTextPhoneNumber copyWith({
@@ -682,21 +730,24 @@ class RichTextPhoneNumber extends RichText {
     phoneNumber: phoneNumber ?? this.phoneNumber,
   );
 
-  static const String constructor = 'richTextPhoneNumber';
-  
+  static const String objectType = 'richTextPhoneNumber';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **RichTextIcon** *(richTextIcon)* - child of RichText
-  ///
-  /// A small image inside the text.
-  ///
-  /// * [document]: The image represented as a document. The image can be in GIF, JPEG or PNG format.
-  /// * [width]: Width of a bounding box in which the image must be shown; 0 if unknown.
-  /// * [height]: Height of a bounding box in which the image must be shown; 0 if unknown.
-class RichTextIcon extends RichText {
+///
+/// A small image inside the text.
+///
+/// * [document]: The image represented as a document. The image can be in GIF, JPEG or PNG format.
+/// * [width]: Width of a bounding box in which the image must be shown; 0 if unknown.
+/// * [height]: Height of a bounding box in which the image must be shown; 0 if unknown.
+final class RichTextIcon extends RichText {
   
   /// **RichTextIcon** *(richTextIcon)* - child of RichText
   ///
@@ -729,14 +780,15 @@ class RichTextIcon extends RichText {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "document": document.toJson(),
       "width": width,
       "height": height,
-    };
-  }
+		};
+	}
+
   
   @override
   RichTextIcon copyWith({
@@ -749,21 +801,24 @@ class RichTextIcon extends RichText {
     height: height ?? this.height,
   );
 
-  static const String constructor = 'richTextIcon';
-  
+  static const String objectType = 'richTextIcon';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **RichTextReference** *(richTextReference)* - child of RichText
-  ///
-  /// A reference to a richTexts object on the same web page.
-  ///
-  /// * [text]: The text.
-  /// * [anchorName]: The name of a richTextAnchor object, which is the first element of the target richTexts object.
-  /// * [url]: An HTTP URL, opening the reference.
-class RichTextReference extends RichText {
+///
+/// A reference to a richTexts object on the same web page.
+///
+/// * [text]: The text.
+/// * [anchorName]: The name of a richTextAnchor object, which is the first element of the target richTexts object.
+/// * [url]: An HTTP URL, opening the reference.
+final class RichTextReference extends RichText {
   
   /// **RichTextReference** *(richTextReference)* - child of RichText
   ///
@@ -796,14 +851,15 @@ class RichTextReference extends RichText {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text.toJson(),
       "anchor_name": anchorName,
       "url": url,
-    };
-  }
+		};
+	}
+
   
   @override
   RichTextReference copyWith({
@@ -816,19 +872,22 @@ class RichTextReference extends RichText {
     url: url ?? this.url,
   );
 
-  static const String constructor = 'richTextReference';
-  
+  static const String objectType = 'richTextReference';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **RichTextAnchor** *(richTextAnchor)* - child of RichText
-  ///
-  /// An anchor.
-  ///
-  /// * [name]: Anchor name.
-class RichTextAnchor extends RichText {
+///
+/// An anchor.
+///
+/// * [name]: Anchor name.
+final class RichTextAnchor extends RichText {
   
   /// **RichTextAnchor** *(richTextAnchor)* - child of RichText
   ///
@@ -849,12 +908,13 @@ class RichTextAnchor extends RichText {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "name": name,
-    };
-  }
+		};
+	}
+
   
   @override
   RichTextAnchor copyWith({
@@ -863,21 +923,24 @@ class RichTextAnchor extends RichText {
     name: name ?? this.name,
   );
 
-  static const String constructor = 'richTextAnchor';
-  
+  static const String objectType = 'richTextAnchor';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **RichTextAnchorLink** *(richTextAnchorLink)* - child of RichText
-  ///
-  /// A link to an anchor on the same web page.
-  ///
-  /// * [text]: The link text.
-  /// * [anchorName]: The anchor name. If the name is empty, the link must bring back to top.
-  /// * [url]: An HTTP URL, opening the anchor.
-class RichTextAnchorLink extends RichText {
+///
+/// A link to an anchor on the same web page.
+///
+/// * [text]: The link text.
+/// * [anchorName]: The anchor name. If the name is empty, the link must bring back to top.
+/// * [url]: An HTTP URL, opening the anchor.
+final class RichTextAnchorLink extends RichText {
   
   /// **RichTextAnchorLink** *(richTextAnchorLink)* - child of RichText
   ///
@@ -910,14 +973,15 @@ class RichTextAnchorLink extends RichText {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text.toJson(),
       "anchor_name": anchorName,
       "url": url,
-    };
-  }
+		};
+	}
+
   
   @override
   RichTextAnchorLink copyWith({
@@ -930,19 +994,22 @@ class RichTextAnchorLink extends RichText {
     url: url ?? this.url,
   );
 
-  static const String constructor = 'richTextAnchorLink';
-  
+  static const String objectType = 'richTextAnchorLink';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **RichTexts** *(richTexts)* - child of RichText
-  ///
-  /// A concatenation of rich texts.
-  ///
-  /// * [texts]: Texts.
-class RichTexts extends RichText {
+///
+/// A concatenation of rich texts.
+///
+/// * [texts]: Texts.
+final class RichTexts extends RichText {
   
   /// **RichTexts** *(richTexts)* - child of RichText
   ///
@@ -963,12 +1030,13 @@ class RichTexts extends RichText {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "texts": texts.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   @override
   RichTexts copyWith({
@@ -977,8 +1045,11 @@ class RichTexts extends RichText {
     texts: texts ?? this.texts,
   );
 
-  static const String constructor = 'richTexts';
-  
+  static const String objectType = 'richTexts';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

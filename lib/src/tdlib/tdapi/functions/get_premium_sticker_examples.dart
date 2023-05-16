@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **GetPremiumStickerExamples** *(getPremiumStickerExamples)* - TDLib function
-  ///
-  /// Returns examples of premium stickers for demonstration purposes.
-  ///
-  /// [Stickers] is returned on completion.
-class GetPremiumStickerExamples extends TdFunction {
+///
+/// Returns examples of premium stickers for demonstration purposes.
+///
+/// [Stickers] is returned on completion.
+final class GetPremiumStickerExamples extends TdFunction {
   
   /// **GetPremiumStickerExamples** *(getPremiumStickerExamples)* - TDLib function
   ///
@@ -17,16 +17,20 @@ class GetPremiumStickerExamples extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetPremiumStickerExamples copyWith() => const GetPremiumStickerExamples();
 
-  static const String constructor = 'getPremiumStickerExamples';
-  
+  static const String objectType = 'getPremiumStickerExamples';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

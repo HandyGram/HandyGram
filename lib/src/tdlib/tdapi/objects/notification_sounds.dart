@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **NotificationSounds** *(notificationSounds)* - basic class
-  ///
-  /// Contains a list of notification sounds.
-  ///
-  /// * [notificationSounds]: A list of notification sounds.
-class NotificationSounds extends TdObject {
+///
+/// Contains a list of notification sounds.
+///
+/// * [notificationSounds]: A list of notification sounds.
+final class NotificationSounds extends TdObject {
   
   /// **NotificationSounds** *(notificationSounds)* - basic class
   ///
@@ -38,12 +38,13 @@ class NotificationSounds extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "notification_sounds": notificationSounds.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   NotificationSounds copyWith({
     List<NotificationSound>? notificationSounds,
@@ -55,8 +56,11 @@ class NotificationSounds extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'notificationSounds';
-  
+  static const String objectType = 'notificationSounds';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

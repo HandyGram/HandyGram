@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GameHighScore** *(gameHighScore)* - basic class
-  ///
-  /// Contains one row of the game high score table.
-  ///
-  /// * [position]: Position in the high score table.
-  /// * [userId]: User identifier.
-  /// * [score]: User score.
-class GameHighScore extends TdObject {
+///
+/// Contains one row of the game high score table.
+///
+/// * [position]: Position in the high score table.
+/// * [userId]: User identifier.
+/// * [score]: User score.
+final class GameHighScore extends TdObject {
   
   /// **GameHighScore** *(gameHighScore)* - basic class
   ///
@@ -40,14 +40,15 @@ class GameHighScore extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "position": position,
       "user_id": userId,
       "score": score,
-    };
-  }
+		};
+	}
+
   
   GameHighScore copyWith({
     int? position,
@@ -59,8 +60,11 @@ class GameHighScore extends TdObject {
     score: score ?? this.score,
   );
 
-  static const String constructor = 'gameHighScore';
-  
+  static const String objectType = 'gameHighScore';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

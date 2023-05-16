@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **ClickPremiumSubscriptionButton** *(clickPremiumSubscriptionButton)* - TDLib function
-  ///
-  /// Informs TDLib that the user clicked Premium subscription button on the Premium features screen.
-  ///
-  /// [Ok] is returned on completion.
-class ClickPremiumSubscriptionButton extends TdFunction {
+///
+/// Informs TDLib that the user clicked Premium subscription button on the Premium features screen.
+///
+/// [Ok] is returned on completion.
+final class ClickPremiumSubscriptionButton extends TdFunction {
   
   /// **ClickPremiumSubscriptionButton** *(clickPremiumSubscriptionButton)* - TDLib function
   ///
@@ -17,16 +17,20 @@ class ClickPremiumSubscriptionButton extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ClickPremiumSubscriptionButton copyWith() => const ClickPremiumSubscriptionButton();
 
-  static const String constructor = 'clickPremiumSubscriptionButton';
-  
+  static const String objectType = 'clickPremiumSubscriptionButton';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

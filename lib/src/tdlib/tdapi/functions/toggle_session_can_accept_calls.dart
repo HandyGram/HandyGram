@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **ToggleSessionCanAcceptCalls** *(toggleSessionCanAcceptCalls)* - TDLib function
-  ///
-  /// Toggles whether a session can accept incoming calls.
-  ///
-  /// * [sessionId]: Session identifier.
-  /// * [canAcceptCalls]: Pass true to allow accepting incoming calls by the session; pass false otherwise.
-  ///
-  /// [Ok] is returned on completion.
-class ToggleSessionCanAcceptCalls extends TdFunction {
+///
+/// Toggles whether a session can accept incoming calls.
+///
+/// * [sessionId]: Session identifier.
+/// * [canAcceptCalls]: Pass true to allow accepting incoming calls by the session; pass false otherwise.
+///
+/// [Ok] is returned on completion.
+final class ToggleSessionCanAcceptCalls extends TdFunction {
   
   /// **ToggleSessionCanAcceptCalls** *(toggleSessionCanAcceptCalls)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class ToggleSessionCanAcceptCalls extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "session_id": sessionId,
       "can_accept_calls": canAcceptCalls,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ToggleSessionCanAcceptCalls copyWith({
     int? sessionId,
@@ -47,8 +48,11 @@ class ToggleSessionCanAcceptCalls extends TdFunction {
     canAcceptCalls: canAcceptCalls ?? this.canAcceptCalls,
   );
 
-  static const String constructor = 'toggleSessionCanAcceptCalls';
-  
+  static const String objectType = 'toggleSessionCanAcceptCalls';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

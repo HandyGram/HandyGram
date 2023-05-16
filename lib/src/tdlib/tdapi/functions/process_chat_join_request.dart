@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **ProcessChatJoinRequest** *(processChatJoinRequest)* - TDLib function
-  ///
-  /// Handles a pending join request in a chat.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [userId]: Identifier of the user that sent the request.
-  /// * [approve]: Pass true to approve the request; pass false to decline it.
-  ///
-  /// [Ok] is returned on completion.
-class ProcessChatJoinRequest extends TdFunction {
+///
+/// Handles a pending join request in a chat.
+///
+/// * [chatId]: Chat identifier.
+/// * [userId]: Identifier of the user that sent the request.
+/// * [approve]: Pass true to approve the request; pass false to decline it.
+///
+/// [Ok] is returned on completion.
+final class ProcessChatJoinRequest extends TdFunction {
   
   /// **ProcessChatJoinRequest** *(processChatJoinRequest)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class ProcessChatJoinRequest extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "user_id": userId,
       "approve": approve,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ProcessChatJoinRequest copyWith({
     int? chatId,
@@ -56,8 +57,11 @@ class ProcessChatJoinRequest extends TdFunction {
     approve: approve ?? this.approve,
   );
 
-  static const String constructor = 'processChatJoinRequest';
-  
+  static const String objectType = 'processChatJoinRequest';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

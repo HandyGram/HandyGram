@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **PassportElementError** *(passportElementError)* - basic class
-  ///
-  /// Contains the description of an error in a Telegram Passport element.
-  ///
-  /// * [type]: Type of the Telegram Passport element which has the error.
-  /// * [message]: Error message.
-  /// * [source]: Error source.
-class PassportElementError extends TdObject {
+///
+/// Contains the description of an error in a Telegram Passport element.
+///
+/// * [type]: Type of the Telegram Passport element which has the error.
+/// * [message]: Error message.
+/// * [source]: Error source.
+final class PassportElementError extends TdObject {
   
   /// **PassportElementError** *(passportElementError)* - basic class
   ///
@@ -40,14 +40,15 @@ class PassportElementError extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "type": type.toJson(),
       "message": message,
       "source": source.toJson(),
-    };
-  }
+		};
+	}
+
   
   PassportElementError copyWith({
     PassportElementType? type,
@@ -59,8 +60,11 @@ class PassportElementError extends TdObject {
     source: source ?? this.source,
   );
 
-  static const String constructor = 'passportElementError';
-  
+  static const String objectType = 'passportElementError';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **PersonalDocument** *(personalDocument)* - basic class
-  ///
-  /// A personal document, containing some information about a user.
-  ///
-  /// * [files]: List of files containing the pages of the document.
-  /// * [translation]: List of files containing a certified English translation of the document.
-class PersonalDocument extends TdObject {
+///
+/// A personal document, containing some information about a user.
+///
+/// * [files]: List of files containing the pages of the document.
+/// * [translation]: List of files containing a certified English translation of the document.
+final class PersonalDocument extends TdObject {
   
   /// **PersonalDocument** *(personalDocument)* - basic class
   ///
@@ -33,13 +33,14 @@ class PersonalDocument extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "files": files.map((i) => i.toJson()).toList(),
       "translation": translation.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   PersonalDocument copyWith({
     List<DatedFile>? files,
@@ -49,8 +50,11 @@ class PersonalDocument extends TdObject {
     translation: translation ?? this.translation,
   );
 
-  static const String constructor = 'personalDocument';
-  
+  static const String objectType = 'personalDocument';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

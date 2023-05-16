@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **MessageSendOptions** *(messageSendOptions)* - basic class
-  ///
-  /// Options to be used when a message is sent.
-  ///
-  /// * [disableNotification]: Pass true to disable notification for the message.
-  /// * [fromBackground]: Pass true if the message is sent from the background.
-  /// * [protectContent]: Pass true if the content of the message must be protected from forwarding and saving; for bots only.
-  /// * [updateOrderOfInstalledStickerSets]: Pass true if the user explicitly chosen a sticker or a custom emoji from an installed sticker set; applicable only to sendMessage and sendMessageAlbum.
-  /// * [schedulingState]: Message scheduling state; pass null to send message immediately. Messages sent to a secret chat, live location messages and self-destructing messages can't be scheduled *(optional)*.
-class MessageSendOptions extends TdObject {
+///
+/// Options to be used when a message is sent.
+///
+/// * [disableNotification]: Pass true to disable notification for the message.
+/// * [fromBackground]: Pass true if the message is sent from the background.
+/// * [protectContent]: Pass true if the content of the message must be protected from forwarding and saving; for bots only.
+/// * [updateOrderOfInstalledStickerSets]: Pass true if the user explicitly chosen a sticker or a custom emoji from an installed sticker set; applicable only to sendMessage and sendMessageAlbum.
+/// * [schedulingState]: Message scheduling state; pass null to send message immediately. Messages sent to a secret chat, live location messages and self-destructing messages can't be scheduled *(optional)*.
+final class MessageSendOptions extends TdObject {
   
   /// **MessageSendOptions** *(messageSendOptions)* - basic class
   ///
@@ -54,16 +54,17 @@ class MessageSendOptions extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "disable_notification": disableNotification,
       "from_background": fromBackground,
       "protect_content": protectContent,
       "update_order_of_installed_sticker_sets": updateOrderOfInstalledStickerSets,
       "scheduling_state": schedulingState?.toJson(),
-    };
-  }
+		};
+	}
+
   
   MessageSendOptions copyWith({
     bool? disableNotification,
@@ -79,8 +80,11 @@ class MessageSendOptions extends TdObject {
     schedulingState: schedulingState ?? this.schedulingState,
   );
 
-  static const String constructor = 'messageSendOptions';
-  
+  static const String objectType = 'messageSendOptions';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **ChatStatisticsMessageSenderInfo** *(chatStatisticsMessageSenderInfo)* - basic class
-  ///
-  /// Contains statistics about messages sent by a user.
-  ///
-  /// * [userId]: User identifier.
-  /// * [sentMessageCount]: Number of sent messages.
-  /// * [averageCharacterCount]: Average number of characters in sent messages; 0 if unknown.
-class ChatStatisticsMessageSenderInfo extends TdObject {
+///
+/// Contains statistics about messages sent by a user.
+///
+/// * [userId]: User identifier.
+/// * [sentMessageCount]: Number of sent messages.
+/// * [averageCharacterCount]: Average number of characters in sent messages; 0 if unknown.
+final class ChatStatisticsMessageSenderInfo extends TdObject {
   
   /// **ChatStatisticsMessageSenderInfo** *(chatStatisticsMessageSenderInfo)* - basic class
   ///
@@ -40,14 +40,15 @@ class ChatStatisticsMessageSenderInfo extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "user_id": userId,
       "sent_message_count": sentMessageCount,
       "average_character_count": averageCharacterCount,
-    };
-  }
+		};
+	}
+
   
   ChatStatisticsMessageSenderInfo copyWith({
     int? userId,
@@ -59,8 +60,11 @@ class ChatStatisticsMessageSenderInfo extends TdObject {
     averageCharacterCount: averageCharacterCount ?? this.averageCharacterCount,
   );
 
-  static const String constructor = 'chatStatisticsMessageSenderInfo';
-  
+  static const String objectType = 'chatStatisticsMessageSenderInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

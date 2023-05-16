@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **FileDownload** *(fileDownload)* - basic class
-  ///
-  /// Describes a file added to file download list.
-  ///
-  /// * [fileId]: File identifier.
-  /// * [message]: The message with the file.
-  /// * [addDate]: Point in time (Unix timestamp) when the file was added to the download list.
-  /// * [completeDate]: Point in time (Unix timestamp) when the file downloading was completed; 0 if the file downloading isn't completed.
-  /// * [isPaused]: True, if downloading of the file is paused.
-class FileDownload extends TdObject {
+///
+/// Describes a file added to file download list.
+///
+/// * [fileId]: File identifier.
+/// * [message]: The message with the file.
+/// * [addDate]: Point in time (Unix timestamp) when the file was added to the download list.
+/// * [completeDate]: Point in time (Unix timestamp) when the file downloading was completed; 0 if the file downloading isn't completed.
+/// * [isPaused]: True, if downloading of the file is paused.
+final class FileDownload extends TdObject {
   
   /// **FileDownload** *(fileDownload)* - basic class
   ///
@@ -54,16 +54,17 @@ class FileDownload extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "file_id": fileId,
       "message": message.toJson(),
       "add_date": addDate,
       "complete_date": completeDate,
       "is_paused": isPaused,
-    };
-  }
+		};
+	}
+
   
   FileDownload copyWith({
     int? fileId,
@@ -79,8 +80,11 @@ class FileDownload extends TdObject {
     isPaused: isPaused ?? this.isPaused,
   );
 
-  static const String constructor = 'fileDownload';
-  
+  static const String objectType = 'fileDownload';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

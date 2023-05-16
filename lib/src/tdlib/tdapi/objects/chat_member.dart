@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **ChatMember** *(chatMember)* - basic class
-  ///
-  /// Describes a user or a chat as a member of another chat.
-  ///
-  /// * [memberId]: Identifier of the chat member. Currently, other chats can be only Left or Banned. Only supergroups and channels can have other chats as Left or Banned members and these chats must be supergroups or channels.
-  /// * [inviterUserId]: Identifier of a user that invited/promoted/banned this member in the chat; 0 if unknown.
-  /// * [joinedChatDate]: Point in time (Unix timestamp) when the user joined/was promoted/was banned in the chat.
-  /// * [status]: Status of the member in the chat.
-class ChatMember extends TdObject {
+///
+/// Describes a user or a chat as a member of another chat.
+///
+/// * [memberId]: Identifier of the chat member. Currently, other chats can be only Left or Banned. Only supergroups and channels can have other chats as Left or Banned members and these chats must be supergroups or channels.
+/// * [inviterUserId]: Identifier of a user that invited/promoted/banned this member in the chat; 0 if unknown.
+/// * [joinedChatDate]: Point in time (Unix timestamp) when the user joined/was promoted/was banned in the chat.
+/// * [status]: Status of the member in the chat.
+final class ChatMember extends TdObject {
   
   /// **ChatMember** *(chatMember)* - basic class
   ///
@@ -59,15 +59,16 @@ class ChatMember extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "member_id": memberId.toJson(),
       "inviter_user_id": inviterUserId,
       "joined_chat_date": joinedChatDate,
       "status": status.toJson(),
-    };
-  }
+		};
+	}
+
   
   ChatMember copyWith({
     MessageSender? memberId,
@@ -85,8 +86,11 @@ class ChatMember extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'chatMember';
-  
+  static const String objectType = 'chatMember';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

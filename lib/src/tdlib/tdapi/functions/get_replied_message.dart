@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **GetRepliedMessage** *(getRepliedMessage)* - TDLib function
-  ///
-  /// Returns information about a message that is replied by a given message. Also, returns the pinned message, the game message, the invoice message, and the topic creation message for messages. of the types messagePinMessage, messageGameScore, messagePaymentSuccessful, and topic messages without replied message respectively.
-  ///
-  /// * [chatId]: Identifier of the chat the message belongs to.
-  /// * [messageId]: Identifier of the reply message.
-  ///
-  /// [Message] is returned on completion.
-class GetRepliedMessage extends TdFunction {
+///
+/// Returns information about a message that is replied by a given message. Also, returns the pinned message, the game message, the invoice message, and the topic creation message for messages. of the types messagePinMessage, messageGameScore, messagePaymentSuccessful, and topic messages without replied message respectively.
+///
+/// * [chatId]: Identifier of the chat the message belongs to.
+/// * [messageId]: Identifier of the reply message.
+///
+/// [Message] is returned on completion.
+final class GetRepliedMessage extends TdFunction {
   
   /// **GetRepliedMessage** *(getRepliedMessage)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class GetRepliedMessage extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetRepliedMessage copyWith({
     int? chatId,
@@ -47,8 +48,11 @@ class GetRepliedMessage extends TdFunction {
     messageId: messageId ?? this.messageId,
   );
 
-  static const String constructor = 'getRepliedMessage';
-  
+  static const String objectType = 'getRepliedMessage';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

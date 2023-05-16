@@ -1,22 +1,22 @@
 part of '../tdapi.dart';
 
 /// **ChatInviteLink** *(chatInviteLink)* - basic class
-  ///
-  /// Contains a chat invite link.
-  ///
-  /// * [inviteLink]: Chat invite link.
-  /// * [name]: Name of the link.
-  /// * [creatorUserId]: User identifier of an administrator created the link.
-  /// * [date]: Point in time (Unix timestamp) when the link was created.
-  /// * [editDate]: Point in time (Unix timestamp) when the link was last edited; 0 if never or unknown.
-  /// * [expirationDate]: Point in time (Unix timestamp) when the link will expire; 0 if never.
-  /// * [memberLimit]: The maximum number of members, which can join the chat using the link simultaneously; 0 if not limited. Always 0 if the link requires approval.
-  /// * [memberCount]: Number of chat members, which joined the chat using the link.
-  /// * [pendingJoinRequestCount]: Number of pending join requests created using this link.
-  /// * [createsJoinRequest]: True, if the link only creates join request. If true, total number of joining members will be unlimited.
-  /// * [isPrimary]: True, if the link is primary. Primary invite link can't have name, expiration date, or usage limit. There is exactly one primary invite link for each administrator with can_invite_users right at a given time.
-  /// * [isRevoked]: True, if the link was revoked.
-class ChatInviteLink extends TdObject {
+///
+/// Contains a chat invite link.
+///
+/// * [inviteLink]: Chat invite link.
+/// * [name]: Name of the link.
+/// * [creatorUserId]: User identifier of an administrator created the link.
+/// * [date]: Point in time (Unix timestamp) when the link was created.
+/// * [editDate]: Point in time (Unix timestamp) when the link was last edited; 0 if never or unknown.
+/// * [expirationDate]: Point in time (Unix timestamp) when the link will expire; 0 if never.
+/// * [memberLimit]: The maximum number of members, which can join the chat using the link simultaneously; 0 if not limited. Always 0 if the link requires approval.
+/// * [memberCount]: Number of chat members, which joined the chat using the link.
+/// * [pendingJoinRequestCount]: Number of pending join requests created using this link.
+/// * [createsJoinRequest]: True, if the link only creates join request. If true, total number of joining members will be unlimited.
+/// * [isPrimary]: True, if the link is primary. Primary invite link can't have name, expiration date, or usage limit. There is exactly one primary invite link for each administrator with can_invite_users right at a given time.
+/// * [isRevoked]: True, if the link was revoked.
+final class ChatInviteLink extends TdObject {
   
   /// **ChatInviteLink** *(chatInviteLink)* - basic class
   ///
@@ -115,9 +115,9 @@ class ChatInviteLink extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "invite_link": inviteLink,
       "name": name,
       "creator_user_id": creatorUserId,
@@ -130,8 +130,9 @@ class ChatInviteLink extends TdObject {
       "creates_join_request": createsJoinRequest,
       "is_primary": isPrimary,
       "is_revoked": isRevoked,
-    };
-  }
+		};
+	}
+
   
   ChatInviteLink copyWith({
     String? inviteLink,
@@ -165,8 +166,11 @@ class ChatInviteLink extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'chatInviteLink';
-  
+  static const String objectType = 'chatInviteLink';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

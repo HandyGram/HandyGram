@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **EmojiStatus** *(emojiStatus)* - basic class
-  ///
-  /// Describes a custom emoji to be shown instead of the Telegram Premium badge.
-  ///
-  /// * [customEmojiId]: Identifier of the custom emoji in stickerFormatTgs format.
-class EmojiStatus extends TdObject {
+///
+/// Describes a custom emoji to be shown instead of the Telegram Premium badge.
+///
+/// * [customEmojiId]: Identifier of the custom emoji in stickerFormatTgs format.
+final class EmojiStatus extends TdObject {
   
   /// **EmojiStatus** *(emojiStatus)* - basic class
   ///
@@ -26,12 +26,13 @@ class EmojiStatus extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "custom_emoji_id": customEmojiId,
-    };
-  }
+		};
+	}
+
   
   EmojiStatus copyWith({
     int? customEmojiId,
@@ -39,8 +40,11 @@ class EmojiStatus extends TdObject {
     customEmojiId: customEmojiId ?? this.customEmojiId,
   );
 
-  static const String constructor = 'emojiStatus';
-  
+  static const String objectType = 'emojiStatus';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

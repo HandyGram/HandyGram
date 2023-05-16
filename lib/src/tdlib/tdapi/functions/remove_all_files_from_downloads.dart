@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **RemoveAllFilesFromDownloads** *(removeAllFilesFromDownloads)* - TDLib function
-  ///
-  /// Removes all files from the file download list.
-  ///
-  /// * [onlyActive]: Pass true to remove only active downloads, including paused.
-  /// * [onlyCompleted]: Pass true to remove only completed downloads.
-  /// * [deleteFromCache]: Pass true to delete the file from the TDLib file cache.
-  ///
-  /// [Ok] is returned on completion.
-class RemoveAllFilesFromDownloads extends TdFunction {
+///
+/// Removes all files from the file download list.
+///
+/// * [onlyActive]: Pass true to remove only active downloads, including paused.
+/// * [onlyCompleted]: Pass true to remove only completed downloads.
+/// * [deleteFromCache]: Pass true to delete the file from the TDLib file cache.
+///
+/// [Ok] is returned on completion.
+final class RemoveAllFilesFromDownloads extends TdFunction {
   
   /// **RemoveAllFilesFromDownloads** *(removeAllFilesFromDownloads)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class RemoveAllFilesFromDownloads extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "only_active": onlyActive,
       "only_completed": onlyCompleted,
       "delete_from_cache": deleteFromCache,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   RemoveAllFilesFromDownloads copyWith({
     bool? onlyActive,
@@ -56,8 +57,11 @@ class RemoveAllFilesFromDownloads extends TdFunction {
     deleteFromCache: deleteFromCache ?? this.deleteFromCache,
   );
 
-  static const String constructor = 'removeAllFilesFromDownloads';
-  
+  static const String objectType = 'removeAllFilesFromDownloads';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

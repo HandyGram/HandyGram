@@ -1,8 +1,10 @@
 part of 'tdapi.dart';
 
 // todo: considering setExtra method or like that...
-abstract class TdFunction {
+sealed class TdFunction {
+  /// object type
+  String get instanceType => "function";
+
   const TdFunction();
   Map<String, dynamic> toJson([dynamic extra]);
-  String getConstructor();
 }

@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **PhotoSize** *(photoSize)* - basic class
-  ///
-  /// Describes an image in JPEG format.
-  ///
-  /// * [type]: Image type (see https://core.telegram.org/constructor/photoSize).
-  /// * [photo]: Information about the image file.
-  /// * [width]: Image width.
-  /// * [height]: Image height.
-  /// * [progressiveSizes]: Sizes of progressive JPEG file prefixes, which can be used to preliminarily show the image; in bytes.
-class PhotoSize extends TdObject {
+///
+/// Describes an image in JPEG format.
+///
+/// * [type]: Image type (see https://core.telegram.org/constructor/photoSize).
+/// * [photo]: Information about the image file.
+/// * [width]: Image width.
+/// * [height]: Image height.
+/// * [progressiveSizes]: Sizes of progressive JPEG file prefixes, which can be used to preliminarily show the image; in bytes.
+final class PhotoSize extends TdObject {
   
   /// **PhotoSize** *(photoSize)* - basic class
   ///
@@ -54,16 +54,17 @@ class PhotoSize extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "type": type,
       "photo": photo.toJson(),
       "width": width,
       "height": height,
       "progressive_sizes": progressiveSizes.map((i) => i).toList(),
-    };
-  }
+		};
+	}
+
   
   PhotoSize copyWith({
     String? type,
@@ -79,8 +80,11 @@ class PhotoSize extends TdObject {
     progressiveSizes: progressiveSizes ?? this.progressiveSizes,
   );
 
-  static const String constructor = 'photoSize';
-  
+  static const String objectType = 'photoSize';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

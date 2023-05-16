@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **SpeechRecognitionResult** *(speechRecognitionResult)* - parent
-  ///
-  /// Describes result of speech recognition in a voice note.
-class SpeechRecognitionResult extends TdObject {
+///
+/// Describes result of speech recognition in a voice note.
+sealed class SpeechRecognitionResult extends TdObject {
   
   /// **SpeechRecognitionResult** *(speechRecognitionResult)* - parent
   ///
@@ -16,39 +16,42 @@ class SpeechRecognitionResult extends TdObject {
   /// * [SpeechRecognitionResultError]
   factory SpeechRecognitionResult.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case SpeechRecognitionResultPending.constructor:
+      case SpeechRecognitionResultPending.objectType:
         return SpeechRecognitionResultPending.fromJson(json);
-      case SpeechRecognitionResultText.constructor:
+      case SpeechRecognitionResultText.objectType:
         return SpeechRecognitionResultText.fromJson(json);
-      case SpeechRecognitionResultError.constructor:
+      case SpeechRecognitionResultError.objectType:
         return SpeechRecognitionResultError.fromJson(json);
       default:
-        return const SpeechRecognitionResult();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of SpeechRecognitionResult)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  SpeechRecognitionResult copyWith() => const SpeechRecognitionResult();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'speechRecognitionResult';
   
+  SpeechRecognitionResult copyWith();
+
+  static const String objectType = 'speechRecognitionResult';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SpeechRecognitionResultPending** *(speechRecognitionResultPending)* - child of SpeechRecognitionResult
-  ///
-  /// The speech recognition is ongoing.
-  ///
-  /// * [partialText]: Partially recognized text.
-class SpeechRecognitionResultPending extends SpeechRecognitionResult {
+///
+/// The speech recognition is ongoing.
+///
+/// * [partialText]: Partially recognized text.
+final class SpeechRecognitionResultPending extends SpeechRecognitionResult {
   
   /// **SpeechRecognitionResultPending** *(speechRecognitionResultPending)* - child of SpeechRecognitionResult
   ///
@@ -69,12 +72,13 @@ class SpeechRecognitionResultPending extends SpeechRecognitionResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "partial_text": partialText,
-    };
-  }
+		};
+	}
+
   
   @override
   SpeechRecognitionResultPending copyWith({
@@ -83,19 +87,22 @@ class SpeechRecognitionResultPending extends SpeechRecognitionResult {
     partialText: partialText ?? this.partialText,
   );
 
-  static const String constructor = 'speechRecognitionResultPending';
-  
+  static const String objectType = 'speechRecognitionResultPending';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SpeechRecognitionResultText** *(speechRecognitionResultText)* - child of SpeechRecognitionResult
-  ///
-  /// The speech recognition successfully finished.
-  ///
-  /// * [text]: Recognized text.
-class SpeechRecognitionResultText extends SpeechRecognitionResult {
+///
+/// The speech recognition successfully finished.
+///
+/// * [text]: Recognized text.
+final class SpeechRecognitionResultText extends SpeechRecognitionResult {
   
   /// **SpeechRecognitionResultText** *(speechRecognitionResultText)* - child of SpeechRecognitionResult
   ///
@@ -116,12 +123,13 @@ class SpeechRecognitionResultText extends SpeechRecognitionResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text,
-    };
-  }
+		};
+	}
+
   
   @override
   SpeechRecognitionResultText copyWith({
@@ -130,19 +138,22 @@ class SpeechRecognitionResultText extends SpeechRecognitionResult {
     text: text ?? this.text,
   );
 
-  static const String constructor = 'speechRecognitionResultText';
-  
+  static const String objectType = 'speechRecognitionResultText';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SpeechRecognitionResultError** *(speechRecognitionResultError)* - child of SpeechRecognitionResult
-  ///
-  /// The speech recognition failed.
-  ///
-  /// * [error]: Received error.
-class SpeechRecognitionResultError extends SpeechRecognitionResult {
+///
+/// The speech recognition failed.
+///
+/// * [error]: Received error.
+final class SpeechRecognitionResultError extends SpeechRecognitionResult {
   
   /// **SpeechRecognitionResultError** *(speechRecognitionResultError)* - child of SpeechRecognitionResult
   ///
@@ -163,12 +174,13 @@ class SpeechRecognitionResultError extends SpeechRecognitionResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "error": error.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   SpeechRecognitionResultError copyWith({
@@ -177,8 +189,11 @@ class SpeechRecognitionResultError extends SpeechRecognitionResult {
     error: error ?? this.error,
   );
 
-  static const String constructor = 'speechRecognitionResultError';
-  
+  static const String objectType = 'speechRecognitionResultError';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

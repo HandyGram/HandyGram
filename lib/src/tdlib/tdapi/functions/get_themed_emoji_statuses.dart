@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **GetThemedEmojiStatuses** *(getThemedEmojiStatuses)* - TDLib function
-  ///
-  /// Returns up to 8 emoji statuses, which must be shown right after the default Premium Badge in the emoji status list.
-  ///
-  /// [EmojiStatuses] is returned on completion.
-class GetThemedEmojiStatuses extends TdFunction {
+///
+/// Returns up to 8 emoji statuses, which must be shown right after the default Premium Badge in the emoji status list.
+///
+/// [EmojiStatuses] is returned on completion.
+final class GetThemedEmojiStatuses extends TdFunction {
   
   /// **GetThemedEmojiStatuses** *(getThemedEmojiStatuses)* - TDLib function
   ///
@@ -17,16 +17,20 @@ class GetThemedEmojiStatuses extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetThemedEmojiStatuses copyWith() => const GetThemedEmojiStatuses();
 
-  static const String constructor = 'getThemedEmojiStatuses';
-  
+  static const String objectType = 'getThemedEmojiStatuses';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

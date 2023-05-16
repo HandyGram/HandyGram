@@ -1,28 +1,28 @@
 part of '../tdapi.dart';
 
 /// **Supergroup** *(supergroup)* - basic class
-  ///
-  /// Represents a supergroup or channel with zero or more members (subscribers in the case of channels). From the point of view of the system, a channel is a special kind of a supergroup:. only administrators can post and see the list of members, and posts from all administrators use the name and photo of the channel instead of individual names and profile photos.. Unlike supergroups, channels can have an unlimited number of subscribers.
-  ///
-  /// * [id]: Supergroup or channel identifier.
-  /// * [usernames]: Usernames of the supergroup or channel; may be null *(optional)*.
-  /// * [date]: Point in time (Unix timestamp) when the current user joined, or the point in time when the supergroup or channel was created, in case the user is not a member.
-  /// * [status]: Status of the current user in the supergroup or channel; custom title will always be empty.
-  /// * [memberCount]: Number of members in the supergroup or channel; 0 if unknown. Currently, it is guaranteed to be known only if the supergroup or channel was received. through searchPublicChats, searchChatsNearby, getInactiveSupergroupChats, getSuitableDiscussionChats, getGroupsInCommon, or getUserPrivacySettingRules.
-  /// * [hasLinkedChat]: True, if the channel has a discussion group, or the supergroup is the designated discussion group for a channel.
-  /// * [hasLocation]: True, if the supergroup is connected to a location, i.e. the supergroup is a location-based supergroup.
-  /// * [signMessages]: True, if messages sent to the channel need to contain information about the sender. This field is only applicable to channels.
-  /// * [joinToSendMessages]: True, if users need to join the supergroup before they can send messages. Always true for channels and non-discussion supergroups.
-  /// * [joinByRequest]: True, if all users directly joining the supergroup need to be approved by supergroup administrators. Always false for channels and supergroups without username, location, or a linked chat.
-  /// * [isSlowModeEnabled]: True, if the slow mode is enabled in the supergroup.
-  /// * [isChannel]: True, if the supergroup is a channel.
-  /// * [isBroadcastGroup]: True, if the supergroup is a broadcast group, i.e. only administrators can send messages and there is no limit on the number of members.
-  /// * [isForum]: True, if the supergroup must be shown as a forum by default.
-  /// * [isVerified]: True, if the supergroup or channel is verified.
-  /// * [restrictionReason]: If non-empty, contains a human-readable description of the reason why access to this supergroup or channel must be restricted.
-  /// * [isScam]: True, if many users reported this supergroup or channel as a scam.
-  /// * [isFake]: True, if many users reported this supergroup or channel as a fake account.
-class Supergroup extends TdObject {
+///
+/// Represents a supergroup or channel with zero or more members (subscribers in the case of channels). From the point of view of the system, a channel is a special kind of a supergroup:. only administrators can post and see the list of members, and posts from all administrators use the name and photo of the channel instead of individual names and profile photos.. Unlike supergroups, channels can have an unlimited number of subscribers.
+///
+/// * [id]: Supergroup or channel identifier.
+/// * [usernames]: Usernames of the supergroup or channel; may be null *(optional)*.
+/// * [date]: Point in time (Unix timestamp) when the current user joined, or the point in time when the supergroup or channel was created, in case the user is not a member.
+/// * [status]: Status of the current user in the supergroup or channel; custom title will always be empty.
+/// * [memberCount]: Number of members in the supergroup or channel; 0 if unknown. Currently, it is guaranteed to be known only if the supergroup or channel was received. through searchPublicChats, searchChatsNearby, getInactiveSupergroupChats, getSuitableDiscussionChats, getGroupsInCommon, or getUserPrivacySettingRules.
+/// * [hasLinkedChat]: True, if the channel has a discussion group, or the supergroup is the designated discussion group for a channel.
+/// * [hasLocation]: True, if the supergroup is connected to a location, i.e. the supergroup is a location-based supergroup.
+/// * [signMessages]: True, if messages sent to the channel need to contain information about the sender. This field is only applicable to channels.
+/// * [joinToSendMessages]: True, if users need to join the supergroup before they can send messages. Always true for channels and non-discussion supergroups.
+/// * [joinByRequest]: True, if all users directly joining the supergroup need to be approved by supergroup administrators. Always false for channels and supergroups without username, location, or a linked chat.
+/// * [isSlowModeEnabled]: True, if the slow mode is enabled in the supergroup.
+/// * [isChannel]: True, if the supergroup is a channel.
+/// * [isBroadcastGroup]: True, if the supergroup is a broadcast group, i.e. only administrators can send messages and there is no limit on the number of members.
+/// * [isForum]: True, if the supergroup must be shown as a forum by default.
+/// * [isVerified]: True, if the supergroup or channel is verified.
+/// * [restrictionReason]: If non-empty, contains a human-readable description of the reason why access to this supergroup or channel must be restricted.
+/// * [isScam]: True, if many users reported this supergroup or channel as a scam.
+/// * [isFake]: True, if many users reported this supergroup or channel as a fake account.
+final class Supergroup extends TdObject {
   
   /// **Supergroup** *(supergroup)* - basic class
   ///
@@ -157,9 +157,9 @@ class Supergroup extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "usernames": usernames?.toJson(),
       "date": date,
@@ -178,8 +178,9 @@ class Supergroup extends TdObject {
       "restriction_reason": restrictionReason,
       "is_scam": isScam,
       "is_fake": isFake,
-    };
-  }
+		};
+	}
+
   
   Supergroup copyWith({
     int? id,
@@ -225,8 +226,11 @@ class Supergroup extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'supergroup';
-  
+  static const String objectType = 'supergroup';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

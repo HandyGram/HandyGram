@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **UserPrivacySettingRules** *(userPrivacySettingRules)* - basic class
-  ///
-  /// A list of privacy rules. Rules are matched in the specified order. The first matched rule defines the privacy setting for a given user. If no rule matches, the action is not allowed.
-  ///
-  /// * [rules]: A list of rules.
-class UserPrivacySettingRules extends TdObject {
+///
+/// A list of privacy rules. Rules are matched in the specified order. The first matched rule defines the privacy setting for a given user. If no rule matches, the action is not allowed.
+///
+/// * [rules]: A list of rules.
+final class UserPrivacySettingRules extends TdObject {
   
   /// **UserPrivacySettingRules** *(userPrivacySettingRules)* - basic class
   ///
@@ -38,12 +38,13 @@ class UserPrivacySettingRules extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "rules": rules.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   UserPrivacySettingRules copyWith({
     List<UserPrivacySettingRule>? rules,
@@ -55,8 +56,11 @@ class UserPrivacySettingRules extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'userPrivacySettingRules';
-  
+  static const String objectType = 'userPrivacySettingRules';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

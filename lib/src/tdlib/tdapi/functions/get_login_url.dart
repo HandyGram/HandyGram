@@ -1,16 +1,16 @@
 part of '../tdapi.dart';
 
 /// **GetLoginUrl** *(getLoginUrl)* - TDLib function
-  ///
-  /// Returns an HTTP URL which can be used to automatically authorize the user on a website after clicking an inline button of type inlineKeyboardButtonTypeLoginUrl.. Use the method getLoginUrlInfo to find whether a prior user confirmation is needed. If an error is returned, then the button must be handled as an ordinary URL button.
-  ///
-  /// * [chatId]: Chat identifier of the message with the button.
-  /// * [messageId]: Message identifier of the message with the button.
-  /// * [buttonId]: Button identifier.
-  /// * [allowWriteAccess]: Pass true to allow the bot to send messages to the current user.
-  ///
-  /// [HttpUrl] is returned on completion.
-class GetLoginUrl extends TdFunction {
+///
+/// Returns an HTTP URL which can be used to automatically authorize the user on a website after clicking an inline button of type inlineKeyboardButtonTypeLoginUrl.. Use the method getLoginUrlInfo to find whether a prior user confirmation is needed. If an error is returned, then the button must be handled as an ordinary URL button.
+///
+/// * [chatId]: Chat identifier of the message with the button.
+/// * [messageId]: Message identifier of the message with the button.
+/// * [buttonId]: Button identifier.
+/// * [allowWriteAccess]: Pass true to allow the bot to send messages to the current user.
+///
+/// [HttpUrl] is returned on completion.
+final class GetLoginUrl extends TdFunction {
   
   /// **GetLoginUrl** *(getLoginUrl)* - TDLib function
   ///
@@ -43,15 +43,16 @@ class GetLoginUrl extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "button_id": buttonId,
       "allow_write_access": allowWriteAccess,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetLoginUrl copyWith({
     int? chatId,
@@ -65,8 +66,11 @@ class GetLoginUrl extends TdFunction {
     allowWriteAccess: allowWriteAccess ?? this.allowWriteAccess,
   );
 
-  static const String constructor = 'getLoginUrl';
-  
+  static const String objectType = 'getLoginUrl';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

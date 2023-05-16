@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **AutoDownloadSettingsPresets** *(autoDownloadSettingsPresets)* - basic class
-  ///
-  /// Contains auto-download settings presets for the current user.
-  ///
-  /// * [low]: Preset with lowest settings; supposed to be used by default when roaming.
-  /// * [medium]: Preset with medium settings; supposed to be used by default when using mobile data.
-  /// * [high]: Preset with highest settings; supposed to be used by default when connected on Wi-Fi.
-class AutoDownloadSettingsPresets extends TdObject {
+///
+/// Contains auto-download settings presets for the current user.
+///
+/// * [low]: Preset with lowest settings; supposed to be used by default when roaming.
+/// * [medium]: Preset with medium settings; supposed to be used by default when using mobile data.
+/// * [high]: Preset with highest settings; supposed to be used by default when connected on Wi-Fi.
+final class AutoDownloadSettingsPresets extends TdObject {
   
   /// **AutoDownloadSettingsPresets** *(autoDownloadSettingsPresets)* - basic class
   ///
@@ -52,14 +52,15 @@ class AutoDownloadSettingsPresets extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "low": low.toJson(),
       "medium": medium.toJson(),
       "high": high.toJson(),
-    };
-  }
+		};
+	}
+
   
   AutoDownloadSettingsPresets copyWith({
     AutoDownloadSettings? low,
@@ -75,8 +76,11 @@ class AutoDownloadSettingsPresets extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'autoDownloadSettingsPresets';
-  
+  static const String objectType = 'autoDownloadSettingsPresets';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

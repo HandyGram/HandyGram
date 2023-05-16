@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **ReadAllMessageThreadReactions** *(readAllMessageThreadReactions)* - TDLib function
-  ///
-  /// Marks all reactions in a forum topic as read.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [messageThreadId]: Message thread identifier in which reactions are marked as read.
-  ///
-  /// [Ok] is returned on completion.
-class ReadAllMessageThreadReactions extends TdFunction {
+///
+/// Marks all reactions in a forum topic as read.
+///
+/// * [chatId]: Chat identifier.
+/// * [messageThreadId]: Message thread identifier in which reactions are marked as read.
+///
+/// [Ok] is returned on completion.
+final class ReadAllMessageThreadReactions extends TdFunction {
   
   /// **ReadAllMessageThreadReactions** *(readAllMessageThreadReactions)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class ReadAllMessageThreadReactions extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_thread_id": messageThreadId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ReadAllMessageThreadReactions copyWith({
     int? chatId,
@@ -47,8 +48,11 @@ class ReadAllMessageThreadReactions extends TdFunction {
     messageThreadId: messageThreadId ?? this.messageThreadId,
   );
 
-  static const String constructor = 'readAllMessageThreadReactions';
-  
+  static const String objectType = 'readAllMessageThreadReactions';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

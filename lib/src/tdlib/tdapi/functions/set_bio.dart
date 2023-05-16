@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **SetBio** *(setBio)* - TDLib function
-  ///
-  /// Changes the bio of the current user.
-  ///
-  /// * [bio]: The new value of the user bio; 0-getOption("bio_length_max") characters without line feeds.
-  ///
-  /// [Ok] is returned on completion.
-class SetBio extends TdFunction {
+///
+/// Changes the bio of the current user.
+///
+/// * [bio]: The new value of the user bio; 0-getOption("bio_length_max") characters without line feeds.
+///
+/// [Ok] is returned on completion.
+final class SetBio extends TdFunction {
   
   /// **SetBio** *(setBio)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class SetBio extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "bio": bio,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetBio copyWith({
     String? bio,
@@ -38,8 +39,11 @@ class SetBio extends TdFunction {
     bio: bio ?? this.bio,
   );
 
-  static const String constructor = 'setBio';
-  
+  static const String objectType = 'setBio';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

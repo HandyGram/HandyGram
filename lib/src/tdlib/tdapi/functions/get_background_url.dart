@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **GetBackgroundUrl** *(getBackgroundUrl)* - TDLib function
-  ///
-  /// Constructs a persistent HTTP URL for a background.
-  ///
-  /// * [name]: Background name.
-  /// * [type]: Background type.
-  ///
-  /// [HttpUrl] is returned on completion.
-class GetBackgroundUrl extends TdFunction {
+///
+/// Constructs a persistent HTTP URL for a background.
+///
+/// * [name]: Background name.
+/// * [type]: Background type.
+///
+/// [HttpUrl] is returned on completion.
+final class GetBackgroundUrl extends TdFunction {
   
   /// **GetBackgroundUrl** *(getBackgroundUrl)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class GetBackgroundUrl extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "name": name,
       "type": type.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetBackgroundUrl copyWith({
     String? name,
@@ -47,8 +48,11 @@ class GetBackgroundUrl extends TdFunction {
     type: type ?? this.type,
   );
 
-  static const String constructor = 'getBackgroundUrl';
-  
+  static const String objectType = 'getBackgroundUrl';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

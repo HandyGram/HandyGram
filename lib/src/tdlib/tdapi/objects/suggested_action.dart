@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **SuggestedAction** *(suggestedAction)* - parent
-  ///
-  /// Describes an action suggested to the current user.
-class SuggestedAction extends TdObject {
+///
+/// Describes an action suggested to the current user.
+sealed class SuggestedAction extends TdObject {
   
   /// **SuggestedAction** *(suggestedAction)* - parent
   ///
@@ -19,43 +19,46 @@ class SuggestedAction extends TdObject {
   /// * [SuggestedActionSetPassword]
   factory SuggestedAction.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case SuggestedActionEnableArchiveAndMuteNewChats.constructor:
+      case SuggestedActionEnableArchiveAndMuteNewChats.objectType:
         return SuggestedActionEnableArchiveAndMuteNewChats.fromJson(json);
-      case SuggestedActionCheckPassword.constructor:
+      case SuggestedActionCheckPassword.objectType:
         return SuggestedActionCheckPassword.fromJson(json);
-      case SuggestedActionCheckPhoneNumber.constructor:
+      case SuggestedActionCheckPhoneNumber.objectType:
         return SuggestedActionCheckPhoneNumber.fromJson(json);
-      case SuggestedActionViewChecksHint.constructor:
+      case SuggestedActionViewChecksHint.objectType:
         return SuggestedActionViewChecksHint.fromJson(json);
-      case SuggestedActionConvertToBroadcastGroup.constructor:
+      case SuggestedActionConvertToBroadcastGroup.objectType:
         return SuggestedActionConvertToBroadcastGroup.fromJson(json);
-      case SuggestedActionSetPassword.constructor:
+      case SuggestedActionSetPassword.objectType:
         return SuggestedActionSetPassword.fromJson(json);
       default:
-        return const SuggestedAction();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of SuggestedAction)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  SuggestedAction copyWith() => const SuggestedAction();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'suggestedAction';
   
+  SuggestedAction copyWith();
+
+  static const String objectType = 'suggestedAction';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SuggestedActionEnableArchiveAndMuteNewChats** *(suggestedActionEnableArchiveAndMuteNewChats)* - child of SuggestedAction
-  ///
-  /// Suggests the user to enable "archive_and_mute_new_chats_from_unknown_users" option.
-class SuggestedActionEnableArchiveAndMuteNewChats extends SuggestedAction {
+///
+/// Suggests the user to enable "archive_and_mute_new_chats_from_unknown_users" option.
+final class SuggestedActionEnableArchiveAndMuteNewChats extends SuggestedAction {
   
   /// **SuggestedActionEnableArchiveAndMuteNewChats** *(suggestedActionEnableArchiveAndMuteNewChats)* - child of SuggestedAction
   ///
@@ -66,26 +69,30 @@ class SuggestedActionEnableArchiveAndMuteNewChats extends SuggestedAction {
   factory SuggestedActionEnableArchiveAndMuteNewChats.fromJson(Map<String, dynamic> json) => const SuggestedActionEnableArchiveAndMuteNewChats();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SuggestedActionEnableArchiveAndMuteNewChats copyWith() => const SuggestedActionEnableArchiveAndMuteNewChats();
 
-  static const String constructor = 'suggestedActionEnableArchiveAndMuteNewChats';
-  
+  static const String objectType = 'suggestedActionEnableArchiveAndMuteNewChats';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SuggestedActionCheckPassword** *(suggestedActionCheckPassword)* - child of SuggestedAction
-  ///
-  /// Suggests the user to check whether they still remember their 2-step verification password.
-class SuggestedActionCheckPassword extends SuggestedAction {
+///
+/// Suggests the user to check whether they still remember their 2-step verification password.
+final class SuggestedActionCheckPassword extends SuggestedAction {
   
   /// **SuggestedActionCheckPassword** *(suggestedActionCheckPassword)* - child of SuggestedAction
   ///
@@ -96,26 +103,30 @@ class SuggestedActionCheckPassword extends SuggestedAction {
   factory SuggestedActionCheckPassword.fromJson(Map<String, dynamic> json) => const SuggestedActionCheckPassword();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SuggestedActionCheckPassword copyWith() => const SuggestedActionCheckPassword();
 
-  static const String constructor = 'suggestedActionCheckPassword';
-  
+  static const String objectType = 'suggestedActionCheckPassword';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SuggestedActionCheckPhoneNumber** *(suggestedActionCheckPhoneNumber)* - child of SuggestedAction
-  ///
-  /// Suggests the user to check whether authorization phone number is correct and change the phone number if it is inaccessible.
-class SuggestedActionCheckPhoneNumber extends SuggestedAction {
+///
+/// Suggests the user to check whether authorization phone number is correct and change the phone number if it is inaccessible.
+final class SuggestedActionCheckPhoneNumber extends SuggestedAction {
   
   /// **SuggestedActionCheckPhoneNumber** *(suggestedActionCheckPhoneNumber)* - child of SuggestedAction
   ///
@@ -126,26 +137,30 @@ class SuggestedActionCheckPhoneNumber extends SuggestedAction {
   factory SuggestedActionCheckPhoneNumber.fromJson(Map<String, dynamic> json) => const SuggestedActionCheckPhoneNumber();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SuggestedActionCheckPhoneNumber copyWith() => const SuggestedActionCheckPhoneNumber();
 
-  static const String constructor = 'suggestedActionCheckPhoneNumber';
-  
+  static const String objectType = 'suggestedActionCheckPhoneNumber';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SuggestedActionViewChecksHint** *(suggestedActionViewChecksHint)* - child of SuggestedAction
-  ///
-  /// Suggests the user to view a hint about the meaning of one and two check marks on sent messages.
-class SuggestedActionViewChecksHint extends SuggestedAction {
+///
+/// Suggests the user to view a hint about the meaning of one and two check marks on sent messages.
+final class SuggestedActionViewChecksHint extends SuggestedAction {
   
   /// **SuggestedActionViewChecksHint** *(suggestedActionViewChecksHint)* - child of SuggestedAction
   ///
@@ -156,28 +171,32 @@ class SuggestedActionViewChecksHint extends SuggestedAction {
   factory SuggestedActionViewChecksHint.fromJson(Map<String, dynamic> json) => const SuggestedActionViewChecksHint();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SuggestedActionViewChecksHint copyWith() => const SuggestedActionViewChecksHint();
 
-  static const String constructor = 'suggestedActionViewChecksHint';
-  
+  static const String objectType = 'suggestedActionViewChecksHint';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SuggestedActionConvertToBroadcastGroup** *(suggestedActionConvertToBroadcastGroup)* - child of SuggestedAction
-  ///
-  /// Suggests the user to convert specified supergroup to a broadcast group.
-  ///
-  /// * [supergroupId]: Supergroup identifier.
-class SuggestedActionConvertToBroadcastGroup extends SuggestedAction {
+///
+/// Suggests the user to convert specified supergroup to a broadcast group.
+///
+/// * [supergroupId]: Supergroup identifier.
+final class SuggestedActionConvertToBroadcastGroup extends SuggestedAction {
   
   /// **SuggestedActionConvertToBroadcastGroup** *(suggestedActionConvertToBroadcastGroup)* - child of SuggestedAction
   ///
@@ -198,12 +217,13 @@ class SuggestedActionConvertToBroadcastGroup extends SuggestedAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "supergroup_id": supergroupId,
-    };
-  }
+		};
+	}
+
   
   @override
   SuggestedActionConvertToBroadcastGroup copyWith({
@@ -212,19 +232,22 @@ class SuggestedActionConvertToBroadcastGroup extends SuggestedAction {
     supergroupId: supergroupId ?? this.supergroupId,
   );
 
-  static const String constructor = 'suggestedActionConvertToBroadcastGroup';
-  
+  static const String objectType = 'suggestedActionConvertToBroadcastGroup';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SuggestedActionSetPassword** *(suggestedActionSetPassword)* - child of SuggestedAction
-  ///
-  /// Suggests the user to set a 2-step verification password to be able to log in again.
-  ///
-  /// * [authorizationDelay]: The number of days to pass between consecutive authorizations if the user declines to set password.
-class SuggestedActionSetPassword extends SuggestedAction {
+///
+/// Suggests the user to set a 2-step verification password to be able to log in again.
+///
+/// * [authorizationDelay]: The number of days to pass between consecutive authorizations if the user declines to set password.
+final class SuggestedActionSetPassword extends SuggestedAction {
   
   /// **SuggestedActionSetPassword** *(suggestedActionSetPassword)* - child of SuggestedAction
   ///
@@ -245,12 +268,13 @@ class SuggestedActionSetPassword extends SuggestedAction {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "authorization_delay": authorizationDelay,
-    };
-  }
+		};
+	}
+
   
   @override
   SuggestedActionSetPassword copyWith({
@@ -259,8 +283,11 @@ class SuggestedActionSetPassword extends SuggestedAction {
     authorizationDelay: authorizationDelay ?? this.authorizationDelay,
   );
 
-  static const String constructor = 'suggestedActionSetPassword';
-  
+  static const String objectType = 'suggestedActionSetPassword';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

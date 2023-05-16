@@ -1,16 +1,16 @@
 part of '../tdapi.dart';
 
 /// **MessageLinkInfo** *(messageLinkInfo)* - basic class
-  ///
-  /// Contains information about a link to a message or a forum topic in a chat.
-  ///
-  /// * [isPublic]: True, if the link is a public link for a message or a forum topic in a chat.
-  /// * [chatId]: If found, identifier of the chat to which the link points, 0 otherwise.
-  /// * [messageThreadId]: If found, identifier of the message thread in which to open the message, or a forum topic to open if the message is missing.
-  /// * [message]: If found, the linked message; may be null *(optional)*.
-  /// * [mediaTimestamp]: Timestamp from which the video/audio/video note/voice note playing must start, in seconds; 0 if not specified. The media can be in the message content or in its web page preview.
-  /// * [forAlbum]: True, if the whole media album to which the message belongs is linked.
-class MessageLinkInfo extends TdObject {
+///
+/// Contains information about a link to a message or a forum topic in a chat.
+///
+/// * [isPublic]: True, if the link is a public link for a message or a forum topic in a chat.
+/// * [chatId]: If found, identifier of the chat to which the link points, 0 otherwise.
+/// * [messageThreadId]: If found, identifier of the message thread in which to open the message, or a forum topic to open if the message is missing.
+/// * [message]: If found, the linked message; may be null *(optional)*.
+/// * [mediaTimestamp]: Timestamp from which the video/audio/video note/voice note playing must start, in seconds; 0 if not specified. The media can be in the message content or in its web page preview.
+/// * [forAlbum]: True, if the whole media album to which the message belongs is linked.
+final class MessageLinkInfo extends TdObject {
   
   /// **MessageLinkInfo** *(messageLinkInfo)* - basic class
   ///
@@ -73,17 +73,18 @@ class MessageLinkInfo extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "is_public": isPublic,
       "chat_id": chatId,
       "message_thread_id": messageThreadId,
       "message": message?.toJson(),
       "media_timestamp": mediaTimestamp,
       "for_album": forAlbum,
-    };
-  }
+		};
+	}
+
   
   MessageLinkInfo copyWith({
     bool? isPublic,
@@ -105,8 +106,11 @@ class MessageLinkInfo extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'messageLinkInfo';
-  
+  static const String objectType = 'messageLinkInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

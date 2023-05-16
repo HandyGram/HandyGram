@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **SaveApplicationLogEvent** *(saveApplicationLogEvent)* - TDLib function
-  ///
-  /// Saves application log event on the server. Can be called before authorization.
-  ///
-  /// * [type]: Event type.
-  /// * [chatId]: Optional chat identifier, associated with the event.
-  /// * [data]: The log event data.
-  ///
-  /// [Ok] is returned on completion.
-class SaveApplicationLogEvent extends TdFunction {
+///
+/// Saves application log event on the server. Can be called before authorization.
+///
+/// * [type]: Event type.
+/// * [chatId]: Optional chat identifier, associated with the event.
+/// * [data]: The log event data.
+///
+/// [Ok] is returned on completion.
+final class SaveApplicationLogEvent extends TdFunction {
   
   /// **SaveApplicationLogEvent** *(saveApplicationLogEvent)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class SaveApplicationLogEvent extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "type": type,
       "chat_id": chatId,
       "data": data.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SaveApplicationLogEvent copyWith({
     String? type,
@@ -56,8 +57,11 @@ class SaveApplicationLogEvent extends TdFunction {
     data: data ?? this.data,
   );
 
-  static const String constructor = 'saveApplicationLogEvent';
-  
+  static const String objectType = 'saveApplicationLogEvent';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

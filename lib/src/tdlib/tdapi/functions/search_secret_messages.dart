@@ -1,17 +1,17 @@
 part of '../tdapi.dart';
 
 /// **SearchSecretMessages** *(searchSecretMessages)* - TDLib function
-  ///
-  /// Searches for messages in secret chats. Returns the results in reverse chronological order. For optimal performance, the number of returned messages is chosen by TDLib.
-  ///
-  /// * [chatId]: Identifier of the chat in which to search. Specify 0 to search in all secret chats.
-  /// * [query]: Query to search for. If empty, searchChatMessages must be used instead.
-  /// * [offset]: Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results.
-  /// * [limit]: The maximum number of messages to be returned; up to 100. For optimal performance, the number of returned messages is chosen by TDLib and can be smaller than the specified limit.
-  /// * [filter]: Additional filter for messages to search; pass null to search for all messages *(optional)*.
-  ///
-  /// [FoundMessages] is returned on completion.
-class SearchSecretMessages extends TdFunction {
+///
+/// Searches for messages in secret chats. Returns the results in reverse chronological order. For optimal performance, the number of returned messages is chosen by TDLib.
+///
+/// * [chatId]: Identifier of the chat in which to search. Specify 0 to search in all secret chats.
+/// * [query]: Query to search for. If empty, searchChatMessages must be used instead.
+/// * [offset]: Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results.
+/// * [limit]: The maximum number of messages to be returned; up to 100. For optimal performance, the number of returned messages is chosen by TDLib and can be smaller than the specified limit.
+/// * [filter]: Additional filter for messages to search; pass null to search for all messages *(optional)*.
+///
+/// [FoundMessages] is returned on completion.
+final class SearchSecretMessages extends TdFunction {
   
   /// **SearchSecretMessages** *(searchSecretMessages)* - TDLib function
   ///
@@ -49,16 +49,17 @@ class SearchSecretMessages extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "query": query,
       "offset": offset,
       "limit": limit,
       "filter": filter?.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SearchSecretMessages copyWith({
     int? chatId,
@@ -74,8 +75,11 @@ class SearchSecretMessages extends TdFunction {
     filter: filter ?? this.filter,
   );
 
-  static const String constructor = 'searchSecretMessages';
-  
+  static const String objectType = 'searchSecretMessages';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

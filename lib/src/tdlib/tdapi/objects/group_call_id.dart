@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **GroupCallId** *(groupCallId)* - basic class
-  ///
-  /// Contains the group call identifier.
-  ///
-  /// * [id]: Group call identifier.
-class GroupCallId extends TdObject {
+///
+/// Contains the group call identifier.
+///
+/// * [id]: Group call identifier.
+final class GroupCallId extends TdObject {
   
   /// **GroupCallId** *(groupCallId)* - basic class
   ///
@@ -38,12 +38,13 @@ class GroupCallId extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
-    };
-  }
+		};
+	}
+
   
   GroupCallId copyWith({
     int? id,
@@ -55,8 +56,11 @@ class GroupCallId extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'groupCallId';
-  
+  static const String objectType = 'groupCallId';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

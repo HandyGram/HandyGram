@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **CancelDownloadFile** *(cancelDownloadFile)* - TDLib function
-  ///
-  /// Stops the downloading of a file. If a file has already been downloaded, does nothing.
-  ///
-  /// * [fileId]: Identifier of a file to stop downloading.
-  /// * [onlyIfPending]: Pass true to stop downloading only if it hasn't been started, i.e. request hasn't been sent to server.
-  ///
-  /// [Ok] is returned on completion.
-class CancelDownloadFile extends TdFunction {
+///
+/// Stops the downloading of a file. If a file has already been downloaded, does nothing.
+///
+/// * [fileId]: Identifier of a file to stop downloading.
+/// * [onlyIfPending]: Pass true to stop downloading only if it hasn't been started, i.e. request hasn't been sent to server.
+///
+/// [Ok] is returned on completion.
+final class CancelDownloadFile extends TdFunction {
   
   /// **CancelDownloadFile** *(cancelDownloadFile)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class CancelDownloadFile extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "file_id": fileId,
       "only_if_pending": onlyIfPending,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   CancelDownloadFile copyWith({
     int? fileId,
@@ -47,8 +48,11 @@ class CancelDownloadFile extends TdFunction {
     onlyIfPending: onlyIfPending ?? this.onlyIfPending,
   );
 
-  static const String constructor = 'cancelDownloadFile';
-  
+  static const String objectType = 'cancelDownloadFile';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,18 +1,18 @@
 part of '../tdapi.dart';
 
 /// **SendPaymentForm** *(sendPaymentForm)* - TDLib function
-  ///
-  /// Sends a filled-out payment form to the bot for final verification.
-  ///
-  /// * [inputInvoice]: The invoice.
-  /// * [paymentFormId]: Payment form identifier returned by getPaymentForm.
-  /// * [orderInfoId]: Identifier returned by validateOrderInfo, or an empty string.
-  /// * [shippingOptionId]: Identifier of a chosen shipping option, if applicable.
-  /// * [credentials]: The credentials chosen by user for payment.
-  /// * [tipAmount]: Chosen by the user amount of tip in the smallest units of the currency.
-  ///
-  /// [PaymentResult] is returned on completion.
-class SendPaymentForm extends TdFunction {
+///
+/// Sends a filled-out payment form to the bot for final verification.
+///
+/// * [inputInvoice]: The invoice.
+/// * [paymentFormId]: Payment form identifier returned by getPaymentForm.
+/// * [orderInfoId]: Identifier returned by validateOrderInfo, or an empty string.
+/// * [shippingOptionId]: Identifier of a chosen shipping option, if applicable.
+/// * [credentials]: The credentials chosen by user for payment.
+/// * [tipAmount]: Chosen by the user amount of tip in the smallest units of the currency.
+///
+/// [PaymentResult] is returned on completion.
+final class SendPaymentForm extends TdFunction {
   
   /// **SendPaymentForm** *(sendPaymentForm)* - TDLib function
   ///
@@ -55,8 +55,8 @@ class SendPaymentForm extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "input_invoice": inputInvoice.toJson(),
       "payment_form_id": paymentFormId,
       "order_info_id": orderInfoId,
@@ -64,8 +64,9 @@ class SendPaymentForm extends TdFunction {
       "credentials": credentials.toJson(),
       "tip_amount": tipAmount,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SendPaymentForm copyWith({
     InputInvoice? inputInvoice,
@@ -83,8 +84,11 @@ class SendPaymentForm extends TdFunction {
     tipAmount: tipAmount ?? this.tipAmount,
   );
 
-  static const String constructor = 'sendPaymentForm';
-  
+  static const String objectType = 'sendPaymentForm';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

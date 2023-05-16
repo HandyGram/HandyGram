@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetLocalizationTargetInfo** *(getLocalizationTargetInfo)* - TDLib function
-  ///
-  /// Returns information about the current localization target. This is an offline request if only_local is true. Can be called before authorization.
-  ///
-  /// * [onlyLocal]: Pass true to get only locally available information without sending network requests.
-  ///
-  /// [LocalizationTargetInfo] is returned on completion.
-class GetLocalizationTargetInfo extends TdFunction {
+///
+/// Returns information about the current localization target. This is an offline request if only_local is true. Can be called before authorization.
+///
+/// * [onlyLocal]: Pass true to get only locally available information without sending network requests.
+///
+/// [LocalizationTargetInfo] is returned on completion.
+final class GetLocalizationTargetInfo extends TdFunction {
   
   /// **GetLocalizationTargetInfo** *(getLocalizationTargetInfo)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetLocalizationTargetInfo extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "only_local": onlyLocal,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetLocalizationTargetInfo copyWith({
     bool? onlyLocal,
@@ -38,8 +39,11 @@ class GetLocalizationTargetInfo extends TdFunction {
     onlyLocal: onlyLocal ?? this.onlyLocal,
   );
 
-  static const String constructor = 'getLocalizationTargetInfo';
-  
+  static const String objectType = 'getLocalizationTargetInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

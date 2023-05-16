@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **ChatMessageSenders** *(chatMessageSenders)* - basic class
-  ///
-  /// Represents a list of message senders, which can be used to send messages in a chat.
-  ///
-  /// * [senders]: List of available message senders.
-class ChatMessageSenders extends TdObject {
+///
+/// Represents a list of message senders, which can be used to send messages in a chat.
+///
+/// * [senders]: List of available message senders.
+final class ChatMessageSenders extends TdObject {
   
   /// **ChatMessageSenders** *(chatMessageSenders)* - basic class
   ///
@@ -38,12 +38,13 @@ class ChatMessageSenders extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "senders": senders.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   ChatMessageSenders copyWith({
     List<ChatMessageSender>? senders,
@@ -55,8 +56,11 @@ class ChatMessageSenders extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'chatMessageSenders';
-  
+  static const String objectType = 'chatMessageSenders';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

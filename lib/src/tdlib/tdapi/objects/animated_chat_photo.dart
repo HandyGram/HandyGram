@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **AnimatedChatPhoto** *(animatedChatPhoto)* - basic class
-  ///
-  /// Animated variant of a chat photo in MPEG4 format.
-  ///
-  /// * [length]: Animation width and height.
-  /// * [file]: Information about the animation file.
-  /// * [mainFrameTimestamp]: Timestamp of the frame, used as a static chat photo.
-class AnimatedChatPhoto extends TdObject {
+///
+/// Animated variant of a chat photo in MPEG4 format.
+///
+/// * [length]: Animation width and height.
+/// * [file]: Information about the animation file.
+/// * [mainFrameTimestamp]: Timestamp of the frame, used as a static chat photo.
+final class AnimatedChatPhoto extends TdObject {
   
   /// **AnimatedChatPhoto** *(animatedChatPhoto)* - basic class
   ///
@@ -40,14 +40,15 @@ class AnimatedChatPhoto extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "length": length,
       "file": file.toJson(),
       "main_frame_timestamp": mainFrameTimestamp,
-    };
-  }
+		};
+	}
+
   
   AnimatedChatPhoto copyWith({
     int? length,
@@ -59,8 +60,11 @@ class AnimatedChatPhoto extends TdObject {
     mainFrameTimestamp: mainFrameTimestamp ?? this.mainFrameTimestamp,
   );
 
-  static const String constructor = 'animatedChatPhoto';
-  
+  static const String objectType = 'animatedChatPhoto';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

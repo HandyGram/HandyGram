@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **DeleteAllCallMessages** *(deleteAllCallMessages)* - TDLib function
-  ///
-  /// Deletes all call messages.
-  ///
-  /// * [revoke]: Pass true to delete the messages for all users.
-  ///
-  /// [Ok] is returned on completion.
-class DeleteAllCallMessages extends TdFunction {
+///
+/// Deletes all call messages.
+///
+/// * [revoke]: Pass true to delete the messages for all users.
+///
+/// [Ok] is returned on completion.
+final class DeleteAllCallMessages extends TdFunction {
   
   /// **DeleteAllCallMessages** *(deleteAllCallMessages)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class DeleteAllCallMessages extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "revoke": revoke,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   DeleteAllCallMessages copyWith({
     bool? revoke,
@@ -38,8 +39,11 @@ class DeleteAllCallMessages extends TdFunction {
     revoke: revoke ?? this.revoke,
   );
 
-  static const String constructor = 'deleteAllCallMessages';
-  
+  static const String objectType = 'deleteAllCallMessages';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

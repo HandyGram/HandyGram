@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **ToggleGroupCallIsMyVideoEnabled** *(toggleGroupCallIsMyVideoEnabled)* - TDLib function
-  ///
-  /// Toggles whether current user's video is enabled.
-  ///
-  /// * [groupCallId]: Group call identifier.
-  /// * [isMyVideoEnabled]: Pass true if the current user's video is enabled.
-  ///
-  /// [Ok] is returned on completion.
-class ToggleGroupCallIsMyVideoEnabled extends TdFunction {
+///
+/// Toggles whether current user's video is enabled.
+///
+/// * [groupCallId]: Group call identifier.
+/// * [isMyVideoEnabled]: Pass true if the current user's video is enabled.
+///
+/// [Ok] is returned on completion.
+final class ToggleGroupCallIsMyVideoEnabled extends TdFunction {
   
   /// **ToggleGroupCallIsMyVideoEnabled** *(toggleGroupCallIsMyVideoEnabled)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class ToggleGroupCallIsMyVideoEnabled extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "group_call_id": groupCallId,
       "is_my_video_enabled": isMyVideoEnabled,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ToggleGroupCallIsMyVideoEnabled copyWith({
     int? groupCallId,
@@ -47,8 +48,11 @@ class ToggleGroupCallIsMyVideoEnabled extends TdFunction {
     isMyVideoEnabled: isMyVideoEnabled ?? this.isMyVideoEnabled,
   );
 
-  static const String constructor = 'toggleGroupCallIsMyVideoEnabled';
-  
+  static const String objectType = 'toggleGroupCallIsMyVideoEnabled';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

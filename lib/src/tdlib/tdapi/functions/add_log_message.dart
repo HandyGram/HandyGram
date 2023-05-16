@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **AddLogMessage** *(addLogMessage)* - TDLib function
-  ///
-  /// Adds a message to TDLib internal log. Can be called synchronously.
-  ///
-  /// * [verbosityLevel]: The minimum verbosity level needed for the message to be logged; 0-1023.
-  /// * [text]: Text of a message to log.
-  ///
-  /// [Ok] is returned on completion.
-class AddLogMessage extends TdFunction {
+///
+/// Adds a message to TDLib internal log. Can be called synchronously.
+///
+/// * [verbosityLevel]: The minimum verbosity level needed for the message to be logged; 0-1023.
+/// * [text]: Text of a message to log.
+///
+/// [Ok] is returned on completion.
+final class AddLogMessage extends TdFunction {
   
   /// **AddLogMessage** *(addLogMessage)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class AddLogMessage extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "verbosity_level": verbosityLevel,
       "text": text,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   AddLogMessage copyWith({
     int? verbosityLevel,
@@ -47,8 +48,11 @@ class AddLogMessage extends TdFunction {
     text: text ?? this.text,
   );
 
-  static const String constructor = 'addLogMessage';
-  
+  static const String objectType = 'addLogMessage';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **MessagePositions** *(messagePositions)* - basic class
-  ///
-  /// Contains a list of message positions.
-  ///
-  /// * [totalCount]: Total number of messages found.
-  /// * [positions]: List of message positions.
-class MessagePositions extends TdObject {
+///
+/// Contains a list of message positions.
+///
+/// * [totalCount]: Total number of messages found.
+/// * [positions]: List of message positions.
+final class MessagePositions extends TdObject {
   
   /// **MessagePositions** *(messagePositions)* - basic class
   ///
@@ -45,13 +45,14 @@ class MessagePositions extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "total_count": totalCount,
       "positions": positions.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   MessagePositions copyWith({
     int? totalCount,
@@ -65,8 +66,11 @@ class MessagePositions extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'messagePositions';
-  
+  static const String objectType = 'messagePositions';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

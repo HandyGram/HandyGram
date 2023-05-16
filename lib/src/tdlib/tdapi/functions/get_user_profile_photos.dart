@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **GetUserProfilePhotos** *(getUserProfilePhotos)* - TDLib function
-  ///
-  /// Returns the profile photos of a user. Personal and public photo aren't returned.
-  ///
-  /// * [userId]: User identifier.
-  /// * [offset]: The number of photos to skip; must be non-negative.
-  /// * [limit]: The maximum number of photos to be returned; up to 100.
-  ///
-  /// [ChatPhotos] is returned on completion.
-class GetUserProfilePhotos extends TdFunction {
+///
+/// Returns the profile photos of a user. Personal and public photo aren't returned.
+///
+/// * [userId]: User identifier.
+/// * [offset]: The number of photos to skip; must be non-negative.
+/// * [limit]: The maximum number of photos to be returned; up to 100.
+///
+/// [ChatPhotos] is returned on completion.
+final class GetUserProfilePhotos extends TdFunction {
   
   /// **GetUserProfilePhotos** *(getUserProfilePhotos)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class GetUserProfilePhotos extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "user_id": userId,
       "offset": offset,
       "limit": limit,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetUserProfilePhotos copyWith({
     int? userId,
@@ -56,8 +57,11 @@ class GetUserProfilePhotos extends TdFunction {
     limit: limit ?? this.limit,
   );
 
-  static const String constructor = 'getUserProfilePhotos';
-  
+  static const String objectType = 'getUserProfilePhotos';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **LocalizationTargetInfo** *(localizationTargetInfo)* - basic class
-  ///
-  /// Contains information about the current localization target.
-  ///
-  /// * [languagePacks]: List of available language packs for this application.
-class LocalizationTargetInfo extends TdObject {
+///
+/// Contains information about the current localization target.
+///
+/// * [languagePacks]: List of available language packs for this application.
+final class LocalizationTargetInfo extends TdObject {
   
   /// **LocalizationTargetInfo** *(localizationTargetInfo)* - basic class
   ///
@@ -38,12 +38,13 @@ class LocalizationTargetInfo extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "language_packs": languagePacks.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   LocalizationTargetInfo copyWith({
     List<LanguagePackInfo>? languagePacks,
@@ -55,8 +56,11 @@ class LocalizationTargetInfo extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'localizationTargetInfo';
-  
+  static const String objectType = 'localizationTargetInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

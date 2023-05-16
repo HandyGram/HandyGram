@@ -1,17 +1,17 @@
 part of '../tdapi.dart';
 
 /// **AnswerCallbackQuery** *(answerCallbackQuery)* - TDLib function
-  ///
-  /// Sets the result of a callback query; for bots only.
-  ///
-  /// * [callbackQueryId]: Identifier of the callback query.
-  /// * [text]: Text of the answer.
-  /// * [showAlert]: Pass true to show an alert to the user instead of a toast notification.
-  /// * [url]: URL to be opened.
-  /// * [cacheTime]: Time during which the result of the query can be cached, in seconds.
-  ///
-  /// [Ok] is returned on completion.
-class AnswerCallbackQuery extends TdFunction {
+///
+/// Sets the result of a callback query; for bots only.
+///
+/// * [callbackQueryId]: Identifier of the callback query.
+/// * [text]: Text of the answer.
+/// * [showAlert]: Pass true to show an alert to the user instead of a toast notification.
+/// * [url]: URL to be opened.
+/// * [cacheTime]: Time during which the result of the query can be cached, in seconds.
+///
+/// [Ok] is returned on completion.
+final class AnswerCallbackQuery extends TdFunction {
   
   /// **AnswerCallbackQuery** *(answerCallbackQuery)* - TDLib function
   ///
@@ -49,16 +49,17 @@ class AnswerCallbackQuery extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "callback_query_id": callbackQueryId,
       "text": text,
       "show_alert": showAlert,
       "url": url,
       "cache_time": cacheTime,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   AnswerCallbackQuery copyWith({
     int? callbackQueryId,
@@ -74,8 +75,11 @@ class AnswerCallbackQuery extends TdFunction {
     cacheTime: cacheTime ?? this.cacheTime,
   );
 
-  static const String constructor = 'answerCallbackQuery';
-  
+  static const String objectType = 'answerCallbackQuery';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

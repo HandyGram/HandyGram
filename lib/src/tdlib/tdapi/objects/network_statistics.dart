@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **NetworkStatistics** *(networkStatistics)* - basic class
-  ///
-  /// A full list of available network statistic entries.
-  ///
-  /// * [sinceDate]: Point in time (Unix timestamp) from which the statistics are collected.
-  /// * [entries]: Network statistics entries.
-class NetworkStatistics extends TdObject {
+///
+/// A full list of available network statistic entries.
+///
+/// * [sinceDate]: Point in time (Unix timestamp) from which the statistics are collected.
+/// * [entries]: Network statistics entries.
+final class NetworkStatistics extends TdObject {
   
   /// **NetworkStatistics** *(networkStatistics)* - basic class
   ///
@@ -45,13 +45,14 @@ class NetworkStatistics extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "since_date": sinceDate,
       "entries": entries.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   NetworkStatistics copyWith({
     int? sinceDate,
@@ -65,8 +66,11 @@ class NetworkStatistics extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'networkStatistics';
-  
+  static const String objectType = 'networkStatistics';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

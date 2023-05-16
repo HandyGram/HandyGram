@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **Proxies** *(proxies)* - basic class
-  ///
-  /// Represents a list of proxy servers.
-  ///
-  /// * [proxies]: List of proxy servers.
-class Proxies extends TdObject {
+///
+/// Represents a list of proxy servers.
+///
+/// * [proxies]: List of proxy servers.
+final class Proxies extends TdObject {
   
   /// **Proxies** *(proxies)* - basic class
   ///
@@ -38,12 +38,13 @@ class Proxies extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "proxies": proxies.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   Proxies copyWith({
     List<Proxy>? proxies,
@@ -55,8 +56,11 @@ class Proxies extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'proxies';
-  
+  static const String objectType = 'proxies';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

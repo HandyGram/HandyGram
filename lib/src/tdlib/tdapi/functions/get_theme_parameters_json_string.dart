@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetThemeParametersJsonString** *(getThemeParametersJsonString)* - TDLib function
-  ///
-  /// Converts a themeParameters object to corresponding JSON-serialized string. Can be called synchronously.
-  ///
-  /// * [theme]: Theme parameters to convert to JSON.
-  ///
-  /// [Text] is returned on completion.
-class GetThemeParametersJsonString extends TdFunction {
+///
+/// Converts a themeParameters object to corresponding JSON-serialized string. Can be called synchronously.
+///
+/// * [theme]: Theme parameters to convert to JSON.
+///
+/// [Text] is returned on completion.
+final class GetThemeParametersJsonString extends TdFunction {
   
   /// **GetThemeParametersJsonString** *(getThemeParametersJsonString)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetThemeParametersJsonString extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "theme": theme.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetThemeParametersJsonString copyWith({
     ThemeParameters? theme,
@@ -38,8 +39,11 @@ class GetThemeParametersJsonString extends TdFunction {
     theme: theme ?? this.theme,
   );
 
-  static const String constructor = 'getThemeParametersJsonString';
-  
+  static const String objectType = 'getThemeParametersJsonString';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

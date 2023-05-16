@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetAttachmentMenuBot** *(getAttachmentMenuBot)* - TDLib function
-  ///
-  /// Returns information about a bot that can be added to attachment menu.
-  ///
-  /// * [botUserId]: Bot's user identifier.
-  ///
-  /// [AttachmentMenuBot] is returned on completion.
-class GetAttachmentMenuBot extends TdFunction {
+///
+/// Returns information about a bot that can be added to attachment menu.
+///
+/// * [botUserId]: Bot's user identifier.
+///
+/// [AttachmentMenuBot] is returned on completion.
+final class GetAttachmentMenuBot extends TdFunction {
   
   /// **GetAttachmentMenuBot** *(getAttachmentMenuBot)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetAttachmentMenuBot extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "bot_user_id": botUserId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetAttachmentMenuBot copyWith({
     int? botUserId,
@@ -38,8 +39,11 @@ class GetAttachmentMenuBot extends TdFunction {
     botUserId: botUserId ?? this.botUserId,
   );
 
-  static const String constructor = 'getAttachmentMenuBot';
-  
+  static const String objectType = 'getAttachmentMenuBot';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

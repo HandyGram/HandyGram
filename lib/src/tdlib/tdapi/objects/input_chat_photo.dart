@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **InputChatPhoto** *(inputChatPhoto)* - parent
-  ///
-  /// Describes a photo to be set as a user profile or chat photo.
-class InputChatPhoto extends TdObject {
+///
+/// Describes a photo to be set as a user profile or chat photo.
+sealed class InputChatPhoto extends TdObject {
   
   /// **InputChatPhoto** *(inputChatPhoto)* - parent
   ///
@@ -16,39 +16,42 @@ class InputChatPhoto extends TdObject {
   /// * [InputChatPhotoAnimation]
   factory InputChatPhoto.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case InputChatPhotoPrevious.constructor:
+      case InputChatPhotoPrevious.objectType:
         return InputChatPhotoPrevious.fromJson(json);
-      case InputChatPhotoStatic.constructor:
+      case InputChatPhotoStatic.objectType:
         return InputChatPhotoStatic.fromJson(json);
-      case InputChatPhotoAnimation.constructor:
+      case InputChatPhotoAnimation.objectType:
         return InputChatPhotoAnimation.fromJson(json);
       default:
-        return const InputChatPhoto();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of InputChatPhoto)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  InputChatPhoto copyWith() => const InputChatPhoto();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'inputChatPhoto';
   
+  InputChatPhoto copyWith();
+
+  static const String objectType = 'inputChatPhoto';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InputChatPhotoPrevious** *(inputChatPhotoPrevious)* - child of InputChatPhoto
-  ///
-  /// A previously used profile photo of the current user.
-  ///
-  /// * [chatPhotoId]: Identifier of the current user's profile photo to reuse.
-class InputChatPhotoPrevious extends InputChatPhoto {
+///
+/// A previously used profile photo of the current user.
+///
+/// * [chatPhotoId]: Identifier of the current user's profile photo to reuse.
+final class InputChatPhotoPrevious extends InputChatPhoto {
   
   /// **InputChatPhotoPrevious** *(inputChatPhotoPrevious)* - child of InputChatPhoto
   ///
@@ -69,12 +72,13 @@ class InputChatPhotoPrevious extends InputChatPhoto {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_photo_id": chatPhotoId,
-    };
-  }
+		};
+	}
+
   
   @override
   InputChatPhotoPrevious copyWith({
@@ -83,19 +87,22 @@ class InputChatPhotoPrevious extends InputChatPhoto {
     chatPhotoId: chatPhotoId ?? this.chatPhotoId,
   );
 
-  static const String constructor = 'inputChatPhotoPrevious';
-  
+  static const String objectType = 'inputChatPhotoPrevious';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InputChatPhotoStatic** *(inputChatPhotoStatic)* - child of InputChatPhoto
-  ///
-  /// A static photo in JPEG format.
-  ///
-  /// * [photo]: Photo to be set as profile photo. Only inputFileLocal and inputFileGenerated are allowed.
-class InputChatPhotoStatic extends InputChatPhoto {
+///
+/// A static photo in JPEG format.
+///
+/// * [photo]: Photo to be set as profile photo. Only inputFileLocal and inputFileGenerated are allowed.
+final class InputChatPhotoStatic extends InputChatPhoto {
   
   /// **InputChatPhotoStatic** *(inputChatPhotoStatic)* - child of InputChatPhoto
   ///
@@ -116,12 +123,13 @@ class InputChatPhotoStatic extends InputChatPhoto {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "photo": photo.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   InputChatPhotoStatic copyWith({
@@ -130,20 +138,23 @@ class InputChatPhotoStatic extends InputChatPhoto {
     photo: photo ?? this.photo,
   );
 
-  static const String constructor = 'inputChatPhotoStatic';
-  
+  static const String objectType = 'inputChatPhotoStatic';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **InputChatPhotoAnimation** *(inputChatPhotoAnimation)* - child of InputChatPhoto
-  ///
-  /// An animation in MPEG4 format; must be square, at most 10 seconds long, have width between 160 and 800 and be at most 2MB in size.
-  ///
-  /// * [animation]: Animation to be set as profile photo. Only inputFileLocal and inputFileGenerated are allowed.
-  /// * [mainFrameTimestamp]: Timestamp of the frame, which will be used as static chat photo.
-class InputChatPhotoAnimation extends InputChatPhoto {
+///
+/// An animation in MPEG4 format; must be square, at most 10 seconds long, have width between 160 and 800 and be at most 2MB in size.
+///
+/// * [animation]: Animation to be set as profile photo. Only inputFileLocal and inputFileGenerated are allowed.
+/// * [mainFrameTimestamp]: Timestamp of the frame, which will be used as static chat photo.
+final class InputChatPhotoAnimation extends InputChatPhoto {
   
   /// **InputChatPhotoAnimation** *(inputChatPhotoAnimation)* - child of InputChatPhoto
   ///
@@ -170,13 +181,14 @@ class InputChatPhotoAnimation extends InputChatPhoto {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "animation": animation.toJson(),
       "main_frame_timestamp": mainFrameTimestamp,
-    };
-  }
+		};
+	}
+
   
   @override
   InputChatPhotoAnimation copyWith({
@@ -187,8 +199,11 @@ class InputChatPhotoAnimation extends InputChatPhoto {
     mainFrameTimestamp: mainFrameTimestamp ?? this.mainFrameTimestamp,
   );
 
-  static const String constructor = 'inputChatPhotoAnimation';
-  
+  static const String objectType = 'inputChatPhotoAnimation';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

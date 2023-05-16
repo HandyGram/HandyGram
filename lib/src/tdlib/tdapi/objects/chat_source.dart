@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **ChatSource** *(chatSource)* - parent
-  ///
-  /// Describes a reason why an external chat is shown in a chat list.
-class ChatSource extends TdObject {
+///
+/// Describes a reason why an external chat is shown in a chat list.
+sealed class ChatSource extends TdObject {
   
   /// **ChatSource** *(chatSource)* - parent
   ///
@@ -15,35 +15,38 @@ class ChatSource extends TdObject {
   /// * [ChatSourcePublicServiceAnnouncement]
   factory ChatSource.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case ChatSourceMtprotoProxy.constructor:
+      case ChatSourceMtprotoProxy.objectType:
         return ChatSourceMtprotoProxy.fromJson(json);
-      case ChatSourcePublicServiceAnnouncement.constructor:
+      case ChatSourcePublicServiceAnnouncement.objectType:
         return ChatSourcePublicServiceAnnouncement.fromJson(json);
       default:
-        return const ChatSource();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of ChatSource)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  ChatSource copyWith() => const ChatSource();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'chatSource';
   
+  ChatSource copyWith();
+
+  static const String objectType = 'chatSource';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatSourceMtprotoProxy** *(chatSourceMtprotoProxy)* - child of ChatSource
-  ///
-  /// The chat is sponsored by the user's MTProxy server.
-class ChatSourceMtprotoProxy extends ChatSource {
+///
+/// The chat is sponsored by the user's MTProxy server.
+final class ChatSourceMtprotoProxy extends ChatSource {
   
   /// **ChatSourceMtprotoProxy** *(chatSourceMtprotoProxy)* - child of ChatSource
   ///
@@ -54,29 +57,33 @@ class ChatSourceMtprotoProxy extends ChatSource {
   factory ChatSourceMtprotoProxy.fromJson(Map<String, dynamic> json) => const ChatSourceMtprotoProxy();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   ChatSourceMtprotoProxy copyWith() => const ChatSourceMtprotoProxy();
 
-  static const String constructor = 'chatSourceMtprotoProxy';
-  
+  static const String objectType = 'chatSourceMtprotoProxy';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatSourcePublicServiceAnnouncement** *(chatSourcePublicServiceAnnouncement)* - child of ChatSource
-  ///
-  /// The chat contains a public service announcement.
-  ///
-  /// * [type]: The type of the announcement.
-  /// * [text]: The text of the announcement.
-class ChatSourcePublicServiceAnnouncement extends ChatSource {
+///
+/// The chat contains a public service announcement.
+///
+/// * [type]: The type of the announcement.
+/// * [text]: The text of the announcement.
+final class ChatSourcePublicServiceAnnouncement extends ChatSource {
   
   /// **ChatSourcePublicServiceAnnouncement** *(chatSourcePublicServiceAnnouncement)* - child of ChatSource
   ///
@@ -103,13 +110,14 @@ class ChatSourcePublicServiceAnnouncement extends ChatSource {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "type": type,
       "text": text,
-    };
-  }
+		};
+	}
+
   
   @override
   ChatSourcePublicServiceAnnouncement copyWith({
@@ -120,8 +128,11 @@ class ChatSourcePublicServiceAnnouncement extends ChatSource {
     text: text ?? this.text,
   );
 
-  static const String constructor = 'chatSourcePublicServiceAnnouncement';
-  
+  static const String objectType = 'chatSourcePublicServiceAnnouncement';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

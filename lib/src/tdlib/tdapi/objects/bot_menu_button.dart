@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **BotMenuButton** *(botMenuButton)* - basic class
-  ///
-  /// Describes a button to be shown instead of bot commands menu button.
-  ///
-  /// * [text]: Text of the button.
-  /// * [url]: URL to be passed to openWebApp.
-class BotMenuButton extends TdObject {
+///
+/// Describes a button to be shown instead of bot commands menu button.
+///
+/// * [text]: Text of the button.
+/// * [url]: URL to be passed to openWebApp.
+final class BotMenuButton extends TdObject {
   
   /// **BotMenuButton** *(botMenuButton)* - basic class
   ///
@@ -45,13 +45,14 @@ class BotMenuButton extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "text": text,
       "url": url,
-    };
-  }
+		};
+	}
+
   
   BotMenuButton copyWith({
     String? text,
@@ -65,8 +66,11 @@ class BotMenuButton extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'botMenuButton';
-  
+  static const String objectType = 'botMenuButton';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **PremiumLimitType** *(premiumLimitType)* - parent
-  ///
-  /// Describes type of a limit, increased for Premium users.
-class PremiumLimitType extends TdObject {
+///
+/// Describes type of a limit, increased for Premium users.
+sealed class PremiumLimitType extends TdObject {
   
   /// **PremiumLimitType** *(premiumLimitType)* - parent
   ///
@@ -23,51 +23,54 @@ class PremiumLimitType extends TdObject {
   /// * [PremiumLimitTypeBioLength]
   factory PremiumLimitType.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case PremiumLimitTypeSupergroupCount.constructor:
+      case PremiumLimitTypeSupergroupCount.objectType:
         return PremiumLimitTypeSupergroupCount.fromJson(json);
-      case PremiumLimitTypePinnedChatCount.constructor:
+      case PremiumLimitTypePinnedChatCount.objectType:
         return PremiumLimitTypePinnedChatCount.fromJson(json);
-      case PremiumLimitTypeCreatedPublicChatCount.constructor:
+      case PremiumLimitTypeCreatedPublicChatCount.objectType:
         return PremiumLimitTypeCreatedPublicChatCount.fromJson(json);
-      case PremiumLimitTypeSavedAnimationCount.constructor:
+      case PremiumLimitTypeSavedAnimationCount.objectType:
         return PremiumLimitTypeSavedAnimationCount.fromJson(json);
-      case PremiumLimitTypeFavoriteStickerCount.constructor:
+      case PremiumLimitTypeFavoriteStickerCount.objectType:
         return PremiumLimitTypeFavoriteStickerCount.fromJson(json);
-      case PremiumLimitTypeChatFilterCount.constructor:
+      case PremiumLimitTypeChatFilterCount.objectType:
         return PremiumLimitTypeChatFilterCount.fromJson(json);
-      case PremiumLimitTypeChatFilterChosenChatCount.constructor:
+      case PremiumLimitTypeChatFilterChosenChatCount.objectType:
         return PremiumLimitTypeChatFilterChosenChatCount.fromJson(json);
-      case PremiumLimitTypePinnedArchivedChatCount.constructor:
+      case PremiumLimitTypePinnedArchivedChatCount.objectType:
         return PremiumLimitTypePinnedArchivedChatCount.fromJson(json);
-      case PremiumLimitTypeCaptionLength.constructor:
+      case PremiumLimitTypeCaptionLength.objectType:
         return PremiumLimitTypeCaptionLength.fromJson(json);
-      case PremiumLimitTypeBioLength.constructor:
+      case PremiumLimitTypeBioLength.objectType:
         return PremiumLimitTypeBioLength.fromJson(json);
       default:
-        return const PremiumLimitType();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of PremiumLimitType)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  PremiumLimitType copyWith() => const PremiumLimitType();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'premiumLimitType';
   
+  PremiumLimitType copyWith();
+
+  static const String objectType = 'premiumLimitType';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumLimitTypeSupergroupCount** *(premiumLimitTypeSupergroupCount)* - child of PremiumLimitType
-  ///
-  /// The maximum number of joined supergroups and channels.
-class PremiumLimitTypeSupergroupCount extends PremiumLimitType {
+///
+/// The maximum number of joined supergroups and channels.
+final class PremiumLimitTypeSupergroupCount extends PremiumLimitType {
   
   /// **PremiumLimitTypeSupergroupCount** *(premiumLimitTypeSupergroupCount)* - child of PremiumLimitType
   ///
@@ -78,26 +81,30 @@ class PremiumLimitTypeSupergroupCount extends PremiumLimitType {
   factory PremiumLimitTypeSupergroupCount.fromJson(Map<String, dynamic> json) => const PremiumLimitTypeSupergroupCount();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PremiumLimitTypeSupergroupCount copyWith() => const PremiumLimitTypeSupergroupCount();
 
-  static const String constructor = 'premiumLimitTypeSupergroupCount';
-  
+  static const String objectType = 'premiumLimitTypeSupergroupCount';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumLimitTypePinnedChatCount** *(premiumLimitTypePinnedChatCount)* - child of PremiumLimitType
-  ///
-  /// The maximum number of pinned chats in the main chat list.
-class PremiumLimitTypePinnedChatCount extends PremiumLimitType {
+///
+/// The maximum number of pinned chats in the main chat list.
+final class PremiumLimitTypePinnedChatCount extends PremiumLimitType {
   
   /// **PremiumLimitTypePinnedChatCount** *(premiumLimitTypePinnedChatCount)* - child of PremiumLimitType
   ///
@@ -108,26 +115,30 @@ class PremiumLimitTypePinnedChatCount extends PremiumLimitType {
   factory PremiumLimitTypePinnedChatCount.fromJson(Map<String, dynamic> json) => const PremiumLimitTypePinnedChatCount();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PremiumLimitTypePinnedChatCount copyWith() => const PremiumLimitTypePinnedChatCount();
 
-  static const String constructor = 'premiumLimitTypePinnedChatCount';
-  
+  static const String objectType = 'premiumLimitTypePinnedChatCount';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumLimitTypeCreatedPublicChatCount** *(premiumLimitTypeCreatedPublicChatCount)* - child of PremiumLimitType
-  ///
-  /// The maximum number of created public chats.
-class PremiumLimitTypeCreatedPublicChatCount extends PremiumLimitType {
+///
+/// The maximum number of created public chats.
+final class PremiumLimitTypeCreatedPublicChatCount extends PremiumLimitType {
   
   /// **PremiumLimitTypeCreatedPublicChatCount** *(premiumLimitTypeCreatedPublicChatCount)* - child of PremiumLimitType
   ///
@@ -138,26 +149,30 @@ class PremiumLimitTypeCreatedPublicChatCount extends PremiumLimitType {
   factory PremiumLimitTypeCreatedPublicChatCount.fromJson(Map<String, dynamic> json) => const PremiumLimitTypeCreatedPublicChatCount();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PremiumLimitTypeCreatedPublicChatCount copyWith() => const PremiumLimitTypeCreatedPublicChatCount();
 
-  static const String constructor = 'premiumLimitTypeCreatedPublicChatCount';
-  
+  static const String objectType = 'premiumLimitTypeCreatedPublicChatCount';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumLimitTypeSavedAnimationCount** *(premiumLimitTypeSavedAnimationCount)* - child of PremiumLimitType
-  ///
-  /// The maximum number of saved animations.
-class PremiumLimitTypeSavedAnimationCount extends PremiumLimitType {
+///
+/// The maximum number of saved animations.
+final class PremiumLimitTypeSavedAnimationCount extends PremiumLimitType {
   
   /// **PremiumLimitTypeSavedAnimationCount** *(premiumLimitTypeSavedAnimationCount)* - child of PremiumLimitType
   ///
@@ -168,26 +183,30 @@ class PremiumLimitTypeSavedAnimationCount extends PremiumLimitType {
   factory PremiumLimitTypeSavedAnimationCount.fromJson(Map<String, dynamic> json) => const PremiumLimitTypeSavedAnimationCount();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PremiumLimitTypeSavedAnimationCount copyWith() => const PremiumLimitTypeSavedAnimationCount();
 
-  static const String constructor = 'premiumLimitTypeSavedAnimationCount';
-  
+  static const String objectType = 'premiumLimitTypeSavedAnimationCount';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumLimitTypeFavoriteStickerCount** *(premiumLimitTypeFavoriteStickerCount)* - child of PremiumLimitType
-  ///
-  /// The maximum number of favorite stickers.
-class PremiumLimitTypeFavoriteStickerCount extends PremiumLimitType {
+///
+/// The maximum number of favorite stickers.
+final class PremiumLimitTypeFavoriteStickerCount extends PremiumLimitType {
   
   /// **PremiumLimitTypeFavoriteStickerCount** *(premiumLimitTypeFavoriteStickerCount)* - child of PremiumLimitType
   ///
@@ -198,26 +217,30 @@ class PremiumLimitTypeFavoriteStickerCount extends PremiumLimitType {
   factory PremiumLimitTypeFavoriteStickerCount.fromJson(Map<String, dynamic> json) => const PremiumLimitTypeFavoriteStickerCount();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PremiumLimitTypeFavoriteStickerCount copyWith() => const PremiumLimitTypeFavoriteStickerCount();
 
-  static const String constructor = 'premiumLimitTypeFavoriteStickerCount';
-  
+  static const String objectType = 'premiumLimitTypeFavoriteStickerCount';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumLimitTypeChatFilterCount** *(premiumLimitTypeChatFilterCount)* - child of PremiumLimitType
-  ///
-  /// The maximum number of chat filters.
-class PremiumLimitTypeChatFilterCount extends PremiumLimitType {
+///
+/// The maximum number of chat filters.
+final class PremiumLimitTypeChatFilterCount extends PremiumLimitType {
   
   /// **PremiumLimitTypeChatFilterCount** *(premiumLimitTypeChatFilterCount)* - child of PremiumLimitType
   ///
@@ -228,26 +251,30 @@ class PremiumLimitTypeChatFilterCount extends PremiumLimitType {
   factory PremiumLimitTypeChatFilterCount.fromJson(Map<String, dynamic> json) => const PremiumLimitTypeChatFilterCount();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PremiumLimitTypeChatFilterCount copyWith() => const PremiumLimitTypeChatFilterCount();
 
-  static const String constructor = 'premiumLimitTypeChatFilterCount';
-  
+  static const String objectType = 'premiumLimitTypeChatFilterCount';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumLimitTypeChatFilterChosenChatCount** *(premiumLimitTypeChatFilterChosenChatCount)* - child of PremiumLimitType
-  ///
-  /// The maximum number of pinned and always included, or always excluded chats in a chat filter.
-class PremiumLimitTypeChatFilterChosenChatCount extends PremiumLimitType {
+///
+/// The maximum number of pinned and always included, or always excluded chats in a chat filter.
+final class PremiumLimitTypeChatFilterChosenChatCount extends PremiumLimitType {
   
   /// **PremiumLimitTypeChatFilterChosenChatCount** *(premiumLimitTypeChatFilterChosenChatCount)* - child of PremiumLimitType
   ///
@@ -258,26 +285,30 @@ class PremiumLimitTypeChatFilterChosenChatCount extends PremiumLimitType {
   factory PremiumLimitTypeChatFilterChosenChatCount.fromJson(Map<String, dynamic> json) => const PremiumLimitTypeChatFilterChosenChatCount();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PremiumLimitTypeChatFilterChosenChatCount copyWith() => const PremiumLimitTypeChatFilterChosenChatCount();
 
-  static const String constructor = 'premiumLimitTypeChatFilterChosenChatCount';
-  
+  static const String objectType = 'premiumLimitTypeChatFilterChosenChatCount';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumLimitTypePinnedArchivedChatCount** *(premiumLimitTypePinnedArchivedChatCount)* - child of PremiumLimitType
-  ///
-  /// The maximum number of pinned chats in the archive chat list.
-class PremiumLimitTypePinnedArchivedChatCount extends PremiumLimitType {
+///
+/// The maximum number of pinned chats in the archive chat list.
+final class PremiumLimitTypePinnedArchivedChatCount extends PremiumLimitType {
   
   /// **PremiumLimitTypePinnedArchivedChatCount** *(premiumLimitTypePinnedArchivedChatCount)* - child of PremiumLimitType
   ///
@@ -288,26 +319,30 @@ class PremiumLimitTypePinnedArchivedChatCount extends PremiumLimitType {
   factory PremiumLimitTypePinnedArchivedChatCount.fromJson(Map<String, dynamic> json) => const PremiumLimitTypePinnedArchivedChatCount();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PremiumLimitTypePinnedArchivedChatCount copyWith() => const PremiumLimitTypePinnedArchivedChatCount();
 
-  static const String constructor = 'premiumLimitTypePinnedArchivedChatCount';
-  
+  static const String objectType = 'premiumLimitTypePinnedArchivedChatCount';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumLimitTypeCaptionLength** *(premiumLimitTypeCaptionLength)* - child of PremiumLimitType
-  ///
-  /// The maximum length of sent media caption.
-class PremiumLimitTypeCaptionLength extends PremiumLimitType {
+///
+/// The maximum length of sent media caption.
+final class PremiumLimitTypeCaptionLength extends PremiumLimitType {
   
   /// **PremiumLimitTypeCaptionLength** *(premiumLimitTypeCaptionLength)* - child of PremiumLimitType
   ///
@@ -318,26 +353,30 @@ class PremiumLimitTypeCaptionLength extends PremiumLimitType {
   factory PremiumLimitTypeCaptionLength.fromJson(Map<String, dynamic> json) => const PremiumLimitTypeCaptionLength();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PremiumLimitTypeCaptionLength copyWith() => const PremiumLimitTypeCaptionLength();
 
-  static const String constructor = 'premiumLimitTypeCaptionLength';
-  
+  static const String objectType = 'premiumLimitTypeCaptionLength';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumLimitTypeBioLength** *(premiumLimitTypeBioLength)* - child of PremiumLimitType
-  ///
-  /// The maximum length of the user's bio.
-class PremiumLimitTypeBioLength extends PremiumLimitType {
+///
+/// The maximum length of the user's bio.
+final class PremiumLimitTypeBioLength extends PremiumLimitType {
   
   /// **PremiumLimitTypeBioLength** *(premiumLimitTypeBioLength)* - child of PremiumLimitType
   ///
@@ -348,17 +387,21 @@ class PremiumLimitTypeBioLength extends PremiumLimitType {
   factory PremiumLimitTypeBioLength.fromJson(Map<String, dynamic> json) => const PremiumLimitTypeBioLength();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PremiumLimitTypeBioLength copyWith() => const PremiumLimitTypeBioLength();
 
-  static const String constructor = 'premiumLimitTypeBioLength';
-  
+  static const String objectType = 'premiumLimitTypeBioLength';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

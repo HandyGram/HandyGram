@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **SessionType** *(sessionType)* - parent
-  ///
-  /// Represents the type of a session.
-class SessionType extends TdObject {
+///
+/// Represents the type of a session.
+sealed class SessionType extends TdObject {
   
   /// **SessionType** *(sessionType)* - parent
   ///
@@ -30,65 +30,68 @@ class SessionType extends TdObject {
   /// * [SessionTypeXbox]
   factory SessionType.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case SessionTypeAndroid.constructor:
+      case SessionTypeAndroid.objectType:
         return SessionTypeAndroid.fromJson(json);
-      case SessionTypeApple.constructor:
+      case SessionTypeApple.objectType:
         return SessionTypeApple.fromJson(json);
-      case SessionTypeBrave.constructor:
+      case SessionTypeBrave.objectType:
         return SessionTypeBrave.fromJson(json);
-      case SessionTypeChrome.constructor:
+      case SessionTypeChrome.objectType:
         return SessionTypeChrome.fromJson(json);
-      case SessionTypeEdge.constructor:
+      case SessionTypeEdge.objectType:
         return SessionTypeEdge.fromJson(json);
-      case SessionTypeFirefox.constructor:
+      case SessionTypeFirefox.objectType:
         return SessionTypeFirefox.fromJson(json);
-      case SessionTypeIpad.constructor:
+      case SessionTypeIpad.objectType:
         return SessionTypeIpad.fromJson(json);
-      case SessionTypeIphone.constructor:
+      case SessionTypeIphone.objectType:
         return SessionTypeIphone.fromJson(json);
-      case SessionTypeLinux.constructor:
+      case SessionTypeLinux.objectType:
         return SessionTypeLinux.fromJson(json);
-      case SessionTypeMac.constructor:
+      case SessionTypeMac.objectType:
         return SessionTypeMac.fromJson(json);
-      case SessionTypeOpera.constructor:
+      case SessionTypeOpera.objectType:
         return SessionTypeOpera.fromJson(json);
-      case SessionTypeSafari.constructor:
+      case SessionTypeSafari.objectType:
         return SessionTypeSafari.fromJson(json);
-      case SessionTypeUbuntu.constructor:
+      case SessionTypeUbuntu.objectType:
         return SessionTypeUbuntu.fromJson(json);
-      case SessionTypeUnknown.constructor:
+      case SessionTypeUnknown.objectType:
         return SessionTypeUnknown.fromJson(json);
-      case SessionTypeVivaldi.constructor:
+      case SessionTypeVivaldi.objectType:
         return SessionTypeVivaldi.fromJson(json);
-      case SessionTypeWindows.constructor:
+      case SessionTypeWindows.objectType:
         return SessionTypeWindows.fromJson(json);
-      case SessionTypeXbox.constructor:
+      case SessionTypeXbox.objectType:
         return SessionTypeXbox.fromJson(json);
       default:
-        return const SessionType();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of SessionType)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  SessionType copyWith() => const SessionType();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'sessionType';
   
+  SessionType copyWith();
+
+  static const String objectType = 'sessionType';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SessionTypeAndroid** *(sessionTypeAndroid)* - child of SessionType
-  ///
-  /// The session is running on an Android device.
-class SessionTypeAndroid extends SessionType {
+///
+/// The session is running on an Android device.
+final class SessionTypeAndroid extends SessionType {
   
   /// **SessionTypeAndroid** *(sessionTypeAndroid)* - child of SessionType
   ///
@@ -99,26 +102,30 @@ class SessionTypeAndroid extends SessionType {
   factory SessionTypeAndroid.fromJson(Map<String, dynamic> json) => const SessionTypeAndroid();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SessionTypeAndroid copyWith() => const SessionTypeAndroid();
 
-  static const String constructor = 'sessionTypeAndroid';
-  
+  static const String objectType = 'sessionTypeAndroid';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SessionTypeApple** *(sessionTypeApple)* - child of SessionType
-  ///
-  /// The session is running on a generic Apple device.
-class SessionTypeApple extends SessionType {
+///
+/// The session is running on a generic Apple device.
+final class SessionTypeApple extends SessionType {
   
   /// **SessionTypeApple** *(sessionTypeApple)* - child of SessionType
   ///
@@ -129,26 +136,30 @@ class SessionTypeApple extends SessionType {
   factory SessionTypeApple.fromJson(Map<String, dynamic> json) => const SessionTypeApple();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SessionTypeApple copyWith() => const SessionTypeApple();
 
-  static const String constructor = 'sessionTypeApple';
-  
+  static const String objectType = 'sessionTypeApple';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SessionTypeBrave** *(sessionTypeBrave)* - child of SessionType
-  ///
-  /// The session is running on the Brave browser.
-class SessionTypeBrave extends SessionType {
+///
+/// The session is running on the Brave browser.
+final class SessionTypeBrave extends SessionType {
   
   /// **SessionTypeBrave** *(sessionTypeBrave)* - child of SessionType
   ///
@@ -159,26 +170,30 @@ class SessionTypeBrave extends SessionType {
   factory SessionTypeBrave.fromJson(Map<String, dynamic> json) => const SessionTypeBrave();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SessionTypeBrave copyWith() => const SessionTypeBrave();
 
-  static const String constructor = 'sessionTypeBrave';
-  
+  static const String objectType = 'sessionTypeBrave';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SessionTypeChrome** *(sessionTypeChrome)* - child of SessionType
-  ///
-  /// The session is running on the Chrome browser.
-class SessionTypeChrome extends SessionType {
+///
+/// The session is running on the Chrome browser.
+final class SessionTypeChrome extends SessionType {
   
   /// **SessionTypeChrome** *(sessionTypeChrome)* - child of SessionType
   ///
@@ -189,26 +204,30 @@ class SessionTypeChrome extends SessionType {
   factory SessionTypeChrome.fromJson(Map<String, dynamic> json) => const SessionTypeChrome();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SessionTypeChrome copyWith() => const SessionTypeChrome();
 
-  static const String constructor = 'sessionTypeChrome';
-  
+  static const String objectType = 'sessionTypeChrome';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SessionTypeEdge** *(sessionTypeEdge)* - child of SessionType
-  ///
-  /// The session is running on the Edge browser.
-class SessionTypeEdge extends SessionType {
+///
+/// The session is running on the Edge browser.
+final class SessionTypeEdge extends SessionType {
   
   /// **SessionTypeEdge** *(sessionTypeEdge)* - child of SessionType
   ///
@@ -219,26 +238,30 @@ class SessionTypeEdge extends SessionType {
   factory SessionTypeEdge.fromJson(Map<String, dynamic> json) => const SessionTypeEdge();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SessionTypeEdge copyWith() => const SessionTypeEdge();
 
-  static const String constructor = 'sessionTypeEdge';
-  
+  static const String objectType = 'sessionTypeEdge';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SessionTypeFirefox** *(sessionTypeFirefox)* - child of SessionType
-  ///
-  /// The session is running on the Firefox browser.
-class SessionTypeFirefox extends SessionType {
+///
+/// The session is running on the Firefox browser.
+final class SessionTypeFirefox extends SessionType {
   
   /// **SessionTypeFirefox** *(sessionTypeFirefox)* - child of SessionType
   ///
@@ -249,26 +272,30 @@ class SessionTypeFirefox extends SessionType {
   factory SessionTypeFirefox.fromJson(Map<String, dynamic> json) => const SessionTypeFirefox();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SessionTypeFirefox copyWith() => const SessionTypeFirefox();
 
-  static const String constructor = 'sessionTypeFirefox';
-  
+  static const String objectType = 'sessionTypeFirefox';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SessionTypeIpad** *(sessionTypeIpad)* - child of SessionType
-  ///
-  /// The session is running on an iPad device.
-class SessionTypeIpad extends SessionType {
+///
+/// The session is running on an iPad device.
+final class SessionTypeIpad extends SessionType {
   
   /// **SessionTypeIpad** *(sessionTypeIpad)* - child of SessionType
   ///
@@ -279,26 +306,30 @@ class SessionTypeIpad extends SessionType {
   factory SessionTypeIpad.fromJson(Map<String, dynamic> json) => const SessionTypeIpad();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SessionTypeIpad copyWith() => const SessionTypeIpad();
 
-  static const String constructor = 'sessionTypeIpad';
-  
+  static const String objectType = 'sessionTypeIpad';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SessionTypeIphone** *(sessionTypeIphone)* - child of SessionType
-  ///
-  /// The session is running on an iPhone device.
-class SessionTypeIphone extends SessionType {
+///
+/// The session is running on an iPhone device.
+final class SessionTypeIphone extends SessionType {
   
   /// **SessionTypeIphone** *(sessionTypeIphone)* - child of SessionType
   ///
@@ -309,26 +340,30 @@ class SessionTypeIphone extends SessionType {
   factory SessionTypeIphone.fromJson(Map<String, dynamic> json) => const SessionTypeIphone();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SessionTypeIphone copyWith() => const SessionTypeIphone();
 
-  static const String constructor = 'sessionTypeIphone';
-  
+  static const String objectType = 'sessionTypeIphone';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SessionTypeLinux** *(sessionTypeLinux)* - child of SessionType
-  ///
-  /// The session is running on a Linux device.
-class SessionTypeLinux extends SessionType {
+///
+/// The session is running on a Linux device.
+final class SessionTypeLinux extends SessionType {
   
   /// **SessionTypeLinux** *(sessionTypeLinux)* - child of SessionType
   ///
@@ -339,26 +374,30 @@ class SessionTypeLinux extends SessionType {
   factory SessionTypeLinux.fromJson(Map<String, dynamic> json) => const SessionTypeLinux();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SessionTypeLinux copyWith() => const SessionTypeLinux();
 
-  static const String constructor = 'sessionTypeLinux';
-  
+  static const String objectType = 'sessionTypeLinux';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SessionTypeMac** *(sessionTypeMac)* - child of SessionType
-  ///
-  /// The session is running on a Mac device.
-class SessionTypeMac extends SessionType {
+///
+/// The session is running on a Mac device.
+final class SessionTypeMac extends SessionType {
   
   /// **SessionTypeMac** *(sessionTypeMac)* - child of SessionType
   ///
@@ -369,26 +408,30 @@ class SessionTypeMac extends SessionType {
   factory SessionTypeMac.fromJson(Map<String, dynamic> json) => const SessionTypeMac();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SessionTypeMac copyWith() => const SessionTypeMac();
 
-  static const String constructor = 'sessionTypeMac';
-  
+  static const String objectType = 'sessionTypeMac';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SessionTypeOpera** *(sessionTypeOpera)* - child of SessionType
-  ///
-  /// The session is running on the Opera browser.
-class SessionTypeOpera extends SessionType {
+///
+/// The session is running on the Opera browser.
+final class SessionTypeOpera extends SessionType {
   
   /// **SessionTypeOpera** *(sessionTypeOpera)* - child of SessionType
   ///
@@ -399,26 +442,30 @@ class SessionTypeOpera extends SessionType {
   factory SessionTypeOpera.fromJson(Map<String, dynamic> json) => const SessionTypeOpera();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SessionTypeOpera copyWith() => const SessionTypeOpera();
 
-  static const String constructor = 'sessionTypeOpera';
-  
+  static const String objectType = 'sessionTypeOpera';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SessionTypeSafari** *(sessionTypeSafari)* - child of SessionType
-  ///
-  /// The session is running on the Safari browser.
-class SessionTypeSafari extends SessionType {
+///
+/// The session is running on the Safari browser.
+final class SessionTypeSafari extends SessionType {
   
   /// **SessionTypeSafari** *(sessionTypeSafari)* - child of SessionType
   ///
@@ -429,26 +476,30 @@ class SessionTypeSafari extends SessionType {
   factory SessionTypeSafari.fromJson(Map<String, dynamic> json) => const SessionTypeSafari();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SessionTypeSafari copyWith() => const SessionTypeSafari();
 
-  static const String constructor = 'sessionTypeSafari';
-  
+  static const String objectType = 'sessionTypeSafari';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SessionTypeUbuntu** *(sessionTypeUbuntu)* - child of SessionType
-  ///
-  /// The session is running on an Ubuntu device.
-class SessionTypeUbuntu extends SessionType {
+///
+/// The session is running on an Ubuntu device.
+final class SessionTypeUbuntu extends SessionType {
   
   /// **SessionTypeUbuntu** *(sessionTypeUbuntu)* - child of SessionType
   ///
@@ -459,26 +510,30 @@ class SessionTypeUbuntu extends SessionType {
   factory SessionTypeUbuntu.fromJson(Map<String, dynamic> json) => const SessionTypeUbuntu();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SessionTypeUbuntu copyWith() => const SessionTypeUbuntu();
 
-  static const String constructor = 'sessionTypeUbuntu';
-  
+  static const String objectType = 'sessionTypeUbuntu';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SessionTypeUnknown** *(sessionTypeUnknown)* - child of SessionType
-  ///
-  /// The session is running on an unknown type of device.
-class SessionTypeUnknown extends SessionType {
+///
+/// The session is running on an unknown type of device.
+final class SessionTypeUnknown extends SessionType {
   
   /// **SessionTypeUnknown** *(sessionTypeUnknown)* - child of SessionType
   ///
@@ -489,26 +544,30 @@ class SessionTypeUnknown extends SessionType {
   factory SessionTypeUnknown.fromJson(Map<String, dynamic> json) => const SessionTypeUnknown();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SessionTypeUnknown copyWith() => const SessionTypeUnknown();
 
-  static const String constructor = 'sessionTypeUnknown';
-  
+  static const String objectType = 'sessionTypeUnknown';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SessionTypeVivaldi** *(sessionTypeVivaldi)* - child of SessionType
-  ///
-  /// The session is running on the Vivaldi browser.
-class SessionTypeVivaldi extends SessionType {
+///
+/// The session is running on the Vivaldi browser.
+final class SessionTypeVivaldi extends SessionType {
   
   /// **SessionTypeVivaldi** *(sessionTypeVivaldi)* - child of SessionType
   ///
@@ -519,26 +578,30 @@ class SessionTypeVivaldi extends SessionType {
   factory SessionTypeVivaldi.fromJson(Map<String, dynamic> json) => const SessionTypeVivaldi();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SessionTypeVivaldi copyWith() => const SessionTypeVivaldi();
 
-  static const String constructor = 'sessionTypeVivaldi';
-  
+  static const String objectType = 'sessionTypeVivaldi';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SessionTypeWindows** *(sessionTypeWindows)* - child of SessionType
-  ///
-  /// The session is running on a Windows device.
-class SessionTypeWindows extends SessionType {
+///
+/// The session is running on a Windows device.
+final class SessionTypeWindows extends SessionType {
   
   /// **SessionTypeWindows** *(sessionTypeWindows)* - child of SessionType
   ///
@@ -549,26 +612,30 @@ class SessionTypeWindows extends SessionType {
   factory SessionTypeWindows.fromJson(Map<String, dynamic> json) => const SessionTypeWindows();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SessionTypeWindows copyWith() => const SessionTypeWindows();
 
-  static const String constructor = 'sessionTypeWindows';
-  
+  static const String objectType = 'sessionTypeWindows';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **SessionTypeXbox** *(sessionTypeXbox)* - child of SessionType
-  ///
-  /// The session is running on an Xbox console.
-class SessionTypeXbox extends SessionType {
+///
+/// The session is running on an Xbox console.
+final class SessionTypeXbox extends SessionType {
   
   /// **SessionTypeXbox** *(sessionTypeXbox)* - child of SessionType
   ///
@@ -579,17 +646,21 @@ class SessionTypeXbox extends SessionType {
   factory SessionTypeXbox.fromJson(Map<String, dynamic> json) => const SessionTypeXbox();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   SessionTypeXbox copyWith() => const SessionTypeXbox();
 
-  static const String constructor = 'sessionTypeXbox';
-  
+  static const String objectType = 'sessionTypeXbox';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **ViewPremiumFeature** *(viewPremiumFeature)* - TDLib function
-  ///
-  /// Informs TDLib that the user viewed detailed information about a Premium feature on the Premium features screen.
-  ///
-  /// * [feature]: The viewed premium feature.
-  ///
-  /// [Ok] is returned on completion.
-class ViewPremiumFeature extends TdFunction {
+///
+/// Informs TDLib that the user viewed detailed information about a Premium feature on the Premium features screen.
+///
+/// * [feature]: The viewed premium feature.
+///
+/// [Ok] is returned on completion.
+final class ViewPremiumFeature extends TdFunction {
   
   /// **ViewPremiumFeature** *(viewPremiumFeature)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class ViewPremiumFeature extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "feature": feature.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ViewPremiumFeature copyWith({
     PremiumFeature? feature,
@@ -38,8 +39,11 @@ class ViewPremiumFeature extends TdFunction {
     feature: feature ?? this.feature,
   );
 
-  static const String constructor = 'viewPremiumFeature';
-  
+  static const String objectType = 'viewPremiumFeature';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

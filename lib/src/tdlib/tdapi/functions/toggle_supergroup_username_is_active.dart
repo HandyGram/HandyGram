@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **ToggleSupergroupUsernameIsActive** *(toggleSupergroupUsernameIsActive)* - TDLib function
-  ///
-  /// Changes active state for a username of a supergroup or channel, requires owner privileges in the supergroup or channel. The editable username can't be disabled.. May return an error with a message "USERNAMES_ACTIVE_TOO_MUCH" if the maximum number of active usernames has been reached.
-  ///
-  /// * [supergroupId]: Identifier of the supergroup or channel.
-  /// * [username]: The username to change.
-  /// * [isActive]: Pass true to activate the username; pass false to disable it.
-  ///
-  /// [Ok] is returned on completion.
-class ToggleSupergroupUsernameIsActive extends TdFunction {
+///
+/// Changes active state for a username of a supergroup or channel, requires owner privileges in the supergroup or channel. The editable username can't be disabled.. May return an error with a message "USERNAMES_ACTIVE_TOO_MUCH" if the maximum number of active usernames has been reached.
+///
+/// * [supergroupId]: Identifier of the supergroup or channel.
+/// * [username]: The username to change.
+/// * [isActive]: Pass true to activate the username; pass false to disable it.
+///
+/// [Ok] is returned on completion.
+final class ToggleSupergroupUsernameIsActive extends TdFunction {
   
   /// **ToggleSupergroupUsernameIsActive** *(toggleSupergroupUsernameIsActive)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class ToggleSupergroupUsernameIsActive extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "supergroup_id": supergroupId,
       "username": username,
       "is_active": isActive,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ToggleSupergroupUsernameIsActive copyWith({
     int? supergroupId,
@@ -56,8 +57,11 @@ class ToggleSupergroupUsernameIsActive extends TdFunction {
     isActive: isActive ?? this.isActive,
   );
 
-  static const String constructor = 'toggleSupergroupUsernameIsActive';
-  
+  static const String objectType = 'toggleSupergroupUsernameIsActive';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

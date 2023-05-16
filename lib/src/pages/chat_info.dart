@@ -121,63 +121,63 @@ class _ChatInfoPageState extends State<ChatInfoPage> {
                 return _loading;
               }
 
-              bool isGroup =
-                  type.getConstructor() != tdlib.ChatTypePrivate.constructor;
+              bool isGroup = type is! tdlib.ChatTypePrivate;
               bool isChannel = false;
               String? description, username, phoneNumber;
               int? totalMembers;
-              if (type.getConstructor() ==
-                  tdlib.ChatTypeBasicGroup.constructor) {
-                id = (type as tdlib.ChatTypeBasicGroup).basicGroupId;
-                ref.watch(session.basicGroupsP);
-                ref.watch(session.basicGroupsFullInfoP);
-                tdlib.BasicGroup? bg = session.basicGroups[id];
-                tdlib.BasicGroupFullInfo? bgfi =
-                    session.basicGroupsFullInfo[id];
-                if (bg == null || bgfi == null) {
-                  session.basicGroups.get(id);
-                  session.basicGroupsFullInfo.get(id);
-                  return _loading;
-                }
+              switch (type) {
+                case tdlib.ChatTypePrivate():
+                  id = type.userId;
+                  ref.watch(session.usersInfoCacheP);
+                  ref.watch(session.usersFullInfoCacheP);
+                  tdlib.User? u = session.usersInfoCache[id];
+                  tdlib.UserFullInfo? ufi = session.usersFullInfoCache[id];
+                  if (u == null || ufi == null) {
+                    session.usersInfoCache.get(id);
+                    session.usersFullInfoCache.get(id);
+                    return _loading;
+                  }
+                  description = ufi.bio?.text;
+                  username = u.usernames?.activeUsernames[0];
+                  phoneNumber = u.phoneNumber.isEmpty ? null : u.phoneNumber;
+                  break;
+                case tdlib.ChatTypeBasicGroup():
+                  id = type.basicGroupId;
+                  ref.watch(session.basicGroupsP);
+                  ref.watch(session.basicGroupsFullInfoP);
+                  tdlib.BasicGroup? bg = session.basicGroups[id];
+                  tdlib.BasicGroupFullInfo? bgfi =
+                      session.basicGroupsFullInfo[id];
+                  if (bg == null || bgfi == null) {
+                    session.basicGroups.get(id);
+                    session.basicGroupsFullInfo.get(id);
+                    return _loading;
+                  }
 
-                description = bgfi.description;
-                totalMembers = bg.memberCount;
-                username = null;
-              } else if (type.getConstructor() ==
-                  tdlib.ChatTypeSupergroup.constructor) {
-                id = (type as tdlib.ChatTypeSupergroup).supergroupId;
-                ref.watch(session.supergroupsP);
-                ref.watch(session.supergroupsFullInfoP);
-                tdlib.Supergroup? sg = session.supergroups[id];
-                tdlib.SupergroupFullInfo? sgfi =
-                    session.supergroupsFullInfo[id];
-                if (sg == null || sgfi == null) {
-                  session.supergroups.get(id);
-                  session.supergroupsFullInfo.get(id);
-                  return _loading;
-                }
+                  description = bgfi.description;
+                  totalMembers = bg.memberCount;
+                  username = null;
+                  break;
+                case tdlib.ChatTypeSupergroup():
+                  id = type.supergroupId;
+                  ref.watch(session.supergroupsP);
+                  ref.watch(session.supergroupsFullInfoP);
+                  tdlib.Supergroup? sg = session.supergroups[id];
+                  tdlib.SupergroupFullInfo? sgfi =
+                      session.supergroupsFullInfo[id];
+                  if (sg == null || sgfi == null) {
+                    session.supergroups.get(id);
+                    session.supergroupsFullInfo.get(id);
+                    return _loading;
+                  }
 
-                description = sgfi.description;
-                totalMembers = sg.memberCount;
-                username = sg.usernames?.activeUsernames[0];
-                isChannel = sg.isChannel;
-              } else if (type.getConstructor() ==
-                  tdlib.ChatTypePrivate.constructor) {
-                id = (type as tdlib.ChatTypePrivate).userId;
-                ref.watch(session.usersInfoCacheP);
-                ref.watch(session.usersFullInfoCacheP);
-                tdlib.User? u = session.usersInfoCache[id];
-                tdlib.UserFullInfo? ufi = session.usersFullInfoCache[id];
-                if (u == null || ufi == null) {
-                  session.usersInfoCache.get(id);
-                  session.usersFullInfoCache.get(id);
-                  return _loading;
-                }
-                description = ufi.bio?.text;
-                username = u.usernames?.activeUsernames[0];
-                phoneNumber = u.phoneNumber.isEmpty ? null : u.phoneNumber;
-              } else {
-                return const Text("secret chats not supported yet");
+                  description = sgfi.description;
+                  totalMembers = sg.memberCount;
+                  username = sg.usernames?.activeUsernames[0];
+                  isChannel = sg.isChannel;
+                  break;
+                default:
+                  return const Text("secret chats are not supported yet");
               }
 
               return Column(

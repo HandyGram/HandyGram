@@ -177,15 +177,18 @@ class TgUserFullInfoCache extends ChangeNotifier {
 }
 
 void usersHandler(tdlib.TdObject object, TgSession session) {
-  if (object.getConstructor() == tdlib.UpdateUser.constructor) {
-    object as tdlib.UpdateUser;
-    session.usersInfoCache.updateFully(object.user);
-  } else if (object.getConstructor() == tdlib.UpdateUserStatus.constructor) {
-    object as tdlib.UpdateUserStatus;
-    session.usersInfoCache.update(object.userId, status: object.status);
-  } else if (object.getConstructor() == tdlib.UpdateUserFullInfo.constructor) {
-    object as tdlib.UpdateUserFullInfo;
-    session.usersFullInfoCache.updateFully(object.userId, object.userFullInfo);
+  switch (object) {
+    case tdlib.UpdateUser(user: var u):
+      session.usersInfoCache.updateFully(u);
+      break;
+    case tdlib.UpdateUserStatus(userId: var id, status: var status):
+      session.usersInfoCache.update(id, status: status);
+      break;
+    case tdlib.UpdateUserFullInfo(userId: var id, userFullInfo: var fi):
+      session.usersFullInfoCache.updateFully(id, fi);
+      break;
+    default:
+      return;
   }
 }
 

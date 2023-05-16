@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **SetDatabaseEncryptionKey** *(setDatabaseEncryptionKey)* - TDLib function
-  ///
-  /// Changes the database encryption key. Usually the encryption key is never changed and is stored in some OS keychain.
-  ///
-  /// * [newEncryptionKey]: New encryption key.
-  ///
-  /// [Ok] is returned on completion.
-class SetDatabaseEncryptionKey extends TdFunction {
+///
+/// Changes the database encryption key. Usually the encryption key is never changed and is stored in some OS keychain.
+///
+/// * [newEncryptionKey]: New encryption key.
+///
+/// [Ok] is returned on completion.
+final class SetDatabaseEncryptionKey extends TdFunction {
   
   /// **SetDatabaseEncryptionKey** *(setDatabaseEncryptionKey)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class SetDatabaseEncryptionKey extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "new_encryption_key": newEncryptionKey,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetDatabaseEncryptionKey copyWith({
     String? newEncryptionKey,
@@ -38,8 +39,11 @@ class SetDatabaseEncryptionKey extends TdFunction {
     newEncryptionKey: newEncryptionKey ?? this.newEncryptionKey,
   );
 
-  static const String constructor = 'setDatabaseEncryptionKey';
-  
+  static const String objectType = 'setDatabaseEncryptionKey';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

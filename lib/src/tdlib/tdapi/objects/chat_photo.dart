@@ -1,16 +1,16 @@
 part of '../tdapi.dart';
 
 /// **ChatPhoto** *(chatPhoto)* - basic class
-  ///
-  /// Describes a chat or user profile photo.
-  ///
-  /// * [id]: Unique photo identifier.
-  /// * [addedDate]: Point in time (Unix timestamp) when the photo has been added.
-  /// * [minithumbnail]: Photo minithumbnail; may be null *(optional)*.
-  /// * [sizes]: Available variants of the photo in JPEG format, in different size.
-  /// * [animation]: A big (640x640) animated variant of the photo in MPEG4 format; may be null *(optional)*.
-  /// * [smallAnimation]: A small (160x160) animated variant of the photo in MPEG4 format; may be null even the big animation is available *(optional)*.
-class ChatPhoto extends TdObject {
+///
+/// Describes a chat or user profile photo.
+///
+/// * [id]: Unique photo identifier.
+/// * [addedDate]: Point in time (Unix timestamp) when the photo has been added.
+/// * [minithumbnail]: Photo minithumbnail; may be null *(optional)*.
+/// * [sizes]: Available variants of the photo in JPEG format, in different size.
+/// * [animation]: A big (640x640) animated variant of the photo in MPEG4 format; may be null *(optional)*.
+/// * [smallAnimation]: A small (160x160) animated variant of the photo in MPEG4 format; may be null even the big animation is available *(optional)*.
+final class ChatPhoto extends TdObject {
   
   /// **ChatPhoto** *(chatPhoto)* - basic class
   ///
@@ -61,17 +61,18 @@ class ChatPhoto extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "added_date": addedDate,
       "minithumbnail": minithumbnail?.toJson(),
       "sizes": sizes.map((i) => i.toJson()).toList(),
       "animation": animation?.toJson(),
       "small_animation": smallAnimation?.toJson(),
-    };
-  }
+		};
+	}
+
   
   ChatPhoto copyWith({
     int? id,
@@ -89,8 +90,11 @@ class ChatPhoto extends TdObject {
     smallAnimation: smallAnimation ?? this.smallAnimation,
   );
 
-  static const String constructor = 'chatPhoto';
-  
+  static const String objectType = 'chatPhoto';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

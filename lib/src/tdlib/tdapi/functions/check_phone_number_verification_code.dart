@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **CheckPhoneNumberVerificationCode** *(checkPhoneNumberVerificationCode)* - TDLib function
-  ///
-  /// Checks the phone number verification code for Telegram Passport.
-  ///
-  /// * [code]: Verification code to check.
-  ///
-  /// [Ok] is returned on completion.
-class CheckPhoneNumberVerificationCode extends TdFunction {
+///
+/// Checks the phone number verification code for Telegram Passport.
+///
+/// * [code]: Verification code to check.
+///
+/// [Ok] is returned on completion.
+final class CheckPhoneNumberVerificationCode extends TdFunction {
   
   /// **CheckPhoneNumberVerificationCode** *(checkPhoneNumberVerificationCode)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class CheckPhoneNumberVerificationCode extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "code": code,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   CheckPhoneNumberVerificationCode copyWith({
     String? code,
@@ -38,8 +39,11 @@ class CheckPhoneNumberVerificationCode extends TdFunction {
     code: code ?? this.code,
   );
 
-  static const String constructor = 'checkPhoneNumberVerificationCode';
-  
+  static const String objectType = 'checkPhoneNumberVerificationCode';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

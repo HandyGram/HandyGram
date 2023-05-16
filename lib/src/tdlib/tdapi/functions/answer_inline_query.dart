@@ -1,19 +1,19 @@
 part of '../tdapi.dart';
 
 /// **AnswerInlineQuery** *(answerInlineQuery)* - TDLib function
-  ///
-  /// Sets the result of an inline query; for bots only.
-  ///
-  /// * [inlineQueryId]: Identifier of the inline query.
-  /// * [isPersonal]: Pass true if results may be cached and returned only for the user that sent the query. By default, results may be returned to any user who sends the same query.
-  /// * [results]: The results of the query.
-  /// * [cacheTime]: Allowed time to cache the results of the query, in seconds.
-  /// * [nextOffset]: Offset for the next inline query; pass an empty string if there are no more results.
-  /// * [switchPmText]: If non-empty, this text must be shown on the button that opens a private chat with the bot and sends a start message to the bot with the parameter switch_pm_parameter.
-  /// * [switchPmParameter]: The parameter for the bot start message.
-  ///
-  /// [Ok] is returned on completion.
-class AnswerInlineQuery extends TdFunction {
+///
+/// Sets the result of an inline query; for bots only.
+///
+/// * [inlineQueryId]: Identifier of the inline query.
+/// * [isPersonal]: Pass true if results may be cached and returned only for the user that sent the query. By default, results may be returned to any user who sends the same query.
+/// * [results]: The results of the query.
+/// * [cacheTime]: Allowed time to cache the results of the query, in seconds.
+/// * [nextOffset]: Offset for the next inline query; pass an empty string if there are no more results.
+/// * [switchPmText]: If non-empty, this text must be shown on the button that opens a private chat with the bot and sends a start message to the bot with the parameter switch_pm_parameter.
+/// * [switchPmParameter]: The parameter for the bot start message.
+///
+/// [Ok] is returned on completion.
+final class AnswerInlineQuery extends TdFunction {
   
   /// **AnswerInlineQuery** *(answerInlineQuery)* - TDLib function
   ///
@@ -61,8 +61,8 @@ class AnswerInlineQuery extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "inline_query_id": inlineQueryId,
       "is_personal": isPersonal,
       "results": results.map((i) => i.toJson()).toList(),
@@ -71,8 +71,9 @@ class AnswerInlineQuery extends TdFunction {
       "switch_pm_text": switchPmText,
       "switch_pm_parameter": switchPmParameter,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   AnswerInlineQuery copyWith({
     int? inlineQueryId,
@@ -92,8 +93,11 @@ class AnswerInlineQuery extends TdFunction {
     switchPmParameter: switchPmParameter ?? this.switchPmParameter,
   );
 
-  static const String constructor = 'answerInlineQuery';
-  
+  static const String objectType = 'answerInlineQuery';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

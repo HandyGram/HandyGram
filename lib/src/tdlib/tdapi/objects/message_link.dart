@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **MessageLink** *(messageLink)* - basic class
-  ///
-  /// Contains an HTTPS link to a message in a supergroup or channel, or a forum topic.
-  ///
-  /// * [link]: The link.
-  /// * [isPublic]: True, if the link will work for non-members of the chat.
-class MessageLink extends TdObject {
+///
+/// Contains an HTTPS link to a message in a supergroup or channel, or a forum topic.
+///
+/// * [link]: The link.
+/// * [isPublic]: True, if the link will work for non-members of the chat.
+final class MessageLink extends TdObject {
   
   /// **MessageLink** *(messageLink)* - basic class
   ///
@@ -45,13 +45,14 @@ class MessageLink extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "link": link,
       "is_public": isPublic,
-    };
-  }
+		};
+	}
+
   
   MessageLink copyWith({
     String? link,
@@ -65,8 +66,11 @@ class MessageLink extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'messageLink';
-  
+  static const String objectType = 'messageLink';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

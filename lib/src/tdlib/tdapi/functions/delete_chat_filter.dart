@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **DeleteChatFilter** *(deleteChatFilter)* - TDLib function
-  ///
-  /// Deletes existing chat filter.
-  ///
-  /// * [chatFilterId]: Chat filter identifier.
-  ///
-  /// [Ok] is returned on completion.
-class DeleteChatFilter extends TdFunction {
+///
+/// Deletes existing chat filter.
+///
+/// * [chatFilterId]: Chat filter identifier.
+///
+/// [Ok] is returned on completion.
+final class DeleteChatFilter extends TdFunction {
   
   /// **DeleteChatFilter** *(deleteChatFilter)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class DeleteChatFilter extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_filter_id": chatFilterId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   DeleteChatFilter copyWith({
     int? chatFilterId,
@@ -38,8 +39,11 @@ class DeleteChatFilter extends TdFunction {
     chatFilterId: chatFilterId ?? this.chatFilterId,
   );
 
-  static const String constructor = 'deleteChatFilter';
-  
+  static const String objectType = 'deleteChatFilter';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **ChatLists** *(chatLists)* - basic class
-  ///
-  /// Contains a list of chat lists.
-  ///
-  /// * [chatLists]: List of chat lists.
-class ChatLists extends TdObject {
+///
+/// Contains a list of chat lists.
+///
+/// * [chatLists]: List of chat lists.
+final class ChatLists extends TdObject {
   
   /// **ChatLists** *(chatLists)* - basic class
   ///
@@ -38,12 +38,13 @@ class ChatLists extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "chat_lists": chatLists.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   ChatLists copyWith({
     List<ChatList>? chatLists,
@@ -55,8 +56,11 @@ class ChatLists extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'chatLists';
-  
+  static const String objectType = 'chatLists';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

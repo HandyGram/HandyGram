@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **SearchUserByPhoneNumber** *(searchUserByPhoneNumber)* - TDLib function
-  ///
-  /// Searches a user by their phone number. Returns a 404 error if the user can't be found.
-  ///
-  /// * [phoneNumber]: Phone number to search for.
-  ///
-  /// [User] is returned on completion.
-class SearchUserByPhoneNumber extends TdFunction {
+///
+/// Searches a user by their phone number. Returns a 404 error if the user can't be found.
+///
+/// * [phoneNumber]: Phone number to search for.
+///
+/// [User] is returned on completion.
+final class SearchUserByPhoneNumber extends TdFunction {
   
   /// **SearchUserByPhoneNumber** *(searchUserByPhoneNumber)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class SearchUserByPhoneNumber extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "phone_number": phoneNumber,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SearchUserByPhoneNumber copyWith({
     String? phoneNumber,
@@ -38,8 +39,11 @@ class SearchUserByPhoneNumber extends TdFunction {
     phoneNumber: phoneNumber ?? this.phoneNumber,
   );
 
-  static const String constructor = 'searchUserByPhoneNumber';
-  
+  static const String objectType = 'searchUserByPhoneNumber';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

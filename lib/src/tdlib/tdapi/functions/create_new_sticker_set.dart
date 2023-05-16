@@ -1,18 +1,18 @@
 part of '../tdapi.dart';
 
 /// **CreateNewStickerSet** *(createNewStickerSet)* - TDLib function
-  ///
-  /// Creates a new sticker set. Returns the newly created sticker set.
-  ///
-  /// * [userId]: Sticker set owner; ignored for regular users.
-  /// * [title]: Sticker set title; 1-64 characters.
-  /// * [name]: Sticker set name. Can contain only English letters, digits and underscores. Must end with *"_by_.
-  /// * [stickerType]: Type of the stickers in the set.
-  /// * [stickers]: List of stickers to be added to the set; must be non-empty. All stickers must have the same format. For TGS stickers, uploadStickerFile must be used before the sticker is shown.
-  /// * [source]: Source of the sticker set; may be empty if unknown.
-  ///
-  /// [StickerSet] is returned on completion.
-class CreateNewStickerSet extends TdFunction {
+///
+/// Creates a new sticker set. Returns the newly created sticker set.
+///
+/// * [userId]: Sticker set owner; ignored for regular users.
+/// * [title]: Sticker set title; 1-64 characters.
+/// * [name]: Sticker set name. Can contain only English letters, digits and underscores. Must end with *"_by_.
+/// * [stickerType]: Type of the stickers in the set.
+/// * [stickers]: List of stickers to be added to the set; must be non-empty. All stickers must have the same format. For TGS stickers, uploadStickerFile must be used before the sticker is shown.
+/// * [source]: Source of the sticker set; may be empty if unknown.
+///
+/// [StickerSet] is returned on completion.
+final class CreateNewStickerSet extends TdFunction {
   
   /// **CreateNewStickerSet** *(createNewStickerSet)* - TDLib function
   ///
@@ -55,8 +55,8 @@ class CreateNewStickerSet extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "user_id": userId,
       "title": title,
       "name": name,
@@ -64,8 +64,9 @@ class CreateNewStickerSet extends TdFunction {
       "stickers": stickers.map((i) => i.toJson()).toList(),
       "source": source,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   CreateNewStickerSet copyWith({
     int? userId,
@@ -83,8 +84,11 @@ class CreateNewStickerSet extends TdFunction {
     source: source ?? this.source,
   );
 
-  static const String constructor = 'createNewStickerSet';
-  
+  static const String objectType = 'createNewStickerSet';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

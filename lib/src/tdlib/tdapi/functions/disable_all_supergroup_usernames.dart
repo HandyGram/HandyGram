@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **DisableAllSupergroupUsernames** *(disableAllSupergroupUsernames)* - TDLib function
-  ///
-  /// Disables all active non-editable usernames of a supergroup or channel, requires owner privileges in the supergroup or channel.
-  ///
-  /// * [supergroupId]: Identifier of the supergroup or channel.
-  ///
-  /// [Ok] is returned on completion.
-class DisableAllSupergroupUsernames extends TdFunction {
+///
+/// Disables all active non-editable usernames of a supergroup or channel, requires owner privileges in the supergroup or channel.
+///
+/// * [supergroupId]: Identifier of the supergroup or channel.
+///
+/// [Ok] is returned on completion.
+final class DisableAllSupergroupUsernames extends TdFunction {
   
   /// **DisableAllSupergroupUsernames** *(disableAllSupergroupUsernames)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class DisableAllSupergroupUsernames extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "supergroup_id": supergroupId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   DisableAllSupergroupUsernames copyWith({
     int? supergroupId,
@@ -38,8 +39,11 @@ class DisableAllSupergroupUsernames extends TdFunction {
     supergroupId: supergroupId ?? this.supergroupId,
   );
 
-  static const String constructor = 'disableAllSupergroupUsernames';
-  
+  static const String objectType = 'disableAllSupergroupUsernames';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

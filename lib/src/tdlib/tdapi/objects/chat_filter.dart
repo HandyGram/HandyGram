@@ -1,23 +1,23 @@
 part of '../tdapi.dart';
 
 /// **ChatFilter** *(chatFilter)* - basic class
-  ///
-  /// Represents a filter of user chats.
-  ///
-  /// * [title]: The title of the filter; 1-12 characters without line feeds.
-  /// * [iconName]: The chosen icon name for short filter representation. If non-empty, must be one of "All", "Unread", "Unmuted", "Bots", "Channels", "Groups", "Private", "Custom", "Setup", "Cat", "Crown",. "Favorite", "Flower", "Game", "Home", "Love", "Mask", "Party", "Sport", "Study", "Trade", "Travel", "Work", "Airplane", "Book", "Light", "Like", "Money", "Note", "Palette".. If empty, use getChatFilterDefaultIconName to get default icon name for the filter.
-  /// * [pinnedChatIds]: The chat identifiers of pinned chats in the filtered chat list. There can be up to getOption("chat_filter_chosen_chat_count_max") pinned and always included non-secret chats and the same number of secret chats, but the limit can be increased with Telegram Premium.
-  /// * [includedChatIds]: The chat identifiers of always included chats in the filtered chat list. There can be up to getOption("chat_filter_chosen_chat_count_max") pinned and always included non-secret chats and the same number of secret chats, but the limit can be increased with Telegram Premium.
-  /// * [excludedChatIds]: The chat identifiers of always excluded chats in the filtered chat list. There can be up to getOption("chat_filter_chosen_chat_count_max") always excluded non-secret chats and the same number of secret chats, but the limit can be increased with Telegram Premium.
-  /// * [excludeMuted]: True, if muted chats need to be excluded.
-  /// * [excludeRead]: True, if read chats need to be excluded.
-  /// * [excludeArchived]: True, if archived chats need to be excluded.
-  /// * [includeContacts]: True, if contacts need to be included.
-  /// * [includeNonContacts]: True, if non-contact users need to be included.
-  /// * [includeBots]: True, if bots need to be included.
-  /// * [includeGroups]: True, if basic groups and supergroups need to be included.
-  /// * [includeChannels]: True, if channels need to be included.
-class ChatFilter extends TdObject {
+///
+/// Represents a filter of user chats.
+///
+/// * [title]: The title of the filter; 1-12 characters without line feeds.
+/// * [iconName]: The chosen icon name for short filter representation. If non-empty, must be one of "All", "Unread", "Unmuted", "Bots", "Channels", "Groups", "Private", "Custom", "Setup", "Cat", "Crown",. "Favorite", "Flower", "Game", "Home", "Love", "Mask", "Party", "Sport", "Study", "Trade", "Travel", "Work", "Airplane", "Book", "Light", "Like", "Money", "Note", "Palette".. If empty, use getChatFilterDefaultIconName to get default icon name for the filter.
+/// * [pinnedChatIds]: The chat identifiers of pinned chats in the filtered chat list. There can be up to getOption("chat_filter_chosen_chat_count_max") pinned and always included non-secret chats and the same number of secret chats, but the limit can be increased with Telegram Premium.
+/// * [includedChatIds]: The chat identifiers of always included chats in the filtered chat list. There can be up to getOption("chat_filter_chosen_chat_count_max") pinned and always included non-secret chats and the same number of secret chats, but the limit can be increased with Telegram Premium.
+/// * [excludedChatIds]: The chat identifiers of always excluded chats in the filtered chat list. There can be up to getOption("chat_filter_chosen_chat_count_max") always excluded non-secret chats and the same number of secret chats, but the limit can be increased with Telegram Premium.
+/// * [excludeMuted]: True, if muted chats need to be excluded.
+/// * [excludeRead]: True, if read chats need to be excluded.
+/// * [excludeArchived]: True, if archived chats need to be excluded.
+/// * [includeContacts]: True, if contacts need to be included.
+/// * [includeNonContacts]: True, if non-contact users need to be included.
+/// * [includeBots]: True, if bots need to be included.
+/// * [includeGroups]: True, if basic groups and supergroups need to be included.
+/// * [includeChannels]: True, if channels need to be included.
+final class ChatFilter extends TdObject {
   
   /// **ChatFilter** *(chatFilter)* - basic class
   ///
@@ -122,9 +122,9 @@ class ChatFilter extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "title": title,
       "icon_name": iconName,
       "pinned_chat_ids": pinnedChatIds.map((i) => i).toList(),
@@ -138,8 +138,9 @@ class ChatFilter extends TdObject {
       "include_bots": includeBots,
       "include_groups": includeGroups,
       "include_channels": includeChannels,
-    };
-  }
+		};
+	}
+
   
   ChatFilter copyWith({
     String? title,
@@ -175,8 +176,11 @@ class ChatFilter extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'chatFilter';
-  
+  static const String objectType = 'chatFilter';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

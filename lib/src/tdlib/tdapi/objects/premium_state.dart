@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **PremiumState** *(premiumState)* - basic class
-  ///
-  /// Contains state of Telegram Premium subscription and promotion videos for Premium features.
-  ///
-  /// * [state]: Text description of the state of the current Premium subscription; may be empty if the current user has no Telegram Premium subscription.
-  /// * [paymentOptions]: The list of available options for buying Telegram Premium.
-  /// * [animations]: The list of available promotion animations for Premium features.
-class PremiumState extends TdObject {
+///
+/// Contains state of Telegram Premium subscription and promotion videos for Premium features.
+///
+/// * [state]: Text description of the state of the current Premium subscription; may be empty if the current user has no Telegram Premium subscription.
+/// * [paymentOptions]: The list of available options for buying Telegram Premium.
+/// * [animations]: The list of available promotion animations for Premium features.
+final class PremiumState extends TdObject {
   
   /// **PremiumState** *(premiumState)* - basic class
   ///
@@ -52,14 +52,15 @@ class PremiumState extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "state": state.toJson(),
       "payment_options": paymentOptions.map((i) => i.toJson()).toList(),
       "animations": animations.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   PremiumState copyWith({
     FormattedText? state,
@@ -75,8 +76,11 @@ class PremiumState extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'premiumState';
-  
+  static const String objectType = 'premiumState';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

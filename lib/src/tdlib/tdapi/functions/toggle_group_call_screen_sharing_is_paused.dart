@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **ToggleGroupCallScreenSharingIsPaused** *(toggleGroupCallScreenSharingIsPaused)* - TDLib function
-  ///
-  /// Pauses or unpauses screen sharing in a joined group call.
-  ///
-  /// * [groupCallId]: Group call identifier.
-  /// * [isPaused]: Pass true to pause screen sharing; pass false to unpause it.
-  ///
-  /// [Ok] is returned on completion.
-class ToggleGroupCallScreenSharingIsPaused extends TdFunction {
+///
+/// Pauses or unpauses screen sharing in a joined group call.
+///
+/// * [groupCallId]: Group call identifier.
+/// * [isPaused]: Pass true to pause screen sharing; pass false to unpause it.
+///
+/// [Ok] is returned on completion.
+final class ToggleGroupCallScreenSharingIsPaused extends TdFunction {
   
   /// **ToggleGroupCallScreenSharingIsPaused** *(toggleGroupCallScreenSharingIsPaused)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class ToggleGroupCallScreenSharingIsPaused extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "group_call_id": groupCallId,
       "is_paused": isPaused,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ToggleGroupCallScreenSharingIsPaused copyWith({
     int? groupCallId,
@@ -47,8 +48,11 @@ class ToggleGroupCallScreenSharingIsPaused extends TdFunction {
     isPaused: isPaused ?? this.isPaused,
   );
 
-  static const String constructor = 'toggleGroupCallScreenSharingIsPaused';
-  
+  static const String objectType = 'toggleGroupCallScreenSharingIsPaused';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

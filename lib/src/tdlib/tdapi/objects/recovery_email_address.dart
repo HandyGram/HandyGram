@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **RecoveryEmailAddress** *(recoveryEmailAddress)* - basic class
-  ///
-  /// Contains information about the current recovery email address.
-  ///
-  /// * [recoveryEmailAddress]: Recovery email address.
-class RecoveryEmailAddress extends TdObject {
+///
+/// Contains information about the current recovery email address.
+///
+/// * [recoveryEmailAddress]: Recovery email address.
+final class RecoveryEmailAddress extends TdObject {
   
   /// **RecoveryEmailAddress** *(recoveryEmailAddress)* - basic class
   ///
@@ -38,12 +38,13 @@ class RecoveryEmailAddress extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "recovery_email_address": recoveryEmailAddress,
-    };
-  }
+		};
+	}
+
   
   RecoveryEmailAddress copyWith({
     String? recoveryEmailAddress,
@@ -55,8 +56,11 @@ class RecoveryEmailAddress extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'recoveryEmailAddress';
-  
+  static const String objectType = 'recoveryEmailAddress';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

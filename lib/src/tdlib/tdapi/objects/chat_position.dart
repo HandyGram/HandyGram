@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **ChatPosition** *(chatPosition)* - basic class
-  ///
-  /// Describes a position of a chat in a chat list.
-  ///
-  /// * [list]: The chat list.
-  /// * [order]: A parameter used to determine order of the chat in the chat list. Chats must be sorted by the pair (order, chat.id) in descending order.
-  /// * [isPinned]: True, if the chat is pinned in the chat list.
-  /// * [source]: Source of the chat in the chat list; may be null *(optional)*.
-class ChatPosition extends TdObject {
+///
+/// Describes a position of a chat in a chat list.
+///
+/// * [list]: The chat list.
+/// * [order]: A parameter used to determine order of the chat in the chat list. Chats must be sorted by the pair (order, chat.id) in descending order.
+/// * [isPinned]: True, if the chat is pinned in the chat list.
+/// * [source]: Source of the chat in the chat list; may be null *(optional)*.
+final class ChatPosition extends TdObject {
   
   /// **ChatPosition** *(chatPosition)* - basic class
   ///
@@ -47,15 +47,16 @@ class ChatPosition extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "list": list.toJson(),
       "order": order,
       "is_pinned": isPinned,
       "source": source?.toJson(),
-    };
-  }
+		};
+	}
+
   
   ChatPosition copyWith({
     ChatList? list,
@@ -69,8 +70,11 @@ class ChatPosition extends TdObject {
     source: source ?? this.source,
   );
 
-  static const String constructor = 'chatPosition';
-  
+  static const String objectType = 'chatPosition';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

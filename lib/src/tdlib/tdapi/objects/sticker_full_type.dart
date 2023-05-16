@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **StickerFullType** *(stickerFullType)* - parent
-  ///
-  /// Contains full information about sticker type.
-class StickerFullType extends TdObject {
+///
+/// Contains full information about sticker type.
+sealed class StickerFullType extends TdObject {
   
   /// **StickerFullType** *(stickerFullType)* - parent
   ///
@@ -16,39 +16,42 @@ class StickerFullType extends TdObject {
   /// * [StickerFullTypeCustomEmoji]
   factory StickerFullType.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case StickerFullTypeRegular.constructor:
+      case StickerFullTypeRegular.objectType:
         return StickerFullTypeRegular.fromJson(json);
-      case StickerFullTypeMask.constructor:
+      case StickerFullTypeMask.objectType:
         return StickerFullTypeMask.fromJson(json);
-      case StickerFullTypeCustomEmoji.constructor:
+      case StickerFullTypeCustomEmoji.objectType:
         return StickerFullTypeCustomEmoji.fromJson(json);
       default:
-        return const StickerFullType();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of StickerFullType)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  StickerFullType copyWith() => const StickerFullType();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'stickerFullType';
   
+  StickerFullType copyWith();
+
+  static const String objectType = 'stickerFullType';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **StickerFullTypeRegular** *(stickerFullTypeRegular)* - child of StickerFullType
-  ///
-  /// The sticker is a regular sticker.
-  ///
-  /// * [premiumAnimation]: Premium animation of the sticker; may be null. If present, only Telegram Premium users can use the sticker *(optional)*.
-class StickerFullTypeRegular extends StickerFullType {
+///
+/// The sticker is a regular sticker.
+///
+/// * [premiumAnimation]: Premium animation of the sticker; may be null. If present, only Telegram Premium users can use the sticker *(optional)*.
+final class StickerFullTypeRegular extends StickerFullType {
   
   /// **StickerFullTypeRegular** *(stickerFullTypeRegular)* - child of StickerFullType
   ///
@@ -69,12 +72,13 @@ class StickerFullTypeRegular extends StickerFullType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "premium_animation": premiumAnimation?.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   StickerFullTypeRegular copyWith({
@@ -83,19 +87,22 @@ class StickerFullTypeRegular extends StickerFullType {
     premiumAnimation: premiumAnimation ?? this.premiumAnimation,
   );
 
-  static const String constructor = 'stickerFullTypeRegular';
-  
+  static const String objectType = 'stickerFullTypeRegular';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **StickerFullTypeMask** *(stickerFullTypeMask)* - child of StickerFullType
-  ///
-  /// The sticker is a mask in WEBP format to be placed on photos or videos.
-  ///
-  /// * [maskPosition]: Position where the mask is placed; may be null *(optional)*.
-class StickerFullTypeMask extends StickerFullType {
+///
+/// The sticker is a mask in WEBP format to be placed on photos or videos.
+///
+/// * [maskPosition]: Position where the mask is placed; may be null *(optional)*.
+final class StickerFullTypeMask extends StickerFullType {
   
   /// **StickerFullTypeMask** *(stickerFullTypeMask)* - child of StickerFullType
   ///
@@ -116,12 +123,13 @@ class StickerFullTypeMask extends StickerFullType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "mask_position": maskPosition?.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   StickerFullTypeMask copyWith({
@@ -130,20 +138,23 @@ class StickerFullTypeMask extends StickerFullType {
     maskPosition: maskPosition ?? this.maskPosition,
   );
 
-  static const String constructor = 'stickerFullTypeMask';
-  
+  static const String objectType = 'stickerFullTypeMask';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **StickerFullTypeCustomEmoji** *(stickerFullTypeCustomEmoji)* - child of StickerFullType
-  ///
-  /// The sticker is a custom emoji to be used inside message text and caption. Currently, only Telegram Premium users can use custom emoji.
-  ///
-  /// * [customEmojiId]: Identifier of the custom emoji.
-  /// * [needsRepainting]: True, if the sticker must be repainted to a text color in messages, the color of the Telegram Premium badge in emoji status, or another appropriate color in other places.
-class StickerFullTypeCustomEmoji extends StickerFullType {
+///
+/// The sticker is a custom emoji to be used inside message text and caption. Currently, only Telegram Premium users can use custom emoji.
+///
+/// * [customEmojiId]: Identifier of the custom emoji.
+/// * [needsRepainting]: True, if the sticker must be repainted to a text color in messages, the color of the Telegram Premium badge in emoji status, or another appropriate color in other places.
+final class StickerFullTypeCustomEmoji extends StickerFullType {
   
   /// **StickerFullTypeCustomEmoji** *(stickerFullTypeCustomEmoji)* - child of StickerFullType
   ///
@@ -170,13 +181,14 @@ class StickerFullTypeCustomEmoji extends StickerFullType {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "custom_emoji_id": customEmojiId,
       "needs_repainting": needsRepainting,
-    };
-  }
+		};
+	}
+
   
   @override
   StickerFullTypeCustomEmoji copyWith({
@@ -187,8 +199,11 @@ class StickerFullTypeCustomEmoji extends StickerFullType {
     needsRepainting: needsRepainting ?? this.needsRepainting,
   );
 
-  static const String constructor = 'stickerFullTypeCustomEmoji';
-  
+  static const String objectType = 'stickerFullTypeCustomEmoji';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

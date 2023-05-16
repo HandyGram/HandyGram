@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **SendPhoneNumberConfirmationCode** *(sendPhoneNumberConfirmationCode)* - TDLib function
-  ///
-  /// Sends phone number confirmation code to handle links of the type internalLinkTypePhoneNumberConfirmation.
-  ///
-  /// * [hash]: Hash value from the link.
-  /// * [phoneNumber]: Phone number value from the link.
-  /// * [settings]: Settings for the authentication of the user's phone number; pass null to use default settings *(optional)*.
-  ///
-  /// [AuthenticationCodeInfo] is returned on completion.
-class SendPhoneNumberConfirmationCode extends TdFunction {
+///
+/// Sends phone number confirmation code to handle links of the type internalLinkTypePhoneNumberConfirmation.
+///
+/// * [hash]: Hash value from the link.
+/// * [phoneNumber]: Phone number value from the link.
+/// * [settings]: Settings for the authentication of the user's phone number; pass null to use default settings *(optional)*.
+///
+/// [AuthenticationCodeInfo] is returned on completion.
+final class SendPhoneNumberConfirmationCode extends TdFunction {
   
   /// **SendPhoneNumberConfirmationCode** *(sendPhoneNumberConfirmationCode)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class SendPhoneNumberConfirmationCode extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "hash": hash,
       "phone_number": phoneNumber,
       "settings": settings?.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SendPhoneNumberConfirmationCode copyWith({
     String? hash,
@@ -56,8 +57,11 @@ class SendPhoneNumberConfirmationCode extends TdFunction {
     settings: settings ?? this.settings,
   );
 
-  static const String constructor = 'sendPhoneNumberConfirmationCode';
-  
+  static const String objectType = 'sendPhoneNumberConfirmationCode';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

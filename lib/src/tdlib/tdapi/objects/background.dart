@@ -1,16 +1,16 @@
 part of '../tdapi.dart';
 
 /// **Background** *(background)* - basic class
-  ///
-  /// Describes a chat background.
-  ///
-  /// * [id]: Unique background identifier.
-  /// * [isDefault]: True, if this is one of default backgrounds.
-  /// * [isDark]: True, if the background is dark and is recommended to be used with dark theme.
-  /// * [name]: Unique background name.
-  /// * [document]: Document with the background; may be null. Null only for filled backgrounds *(optional)*.
-  /// * [type]: Type of the background.
-class Background extends TdObject {
+///
+/// Describes a chat background.
+///
+/// * [id]: Unique background identifier.
+/// * [isDefault]: True, if this is one of default backgrounds.
+/// * [isDark]: True, if the background is dark and is recommended to be used with dark theme.
+/// * [name]: Unique background name.
+/// * [document]: Document with the background; may be null. Null only for filled backgrounds *(optional)*.
+/// * [type]: Type of the background.
+final class Background extends TdObject {
   
   /// **Background** *(background)* - basic class
   ///
@@ -73,17 +73,18 @@ class Background extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "is_default": isDefault,
       "is_dark": isDark,
       "name": name,
       "document": document?.toJson(),
       "type": type.toJson(),
-    };
-  }
+		};
+	}
+
   
   Background copyWith({
     int? id,
@@ -105,8 +106,11 @@ class Background extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'background';
-  
+  static const String objectType = 'background';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

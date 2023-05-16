@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **SetInactiveSessionTtl** *(setInactiveSessionTtl)* - TDLib function
-  ///
-  /// Changes the period of inactivity after which sessions will automatically be terminated.
-  ///
-  /// * [inactiveSessionTtlDays]: New number of days of inactivity before sessions will be automatically terminated; 1-366 days.
-  ///
-  /// [Ok] is returned on completion.
-class SetInactiveSessionTtl extends TdFunction {
+///
+/// Changes the period of inactivity after which sessions will automatically be terminated.
+///
+/// * [inactiveSessionTtlDays]: New number of days of inactivity before sessions will be automatically terminated; 1-366 days.
+///
+/// [Ok] is returned on completion.
+final class SetInactiveSessionTtl extends TdFunction {
   
   /// **SetInactiveSessionTtl** *(setInactiveSessionTtl)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class SetInactiveSessionTtl extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "inactive_session_ttl_days": inactiveSessionTtlDays,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetInactiveSessionTtl copyWith({
     int? inactiveSessionTtlDays,
@@ -38,8 +39,11 @@ class SetInactiveSessionTtl extends TdFunction {
     inactiveSessionTtlDays: inactiveSessionTtlDays ?? this.inactiveSessionTtlDays,
   );
 
-  static const String constructor = 'setInactiveSessionTtl';
-  
+  static const String objectType = 'setInactiveSessionTtl';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

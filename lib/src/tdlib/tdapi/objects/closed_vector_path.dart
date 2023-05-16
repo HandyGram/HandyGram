@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **ClosedVectorPath** *(closedVectorPath)* - basic class
-  ///
-  /// Represents a closed vector path. The path begins at the end point of the last command.
-  ///
-  /// * [commands]: List of vector path commands.
-class ClosedVectorPath extends TdObject {
+///
+/// Represents a closed vector path. The path begins at the end point of the last command.
+///
+/// * [commands]: List of vector path commands.
+final class ClosedVectorPath extends TdObject {
   
   /// **ClosedVectorPath** *(closedVectorPath)* - basic class
   ///
@@ -26,12 +26,13 @@ class ClosedVectorPath extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "commands": commands.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   ClosedVectorPath copyWith({
     List<VectorPathCommand>? commands,
@@ -39,8 +40,11 @@ class ClosedVectorPath extends TdObject {
     commands: commands ?? this.commands,
   );
 
-  static const String constructor = 'closedVectorPath';
-  
+  static const String objectType = 'closedVectorPath';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

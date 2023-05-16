@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **SendCallDebugInformation** *(sendCallDebugInformation)* - TDLib function
-  ///
-  /// Sends debug information for a call to Telegram servers.
-  ///
-  /// * [callId]: Call identifier.
-  /// * [debugInformation]: Debug information in application-specific format.
-  ///
-  /// [Ok] is returned on completion.
-class SendCallDebugInformation extends TdFunction {
+///
+/// Sends debug information for a call to Telegram servers.
+///
+/// * [callId]: Call identifier.
+/// * [debugInformation]: Debug information in application-specific format.
+///
+/// [Ok] is returned on completion.
+final class SendCallDebugInformation extends TdFunction {
   
   /// **SendCallDebugInformation** *(sendCallDebugInformation)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class SendCallDebugInformation extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "call_id": callId,
       "debug_information": debugInformation,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SendCallDebugInformation copyWith({
     int? callId,
@@ -47,8 +48,11 @@ class SendCallDebugInformation extends TdFunction {
     debugInformation: debugInformation ?? this.debugInformation,
   );
 
-  static const String constructor = 'sendCallDebugInformation';
-  
+  static const String objectType = 'sendCallDebugInformation';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

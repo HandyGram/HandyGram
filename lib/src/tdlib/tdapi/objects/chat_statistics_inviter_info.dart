@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **ChatStatisticsInviterInfo** *(chatStatisticsInviterInfo)* - basic class
-  ///
-  /// Contains statistics about number of new members invited by a user.
-  ///
-  /// * [userId]: User identifier.
-  /// * [addedMemberCount]: Number of new members invited by the user.
-class ChatStatisticsInviterInfo extends TdObject {
+///
+/// Contains statistics about number of new members invited by a user.
+///
+/// * [userId]: User identifier.
+/// * [addedMemberCount]: Number of new members invited by the user.
+final class ChatStatisticsInviterInfo extends TdObject {
   
   /// **ChatStatisticsInviterInfo** *(chatStatisticsInviterInfo)* - basic class
   ///
@@ -33,13 +33,14 @@ class ChatStatisticsInviterInfo extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "user_id": userId,
       "added_member_count": addedMemberCount,
-    };
-  }
+		};
+	}
+
   
   ChatStatisticsInviterInfo copyWith({
     int? userId,
@@ -49,8 +50,11 @@ class ChatStatisticsInviterInfo extends TdObject {
     addedMemberCount: addedMemberCount ?? this.addedMemberCount,
   );
 
-  static const String constructor = 'chatStatisticsInviterInfo';
-  
+  static const String objectType = 'chatStatisticsInviterInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

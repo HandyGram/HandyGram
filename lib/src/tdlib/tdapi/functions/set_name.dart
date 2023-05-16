@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **SetName** *(setName)* - TDLib function
-  ///
-  /// Changes the first and last name of the current user.
-  ///
-  /// * [firstName]: The new value of the first name for the current user; 1-64 characters.
-  /// * [lastName]: The new value of the optional last name for the current user; 0-64 characters.
-  ///
-  /// [Ok] is returned on completion.
-class SetName extends TdFunction {
+///
+/// Changes the first and last name of the current user.
+///
+/// * [firstName]: The new value of the first name for the current user; 1-64 characters.
+/// * [lastName]: The new value of the optional last name for the current user; 0-64 characters.
+///
+/// [Ok] is returned on completion.
+final class SetName extends TdFunction {
   
   /// **SetName** *(setName)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class SetName extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "first_name": firstName,
       "last_name": lastName,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetName copyWith({
     String? firstName,
@@ -47,8 +48,11 @@ class SetName extends TdFunction {
     lastName: lastName ?? this.lastName,
   );
 
-  static const String constructor = 'setName';
-  
+  static const String objectType = 'setName';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **GetChatMember** *(getChatMember)* - TDLib function
-  ///
-  /// Returns information about a single member of a chat.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [memberId]: Member identifier.
-  ///
-  /// [ChatMember] is returned on completion.
-class GetChatMember extends TdFunction {
+///
+/// Returns information about a single member of a chat.
+///
+/// * [chatId]: Chat identifier.
+/// * [memberId]: Member identifier.
+///
+/// [ChatMember] is returned on completion.
+final class GetChatMember extends TdFunction {
   
   /// **GetChatMember** *(getChatMember)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class GetChatMember extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "member_id": memberId.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetChatMember copyWith({
     int? chatId,
@@ -47,8 +48,11 @@ class GetChatMember extends TdFunction {
     memberId: memberId ?? this.memberId,
   );
 
-  static const String constructor = 'getChatMember';
-  
+  static const String objectType = 'getChatMember';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

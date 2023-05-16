@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **SetChatAvailableReactions** *(setChatAvailableReactions)* - TDLib function
-  ///
-  /// Changes reactions, available in a chat. Available for basic groups, supergroups, and channels. Requires can_change_info administrator right.
-  ///
-  /// * [chatId]: Identifier of the chat.
-  /// * [availableReactions]: Reactions available in the chat. All emoji reactions must be active.
-  ///
-  /// [Ok] is returned on completion.
-class SetChatAvailableReactions extends TdFunction {
+///
+/// Changes reactions, available in a chat. Available for basic groups, supergroups, and channels. Requires can_change_info administrator right.
+///
+/// * [chatId]: Identifier of the chat.
+/// * [availableReactions]: Reactions available in the chat. All emoji reactions must be active.
+///
+/// [Ok] is returned on completion.
+final class SetChatAvailableReactions extends TdFunction {
   
   /// **SetChatAvailableReactions** *(setChatAvailableReactions)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class SetChatAvailableReactions extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "available_reactions": availableReactions.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetChatAvailableReactions copyWith({
     int? chatId,
@@ -47,8 +48,11 @@ class SetChatAvailableReactions extends TdFunction {
     availableReactions: availableReactions ?? this.availableReactions,
   );
 
-  static const String constructor = 'setChatAvailableReactions';
-  
+  static const String objectType = 'setChatAvailableReactions';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetJsonValue** *(getJsonValue)* - TDLib function
-  ///
-  /// Converts a JSON-serialized string to corresponding JsonValue object. Can be called synchronously.
-  ///
-  /// * [json]: The JSON-serialized string.
-  ///
-  /// [JsonValue] is returned on completion.
-class GetJsonValue extends TdFunction {
+///
+/// Converts a JSON-serialized string to corresponding JsonValue object. Can be called synchronously.
+///
+/// * [json]: The JSON-serialized string.
+///
+/// [JsonValue] is returned on completion.
+final class GetJsonValue extends TdFunction {
   
   /// **GetJsonValue** *(getJsonValue)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetJsonValue extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "json": json,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetJsonValue copyWith({
     String? json,
@@ -38,8 +39,11 @@ class GetJsonValue extends TdFunction {
     json: json ?? this.json,
   );
 
-  static const String constructor = 'getJsonValue';
-  
+  static const String objectType = 'getJsonValue';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

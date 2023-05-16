@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **MessageCopyOptions** *(messageCopyOptions)* - basic class
-  ///
-  /// Options to be used when a message content is copied without reference to the original sender. Service messages and messageInvoice can't be copied.
-  ///
-  /// * [sendCopy]: True, if content of the message needs to be copied without reference to the original sender. Always true if the message is forwarded to a secret chat or is local.
-  /// * [replaceCaption]: True, if media caption of the message copy needs to be replaced. Ignored if send_copy is false.
-  /// * [newCaption]: New message caption; pass null to copy message without caption. Ignored if replace_caption is false *(optional)*.
-class MessageCopyOptions extends TdObject {
+///
+/// Options to be used when a message content is copied without reference to the original sender. Service messages and messageInvoice can't be copied.
+///
+/// * [sendCopy]: True, if content of the message needs to be copied without reference to the original sender. Always true if the message is forwarded to a secret chat or is local.
+/// * [replaceCaption]: True, if media caption of the message copy needs to be replaced. Ignored if send_copy is false.
+/// * [newCaption]: New message caption; pass null to copy message without caption. Ignored if replace_caption is false *(optional)*.
+final class MessageCopyOptions extends TdObject {
   
   /// **MessageCopyOptions** *(messageCopyOptions)* - basic class
   ///
@@ -40,14 +40,15 @@ class MessageCopyOptions extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "send_copy": sendCopy,
       "replace_caption": replaceCaption,
       "new_caption": newCaption?.toJson(),
-    };
-  }
+		};
+	}
+
   
   MessageCopyOptions copyWith({
     bool? sendCopy,
@@ -59,8 +60,11 @@ class MessageCopyOptions extends TdObject {
     newCaption: newCaption ?? this.newCaption,
   );
 
-  static const String constructor = 'messageCopyOptions';
-  
+  static const String objectType = 'messageCopyOptions';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

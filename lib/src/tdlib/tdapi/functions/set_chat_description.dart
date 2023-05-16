@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **SetChatDescription** *(setChatDescription)* - TDLib function
-  ///
-  /// Changes information about a chat. Available for basic groups, supergroups, and channels. Requires can_change_info administrator right.
-  ///
-  /// * [chatId]: Identifier of the chat.
-  /// * [description]: New chat description; 0-255 characters.
-  ///
-  /// [Ok] is returned on completion.
-class SetChatDescription extends TdFunction {
+///
+/// Changes information about a chat. Available for basic groups, supergroups, and channels. Requires can_change_info administrator right.
+///
+/// * [chatId]: Identifier of the chat.
+/// * [description]: New chat description; 0-255 characters.
+///
+/// [Ok] is returned on completion.
+final class SetChatDescription extends TdFunction {
   
   /// **SetChatDescription** *(setChatDescription)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class SetChatDescription extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "description": description,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetChatDescription copyWith({
     int? chatId,
@@ -47,8 +48,11 @@ class SetChatDescription extends TdFunction {
     description: description ?? this.description,
   );
 
-  static const String constructor = 'setChatDescription';
-  
+  static const String objectType = 'setChatDescription';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

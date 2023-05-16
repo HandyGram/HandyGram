@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **ForumTopicIcon** *(forumTopicIcon)* - basic class
-  ///
-  /// Describes a forum topic icon.
-  ///
-  /// * [color]: Color of the topic icon in RGB format.
-  /// * [customEmojiId]: Unique identifier of the custom emoji shown on the topic icon; 0 if none.
-class ForumTopicIcon extends TdObject {
+///
+/// Describes a forum topic icon.
+///
+/// * [color]: Color of the topic icon in RGB format.
+/// * [customEmojiId]: Unique identifier of the custom emoji shown on the topic icon; 0 if none.
+final class ForumTopicIcon extends TdObject {
   
   /// **ForumTopicIcon** *(forumTopicIcon)* - basic class
   ///
@@ -33,13 +33,14 @@ class ForumTopicIcon extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "color": color,
       "custom_emoji_id": customEmojiId,
-    };
-  }
+		};
+	}
+
   
   ForumTopicIcon copyWith({
     int? color,
@@ -49,8 +50,11 @@ class ForumTopicIcon extends TdObject {
     customEmojiId: customEmojiId ?? this.customEmojiId,
   );
 
-  static const String constructor = 'forumTopicIcon';
-  
+  static const String objectType = 'forumTopicIcon';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,16 +1,16 @@
 part of '../tdapi.dart';
 
 /// **SendCallRating** *(sendCallRating)* - TDLib function
-  ///
-  /// Sends a call rating.
-  ///
-  /// * [callId]: Call identifier.
-  /// * [rating]: Call rating; 1-5.
-  /// * [comment]: An optional user comment if the rating is less than 5.
-  /// * [problems]: List of the exact types of problems with the call, specified by the user.
-  ///
-  /// [Ok] is returned on completion.
-class SendCallRating extends TdFunction {
+///
+/// Sends a call rating.
+///
+/// * [callId]: Call identifier.
+/// * [rating]: Call rating; 1-5.
+/// * [comment]: An optional user comment if the rating is less than 5.
+/// * [problems]: List of the exact types of problems with the call, specified by the user.
+///
+/// [Ok] is returned on completion.
+final class SendCallRating extends TdFunction {
   
   /// **SendCallRating** *(sendCallRating)* - TDLib function
   ///
@@ -43,15 +43,16 @@ class SendCallRating extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "call_id": callId,
       "rating": rating,
       "comment": comment,
       "problems": problems.map((i) => i.toJson()).toList(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SendCallRating copyWith({
     int? callId,
@@ -65,8 +66,11 @@ class SendCallRating extends TdFunction {
     problems: problems ?? this.problems,
   );
 
-  static const String constructor = 'sendCallRating';
-  
+  static const String objectType = 'sendCallRating';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

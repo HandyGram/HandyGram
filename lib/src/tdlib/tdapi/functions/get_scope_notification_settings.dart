@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetScopeNotificationSettings** *(getScopeNotificationSettings)* - TDLib function
-  ///
-  /// Returns the notification settings for chats of a given type.
-  ///
-  /// * [scope]: Types of chats for which to return the notification settings information.
-  ///
-  /// [ScopeNotificationSettings] is returned on completion.
-class GetScopeNotificationSettings extends TdFunction {
+///
+/// Returns the notification settings for chats of a given type.
+///
+/// * [scope]: Types of chats for which to return the notification settings information.
+///
+/// [ScopeNotificationSettings] is returned on completion.
+final class GetScopeNotificationSettings extends TdFunction {
   
   /// **GetScopeNotificationSettings** *(getScopeNotificationSettings)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetScopeNotificationSettings extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "scope": scope.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetScopeNotificationSettings copyWith({
     NotificationSettingsScope? scope,
@@ -38,8 +39,11 @@ class GetScopeNotificationSettings extends TdFunction {
     scope: scope ?? this.scope,
   );
 
-  static const String constructor = 'getScopeNotificationSettings';
-  
+  static const String objectType = 'getScopeNotificationSettings';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **SetChatClientData** *(setChatClientData)* - TDLib function
-  ///
-  /// Changes application-specific data associated with a chat.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [clientData]: New value of client_data.
-  ///
-  /// [Ok] is returned on completion.
-class SetChatClientData extends TdFunction {
+///
+/// Changes application-specific data associated with a chat.
+///
+/// * [chatId]: Chat identifier.
+/// * [clientData]: New value of client_data.
+///
+/// [Ok] is returned on completion.
+final class SetChatClientData extends TdFunction {
   
   /// **SetChatClientData** *(setChatClientData)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class SetChatClientData extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "client_data": clientData,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetChatClientData copyWith({
     int? chatId,
@@ -47,8 +48,11 @@ class SetChatClientData extends TdFunction {
     clientData: clientData ?? this.clientData,
   );
 
-  static const String constructor = 'setChatClientData';
-  
+  static const String objectType = 'setChatClientData';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

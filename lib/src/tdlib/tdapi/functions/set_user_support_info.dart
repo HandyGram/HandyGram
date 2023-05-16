@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **SetUserSupportInfo** *(setUserSupportInfo)* - TDLib function
-  ///
-  /// Sets support information for the given user; for Telegram support only.
-  ///
-  /// * [userId]: User identifier.
-  /// * [message]: New information message.
-  ///
-  /// [UserSupportInfo] is returned on completion.
-class SetUserSupportInfo extends TdFunction {
+///
+/// Sets support information for the given user; for Telegram support only.
+///
+/// * [userId]: User identifier.
+/// * [message]: New information message.
+///
+/// [UserSupportInfo] is returned on completion.
+final class SetUserSupportInfo extends TdFunction {
   
   /// **SetUserSupportInfo** *(setUserSupportInfo)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class SetUserSupportInfo extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "user_id": userId,
       "message": message.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetUserSupportInfo copyWith({
     int? userId,
@@ -47,8 +48,11 @@ class SetUserSupportInfo extends TdFunction {
     message: message ?? this.message,
   );
 
-  static const String constructor = 'setUserSupportInfo';
-  
+  static const String objectType = 'setUserSupportInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

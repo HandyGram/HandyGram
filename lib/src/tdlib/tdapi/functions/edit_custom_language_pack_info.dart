@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **EditCustomLanguagePackInfo** *(editCustomLanguagePackInfo)* - TDLib function
-  ///
-  /// Edits information about a custom local language pack in the current localization target. Can be called before authorization.
-  ///
-  /// * [info]: New information about the custom local language pack.
-  ///
-  /// [Ok] is returned on completion.
-class EditCustomLanguagePackInfo extends TdFunction {
+///
+/// Edits information about a custom local language pack in the current localization target. Can be called before authorization.
+///
+/// * [info]: New information about the custom local language pack.
+///
+/// [Ok] is returned on completion.
+final class EditCustomLanguagePackInfo extends TdFunction {
   
   /// **EditCustomLanguagePackInfo** *(editCustomLanguagePackInfo)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class EditCustomLanguagePackInfo extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "info": info.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   EditCustomLanguagePackInfo copyWith({
     LanguagePackInfo? info,
@@ -38,8 +39,11 @@ class EditCustomLanguagePackInfo extends TdFunction {
     info: info ?? this.info,
   );
 
-  static const String constructor = 'editCustomLanguagePackInfo';
-  
+  static const String objectType = 'editCustomLanguagePackInfo';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

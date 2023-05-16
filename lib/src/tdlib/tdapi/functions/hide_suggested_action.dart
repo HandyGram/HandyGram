@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **HideSuggestedAction** *(hideSuggestedAction)* - TDLib function
-  ///
-  /// Hides a suggested action.
-  ///
-  /// * [action]: Suggested action to hide.
-  ///
-  /// [Ok] is returned on completion.
-class HideSuggestedAction extends TdFunction {
+///
+/// Hides a suggested action.
+///
+/// * [action]: Suggested action to hide.
+///
+/// [Ok] is returned on completion.
+final class HideSuggestedAction extends TdFunction {
   
   /// **HideSuggestedAction** *(hideSuggestedAction)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class HideSuggestedAction extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "action": action.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   HideSuggestedAction copyWith({
     SuggestedAction? action,
@@ -38,8 +39,11 @@ class HideSuggestedAction extends TdFunction {
     action: action ?? this.action,
   );
 
-  static const String constructor = 'hideSuggestedAction';
-  
+  static const String objectType = 'hideSuggestedAction';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

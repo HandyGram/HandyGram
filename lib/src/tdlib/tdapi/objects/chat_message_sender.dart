@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **ChatMessageSender** *(chatMessageSender)* - basic class
-  ///
-  /// Represents a message sender, which can be used to send messages in a chat.
-  ///
-  /// * [sender]: Available message senders.
-  /// * [needsPremium]: True, if Telegram Premium is needed to use the message sender.
-class ChatMessageSender extends TdObject {
+///
+/// Represents a message sender, which can be used to send messages in a chat.
+///
+/// * [sender]: Available message senders.
+/// * [needsPremium]: True, if Telegram Premium is needed to use the message sender.
+final class ChatMessageSender extends TdObject {
   
   /// **ChatMessageSender** *(chatMessageSender)* - basic class
   ///
@@ -33,13 +33,14 @@ class ChatMessageSender extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "sender": sender.toJson(),
       "needs_premium": needsPremium,
-    };
-  }
+		};
+	}
+
   
   ChatMessageSender copyWith({
     MessageSender? sender,
@@ -49,8 +50,11 @@ class ChatMessageSender extends TdObject {
     needsPremium: needsPremium ?? this.needsPremium,
   );
 
-  static const String constructor = 'chatMessageSender';
-  
+  static const String objectType = 'chatMessageSender';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

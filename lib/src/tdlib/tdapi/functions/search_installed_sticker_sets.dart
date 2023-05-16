@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **SearchInstalledStickerSets** *(searchInstalledStickerSets)* - TDLib function
-  ///
-  /// Searches for installed sticker sets by looking for specified query in their title and name.
-  ///
-  /// * [stickerType]: Type of the sticker sets to search for.
-  /// * [query]: Query to search for.
-  /// * [limit]: The maximum number of sticker sets to return.
-  ///
-  /// [StickerSets] is returned on completion.
-class SearchInstalledStickerSets extends TdFunction {
+///
+/// Searches for installed sticker sets by looking for specified query in their title and name.
+///
+/// * [stickerType]: Type of the sticker sets to search for.
+/// * [query]: Query to search for.
+/// * [limit]: The maximum number of sticker sets to return.
+///
+/// [StickerSets] is returned on completion.
+final class SearchInstalledStickerSets extends TdFunction {
   
   /// **SearchInstalledStickerSets** *(searchInstalledStickerSets)* - TDLib function
   ///
@@ -37,14 +37,15 @@ class SearchInstalledStickerSets extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "sticker_type": stickerType.toJson(),
       "query": query,
       "limit": limit,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SearchInstalledStickerSets copyWith({
     StickerType? stickerType,
@@ -56,8 +57,11 @@ class SearchInstalledStickerSets extends TdFunction {
     limit: limit ?? this.limit,
   );
 
-  static const String constructor = 'searchInstalledStickerSets';
-  
+  static const String objectType = 'searchInstalledStickerSets';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

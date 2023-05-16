@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **EmailAddressAuthentication** *(emailAddressAuthentication)* - parent
-  ///
-  /// Contains authentication data for a email address.
-class EmailAddressAuthentication extends TdObject {
+///
+/// Contains authentication data for a email address.
+sealed class EmailAddressAuthentication extends TdObject {
   
   /// **EmailAddressAuthentication** *(emailAddressAuthentication)* - parent
   ///
@@ -16,39 +16,42 @@ class EmailAddressAuthentication extends TdObject {
   /// * [EmailAddressAuthenticationGoogleId]
   factory EmailAddressAuthentication.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case EmailAddressAuthenticationCode.constructor:
+      case EmailAddressAuthenticationCode.objectType:
         return EmailAddressAuthenticationCode.fromJson(json);
-      case EmailAddressAuthenticationAppleId.constructor:
+      case EmailAddressAuthenticationAppleId.objectType:
         return EmailAddressAuthenticationAppleId.fromJson(json);
-      case EmailAddressAuthenticationGoogleId.constructor:
+      case EmailAddressAuthenticationGoogleId.objectType:
         return EmailAddressAuthenticationGoogleId.fromJson(json);
       default:
-        return const EmailAddressAuthentication();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of EmailAddressAuthentication)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  EmailAddressAuthentication copyWith() => const EmailAddressAuthentication();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'emailAddressAuthentication';
   
+  EmailAddressAuthentication copyWith();
+
+  static const String objectType = 'emailAddressAuthentication';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **EmailAddressAuthenticationCode** *(emailAddressAuthenticationCode)* - child of EmailAddressAuthentication
-  ///
-  /// An authentication code delivered to a user's email address.
-  ///
-  /// * [code]: The code.
-class EmailAddressAuthenticationCode extends EmailAddressAuthentication {
+///
+/// An authentication code delivered to a user's email address.
+///
+/// * [code]: The code.
+final class EmailAddressAuthenticationCode extends EmailAddressAuthentication {
   
   /// **EmailAddressAuthenticationCode** *(emailAddressAuthenticationCode)* - child of EmailAddressAuthentication
   ///
@@ -69,12 +72,13 @@ class EmailAddressAuthenticationCode extends EmailAddressAuthentication {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "code": code,
-    };
-  }
+		};
+	}
+
   
   @override
   EmailAddressAuthenticationCode copyWith({
@@ -83,19 +87,22 @@ class EmailAddressAuthenticationCode extends EmailAddressAuthentication {
     code: code ?? this.code,
   );
 
-  static const String constructor = 'emailAddressAuthenticationCode';
-  
+  static const String objectType = 'emailAddressAuthenticationCode';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **EmailAddressAuthenticationAppleId** *(emailAddressAuthenticationAppleId)* - child of EmailAddressAuthentication
-  ///
-  /// An authentication token received through Apple emailAddressAuthenticationAppleId.
-  ///
-  /// * [token]: The token.
-class EmailAddressAuthenticationAppleId extends EmailAddressAuthentication {
+///
+/// An authentication token received through Apple emailAddressAuthenticationAppleId.
+///
+/// * [token]: The token.
+final class EmailAddressAuthenticationAppleId extends EmailAddressAuthentication {
   
   /// **EmailAddressAuthenticationAppleId** *(emailAddressAuthenticationAppleId)* - child of EmailAddressAuthentication
   ///
@@ -116,12 +123,13 @@ class EmailAddressAuthenticationAppleId extends EmailAddressAuthentication {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "token": token,
-    };
-  }
+		};
+	}
+
   
   @override
   EmailAddressAuthenticationAppleId copyWith({
@@ -130,19 +138,22 @@ class EmailAddressAuthenticationAppleId extends EmailAddressAuthentication {
     token: token ?? this.token,
   );
 
-  static const String constructor = 'emailAddressAuthenticationAppleId';
-  
+  static const String objectType = 'emailAddressAuthenticationAppleId';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **EmailAddressAuthenticationGoogleId** *(emailAddressAuthenticationGoogleId)* - child of EmailAddressAuthentication
-  ///
-  /// An authentication token received through Google emailAddressAuthenticationGoogleId.
-  ///
-  /// * [token]: The token.
-class EmailAddressAuthenticationGoogleId extends EmailAddressAuthentication {
+///
+/// An authentication token received through Google emailAddressAuthenticationGoogleId.
+///
+/// * [token]: The token.
+final class EmailAddressAuthenticationGoogleId extends EmailAddressAuthentication {
   
   /// **EmailAddressAuthenticationGoogleId** *(emailAddressAuthenticationGoogleId)* - child of EmailAddressAuthentication
   ///
@@ -163,12 +174,13 @@ class EmailAddressAuthenticationGoogleId extends EmailAddressAuthentication {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "token": token,
-    };
-  }
+		};
+	}
+
   
   @override
   EmailAddressAuthenticationGoogleId copyWith({
@@ -177,8 +189,11 @@ class EmailAddressAuthenticationGoogleId extends EmailAddressAuthentication {
     token: token ?? this.token,
   );
 
-  static const String constructor = 'emailAddressAuthenticationGoogleId';
-  
+  static const String objectType = 'emailAddressAuthenticationGoogleId';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

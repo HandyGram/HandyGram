@@ -1,17 +1,17 @@
 part of '../tdapi.dart';
 
 /// **SearchFileDownloads** *(searchFileDownloads)* - TDLib function
-  ///
-  /// Searches for files in the file download list or recently downloaded files from the list.
-  ///
-  /// * [query]: Query to search for; may be empty to return all downloaded files.
-  /// * [onlyActive]: Pass true to search only for active downloads, including paused.
-  /// * [onlyCompleted]: Pass true to search only for completed downloads.
-  /// * [offset]: Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results.
-  /// * [limit]: The maximum number of files to be returned.
-  ///
-  /// [FoundFileDownloads] is returned on completion.
-class SearchFileDownloads extends TdFunction {
+///
+/// Searches for files in the file download list or recently downloaded files from the list.
+///
+/// * [query]: Query to search for; may be empty to return all downloaded files.
+/// * [onlyActive]: Pass true to search only for active downloads, including paused.
+/// * [onlyCompleted]: Pass true to search only for completed downloads.
+/// * [offset]: Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results.
+/// * [limit]: The maximum number of files to be returned.
+///
+/// [FoundFileDownloads] is returned on completion.
+final class SearchFileDownloads extends TdFunction {
   
   /// **SearchFileDownloads** *(searchFileDownloads)* - TDLib function
   ///
@@ -49,16 +49,17 @@ class SearchFileDownloads extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "query": query,
       "only_active": onlyActive,
       "only_completed": onlyCompleted,
       "offset": offset,
       "limit": limit,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SearchFileDownloads copyWith({
     String? query,
@@ -74,8 +75,11 @@ class SearchFileDownloads extends TdFunction {
     limit: limit ?? this.limit,
   );
 
-  static const String constructor = 'searchFileDownloads';
-  
+  static const String objectType = 'searchFileDownloads';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

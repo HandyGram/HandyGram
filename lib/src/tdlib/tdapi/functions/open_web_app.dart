@@ -1,19 +1,19 @@
 part of '../tdapi.dart';
 
 /// **OpenWebApp** *(openWebApp)* - TDLib function
-  ///
-  /// Informs TDLib that a Web App is being opened from attachment menu, a botMenuButton button, an internalLinkTypeAttachmentMenuBot link, or an inlineKeyboardButtonTypeWebApp button.. For each bot, a confirmation alert about data sent to the bot must be shown once.
-  ///
-  /// * [chatId]: Identifier of the chat in which the Web App is opened.
-  /// * [botUserId]: Identifier of the bot, providing the Web App.
-  /// * [url]: The URL from an inlineKeyboardButtonTypeWebApp button, a botMenuButton button, or an internalLinkTypeAttachmentMenuBot link, or an empty string otherwise.
-  /// * [theme]: Preferred Web App theme; pass null to use the default theme *(optional)*.
-  /// * [applicationName]: Short name of the application; 0-64 English letters, digits, and underscores.
-  /// * [messageThreadId]: If not 0, a message thread identifier in which the message will be sent.
-  /// * [replyToMessageId]: Identifier of the replied message for the message sent by the Web App; 0 if none.
-  ///
-  /// [WebAppInfo] is returned on completion.
-class OpenWebApp extends TdFunction {
+///
+/// Informs TDLib that a Web App is being opened from attachment menu, a botMenuButton button, an internalLinkTypeAttachmentMenuBot link, or an inlineKeyboardButtonTypeWebApp button.. For each bot, a confirmation alert about data sent to the bot must be shown once.
+///
+/// * [chatId]: Identifier of the chat in which the Web App is opened.
+/// * [botUserId]: Identifier of the bot, providing the Web App.
+/// * [url]: The URL from an inlineKeyboardButtonTypeWebApp button, a botMenuButton button, or an internalLinkTypeAttachmentMenuBot link, or an empty string otherwise.
+/// * [theme]: Preferred Web App theme; pass null to use the default theme *(optional)*.
+/// * [applicationName]: Short name of the application; 0-64 English letters, digits, and underscores.
+/// * [messageThreadId]: If not 0, a message thread identifier in which the message will be sent.
+/// * [replyToMessageId]: Identifier of the replied message for the message sent by the Web App; 0 if none.
+///
+/// [WebAppInfo] is returned on completion.
+final class OpenWebApp extends TdFunction {
   
   /// **OpenWebApp** *(openWebApp)* - TDLib function
   ///
@@ -61,8 +61,8 @@ class OpenWebApp extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "bot_user_id": botUserId,
       "url": url,
@@ -71,8 +71,9 @@ class OpenWebApp extends TdFunction {
       "message_thread_id": messageThreadId,
       "reply_to_message_id": replyToMessageId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   OpenWebApp copyWith({
     int? chatId,
@@ -92,8 +93,11 @@ class OpenWebApp extends TdFunction {
     replyToMessageId: replyToMessageId ?? this.replyToMessageId,
   );
 
-  static const String constructor = 'openWebApp';
-  
+  static const String objectType = 'openWebApp';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

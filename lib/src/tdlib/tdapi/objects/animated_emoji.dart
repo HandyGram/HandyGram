@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **AnimatedEmoji** *(animatedEmoji)* - basic class
-  ///
-  /// Describes an animated or custom representation of an emoji.
-  ///
-  /// * [sticker]: Sticker for the emoji; may be null if yet unknown for a custom emoji. If the sticker is a custom emoji, it can have arbitrary format different from stickerFormatTgs *(optional)*.
-  /// * [stickerWidth]: Expected width of the sticker, which can be used if the sticker is null.
-  /// * [stickerHeight]: Expected height of the sticker, which can be used if the sticker is null.
-  /// * [fitzpatrickType]: Emoji modifier fitzpatrick type; 0-6; 0 if none.
-  /// * [sound]: File containing the sound to be played when the sticker is clicked; may be null. The sound is encoded with the Opus codec, and stored inside an OGG container *(optional)*.
-class AnimatedEmoji extends TdObject {
+///
+/// Describes an animated or custom representation of an emoji.
+///
+/// * [sticker]: Sticker for the emoji; may be null if yet unknown for a custom emoji. If the sticker is a custom emoji, it can have arbitrary format different from stickerFormatTgs *(optional)*.
+/// * [stickerWidth]: Expected width of the sticker, which can be used if the sticker is null.
+/// * [stickerHeight]: Expected height of the sticker, which can be used if the sticker is null.
+/// * [fitzpatrickType]: Emoji modifier fitzpatrick type; 0-6; 0 if none.
+/// * [sound]: File containing the sound to be played when the sticker is clicked; may be null. The sound is encoded with the Opus codec, and stored inside an OGG container *(optional)*.
+final class AnimatedEmoji extends TdObject {
   
   /// **AnimatedEmoji** *(animatedEmoji)* - basic class
   ///
@@ -66,16 +66,17 @@ class AnimatedEmoji extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "sticker": sticker?.toJson(),
       "sticker_width": stickerWidth,
       "sticker_height": stickerHeight,
       "fitzpatrick_type": fitzpatrickType,
       "sound": sound?.toJson(),
-    };
-  }
+		};
+	}
+
   
   AnimatedEmoji copyWith({
     Sticker? sticker,
@@ -95,8 +96,11 @@ class AnimatedEmoji extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'animatedEmoji';
-  
+  static const String objectType = 'animatedEmoji';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

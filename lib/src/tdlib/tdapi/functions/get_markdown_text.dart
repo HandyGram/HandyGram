@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetMarkdownText** *(getMarkdownText)* - TDLib function
-  ///
-  /// Replaces text entities with Markdown formatting in a human-friendly format. Entities that can't be represented in Markdown unambiguously are kept as is. Can be called synchronously.
-  ///
-  /// * [text]: The text.
-  ///
-  /// [FormattedText] is returned on completion.
-class GetMarkdownText extends TdFunction {
+///
+/// Replaces text entities with Markdown formatting in a human-friendly format. Entities that can't be represented in Markdown unambiguously are kept as is. Can be called synchronously.
+///
+/// * [text]: The text.
+///
+/// [FormattedText] is returned on completion.
+final class GetMarkdownText extends TdFunction {
   
   /// **GetMarkdownText** *(getMarkdownText)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetMarkdownText extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "text": text.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetMarkdownText copyWith({
     FormattedText? text,
@@ -38,8 +39,11 @@ class GetMarkdownText extends TdFunction {
     text: text ?? this.text,
   );
 
-  static const String constructor = 'getMarkdownText';
-  
+  static const String objectType = 'getMarkdownText';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

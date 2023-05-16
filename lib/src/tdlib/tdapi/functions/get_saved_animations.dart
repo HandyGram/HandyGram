@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **GetSavedAnimations** *(getSavedAnimations)* - TDLib function
-  ///
-  /// Returns saved animations.
-  ///
-  /// [Animations] is returned on completion.
-class GetSavedAnimations extends TdFunction {
+///
+/// Returns saved animations.
+///
+/// [Animations] is returned on completion.
+final class GetSavedAnimations extends TdFunction {
   
   /// **GetSavedAnimations** *(getSavedAnimations)* - TDLib function
   ///
@@ -17,16 +17,20 @@ class GetSavedAnimations extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetSavedAnimations copyWith() => const GetSavedAnimations();
 
-  static const String constructor = 'getSavedAnimations';
-  
+  static const String objectType = 'getSavedAnimations';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

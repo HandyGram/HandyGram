@@ -1,28 +1,28 @@
 part of '../tdapi.dart';
 
 /// **SetTdlibParameters** *(setTdlibParameters)* - TDLib function
-  ///
-  /// Sets the parameters for TDLib initialization. Works only when the current authorization state is authorizationStateWaitTdlibParameters.
-  ///
-  /// * [useTestDc]: Pass true to use Telegram test environment instead of the production environment.
-  /// * [databaseDirectory]: The path to the directory for the persistent database; if empty, the current working directory will be used.
-  /// * [filesDirectory]: The path to the directory for storing files; if empty, database_directory will be used.
-  /// * [databaseEncryptionKey]: Encryption key for the database. If the encryption key is invalid, then an error with code 401 will be returned.
-  /// * [useFileDatabase]: Pass true to keep information about downloaded and uploaded files between application restarts.
-  /// * [useChatInfoDatabase]: Pass true to keep cache of users, basic groups, supergroups, channels and secret chats between restarts. Implies use_file_database.
-  /// * [useMessageDatabase]: Pass true to keep cache of chats and messages between restarts. Implies use_chat_info_database.
-  /// * [useSecretChats]: Pass true to enable support for secret chats.
-  /// * [apiId]: Application identifier for Telegram API access, which can be obtained at https://my.telegram.org.
-  /// * [apiHash]: Application identifier hash for Telegram API access, which can be obtained at https://my.telegram.org.
-  /// * [systemLanguageCode]: IETF language tag of the user's operating system language; must be non-empty.
-  /// * [deviceModel]: Model of the device the application is being run on; must be non-empty.
-  /// * [systemVersion]: Version of the operating system the application is being run on. If empty, the version is automatically detected by TDLib.
-  /// * [applicationVersion]: Application version; must be non-empty.
-  /// * [enableStorageOptimizer]: Pass true to automatically delete old files in background.
-  /// * [ignoreFileNames]: Pass true to ignore original file names for downloaded files. Otherwise, downloaded files are saved under names as close as possible to the original name.
-  ///
-  /// [Ok] is returned on completion.
-class SetTdlibParameters extends TdFunction {
+///
+/// Sets the parameters for TDLib initialization. Works only when the current authorization state is authorizationStateWaitTdlibParameters.
+///
+/// * [useTestDc]: Pass true to use Telegram test environment instead of the production environment.
+/// * [databaseDirectory]: The path to the directory for the persistent database; if empty, the current working directory will be used.
+/// * [filesDirectory]: The path to the directory for storing files; if empty, database_directory will be used.
+/// * [databaseEncryptionKey]: Encryption key for the database. If the encryption key is invalid, then an error with code 401 will be returned.
+/// * [useFileDatabase]: Pass true to keep information about downloaded and uploaded files between application restarts.
+/// * [useChatInfoDatabase]: Pass true to keep cache of users, basic groups, supergroups, channels and secret chats between restarts. Implies use_file_database.
+/// * [useMessageDatabase]: Pass true to keep cache of chats and messages between restarts. Implies use_chat_info_database.
+/// * [useSecretChats]: Pass true to enable support for secret chats.
+/// * [apiId]: Application identifier for Telegram API access, which can be obtained at https://my.telegram.org.
+/// * [apiHash]: Application identifier hash for Telegram API access, which can be obtained at https://my.telegram.org.
+/// * [systemLanguageCode]: IETF language tag of the user's operating system language; must be non-empty.
+/// * [deviceModel]: Model of the device the application is being run on; must be non-empty.
+/// * [systemVersion]: Version of the operating system the application is being run on. If empty, the version is automatically detected by TDLib.
+/// * [applicationVersion]: Application version; must be non-empty.
+/// * [enableStorageOptimizer]: Pass true to automatically delete old files in background.
+/// * [ignoreFileNames]: Pass true to ignore original file names for downloaded files. Otherwise, downloaded files are saved under names as close as possible to the original name.
+///
+/// [Ok] is returned on completion.
+final class SetTdlibParameters extends TdFunction {
   
   /// **SetTdlibParameters** *(setTdlibParameters)* - TDLib function
   ///
@@ -115,8 +115,8 @@ class SetTdlibParameters extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "use_test_dc": useTestDc,
       "database_directory": databaseDirectory,
       "files_directory": filesDirectory,
@@ -134,8 +134,9 @@ class SetTdlibParameters extends TdFunction {
       "enable_storage_optimizer": enableStorageOptimizer,
       "ignore_file_names": ignoreFileNames,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetTdlibParameters copyWith({
     bool? useTestDc,
@@ -173,8 +174,11 @@ class SetTdlibParameters extends TdFunction {
     ignoreFileNames: ignoreFileNames ?? this.ignoreFileNames,
   );
 
-  static const String constructor = 'setTdlibParameters';
-  
+  static const String objectType = 'setTdlibParameters';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **InviteGroupCallParticipants** *(inviteGroupCallParticipants)* - TDLib function
-  ///
-  /// Invites users to an active group call. Sends a service message of type messageInviteToGroupCall for video chats.
-  ///
-  /// * [groupCallId]: Group call identifier.
-  /// * [userIds]: User identifiers. At most 10 users can be invited simultaneously.
-  ///
-  /// [Ok] is returned on completion.
-class InviteGroupCallParticipants extends TdFunction {
+///
+/// Invites users to an active group call. Sends a service message of type messageInviteToGroupCall for video chats.
+///
+/// * [groupCallId]: Group call identifier.
+/// * [userIds]: User identifiers. At most 10 users can be invited simultaneously.
+///
+/// [Ok] is returned on completion.
+final class InviteGroupCallParticipants extends TdFunction {
   
   /// **InviteGroupCallParticipants** *(inviteGroupCallParticipants)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class InviteGroupCallParticipants extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "group_call_id": groupCallId,
       "user_ids": userIds.map((i) => i).toList(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   InviteGroupCallParticipants copyWith({
     int? groupCallId,
@@ -47,8 +48,11 @@ class InviteGroupCallParticipants extends TdFunction {
     userIds: userIds ?? this.userIds,
   );
 
-  static const String constructor = 'inviteGroupCallParticipants';
-  
+  static const String objectType = 'inviteGroupCallParticipants';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

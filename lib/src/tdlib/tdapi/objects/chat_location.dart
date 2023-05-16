@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **ChatLocation** *(chatLocation)* - basic class
-  ///
-  /// Represents a location to which a chat is connected.
-  ///
-  /// * [location]: The location.
-  /// * [address]: Location address; 1-64 characters, as defined by the chat owner.
-class ChatLocation extends TdObject {
+///
+/// Represents a location to which a chat is connected.
+///
+/// * [location]: The location.
+/// * [address]: Location address; 1-64 characters, as defined by the chat owner.
+final class ChatLocation extends TdObject {
   
   /// **ChatLocation** *(chatLocation)* - basic class
   ///
@@ -33,13 +33,14 @@ class ChatLocation extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "location": location.toJson(),
       "address": address,
-    };
-  }
+		};
+	}
+
   
   ChatLocation copyWith({
     Location? location,
@@ -49,8 +50,11 @@ class ChatLocation extends TdObject {
     address: address ?? this.address,
   );
 
-  static const String constructor = 'chatLocation';
-  
+  static const String objectType = 'chatLocation';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

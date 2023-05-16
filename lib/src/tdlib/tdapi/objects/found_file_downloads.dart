@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **FoundFileDownloads** *(foundFileDownloads)* - basic class
-  ///
-  /// Contains a list of downloaded files, found by a search.
-  ///
-  /// * [totalCounts]: Total number of suitable files, ignoring offset.
-  /// * [files]: The list of files.
-  /// * [nextOffset]: The offset for the next request. If empty, there are no more results.
-class FoundFileDownloads extends TdObject {
+///
+/// Contains a list of downloaded files, found by a search.
+///
+/// * [totalCounts]: Total number of suitable files, ignoring offset.
+/// * [files]: The list of files.
+/// * [nextOffset]: The offset for the next request. If empty, there are no more results.
+final class FoundFileDownloads extends TdObject {
   
   /// **FoundFileDownloads** *(foundFileDownloads)* - basic class
   ///
@@ -52,14 +52,15 @@ class FoundFileDownloads extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "total_counts": totalCounts.toJson(),
       "files": files.map((i) => i.toJson()).toList(),
       "next_offset": nextOffset,
-    };
-  }
+		};
+	}
+
   
   FoundFileDownloads copyWith({
     DownloadedFileCounts? totalCounts,
@@ -75,8 +76,11 @@ class FoundFileDownloads extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'foundFileDownloads';
-  
+  static const String objectType = 'foundFileDownloads';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

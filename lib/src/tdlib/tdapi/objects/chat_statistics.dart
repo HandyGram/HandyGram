@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **ChatStatistics** *(chatStatistics)* - parent
-  ///
-  /// Contains a detailed statistics about a chat.
-class ChatStatistics extends TdObject {
+///
+/// Contains a detailed statistics about a chat.
+sealed class ChatStatistics extends TdObject {
   
   /// **ChatStatistics** *(chatStatistics)* - parent
   ///
@@ -15,52 +15,55 @@ class ChatStatistics extends TdObject {
   /// * [ChatStatisticsChannel]
   factory ChatStatistics.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case ChatStatisticsSupergroup.constructor:
+      case ChatStatisticsSupergroup.objectType:
         return ChatStatisticsSupergroup.fromJson(json);
-      case ChatStatisticsChannel.constructor:
+      case ChatStatisticsChannel.objectType:
         return ChatStatisticsChannel.fromJson(json);
       default:
-        return const ChatStatistics();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of ChatStatistics)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  ChatStatistics copyWith() => const ChatStatistics();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'chatStatistics';
   
+  ChatStatistics copyWith();
+
+  static const String objectType = 'chatStatistics';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatStatisticsSupergroup** *(chatStatisticsSupergroup)* - child of ChatStatistics
-  ///
-  /// A detailed statistics about a supergroup chat.
-  ///
-  /// * [period]: A period to which the statistics applies.
-  /// * [memberCount]: Number of members in the chat.
-  /// * [messageCount]: Number of messages sent to the chat.
-  /// * [viewerCount]: Number of users who viewed messages in the chat.
-  /// * [senderCount]: Number of users who sent messages to the chat.
-  /// * [memberCountGraph]: A graph containing number of members in the chat.
-  /// * [joinGraph]: A graph containing number of members joined and left the chat.
-  /// * [joinBySourceGraph]: A graph containing number of new member joins per source.
-  /// * [languageGraph]: A graph containing distribution of active users per language.
-  /// * [messageContentGraph]: A graph containing distribution of sent messages by content type.
-  /// * [actionGraph]: A graph containing number of different actions in the chat.
-  /// * [dayGraph]: A graph containing distribution of message views per hour.
-  /// * [weekGraph]: A graph containing distribution of message views per day of week.
-  /// * [topSenders]: List of users sent most messages in the last week.
-  /// * [topAdministrators]: List of most active administrators in the last week.
-  /// * [topInviters]: List of most active inviters of new members in the last week.
-class ChatStatisticsSupergroup extends ChatStatistics {
+///
+/// A detailed statistics about a supergroup chat.
+///
+/// * [period]: A period to which the statistics applies.
+/// * [memberCount]: Number of members in the chat.
+/// * [messageCount]: Number of messages sent to the chat.
+/// * [viewerCount]: Number of users who viewed messages in the chat.
+/// * [senderCount]: Number of users who sent messages to the chat.
+/// * [memberCountGraph]: A graph containing number of members in the chat.
+/// * [joinGraph]: A graph containing number of members joined and left the chat.
+/// * [joinBySourceGraph]: A graph containing number of new member joins per source.
+/// * [languageGraph]: A graph containing distribution of active users per language.
+/// * [messageContentGraph]: A graph containing distribution of sent messages by content type.
+/// * [actionGraph]: A graph containing number of different actions in the chat.
+/// * [dayGraph]: A graph containing distribution of message views per hour.
+/// * [weekGraph]: A graph containing distribution of message views per day of week.
+/// * [topSenders]: List of users sent most messages in the last week.
+/// * [topAdministrators]: List of most active administrators in the last week.
+/// * [topInviters]: List of most active inviters of new members in the last week.
+final class ChatStatisticsSupergroup extends ChatStatistics {
   
   /// **ChatStatisticsSupergroup** *(chatStatisticsSupergroup)* - child of ChatStatistics
   ///
@@ -183,9 +186,9 @@ class ChatStatisticsSupergroup extends ChatStatistics {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "period": period.toJson(),
       "member_count": memberCount.toJson(),
       "message_count": messageCount.toJson(),
@@ -202,8 +205,9 @@ class ChatStatisticsSupergroup extends ChatStatistics {
       "top_senders": topSenders.map((i) => i.toJson()).toList(),
       "top_administrators": topAdministrators.map((i) => i.toJson()).toList(),
       "top_inviters": topInviters.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   @override
   ChatStatisticsSupergroup copyWith({
@@ -246,33 +250,36 @@ class ChatStatisticsSupergroup extends ChatStatistics {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'chatStatisticsSupergroup';
-  
+  static const String objectType = 'chatStatisticsSupergroup';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **ChatStatisticsChannel** *(chatStatisticsChannel)* - child of ChatStatistics
-  ///
-  /// A detailed statistics about a channel chat.
-  ///
-  /// * [period]: A period to which the statistics applies.
-  /// * [memberCount]: Number of members in the chat.
-  /// * [meanViewCount]: Mean number of times the recently sent messages was viewed.
-  /// * [meanShareCount]: Mean number of times the recently sent messages was shared.
-  /// * [enabledNotificationsPercentage]: A percentage of users with enabled notifications for the chat.
-  /// * [memberCountGraph]: A graph containing number of members in the chat.
-  /// * [joinGraph]: A graph containing number of members joined and left the chat.
-  /// * [muteGraph]: A graph containing number of members muted and unmuted the chat.
-  /// * [viewCountByHourGraph]: A graph containing number of message views in a given hour in the last two weeks.
-  /// * [viewCountBySourceGraph]: A graph containing number of message views per source.
-  /// * [joinBySourceGraph]: A graph containing number of new member joins per source.
-  /// * [languageGraph]: A graph containing number of users viewed chat messages per language.
-  /// * [messageInteractionGraph]: A graph containing number of chat message views and shares.
-  /// * [instantViewInteractionGraph]: A graph containing number of views of associated with the chat instant views.
-  /// * [recentMessageInteractions]: Detailed statistics about number of views and shares of recently sent messages.
-class ChatStatisticsChannel extends ChatStatistics {
+///
+/// A detailed statistics about a channel chat.
+///
+/// * [period]: A period to which the statistics applies.
+/// * [memberCount]: Number of members in the chat.
+/// * [meanViewCount]: Mean number of times the recently sent messages was viewed.
+/// * [meanShareCount]: Mean number of times the recently sent messages was shared.
+/// * [enabledNotificationsPercentage]: A percentage of users with enabled notifications for the chat.
+/// * [memberCountGraph]: A graph containing number of members in the chat.
+/// * [joinGraph]: A graph containing number of members joined and left the chat.
+/// * [muteGraph]: A graph containing number of members muted and unmuted the chat.
+/// * [viewCountByHourGraph]: A graph containing number of message views in a given hour in the last two weeks.
+/// * [viewCountBySourceGraph]: A graph containing number of message views per source.
+/// * [joinBySourceGraph]: A graph containing number of new member joins per source.
+/// * [languageGraph]: A graph containing number of users viewed chat messages per language.
+/// * [messageInteractionGraph]: A graph containing number of chat message views and shares.
+/// * [instantViewInteractionGraph]: A graph containing number of views of associated with the chat instant views.
+/// * [recentMessageInteractions]: Detailed statistics about number of views and shares of recently sent messages.
+final class ChatStatisticsChannel extends ChatStatistics {
   
   /// **ChatStatisticsChannel** *(chatStatisticsChannel)* - child of ChatStatistics
   ///
@@ -389,9 +396,9 @@ class ChatStatisticsChannel extends ChatStatistics {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "period": period.toJson(),
       "member_count": memberCount.toJson(),
       "mean_view_count": meanViewCount.toJson(),
@@ -407,8 +414,9 @@ class ChatStatisticsChannel extends ChatStatistics {
       "message_interaction_graph": messageInteractionGraph.toJson(),
       "instant_view_interaction_graph": instantViewInteractionGraph.toJson(),
       "recent_message_interactions": recentMessageInteractions.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   @override
   ChatStatisticsChannel copyWith({
@@ -449,8 +457,11 @@ class ChatStatisticsChannel extends ChatStatistics {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'chatStatisticsChannel';
-  
+  static const String objectType = 'chatStatisticsChannel';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

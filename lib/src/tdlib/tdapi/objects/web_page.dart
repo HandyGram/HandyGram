@@ -1,31 +1,31 @@
 part of '../tdapi.dart';
 
 /// **WebPage** *(webPage)* - basic class
-  ///
-  /// Describes a web page preview.
-  ///
-  /// * [url]: Original URL of the link.
-  /// * [displayUrl]: URL to display.
-  /// * [type]: Type of the web page. Can be: article, photo, audio, video, document, profile, app, or something else.
-  /// * [siteName]: Short name of the site (e.g., Google Docs, App Store).
-  /// * [title]: Title of the content.
-  /// * [description]: Description of the content.
-  /// * [photo]: Image representing the content; may be null *(optional)*.
-  /// * [embedUrl]: URL to show in the embedded preview.
-  /// * [embedType]: MIME type of the embedded preview, (e.g., text/html or video/mp4).
-  /// * [embedWidth]: Width of the embedded preview.
-  /// * [embedHeight]: Height of the embedded preview.
-  /// * [duration]: Duration of the content, in seconds.
-  /// * [author]: Author of the content.
-  /// * [animation]: Preview of the content as an animation, if available; may be null *(optional)*.
-  /// * [audio]: Preview of the content as an audio file, if available; may be null *(optional)*.
-  /// * [document]: Preview of the content as a document, if available; may be null *(optional)*.
-  /// * [sticker]: Preview of the content as a sticker for small WEBP files, if available; may be null *(optional)*.
-  /// * [video]: Preview of the content as a video, if available; may be null *(optional)*.
-  /// * [videoNote]: Preview of the content as a video note, if available; may be null *(optional)*.
-  /// * [voiceNote]: Preview of the content as a voice note, if available; may be null *(optional)*.
-  /// * [instantViewVersion]: Version of web page instant view (currently, can be 1 or 2); 0 if none.
-class WebPage extends TdObject {
+///
+/// Describes a web page preview.
+///
+/// * [url]: Original URL of the link.
+/// * [displayUrl]: URL to display.
+/// * [type]: Type of the web page. Can be: article, photo, audio, video, document, profile, app, or something else.
+/// * [siteName]: Short name of the site (e.g., Google Docs, App Store).
+/// * [title]: Title of the content.
+/// * [description]: Description of the content.
+/// * [photo]: Image representing the content; may be null *(optional)*.
+/// * [embedUrl]: URL to show in the embedded preview.
+/// * [embedType]: MIME type of the embedded preview, (e.g., text/html or video/mp4).
+/// * [embedWidth]: Width of the embedded preview.
+/// * [embedHeight]: Height of the embedded preview.
+/// * [duration]: Duration of the content, in seconds.
+/// * [author]: Author of the content.
+/// * [animation]: Preview of the content as an animation, if available; may be null *(optional)*.
+/// * [audio]: Preview of the content as an audio file, if available; may be null *(optional)*.
+/// * [document]: Preview of the content as a document, if available; may be null *(optional)*.
+/// * [sticker]: Preview of the content as a sticker for small WEBP files, if available; may be null *(optional)*.
+/// * [video]: Preview of the content as a video, if available; may be null *(optional)*.
+/// * [videoNote]: Preview of the content as a video note, if available; may be null *(optional)*.
+/// * [voiceNote]: Preview of the content as a voice note, if available; may be null *(optional)*.
+/// * [instantViewVersion]: Version of web page instant view (currently, can be 1 or 2); 0 if none.
+final class WebPage extends TdObject {
   
   /// **WebPage** *(webPage)* - basic class
   ///
@@ -178,9 +178,9 @@ class WebPage extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "url": url,
       "display_url": displayUrl,
       "type": type,
@@ -202,8 +202,9 @@ class WebPage extends TdObject {
       "video_note": videoNote?.toJson(),
       "voice_note": voiceNote?.toJson(),
       "instant_view_version": instantViewVersion,
-    };
-  }
+		};
+	}
+
   
   WebPage copyWith({
     String? url,
@@ -255,8 +256,11 @@ class WebPage extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'webPage';
-  
+  static const String objectType = 'webPage';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

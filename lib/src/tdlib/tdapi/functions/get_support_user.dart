@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **GetSupportUser** *(getSupportUser)* - TDLib function
-  ///
-  /// Returns a user that can be contacted to get support.
-  ///
-  /// [User] is returned on completion.
-class GetSupportUser extends TdFunction {
+///
+/// Returns a user that can be contacted to get support.
+///
+/// [User] is returned on completion.
+final class GetSupportUser extends TdFunction {
   
   /// **GetSupportUser** *(getSupportUser)* - TDLib function
   ///
@@ -17,16 +17,20 @@ class GetSupportUser extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetSupportUser copyWith() => const GetSupportUser();
 
-  static const String constructor = 'getSupportUser';
-  
+  static const String objectType = 'getSupportUser';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

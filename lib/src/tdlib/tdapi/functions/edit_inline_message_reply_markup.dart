@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **EditInlineMessageReplyMarkup** *(editInlineMessageReplyMarkup)* - TDLib function
-  ///
-  /// Edits the reply markup of an inline message sent via a bot; for bots only.
-  ///
-  /// * [inlineMessageId]: Inline message identifier.
-  /// * [replyMarkup]: The new message reply markup; pass null if none *(optional)*.
-  ///
-  /// [Ok] is returned on completion.
-class EditInlineMessageReplyMarkup extends TdFunction {
+///
+/// Edits the reply markup of an inline message sent via a bot; for bots only.
+///
+/// * [inlineMessageId]: Inline message identifier.
+/// * [replyMarkup]: The new message reply markup; pass null if none *(optional)*.
+///
+/// [Ok] is returned on completion.
+final class EditInlineMessageReplyMarkup extends TdFunction {
   
   /// **EditInlineMessageReplyMarkup** *(editInlineMessageReplyMarkup)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class EditInlineMessageReplyMarkup extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "inline_message_id": inlineMessageId,
       "reply_markup": replyMarkup?.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   EditInlineMessageReplyMarkup copyWith({
     String? inlineMessageId,
@@ -47,8 +48,11 @@ class EditInlineMessageReplyMarkup extends TdFunction {
     replyMarkup: replyMarkup ?? this.replyMarkup,
   );
 
-  static const String constructor = 'editInlineMessageReplyMarkup';
-  
+  static const String objectType = 'editInlineMessageReplyMarkup';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

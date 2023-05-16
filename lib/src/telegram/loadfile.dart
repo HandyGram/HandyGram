@@ -70,8 +70,7 @@ Future<File?> loadTgFile(
 }
 
 void filesHandler(tdlib.TdObject object, TgSession session) {
-  if (object.getConstructor() != tdlib.UpdateFile.constructor) return;
-  object as tdlib.UpdateFile;
+  if (object is! tdlib.UpdateFile) return;
   if (session.fileDlNotifiers.containsKey(object.file.remote.id)) {
     session.fileDlNotifiers[object.file.remote.id]!(
       object.file.local.downloadedSize,

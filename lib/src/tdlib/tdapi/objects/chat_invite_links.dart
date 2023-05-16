@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **ChatInviteLinks** *(chatInviteLinks)* - basic class
-  ///
-  /// Contains a list of chat invite links.
-  ///
-  /// * [totalCount]: Approximate total number of chat invite links found.
-  /// * [inviteLinks]: List of invite links.
-class ChatInviteLinks extends TdObject {
+///
+/// Contains a list of chat invite links.
+///
+/// * [totalCount]: Approximate total number of chat invite links found.
+/// * [inviteLinks]: List of invite links.
+final class ChatInviteLinks extends TdObject {
   
   /// **ChatInviteLinks** *(chatInviteLinks)* - basic class
   ///
@@ -45,13 +45,14 @@ class ChatInviteLinks extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "total_count": totalCount,
       "invite_links": inviteLinks.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   ChatInviteLinks copyWith({
     int? totalCount,
@@ -65,8 +66,11 @@ class ChatInviteLinks extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'chatInviteLinks';
-  
+  static const String objectType = 'chatInviteLinks';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

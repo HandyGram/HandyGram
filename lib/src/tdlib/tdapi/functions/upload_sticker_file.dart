@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **UploadStickerFile** *(uploadStickerFile)* - TDLib function
-  ///
-  /// Uploads a file with a sticker; returns the uploaded file.
-  ///
-  /// * [userId]: Sticker file owner; ignored for regular users.
-  /// * [sticker]: Sticker file to upload.
-  ///
-  /// [File] is returned on completion.
-class UploadStickerFile extends TdFunction {
+///
+/// Uploads a file with a sticker; returns the uploaded file.
+///
+/// * [userId]: Sticker file owner; ignored for regular users.
+/// * [sticker]: Sticker file to upload.
+///
+/// [File] is returned on completion.
+final class UploadStickerFile extends TdFunction {
   
   /// **UploadStickerFile** *(uploadStickerFile)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class UploadStickerFile extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "user_id": userId,
       "sticker": sticker.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   UploadStickerFile copyWith({
     int? userId,
@@ -47,8 +48,11 @@ class UploadStickerFile extends TdFunction {
     sticker: sticker ?? this.sticker,
   );
 
-  static const String constructor = 'uploadStickerFile';
-  
+  static const String objectType = 'uploadStickerFile';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

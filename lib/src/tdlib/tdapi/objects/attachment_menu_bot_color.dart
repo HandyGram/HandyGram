@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **AttachmentMenuBotColor** *(attachmentMenuBotColor)* - basic class
-  ///
-  /// Describes a color to highlight a bot added to attachment menu.
-  ///
-  /// * [lightColor]: Color in the RGB24 format for light themes.
-  /// * [darkColor]: Color in the RGB24 format for dark themes.
-class AttachmentMenuBotColor extends TdObject {
+///
+/// Describes a color to highlight a bot added to attachment menu.
+///
+/// * [lightColor]: Color in the RGB24 format for light themes.
+/// * [darkColor]: Color in the RGB24 format for dark themes.
+final class AttachmentMenuBotColor extends TdObject {
   
   /// **AttachmentMenuBotColor** *(attachmentMenuBotColor)* - basic class
   ///
@@ -33,13 +33,14 @@ class AttachmentMenuBotColor extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "light_color": lightColor,
       "dark_color": darkColor,
-    };
-  }
+		};
+	}
+
   
   AttachmentMenuBotColor copyWith({
     int? lightColor,
@@ -49,8 +50,11 @@ class AttachmentMenuBotColor extends TdObject {
     darkColor: darkColor ?? this.darkColor,
   );
 
-  static const String constructor = 'attachmentMenuBotColor';
-  
+  static const String objectType = 'attachmentMenuBotColor';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

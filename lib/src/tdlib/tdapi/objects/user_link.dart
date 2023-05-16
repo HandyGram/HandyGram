@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **UserLink** *(userLink)* - basic class
-  ///
-  /// Contains an HTTPS URL, which can be used to get information about a user.
-  ///
-  /// * [url]: The URL.
-  /// * [expiresIn]: Left time for which the link is valid, in seconds; 0 if the link is a public username link.
-class UserLink extends TdObject {
+///
+/// Contains an HTTPS URL, which can be used to get information about a user.
+///
+/// * [url]: The URL.
+/// * [expiresIn]: Left time for which the link is valid, in seconds; 0 if the link is a public username link.
+final class UserLink extends TdObject {
   
   /// **UserLink** *(userLink)* - basic class
   ///
@@ -45,13 +45,14 @@ class UserLink extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "url": url,
       "expires_in": expiresIn,
-    };
-  }
+		};
+	}
+
   
   UserLink copyWith({
     String? url,
@@ -65,8 +66,11 @@ class UserLink extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'userLink';
-  
+  static const String objectType = 'userLink';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

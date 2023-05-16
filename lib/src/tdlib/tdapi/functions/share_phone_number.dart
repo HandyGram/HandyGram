@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **SharePhoneNumber** *(sharePhoneNumber)* - TDLib function
-  ///
-  /// Shares the phone number of the current user with a mutual contact. Supposed to be called when the user clicks on chatActionBarSharePhoneNumber.
-  ///
-  /// * [userId]: Identifier of the user with whom to share the phone number. The user must be a mutual contact.
-  ///
-  /// [Ok] is returned on completion.
-class SharePhoneNumber extends TdFunction {
+///
+/// Shares the phone number of the current user with a mutual contact. Supposed to be called when the user clicks on chatActionBarSharePhoneNumber.
+///
+/// * [userId]: Identifier of the user with whom to share the phone number. The user must be a mutual contact.
+///
+/// [Ok] is returned on completion.
+final class SharePhoneNumber extends TdFunction {
   
   /// **SharePhoneNumber** *(sharePhoneNumber)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class SharePhoneNumber extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "user_id": userId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SharePhoneNumber copyWith({
     int? userId,
@@ -38,8 +39,11 @@ class SharePhoneNumber extends TdFunction {
     userId: userId ?? this.userId,
   );
 
-  static const String constructor = 'sharePhoneNumber';
-  
+  static const String objectType = 'sharePhoneNumber';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

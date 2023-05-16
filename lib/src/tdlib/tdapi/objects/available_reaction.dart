@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **AvailableReaction** *(availableReaction)* - basic class
-  ///
-  /// Represents an available reaction.
-  ///
-  /// * [type]: Type of the reaction.
-  /// * [needsPremium]: True, if Telegram Premium is needed to send the reaction.
-class AvailableReaction extends TdObject {
+///
+/// Represents an available reaction.
+///
+/// * [type]: Type of the reaction.
+/// * [needsPremium]: True, if Telegram Premium is needed to send the reaction.
+final class AvailableReaction extends TdObject {
   
   /// **AvailableReaction** *(availableReaction)* - basic class
   ///
@@ -33,13 +33,14 @@ class AvailableReaction extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "type": type.toJson(),
       "needs_premium": needsPremium,
-    };
-  }
+		};
+	}
+
   
   AvailableReaction copyWith({
     ReactionType? type,
@@ -49,8 +50,11 @@ class AvailableReaction extends TdObject {
     needsPremium: needsPremium ?? this.needsPremium,
   );
 
-  static const String constructor = 'availableReaction';
-  
+  static const String objectType = 'availableReaction';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

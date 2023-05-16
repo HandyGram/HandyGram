@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **ToggleChatIsMarkedAsUnread** *(toggleChatIsMarkedAsUnread)* - TDLib function
-  ///
-  /// Changes the marked as unread state of a chat.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [isMarkedAsUnread]: New value of is_marked_as_unread.
-  ///
-  /// [Ok] is returned on completion.
-class ToggleChatIsMarkedAsUnread extends TdFunction {
+///
+/// Changes the marked as unread state of a chat.
+///
+/// * [chatId]: Chat identifier.
+/// * [isMarkedAsUnread]: New value of is_marked_as_unread.
+///
+/// [Ok] is returned on completion.
+final class ToggleChatIsMarkedAsUnread extends TdFunction {
   
   /// **ToggleChatIsMarkedAsUnread** *(toggleChatIsMarkedAsUnread)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class ToggleChatIsMarkedAsUnread extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "is_marked_as_unread": isMarkedAsUnread,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   ToggleChatIsMarkedAsUnread copyWith({
     int? chatId,
@@ -47,8 +48,11 @@ class ToggleChatIsMarkedAsUnread extends TdFunction {
     isMarkedAsUnread: isMarkedAsUnread ?? this.isMarkedAsUnread,
   );
 
-  static const String constructor = 'toggleChatIsMarkedAsUnread';
-  
+  static const String objectType = 'toggleChatIsMarkedAsUnread';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

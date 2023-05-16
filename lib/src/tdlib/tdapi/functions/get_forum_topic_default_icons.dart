@@ -1,11 +1,11 @@
 part of '../tdapi.dart';
 
 /// **GetForumTopicDefaultIcons** *(getForumTopicDefaultIcons)* - TDLib function
-  ///
-  /// Returns list of custom emojis, which can be used as forum topic icon by all users.
-  ///
-  /// [Stickers] is returned on completion.
-class GetForumTopicDefaultIcons extends TdFunction {
+///
+/// Returns list of custom emojis, which can be used as forum topic icon by all users.
+///
+/// [Stickers] is returned on completion.
+final class GetForumTopicDefaultIcons extends TdFunction {
   
   /// **GetForumTopicDefaultIcons** *(getForumTopicDefaultIcons)* - TDLib function
   ///
@@ -17,16 +17,20 @@ class GetForumTopicDefaultIcons extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetForumTopicDefaultIcons copyWith() => const GetForumTopicDefaultIcons();
 
-  static const String constructor = 'getForumTopicDefaultIcons';
-  
+  static const String objectType = 'getForumTopicDefaultIcons';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

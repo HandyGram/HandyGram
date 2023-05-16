@@ -1,18 +1,18 @@
 part of '../tdapi.dart';
 
 /// **SetGameScore** *(setGameScore)* - TDLib function
-  ///
-  /// Updates the game score of the specified user in the game; for bots only.
-  ///
-  /// * [chatId]: The chat to which the message with the game belongs.
-  /// * [messageId]: Identifier of the message.
-  /// * [editMessage]: Pass true to edit the game message to include the current scoreboard.
-  /// * [userId]: User identifier.
-  /// * [score]: The new score.
-  /// * [force]: Pass true to update the score even if it decreases. If the score is 0, the user will be deleted from the high score table.
-  ///
-  /// [Message] is returned on completion.
-class SetGameScore extends TdFunction {
+///
+/// Updates the game score of the specified user in the game; for bots only.
+///
+/// * [chatId]: The chat to which the message with the game belongs.
+/// * [messageId]: Identifier of the message.
+/// * [editMessage]: Pass true to edit the game message to include the current scoreboard.
+/// * [userId]: User identifier.
+/// * [score]: The new score.
+/// * [force]: Pass true to update the score even if it decreases. If the score is 0, the user will be deleted from the high score table.
+///
+/// [Message] is returned on completion.
+final class SetGameScore extends TdFunction {
   
   /// **SetGameScore** *(setGameScore)* - TDLib function
   ///
@@ -55,8 +55,8 @@ class SetGameScore extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "message_id": messageId,
       "edit_message": editMessage,
@@ -64,8 +64,9 @@ class SetGameScore extends TdFunction {
       "score": score,
       "force": force,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SetGameScore copyWith({
     int? chatId,
@@ -83,8 +84,11 @@ class SetGameScore extends TdFunction {
     force: force ?? this.force,
   );
 
-  static const String constructor = 'setGameScore';
-  
+  static const String objectType = 'setGameScore';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

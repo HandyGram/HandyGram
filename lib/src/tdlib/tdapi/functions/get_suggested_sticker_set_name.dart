@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetSuggestedStickerSetName** *(getSuggestedStickerSetName)* - TDLib function
-  ///
-  /// Returns a suggested name for a new sticker set with a given title.
-  ///
-  /// * [title]: Sticker set title; 1-64 characters.
-  ///
-  /// [Text] is returned on completion.
-class GetSuggestedStickerSetName extends TdFunction {
+///
+/// Returns a suggested name for a new sticker set with a given title.
+///
+/// * [title]: Sticker set title; 1-64 characters.
+///
+/// [Text] is returned on completion.
+final class GetSuggestedStickerSetName extends TdFunction {
   
   /// **GetSuggestedStickerSetName** *(getSuggestedStickerSetName)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetSuggestedStickerSetName extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "title": title,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetSuggestedStickerSetName copyWith({
     String? title,
@@ -38,8 +39,11 @@ class GetSuggestedStickerSetName extends TdFunction {
     title: title ?? this.title,
   );
 
-  static const String constructor = 'getSuggestedStickerSetName';
-  
+  static const String objectType = 'getSuggestedStickerSetName';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

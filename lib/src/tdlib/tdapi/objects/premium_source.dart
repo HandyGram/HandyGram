@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **PremiumSource** *(premiumSource)* - parent
-  ///
-  /// Describes a source from which the Premium features screen is opened.
-class PremiumSource extends TdObject {
+///
+/// Describes a source from which the Premium features screen is opened.
+sealed class PremiumSource extends TdObject {
   
   /// **PremiumSource** *(premiumSource)* - parent
   ///
@@ -17,41 +17,44 @@ class PremiumSource extends TdObject {
   /// * [PremiumSourceSettings]
   factory PremiumSource.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case PremiumSourceLimitExceeded.constructor:
+      case PremiumSourceLimitExceeded.objectType:
         return PremiumSourceLimitExceeded.fromJson(json);
-      case PremiumSourceFeature.constructor:
+      case PremiumSourceFeature.objectType:
         return PremiumSourceFeature.fromJson(json);
-      case PremiumSourceLink.constructor:
+      case PremiumSourceLink.objectType:
         return PremiumSourceLink.fromJson(json);
-      case PremiumSourceSettings.constructor:
+      case PremiumSourceSettings.objectType:
         return PremiumSourceSettings.fromJson(json);
       default:
-        return const PremiumSource();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of PremiumSource)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  PremiumSource copyWith() => const PremiumSource();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'premiumSource';
   
+  PremiumSource copyWith();
+
+  static const String objectType = 'premiumSource';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumSourceLimitExceeded** *(premiumSourceLimitExceeded)* - child of PremiumSource
-  ///
-  /// A limit was exceeded.
-  ///
-  /// * [limitType]: Type of the exceeded limit.
-class PremiumSourceLimitExceeded extends PremiumSource {
+///
+/// A limit was exceeded.
+///
+/// * [limitType]: Type of the exceeded limit.
+final class PremiumSourceLimitExceeded extends PremiumSource {
   
   /// **PremiumSourceLimitExceeded** *(premiumSourceLimitExceeded)* - child of PremiumSource
   ///
@@ -72,12 +75,13 @@ class PremiumSourceLimitExceeded extends PremiumSource {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "limit_type": limitType.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   PremiumSourceLimitExceeded copyWith({
@@ -86,19 +90,22 @@ class PremiumSourceLimitExceeded extends PremiumSource {
     limitType: limitType ?? this.limitType,
   );
 
-  static const String constructor = 'premiumSourceLimitExceeded';
-  
+  static const String objectType = 'premiumSourceLimitExceeded';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumSourceFeature** *(premiumSourceFeature)* - child of PremiumSource
-  ///
-  /// A user tried to use a Premium feature.
-  ///
-  /// * [feature]: The used feature.
-class PremiumSourceFeature extends PremiumSource {
+///
+/// A user tried to use a Premium feature.
+///
+/// * [feature]: The used feature.
+final class PremiumSourceFeature extends PremiumSource {
   
   /// **PremiumSourceFeature** *(premiumSourceFeature)* - child of PremiumSource
   ///
@@ -119,12 +126,13 @@ class PremiumSourceFeature extends PremiumSource {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "feature": feature.toJson(),
-    };
-  }
+		};
+	}
+
   
   @override
   PremiumSourceFeature copyWith({
@@ -133,19 +141,22 @@ class PremiumSourceFeature extends PremiumSource {
     feature: feature ?? this.feature,
   );
 
-  static const String constructor = 'premiumSourceFeature';
-  
+  static const String objectType = 'premiumSourceFeature';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumSourceLink** *(premiumSourceLink)* - child of PremiumSource
-  ///
-  /// A user opened an internal link of the type internalLinkTypePremiumFeatures.
-  ///
-  /// * [referrer]: The referrer from the link.
-class PremiumSourceLink extends PremiumSource {
+///
+/// A user opened an internal link of the type internalLinkTypePremiumFeatures.
+///
+/// * [referrer]: The referrer from the link.
+final class PremiumSourceLink extends PremiumSource {
   
   /// **PremiumSourceLink** *(premiumSourceLink)* - child of PremiumSource
   ///
@@ -166,12 +177,13 @@ class PremiumSourceLink extends PremiumSource {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "referrer": referrer,
-    };
-  }
+		};
+	}
+
   
   @override
   PremiumSourceLink copyWith({
@@ -180,17 +192,20 @@ class PremiumSourceLink extends PremiumSource {
     referrer: referrer ?? this.referrer,
   );
 
-  static const String constructor = 'premiumSourceLink';
-  
+  static const String objectType = 'premiumSourceLink';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **PremiumSourceSettings** *(premiumSourceSettings)* - child of PremiumSource
-  ///
-  /// A user opened the Premium features screen from settings.
-class PremiumSourceSettings extends PremiumSource {
+///
+/// A user opened the Premium features screen from settings.
+final class PremiumSourceSettings extends PremiumSource {
   
   /// **PremiumSourceSettings** *(premiumSourceSettings)* - child of PremiumSource
   ///
@@ -201,17 +216,21 @@ class PremiumSourceSettings extends PremiumSource {
   factory PremiumSourceSettings.fromJson(Map<String, dynamic> json) => const PremiumSourceSettings();
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   PremiumSourceSettings copyWith() => const PremiumSourceSettings();
 
-  static const String constructor = 'premiumSourceSettings';
-  
+  static const String objectType = 'premiumSourceSettings';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

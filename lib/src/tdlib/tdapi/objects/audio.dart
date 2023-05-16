@@ -1,19 +1,19 @@
 part of '../tdapi.dart';
 
 /// **Audio** *(audio)* - basic class
-  ///
-  /// Describes an audio file. Audio is usually in MP3 or M4A format.
-  ///
-  /// * [duration]: Duration of the audio, in seconds; as defined by the sender.
-  /// * [title]: Title of the audio; as defined by the sender.
-  /// * [performer]: Performer of the audio; as defined by the sender.
-  /// * [fileName]: Original name of the file; as defined by the sender.
-  /// * [mimeType]: The MIME type of the file; as defined by the sender.
-  /// * [albumCoverMinithumbnail]: The minithumbnail of the album cover; may be null *(optional)*.
-  /// * [albumCoverThumbnail]: The thumbnail of the album cover in JPEG format; as defined by the sender. The full size thumbnail is supposed to be extracted from the downloaded audio file; may be null *(optional)*.
-  /// * [externalAlbumCovers]: Album cover variants to use if the downloaded audio file contains no album cover. Provided thumbnail dimensions are approximate.
-  /// * [audio]: File containing the audio.
-class Audio extends TdObject {
+///
+/// Describes an audio file. Audio is usually in MP3 or M4A format.
+///
+/// * [duration]: Duration of the audio, in seconds; as defined by the sender.
+/// * [title]: Title of the audio; as defined by the sender.
+/// * [performer]: Performer of the audio; as defined by the sender.
+/// * [fileName]: Original name of the file; as defined by the sender.
+/// * [mimeType]: The MIME type of the file; as defined by the sender.
+/// * [albumCoverMinithumbnail]: The minithumbnail of the album cover; may be null *(optional)*.
+/// * [albumCoverThumbnail]: The thumbnail of the album cover in JPEG format; as defined by the sender. The full size thumbnail is supposed to be extracted from the downloaded audio file; may be null *(optional)*.
+/// * [externalAlbumCovers]: Album cover variants to use if the downloaded audio file contains no album cover. Provided thumbnail dimensions are approximate.
+/// * [audio]: File containing the audio.
+final class Audio extends TdObject {
   
   /// **Audio** *(audio)* - basic class
   ///
@@ -82,9 +82,9 @@ class Audio extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "duration": duration,
       "title": title,
       "performer": performer,
@@ -94,8 +94,9 @@ class Audio extends TdObject {
       "album_cover_thumbnail": albumCoverThumbnail?.toJson(),
       "external_album_covers": externalAlbumCovers.map((i) => i.toJson()).toList(),
       "audio": audio.toJson(),
-    };
-  }
+		};
+	}
+
   
   Audio copyWith({
     int? duration,
@@ -119,8 +120,11 @@ class Audio extends TdObject {
     audio: audio ?? this.audio,
   );
 
-  static const String constructor = 'audio';
-  
+  static const String objectType = 'audio';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

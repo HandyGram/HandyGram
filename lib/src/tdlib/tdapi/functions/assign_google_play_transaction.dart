@@ -1,16 +1,16 @@
 part of '../tdapi.dart';
 
 /// **AssignGooglePlayTransaction** *(assignGooglePlayTransaction)* - TDLib function
-  ///
-  /// Informs server about a purchase through Google Play. For official applications only.
-  ///
-  /// * [packageName]: Application package name.
-  /// * [storeProductId]: Identifier of the purchased store product.
-  /// * [purchaseToken]: Google Play purchase token.
-  /// * [purpose]: Transaction purpose.
-  ///
-  /// [Ok] is returned on completion.
-class AssignGooglePlayTransaction extends TdFunction {
+///
+/// Informs server about a purchase through Google Play. For official applications only.
+///
+/// * [packageName]: Application package name.
+/// * [storeProductId]: Identifier of the purchased store product.
+/// * [purchaseToken]: Google Play purchase token.
+/// * [purpose]: Transaction purpose.
+///
+/// [Ok] is returned on completion.
+final class AssignGooglePlayTransaction extends TdFunction {
   
   /// **AssignGooglePlayTransaction** *(assignGooglePlayTransaction)* - TDLib function
   ///
@@ -43,15 +43,16 @@ class AssignGooglePlayTransaction extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "package_name": packageName,
       "store_product_id": storeProductId,
       "purchase_token": purchaseToken,
       "purpose": purpose.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   AssignGooglePlayTransaction copyWith({
     String? packageName,
@@ -65,8 +66,11 @@ class AssignGooglePlayTransaction extends TdFunction {
     purpose: purpose ?? this.purpose,
   );
 
-  static const String constructor = 'assignGooglePlayTransaction';
-  
+  static const String objectType = 'assignGooglePlayTransaction';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

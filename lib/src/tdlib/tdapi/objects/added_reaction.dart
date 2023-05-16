@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **AddedReaction** *(addedReaction)* - basic class
-  ///
-  /// Represents a reaction applied to a message.
-  ///
-  /// * [type]: Type of the reaction.
-  /// * [senderId]: Identifier of the chat member, applied the reaction.
-class AddedReaction extends TdObject {
+///
+/// Represents a reaction applied to a message.
+///
+/// * [type]: Type of the reaction.
+/// * [senderId]: Identifier of the chat member, applied the reaction.
+final class AddedReaction extends TdObject {
   
   /// **AddedReaction** *(addedReaction)* - basic class
   ///
@@ -33,13 +33,14 @@ class AddedReaction extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "type": type.toJson(),
       "sender_id": senderId.toJson(),
-    };
-  }
+		};
+	}
+
   
   AddedReaction copyWith({
     ReactionType? type,
@@ -49,8 +50,11 @@ class AddedReaction extends TdObject {
     senderId: senderId ?? this.senderId,
   );
 
-  static const String constructor = 'addedReaction';
-  
+  static const String objectType = 'addedReaction';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

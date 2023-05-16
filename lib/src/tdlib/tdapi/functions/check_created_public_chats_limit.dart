@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **CheckCreatedPublicChatsLimit** *(checkCreatedPublicChatsLimit)* - TDLib function
-  ///
-  /// Checks whether the maximum number of owned public chats has been reached. Returns corresponding error if the limit was reached. The limit can be increased with Telegram Premium.
-  ///
-  /// * [type]: Type of the public chats, for which to check the limit.
-  ///
-  /// [Ok] is returned on completion.
-class CheckCreatedPublicChatsLimit extends TdFunction {
+///
+/// Checks whether the maximum number of owned public chats has been reached. Returns corresponding error if the limit was reached. The limit can be increased with Telegram Premium.
+///
+/// * [type]: Type of the public chats, for which to check the limit.
+///
+/// [Ok] is returned on completion.
+final class CheckCreatedPublicChatsLimit extends TdFunction {
   
   /// **CheckCreatedPublicChatsLimit** *(checkCreatedPublicChatsLimit)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class CheckCreatedPublicChatsLimit extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "type": type.toJson(),
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   CheckCreatedPublicChatsLimit copyWith({
     PublicChatType? type,
@@ -38,8 +39,11 @@ class CheckCreatedPublicChatsLimit extends TdFunction {
     type: type ?? this.type,
   );
 
-  static const String constructor = 'checkCreatedPublicChatsLimit';
-  
+  static const String objectType = 'checkCreatedPublicChatsLimit';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

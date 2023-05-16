@@ -1,18 +1,18 @@
 part of '../tdapi.dart';
 
 /// **GetMapThumbnailFile** *(getMapThumbnailFile)* - TDLib function
-  ///
-  /// Returns information about a file with a map thumbnail in PNG format. Only map thumbnail files with size less than 1MB can be downloaded.
-  ///
-  /// * [location]: Location of the map center.
-  /// * [zoom]: Map zoom level; 13-20.
-  /// * [width]: Map width in pixels before applying scale; 16-1024.
-  /// * [height]: Map height in pixels before applying scale; 16-1024.
-  /// * [scale]: Map scale; 1-3.
-  /// * [chatId]: Identifier of a chat in which the thumbnail will be shown. Use 0 if unknown.
-  ///
-  /// [File] is returned on completion.
-class GetMapThumbnailFile extends TdFunction {
+///
+/// Returns information about a file with a map thumbnail in PNG format. Only map thumbnail files with size less than 1MB can be downloaded.
+///
+/// * [location]: Location of the map center.
+/// * [zoom]: Map zoom level; 13-20.
+/// * [width]: Map width in pixels before applying scale; 16-1024.
+/// * [height]: Map height in pixels before applying scale; 16-1024.
+/// * [scale]: Map scale; 1-3.
+/// * [chatId]: Identifier of a chat in which the thumbnail will be shown. Use 0 if unknown.
+///
+/// [File] is returned on completion.
+final class GetMapThumbnailFile extends TdFunction {
   
   /// **GetMapThumbnailFile** *(getMapThumbnailFile)* - TDLib function
   ///
@@ -55,8 +55,8 @@ class GetMapThumbnailFile extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "location": location.toJson(),
       "zoom": zoom,
       "width": width,
@@ -64,8 +64,9 @@ class GetMapThumbnailFile extends TdFunction {
       "scale": scale,
       "chat_id": chatId,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetMapThumbnailFile copyWith({
     Location? location,
@@ -83,8 +84,11 @@ class GetMapThumbnailFile extends TdFunction {
     chatId: chatId ?? this.chatId,
   );
 
-  static const String constructor = 'getMapThumbnailFile';
-  
+  static const String objectType = 'getMapThumbnailFile';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **SearchChatRecentLocationMessages** *(searchChatRecentLocationMessages)* - TDLib function
-  ///
-  /// Returns information about the recent locations of chat members that were sent to the chat. Returns up to 1 location message per user.
-  ///
-  /// * [chatId]: Chat identifier.
-  /// * [limit]: The maximum number of messages to be returned.
-  ///
-  /// [Messages] is returned on completion.
-class SearchChatRecentLocationMessages extends TdFunction {
+///
+/// Returns information about the recent locations of chat members that were sent to the chat. Returns up to 1 location message per user.
+///
+/// * [chatId]: Chat identifier.
+/// * [limit]: The maximum number of messages to be returned.
+///
+/// [Messages] is returned on completion.
+final class SearchChatRecentLocationMessages extends TdFunction {
   
   /// **SearchChatRecentLocationMessages** *(searchChatRecentLocationMessages)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class SearchChatRecentLocationMessages extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "chat_id": chatId,
       "limit": limit,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SearchChatRecentLocationMessages copyWith({
     int? chatId,
@@ -47,8 +48,11 @@ class SearchChatRecentLocationMessages extends TdFunction {
     limit: limit ?? this.limit,
   );
 
-  static const String constructor = 'searchChatRecentLocationMessages';
-  
+  static const String objectType = 'searchChatRecentLocationMessages';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

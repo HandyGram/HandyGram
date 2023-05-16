@@ -1,12 +1,12 @@
 part of '../tdapi.dart';
 
 /// **ChatMembers** *(chatMembers)* - basic class
-  ///
-  /// Contains a list of chat members.
-  ///
-  /// * [totalCount]: Approximate total number of chat members found.
-  /// * [members]: A list of chat members.
-class ChatMembers extends TdObject {
+///
+/// Contains a list of chat members.
+///
+/// * [totalCount]: Approximate total number of chat members found.
+/// * [members]: A list of chat members.
+final class ChatMembers extends TdObject {
   
   /// **ChatMembers** *(chatMembers)* - basic class
   ///
@@ -45,13 +45,14 @@ class ChatMembers extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "total_count": totalCount,
       "members": members.map((i) => i.toJson()).toList(),
-    };
-  }
+		};
+	}
+
   
   ChatMembers copyWith({
     int? totalCount,
@@ -65,8 +66,11 @@ class ChatMembers extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'chatMembers';
-  
+  static const String objectType = 'chatMembers';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

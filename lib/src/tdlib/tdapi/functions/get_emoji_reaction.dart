@@ -1,13 +1,13 @@
 part of '../tdapi.dart';
 
 /// **GetEmojiReaction** *(getEmojiReaction)* - TDLib function
-  ///
-  /// Returns information about a emoji reaction. Returns a 404 error if the reaction is not found.
-  ///
-  /// * [emoji]: Text representation of the reaction.
-  ///
-  /// [EmojiReaction] is returned on completion.
-class GetEmojiReaction extends TdFunction {
+///
+/// Returns information about a emoji reaction. Returns a 404 error if the reaction is not found.
+///
+/// * [emoji]: Text representation of the reaction.
+///
+/// [EmojiReaction] is returned on completion.
+final class GetEmojiReaction extends TdFunction {
   
   /// **GetEmojiReaction** *(getEmojiReaction)* - TDLib function
   ///
@@ -25,12 +25,13 @@ class GetEmojiReaction extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "emoji": emoji,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   GetEmojiReaction copyWith({
     String? emoji,
@@ -38,8 +39,11 @@ class GetEmojiReaction extends TdFunction {
     emoji: emoji ?? this.emoji,
   );
 
-  static const String constructor = 'getEmojiReaction';
-  
+  static const String objectType = 'getEmojiReaction';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

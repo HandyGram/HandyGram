@@ -1,14 +1,14 @@
 part of '../tdapi.dart';
 
 /// **SendCallSignalingData** *(sendCallSignalingData)* - TDLib function
-  ///
-  /// Sends call signaling data.
-  ///
-  /// * [callId]: Call identifier.
-  /// * [data]: The data.
-  ///
-  /// [Ok] is returned on completion.
-class SendCallSignalingData extends TdFunction {
+///
+/// Sends call signaling data.
+///
+/// * [callId]: Call identifier.
+/// * [data]: The data.
+///
+/// [Ok] is returned on completion.
+final class SendCallSignalingData extends TdFunction {
   
   /// **SendCallSignalingData** *(sendCallSignalingData)* - TDLib function
   ///
@@ -31,13 +31,14 @@ class SendCallSignalingData extends TdFunction {
   
   @override
   Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+		return {
+			"@type": objectType,
       "call_id": callId,
       "data": data,
       "@extra": extra,
-    };
-  }
+		};
+	}
+
   
   SendCallSignalingData copyWith({
     int? callId,
@@ -47,8 +48,11 @@ class SendCallSignalingData extends TdFunction {
     data: data ?? this.data,
   );
 
-  static const String constructor = 'sendCallSignalingData';
-  
+  static const String objectType = 'sendCallSignalingData';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

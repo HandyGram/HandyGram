@@ -1,21 +1,21 @@
 part of '../tdapi.dart';
 
 /// **PaymentReceipt** *(paymentReceipt)* - basic class
-  ///
-  /// Contains information about a successful payment.
-  ///
-  /// * [title]: Product title.
-  /// * [description]: Product description.
-  /// * [photo]: Product photo; may be null *(optional)*.
-  /// * [date]: Point in time (Unix timestamp) when the payment was made.
-  /// * [sellerBotUserId]: User identifier of the seller bot.
-  /// * [paymentProviderUserId]: User identifier of the payment provider bot.
-  /// * [invoice]: Information about the invoice.
-  /// * [orderInfo]: Order information; may be null *(optional)*.
-  /// * [shippingOption]: Chosen shipping option; may be null *(optional)*.
-  /// * [credentialsTitle]: Title of the saved credentials chosen by the buyer.
-  /// * [tipAmount]: The amount of tip chosen by the buyer in the smallest units of the currency.
-class PaymentReceipt extends TdObject {
+///
+/// Contains information about a successful payment.
+///
+/// * [title]: Product title.
+/// * [description]: Product description.
+/// * [photo]: Product photo; may be null *(optional)*.
+/// * [date]: Point in time (Unix timestamp) when the payment was made.
+/// * [sellerBotUserId]: User identifier of the seller bot.
+/// * [paymentProviderUserId]: User identifier of the payment provider bot.
+/// * [invoice]: Information about the invoice.
+/// * [orderInfo]: Order information; may be null *(optional)*.
+/// * [shippingOption]: Chosen shipping option; may be null *(optional)*.
+/// * [credentialsTitle]: Title of the saved credentials chosen by the buyer.
+/// * [tipAmount]: The amount of tip chosen by the buyer in the smallest units of the currency.
+final class PaymentReceipt extends TdObject {
   
   /// **PaymentReceipt** *(paymentReceipt)* - basic class
   ///
@@ -108,9 +108,9 @@ class PaymentReceipt extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "title": title,
       "description": description.toJson(),
       "photo": photo?.toJson(),
@@ -122,8 +122,9 @@ class PaymentReceipt extends TdObject {
       "shipping_option": shippingOption?.toJson(),
       "credentials_title": credentialsTitle,
       "tip_amount": tipAmount,
-    };
-  }
+		};
+	}
+
   
   PaymentReceipt copyWith({
     String? title,
@@ -155,8 +156,11 @@ class PaymentReceipt extends TdObject {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'paymentReceipt';
-  
+  static const String objectType = 'paymentReceipt';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

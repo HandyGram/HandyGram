@@ -1,9 +1,9 @@
 part of '../tdapi.dart';
 
 /// **CheckStickerSetNameResult** *(checkStickerSetNameResult)* - parent
-  ///
-  /// Represents result of checking whether a name can be used for a new sticker set.
-class CheckStickerSetNameResult extends TdObject {
+///
+/// Represents result of checking whether a name can be used for a new sticker set.
+sealed class CheckStickerSetNameResult extends TdObject {
   
   /// **CheckStickerSetNameResult** *(checkStickerSetNameResult)* - parent
   ///
@@ -16,37 +16,40 @@ class CheckStickerSetNameResult extends TdObject {
   /// * [CheckStickerSetNameResultNameOccupied]
   factory CheckStickerSetNameResult.fromJson(Map<String, dynamic> json)  {
     switch(json["@type"]) {
-      case CheckStickerSetNameResultOk.constructor:
+      case CheckStickerSetNameResultOk.objectType:
         return CheckStickerSetNameResultOk.fromJson(json);
-      case CheckStickerSetNameResultNameInvalid.constructor:
+      case CheckStickerSetNameResultNameInvalid.objectType:
         return CheckStickerSetNameResultNameInvalid.fromJson(json);
-      case CheckStickerSetNameResultNameOccupied.constructor:
+      case CheckStickerSetNameResultNameOccupied.objectType:
         return CheckStickerSetNameResultNameOccupied.fromJson(json);
       default:
-        return const CheckStickerSetNameResult();
+        throw FormatException(
+          "Unknown object ${json["@type"]} (expected child of CheckStickerSetNameResult)",
+          json,
+        );
     }
   }
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      
-    };
-  }
-  
-  CheckStickerSetNameResult copyWith() => const CheckStickerSetNameResult();
+  Map<String, dynamic> toJson();
 
-  static const String constructor = 'checkStickerSetNameResult';
   
+  CheckStickerSetNameResult copyWith();
+
+  static const String objectType = 'checkStickerSetNameResult';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **CheckStickerSetNameResultOk** *(checkStickerSetNameResultOk)* - child of CheckStickerSetNameResult
-  ///
-  /// The name can be set.
-class CheckStickerSetNameResultOk extends CheckStickerSetNameResult {
+///
+/// The name can be set.
+final class CheckStickerSetNameResultOk extends CheckStickerSetNameResult {
   
   /// **CheckStickerSetNameResultOk** *(checkStickerSetNameResultOk)* - child of CheckStickerSetNameResult
   ///
@@ -72,11 +75,12 @@ class CheckStickerSetNameResultOk extends CheckStickerSetNameResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   CheckStickerSetNameResultOk copyWith({
@@ -87,17 +91,20 @@ class CheckStickerSetNameResultOk extends CheckStickerSetNameResult {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'checkStickerSetNameResultOk';
-  
+  static const String objectType = 'checkStickerSetNameResultOk';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **CheckStickerSetNameResultNameInvalid** *(checkStickerSetNameResultNameInvalid)* - child of CheckStickerSetNameResult
-  ///
-  /// The name is invalid.
-class CheckStickerSetNameResultNameInvalid extends CheckStickerSetNameResult {
+///
+/// The name is invalid.
+final class CheckStickerSetNameResultNameInvalid extends CheckStickerSetNameResult {
   
   /// **CheckStickerSetNameResultNameInvalid** *(checkStickerSetNameResultNameInvalid)* - child of CheckStickerSetNameResult
   ///
@@ -123,11 +130,12 @@ class CheckStickerSetNameResultNameInvalid extends CheckStickerSetNameResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   CheckStickerSetNameResultNameInvalid copyWith({
@@ -138,17 +146,20 @@ class CheckStickerSetNameResultNameInvalid extends CheckStickerSetNameResult {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'checkStickerSetNameResultNameInvalid';
-  
+  static const String objectType = 'checkStickerSetNameResultNameInvalid';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
 
 
 /// **CheckStickerSetNameResultNameOccupied** *(checkStickerSetNameResultNameOccupied)* - child of CheckStickerSetNameResult
-  ///
-  /// The name is occupied.
-class CheckStickerSetNameResultNameOccupied extends CheckStickerSetNameResult {
+///
+/// The name is occupied.
+final class CheckStickerSetNameResultNameOccupied extends CheckStickerSetNameResult {
   
   /// **CheckStickerSetNameResultNameOccupied** *(checkStickerSetNameResultNameOccupied)* - child of CheckStickerSetNameResult
   ///
@@ -174,11 +185,12 @@ class CheckStickerSetNameResultNameOccupied extends CheckStickerSetNameResult {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
-    };
-  }
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
+		};
+	}
+
   
   @override
   CheckStickerSetNameResultNameOccupied copyWith({
@@ -189,8 +201,11 @@ class CheckStickerSetNameResultNameOccupied extends CheckStickerSetNameResult {
     clientId: clientId ?? this.clientId,
   );
 
-  static const String constructor = 'checkStickerSetNameResultNameOccupied';
-  
+  static const String objectType = 'checkStickerSetNameResultNameOccupied';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

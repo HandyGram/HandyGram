@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **CallServer** *(callServer)* - basic class
-  ///
-  /// Describes a server for relaying call data.
-  ///
-  /// * [id]: Server identifier.
-  /// * [ipAddress]: Server IPv4 address.
-  /// * [ipv6Address]: Server IPv6 address.
-  /// * [port]: Server port number.
-  /// * [type]: Server type.
-class CallServer extends TdObject {
+///
+/// Describes a server for relaying call data.
+///
+/// * [id]: Server identifier.
+/// * [ipAddress]: Server IPv4 address.
+/// * [ipv6Address]: Server IPv6 address.
+/// * [port]: Server port number.
+/// * [type]: Server type.
+final class CallServer extends TdObject {
   
   /// **CallServer** *(callServer)* - basic class
   ///
@@ -54,16 +54,17 @@ class CallServer extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "ip_address": ipAddress,
       "ipv6_address": ipv6Address,
       "port": port,
       "type": type.toJson(),
-    };
-  }
+		};
+	}
+
   
   CallServer copyWith({
     int? id,
@@ -79,8 +80,11 @@ class CallServer extends TdObject {
     type: type ?? this.type,
   );
 
-  static const String constructor = 'callServer';
-  
+  static const String objectType = 'callServer';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }

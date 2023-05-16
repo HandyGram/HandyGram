@@ -1,15 +1,15 @@
 part of '../tdapi.dart';
 
 /// **Call** *(call)* - basic class
-  ///
-  /// Describes a call.
-  ///
-  /// * [id]: Call identifier, not persistent.
-  /// * [userId]: Peer user identifier.
-  /// * [isOutgoing]: True, if the call is outgoing.
-  /// * [isVideo]: True, if the call is a video call.
-  /// * [state]: Call state.
-class Call extends TdObject {
+///
+/// Describes a call.
+///
+/// * [id]: Call identifier, not persistent.
+/// * [userId]: Peer user identifier.
+/// * [isOutgoing]: True, if the call is outgoing.
+/// * [isVideo]: True, if the call is a video call.
+/// * [state]: Call state.
+final class Call extends TdObject {
   
   /// **Call** *(call)* - basic class
   ///
@@ -54,16 +54,17 @@ class Call extends TdObject {
   
   
   @override
-  Map<String, dynamic> toJson([dynamic extra]) {
-    return {
-      "@type": constructor,
+  Map<String, dynamic> toJson() {
+		return {
+			"@type": objectType,
       "id": id,
       "user_id": userId,
       "is_outgoing": isOutgoing,
       "is_video": isVideo,
       "state": state.toJson(),
-    };
-  }
+		};
+	}
+
   
   Call copyWith({
     int? id,
@@ -79,8 +80,11 @@ class Call extends TdObject {
     state: state ?? this.state,
   );
 
-  static const String constructor = 'call';
-  
+  static const String objectType = 'call';
+
   @override
-  String getConstructor() => constructor;
+  String toString() => jsonEncode(toJson());
+
+  @override
+  String get instanceType => objectType;
 }
