@@ -1,26 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:handygram/src/misc/utils.dart';
 
 class PreSettingsButton extends StatefulWidget {
   const PreSettingsButton({
     super.key,
     required this.onPressed,
-    required this.icon,
+    this.icon,
     this.title,
     this.isCentered = false,
     this.mini = false,
+    this.isEmoji = false,
     this.background,
     this.foreground,
   });
 
   final String? title;
-  final IconData icon;
+  final IconData? icon;
   final Function() onPressed;
 
   final bool isCentered;
   final Color? foreground;
   final Color? background;
   final bool mini;
+  final bool isEmoji;
 
   @override
   State<PreSettingsButton> createState() => _PreSettingsButtonState();
@@ -29,6 +32,27 @@ class PreSettingsButton extends StatefulWidget {
 class _PreSettingsButtonState extends State<PreSettingsButton> {
   @override
   Widget build(BuildContext context) {
+    assert(widget.title != null || widget.icon != null);
+
+    Widget? t;
+    if (widget.title != null) {
+      t = Text(
+        widget.title!,
+        style: !widget.isEmoji
+            ? TextStyle(
+                color: widget.foreground ??
+                    Theme.of(context).textTheme.bodyMedium!.color,
+                fontSize: scaleText(14),
+              )
+            : GoogleFonts.notoColorEmoji(
+                fontSize: scaleText(14),
+              ),
+        overflow: TextOverflow.fade,
+        maxLines: 1,
+        softWrap: false,
+      );
+    }
+
     return InkWell(
       customBorder: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
@@ -47,27 +71,22 @@ class _PreSettingsButtonState extends State<PreSettingsButton> {
               : MainAxisAlignment.start,
           mainAxisSize: widget.mini ? MainAxisSize.min : MainAxisSize.max,
           children: [
-            Icon(
-              widget.icon,
-              size: 18,
-              color: widget.foreground ??
-                  Theme.of(context).textTheme.bodyMedium!.color,
-            ),
-            if (widget.title != null) const SizedBox(width: 10),
-            if (widget.title != null)
-              Expanded(
-                child: Text(
-                  widget.title!,
-                  style: TextStyle(
-                    color: widget.foreground ??
-                        Theme.of(context).textTheme.bodyMedium!.color,
-                    fontSize: scaleText(14),
-                  ),
-                  overflow: TextOverflow.fade,
-                  maxLines: 1,
-                  softWrap: false,
-                ),
+            if (widget.icon != null)
+              Icon(
+                widget.icon,
+                size: 18,
+                color: widget.foreground ??
+                    Theme.of(context).textTheme.bodyMedium!.color,
               ),
+            if (widget.title != null && widget.icon != null)
+              const SizedBox(width: 10),
+            if (widget.title != null)
+              if (widget.isCentered)
+                t!
+              else
+                Expanded(
+                  child: t!,
+                ),
           ],
         ),
       ),
