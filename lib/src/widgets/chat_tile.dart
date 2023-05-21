@@ -6,7 +6,6 @@ import 'package:handygram/src/telegram/session.dart';
 import 'chat_image.dart';
 import 'package:handygram/src/telegram/users.dart';
 import 'package:handygram/src/tdlib/td_api.dart' as tdlib;
-import 'package:handygram/src/misc/tdlib_utils.dart';
 
 // returns user, bot, deleted_user, unknown_user, channel, group
 String _getChatTileType(int id) => switch (session.chatsInfoCache[id]?.type) {
@@ -168,7 +167,7 @@ class ChatTile extends StatelessWidget {
                     if (lastMessage != null &&
                         lastDraft == null &&
                         session.chatsInfoCache[id]?.type
-                            is tdlib.ChatTypePrivate &&
+                            is! tdlib.ChatTypePrivate &&
                         lastMessage.senderId.getSenderId() != id)
                       Flexible(
                         child: Text(
