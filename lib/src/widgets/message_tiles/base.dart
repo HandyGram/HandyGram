@@ -5,7 +5,6 @@ import 'package:handygram/src/misc/utils.dart';
 import 'package:handygram/src/telegram/messages.dart';
 import 'package:handygram/src/widgets/chat_image.dart';
 import 'package:handygram/src/telegram/session.dart';
-import 'package:handygram/src/misc/tdlib_utils.dart';
 import 'package:handygram/src/tdlib/td_api.dart' as tdlib;
 import 'package:handygram/src/widgets/message_tiles/reaction_chip.dart';
 
@@ -230,7 +229,9 @@ class MessageBaseTile extends ConsumerWidget {
         Navigator.pushNamed(
           context,
           "/message_menu",
-          arguments: {"message": msg},
+          arguments: {
+            "message": msg,
+          },
         );
       },
       child: Row(
