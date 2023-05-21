@@ -251,7 +251,7 @@ class MessageBaseTile extends ConsumerWidget {
                   msg.senderId.getSenderId(),
                 ),
                 id: msg.senderId.getSenderId(),
-                isUser: msg.senderId is tdlib.MessageSenderUser,
+                messageSender: msg.senderId,
               ),
             )
           else if ((msg.isOutgoing || small) &&
@@ -379,7 +379,7 @@ class MessageBaseTile extends ConsumerWidget {
                 key: ValueKey<int>(
                   msg.senderId.getSenderId(),
                 ),
-                isUser: msg.senderId is tdlib.MessageSenderUser,
+                messageSender: msg.senderId,
                 id: msg.senderId.getSenderId(),
               ),
             )

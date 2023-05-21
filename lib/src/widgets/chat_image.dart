@@ -11,8 +11,9 @@ class ChatImage extends StatefulWidget {
     required this.id,
     this.title,
     this.image,
-    required this.isUser,
-  });
+    this.isUser,
+    this.messageSender,
+  }) : assert(isUser != null || messageSender != null);
 
   final int id;
 
@@ -20,16 +21,17 @@ class ChatImage extends StatefulWidget {
   // increase performance.
   final String? title;
   final Widget? image;
-  final bool isUser;
+  final bool? isUser;
+  final tdlib.MessageSender? messageSender;
 
   @override
   State<ChatImage> createState() => _ChatImageState();
 }
 
-Future<Map<String, dynamic>> getChatInfoForUser(int id) async {
+Future<Map<String, dynamic>> getChatInfoForUser(int id, [int? uid]) async {
   tdlib.ChatPhotos? photos;
   try {
-    photos = await session.functions.getUserProfilePhotos(id);
+    photos = await session.functions.getUserProfilePhotos(uid ?? id);
   } catch (_) {
     return {
       "title": "?",
@@ -48,7 +50,7 @@ Future<Map<String, dynamic>> getChatInfoForUser(int id) async {
   String title = "?";
   if (prov != null) {
     try {
-      title = (await session.usersInfoCache.get(id))?.firstName ?? "?";
+      title = (await session.usersInfoCache.get(uid ?? id))?.firstName ?? "?";
     } catch (_) {}
   }
 
@@ -59,10 +61,10 @@ Future<Map<String, dynamic>> getChatInfoForUser(int id) async {
   };
 }
 
-Future<Map<String, dynamic>> getChatInfoForChat(int id) async {
+Future<Map<String, dynamic>> getChatInfoForChat(int id, [int? cid]) async {
   tdlib.File? photo;
   try {
-    photo = (await session.chatsInfoCache.get(id))?.photo?.small;
+    photo = (await session.chatsInfoCache.get(cid ?? id))?.photo?.small;
   } catch (_) {
     return {
       "title": "?",
@@ -71,7 +73,7 @@ Future<Map<String, dynamic>> getChatInfoForChat(int id) async {
   }
   if (photo == null) {
     return {
-      "title": session.chatsInfoCache[id]?.title ?? "?",
+      "title": session.chatsInfoCache[cid ?? id]?.title ?? "?",
       "photo": null,
     };
   }
@@ -80,7 +82,7 @@ Future<Map<String, dynamic>> getChatInfoForChat(int id) async {
   String title = "?";
   if (prov != null) {
     try {
-      title = session.chatsInfoCache[id]?.title ?? "?";
+      title = session.chatsInfoCache[cid ?? id]?.title ?? "?";
     } catch (_) {}
   }
 
@@ -91,17 +93,30 @@ Future<Map<String, dynamic>> getChatInfoForChat(int id) async {
   };
 }
 
-Future<Map<String, dynamic>> _getChatInfo(int id, bool isUser) async {
+Future<Map<String, dynamic>> _getChatInfo(
+    int id, bool? isUser, tdlib.MessageSender? sender) async {
   if (session.chatPhotos.containsKey(id)) {
     return session.chatPhotos[id]!;
   }
 
   Map<String, dynamic> info;
-  if (isUser) {
-    info = await getChatInfoForUser(id);
-  } else {
-    info = await getChatInfoForChat(id);
+  switch (sender) {
+    case tdlib.MessageSenderChat(chatId: var cid):
+      info = await getChatInfoForChat(id, cid);
+      break;
+    case tdlib.MessageSenderUser(userId: var uid):
+      info = await getChatInfoForUser(id, uid);
+      break;
+    case null:
+    default:
+      if (isUser ?? false) {
+        info = await getChatInfoForUser(id);
+      } else {
+        info = await getChatInfoForChat(id);
+      }
+      break;
   }
+
   if (info["title"] != "?" || info["photo"] != null) {
     session.chatPhotos[id] = info;
   }
@@ -140,7 +155,7 @@ class _ChatImageState extends State<ChatImage> {
     super.initState();
     if (image == null) {
       loaderF = CancelableOperation.fromFuture(
-        _getChatInfo(id, widget.isUser).then(
+        _getChatInfo(id, widget.isUser, widget.messageSender).then(
           (val) => setState(() {
             title ??= val["title"];
             image = val["photo"] != null
