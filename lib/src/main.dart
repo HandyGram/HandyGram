@@ -8,6 +8,7 @@ import 'package:handygram/src/pages/chat_menu.dart';
 import 'package:handygram/src/pages/greeting.dart';
 import 'package:handygram/src/pages/home.dart';
 import 'package:handygram/src/pages/login.dart';
+import 'package:handygram/src/pages/message_menu.dart';
 import 'package:handygram/src/pages/pre_settings.dart';
 import 'package:handygram/src/pages/settings.dart';
 import 'package:handygram/src/pages/tdlib_loader.dart';
@@ -71,6 +72,11 @@ class HandyGram extends StatelessWidget {
             break;
           case "/chat_info":
             page = ChatInfoPage(
+              args: s.arguments as Map<String, dynamic>,
+            );
+            break;
+          case "/message_menu":
+            page = MessageMenuPage(
               args: s.arguments as Map<String, dynamic>,
             );
             break;
