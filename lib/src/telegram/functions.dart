@@ -467,4 +467,76 @@ class TelegramFunctions {
       throw TelegramError(obj, "object is not tdlib.Ok");
     }
   }
+
+  Future<List<List<tdlib.ReactionType>>?> getMessageAvailableReactions(
+    int chatId,
+    int messageId,
+    int rowSize,
+  ) async {
+    tdlib.TdObject? obj;
+    try {
+      obj = await _invoke(tdlib.GetMessageAvailableReactions(
+        chatId: chatId,
+        messageId: messageId,
+        rowSize: rowSize,
+      ));
+    } catch (_) {}
+    if (obj == null) return null;
+    if (obj is! tdlib.AvailableReactions) {
+      throw TelegramError(obj, "object is not tdlib.AvailableReactions");
+    }
+
+    // We do not support Premium features yet.
+    obj.topReactions.removeWhere((e) => e.needsPremium);
+    obj.recentReactions.removeWhere((e) => e.needsPremium);
+    obj.popularReactions.removeWhere((e) => e.needsPremium);
+
+    return [
+      obj.topReactions.map((e) => e.type).toList(),
+      obj.recentReactions.map((e) => e.type).toList(),
+      obj.popularReactions.map((e) => e.type).toList(),
+    ];
+  }
+
+  Future<void> deleteMessage(
+    int chatId,
+    int messageId, [
+    bool revoke = true,
+  ]) async {
+    tdlib.TdObject? obj = await _invoke(tdlib.DeleteMessages(
+      chatId: chatId,
+      messageIds: [messageId],
+      revoke: revoke,
+    ));
+    if (obj == null) return;
+    if (obj is! tdlib.Ok) {
+      throw TelegramError(obj, "object is not tdlib.Ok");
+    }
+  }
+
+  Future<List<TgMessage>?> forwardMessage(
+    int chatId,
+    int messageId,
+    int fromChatId, [
+    int messageThreadId = 0,
+    bool copy = false,
+    bool removeCaption = false,
+  ]) async {
+    tdlib.TdObject? obj = await _invoke(tdlib.ForwardMessages(
+      chatId: chatId,
+      messageIds: [messageId],
+      fromChatId: fromChatId,
+      messageThreadId: messageThreadId,
+      sendCopy: copy,
+      removeCaption: removeCaption,
+
+      // wtf pavel
+      onlyPreview: false,
+    ));
+    if (obj == null) return null;
+    if (obj is! tdlib.Messages) {
+      throw TelegramError(obj, "object is not tdlib.Messages");
+    }
+    return obj.messages.map<TgMessage>((e) => TgMessage(e)).toList();
+  }
 }
