@@ -171,45 +171,58 @@ class _TextMessagePageState extends State<TextMessagePage> {
                 },
               ),
               const SizedBox(height: 10),
-              PreSettingsButton(
-                icon: Icons.send,
-                title: "Send",
-                onPressed: () async {
-                  if (controller.text.isEmpty || isSending) return;
-                  isSending = true;
-                  tdlib.Message? result;
-                  try {
-                    result = await session.functions.sendMessage(
-                      chatId: chatId,
-                      content: tdlib.InputMessageText(
-                        text: tdlib.FormattedText(
-                          text: controller.text,
-                          entities: [],
+              if (isSending)
+                const Center(
+                  child: SizedBox(
+                    height: 30,
+                    width: 30,
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+              if (!isSending)
+                PreSettingsButton(
+                  icon: Icons.send,
+                  title: "Send",
+                  onPressed: () async {
+                    if (controller.text.isEmpty || isSending) return;
+                    setState(() {
+                      isSending = true;
+                    });
+                    tdlib.Message? result;
+                    try {
+                      result = await session.functions.sendMessage(
+                        chatId: chatId,
+                        content: tdlib.InputMessageText(
+                          text: tdlib.FormattedText(
+                            text: controller.text,
+                            entities: [],
+                          ),
+                          disableWebPagePreview: true,
+                          clearDraft: true,
                         ),
-                        disableWebPagePreview: true,
-                        clearDraft: true,
-                      ),
-                      replyToMessageId: replyToMsg?.id ?? 0,
-                    );
-                  } finally {
-                    isSending = false;
-                  }
+                        replyToMessageId: replyToMsg?.id ?? 0,
+                      );
+                    } finally {
+                      setState(() {
+                        isSending = false;
+                      });
+                    }
 
-                  if (result == null) {
-                    // ignore: use_build_context_synchronously
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Center(
-                          child: Text("error"),
+                    if (result == null) {
+                      // ignore: use_build_context_synchronously
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Center(
+                            child: Text("error"),
+                          ),
                         ),
-                      ),
-                    );
-                  } else {
-                    // ignore: use_build_context_synchronously
-                    widget.args["onComplete"]();
-                  }
-                },
-              ),
+                      );
+                    } else {
+                      // ignore: use_build_context_synchronously
+                      widget.args["onComplete"]();
+                    }
+                  },
+                ),
             ],
           );
         },
