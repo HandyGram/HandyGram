@@ -60,6 +60,12 @@ class _ChatPageState extends ConsumerState<ChatPage> {
   }
 
   @override
+  void dispose() {
+    session.functions.closeChat(chatId);
+    super.dispose();
+  }
+
+  @override
   void initState() {
     chatId = widget.args["id"];
     SchedulerBinding.instance.addPostFrameCallback(
@@ -87,7 +93,10 @@ class _ChatPageState extends ConsumerState<ChatPage> {
         });
         try {
           loadStatus = await _loadHistory(
-              0, 20, session.messages[chatId]!.messages.first.id);
+            0,
+            20,
+            session.messages[chatId]!.messages.first.idServer,
+          );
         } finally {
           loadMutex.release();
           setState(() {
@@ -96,6 +105,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
         }
       },
     );
+    session.functions.openChat(chatId);
     super.initState();
   }
 
@@ -118,38 +128,6 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     int prevSenderId = 0;
     DateTime prevTime = DateTime.now();
     final List<TgMessage> list = msgs.messages.reversed.toList();
-
-    if (list.isEmpty) {
-      return Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Center(
-                child: IconButton(
-                  icon: const Icon(
-                    Icons.backspace,
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ),
-              Center(
-                child: Text(
-                  session.chatsInfoCache[chatId]?.title ?? chatId.toString(),
-                ),
-              ),
-              const Center(
-                child: Text(
-                  "No messages, this is an error :/",
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
 
     return Scaffold(
       body: RotaryScrollWrapper(
@@ -199,7 +177,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                         prevTime = date;
                         return w;
                       }).toList(),
-                      if (_loadingHistory) ...[
+                      if (_loadingHistory || list.isEmpty) ...[
                         const SizedBox(
                           height: 10,
                         ),

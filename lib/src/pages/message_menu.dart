@@ -161,7 +161,7 @@ class _MessageMenuPageState extends State<MessageMenuPage> {
           ),
           Consumer(
             builder: (context, ref, _) {
-              if (!(canSendMessages(msg.chatId, ref) ?? false)) {
+              if (canSendMessages(msg.chatId, ref)?.isEmpty ?? false) {
                 return Container();
               }
 
@@ -171,7 +171,19 @@ class _MessageMenuPageState extends State<MessageMenuPage> {
                   PreSettingsButton(
                     icon: Icons.reply,
                     title: "Reply",
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(
+                        "/text_message",
+                        arguments: {
+                          "reply_to_msg": msg,
+                          "chat": msg.chatId,
+                          "onComplete": () {
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          },
+                        },
+                      );
+                    },
                   ),
                 ],
               );

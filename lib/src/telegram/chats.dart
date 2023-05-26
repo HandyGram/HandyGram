@@ -653,7 +653,7 @@ class TgBasicGroupFullInfoCache extends ChangeNotifier {
   }
 }
 
-void chatsHandler(tdlib.TdObject object, TgSession session) async {
+Future<void> chatsHandler(tdlib.TdObject object, TgSession session) async {
   switch (object) {
     case tdlib.UpdateChatLastMessage(
         chatId: var id,

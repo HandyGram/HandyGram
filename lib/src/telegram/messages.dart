@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:handygram/src/misc/log.dart';
 import 'package:handygram/src/misc/settings_db.dart';
 import 'package:handygram/src/telegram/session.dart';
-import 'package:mutex/mutex.dart';
 import 'package:handygram/src/tdlib/td_api.dart' as tdlib;
 
 typedef TdMsg = tdlib.Message;
@@ -240,8 +240,8 @@ class TgMessage {
   //
 
   /// Message identifier; unique for the chat to which the message belongs.
-  late final int id = tgMsg.id;
-  late final int idServer = convertMessageId(id);
+  late final int id = convertMessageId(tgMsg.id);
+  late final int idServer = tgMsg.id;
 
   /// Identifier of the sender of the message.
   late final tdlib.MessageSender senderId = tgMsg.senderId;
@@ -675,7 +675,6 @@ class TgVoiceNoteMessageContent extends TgMessageContent {
 class TgMessagesList extends ChangeNotifier {
   // Use map to quickly find messages by id
   final Map<int, TgMessage> _messages = {};
-  final Mutex _m = Mutex();
   List<TgMessage> _latestSort = [];
 
   static List<int> _resortIsolated(List<int> toSort) {
@@ -699,62 +698,43 @@ class TgMessagesList extends ChangeNotifier {
 
   void insert(TgMessage? msg) async {
     if (msg == null) return;
-    await _m.acquire();
     _messages[msg.id] = msg;
     await _resort();
-    _m.release();
     notifyListeners();
   }
 
   void insertAll(List<TgMessage?> messages) async {
-    await _m.acquire();
-    try {
-      for (var i in messages) {
-        if (i != null) _messages[i.id] = i;
-      }
-      await _resort();
-    } finally {
-      _m.release();
+    for (var i in messages) {
+      if (i != null) _messages[i.id] = i;
     }
+    await _resort();
     notifyListeners();
   }
 
   void deleteAll(List<int> messageIds) async {
-    await _m.acquire();
-    try {
-      for (var i in messageIds) {
-        _messages.remove(i);
-      }
-      await _resort();
-    } finally {
-      _m.release();
+    for (var i in messageIds) {
+      _messages.remove(i);
     }
+    await _resort();
     notifyListeners();
   }
 
   void clear() async {
-    await _m.acquire();
     _messages.clear();
     _latestSort = [];
-    _m.release();
   }
 
   TgMessagesList.withHistory(int chatId) {
-    _m.acquire();
     session.functions.getChatHistory(chatId).then((value) async {
       if (value == null) {
-        _m.release();
         return;
       }
-      try {
-        for (var i in value) {
-          if (i == null) continue;
-          _messages[i.id] = i;
-        }
-        await _resort();
-      } finally {
-        _m.release();
+
+      for (var i in value) {
+        if (i == null) continue;
+        _messages[i.id] = i;
       }
+      await _resort();
     });
   }
 
@@ -864,6 +844,14 @@ class TgMessagesListCombine {
     int messageId,
     tdlib.MessageInteractionInfo? info,
   ) async {
+    l.d(
+        "IIUpdate",
+        "messageId $messageId, chatId $chatId, "
+            "msg ${_messageLists[chatId]?[messageId]} "
+            "with id ${_messageLists[chatId]?[messageId]?.id}, "
+            "last msg is ${_messageLists[chatId]?.messages.last} "
+            "with id ${_messageLists[chatId]?.messages.last.id}");
+
     if (_messageLists[chatId] == null && !(_isLoading[chatId] ?? false)) {
       return;
     }
@@ -957,27 +945,32 @@ class TgMessagesListCombine {
   }
 }
 
-void messagesHandler(tdlib.TdObject object, TgSession session) async {
+Future<void> messagesHandler(tdlib.TdObject object, TgSession session) async {
   switch (object) {
     case tdlib.UpdateNewMessage(message: var msg):
-      session.messages.updateLastMessage(msg.chatId, msg);
+      await session.messages.updateLastMessage(msg.chatId, msg);
       return;
     case tdlib.UpdateDeleteMessages(chatId: var cid, messageIds: var mids):
-      session.messages.deleteMessages(cid, mids);
+      await session.messages.deleteMessages(
+        cid,
+        mids.map((e) => convertMessageId(e)).toList(),
+      );
       return;
     case tdlib.UpdateMessageContent(
         chatId: var cid,
         messageId: var mid,
         newContent: var nc
       ):
-      session.messages.updateMessageContent(cid, mid, nc);
+      await session.messages
+          .updateMessageContent(cid, convertMessageId(mid), nc);
       return;
     case tdlib.UpdateMessageInteractionInfo(
         chatId: var cid,
         messageId: var mid,
         interactionInfo: var ii
       ):
-      session.messages.updateInteractionInfo(cid, mid, ii);
+      await session.messages
+          .updateInteractionInfo(cid, convertMessageId(mid), ii);
       break;
     case tdlib.UpdateMessageEdited(
         chatId: var cid,
@@ -985,7 +978,26 @@ void messagesHandler(tdlib.TdObject object, TgSession session) async {
         replyMarkup: var rm,
         editDate: var ed,
       ):
-      session.messages.updateEditData(cid, mid, rm, ed);
+      await session.messages.updateEditData(cid, convertMessageId(mid), rm, ed);
+      break;
+    case tdlib.UpdateMessageSendFailed(
+        message: var msg,
+        oldMessageId: var omid,
+      ):
+      await session.messages.deleteMessages(
+        msg.chatId,
+        [convertMessageId(omid)],
+      );
+      break;
+    case tdlib.UpdateMessageSendSucceeded(
+        message: var msg,
+        oldMessageId: var omid,
+      ):
+      await session.messages.deleteMessages(
+        msg.chatId,
+        [convertMessageId(omid)],
+      );
+      await session.messages.updateLastMessage(msg.chatId, msg);
       break;
     default:
       return;

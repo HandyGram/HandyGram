@@ -29,7 +29,7 @@ linter:
 analyzer:
   exclude:
     # Takes A LOT of CPU time to analyze.
-    #- lib/src/tdlib/tdapi/**
+    - lib/src/tdlib/tdapi/**
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:handygram/src/misc/log.dart';
 import 'package:handygram/src/misc/settings_db.dart';
 import 'dart:io';
@@ -19,6 +20,27 @@ import 'users.dart';
 import 'loadfile.dart';
 import 'package:wear/wear.dart';
 part 'functions.dart';
+
+class TgSessionUpdates extends ChangeNotifier {
+  int _totalUpdates = 0;
+  int _handledUpdates = 0;
+  int? _final;
+
+  int get total => _totalUpdates;
+  int get handled => _handledUpdates;
+  int? get finalUpdate => _final;
+
+  void addUpdate(tdlib.TdObject obj) {
+    _totalUpdates++;
+    if (obj is tdlib.UpdateChatPosition) _final ??= _totalUpdates;
+    notifyListeners();
+  }
+
+  void handleUpdate() {
+    _handledUpdates++;
+    notifyListeners();
+  }
+}
 
 class TgSession {
   late final TdlibGlue _glue;
@@ -99,7 +121,7 @@ class TgSession {
   }
 
   // Base
-  final List<void Function(tdlib.TdObject, TgSession)> notified = [
+  final List<FutureOr<void> Function(tdlib.TdObject, TgSession)> notified = [
     loginHandler,
     chatsHandler,
     usersHandler,
@@ -112,6 +134,8 @@ class TgSession {
   }
 
   Future? hiveFuture;
+  final Mutex _m = Mutex();
+  TgSessionUpdates updStats = TgSessionUpdates();
 
   Future<void> _init() async {
     chatLists = {
@@ -142,9 +166,18 @@ class TgSession {
     basicGroupsFullInfoP = ChangeNotifierProvider((_) => basicGroupsFullInfo);
     _glue = await TdlibGlue.initialize();
     // Setup update loop with wrappers.
-    _glue.notifier = (tdlib.TdObject object) {
+    _glue.notifier = (tdlib.TdObject object) async {
+      if (!settingsStorage.isAsyncUpdates) {
+        updStats.addUpdate(object);
+        await _m.acquire();
+      }
       for (var i in notified) {
-        i(object, this);
+        await i(object, this);
+      }
+      if (!settingsStorage.isAsyncUpdates) {
+        await Future.delayed(const Duration(milliseconds: 4));
+        updStats.handleUpdate();
+        _m.release();
       }
     };
     functions = TelegramFunctions._(_glue);
@@ -155,7 +188,7 @@ class TgSession {
 
   // Init
   static late tdlib.SetTdlibParameters options;
-  static String appVersion = "0.3.0";
+  static String appVersion = "0.4.0";
   static String cacheDir = "";
 
   void kill() {
@@ -166,6 +199,7 @@ class TgSession {
     var path = (await getApplicationDocumentsDirectory()).path;
     var a = await DeviceInfoPlugin().androidInfo;
     cacheDir = (await getExternalCacheDirectories())![0].path;
+    await Directory("$cacheDir/thumbnails").create(recursive: true);
     options = tdlib.SetTdlibParameters(
       useTestDc: false,
       databaseDirectory: "$path/tdlib/db/",

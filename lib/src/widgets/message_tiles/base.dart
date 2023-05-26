@@ -7,6 +7,7 @@ import 'package:handygram/src/widgets/chat_image.dart';
 import 'package:handygram/src/telegram/session.dart';
 import 'package:handygram/src/tdlib/td_api.dart' as tdlib;
 import 'package:handygram/src/widgets/message_tiles/reaction_chip.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 Size downscaleProperly(Size contentSize, Size screenSize, double factor) {
   if (contentSize.width > contentSize.height) {
@@ -224,173 +225,202 @@ class MessageBaseTile extends ConsumerWidget {
       title = "${title.substring(0, 15)}...";
     }
 
-    return GestureDetector(
-      onLongPress: () {
-        Navigator.pushNamed(
-          context,
-          "/message_menu",
-          arguments: {
-            "message": msg,
-          },
-        );
-      },
-      child: Row(
-        key: ValueKey<int>(msg.id),
-        mainAxisAlignment:
-            msg.isOutgoing ? MainAxisAlignment.end : MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          if (!msg.isOutgoing) const SizedBox(width: 15),
-          if (!msg.isOutgoing && !small && !settingsStorage.noProfilePhotos)
-            SizedBox(
-              height: 25,
-              width: 25,
-              child: ChatImage(
-                key: ValueKey<int>(
-                  msg.senderId.getSenderId(),
-                ),
-                id: msg.senderId.getSenderId(),
-                messageSender: msg.senderId,
-              ),
-            )
-          else if ((msg.isOutgoing || small) &&
-              !settingsStorage.noProfilePhotos)
-            const SizedBox(
-              height: 25,
-              width: 25,
-            ),
-          const SizedBox(width: 10),
-          Flexible(
-            child: Container(
-              padding: msg.type == TgMessageType.sticker
-                  ? null
-                  : const EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                color: msg.type == TgMessageType.sticker
-                    ? null
-                    : !msg.isOutgoing
-                        ? someoneMessageColor
-                        : myMessageColor,
-                borderRadius: msg.type == TgMessageType.sticker
-                    ? null
-                    : BorderRadius.circular(10),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: msg.isOutgoing
-                    ? CrossAxisAlignment.end
-                    : CrossAxisAlignment.start,
-                children: [
-                  if (msg.replyToMessageId != 0)
-                    _ReplyMessagePreview(
-                      id: msg.replyToMessageId,
-                      chatId: msg.replyInChatId != 0
-                          ? msg.replyInChatId
-                          : msg.chatId,
-                      key: ValueKey<int>(
-                        msg.replyToMessageId,
-                      ),
-                    ),
-                  child ??
-                      Text(
-                        msg.toString(),
-                        style: TextStyle(
-                          fontSize: scaleText(12),
-                        ),
-                      ),
-                  if (child != null && (!small || msg.interactionInfo != null))
-                    const SizedBox(
-                      height: 1,
-                    ),
-                  if (msg.interactionInfo?.reactions.isNotEmpty ?? false)
-                    LayoutBuilder(builder: (ctx, constraints) {
-                      var r = msg.interactionInfo!.reactions;
-                      return SizedBox(
-                        width: constraints.maxWidth,
-                        height: 30,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          reverse: !msg.isOutgoing,
-                          itemCount: r.length * 2,
-                          shrinkWrap: true,
-                          itemBuilder: (context, i) {
-                            if (i % 2 == (msg.isOutgoing ? 1 : 0)) {
-                              return const SizedBox(width: 5);
-                            }
+    bool isFakeMessage = msg.idServer % 1048576 != 0;
 
-                            return ReactionChip(
-                              chatId: msg.chatId,
-                              messageId: msg.id,
-                              reaction: r[i ~/ 2],
-                            );
-                          },
+    return VisibilityDetector(
+      key: UniqueKey(),
+      onVisibilityChanged: (vi) {
+        if (vi.visibleFraction > 0.5 && !isFakeMessage) {
+          session.functions.viewMessages(msg.chatId, [msg.idServer]);
+        }
+      },
+      child: GestureDetector(
+        onLongPress: () {
+          if (!isFakeMessage) {
+            Navigator.pushNamed(
+              context,
+              "/message_menu",
+              arguments: {
+                "message": msg,
+              },
+            );
+          }
+        },
+        child: Row(
+          key: ValueKey<int>(msg.id),
+          mainAxisAlignment:
+              msg.isOutgoing ? MainAxisAlignment.end : MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            if (!msg.isOutgoing) const SizedBox(width: 15),
+            if (!msg.isOutgoing && !small && !settingsStorage.noProfilePhotos)
+              SizedBox(
+                height: 25,
+                width: 25,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      "/informator",
+                      arguments: {
+                        "sender": msg.senderId,
+                      },
+                    );
+                  },
+                  child: ChatImage(
+                    key: ValueKey<int>(
+                      msg.senderId.getSenderId(),
+                    ),
+                    id: msg.senderId.getSenderId(),
+                    messageSender: msg.senderId,
+                  ),
+                ),
+              )
+            else if ((msg.isOutgoing || small) &&
+                !settingsStorage.noProfilePhotos)
+              const SizedBox(
+                height: 25,
+                width: 25,
+              ),
+            const SizedBox(width: 10),
+            Flexible(
+              child: Container(
+                padding: msg.type == TgMessageType.sticker
+                    ? null
+                    : const EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  color: msg.type == TgMessageType.sticker
+                      ? null
+                      : isFakeMessage
+                          ? Theme.of(context).colorScheme.background
+                          : !msg.isOutgoing
+                              ? someoneMessageColor
+                              : myMessageColor,
+                  borderRadius: msg.type == TgMessageType.sticker
+                      ? null
+                      : BorderRadius.circular(10),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: msg.isOutgoing
+                      ? CrossAxisAlignment.end
+                      : CrossAxisAlignment.start,
+                  children: [
+                    if (msg.replyToMessageId != 0)
+                      _ReplyMessagePreview(
+                        id: msg.replyToMessageId,
+                        chatId: msg.replyInChatId != 0
+                            ? msg.replyInChatId
+                            : msg.chatId,
+                        key: ValueKey<int>(
+                          msg.replyToMessageId,
                         ),
-                      );
-                    }),
-                  const SizedBox(height: 1),
-                  if (!small)
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            !msg.isOutgoing
-                                ? "$title, ${msg.date.hour.toString().padLeft(2, '0')}:${msg.date.minute.toString().padLeft(2, '0')}"
-                                : "${msg.date.hour.toString().padLeft(2, '0')}:${msg.date.minute.toString().padLeft(2, '0')}",
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: scaleText(10),
-                              fontStyle: FontStyle.italic,
-                            ),
-                            textAlign: msg.isOutgoing
-                                ? TextAlign.right
-                                : TextAlign.left,
+                      ),
+                    child ??
+                        Text(
+                          msg.toString(),
+                          style: TextStyle(
+                            fontSize: scaleText(12),
                           ),
                         ),
-                        if (msg.isOutgoing) const SizedBox(width: 5),
-                        if (msg.isOutgoing)
-                          (session.chatsInfoCache[msg.chatId]
-                                          ?.lastReadOutboxMessageId ??
-                                      0) >=
-                                  msg.id
-                              ? const Icon(
-                                  Icons.done_all,
-                                  size: 10,
-                                  color: Colors.grey,
-                                )
-                              : const Icon(
-                                  Icons.done,
-                                  size: 10,
-                                  color: Colors.grey,
-                                )
-                      ],
-                    ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(width: 10),
-          if (msg.isOutgoing && !small && !settingsStorage.noProfilePhotos)
-            SizedBox(
-              height: 25,
-              width: 25,
-              child: ChatImage(
-                key: ValueKey<int>(
-                  msg.senderId.getSenderId(),
+                    if (child != null &&
+                        (!small || msg.interactionInfo != null))
+                      const SizedBox(
+                        height: 1,
+                      ),
+                    if (msg.interactionInfo?.reactions.isNotEmpty ?? false)
+                      LayoutBuilder(builder: (ctx, constraints) {
+                        var r = msg.interactionInfo!.reactions;
+                        return SizedBox(
+                          width: constraints.maxWidth,
+                          height: 30,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            reverse: !msg.isOutgoing,
+                            itemCount: r.length * 2,
+                            shrinkWrap: true,
+                            itemBuilder: (context, i) {
+                              if (i % 2 == (msg.isOutgoing ? 1 : 0)) {
+                                return const SizedBox(width: 5);
+                              }
+
+                              return ReactionChip(
+                                chatId: msg.chatId,
+                                messageId: msg.id,
+                                reaction: r[i ~/ 2],
+                              );
+                            },
+                          ),
+                        );
+                      }),
+                    const SizedBox(height: 1),
+                    if (!small)
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Flexible(
+                            child: Text(
+                              isFakeMessage
+                                  ? "Sending..."
+                                  : !msg.isOutgoing
+                                      ? "$title, ${msg.date.hour.toString().padLeft(2, '0')}:${msg.date.minute.toString().padLeft(2, '0')}"
+                                      : "${msg.date.hour.toString().padLeft(2, '0')}:${msg.date.minute.toString().padLeft(2, '0')}",
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: scaleText(10),
+                                fontStyle: FontStyle.italic,
+                              ),
+                              textAlign: msg.isOutgoing
+                                  ? TextAlign.right
+                                  : TextAlign.left,
+                            ),
+                          ),
+                          if (msg.isOutgoing && !isFakeMessage)
+                            const SizedBox(width: 5),
+                          if (msg.isOutgoing && !isFakeMessage)
+                            (session.chatsInfoCache[msg.chatId]
+                                            ?.lastReadOutboxMessageId ??
+                                        0) >=
+                                    msg.id
+                                ? const Icon(
+                                    Icons.done_all,
+                                    size: 10,
+                                    color: Colors.grey,
+                                  )
+                                : const Icon(
+                                    Icons.done,
+                                    size: 10,
+                                    color: Colors.grey,
+                                  )
+                        ],
+                      ),
+                  ],
                 ),
-                messageSender: msg.senderId,
-                id: msg.senderId.getSenderId(),
               ),
-            )
-          else if ((!msg.isOutgoing || small) &&
-              !settingsStorage.noProfilePhotos)
-            const SizedBox(
-              height: 25,
-              width: 25,
             ),
-          if (msg.isOutgoing) const SizedBox(width: 15),
-        ],
+            const SizedBox(width: 10),
+            if (msg.isOutgoing && !small && !settingsStorage.noProfilePhotos)
+              SizedBox(
+                height: 25,
+                width: 25,
+                child: ChatImage(
+                  key: ValueKey<int>(
+                    msg.senderId.getSenderId(),
+                  ),
+                  id: msg.senderId.getSenderId(),
+                  messageSender: msg.senderId,
+                ),
+              )
+            else if ((!msg.isOutgoing || small) &&
+                !settingsStorage.noProfilePhotos)
+              const SizedBox(
+                height: 25,
+                width: 25,
+              ),
+            if (msg.isOutgoing) const SizedBox(width: 15),
+          ],
+        ),
       ),
     );
   }

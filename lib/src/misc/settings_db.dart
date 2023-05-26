@@ -17,6 +17,12 @@ class SettingsStorage {
     _settingsBox.put("settings", _raw);
   }
 
+  bool get isAsyncUpdates => _raw["isAsyncUpdates"] ?? false;
+  set isAsyncUpdates(bool value) {
+    _raw["isAsyncUpdates"] = value;
+    _settingsBox.put("settings", _raw);
+  }
+
   bool get prioritizeAllImages => _raw["prioritizeAllImages"] ?? false;
   set prioritizeAllImages(bool value) {
     _raw["prioritizeAllImages"] = value;
@@ -45,6 +51,13 @@ class SettingsStorage {
   double get textScale => _raw["textScale"] ?? 1.0;
   set textScale(double value) {
     _raw["textScale"] = value;
+    _settingsBox.put("settings", _raw);
+  }
+
+  /// Enable clock over all pages
+  bool get clockEnabled => _raw["clockEnabled"] ?? true;
+  set clockEnabled(bool value) {
+    _raw["clockEnabled"] = value;
     _settingsBox.put("settings", _raw);
   }
 

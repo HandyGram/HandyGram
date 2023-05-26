@@ -172,13 +172,35 @@ class _ChatMenuPageState extends State<ChatMenuPage> {
                       if (canSendVm)
                         PreSettingsButton(
                           icon: Icons.voice_chat,
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).pushNamed(
+                              "/voice_message",
+                              arguments: {
+                                "chat": id,
+                                "onComplete": () {
+                                  Navigator.pop(context);
+                                  Navigator.pop(context);
+                                },
+                              },
+                            );
+                          },
                           mini: true,
                         ),
                       if (hasNoRestrictions)
                         PreSettingsButton(
                           icon: Icons.edit,
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).pushNamed(
+                              "/text_message",
+                              arguments: {
+                                "chat": id,
+                                "onComplete": () {
+                                  Navigator.pop(context);
+                                  Navigator.pop(context);
+                                },
+                              },
+                            );
+                          },
                           mini: true,
                         )
                       else
@@ -186,17 +208,38 @@ class _ChatMenuPageState extends State<ChatMenuPage> {
                           child: PreSettingsButton(
                             icon: Icons.edit,
                             title: "Text",
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).pushNamed(
+                                "/text_message",
+                                arguments: {
+                                  "chat": id,
+                                  "onComplete": () {
+                                    Navigator.pop(context);
+                                    Navigator.pop(context);
+                                  },
+                                },
+                              );
+                            },
                           ),
                         ),
                       // We need !isChannel because permissions
                       // only admin has ability to post something.
                       if (perms.canSendMediaMessages ||
-                          perms.canSendOtherMessages ||
                           canPostMessagesOnChannel)
                         PreSettingsButton(
                           icon: Icons.attach_file,
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).pushNamed(
+                              "/pre_attach",
+                              arguments: {
+                                "chat": id,
+                                "onComplete": () {
+                                  Navigator.pop(context);
+                                  Navigator.pop(context);
+                                },
+                              },
+                            );
+                          },
                           mini: true,
                         ),
                     ],

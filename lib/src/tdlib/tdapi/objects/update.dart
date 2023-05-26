@@ -6213,7 +6213,7 @@ final class UpdateInstalledStickerSets extends Update {
     stickerType: StickerType.fromJson(json['sticker_type']),
     stickerSetIds: List<int>.from((json['sticker_set_ids'] ?? []).map((item) => item).toList()),
     extra: json['@extra'],
-    clientId: json['@client_id'],
+    //clientId: json['@client_id'],
   );
   
   

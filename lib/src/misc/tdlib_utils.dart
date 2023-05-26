@@ -16,7 +16,24 @@ extension InputMessageWithText on tdlib.InputMessageContent {
       };
 }
 
-bool? canSendMessages(int chatId, [WidgetRef? ref]) {
+enum AvailableSendPermissions {
+  /// text messages, contacts, locations, and venues.
+  textMessages,
+
+  /// audio files, documents, photos, videos, video notes, and voice notes
+  mediaMessages,
+
+  /// voice/video notes
+  voiceMessages,
+
+  /// animations, games, stickers, and dice and use inline bots
+  otherMessages,
+
+  /// polls
+  polls,
+}
+
+List<AvailableSendPermissions>? canSendMessages(int chatId, [WidgetRef? ref]) {
   var ci = ref?.watch(session.chatsInfoCacheP) ?? session.chatsInfoCache;
   var chat = ci.maybeGet(chatId);
   if (chat == null) {
@@ -36,16 +53,27 @@ bool? canSendMessages(int chatId, [WidgetRef? ref]) {
 
     if (type.isChannel) {
       var status = s.status;
-      if (status is tdlib.ChatMemberStatusAdministrator) {
-        return status.rights.canPostMessages;
+      if (status is tdlib.ChatMemberStatusAdministrator &&
+          status.rights.canPostMessages) {
+        return AvailableSendPermissions.values;
       } else if (status is! tdlib.ChatMemberStatusCreator) {
-        return false;
+        return [];
       }
-      return true;
+      return AvailableSendPermissions.values;
     } else {
       var status = s.status;
       if (status is tdlib.ChatMemberStatusRestricted) {
-        return status.permissions.canSendMessages;
+        if (!status.permissions.canSendMessages) return [];
+        return [
+          AvailableSendPermissions.textMessages,
+          if (status.permissions.canSendMediaMessages) ...[
+            AvailableSendPermissions.mediaMessages,
+            AvailableSendPermissions.voiceMessages
+          ],
+          if (status.permissions.canSendOtherMessages)
+            AvailableSendPermissions.otherMessages,
+          if (status.permissions.canSendPolls) AvailableSendPermissions.polls,
+        ];
       }
     }
   } else if (type is tdlib.ChatTypeBasicGroup) {
@@ -58,11 +86,44 @@ bool? canSendMessages(int chatId, [WidgetRef? ref]) {
 
     var status = b.status;
     if (status is tdlib.ChatMemberStatusRestricted) {
-      return status.permissions.canSendMessages;
+      if (!status.permissions.canSendMessages) return [];
+      return [
+        AvailableSendPermissions.textMessages,
+        if (status.permissions.canSendMediaMessages) ...[
+          AvailableSendPermissions.mediaMessages,
+          AvailableSendPermissions.voiceMessages
+        ],
+        if (status.permissions.canSendOtherMessages)
+          AvailableSendPermissions.otherMessages,
+        if (status.permissions.canSendPolls) AvailableSendPermissions.polls,
+      ];
     }
   } else if (type is tdlib.ChatTypePrivate) {
-    return true;
+    var ufi =
+        ref?.watch(session.usersFullInfoCacheP) ?? session.usersFullInfoCache;
+    var uf = ufi.maybeGet(type.userId);
+    if (uf == null) {
+      ufi.get(type.userId);
+      return null;
+    }
+    return [
+      AvailableSendPermissions.textMessages,
+      AvailableSendPermissions.mediaMessages,
+      AvailableSendPermissions.otherMessages,
+      AvailableSendPermissions.polls,
+      if (!uf.hasRestrictedVoiceAndVideoNoteMessages)
+        AvailableSendPermissions.voiceMessages,
+    ];
   }
 
-  return perms.canSendMessages;
+  if (!perms.canSendMessages) return [];
+  return [
+    AvailableSendPermissions.textMessages,
+    if (perms.canSendMediaMessages) ...[
+      AvailableSendPermissions.mediaMessages,
+      AvailableSendPermissions.voiceMessages
+    ],
+    if (perms.canSendOtherMessages) AvailableSendPermissions.otherMessages,
+    if (perms.canSendPolls) AvailableSendPermissions.polls,
+  ];
 }

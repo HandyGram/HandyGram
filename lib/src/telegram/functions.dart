@@ -380,7 +380,7 @@ class TelegramFunctions {
         chatId: chatId,
         inputMessageContent: content,
         messageThreadId: messageThreadId,
-        replyToMessageId: replyToMessageId,
+        replyToMessageId: convertMessageId(replyToMessageId),
         options: options,
 
         // Used only for bots, so we just set it as null
@@ -441,7 +441,7 @@ class TelegramFunctions {
   }) async {
     tdlib.TdObject? obj = await _invoke(tdlib.AddMessageReaction(
       chatId: chatId,
-      messageId: messageId,
+      messageId: convertMessageId(messageId),
       reactionType: type,
       isBig: isBig,
       updateRecentReactions: updateRecentReactions,
@@ -459,7 +459,7 @@ class TelegramFunctions {
   }) async {
     tdlib.TdObject? obj = await _invoke(tdlib.RemoveMessageReaction(
       chatId: chatId,
-      messageId: messageId,
+      messageId: convertMessageId(messageId),
       reactionType: type,
     ));
     if (obj == null) return;
@@ -477,7 +477,7 @@ class TelegramFunctions {
     try {
       obj = await _invoke(tdlib.GetMessageAvailableReactions(
         chatId: chatId,
-        messageId: messageId,
+        messageId: convertMessageId(messageId),
         rowSize: rowSize,
       ));
     } catch (_) {}
@@ -505,7 +505,7 @@ class TelegramFunctions {
   ]) async {
     tdlib.TdObject? obj = await _invoke(tdlib.DeleteMessages(
       chatId: chatId,
-      messageIds: [messageId],
+      messageIds: [convertMessageId(messageId)],
       revoke: revoke,
     ));
     if (obj == null) return;
@@ -524,7 +524,7 @@ class TelegramFunctions {
   ]) async {
     tdlib.TdObject? obj = await _invoke(tdlib.ForwardMessages(
       chatId: chatId,
-      messageIds: [messageId],
+      messageIds: [convertMessageId(messageId)],
       fromChatId: fromChatId,
       messageThreadId: messageThreadId,
       sendCopy: copy,
@@ -538,5 +538,78 @@ class TelegramFunctions {
       throw TelegramError(obj, "object is not tdlib.Messages");
     }
     return obj.messages.map<TgMessage>((e) => TgMessage(e)).toList();
+  }
+
+  Future<List<tdlib.Sticker>?> getRecentStickers([
+    bool isAttached = false,
+  ]) async {
+    tdlib.TdObject? obj = await _invoke(tdlib.GetRecentStickers(
+      isAttached: isAttached,
+    ));
+    if (obj == null) return null;
+    if (obj is! tdlib.Stickers) {
+      throw TelegramError(obj, "object is not tdlib.Stickers");
+    }
+    return obj.stickers;
+  }
+
+  Future<List<tdlib.Animation>?> getSavedAnimations() async {
+    tdlib.TdObject? obj = await _invoke(const tdlib.GetSavedAnimations());
+    if (obj == null) return null;
+    if (obj is! tdlib.Animations) {
+      throw TelegramError(obj, "object is not tdlib.Animations");
+    }
+    return obj.animations;
+  }
+
+  Future<tdlib.StickerSet?> getStickerSet(
+    int setId,
+  ) async {
+    tdlib.TdObject? obj = await _invoke(tdlib.GetStickerSet(
+      setId: setId,
+    ));
+    if (obj == null) return null;
+    if (obj is! tdlib.StickerSet) {
+      throw TelegramError(obj, "object is not tdlib.StickerSet");
+    }
+    return obj;
+  }
+
+  Future<void> openChat(
+    int chatId,
+  ) async {
+    tdlib.TdObject? obj = await _invoke(tdlib.OpenChat(chatId: chatId));
+    if (obj == null) return;
+    if (obj is! tdlib.Ok) {
+      throw TelegramError(obj, "object is not tdlib.Ok");
+    }
+  }
+
+  Future<void> closeChat(
+    int chatId,
+  ) async {
+    tdlib.TdObject? obj = await _invoke(tdlib.CloseChat(chatId: chatId));
+    if (obj == null) return;
+    if (obj is! tdlib.Ok) {
+      throw TelegramError(obj, "object is not tdlib.Ok");
+    }
+  }
+
+  Future<void> viewMessages(
+    int chatId,
+    List<int> messageIds, [
+    int messageThreadId = 0,
+    bool forceRead = false,
+  ]) async {
+    tdlib.TdObject? obj = await _invoke(tdlib.ViewMessages(
+      chatId: chatId,
+      messageIds: messageIds,
+      messageThreadId: messageThreadId,
+      forceRead: forceRead,
+    ));
+    if (obj == null) return;
+    if (obj is! tdlib.Ok) {
+      throw TelegramError(obj, "object is not tdlib.Ok");
+    }
   }
 }

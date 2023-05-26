@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
-import 'package:handygram/src/misc/utils.dart';
 import 'package:handygram/src/telegram/loadfile.dart';
 import 'package:handygram/src/widgets/loading_box.dart';
+import 'package:handygram/src/widgets/thumbnail.dart';
 import 'package:video_player/video_player.dart';
 import 'package:handygram/src/tdlib/td_api.dart' as tdlib;
 
@@ -43,41 +43,7 @@ class _MicroPlayerState extends State<MicroPlayer> {
   @override
   void initState() {
     super.initState();
-    if (heavyPreviewFormats.contains(
-      widget.thumb.format.instanceType,
-    )) {
-      preview = const LoadingContainer();
-      state = MicroPlayerState.preview;
-    } else {
-      _loadF = CancelableOperation.fromFuture(loadTgFile(
-        widget.thumb.file.remote.id,
-        priority: 1,
-        type: const tdlib.FileTypeThumbnail(),
-      ).then(
-        (prov) => setState(() {
-          preview = prov == null
-              ? Container(
-                  color: Colors.white.withOpacity(0.2),
-                  child: SizedBox.expand(
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Text(
-                        "Error loading preview",
-                        style: TextStyle(
-                          fontSize: scaleText(8),
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              : Image(
-                  image: FileImage(prov),
-                  fit: BoxFit.cover,
-                );
-          state = MicroPlayerState.preview;
-        }),
-      ));
-    }
+    state = MicroPlayerState.preview;
   }
 
   @override
@@ -115,12 +81,6 @@ class _MicroPlayerState extends State<MicroPlayer> {
     return controller;
   }
 
-  final List<String> heavyPreviewFormats = [
-    "thumbnailFormatGif",
-    "thumbnailFormatMpeg4",
-    "thumbnailFormatTgs",
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -129,7 +89,9 @@ class _MicroPlayerState extends State<MicroPlayer> {
       children: [
         if (state == MicroPlayerState.loading) const LoadingContainer(),
         if (state == MicroPlayerState.preview)
-          preview ?? const LoadingContainer(),
+          TelegramThumbnail(
+            thumbnail: widget.thumb,
+          ),
         if (state == MicroPlayerState.preview)
           Container(
             color: Colors.black.withOpacity(0.75),
@@ -180,39 +142,6 @@ class _MicroPlayerState extends State<MicroPlayer> {
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
                 ),
-              ),
-            ),
-          ),
-        if (state == MicroPlayerState.preview &&
-            heavyPreviewFormats.contains(widget.thumb.format.instanceType))
-          SizedBox.expand(
-            child: Align(
-              alignment: Alignment.topRight,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Flexible(
-                    child: Text(
-                      "Couldn't load preview",
-                      maxLines: 1,
-                      style: TextStyle(
-                        fontSize: 8,
-                        color: Theme.of(context).colorScheme.error,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Icon(
-                    Icons.error,
-                    size: 12,
-                    color: Theme.of(context).colorScheme.error,
-                  ),
-                  const SizedBox(
-                    width: 2,
-                  ),
-                ],
               ),
             ),
           ),

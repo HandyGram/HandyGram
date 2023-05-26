@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:handygram/src/misc/settings_db.dart';
 import 'package:handygram/src/telegram/actions.dart';
 import 'package:handygram/src/telegram/chats.dart';
 import 'package:handygram/src/telegram/session.dart';
@@ -32,6 +33,37 @@ class _HomePageState extends State<HomePage> {
         TgChatActions acts = ref.watch(session.chatActionsP);
         var chatsInfo = ref.watch(session.chatsInfoCacheP);
         ref.watch(session.usersInfoCacheP);
+
+        if (list.chats.isEmpty) {
+          return Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(
+                  height: 30,
+                  width: 30,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                const Text("Please wait..."),
+                if (!settingsStorage.isAsyncUpdates)
+                  Text(
+                    "Handling all missed events...\n"
+                    "${session.updStats.handled}/${session.updStats.finalUpdate ?? session.updStats.total}"
+                    "${session.updStats.finalUpdate == null ? "" : " (${(session.updStats.handled / session.updStats.finalUpdate! * 100).toStringAsFixed(1)}%)"}\n\n"
+                    "This may take from\nsome seconds to minute.",
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 10,
+                      color: Colors.grey,
+                    ),
+                  ),
+              ],
+            ),
+          );
+        }
 
         var lw = ListView.builder(
           padding: const EdgeInsets.all(10),

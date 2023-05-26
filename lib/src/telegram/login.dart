@@ -3,7 +3,7 @@ import 'package:handygram/src/misc/log.dart';
 import 'package:handygram/src/tdlib/td_api.dart' as tdlib;
 import 'package:handygram/src/telegram/session.dart';
 
-void loginHandler(tdlib.TdObject object, TgSession session) async {
+Future<void> loginHandler(tdlib.TdObject object, TgSession session) async {
   if (object is! tdlib.UpdateAuthorizationState) {
     return;
   }
@@ -52,11 +52,12 @@ void loginHandler(tdlib.TdObject object, TgSession session) async {
       break;
     case tdlib.AuthorizationStateClosed():
       if (session.authStateListener != null) {
-      session.authStateListener!("closed");
-    }
-    session.isLoggedInPriv = false;
-    break;
+        session.authStateListener!("closed");
+      }
+      session.isLoggedInPriv = false;
+      break;
     default:
-      l.w("loginHandler", "Unhandled auth state ${object.authorizationState.instanceType}");
+      l.w("loginHandler",
+          "Unhandled auth state ${object.authorizationState.instanceType}");
   }
 }

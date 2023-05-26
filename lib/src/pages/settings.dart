@@ -59,6 +59,16 @@ class _SettingsPageState extends State<SettingsPage> {
             description: "Disable profile pictures nearby messages",
             value: settingsStorage.noProfilePhotos,
           ),
+          SettingsSwitch(
+            onChanged: (v) {
+              setState(() {
+                settingsStorage.clockEnabled = !settingsStorage.clockEnabled;
+              });
+            },
+            title: "Show clock",
+            description: "Show clock over all pages in top center",
+            value: settingsStorage.clockEnabled,
+          ),
           if (settingsStorage.textScale > 1.25)
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 10),
@@ -89,6 +99,18 @@ class _SettingsPageState extends State<SettingsPage> {
             title: "Asynchronous invokes",
             description: "Allow multiple invokes at one time. Unstable.",
             value: settingsStorage.isAsyncInvokes,
+          ),
+          SettingsSwitch(
+            onChanged: (v) {
+              setState(() {
+                settingsStorage.isAsyncUpdates =
+                    !settingsStorage.isAsyncUpdates;
+              });
+            },
+            title: "Asynchronous updates",
+            description:
+                "Speed up startup, letting all update handlers run at the same time. VERY UNSTABLE.",
+            value: settingsStorage.isAsyncUpdates,
           ),
           SettingsSwitch(
             onChanged: (v) {
