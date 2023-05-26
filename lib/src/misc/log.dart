@@ -53,7 +53,7 @@ class Log {
     log(
       "[${_revAssocs[entry.level]}] ${entry.message}",
       time: entry.time,
-      name: entry.tag,
+      name: "HandyGram_${entry.tag}",
     );
 
     // ignore: avoid_print
