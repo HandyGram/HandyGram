@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:handygram/src/misc/log.dart';
 
 import 'package:flutter/foundation.dart';
@@ -10,6 +11,7 @@ import "session.dart";
 class TgChatListEntry {
   int order = 0;
   int id = 0;
+  tdlib.ChatPosition? pos;
   tdlib.Message? lastMessage;
   tdlib.DraftMessage? draftMessage;
   bool pinned = false;
@@ -17,6 +19,7 @@ class TgChatListEntry {
   TgChatListEntry(
     this.order,
     this.id,
+    this.pos,
     this.lastMessage,
     this.draftMessage,
     this.pinned,
@@ -48,10 +51,9 @@ class TgChatList extends ChangeNotifier {
   // id -> chat
   final Map<int, TgChatListEntry> _chats = {};
 
-  late final String? folderName;
   final Mutex _m = Mutex();
 
-  TgChatList._i(this.type, this.folderName);
+  TgChatList._i(this.type);
 
   void _reorder(
     int id,
@@ -75,12 +77,23 @@ class TgChatList extends ChangeNotifier {
     _sortChats();
   }
 
-  static Future<TgChatList> initialize(
-    TgChatListType type, [
-    String? folderName,
-  ]) async {
-    TgChatList cache = TgChatList._i(type, folderName);
+  static Future<TgChatList> initialize(TgChatListType type) async {
+    TgChatList cache = TgChatList._i(type);
     return cache;
+  }
+
+  Future<void> updateLast(int id, tdlib.Message? lastMsg) async {
+    await _m.acquire();
+    _chats[id]?.lastMessage = lastMsg;
+    _m.release();
+    notifyListeners();
+  }
+
+  Future<void> updateDraft(int id, tdlib.DraftMessage? draft) async {
+    await _m.acquire();
+    _chats[id]?.draftMessage = draft;
+    _m.release();
+    notifyListeners();
   }
 
   void add(
@@ -93,6 +106,7 @@ class TgChatList extends ChangeNotifier {
     TgChatListEntry entry = TgChatListEntry(
       p.order,
       i,
+      p,
       lastMsg,
       lastDraft,
       p.isPinned,
@@ -163,59 +177,183 @@ class TgChatList extends ChangeNotifier {
   List<TgChatListEntry> get pinnedChats => _lastSortPinned;
 }
 
-Future<void> getChatListImpl(TgSession session) async {
-  while (true) {
-    try {
-      await session.functions.loadChats(25);
-    } catch (e, st) {
-      l.e("getChatListImpl", "$e\n$st");
-      return;
-    }
-  }
-}
+class TgChatFilter {
+  final tdlib.ChatFilter _filter;
 
-final List<int> _notFoundChats = [];
-Future<tdlib.Chat?> getChatImpl(TgSession session, int id) async {
-  if (_notFoundChats.contains(id)) {
-    return null;
+  List<int> _filteredChatIds = [];
+  final Map<int, int> _overridenPositions = {};
+
+  List<TgChatListEntry> get chats {
+    List<TgChatListEntry> entries = session.chatLists.main.chats
+      ..addAll(session.chatLists.archive.chats);
+    return _filteredChatIds
+        .map((e) => entries.firstWhere((a) => a.id == e))
+        .toList();
   }
 
-  tdlib.Chat? chat;
-  try {
-    chat = await session.functions.getChat(id);
-  } catch (e, st) {
-    if (e.toString().contains("Chat not found")) {
-      _notFoundChats.add(id);
-      return null;
+  void _filterOut() {
+    Set<int> chatIds = {};
+    Set<int> pinnedIds = _filter.pinnedChatIds.toSet();
+    List<TgChatListEntry> entries = session.chatLists.main.chats;
+    if (!_filter.excludeArchived) {
+      entries.addAll(session.chatLists.archive.chats);
     }
-    l.e("getChatImpl", "$e\n$st");
-    return null;
-  }
-  return chat;
-}
+    if (_filter.excludeMuted) {
+      entries.removeWhere((e) {
+        var s = session.chatsInfoCache[e.id]?.notificationSettings;
+        if (s == null) return false;
+        // TODO: handle muted by default chats
+        return s.muteFor > 0;
+      });
+    }
+    if (_filter.excludeRead) {
+      entries
+          .removeWhere((e) => session.chatsInfoCache[e.id]?.unreadCount == 0);
+    }
+    if (_filter.includeBots) {
+      chatIds.addAll(
+        entries
+            // Sorting out only private chats
+            .where((e) =>
+                session.chatsInfoCache[e.id]?.type is tdlib.ChatTypePrivate)
+            // Sorting out only bots
+            .where(
+                (e) => session.usersInfoCache[e.id]?.type is tdlib.UserTypeBot)
+            .map((e) => e.id),
+      );
+    }
+    if (_filter.includeChannels) {
+      chatIds.addAll(
+        entries
+            // Sorting out only supergroups
+            .where((e) =>
+                session.chatsInfoCache[e.id]?.type is tdlib.ChatTypeSupergroup)
+            // Sorting out only channels
+            .where((e) => session.supergroups[e.id]?.isChannel ?? false)
+            .map((e) => e.id),
+      );
+    }
+    if (_filter.includeContacts) {
+      chatIds.addAll(
+        entries
+            // Sorting out only private chats
+            .where((e) =>
+                session.chatsInfoCache[e.id]?.type is tdlib.ChatTypePrivate)
+            // Sorting out only contacts
+            .where((e) => session.usersInfoCache[e.id]?.isContact ?? false)
+            .map((e) => e.id),
+      );
+    }
+    if (_filter.includeGroups) {
+      chatIds.addAll(
+        entries
+            // Sorting out only supergroups
+            .where((e) =>
+                session.chatsInfoCache[e.id]?.type is tdlib.ChatTypeSupergroup)
+            // Sorting out only groups
+            .where((e) => !(session.supergroups[e.id]?.isChannel ?? false))
+            .map((e) => e.id),
+      );
+      chatIds.addAll(
+        entries
+            // Sorting out only basic groups
+            .where((e) =>
+                session.chatsInfoCache[e.id]?.type is tdlib.ChatTypeBasicGroup)
+            .map((e) => e.id),
+      );
+    }
+    if (_filter.includeNonContacts) {
+      chatIds.addAll(
+        entries
+            // Sorting out only private chats
+            .where((e) =>
+                session.chatsInfoCache[e.id]?.type is tdlib.ChatTypePrivate)
+            // Sorting out only non-contacts
+            .where((e) => !(session.usersInfoCache[e.id]?.isContact ?? false))
+            .map((e) => e.id),
+      );
+    }
+    chatIds.removeAll(_filter.excludedChatIds);
+    chatIds.addAll(_filter.includedChatIds);
+    chatIds.removeAll(_filter.pinnedChatIds);
 
-// Add or replace a chat in one of lists.
-Future<void> updateChatListImpl(
-  int chatId,
-  tdlib.ChatPosition? pos,
-  TgSession session, {
-  tdlib.Message? lastMsg,
-  tdlib.DraftMessage? lastDraft,
-}) async {
-  if (pos == null) {
-    return;
-  } else {
-    TgChatListType t = chatListToChatType(pos.list);
-    if (t == TgChatListType.folder) {
-      // TODO: folders
-      return;
+    Map<int, int> posToId = {}, posToIdPinned = {};
+    for (var i in chatIds) {
+      var pos =
+          _overridenPositions[i] ?? entries.firstWhere((e) => e.id == i).order;
+      posToId[pos] = i;
     }
-    session.chatLists[t]!.add(
-      pos,
-      chatId,
-      lastDraft: lastDraft,
-      lastMsg: lastMsg,
+    for (var i in pinnedIds) {
+      var pos =
+          _overridenPositions[i] ?? entries.firstWhere((e) => e.id == i).order;
+      posToIdPinned[pos] = i;
+    }
+
+    List<int> sortedKeys = posToId.keys.toList(),
+        sortedKeysPinned = posToIdPinned.keys.toList();
+    sortedKeys.sort(
+      (a, b) => -a.compareTo(b),
     );
+    sortedKeysPinned.sort(
+      (a, b) => -a.compareTo(b),
+    );
+    List<int> sortedIds = [], sortedIdsPinned = [];
+    for (var i in sortedKeys) {
+      sortedIds.add(posToId[i]!);
+    }
+    for (var i in sortedKeysPinned) {
+      sortedIdsPinned.add(posToId[i]!);
+    }
+    _filteredChatIds = [...sortedIdsPinned, ...sortedIds];
+  }
+
+  void update(int chatId, tdlib.ChatPosition pos) {
+    _overridenPositions[chatId] = pos.order;
+    _filterOut();
+  }
+
+  TgChatFilter._i(this._filter) {
+    _filterOut();
+  }
+
+  static Future<TgChatFilter?> initialize(tdlib.ChatFilterInfo info) async {
+    var filter = await session.functions.getChatFilter(info.id);
+    if (filter == null) return null;
+    return TgChatFilter._i(filter);
+  }
+}
+
+class TgChatLists extends ChangeNotifier {
+  final TgChatList main;
+  final TgChatList archive;
+  late final ChangeNotifierProvider<TgChatList> mainP;
+  late final ChangeNotifierProvider<TgChatList> archiveP;
+  final Map<int, TgChatFilter> _filters = {};
+  int _mainListId = 0;
+
+  int get mainListPosition => _mainListId;
+  Map<int, TgChatFilter> get filters => _filters;
+
+  Future<void> updateFilters(
+      List<tdlib.ChatFilterInfo> infos, int mainPos) async {
+    _mainListId = mainPos;
+    _filters.clear();
+    for (var i in infos) {
+      var f = await TgChatFilter.initialize(i);
+      if (f != null) _filters[i.id] = f;
+    }
+    notifyListeners();
+  }
+
+  TgChatLists._i(this.main, this.archive) {
+    mainP = ChangeNotifierProvider((_) => main);
+    archiveP = ChangeNotifierProvider((_) => archive);
+  }
+
+  static Future<TgChatLists> initialize() async {
+    var main = await TgChatList.initialize(TgChatListType.main);
+    var archive = await TgChatList.initialize(TgChatListType.archive);
+    return TgChatLists._i(main, archive);
   }
 }
 
@@ -662,10 +800,20 @@ Future<void> chatsHandler(tdlib.TdObject object, TgSession session) async {
       ):
       if (pos.isNotEmpty) {
         for (var i in pos) {
-          await session.updateChatList(id, chat: i, lastMessage: lastMsg);
+          switch (i.list) {
+            case tdlib.ChatListArchive():
+              session.chatLists.archive.add(i, id, lastMsg: lastMsg);
+              break;
+            case tdlib.ChatListMain():
+              session.chatLists.main.add(i, id, lastMsg: lastMsg);
+              break;
+            case tdlib.ChatListFilter():
+              break;
+          }
         }
       } else {
-        await session.updateChatList(id, lastMessage: lastMsg);
+        session.chatLists.archive.updateLast(id, lastMsg);
+        session.chatLists.main.updateLast(id, lastMsg);
       }
       session.chatsInfoCache.update(id, lastMessage: lastMsg);
       break;
@@ -676,10 +824,20 @@ Future<void> chatsHandler(tdlib.TdObject object, TgSession session) async {
       ):
       if (pos.isNotEmpty) {
         for (var i in pos) {
-          await session.updateChatList(id, chat: i, draft: draftMsg);
+          switch (i.list) {
+            case tdlib.ChatListArchive():
+              session.chatLists.archive.add(i, id, lastDraft: draftMsg);
+              break;
+            case tdlib.ChatListMain():
+              session.chatLists.main.add(i, id, lastDraft: draftMsg);
+              break;
+            case tdlib.ChatListFilter():
+              break;
+          }
         }
       } else {
-        await session.updateChatList(id, draft: draftMsg);
+        session.chatLists.archive.updateDraft(id, draftMsg);
+        session.chatLists.main.updateDraft(id, draftMsg);
       }
       session.chatsInfoCache.update(id, draft: draftMsg);
       break;
@@ -687,7 +845,17 @@ Future<void> chatsHandler(tdlib.TdObject object, TgSession session) async {
         chatId: var id,
         position: var pos,
       ):
-      await session.updateChatList(id, chat: pos);
+      switch (pos.list) {
+        case tdlib.ChatListArchive():
+          session.chatLists.archive.add(pos, id);
+          break;
+        case tdlib.ChatListMain():
+          session.chatLists.main.add(pos, id);
+          break;
+        case tdlib.ChatListFilter(chatFilterId: var fid):
+          session.chatLists.filters[fid]?.update(id, pos);
+          break;
+      }
       break;
     case tdlib.UpdateChatReadInbox(
         chatId: var id,
@@ -723,6 +891,12 @@ Future<void> chatsHandler(tdlib.TdObject object, TgSession session) async {
         basicGroupFullInfo: var fi,
       ):
       session.basicGroupsFullInfo.update(fi, id);
+      break;
+    case tdlib.UpdateChatFilters(
+        chatFilters: var infos,
+        mainChatListPosition: var mainPos,
+      ):
+      session.chatLists.updateFilters(infos, mainPos);
       break;
     default:
       return;

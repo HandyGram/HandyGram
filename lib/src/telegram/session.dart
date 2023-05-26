@@ -51,8 +51,8 @@ class TgSession {
   Function(String)? authStateListener;
   bool? isLoggedInPriv;
 
-  late Map<TgChatListType, TgChatList> chatLists;
-  late Map<TgChatListType, ChangeNotifierProvider<TgChatList>> chatListsP;
+  late TgChatLists chatLists;
+  late ChangeNotifierProvider<TgChatLists> chatListsP;
 
   late TgChatInfoCache chatsInfoCache;
   late ChangeNotifierProvider<TgChatInfoCache> chatsInfoCacheP;
@@ -84,22 +84,6 @@ class TgSession {
 
   late final bool isSquareScreen;
 
-  // Functions (codeless)
-  Future<void> updateChatList(
-    int chatId, {
-    tdlib.ChatPosition? chat,
-    tdlib.Message? lastMessage,
-    tdlib.DraftMessage? draft,
-  }) async {
-    return updateChatListImpl(
-      chatId,
-      chat,
-      this,
-      lastDraft: draft,
-      lastMsg: lastMessage,
-    );
-  }
-
   // Functions
   Future<bool?> isLoggedIn() async {
     int i = 0;
@@ -109,15 +93,6 @@ class TgSession {
       i++;
     }
     return isLoggedInPriv;
-  }
-
-  TgChatListType? getChatListType(int id) {
-    for (var l in chatLists.entries) {
-      if (l.value.chats.indexWhere((e) => e.id == id) != -1) {
-        return l.key;
-      }
-    }
-    return TgChatListType.main;
   }
 
   // Base
@@ -138,25 +113,11 @@ class TgSession {
   TgSessionUpdates updStats = TgSessionUpdates();
 
   Future<void> _init() async {
-    chatLists = {
-      TgChatListType.archive: await TgChatList.initialize(
-        TgChatListType.archive,
-      ),
-      TgChatListType.main: await TgChatList.initialize(
-        TgChatListType.main,
-      ),
-    };
+    chatLists = await TgChatLists.initialize();
     chatsInfoCache = await TgChatInfoCache.initialize();
     usersInfoCache = await TgUserInfoCache.initialize();
     usersFullInfoCache = await TgUserFullInfoCache.initialize();
-    chatListsP = {
-      TgChatListType.archive: ChangeNotifierProvider(
-        (_) => chatLists[TgChatListType.archive]!,
-      ),
-      TgChatListType.main: ChangeNotifierProvider(
-        (_) => chatLists[TgChatListType.main]!,
-      ),
-    };
+    chatListsP = ChangeNotifierProvider((_) => chatLists);
     chatsInfoCacheP = ChangeNotifierProvider((_) => chatsInfoCache);
     usersInfoCacheP = ChangeNotifierProvider((_) => usersInfoCache);
     usersFullInfoCacheP = ChangeNotifierProvider((_) => usersFullInfoCache);
@@ -171,8 +132,12 @@ class TgSession {
         updStats.addUpdate(object);
         await _m.acquire();
       }
-      for (var i in notified) {
-        await i(object, this);
+      try {
+        for (var i in notified) {
+          await i(object, this);
+        }
+      } catch (e, st) {
+        l.e("Updates", "$e\n$st");
       }
       if (!settingsStorage.isAsyncUpdates) {
         await Future.delayed(const Duration(milliseconds: 4));

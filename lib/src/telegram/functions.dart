@@ -111,7 +111,10 @@ class TelegramFunctions {
         userId: id,
       ));
     } catch (_) {}
-    if (obj == null) return null;
+    if (obj == null) {
+      l.e("getUser", "$id isn't a User!");
+      return null;
+    }
     if (obj is! tdlib.User) {
       throw TelegramError(obj, "object is not tdlib.User");
     }
@@ -611,5 +614,16 @@ class TelegramFunctions {
     if (obj is! tdlib.Ok) {
       throw TelegramError(obj, "object is not tdlib.Ok");
     }
+  }
+
+  Future<tdlib.ChatFilter?> getChatFilter(int filterId) async {
+    tdlib.TdObject? obj = await _invoke(tdlib.GetChatFilter(
+      chatFilterId: filterId,
+    ));
+    if (obj == null) return null;
+    if (obj is! tdlib.ChatFilter) {
+      throw TelegramError(obj, "object is not tdlib.ChatFilter");
+    }
+    return obj;
   }
 }
