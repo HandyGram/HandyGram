@@ -240,8 +240,8 @@ class TgMessage {
   //
 
   /// Message identifier; unique for the chat to which the message belongs.
-  late final int id = convertMessageId(tgMsg.id);
-  late final int idServer = tgMsg.id;
+  late final int id = tgMsg.id;
+  late final int idReal = isInternalMessageId(id) ? -1 : convertMessageId(id);
 
   /// Identifier of the sender of the message.
   late final tdlib.MessageSender senderId = tgMsg.senderId;
@@ -326,12 +326,12 @@ class TgMessage {
   /// If non-zero, the identifier of the message this message is replying to;
   /// can be the identifier of a deleted message.
   late final int replyToMessageId = tgMsg.replyToMessageId;
-  late final int replyToMessageIdServer = convertMessageId(replyToMessageId);
+  late final int replyToMessageIdReal = convertMessageId(replyToMessageId);
 
   /// If non-zero, the identifier of the message thread the message belongs to;
   /// unique within the chat to which the message belongs.
   late final int messageThreadMessageId = tgMsg.messageThreadId;
-  late final int messageThreadMessageIdServer =
+  late final int messageThreadMessageIdReal =
       convertMessageId(messageThreadMessageId);
 
   /// For self-destructing messages, the message's TTL (Time To Live),
@@ -371,7 +371,9 @@ class TgMessage {
   /// (Please use converter in chats.dart for LAST message!)
   @override
   String toString() => settingsStorage.debug
-      ? "[ID: $idServer ($id)]\n${content.toString()}"
+      ? isInternalMessageId(id)
+          ? "[INTERNAL ID: $id]\n${content.toString()}"
+          : "[ID: $idReal ($id)]\n${content.toString()}"
       : content.toString();
 
   TgMessage(
@@ -951,26 +953,21 @@ Future<void> messagesHandler(tdlib.TdObject object, TgSession session) async {
       await session.messages.updateLastMessage(msg.chatId, msg);
       return;
     case tdlib.UpdateDeleteMessages(chatId: var cid, messageIds: var mids):
-      await session.messages.deleteMessages(
-        cid,
-        mids.map((e) => convertMessageId(e)).toList(),
-      );
+      await session.messages.deleteMessages(cid, mids);
       return;
     case tdlib.UpdateMessageContent(
         chatId: var cid,
         messageId: var mid,
         newContent: var nc
       ):
-      await session.messages
-          .updateMessageContent(cid, convertMessageId(mid), nc);
+      await session.messages.updateMessageContent(cid, mid, nc);
       return;
     case tdlib.UpdateMessageInteractionInfo(
         chatId: var cid,
         messageId: var mid,
         interactionInfo: var ii
       ):
-      await session.messages
-          .updateInteractionInfo(cid, convertMessageId(mid), ii);
+      await session.messages.updateInteractionInfo(cid, mid, ii);
       break;
     case tdlib.UpdateMessageEdited(
         chatId: var cid,
@@ -978,7 +975,7 @@ Future<void> messagesHandler(tdlib.TdObject object, TgSession session) async {
         replyMarkup: var rm,
         editDate: var ed,
       ):
-      await session.messages.updateEditData(cid, convertMessageId(mid), rm, ed);
+      await session.messages.updateEditData(cid, mid, rm, ed);
       break;
     case tdlib.UpdateMessageSendFailed(
         message: var msg,
@@ -986,7 +983,7 @@ Future<void> messagesHandler(tdlib.TdObject object, TgSession session) async {
       ):
       await session.messages.deleteMessages(
         msg.chatId,
-        [convertMessageId(omid)],
+        [omid],
       );
       break;
     case tdlib.UpdateMessageSendSucceeded(
@@ -995,7 +992,7 @@ Future<void> messagesHandler(tdlib.TdObject object, TgSession session) async {
       ):
       await session.messages.deleteMessages(
         msg.chatId,
-        [convertMessageId(omid)],
+        [omid],
       );
       await session.messages.updateLastMessage(msg.chatId, msg);
       break;
@@ -1003,6 +1000,8 @@ Future<void> messagesHandler(tdlib.TdObject object, TgSession session) async {
       return;
   }
 }
+
+bool isInternalMessageId(int id) => (id % 1048576) != 0;
 
 int convertMessageId(int id) {
   if ((id % 1048576) == 0) {

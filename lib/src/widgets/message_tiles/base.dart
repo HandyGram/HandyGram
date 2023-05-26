@@ -229,13 +229,13 @@ class MessageBaseTile extends ConsumerWidget {
       title = "${title.substring(0, 15)}...";
     }
 
-    bool isFakeMessage = msg.idServer % 1048576 != 0;
+    bool isFakeMessage = isInternalMessageId(msg.id);
 
     return VisibilityDetector(
       key: UniqueKey(),
       onVisibilityChanged: (vi) {
         if (vi.visibleFraction > 0.5 && !isFakeMessage) {
-          session.functions.viewMessages(msg.chatId, [msg.idServer]);
+          session.functions.viewMessages(msg.chatId, [msg.id]);
         }
       },
       child: GestureDetector(

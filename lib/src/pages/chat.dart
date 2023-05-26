@@ -95,7 +95,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
           loadStatus = await _loadHistory(
             0,
             20,
-            session.messages[chatId]!.messages.first.idServer,
+            session.messages[chatId]!.messages.first.id,
           );
         } finally {
           loadMutex.release();

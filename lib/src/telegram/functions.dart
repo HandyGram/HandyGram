@@ -380,7 +380,7 @@ class TelegramFunctions {
         chatId: chatId,
         inputMessageContent: content,
         messageThreadId: messageThreadId,
-        replyToMessageId: convertMessageId(replyToMessageId),
+        replyToMessageId: replyToMessageId,
         options: options,
 
         // Used only for bots, so we just set it as null
@@ -441,7 +441,7 @@ class TelegramFunctions {
   }) async {
     tdlib.TdObject? obj = await _invoke(tdlib.AddMessageReaction(
       chatId: chatId,
-      messageId: convertMessageId(messageId),
+      messageId: messageId,
       reactionType: type,
       isBig: isBig,
       updateRecentReactions: updateRecentReactions,
@@ -459,7 +459,7 @@ class TelegramFunctions {
   }) async {
     tdlib.TdObject? obj = await _invoke(tdlib.RemoveMessageReaction(
       chatId: chatId,
-      messageId: convertMessageId(messageId),
+      messageId: messageId,
       reactionType: type,
     ));
     if (obj == null) return;
@@ -477,7 +477,7 @@ class TelegramFunctions {
     try {
       obj = await _invoke(tdlib.GetMessageAvailableReactions(
         chatId: chatId,
-        messageId: convertMessageId(messageId),
+        messageId: messageId,
         rowSize: rowSize,
       ));
     } catch (_) {}
@@ -505,7 +505,7 @@ class TelegramFunctions {
   ]) async {
     tdlib.TdObject? obj = await _invoke(tdlib.DeleteMessages(
       chatId: chatId,
-      messageIds: [convertMessageId(messageId)],
+      messageIds: [messageId],
       revoke: revoke,
     ));
     if (obj == null) return;
@@ -524,7 +524,7 @@ class TelegramFunctions {
   ]) async {
     tdlib.TdObject? obj = await _invoke(tdlib.ForwardMessages(
       chatId: chatId,
-      messageIds: [convertMessageId(messageId)],
+      messageIds: [messageId],
       fromChatId: fromChatId,
       messageThreadId: messageThreadId,
       sendCopy: copy,
