@@ -59,14 +59,20 @@ class _VoiceMessagePageState extends State<VoiceMessagePage> {
     chatId = widget.args["chat"];
 
     rc.onRecorderStateChanged.listen((_) {
-      setState(() {});
+      safeSetState(() {});
     });
     rc.onCurrentDuration.listen((v) {
-      setState(() {});
+      safeSetState(() {});
       lastDur = v;
     });
 
     File(path).parent.create();
+  }
+
+  void safeSetState(void Function() f) {
+    if (context.mounted) {
+      setState(f);
+    }
   }
 
   Widget _buildTextContainer(String? text, [int? maxLines, TextAlign? align]) {
@@ -204,10 +210,10 @@ class _VoiceMessagePageState extends State<VoiceMessagePage> {
                               );
                               await pc.startPlayer(finishMode: FinishMode.stop);
                               pc.onPlayerStateChanged.listen(
-                                (event) => setState(() {}),
+                                (event) => safeSetState(() {}),
                               );
                             }
-                            setState(() {});
+                            safeSetState(() {});
                           },
                         ),
                       if (!isSending) const SizedBox(width: 10),
@@ -232,10 +238,10 @@ class _VoiceMessagePageState extends State<VoiceMessagePage> {
                               rc.dispose();
                               rc = RecorderController();
                               rc.onRecorderStateChanged.listen((_) {
-                                setState(() {});
+                                safeSetState(() {});
                               });
                               rc.onCurrentDuration.listen((v) {
-                                setState(() {});
+                                safeSetState(() {});
                                 lastDur = v;
                               });
                               await pc.stopPlayer();
@@ -255,7 +261,7 @@ class _VoiceMessagePageState extends State<VoiceMessagePage> {
                               rc.sampleRate = 44100;
                               await rc.record(path: path);
                             }
-                            setState(() {});
+                            safeSetState(() {});
                           },
                         ),
                     ],
@@ -276,7 +282,7 @@ class _VoiceMessagePageState extends State<VoiceMessagePage> {
                             }
 
                             isSending = true;
-                            setState(() {
+                            safeSetState(() {
                               _msg = "Converting waveform...";
                             });
 
@@ -305,14 +311,14 @@ class _VoiceMessagePageState extends State<VoiceMessagePage> {
                                 left -= 8;
                               }
 
-                              setState(() {
+                              safeSetState(() {
                                 _msg = "Converting to Opus...";
                               });
 
                               int? st = await FlutterFFmpeg().execute(
                                   "-i $path -c:a libopus -b:a 256K $pathOpus");
                               if (st != 0) {
-                                setState(() {
+                                safeSetState(() {
                                   isSending = false;
                                 });
                                 // ignore: use_build_context_synchronously
@@ -325,7 +331,7 @@ class _VoiceMessagePageState extends State<VoiceMessagePage> {
                                 );
                               }
 
-                              setState(() {
+                              safeSetState(() {
                                 _msg = "Sending...";
                               });
 
@@ -366,7 +372,7 @@ class _VoiceMessagePageState extends State<VoiceMessagePage> {
                                 ),
                               );
                             } finally {
-                              setState(() {
+                              safeSetState(() {
                                 _msg = "Staring...";
                                 isSending = false;
                               });
