@@ -63,23 +63,20 @@ class _InformatorPageState extends State<InformatorPage> {
               String? title;
               switch (sender) {
                 case tdlib.MessageSenderChat(chatId: var cid):
-                  ref.watch(session.chatsInfoCacheP);
-                  var chat = session.chatsInfoCache[cid];
+                  var chat = ref.watch(
+                    session.chatsInfoCacheP.select((cache) => cache[cid]),
+                  );
                   title = chat?.title;
-                  if (title == null || title.isEmpty) {
-                    return _loading;
-                  }
                   break;
                 case tdlib.MessageSenderUser(userId: var uid):
-                  ref.watch(session.usersInfoCacheP);
-                  var user = session.usersInfoCache[uid];
+                  var user = ref.watch(
+                    session.usersInfoCacheP.select((cache) => cache[uid]),
+                  );
                   title = user?.firstName;
-                  if (title == null || title.isEmpty) {
-                    return _loading;
-                  }
                   break;
               }
 
+              if (title == null || title.isEmpty) return _loading;
               return Column(
                 children: [
                   Row(
@@ -153,10 +150,12 @@ class _InformatorPageState extends State<InformatorPage> {
               if (sender is tdlib.MessageSenderUser) {
                 isGroup = false;
                 isChannel = false;
-                ref.watch(session.usersInfoCacheP);
-                ref.watch(session.usersFullInfoCacheP);
-                tdlib.User? u = session.usersInfoCache[id];
-                tdlib.UserFullInfo? ufi = session.usersFullInfoCache[id];
+                tdlib.User? u = ref.watch(
+                  session.usersInfoCacheP.select((c) => c[id]),
+                );
+                tdlib.UserFullInfo? ufi = ref.watch(
+                  session.usersFullInfoCacheP.select((c) => c[id]),
+                );
                 if (u == null || ufi == null) {
                   session.usersInfoCache.get(id);
                   session.usersFullInfoCache.get(id);
@@ -166,8 +165,9 @@ class _InformatorPageState extends State<InformatorPage> {
                 username = u.usernames?.activeUsernames[0];
                 phoneNumber = u.phoneNumber.isEmpty ? null : u.phoneNumber;
               } else {
-                var ci = ref.watch(session.chatsInfoCacheP);
-                tdlib.ChatType? type = ci[id]?.type;
+                tdlib.ChatType? type = ref.watch(
+                  session.chatsInfoCacheP.select((c) => c[id]?.type),
+                );
                 isGroup = type is! tdlib.ChatTypePrivate;
                 if (type == null) {
                   return _loading;
@@ -175,10 +175,12 @@ class _InformatorPageState extends State<InformatorPage> {
                 switch (type) {
                   case tdlib.ChatTypePrivate():
                     id = type.userId;
-                    ref.watch(session.usersInfoCacheP);
-                    ref.watch(session.usersFullInfoCacheP);
-                    tdlib.User? u = session.usersInfoCache[id];
-                    tdlib.UserFullInfo? ufi = session.usersFullInfoCache[id];
+                    tdlib.User? u = ref.watch(
+                      session.usersInfoCacheP.select((c) => c[id]),
+                    );
+                    tdlib.UserFullInfo? ufi = ref.watch(
+                      session.usersFullInfoCacheP.select((c) => c[id]),
+                    );
                     if (u == null || ufi == null) {
                       session.usersInfoCache.get(id);
                       session.usersFullInfoCache.get(id);
@@ -190,11 +192,12 @@ class _InformatorPageState extends State<InformatorPage> {
                     break;
                   case tdlib.ChatTypeBasicGroup():
                     id = type.basicGroupId;
-                    ref.watch(session.basicGroupsP);
-                    ref.watch(session.basicGroupsFullInfoP);
-                    tdlib.BasicGroup? bg = session.basicGroups[id];
-                    tdlib.BasicGroupFullInfo? bgfi =
-                        session.basicGroupsFullInfo[id];
+                    tdlib.BasicGroup? bg = ref.watch(
+                      session.basicGroupsP.select((c) => c[id]),
+                    );
+                    tdlib.BasicGroupFullInfo? bgfi = ref.watch(
+                      session.basicGroupsFullInfoP.select((c) => c[id]),
+                    );
                     if (bg == null || bgfi == null) {
                       session.basicGroups.get(id);
                       session.basicGroupsFullInfo.get(id);
@@ -207,11 +210,12 @@ class _InformatorPageState extends State<InformatorPage> {
                     break;
                   case tdlib.ChatTypeSupergroup():
                     id = type.supergroupId;
-                    ref.watch(session.supergroupsP);
-                    ref.watch(session.supergroupsFullInfoP);
-                    tdlib.Supergroup? sg = session.supergroups[id];
-                    tdlib.SupergroupFullInfo? sgfi =
-                        session.supergroupsFullInfo[id];
+                    tdlib.Supergroup? sg = ref.watch(
+                      session.supergroupsP.select((c) => c[id]),
+                    );
+                    tdlib.SupergroupFullInfo? sgfi = ref.watch(
+                      session.supergroupsFullInfoP.select((c) => c[id]),
+                    );
                     if (sg == null || sgfi == null) {
                       session.supergroups.get(id);
                       session.supergroupsFullInfo.get(id);

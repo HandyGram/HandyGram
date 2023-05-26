@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:handygram/src/misc/settings_db.dart';
-import 'package:handygram/src/telegram/actions.dart';
 import 'package:handygram/src/telegram/chats.dart';
 import 'package:handygram/src/telegram/session.dart';
 import 'package:handygram/src/widgets/chat_tile.dart';
 import 'package:handygram/src/widgets/settings/pre_button.dart';
 import 'package:rotary_scrollbar/rotary_scrollbar.dart';
-import 'package:handygram/src/misc/tdlib_utils.dart' as tdlib;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,20 +17,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final ScrollController _controller = ScrollController();
 
-  List<String> getWritersList(List<int> rawWriters) => rawWriters
-      .map<String>(
-        (id) => (session.usersInfoCache.maybeGet(id)?.firstName) ?? "Someone",
-      )
-      .toList();
-
   @override
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, _) {
         TgChatList list = ref.watch(session.chatListsP[TgChatListType.main]!);
-        TgChatActions acts = ref.watch(session.chatActionsP);
-        var chatsInfo = ref.watch(session.chatsInfoCacheP);
-        ref.watch(session.usersInfoCacheP);
 
         if (list.chats.isEmpty) {
           return Center(
@@ -87,13 +76,7 @@ class _HomePageState extends State<HomePage> {
             }
             int i = pi - 2;
             var c = list.chats[i];
-            return ChatTile(
-              id: c.id,
-              lastMsg: c.lastMessage,
-              lastDraft: c.draftMessage?.inputMessageText.getText(),
-              title: chatsInfo[c.id]?.title,
-              writers: getWritersList(acts.getTypersList(c.id)),
-            );
+            return ChatTile(entry: c);
           },
         );
 

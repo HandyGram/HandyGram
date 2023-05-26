@@ -123,8 +123,9 @@ class _ChatPageState extends ConsumerState<ChatPage> {
       );
     }
 
-    final TgMessagesList msgs =
-        ref.watch<TgMessagesList>(session.messages.getProvider(chatId)!);
+    final TgMessagesList msgs = ref.watch<TgMessagesList>(
+      session.messages.getProvider(chatId)!,
+    );
     int prevSenderId = 0;
     DateTime prevTime = DateTime.now();
     final List<TgMessage> list = msgs.messages.reversed.toList();

@@ -210,14 +210,18 @@ class MessageBaseTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    bool isUser = msg.senderId is tdlib.MessageSenderUser;
     String? ptitle;
-    if (isUser) {
-      final uref = ref.watch(session.usersInfoCacheP);
-      ptitle = uref[msg.senderId.getSenderId()]?.firstName;
-    } else {
-      final cref = ref.watch(session.chatsInfoCacheP);
-      ptitle = cref[msg.senderId.getSenderId()]?.title;
+    switch (msg.senderId) {
+      case tdlib.MessageSenderChat(chatId: var cid):
+        ptitle = ref.watch(session.chatsInfoCacheP.select(
+          (c) => c[cid]?.title,
+        ));
+        break;
+      case tdlib.MessageSenderUser(userId: var uid):
+        ptitle = ref.watch(session.usersInfoCacheP.select(
+          (c) => c[uid]?.firstName,
+        ));
+        break;
     }
 
     var title = ptitle ?? "Unnamed";

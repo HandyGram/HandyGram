@@ -34,20 +34,23 @@ enum AvailableSendPermissions {
 }
 
 List<AvailableSendPermissions>? canSendMessages(int chatId, [WidgetRef? ref]) {
-  var ci = ref?.watch(session.chatsInfoCacheP) ?? session.chatsInfoCache;
-  var chat = ci.maybeGet(chatId);
+  var chat = ref?.watch(session.chatsInfoCacheP.select(
+        (cache) => cache[chatId],
+      )) ??
+      session.chatsInfoCache[chatId];
   if (chat == null) {
-    ci.get(chatId);
+    session.chatsInfoCache.get(chatId);
     return null;
   }
 
   tdlib.ChatPermissions perms = chat.permissions;
   var type = chat.type;
   if (type is tdlib.ChatTypeSupergroup) {
-    var si = ref?.watch(session.supergroupsP) ?? session.supergroups;
-    var s = si.maybeGet(type.supergroupId);
+    var s = ref?.watch(
+            session.supergroupsP.select((cache) => cache[type.supergroupId])) ??
+        session.supergroups[type.supergroupId];
     if (s == null) {
-      si.get(type.supergroupId);
+      session.supergroups.get(type.supergroupId);
       return null;
     }
 
@@ -77,10 +80,11 @@ List<AvailableSendPermissions>? canSendMessages(int chatId, [WidgetRef? ref]) {
       }
     }
   } else if (type is tdlib.ChatTypeBasicGroup) {
-    var bi = ref?.watch(session.basicGroupsP) ?? session.basicGroups;
-    var b = bi.maybeGet(type.basicGroupId);
+    var b = ref?.watch(
+            session.basicGroupsP.select((cache) => cache[type.basicGroupId])) ??
+        session.basicGroups[type.basicGroupId];
     if (b == null) {
-      bi.get(type.basicGroupId);
+      session.basicGroups.get(type.basicGroupId);
       return null;
     }
 
@@ -99,11 +103,11 @@ List<AvailableSendPermissions>? canSendMessages(int chatId, [WidgetRef? ref]) {
       ];
     }
   } else if (type is tdlib.ChatTypePrivate) {
-    var ufi =
-        ref?.watch(session.usersFullInfoCacheP) ?? session.usersFullInfoCache;
-    var uf = ufi.maybeGet(type.userId);
+    var uf = ref?.watch(session.usersFullInfoCacheP
+            .select((cache) => cache[type.userId])) ??
+        session.usersFullInfoCache[type.userId];
     if (uf == null) {
-      ufi.get(type.userId);
+      session.usersFullInfoCache.get(type.userId);
       return null;
     }
     return [

@@ -20,13 +20,16 @@ class ChatMenuPage extends StatefulWidget {
 class _ChatMenuPageState extends State<ChatMenuPage> {
   @override
   Widget build(BuildContext context) {
+    var id = widget.args["id"];
+
     return Scaffold(
       body: ScalingList(
         children: [
           Consumer(
             builder: (context, ref, _) {
-              ref.watch(session.chatsInfoCacheP);
-              String? title = session.chatsInfoCache[widget.args["id"]]?.title;
+              String? title = ref.watch(session.chatsInfoCacheP.select(
+                (c) => c[id]?.title,
+              ));
               if (title == null || title.isEmpty) {
                 return Container();
               }
@@ -36,7 +39,7 @@ class _ChatMenuPageState extends State<ChatMenuPage> {
                   Flexible(
                     flex: 1,
                     child: ChatImage(
-                      id: widget.args["id"],
+                      id: id,
                       isUser: false,
                       title: title,
                     ),
@@ -71,95 +74,12 @@ class _ChatMenuPageState extends State<ChatMenuPage> {
           ),
           Consumer(
             builder: (context, ref, _) {
-              var ci = ref.watch(session.chatsInfoCacheP);
-              int id = widget.args["id"];
-              var chat = ci.maybeGet(id);
-              if (chat == null) {
-                ci.get(id);
+              var perms = canSendMessages(id, ref) ?? [];
+              if (perms.isEmpty) {
                 return Container();
               }
 
-              bool canSendVm = chat.permissions.canSendMediaMessages;
-              bool canPostMessagesOnChannel = false;
-              tdlib.ChatPermissions perms = chat.permissions;
-              var type = chat.type;
-              if (type is tdlib.ChatTypeSupergroup) {
-                var si = ref.watch(session.supergroupsP);
-                var s = si.maybeGet(type.supergroupId);
-                if (s == null) {
-                  si.get(type.supergroupId);
-                  return Container();
-                }
-
-                // We shouldn't show write buttons in channel
-                // (if user is not an administrator or creator)
-                if (type.isChannel) {
-                  var status = s.status;
-                  if (status is tdlib.ChatMemberStatusAdministrator) {
-                    if (!status.rights.canPostMessages) {
-                      return Container();
-                    }
-                  } else if (status is! tdlib.ChatMemberStatusCreator) {
-                    return Container();
-                  }
-                  canPostMessagesOnChannel = true;
-                  canSendVm = true;
-                } else {
-                  // User may be restricted personally
-                  var status = s.status;
-                  if (status is tdlib.ChatMemberStatusRestricted) {
-                    perms = status.permissions;
-                    canSendVm = perms.canSendMediaMessages;
-                  }
-                  if (!perms.canSendMessages) {
-                    return Container();
-                  }
-                }
-              } else if (type is tdlib.ChatTypeBasicGroup) {
-                var bi = ref.watch(session.basicGroupsP);
-                var b = bi.maybeGet(type.basicGroupId);
-                if (b == null) {
-                  bi.get(type.basicGroupId);
-                  return Container();
-                }
-
-                var status = b.status;
-                if (status is tdlib.ChatMemberStatusRestricted) {
-                  perms = status.permissions;
-                  canSendVm = perms.canSendMediaMessages;
-                }
-                if (!perms.canSendMessages) {
-                  return Container();
-                }
-              } else if (type is tdlib.ChatTypePrivate) {
-                var ui = ref.watch(session.usersFullInfoCacheP);
-                var u = ui.maybeGet(type.userId);
-                if (u == null) {
-                  ui.get(type.userId);
-                  return Container();
-                }
-                if (u.hasRestrictedVoiceAndVideoNoteMessages) {
-                  canSendVm = false;
-                }
-              }
-
-              String strType = switch (session.chatsInfoCache[id]?.type) {
-                tdlib.ChatTypePrivate() => switch (
-                      session.usersInfoCache[id]?.type) {
-                    tdlib.UserTypeBot() => "bot",
-                    _ => "user",
-                  },
-                tdlib.ChatTypeSupergroup(isChannel: var isChannel) =>
-                  isChannel ? "channel" : "group",
-                tdlib.ChatTypeSecret() => "user",
-                tdlib.ChatTypeBasicGroup() => "group",
-                _ => "group",
-              };
-
-              bool hasNoRestrictions = canSendVm &&
-                  (perms.canSendMediaMessages ||
-                      perms.canSendOtherMessages ||
-                      canPostMessagesOnChannel);
+              bool hasNoRestrictions = perms.length > 3;
 
               return Column(
                 children: [
@@ -169,7 +89,8 @@ class _ChatMenuPageState extends State<ChatMenuPage> {
                         ? MainAxisAlignment.spaceBetween
                         : MainAxisAlignment.spaceEvenly,
                     children: [
-                      if (canSendVm)
+                      if (perms
+                          .contains(AvailableSendPermissions.voiceMessages))
                         PreSettingsButton(
                           icon: Icons.voice_chat,
                           onPressed: () {
@@ -222,10 +143,8 @@ class _ChatMenuPageState extends State<ChatMenuPage> {
                             },
                           ),
                         ),
-                      // We need !isChannel because permissions
-                      // only admin has ability to post something.
-                      if (perms.canSendMediaMessages ||
-                          canPostMessagesOnChannel)
+                      if (perms
+                          .contains(AvailableSendPermissions.mediaMessages))
                         PreSettingsButton(
                           icon: Icons.attach_file,
                           onPressed: () {
@@ -244,6 +163,35 @@ class _ChatMenuPageState extends State<ChatMenuPage> {
                         ),
                     ],
                   ),
+                ],
+              );
+            },
+          ),
+          Consumer(
+            builder: (context, ref, _) {
+              var type = ref.watch(
+                session.chatsInfoCacheP.select((c) => c[id]?.type),
+              );
+              tdlib.UserType? uType;
+              if (type is tdlib.ChatTypePrivate) {
+                uType = ref.watch(
+                  session.usersInfoCacheP.select((c) => c[id]?.type),
+                );
+              }
+              String strType = switch (type) {
+                tdlib.ChatTypePrivate() => switch (uType) {
+                    tdlib.UserTypeBot() => "bot",
+                    _ => "user",
+                  },
+                tdlib.ChatTypeSupergroup(isChannel: var isChannel) =>
+                  isChannel ? "channel" : "group",
+                tdlib.ChatTypeSecret() => "user",
+                tdlib.ChatTypeBasicGroup() => "group",
+                _ => "group",
+              };
+
+              return Column(
+                children: [
                   const SizedBox(height: 10),
                   PreSettingsButton(
                     icon: Icons.info,

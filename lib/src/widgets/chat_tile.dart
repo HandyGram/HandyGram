@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:handygram/src/misc/color.dart';
 import 'package:handygram/src/misc/utils.dart';
 import 'package:handygram/src/telegram/chats.dart';
 import 'package:handygram/src/telegram/session.dart';
 import 'chat_image.dart';
-import 'package:handygram/src/telegram/users.dart';
 import 'package:handygram/src/tdlib/td_api.dart' as tdlib;
 
 // returns user, bot, deleted_user, unknown_user, channel, group
@@ -30,53 +30,68 @@ String _writersToString(List<String> writers) {
   }
 }
 
-class ChatTile extends StatelessWidget {
+class ChatTile extends ConsumerWidget {
   const ChatTile({
     super.key,
-    required this.id,
-    this.title,
-    this.image,
-    this.lastMsg,
-    this.lastDraft,
-    this.unreadCount,
-    this.online,
-    this.writers,
+    required this.entry,
   });
 
-  final int id;
-  final String? title;
-  final Widget? image;
-  final tdlib.Message? lastMsg;
-  final String? lastDraft;
-  final int? unreadCount;
-  final bool? online;
-  final List<String>? writers;
+  final TgChatListEntry entry;
 
   @override
-  Widget build(BuildContext context) {
-    String userType = _getChatTileType(id);
-    bool isRegularUser = userType == "user" && id != 777000;
-    tdlib.Message? lastMessage = lastMsg;
-    if (session.chatsInfoCache[id]?.lastMessage != null &&
-        lastMessage == null) {
-      lastMessage = session.chatsInfoCache[id]?.lastMessage;
+  Widget build(BuildContext context, WidgetRef ref) {
+    String userType = _getChatTileType(entry.id);
+    bool isRegularUser = userType == "user" && entry.id != 777000;
+
+    // i wanna kill myself
+    var lastMsg = ref.watch(
+      session.chatsInfoCacheP.select((c) => c[entry.id]?.lastMessage),
+    );
+    var draftMsg = ref.watch(
+      session.chatsInfoCacheP.select((c) => c[entry.id]?.draftMessage),
+    );
+    var title = ref.watch(
+      session.chatsInfoCacheP.select((c) => c[entry.id]?.title),
+    );
+    var type = ref.watch(
+      session.chatsInfoCacheP.select((c) => c[entry.id]?.type),
+    );
+    var status = ref.watch(
+      session.usersInfoCacheP.select((c) => c[entry.id]?.status),
+    );
+    var writers = ref.watch(
+      session.chatActionsP.select((a) => a.getTypersList(entry.id)),
+    );
+    var unreadCount = ref.watch(
+      session.chatsInfoCacheP.select((c) => c[entry.id]?.unreadCount),
+    );
+    var unreadMentionCount = ref.watch(
+      session.chatsInfoCacheP.select((c) => c[entry.id]?.unreadMentionCount),
+    );
+    String? lastMsgSender;
+    if (lastMsg != null) {
+      switch (lastMsg.senderId) {
+        case tdlib.MessageSenderChat(chatId: var cid):
+          lastMsgSender = ref.watch(
+            session.chatsInfoCacheP.select((c) => c[cid]?.title),
+          );
+          break;
+        case tdlib.MessageSenderUser(userId: var uid):
+          lastMsgSender = ref.watch(
+            session.usersInfoCacheP.select((c) => c[uid]?.firstName),
+          );
+          break;
+      }
     }
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: GestureDetector(
         onTap: () {
-          Navigator.of(context).pushNamed("/chat", arguments: {
-            "id": id,
-            "title": title,
-            "image": image,
-            "lastMessage": lastMessage,
-            "lastDraft": lastDraft,
-            "unreadCount": unreadCount,
-            "online": online,
-            "writers": writers,
-            "type": userType,
-          });
+          Navigator.of(context).pushNamed(
+            "/chat",
+            arguments: {"id": entry.id},
+          );
         },
         child: Row(
           children: [
@@ -86,8 +101,8 @@ class ChatTile extends StatelessWidget {
                   height: 40,
                   width: 40,
                   child: ChatImage(
-                    key: ValueKey<int>(id),
-                    id: id,
+                    key: ValueKey<int>(entry.id),
+                    id: entry.id,
                     isUser: false,
                   ),
                 ),
@@ -95,9 +110,7 @@ class ChatTile extends StatelessWidget {
                   duration: const Duration(
                     milliseconds: 300,
                   ),
-                  child: (isRegularUser &&
-                          session.usersInfoCache[id]?.status
-                              is tdlib.UserStatusOnline)
+                  child: (isRegularUser && status is tdlib.UserStatusOnline)
                       ? SizedBox(
                           height: 40,
                           width: 40,
@@ -144,7 +157,7 @@ class ChatTile extends StatelessWidget {
                                   ? Icons.group
                                   : userType == "channel"
                                       ? Icons.star
-                                      : id == 777000
+                                      : entry.id == 777000
                                           ? Icons.security
                                           : Icons.delete,
                           size: 12,
@@ -152,7 +165,7 @@ class ChatTile extends StatelessWidget {
                       if (!isRegularUser) const SizedBox(width: 3),
                       Expanded(
                         child: Text(
-                          title ?? "? ($id)",
+                          title ?? "? (${entry.id})",
                           style: TextStyle(
                             fontSize: scaleText(11),
                             fontWeight: FontWeight.w500,
@@ -163,29 +176,14 @@ class ChatTile extends StatelessWidget {
                       ),
                     ],
                   ),
-                  if (writers == null || writers!.isEmpty) ...[
-                    if (lastMessage != null &&
-                        lastDraft == null &&
-                        session.chatsInfoCache[id]?.type
-                            is! tdlib.ChatTypePrivate &&
-                        lastMessage.senderId.getSenderId() != id)
+                  if (writers.isEmpty) ...[
+                    if (lastMsg != null &&
+                        draftMsg == null &&
+                        type is! tdlib.ChatTypePrivate &&
+                        lastMsg.senderId.getSenderId() != entry.id)
                       Flexible(
                         child: Text(
-                          session.usersInfoCache[
-                                      lastMessage.senderId.getSenderId()] ==
-                                  null
-                              ? session.chatsInfoCache[
-                                          lastMessage.senderId.getSenderId()] ==
-                                      null
-                                  ? lastMessage.senderId
-                                      .getSenderId()
-                                      .toString()
-                                  : session
-                                      .chatsInfoCache[
-                                          lastMessage.senderId.getSenderId()]!
-                                      .title
-                              : userToUsername(session.usersInfoCache[
-                                  lastMessage.senderId.getSenderId()]!),
+                          lastMsgSender ?? "Loading...",
                           style: TextStyle(
                             fontSize: scaleText(8),
                           ),
@@ -193,10 +191,10 @@ class ChatTile extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                    if (lastMessage != null && lastDraft == null)
+                    if (lastMsg != null && draftMsg == null)
                       Flexible(
                         child: Text(
-                          messageContentToString(lastMessage.content),
+                          messageContentToString(lastMsg.content),
                           style: TextStyle(
                             fontSize: scaleText(10),
                             color: Colors.grey,
@@ -205,7 +203,7 @@ class ChatTile extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                    if (lastDraft != null)
+                    if (draftMsg != null)
                       Flexible(
                         child: Text(
                           "Draft",
@@ -217,10 +215,10 @@ class ChatTile extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                    if (lastDraft != null)
+                    if (draftMsg != null)
                       Flexible(
                         child: Text(
-                          lastDraft ?? "Unknown",
+                          draftMsg.inputMessageText.getText() ?? "Unknown",
                           style: TextStyle(
                             fontSize: scaleText(10),
                             color: Colors.grey,
@@ -233,7 +231,13 @@ class ChatTile extends StatelessWidget {
                     if (!isRegularUser)
                       Flexible(
                         child: Text(
-                          _writersToString(writers!),
+                          _writersToString(writers.map<String>((e) {
+                            return ref.watch(
+                                  session.usersInfoCacheP
+                                      .select((c) => c[e]?.firstName),
+                                ) ??
+                                "Someone";
+                          }).toList()),
                           style: TextStyle(
                             fontSize: scaleText(8),
                             color: Colors.blue,
@@ -244,7 +248,7 @@ class ChatTile extends StatelessWidget {
                       ),
                     Flexible(
                       child: Text(
-                        "${writers!.length == 1 ? "is" : "are"} typing...",
+                        "${writers.length == 1 ? "is" : "are"} typing...",
                         style: TextStyle(
                           fontSize: scaleText(10),
                           color: Colors.blue,
@@ -261,17 +265,13 @@ class ChatTile extends StatelessWidget {
               duration: const Duration(
                 milliseconds: 250,
               ),
-              child: ((session.chatsInfoCache[id]?.unreadCount ?? 0) > 0)
+              child: ((unreadCount ?? 0) > 0)
                   ? Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color:
-                            ((session.chatsInfoCache[id]?.unreadMentionCount ??
-                                            0) >
-                                        0 ||
-                                    isRegularUser)
-                                ? Colors.blue
-                                : HColor.blend(Colors.white.withOpacity(0.3)),
+                        color: ((unreadMentionCount ?? 0) > 0 || isRegularUser)
+                            ? Colors.blue
+                            : HColor.blend(Colors.white.withOpacity(0.3)),
                       ),
                       padding: const EdgeInsets.all(3),
                       child: AnimatedSwitcher(
@@ -292,12 +292,8 @@ class ChatTile extends StatelessWidget {
                           );
                         },
                         child: Text(
-                          session.chatsInfoCache[id]?.unreadCount.toString() ??
-                              "",
-                          key: ValueKey<String>(session
-                                  .chatsInfoCache[id]?.unreadCount
-                                  .toString() ??
-                              ""),
+                          unreadCount?.toString() ?? "",
+                          key: ValueKey<String>(unreadCount?.toString() ?? ""),
                           style: TextStyle(
                             fontSize: scaleText(8),
                           ),

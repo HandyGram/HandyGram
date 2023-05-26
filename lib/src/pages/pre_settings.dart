@@ -27,12 +27,11 @@ class _PreSettingsPageState extends State<PreSettingsPage> {
         children: [
           Consumer(
             builder: (context, ref, _) {
-              ref.watch(session.usersInfoCacheP);
-              if (session.usersInfoCache.me != null &&
-                  session.usersFullInfoCache[session.usersInfoCache.me!.id] ==
-                      null) {
+              var me = ref
+                  .watch(session.usersInfoCacheP.select((cache) => cache.me));
+              if (me != null && session.usersFullInfoCache[me.id] == null) {
                 // Request loading full info for current user
-                session.usersFullInfoCache.get(session.usersInfoCache.me!.id);
+                session.usersFullInfoCache.get(me.id);
               }
               return Column(
                 children: [
@@ -117,11 +116,14 @@ class _PreSettingsPageState extends State<PreSettingsPage> {
           const SizedBox(height: 10),
           Consumer(
             builder: (context, ref, _) {
-              ref.watch(session.usersFullInfoCacheP);
-              String? desc = session.usersInfoCache.me == null
-                  ? null
-                  : session.usersFullInfoCache[session.usersInfoCache.me!.id]
-                      ?.bio?.text;
+              String? desc;
+              var me = ref
+                  .watch(session.usersInfoCacheP.select((cache) => cache.me));
+              if (me != null) {
+                var meFi = ref.watch(session.usersFullInfoCacheP
+                    .select((cache) => cache[me.id]));
+                desc = meFi?.bio?.text;
+              }
               if (desc == null || desc.isEmpty) {
                 return Container();
               }

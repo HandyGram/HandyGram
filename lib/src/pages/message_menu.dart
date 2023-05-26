@@ -48,11 +48,11 @@ class _MessageMenuPageState extends State<MessageMenuPage> {
         children: [
           Consumer(
             builder: (context, ref, _) {
-              var l = ref.watch(session.messages.getProvider(msg.chatId)!);
-              TgMessage? m;
-              try {
-                m = l.messages.firstWhere((e) => e.id == msg.id);
-              } catch (_) {}
+              TgMessage? m = ref.watch(
+                session.messages
+                    .getProvider(msg.chatId)!
+                    .select((p) => p[msg.id]),
+              );
               return Text(
                 (m ?? msg).toString(),
                 style: TextStyle(

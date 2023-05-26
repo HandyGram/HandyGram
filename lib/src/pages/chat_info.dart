@@ -54,13 +54,14 @@ class _ChatInfoPageState extends State<ChatInfoPage> {
 
   @override
   Widget build(BuildContext context) {
+    var id = widget.args["id"];
     return Scaffold(
       body: ScalingList(
         children: [
           Consumer(
             builder: (context, ref, _) {
-              ref.watch(session.chatsInfoCacheP);
-              var chat = session.chatsInfoCache[widget.args["id"]];
+              var chat =
+                  ref.watch(session.chatsInfoCacheP.select((c) => c[id]));
               String? title = chat?.title;
               if (title == null || title.isEmpty) {
                 return _loading;
@@ -74,15 +75,14 @@ class _ChatInfoPageState extends State<ChatInfoPage> {
                         flex: 1,
                         child: GestureDetector(
                           onTap: () async {
-                            if (session.chatsInfoCache[widget.args["id"]]?.photo
-                                    ?.big ==
+                            if (session.chatsInfoCache[id]?.photo?.big ==
                                 null) {
                               return;
                             }
 
                             TgImage(
-                              id: session.chatsInfoCache[widget.args["id"]]!
-                                  .photo!.big.remote.id,
+                              id: session
+                                  .chatsInfoCache[id]!.photo!.big.remote.id,
                             ).load().then((i) {
                               if (i != null && context.mounted) {
                                 Navigator.of(context).push(
@@ -94,7 +94,7 @@ class _ChatInfoPageState extends State<ChatInfoPage> {
                             });
                           },
                           child: ChatImage(
-                            id: widget.args["id"],
+                            id: id,
                             isUser: false,
                             title: title,
                           ),
@@ -114,13 +114,9 @@ class _ChatInfoPageState extends State<ChatInfoPage> {
           ),
           Consumer(
             builder: (context, ref, _) {
-              var ci = ref.watch(session.chatsInfoCacheP);
-              int id = widget.args["id"];
-
-              tdlib.ChatType? type = ci[id]?.type;
-              if (type == null) {
-                return _loading;
-              }
+              tdlib.ChatType? type = ref.watch(
+                session.chatsInfoCacheP.select((c) => c[id]?.type),
+              );
 
               bool isGroup = type is! tdlib.ChatTypePrivate;
               bool isChannel = false;
@@ -129,10 +125,12 @@ class _ChatInfoPageState extends State<ChatInfoPage> {
               switch (type) {
                 case tdlib.ChatTypePrivate():
                   id = type.userId;
-                  ref.watch(session.usersInfoCacheP);
-                  ref.watch(session.usersFullInfoCacheP);
-                  tdlib.User? u = session.usersInfoCache[id];
-                  tdlib.UserFullInfo? ufi = session.usersFullInfoCache[id];
+                  tdlib.User? u = ref.watch(
+                    session.usersInfoCacheP.select((c) => c[id]),
+                  );
+                  tdlib.UserFullInfo? ufi = ref.watch(
+                    session.usersFullInfoCacheP.select((c) => c[id]),
+                  );
                   if (u == null || ufi == null) {
                     session.usersInfoCache.get(id);
                     session.usersFullInfoCache.get(id);
@@ -144,11 +142,12 @@ class _ChatInfoPageState extends State<ChatInfoPage> {
                   break;
                 case tdlib.ChatTypeBasicGroup():
                   id = type.basicGroupId;
-                  ref.watch(session.basicGroupsP);
-                  ref.watch(session.basicGroupsFullInfoP);
-                  tdlib.BasicGroup? bg = session.basicGroups[id];
-                  tdlib.BasicGroupFullInfo? bgfi =
-                      session.basicGroupsFullInfo[id];
+                  tdlib.BasicGroup? bg = ref.watch(
+                    session.basicGroupsP.select((c) => c[id]),
+                  );
+                  tdlib.BasicGroupFullInfo? bgfi = ref.watch(
+                    session.basicGroupsFullInfoP.select((c) => c[id]),
+                  );
                   if (bg == null || bgfi == null) {
                     session.basicGroups.get(id);
                     session.basicGroupsFullInfo.get(id);
@@ -161,11 +160,12 @@ class _ChatInfoPageState extends State<ChatInfoPage> {
                   break;
                 case tdlib.ChatTypeSupergroup():
                   id = type.supergroupId;
-                  ref.watch(session.supergroupsP);
-                  ref.watch(session.supergroupsFullInfoP);
-                  tdlib.Supergroup? sg = session.supergroups[id];
-                  tdlib.SupergroupFullInfo? sgfi =
-                      session.supergroupsFullInfo[id];
+                  tdlib.Supergroup? sg = ref.watch(
+                    session.supergroupsP.select((c) => c[id]),
+                  );
+                  tdlib.SupergroupFullInfo? sgfi = ref.watch(
+                    session.supergroupsFullInfoP.select((c) => c[id]),
+                  );
                   if (sg == null || sgfi == null) {
                     session.supergroups.get(id);
                     session.supergroupsFullInfo.get(id);
@@ -177,6 +177,8 @@ class _ChatInfoPageState extends State<ChatInfoPage> {
                   username = sg.usernames?.activeUsernames[0];
                   isChannel = sg.isChannel;
                   break;
+                case null:
+                  return _loading;
                 default:
                   return const Text("secret chats are not supported yet");
               }
