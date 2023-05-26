@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:handygram/src/misc/settings_db.dart';
@@ -57,6 +58,10 @@ class _MiniVideoPlayerControlsState extends State<_MiniVideoPlayerControls> {
   Widget build(BuildContext context) {
     Duration pos = controller.value.position;
     Duration dur = controller.value.duration;
+    var safeDur = max(dur.inMilliseconds, 10);
+    if (pos > dur) {
+      pos = Duration.zero;
+    }
     return GestureDetector(
       child: AnimatedSwitcher(
         duration: const Duration(milliseconds: 250),
@@ -126,10 +131,9 @@ class _MiniVideoPlayerControlsState extends State<_MiniVideoPlayerControls> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Slider(
-                              value:
-                                  (pos.inMilliseconds / dur.inMilliseconds <= 0)
-                                      ? 0.0001
-                                      : pos.inMilliseconds / dur.inMilliseconds,
+                              value: (pos.inMilliseconds / safeDur <= 0)
+                                  ? 0.0001
+                                  : pos.inMilliseconds / safeDur,
                               onChanged: (value) => controller.seekTo(
                                 Duration(
                                   milliseconds:
@@ -213,7 +217,9 @@ class _MiniVideoPlayerState extends State<MiniVideoPlayer> {
       priority: 32,
       notifier: (done, total) {
         setState(() {
-          dwProgress = done / total;
+          if (total > 0 && done > 0) {
+            dwProgress = done / total;
+          }
         });
       },
     );
@@ -225,7 +231,7 @@ class _MiniVideoPlayerState extends State<MiniVideoPlayer> {
       ),
     );
     controller!.setLooping(false);
-    controller!.setVolume(0);
+    controller!.setVolume(1);
     await controller!.initialize();
     controller!.play();
     return controller;
