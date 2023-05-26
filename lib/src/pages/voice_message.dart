@@ -250,9 +250,9 @@ class _VoiceMessagePageState extends State<VoiceMessagePage> {
 
                               rc.androidOutputFormat =
                                   AndroidOutputFormat.mpeg4;
-                              rc.androidEncoder = AndroidEncoder.he_aac;
+                              rc.androidEncoder = AndroidEncoder.aac;
                               rc.bitRate = 256000;
-                              rc.sampleRate = 48000;
+                              rc.sampleRate = 44100;
                               await rc.record(path: path);
                             }
                             setState(() {});
@@ -356,6 +356,15 @@ class _VoiceMessagePageState extends State<VoiceMessagePage> {
                                 // ignore: use_build_context_synchronously
                                 widget.args["onComplete"]();
                               }
+                            } catch (_) {
+                              // ignore: use_build_context_synchronously
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Center(
+                                    child: Text("Error"),
+                                  ),
+                                ),
+                              );
                             } finally {
                               setState(() {
                                 _msg = "Staring...";
