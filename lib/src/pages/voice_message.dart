@@ -42,6 +42,11 @@ class _VoiceMessagePageState extends State<VoiceMessagePage> {
   void dispose() {
     rc.dispose();
     pc.dispose();
+
+    try {
+      File(path).delete(recursive: true);
+    } catch (_) {}
+
     super.dispose();
   }
 
