@@ -983,7 +983,7 @@ Future<void> messagesHandler(tdlib.TdObject object, TgSession session) async {
       ):
       await session.messages.deleteMessages(
         msg.chatId,
-        [omid],
+        [omid, msg.id],
       );
       break;
     case tdlib.UpdateMessageSendSucceeded(
@@ -992,7 +992,7 @@ Future<void> messagesHandler(tdlib.TdObject object, TgSession session) async {
       ):
       await session.messages.deleteMessages(
         msg.chatId,
-        [omid],
+        [omid, msg.id],
       );
       await session.messages.updateLastMessage(msg.chatId, msg);
       break;
