@@ -198,9 +198,7 @@ class _VoiceMessagePageState extends State<VoiceMessagePage> {
                           onPressed: () async {
                             if (pc.playerState.isPlaying) {
                               await pc.stopPlayer();
-                              pc.dispose();
                             } else {
-                              pc = PlayerController();
                               await pc.preparePlayer(
                                 path: path,
                                 shouldExtractWaveform: false,
@@ -243,7 +241,6 @@ class _VoiceMessagePageState extends State<VoiceMessagePage> {
                                 lastDur = v;
                               });
                               await pc.stopPlayer();
-                              pc.dispose();
                             } else if (rc.recorderState.isRecording) {
                               await rc.stop();
                             } else if (rc.elapsedDuration == Duration.zero) {
@@ -270,13 +267,12 @@ class _VoiceMessagePageState extends State<VoiceMessagePage> {
                           icon: Icons.send,
                           title: "Send",
                           onPressed: () async {
+                            if (rc.recorderState.isRecording) {
+                              await rc.stop();
+                            }
                             if (lastDur == null ||
                                 !rc.recorderState.isStopped) {
-                              if (rc.recorderState.isRecording) {
-                                await rc.stop();
-                              } else {
-                                return;
-                              }
+                              return;
                             }
 
                             isSending = true;
