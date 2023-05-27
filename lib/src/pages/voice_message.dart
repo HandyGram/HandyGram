@@ -24,29 +24,24 @@ class VoiceMessagePage extends StatefulWidget {
   State<VoiceMessagePage> createState() => _VoiceMessagePageState();
 }
 
+final _rng = Random.secure();
+
 class _VoiceMessagePageState extends State<VoiceMessagePage> {
   late final TgMessage? replyToMsg;
   late final int chatId;
   RecorderController rc = RecorderController();
   PlayerController pc = PlayerController();
-  String path = "${TgSession.cacheDir}/temp/vm_tmp.m4a";
-  String pathOpus = "${TgSession.cacheDir}/temp/vm_tmp.ogg";
+  int randId = _rng.nextInt(999999999);
+  late String path = "${TgSession.cacheDir}/temp/voice-$randId.m4a";
+  late String pathOpus = "${TgSession.cacheDir}/temp/voice-$randId.ogg";
   Duration? lastDur;
   bool isSending = false;
   String _msg = "Staring...";
-
-  void _del() async {
-    try {
-      await File(path).delete(recursive: true);
-      await File(pathOpus).delete(recursive: true);
-    } catch (_) {}
-  }
 
   @override
   void dispose() {
     rc.dispose();
     pc.dispose();
-    _del();
     super.dispose();
   }
 
@@ -227,10 +222,6 @@ class _VoiceMessagePageState extends State<VoiceMessagePage> {
                           onPressed: () async {
                             if (rc.recorderState.isStopped && lastDur != null) {
                               lastDur = null;
-                              try {
-                                await File(path).delete(recursive: true);
-                                await File(pathOpus).delete(recursive: true);
-                              } catch (_) {}
                               rc.dispose();
                               rc = RecorderController();
                               rc.onRecorderStateChanged.listen((_) {
@@ -244,11 +235,6 @@ class _VoiceMessagePageState extends State<VoiceMessagePage> {
                             } else if (rc.recorderState.isRecording) {
                               await rc.stop();
                             } else if (rc.elapsedDuration == Duration.zero) {
-                              try {
-                                await File(path).delete(recursive: true);
-                                await File(pathOpus).delete(recursive: true);
-                              } catch (_) {}
-
                               rc.androidOutputFormat =
                                   AndroidOutputFormat.mpeg4;
                               rc.androidEncoder = AndroidEncoder.aac;
