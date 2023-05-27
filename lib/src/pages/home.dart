@@ -68,16 +68,11 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Consumer(
         builder: (context, ref, _) {
-          ref.watch(session.chatListsP);
-          ref.watch(ChangeNotifierProvider((_) => session.updStats));
+          var main = ref.watch(session.chatLists.mainP);
+          var stats =
+              ref.watch(ChangeNotifierProvider((_) => session.updStats));
 
-          List<dynamic> lists = [
-            session.chatLists.main,
-            session.chatLists.archive,
-            ...session.chatLists.filters.values,
-          ];
-
-          if (session.chatLists.main.chats.isEmpty) {
+          if (main.chats.isEmpty) {
             return Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -94,8 +89,8 @@ class _HomePageState extends State<HomePage> {
                   if (!settingsStorage.isAsyncUpdates)
                     Text(
                       "Handling all missed events...\n"
-                      "${session.updStats.handled}/${session.updStats.finalUpdate ?? session.updStats.total}"
-                      "${session.updStats.finalUpdate == null ? "" : " (${(session.updStats.handled / session.updStats.finalUpdate! * 100).toStringAsFixed(1)}%)"}\n\n"
+                      "${stats.handled}/${stats.finalUpdate ?? stats.total}"
+                      "${stats.finalUpdate == null ? "" : " (${(stats.handled / stats.finalUpdate! * 100).toStringAsFixed(1)}%)"}\n\n"
                       "This may take from\nsome seconds to minute.",
                       textAlign: TextAlign.center,
                       style: const TextStyle(
@@ -112,46 +107,11 @@ class _HomePageState extends State<HomePage> {
             children: [
               SizedBox.expand(
                 child: buildList(
-                  lists[curList].chats,
-                  lists[curList] is TgChatList
-                      ? lists[curList].type
-                      : TgChatListType.folder,
+                  main.chats,
+                  main.type,
                   context,
                 ),
               ),
-              // TODO: folders UI
-              // if (curList != 0)
-              //   SizedBox.expand(
-              //     child: Align(
-              //       alignment: Alignment.centerLeft,
-              //       child: IconButton(
-              //         icon: const Icon(
-              //           Icons.navigate_before,
-              //         ),
-              //         onPressed: () {
-              //           setState(() {
-              //             curList--;
-              //           });
-              //         },
-              //       ),
-              //     ),
-              //   ),
-              // if (curList + 1 != lists.length)
-              //   SizedBox.expand(
-              //     child: Align(
-              //       alignment: Alignment.centerRight,
-              //       child: IconButton(
-              //         icon: const Icon(
-              //           Icons.navigate_next,
-              //         ),
-              //         onPressed: () {
-              //           setState(() {
-              //             curList++;
-              //           });
-              //         },
-              //       ),
-              //     ),
-              //   ),
             ],
           );
         },
