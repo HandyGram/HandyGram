@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:async/async.dart';
-import 'package:audioplayers/audioplayers.dart';
+import 'package:audio_waveforms/audio_waveforms.dart';
 import 'package:flutter/material.dart';
 import 'package:handygram/src/misc/utils.dart';
 import 'package:handygram/src/telegram/loadfile.dart';
@@ -57,7 +57,7 @@ class _MessageVoiceNoteContentState extends State<MessageVoiceNoteContent> {
   double progress = 0.0;
   int duration = 99;
   VoicePlayerState state = VoicePlayerState.stopped;
-  AudioPlayer player = AudioPlayer();
+  PlayerController player = PlayerController();
   List<Widget> bars = [];
   List<int> lengths = [];
   CancelableOperation? loadF;
@@ -79,17 +79,23 @@ class _MessageVoiceNoteContentState extends State<MessageVoiceNoteContent> {
       ),
     );
 
-    player.onPositionChanged.listen(
-      (event) => setState(() => progress = event.inMilliseconds / duration),
-    );
-    player.onDurationChanged.listen((event) => duration = event.inMilliseconds);
+    player.onCurrentDurationChanged.listen((event) => duration = event);
     player.onPlayerStateChanged.listen((st) => setState(() {
-          if (st != PlayerState.playing) {
+          if (!st.isPlaying) {
             state = VoicePlayerState.stopped;
           } else {
             state = VoicePlayerState.playing;
           }
         }));
+  }
+
+  Future<void> _worker() async {
+    var dur = await player.getDuration(DurationType.current);
+    setState(() {
+      progress = dur / duration;
+    });
+    await Future.delayed(const Duration(milliseconds: 100));
+    return _worker();
   }
 
   @override
@@ -128,7 +134,8 @@ class _MessageVoiceNoteContentState extends State<MessageVoiceNoteContent> {
             GestureDetector(
               onTap: () {
                 if (state == VoicePlayerState.playing) {
-                  player.stop();
+                  player.stopPlayer();
+                  loadF?.cancel();
                 } else if (state == VoicePlayerState.stopped) {
                   state = VoicePlayerState.loading;
                   loadF = CancelableOperation.fromFuture(
@@ -138,9 +145,14 @@ class _MessageVoiceNoteContentState extends State<MessageVoiceNoteContent> {
                       type: const tdlib.FileTypeVoiceNote(),
                     ).then((f) async {
                       if (f != null) {
-                        var s = DeviceFileSource(f.path);
-                        await player.play(s);
+                        await player.preparePlayer(
+                          path: f.path,
+                          volume: 1.0,
+                          shouldExtractWaveform: false,
+                        );
+                        await player.startPlayer(finishMode: FinishMode.stop);
                         setState(() => state = VoicePlayerState.playing);
+                        await _worker();
                       } else {
                         setState(() => state = VoicePlayerState.error);
                       }
