@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:handygram/src/misc/utils.dart';
 import 'package:handygram/src/tdlib/td_api.dart' as tdlib;
 import 'package:handygram/src/telegram/session.dart';
@@ -87,7 +88,7 @@ class _ReactionChipState extends State<ReactionChip>
                     emoji,
                     maxLines: 1,
                     overflow: TextOverflow.clip,
-                    style: TextStyle(
+                    style: GoogleFonts.notoColorEmoji(
                       fontSize: scaleText(12),
                     ),
                   ),
