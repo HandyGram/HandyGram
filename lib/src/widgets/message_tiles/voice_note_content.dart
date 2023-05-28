@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 
@@ -55,17 +56,18 @@ enum VoicePlayerState {
 
 class _MessageVoiceNoteContentState extends State<MessageVoiceNoteContent> {
   double progress = 0.0;
-  int duration = 99;
-  VoicePlayerState state = VoicePlayerState.stopped;
+  bool error = false, loading = false;
   PlayerController player = PlayerController();
   List<Widget> bars = [];
   List<int> lengths = [];
   CancelableOperation? loadF;
+  Timer? _t;
 
   @override
   void dispose() {
     player.dispose();
     loadF?.cancel();
+    _t?.cancel();
     super.dispose();
   }
 
@@ -78,24 +80,14 @@ class _MessageVoiceNoteContentState extends State<MessageVoiceNoteContent> {
         content.voiceNote.waveform,
       ),
     );
-
-    player.onCurrentDurationChanged.listen((event) => duration = event);
-    player.onPlayerStateChanged.listen((st) => setState(() {
-          if (!st.isPlaying) {
-            state = VoicePlayerState.stopped;
-          } else {
-            state = VoicePlayerState.playing;
-          }
-        }));
   }
 
-  Future<void> _worker() async {
+  Future<void> _updateProgress() async {
+    var durFull = await player.getDuration(DurationType.max);
     var dur = await player.getDuration(DurationType.current);
     setState(() {
-      progress = dur / duration;
+      progress = dur / durFull;
     });
-    await Future.delayed(const Duration(milliseconds: 100));
-    return _worker();
   }
 
   @override
@@ -111,7 +103,9 @@ class _MessageVoiceNoteContentState extends State<MessageVoiceNoteContent> {
             height: e.toDouble() + 1,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(2),
-              color: (progress * 100 > i)
+              // waveform of 100 positions is just RECOMMENDED value.
+              // so, use the real value.
+              color: (progress * lengths.length > i)
                   ? Theme.of(context)
                       .buttonTheme
                       .colorScheme!
@@ -133,11 +127,13 @@ class _MessageVoiceNoteContentState extends State<MessageVoiceNoteContent> {
           children: [
             GestureDetector(
               onTap: () {
-                if (state == VoicePlayerState.playing) {
+                if (player.playerState.isPlaying) {
                   player.stopPlayer();
-                  loadF?.cancel();
-                } else if (state == VoicePlayerState.stopped) {
-                  state = VoicePlayerState.loading;
+                  player.dispose();
+                } else if (player.playerState.isStopped) {
+                  setState(() {
+                    loading = true;
+                  });
                   loadF = CancelableOperation.fromFuture(
                     loadTgFile(
                       content.voiceNote.voice.remote.id,
@@ -145,16 +141,24 @@ class _MessageVoiceNoteContentState extends State<MessageVoiceNoteContent> {
                       type: const tdlib.FileTypeVoiceNote(),
                     ).then((f) async {
                       if (f != null) {
+                        player = PlayerController();
+                        player.onPlayerStateChanged
+                            .listen((st) => setState(() {}));
                         await player.preparePlayer(
                           path: f.path,
                           volume: 1.0,
                           shouldExtractWaveform: false,
                         );
                         await player.startPlayer(finishMode: FinishMode.stop);
-                        setState(() => state = VoicePlayerState.playing);
-                        await _worker();
+                        setState(() {
+                          loading = false;
+                        });
+                        _t = Timer.periodic(
+                          const Duration(milliseconds: 100),
+                          (_) => _updateProgress(),
+                        );
                       } else {
-                        setState(() => state = VoicePlayerState.error);
+                        setState(() => error = true);
                       }
                     }),
                   );
@@ -167,13 +171,13 @@ class _MessageVoiceNoteContentState extends State<MessageVoiceNoteContent> {
                   color: Theme.of(context).buttonTheme.colorScheme!.primary,
                   shape: BoxShape.circle,
                 ),
-                child: state == VoicePlayerState.error
+                child: error
                     ? const Icon(Icons.error)
-                    : state == VoicePlayerState.playing
-                        ? const Icon(Icons.pause)
-                        : state == VoicePlayerState.stopped
-                            ? const Icon(Icons.play_arrow)
-                            : const CircularProgressIndicator(),
+                    : loading
+                        ? const CircularProgressIndicator()
+                        : player.playerState.isPlaying
+                            ? const Icon(Icons.pause)
+                            : const Icon(Icons.play_arrow),
               ),
             ),
             const SizedBox(width: 10),
