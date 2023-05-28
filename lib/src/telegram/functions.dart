@@ -394,6 +394,7 @@ class TelegramFunctions {
     if (obj is! tdlib.Message) {
       throw TelegramError(obj, "object is not tdlib.Message");
     }
+    session.sendLock.messageStartedToSend(obj.id);
     return obj;
   }
 

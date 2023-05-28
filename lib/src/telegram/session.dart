@@ -82,6 +82,9 @@ class TgSession {
   Map<int, Map<String, dynamic>> chatPhotos = {};
   Map<String, Function(int, int)> fileDlNotifiers = {};
 
+  MessageSendingLock sendLock = MessageSendingLock();
+  late ChangeNotifierProvider<MessageSendingLock> sendLockP;
+
   late final bool isSquareScreen;
 
   // Functions
@@ -125,6 +128,7 @@ class TgSession {
     supergroupsFullInfoP = ChangeNotifierProvider((_) => supergroupsFullInfo);
     basicGroupsP = ChangeNotifierProvider((_) => basicGroups);
     basicGroupsFullInfoP = ChangeNotifierProvider((_) => basicGroupsFullInfo);
+    sendLockP = ChangeNotifierProvider((_) => sendLock);
     _glue = await TdlibGlue.initialize();
     // Setup update loop with wrappers.
     _glue.notifier = (tdlib.TdObject object) async {

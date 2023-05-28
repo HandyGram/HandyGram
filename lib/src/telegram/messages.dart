@@ -4,6 +4,7 @@ import 'package:handygram/src/misc/log.dart';
 import 'package:handygram/src/misc/settings_db.dart';
 import 'package:handygram/src/telegram/session.dart';
 import 'package:handygram/src/tdlib/td_api.dart' as tdlib;
+import 'package:mutex/mutex.dart';
 
 typedef TdMsg = tdlib.Message;
 
@@ -678,6 +679,7 @@ class TgMessagesList extends ChangeNotifier {
   // Use map to quickly find messages by id
   final Map<int, TgMessage> _messages = {};
   List<TgMessage> _latestSort = [];
+  final Mutex _m = Mutex();
 
   static List<int> _resortIsolated(List<int> toSort) {
     return List.from(toSort)
@@ -700,33 +702,42 @@ class TgMessagesList extends ChangeNotifier {
 
   void insert(TgMessage? msg) async {
     if (msg == null) return;
+    await _m.acquire();
     _messages[msg.id] = msg;
     await _resort();
+    _m.release();
     notifyListeners();
   }
 
   void insertAll(List<TgMessage?> messages) async {
+    await _m.acquire();
     for (var i in messages) {
       if (i != null) _messages[i.id] = i;
     }
     await _resort();
+    _m.release();
     notifyListeners();
   }
 
   void deleteAll(List<int> messageIds) async {
+    await _m.acquire();
     for (var i in messageIds) {
       _messages.remove(i);
     }
     await _resort();
+    _m.release();
     notifyListeners();
   }
 
   void clear() async {
+    await _m.acquire();
     _messages.clear();
     _latestSort = [];
+    _m.release();
   }
 
   TgMessagesList.withHistory(int chatId) {
+    _m.acquire();
     session.functions.getChatHistory(chatId).then((value) async {
       if (value == null) {
         return;
@@ -737,6 +748,7 @@ class TgMessagesList extends ChangeNotifier {
         _messages[i.id] = i;
       }
       await _resort();
+      _m.release();
     });
   }
 
@@ -947,12 +959,81 @@ class TgMessagesListCombine {
   }
 }
 
+class MessageSentState {
+  final bool error;
+  final String? errorMessage;
+  final int prevId;
+  final int? newId;
+
+  const MessageSentState({
+    required this.error,
+    required this.prevId,
+    this.errorMessage,
+    this.newId,
+  });
+}
+
+class MessageSendingLock extends ChangeNotifier {
+  final List<int> _sending = [];
+  final Map<int, MessageSentState> _errorDesc = {};
+
+  /// Get MessageSentState by fake message id
+  MessageSentState? getMessageSentState(int prevId) {
+    return _errorDesc[prevId];
+  }
+
+  /// Is getChatHistory locked now?
+  bool get locked => _sending.isNotEmpty;
+
+  /// Trigger this right after sendMessage
+  void messageStartedToSend(int fakeMessageId) {
+    _sending.add(fakeMessageId);
+    notifyListeners();
+  }
+
+  /// Trigger this right after updateMessageSendSucceeded
+  void messageWasSuccessfullySent(int fakeMessageId, int newId) {
+    _sending.remove(fakeMessageId);
+    _errorDesc[fakeMessageId] = MessageSentState(
+      error: false,
+      prevId: fakeMessageId,
+      newId: newId,
+    );
+
+    notifyListeners();
+  }
+
+  /// Trigger this right after updateMessageSendFailed
+  void messageWasNotSent(
+    int fakeMessageId,
+    int errorCode,
+    String errorMessage,
+  ) {
+    _sending.remove(fakeMessageId);
+    _errorDesc[fakeMessageId] = MessageSentState(
+      error: true,
+      prevId: fakeMessageId,
+      errorMessage: "$errorCode: $errorMessage",
+    );
+
+    notifyListeners();
+  }
+
+  /// Trigger this right after updateDeleteMessages.
+  /// Some sent messages may be marked as deleted, according to TDLib docs!
+  void messageWasDeleted(List<int> ids) {
+    _sending.removeWhere((id) => ids.contains(id));
+    notifyListeners();
+  }
+}
+
 Future<void> messagesHandler(tdlib.TdObject object, TgSession session) async {
   switch (object) {
     case tdlib.UpdateNewMessage(message: var msg):
       await session.messages.updateLastMessage(msg.chatId, msg);
       return;
     case tdlib.UpdateDeleteMessages(chatId: var cid, messageIds: var mids):
+      session.sendLock.messageWasDeleted(mids);
       await session.messages.deleteMessages(cid, mids);
       return;
     case tdlib.UpdateMessageContent(
@@ -980,7 +1061,10 @@ Future<void> messagesHandler(tdlib.TdObject object, TgSession session) async {
     case tdlib.UpdateMessageSendFailed(
         message: var msg,
         oldMessageId: var omid,
+        errorCode: var ec,
+        errorMessage: var em,
       ):
+      session.sendLock.messageWasNotSent(omid, ec, em);
       await session.messages.deleteMessages(
         msg.chatId,
         [omid, msg.id],
@@ -990,6 +1074,7 @@ Future<void> messagesHandler(tdlib.TdObject object, TgSession session) async {
         message: var msg,
         oldMessageId: var omid,
       ):
+      session.sendLock.messageWasSuccessfullySent(omid, msg.id);
       await session.messages.deleteMessages(
         msg.chatId,
         [omid, msg.id],
