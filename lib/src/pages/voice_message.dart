@@ -324,7 +324,8 @@ class _VoiceMessagePageState extends State<VoiceMessagePage> {
                                 chatId: chatId,
                                 content: tdlib.InputMessageVoiceNote(
                                   duration: rc.recordedDuration.inSeconds,
-                                  voiceNote: tdlib.InputFileLocal(path: path),
+                                  voiceNote:
+                                      tdlib.InputFileLocal(path: pathOpus),
                                   waveform: base64Encode(
                                     byteWf
                                         .map((e) => int.parse(e, radix: 2))
