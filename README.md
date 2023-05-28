@@ -14,37 +14,42 @@ in Dart (still using the TDLib :p)
     - [x] Main folder
     - [x] Pinned chats
     - [ ] Archive
-    - [ ] Folders **(not planned to be done)**
+    - [ ] Folders
 - [ ] **Message rendering**
-    - [x] Text *(text formatting isn't supported)*
+    - [x] Text *(text formatting isn't supported yet)*
     - [x] Photo *(with photo viewer! :p)*
     - [x] Video *(thumbnail + video player)*
-    - [x] Stickers *(both video and photo ones. TGS stickers show up only thumbnail!)*
-    - [x] GIFs *(Not all previews are working)*
+    - [x] Stickers
+    - [x] GIFs
     - [x] Voice notes
     - [ ] Video notes (working on it)
+- [ ] **Message sending**
+    - [x] Text *(text formatting isn't supported)*
+    - [x] Stickers
+    - [x] GIFs
+    - [x] Voice notes
+    - [ ] Photos
 - [ ] **Calls**
     - [ ] Call menu
     - [ ] Call base logic
-- [ ] **Menus**
+- [x] **Menus**
     - [x] Home
     - [x] Chat
     - [x] Video player
     - [x] Photo viewer
-    - [ ] User info
-    - [ ] Chat info
-    - [ ] Call menu
+    - [x] User info
+    - [x] Chat info
+    - [x] Voice, text, sticker, GIF message send pages
     - [x] Settings
 - **Misc**
-    - [x] Switch to `package:tdlib` rather than `package:telegram_client`
     - [x] Data saving between app restarts
+    - [x] In-app clock!!1!1!
     - [ ] Notifications
 
 ## Compatibility
 * Samsung Galaxy Watch 4/5 (Wear OS 3)
-  * Runs very good, but sometimes can stutter
 * Oppo Watch (Wear OS 2)
-  * Very strange unpredictable behaviour *(on v0.1.0, idk what's happening on v0.2.0)*
+  * Runs very good, but sometimes can stutter
 * TicWatch Pro 3 Ultra (Wear OS 2)
   * Some instabilities in visualization of videos
 
