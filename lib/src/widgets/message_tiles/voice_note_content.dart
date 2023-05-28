@@ -130,6 +130,7 @@ class _MessageVoiceNoteContentState extends State<MessageVoiceNoteContent> {
                 if (player.playerState.isPlaying) {
                   player.stopPlayer();
                   player.dispose();
+                  _t?.cancel();
                 } else if (player.playerState.isStopped) {
                   setState(() {
                     loading = true;
