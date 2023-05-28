@@ -229,7 +229,7 @@ class MessageBaseTile extends ConsumerWidget {
       title = "${title.substring(0, 15)}...";
     }
 
-    bool isFakeMessage = isInternalMessageId(msg.id);
+    bool isFakeMessage = isInternalMessageId(msg.id) && msg.isOutgoing;
 
     return VisibilityDetector(
       key: UniqueKey(),
