@@ -52,6 +52,10 @@ in Dart (still using the TDLib :p)
   * Runs very good, but sometimes can stutter
 * TicWatch Pro 3 Ultra (Wear OS 2)
   * Some instabilities in visualization of videos
+* Pixel Watch
+  * Occasional stuttering
+  * Some instabilities in visualization of videos (crashes, stuttering)
+  * Scrolling with crown is buggy
 
 Feel free to test on other devices and post an issue if something wrong happens :p
 
