@@ -69,7 +69,7 @@ You can download the latest built version from [releases page](https://github.co
   ```
 * Go into HandyGram directory
   ```sh
-  cd handygram
+  cd HandyGram
   ```
 * Copy/paste and rename `lib/src/telegram/api_config.dart.sample` to `api_config.dart` (this is ignored in `.gitignore` so it's ok to make commits with personal keys)
   ```sh
