@@ -67,6 +67,10 @@ You can download the latest built version from [releases page](https://github.co
   ```sh
   git clone https://github.com/HandyGram/HandyGram.git
   ```
+* Go into HandyGram directory
+  ```sh
+  cd handygram
+  ```
 * Copy/paste and rename `lib/src/telegram/api_config.dart.sample` to `api_config.dart` (this is ignored in `.gitignore` so it's ok to make commits with personal keys)
   ```sh
   cp lib/src/telegram/api_config.dart.sample lib/src/telegram/api_config.dart
@@ -74,10 +78,6 @@ You can download the latest built version from [releases page](https://github.co
 * To obtain API keys, go to [My Telegram](https://my.telegram.org) and log in
 * In [My Telegram](https://my.telegram.org), copy value of `App api_id` and paste for value of `apiId` in `api_config.dart`
 * In [My Telegram](https://my.telegram.org), copy value of `App api_hash` and paste for value of `apiHash` in `api_config.dart`
-* Go into HandyGram directory
-  ```sh
-  cd handygram
-  ```
 * Build HandyGram as apk
   ```sh
   flutter build apk
