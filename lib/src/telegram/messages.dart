@@ -1086,14 +1086,15 @@ Future<void> messagesHandler(tdlib.TdObject object, TgSession session) async {
   }
 }
 
-bool isInternalMessageId(int id) => (id % 1048576) != 0;
+const int telegramIdDivider = 1048576;
+bool isInternalMessageId(int id) => (id % telegramIdDivider) != 0;
 
 int convertMessageId(int id) {
-  if ((id % 1048576) == 0) {
+  if (isInternalMessageId(id)) {
     // TDLib message ID -> server one
-    return id ~/ 1048576;
+    return id ~/ telegramIdDivider;
   } else {
     // Server message ID -> TDLib one
-    return id * 1048576;
+    return id * telegramIdDivider;
   }
 }

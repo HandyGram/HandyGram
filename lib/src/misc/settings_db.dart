@@ -63,6 +63,13 @@ class SettingsStorage {
     _settingsBox.put("settings", _raw);
   }
 
+  /// Force use of UI for round watch
+  bool get useRoundAdaptedUI => _raw["useRoundAdaptedUI"] ?? true;
+  set useRoundAdaptedUI(bool value) {
+    _raw["useRoundAdaptedUI"] = value;
+    _settingsBox.put("settings", _raw);
+  }
+
   /*
    * Developer
    */
@@ -78,6 +85,19 @@ class SettingsStorage {
     _raw["verbose"] = value;
     _settingsBox.put("settings", _raw);
   }
+
+  /*
+   * Internal
+   */
+
+  /// Show first watch shape setup
+  bool get showWatchShapeChooser => _raw["showWatchShapeChooser"] ?? true;
+  set showWatchShapeChooser(bool value) {
+    _raw["showWatchShapeChooser"] = value;
+    _settingsBox.put("settings", _raw);
+  }
+
+  int lastClientId = -1;
 
   static const Map<int, Map<String, dynamic>> _defaultSettings = {
     // There were no settings before 0.3.0
@@ -104,6 +124,15 @@ class SettingsStorage {
       "textScale": 1.1,
       "clockEnabled": true,
     },
+
+    // 0.4.2
+    420: {
+      // UI
+      "useRoundAdaptedUI": true,
+
+      // Internal
+      "showWatchShapeChooser": true,
+    },
   };
 
   Future<void> _initializeBox(String prevVersion) async {
@@ -129,8 +158,6 @@ class SettingsStorage {
       await _initializeBox(prev["lastUpdated"]);
     }
   }
-
-  int lastClientId = -1;
 
   Future<void> initialize() async {
     _settingsBox = await Hive.openBox<Map>(

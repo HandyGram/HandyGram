@@ -6,8 +6,8 @@ import 'package:handygram/src/misc/utils.dart';
 import 'package:handygram/src/telegram/messages.dart';
 import 'package:handygram/src/telegram/session.dart';
 import 'package:handygram/src/widgets/message_tiles/wrapper.dart';
+import 'package:handygram/src/widgets/rotary_wrapper.dart';
 import 'package:mutex/mutex.dart';
-import 'package:rotary_scrollbar/rotary_scrollbar.dart';
 
 // TODO: fix jumps on new messages
 class ChatPage extends ConsumerStatefulWidget {
@@ -62,11 +62,13 @@ class _ChatPageState extends ConsumerState<ChatPage> {
   @override
   void dispose() {
     session.functions.closeChat(chatId);
+    session.natives.stopFastNetwork();
     super.dispose();
   }
 
   @override
   void initState() {
+    session.natives.requestFastNetwork();
     chatId = widget.args["id"];
     SchedulerBinding.instance.addPostFrameCallback(
       (timeStamp) async {
@@ -131,11 +133,8 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     final List<TgMessage> list = msgs.messages.reversed.toList();
 
     return Scaffold(
-      body: RotaryScrollWrapper(
-        rotaryScrollbar: RotaryScrollbar(
-          controller: _scrCont,
-          width: 3,
-        ),
+      body: HandyRotaryScrollWrapper(
+        controller: _scrCont,
         child: Column(
           children: [
             Expanded(
@@ -201,7 +200,8 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: IconButton(
-                          padding: const EdgeInsets.all(2),
+                          padding:
+                              EdgeInsets.all(session.isSquareScreen ? 0 : 2),
                           icon: const Icon(
                             Icons.navigate_before,
                             shadows: [
@@ -219,7 +219,9 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                     ),
                   SizedBox.expand(
                     child: Align(
-                      alignment: Alignment.bottomCenter,
+                      alignment: session.isSquareScreen
+                          ? Alignment.bottomRight
+                          : Alignment.bottomCenter,
                       child: IconButton(
                         padding: const EdgeInsets.all(2),
                         icon: const Icon(

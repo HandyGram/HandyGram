@@ -36,6 +36,19 @@ class _SettingsPageState extends State<SettingsPage> {
                   "Failed to restore settings database. Your settings were reset.",
             ),
           const SettingsSection(title: "Interface", icon: Icons.visibility),
+          if (!session.isWearable)
+            SettingsSwitch(
+              onChanged: (v) {
+                setState(() {
+                  settingsStorage.useRoundAdaptedUI =
+                      !settingsStorage.useRoundAdaptedUI;
+                });
+              },
+              title: "Use round watch UI",
+              description:
+                  "Change the app layout between square and round watch adapted ones. Takes full effect after restart.",
+              value: settingsStorage.useRoundAdaptedUI,
+            ),
           SettingsSwitch(
             onChanged: (v) {
               setState(() {

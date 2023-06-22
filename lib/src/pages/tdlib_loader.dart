@@ -50,8 +50,10 @@ class _TDLibLoaderState extends State<TDLibLoader> {
   }
 
   void _checkLogin() {
-    session.isLoggedIn().then((value) {
+    session.isLoggedIn().then((value) async {
       if (value == true) {
+        await session.chatsInfoCache.finishInit();
+        // ignore: use_build_context_synchronously
         Navigator.pushReplacementNamed(context, "/home");
         session.functions.getChatList();
       } else if (value == false) {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:handygram/src/telegram/session.dart';
-import 'package:rotary_scrollbar/rotary_scrollbar.dart';
+import 'package:handygram/src/widgets/rotary_wrapper.dart';
 
 class ScalingList extends StatefulWidget {
   const ScalingList({Key? key, required this.children}) : super(key: key);
@@ -22,42 +22,31 @@ class _ScalingListState extends State<ScalingList> {
 
   @override
   Widget build(BuildContext context) {
-    if (session.isSquareScreen) {
-      return Padding(
-        padding: const EdgeInsets.all(10),
-        child: StretchingOverscrollIndicator(
-          axisDirection: scrollController.positions.isEmpty
-              ? AxisDirection.down
-              : scrollController.position.axisDirection,
-          child: ListView(
-            controller: scrollController,
-            padding: EdgeInsets.all(session.isSquareScreen ? 0 : 20),
-            // Center everything
-            children: widget.children.map((e) => Center(child: e)).toList(),
-          ),
-        ),
-      );
-    }
     return Padding(
-      padding: const EdgeInsets.all(10),
-      child: RotaryScrollWrapper(
-        rotaryScrollbar: RotaryScrollbar(
-          controller: scrollController,
-          width: 4,
-          autoHideDuration: const Duration(seconds: 1),
-        ),
+      padding: session.isSquareScreen
+          ? const EdgeInsets.only(
+              left: 5,
+              right: 5,
+            )
+          : const EdgeInsets.all(10),
+      child: HandyRotaryScrollWrapper(
+        controller: scrollController,
         child: StretchingOverscrollIndicator(
           axisDirection: scrollController.positions.isEmpty
               ? AxisDirection.down
               : scrollController.position.axisDirection,
           child: ListView(
             controller: scrollController,
-            padding: EdgeInsets.only(
-              left: 20,
-              right: 20,
-              bottom: MediaQuery.of(context).size.width / 2,
-              top: MediaQuery.of(context).size.width / 4,
-            ),
+            padding: session.isSquareScreen
+                ? EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height / 5,
+                  )
+                : EdgeInsets.only(
+                    left: 20,
+                    right: 20,
+                    bottom: MediaQuery.of(context).size.width / 2,
+                    top: MediaQuery.of(context).size.width / 4,
+                  ),
             // Center everything
             children: widget.children.map((e) => Center(child: e)).toList(),
           ),
@@ -92,42 +81,29 @@ class _ScalingListBuilderState extends State<ScalingListBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    if (session.isSquareScreen) {
-      return Padding(
-        padding: const EdgeInsets.all(10),
-        child: StretchingOverscrollIndicator(
-          axisDirection: scrollController.positions.isEmpty
-              ? AxisDirection.down
-              : scrollController.position.axisDirection,
-          child: ListView.builder(
-            controller: scrollController,
-            padding: EdgeInsets.all(session.isSquareScreen ? 0 : 20),
-            itemCount: widget.itemCount,
-            itemBuilder: widget.itemBuilder,
-          ),
-        ),
-      );
-    }
     return Padding(
-      padding: const EdgeInsets.all(10),
-      child: RotaryScrollWrapper(
-        rotaryScrollbar: RotaryScrollbar(
-          controller: scrollController,
-          width: 4,
-          autoHideDuration: const Duration(seconds: 1),
-        ),
+      padding: session.isSquareScreen
+          ? const EdgeInsets.only(
+              left: 5,
+              right: 5,
+            )
+          : const EdgeInsets.all(10),
+      child: HandyRotaryScrollWrapper(
+        controller: scrollController,
         child: StretchingOverscrollIndicator(
           axisDirection: scrollController.positions.isEmpty
               ? AxisDirection.down
               : scrollController.position.axisDirection,
           child: ListView.builder(
             controller: scrollController,
-            padding: EdgeInsets.only(
-              left: 20,
-              right: 20,
-              bottom: MediaQuery.of(context).size.width / 2,
-              top: MediaQuery.of(context).size.width / 4,
-            ),
+            padding: session.isSquareScreen
+                ? EdgeInsets.zero
+                : EdgeInsets.only(
+                    left: 20,
+                    right: 20,
+                    bottom: MediaQuery.of(context).size.width / 2,
+                    top: MediaQuery.of(context).size.width / 4,
+                  ),
             itemCount: widget.itemCount,
             itemBuilder: widget.itemBuilder,
           ),

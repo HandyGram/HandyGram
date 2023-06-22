@@ -32,7 +32,7 @@ dependencies:
   hive: ^2.2.3
   async: ^2.10.0
   ffi: ^2.0.1
-  audioplayers: ^4.0.1
+  audioplayers: ^4.1.0
   scrollview_observer: ^1.10.1
   positioned_scroll_observer: ^2.2.0
   google_fonts: ^4.0.4
@@ -41,6 +41,9 @@ dependencies:
   lottie: ^2.3.2
   workmanager: ^0.5.1
   audio_waveforms: ^1.0.4
+  battery_info: ^1.1.1
+  wearable_rotary: ^2.0.1
+  vibration: ^1.7.7
 
 dev_dependencies:
   flutter_test:

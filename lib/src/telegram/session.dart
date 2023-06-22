@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:handygram/src/misc/log.dart';
+import 'package:handygram/src/misc/native_utils.dart';
 import 'package:handygram/src/misc/settings_db.dart';
 import 'dart:io';
 
@@ -85,6 +86,9 @@ class TgSession {
   MessageSendingLock sendLock = MessageSendingLock();
   late ChangeNotifierProvider<MessageSendingLock> sendLockP;
 
+  HandyNatives natives = HandyNatives();
+  late ChangeNotifierProvider<HandyNatives> nativesP;
+
   late final bool isSquareScreen;
 
   // Functions
@@ -114,21 +118,9 @@ class TgSession {
   Future? hiveFuture;
   final Mutex _m = Mutex();
   TgSessionUpdates updStats = TgSessionUpdates();
+  late final bool isWearable;
 
   Future<void> _init() async {
-    chatLists = await TgChatLists.initialize();
-    chatsInfoCache = await TgChatInfoCache.initialize();
-    usersInfoCache = await TgUserInfoCache.initialize();
-    usersFullInfoCache = await TgUserFullInfoCache.initialize();
-    chatListsP = ChangeNotifierProvider((_) => chatLists);
-    chatsInfoCacheP = ChangeNotifierProvider((_) => chatsInfoCache);
-    usersInfoCacheP = ChangeNotifierProvider((_) => usersInfoCache);
-    usersFullInfoCacheP = ChangeNotifierProvider((_) => usersFullInfoCache);
-    supergroupsP = ChangeNotifierProvider((_) => supergroups);
-    supergroupsFullInfoP = ChangeNotifierProvider((_) => supergroupsFullInfo);
-    basicGroupsP = ChangeNotifierProvider((_) => basicGroups);
-    basicGroupsFullInfoP = ChangeNotifierProvider((_) => basicGroupsFullInfo);
-    sendLockP = ChangeNotifierProvider((_) => sendLock);
     _glue = await TdlibGlue.initialize();
     // Setup update loop with wrappers.
     _glue.notifier = (tdlib.TdObject object) async {
@@ -151,13 +143,46 @@ class TgSession {
     };
     functions = TelegramFunctions._(_glue);
 
-    String shape = await Wear.instance.getShape();
-    isSquareScreen = shape != "round";
+    chatLists = await TgChatLists.initialize();
+    chatsInfoCache = await TgChatInfoCache.initialize();
+    usersInfoCache = await TgUserInfoCache.initialize();
+    usersFullInfoCache = await TgUserFullInfoCache.initialize();
+    chatListsP = ChangeNotifierProvider((_) => chatLists);
+    chatsInfoCacheP = ChangeNotifierProvider((_) => chatsInfoCache);
+    usersInfoCacheP = ChangeNotifierProvider((_) => usersInfoCache);
+    usersFullInfoCacheP = ChangeNotifierProvider((_) => usersFullInfoCache);
+    supergroupsP = ChangeNotifierProvider((_) => supergroups);
+    supergroupsFullInfoP = ChangeNotifierProvider((_) => supergroupsFullInfo);
+    basicGroupsP = ChangeNotifierProvider((_) => basicGroups);
+    basicGroupsFullInfoP = ChangeNotifierProvider((_) => basicGroupsFullInfo);
+    sendLockP = ChangeNotifierProvider((_) => sendLock);
+    nativesP = ChangeNotifierProvider((_) => natives);
+
+    isWearable = await natives.checkIsWearOS() ?? false;
+    String? shape;
+    if (isWearable) {
+      try {
+        shape = await Wear.instance.getShape();
+      } catch (e, st) {
+        l.e("WearShape", "$e\n$st");
+      }
+    }
+
+    if (shape != null) {
+      isSquareScreen = shape != "round";
+
+      // We can get screen shape with WearOS APIs.
+      if (settingsStorage.showWatchShapeChooser) {
+        settingsStorage.showWatchShapeChooser = false;
+      }
+    } else {
+      isSquareScreen = !settingsStorage.useRoundAdaptedUI;
+    }
   }
 
   // Init
   static late tdlib.SetTdlibParameters options;
-  static String appVersion = "0.4.0";
+  static String appVersion = "0.4.2";
   static String cacheDir = "";
 
   void kill() {

@@ -24,6 +24,7 @@ class _MessageTilePhotoContentState extends State<MessageTilePhotoContent> {
   int selSize = 0;
   Size? photoSize;
   CancelableOperation? loadF;
+  bool built = false;
 
   @override
   void initState() {
@@ -36,18 +37,15 @@ class _MessageTilePhotoContentState extends State<MessageTilePhotoContent> {
       selSize = 1;
     }
 
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      loadF = CancelableOperation.fromFuture(
-        TgImage(
-          id: content.photo.sizes[selSize].photo.remote.id,
-          type: const tdlib.FileTypePhoto(),
-        ).load().then((i) {
-          setState(() {
-            imageProvider = i;
-          });
-        }),
-      );
-    });
+    loadF = CancelableOperation.fromFuture(
+      TgImage(
+        id: content.photo.sizes[selSize].photo.remote.id,
+        type: const tdlib.FileTypePhoto(),
+      ).load().then((i) {
+        imageProvider = i;
+        if (built) setState(() {});
+      }),
+    );
   }
 
   @override
@@ -58,6 +56,7 @@ class _MessageTilePhotoContentState extends State<MessageTilePhotoContent> {
 
   @override
   Widget build(BuildContext context) {
+    built = true;
     var content = widget.msg.content as TgPhotoMessageContent;
     photoSize ??= downscaleProperly(
       Size(
@@ -83,7 +82,7 @@ class _MessageTilePhotoContentState extends State<MessageTilePhotoContent> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 250),
+              duration: const Duration(milliseconds: 50),
               child: imageProvider == null
                   ? const LoadingContainer()
                   : GestureDetector(

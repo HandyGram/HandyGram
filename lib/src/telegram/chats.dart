@@ -200,9 +200,7 @@ class TgChatFilter {
     }
     if (_filter.excludeMuted) {
       entries.removeWhere((e) {
-        var s = session.chatsInfoCache[e.id]?.notificationSettings;
-        if (s == null) return false;
-        // TODO: handle muted by default chats
+        var s = session.chatsInfoCache.getNotificationSettings(e.id);
         return s.muteFor > 0;
       });
     }
@@ -421,26 +419,139 @@ String messageContentToString(tdlib.MessageContent content) =>
       _ => "Unknown message",
     };
 
+enum _NotiScope {
+  private,
+  channel,
+  group,
+}
+
+class MergedNotiSettings {
+  final bool disableMentionNotifications;
+  final bool disablePinnedMessageNotifications;
+  final bool showPreview;
+  final int muteFor;
+
+  MergedNotiSettings._i(
+    this.disableMentionNotifications,
+    this.disablePinnedMessageNotifications,
+    this.showPreview,
+    this.muteFor,
+  );
+
+  factory MergedNotiSettings(
+    tdlib.ScopeNotificationSettings scope,
+    tdlib.ChatNotificationSettings chat,
+  ) {
+    bool disableMentionNotifications =
+        chat.useDefaultDisableMentionNotifications
+            ? scope.disableMentionNotifications
+            : chat.disableMentionNotifications;
+    bool disablePinnedMessageNotifications =
+        chat.useDefaultDisablePinnedMessageNotifications
+            ? scope.disablePinnedMessageNotifications
+            : chat.disablePinnedMessageNotifications;
+    bool showPreview =
+        chat.useDefaultShowPreview ? scope.showPreview : chat.showPreview;
+    int muteFor = chat.useDefaultMuteFor ? scope.muteFor : chat.muteFor;
+    return MergedNotiSettings._i(
+      disableMentionNotifications,
+      disablePinnedMessageNotifications,
+      showPreview,
+      muteFor,
+    );
+  }
+}
+
 // Saves all chats info, manages it and gives us
 // ability to synchronously (maybe)get chat info.
 class TgChatInfoCache extends ChangeNotifier {
   final Map<int, tdlib.Chat> _chats = {};
   final List<int> _loading = [];
+  late final Map<_NotiScope, tdlib.ScopeNotificationSettings?> _scopeNS;
+
+  Future<void> finishInit() async {
+    _scopeNS = {
+      _NotiScope.channel: await session.functions.getScopeNotificationSettings(
+        const tdlib.NotificationSettingsScopeChannelChats(),
+      ),
+      _NotiScope.group: await session.functions.getScopeNotificationSettings(
+        const tdlib.NotificationSettingsScopeGroupChats(),
+      ),
+      _NotiScope.private: await session.functions.getScopeNotificationSettings(
+        const tdlib.NotificationSettingsScopePrivateChats(),
+      ),
+    };
+  }
 
   TgChatInfoCache._i();
 
-  Future<void> _asyncInit() async {
-    // _chats = await SuperBox.initialize<int, tdlib.Chat>(
-    //   "cache-chatinfo",
-    //   (json) => tdlib.Chat.fromJson(json),
-    //   (value) => Map<String, dynamic>.from(value.toJson()),
-    // );
-  }
-
   static Future<TgChatInfoCache> initialize() async {
     TgChatInfoCache cache = TgChatInfoCache._i();
-    await cache._asyncInit();
     return cache;
+  }
+
+  MergedNotiSettings getNotificationSettings(int id) {
+    var chat = _chats[id];
+    if (chat == null) throw "No such chat";
+
+    _NotiScope chatScope = switch (chat.type) {
+      tdlib.ChatTypePrivate() => _NotiScope.private,
+      tdlib.ChatTypeSecret() => throw "secret chats not supported",
+      tdlib.ChatTypeBasicGroup() => _NotiScope.group,
+      tdlib.ChatTypeSupergroup(isChannel: var isCh) =>
+        isCh ? _NotiScope.channel : _NotiScope.group,
+    };
+
+    var scope = _scopeNS[chatScope];
+    if (scope == null) throw "Internal error";
+
+    return MergedNotiSettings(
+      scope,
+      chat.notificationSettings,
+    );
+  }
+
+  int getUnreadCountForChat(tdlib.Chat chat, [bool countForTotalList = false]) {
+    MergedNotiSettings settings = getNotificationSettings(chat.id);
+
+    // Skip muted chats
+    if (settings.muteFor > 0) return 0;
+
+    // Check for any mentions
+    if (chat.unreadMentionCount > 0 && !settings.disableMentionNotifications) {
+      return chat.unreadMentionCount;
+    }
+
+    // We count only one unread message from private chat
+    if (chat.type is tdlib.ChatTypePrivate &&
+        chat.unreadCount > 0 &&
+        countForTotalList) {
+      return 1;
+    }
+
+    // Count chats using "mark as unread"
+    if (chat.isMarkedAsUnread) return 1;
+
+    // Count all messages from unmuted non-personal chats.
+    return chat.unreadCount;
+  }
+
+  int get unreadCount {
+    int total = 0;
+    for (var c in session.chatLists.main.chats) {
+      total += _chats[c.id]?.unreadCount ?? 0;
+    }
+    return total;
+  }
+
+  int get unreadMentionCount {
+    int total = 0;
+    for (var c in session.chatLists.main.chats) {
+      var chat = _chats[c.id];
+      if (chat == null) continue;
+      total += getUnreadCountForChat(chat, true);
+    }
+    return total;
   }
 
   void add(tdlib.Chat chat) {
@@ -455,33 +566,66 @@ class TgChatInfoCache extends ChangeNotifier {
     int? lastReadOutboxMessageId,
     int? lastReadInboxMessageId,
     int? unreadCount,
+    tdlib.ChatNotificationSettings? notificationSettings,
     tdlib.ChatPhotoInfo? photo,
+    bool? isMarkedAsUnread,
+    tdlib.ChatPermissions? permissions,
+    int? unreadMentionCount,
+    int? unreadReactionCount,
+    String? title,
   }) async {
-    if (_chats.containsKey(id)) {
-      if (draft != null || lastMessage != null) {
-        if (lastMessage != null) {
-          _chats[id] = _chats[id]!.copyWith(
-            lastMessage: lastMessage,
-          );
-        }
+    if (!_chats.containsKey(id)) {
+      return;
+    }
+
+    if (draft != null || lastMessage != null) {
+      if (lastMessage != null) {
         _chats[id] = _chats[id]!.copyWith(
-          draftMessage: draft,
-        );
-      } else if (lastReadOutboxMessageId != null) {
-        _chats[id] = _chats[id]!.copyWith(
-          lastReadOutboxMessageId: lastReadOutboxMessageId,
-        );
-      } else if (lastReadInboxMessageId != null) {
-        _chats[id] = _chats[id]!.copyWith(
-          unreadCount: unreadCount,
-          lastReadInboxMessageId: lastReadInboxMessageId,
-        );
-      } else if (photo != null) {
-        _chats[id] = _chats[id]!.copyWith(
-          photo: photo,
+          lastMessage: lastMessage,
         );
       }
+      _chats[id] = _chats[id]!.copyWith(
+        draftMessage: draft,
+      );
+    } else if (lastReadOutboxMessageId != null) {
+      _chats[id] = _chats[id]!.copyWith(
+        lastReadOutboxMessageId: lastReadOutboxMessageId,
+      );
+    } else if (lastReadInboxMessageId != null) {
+      _chats[id] = _chats[id]!.copyWith(
+        unreadCount: unreadCount,
+        lastReadInboxMessageId: lastReadInboxMessageId,
+      );
+    } else if (photo != null) {
+      _chats[id] = _chats[id]!.copyWith(
+        photo: photo,
+      );
+    } else if (notificationSettings != null) {
+      _chats[id] = _chats[id]!.copyWith(
+        notificationSettings: notificationSettings,
+      );
+    } else if (isMarkedAsUnread != null) {
+      _chats[id] = _chats[id]!.copyWith(
+        isMarkedAsUnread: isMarkedAsUnread,
+      );
+    } else if (permissions != null) {
+      _chats[id] = _chats[id]!.copyWith(
+        permissions: permissions,
+      );
+    } else if (unreadMentionCount != null) {
+      _chats[id] = _chats[id]!.copyWith(
+        unreadMentionCount: unreadMentionCount,
+      );
+    } else if (unreadReactionCount != null) {
+      _chats[id] = _chats[id]!.copyWith(
+        unreadReactionCount: unreadReactionCount,
+      );
+    } else if (title != null) {
+      _chats[id] = _chats[id]!.copyWith(
+        title: title,
+      );
     }
+
     notifyListeners();
   }
 
@@ -897,6 +1041,39 @@ Future<void> chatsHandler(tdlib.TdObject object, TgSession session) async {
         mainChatListPosition: var mainPos,
       ):
       session.chatLists.updateFilters(infos, mainPos);
+      break;
+    case tdlib.UpdateChatIsMarkedAsUnread(
+        chatId: var cid,
+        isMarkedAsUnread: var imau,
+      ):
+      session.chatsInfoCache.update(cid, isMarkedAsUnread: imau);
+      break;
+    case tdlib.UpdateChatNotificationSettings(
+        chatId: var cid,
+        notificationSettings: var ns,
+      ):
+      session.chatsInfoCache.update(cid, notificationSettings: ns);
+      break;
+    case tdlib.UpdateChatPermissions(chatId: var cid, permissions: var p):
+      session.chatsInfoCache.update(cid, permissions: p);
+      break;
+    case tdlib.UpdateChatTitle(
+        chatId: var cid,
+        title: var t,
+      ):
+      session.chatsInfoCache.update(cid, title: t);
+      break;
+    case tdlib.UpdateChatUnreadMentionCount(
+        chatId: var cid,
+        unreadMentionCount: var umc,
+      ):
+      session.chatsInfoCache.update(cid, unreadMentionCount: umc);
+      break;
+    case tdlib.UpdateChatUnreadReactionCount(
+        chatId: var cid,
+        unreadReactionCount: var urc,
+      ):
+      session.chatsInfoCache.update(cid, unreadReactionCount: urc);
       break;
     default:
       return;
