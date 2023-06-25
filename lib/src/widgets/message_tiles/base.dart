@@ -210,6 +210,9 @@ class MessageBaseTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    bool noBg = msg.type == TgMessageType.sticker ||
+        msg.type == TgMessageType.videoNote;
+
     String? ptitle;
     switch (msg.senderId) {
       case tdlib.MessageSenderChat(chatId: var cid):
@@ -257,7 +260,8 @@ class MessageBaseTile extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           mainAxisSize: MainAxisSize.max,
           children: [
-            if (!msg.isOutgoing) const SizedBox(width: 15),
+            if (!msg.isOutgoing)
+              SizedBox(width: session.isSquareScreen ? 5 : 15),
             if (!msg.isOutgoing && !small && !settingsStorage.noProfilePhotos)
               SizedBox(
                 height: 25,
@@ -281,29 +285,25 @@ class MessageBaseTile extends ConsumerWidget {
                   ),
                 ),
               )
-            else if ((msg.isOutgoing || small) &&
-                !settingsStorage.noProfilePhotos)
+            else if (!settingsStorage.noProfilePhotos &&
+                ((msg.isOutgoing && !session.isSquareScreen) || small))
               const SizedBox(
                 height: 25,
                 width: 25,
               ),
-            const SizedBox(width: 10),
+            SizedBox(width: session.isSquareScreen ? 5 : 10),
             Flexible(
               child: Container(
-                padding: msg.type == TgMessageType.sticker
-                    ? null
-                    : const EdgeInsets.all(5),
+                padding: noBg ? null : const EdgeInsets.all(5),
                 decoration: BoxDecoration(
-                  color: msg.type == TgMessageType.sticker
+                  color: noBg
                       ? null
                       : isFakeMessage
                           ? Theme.of(context).colorScheme.background
                           : !msg.isOutgoing
                               ? someoneMessageColor
                               : myMessageColor,
-                  borderRadius: msg.type == TgMessageType.sticker
-                      ? null
-                      : BorderRadius.circular(10),
+                  borderRadius: noBg ? null : BorderRadius.circular(10),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -403,7 +403,7 @@ class MessageBaseTile extends ConsumerWidget {
                 ),
               ),
             ),
-            const SizedBox(width: 10),
+            SizedBox(width: session.isSquareScreen ? 5 : 10),
             if (msg.isOutgoing && !small && !settingsStorage.noProfilePhotos)
               SizedBox(
                 height: 25,
@@ -416,13 +416,14 @@ class MessageBaseTile extends ConsumerWidget {
                   messageSender: msg.senderId,
                 ),
               )
-            else if ((!msg.isOutgoing || small) &&
-                !settingsStorage.noProfilePhotos)
+            else if (!settingsStorage.noProfilePhotos &&
+                ((!msg.isOutgoing && !session.isSquareScreen) || small))
               const SizedBox(
                 height: 25,
                 width: 25,
               ),
-            if (msg.isOutgoing) const SizedBox(width: 15),
+            if (msg.isOutgoing)
+              SizedBox(width: session.isSquareScreen ? 5 : 15),
           ],
         ),
       ),

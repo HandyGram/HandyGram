@@ -95,10 +95,6 @@ Future<Map<String, dynamic>> getChatInfoForChat(int id, [int? cid]) async {
 
 Future<Map<String, dynamic>> _getChatInfo(
     int id, bool? isUser, tdlib.MessageSender? sender) async {
-  if (session.chatPhotos.containsKey(id)) {
-    return session.chatPhotos[id]!;
-  }
-
   Map<String, dynamic> info;
   switch (sender) {
     case tdlib.MessageSenderChat(chatId: var cid):
@@ -154,21 +150,34 @@ class _ChatImageState extends State<ChatImage> {
   void initState() {
     super.initState();
     if (image == null) {
-      loaderF = CancelableOperation.fromFuture(
-        _getChatInfo(id, widget.isUser, widget.messageSender).then(
-          (val) => setState(() {
-            title ??= val["title"];
-            image = val["photo"] != null
-                ? Image(
-                    image: val["photo"],
-                    fit: BoxFit.cover,
-                    key: ValueKey<String>(val["photo_id"]),
-                  )
-                : null;
-            _isLoading = false;
-          }),
-        ),
-      );
+      if (session.chatPhotos.containsKey(id)) {
+        var val = session.chatPhotos[id]!;
+        title ??= val["title"];
+        image = val["photo"] != null
+            ? Image(
+                image: val["photo"],
+                fit: BoxFit.cover,
+                key: ValueKey<String>(val["photo_id"]),
+              )
+            : null;
+        _isLoading = false;
+      } else {
+        loaderF = CancelableOperation.fromFuture(
+          _getChatInfo(id, widget.isUser, widget.messageSender).then(
+            (val) => setState(() {
+              title ??= val["title"];
+              image = val["photo"] != null
+                  ? Image(
+                      image: val["photo"],
+                      fit: BoxFit.cover,
+                      key: ValueKey<String>(val["photo_id"]),
+                    )
+                  : null;
+              _isLoading = false;
+            }),
+          ),
+        );
+      }
     }
   }
 
@@ -184,7 +193,7 @@ class _ChatImageState extends State<ChatImage> {
         child: Stack(
           children: [
             AnimatedSwitcher(
-              duration: const Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: 50),
               child: widget.id == 0
                   ? Icon(
                       Icons.error,

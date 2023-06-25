@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:handygram/src/misc/settings_db.dart';
 
 class PhotoViewer extends StatelessWidget {
   const PhotoViewer({super.key, required this.photo});
@@ -25,18 +24,17 @@ class PhotoViewer extends StatelessWidget {
               ),
             ),
           ),
-          if (!settingsStorage.backButtonDisabled)
-            SizedBox.expand(
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: IconButton(
-                  icon: const Icon(Icons.close),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
+          SizedBox.expand(
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: IconButton(
+                icon: const Icon(Icons.close),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
               ),
             ),
+          ),
         ],
       ),
     );

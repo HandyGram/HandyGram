@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:handygram/src/misc/settings_db.dart';
@@ -137,7 +138,7 @@ class _MessageMenuPageState extends State<MessageMenuPage> {
 
                             Navigator.push(
                               context,
-                              MaterialPageRoute(
+                              CupertinoPageRoute(
                                 builder: (context) => ReactionsChooser(
                                   chosen:
                                       chosen?.type as tdlib.ReactionTypeEmoji?,

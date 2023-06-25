@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:async/async.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:handygram/src/misc/utils.dart';
 import 'package:handygram/src/telegram/images.dart';
@@ -140,9 +141,11 @@ class _MessageTileVideoContentState extends State<MessageTileVideoContent> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
+                        CupertinoPageRoute(
                           builder: (_) => MiniVideoPlayer(
-                            tgvideo: content.video,
+                            video: content.video.video,
+                            width: content.video.width,
+                            height: content.video.height,
                           ),
                         ),
                       );

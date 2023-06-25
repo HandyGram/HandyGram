@@ -102,8 +102,8 @@ class ChatTile extends ConsumerWidget {
                   width: 40,
                   child: ChatImage(
                     key: ValueKey<int>(entry.id),
-                    id: entry.id,
-                    isUser: false,
+                    id: type is tdlib.ChatTypePrivate ? type.userId : entry.id,
+                    isUser: type is tdlib.ChatTypePrivate,
                   ),
                 ),
                 AnimatedSwitcher(

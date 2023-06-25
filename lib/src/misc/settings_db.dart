@@ -1,4 +1,6 @@
 import 'package:handygram/src/misc/log.dart';
+import 'package:handygram/src/misc/utils.dart';
+import 'package:handygram/src/telegram/session.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -48,7 +50,7 @@ class SettingsStorage {
   }
 
   /// Small messages and other UI elements font
-  double get textScale => _raw["textScale"] ?? 1.0;
+  double get textScale => _raw["textScale"] ?? 1.1;
   set textScale(double value) {
     _raw["textScale"] = value;
     _settingsBox.put("settings", _raw);
@@ -58,6 +60,13 @@ class SettingsStorage {
   bool get clockEnabled => _raw["clockEnabled"] ?? true;
   set clockEnabled(bool value) {
     _raw["clockEnabled"] = value;
+    _settingsBox.put("settings", _raw);
+  }
+
+  /// Force use of UI for round watch
+  bool get useRoundAdaptedUI => _raw["useRoundAdaptedUI"] ?? true;
+  set useRoundAdaptedUI(bool value) {
+    _raw["useRoundAdaptedUI"] = value;
     _settingsBox.put("settings", _raw);
   }
 
@@ -77,7 +86,78 @@ class SettingsStorage {
     _settingsBox.put("settings", _raw);
   }
 
+  /*
+   * Internal
+   */
+
+  /// Show first watch shape setup
+  bool get showWatchShapeChooser => _raw["showWatchShapeChooser"] ?? true;
+  set showWatchShapeChooser(bool value) {
+    _raw["showWatchShapeChooser"] = value;
+    _settingsBox.put("settings", _raw);
+  }
+
   int lastClientId = -1;
+
+  static const Map<int, Map<String, dynamic>> _defaultSettings = {
+    // There were no settings before 0.3.0
+
+    // 0.3.0
+    300: {
+      // TDLib
+      "isAsyncInvokes": false,
+      "prioritizeAllImages": false,
+
+      // Developer
+      "debug": false,
+      "verbose": false,
+    },
+
+    // 0.4.0
+    400: {
+      // TDLib
+      "isAsyncUpdates": false,
+
+      // UI
+      "backButtonDisabled": false,
+      "noProfilePhotos": false,
+      "textScale": 1.1,
+      "clockEnabled": true,
+    },
+
+    // 0.4.2
+    420: {
+      // UI
+      "useRoundAdaptedUI": true,
+
+      // Internal
+      "showWatchShapeChooser": true,
+    },
+  };
+
+  Future<void> _initializeBox(String prevVersion) async {
+    int oldCode;
+    (oldCode, _) = parseVersionCode(prevVersion);
+
+    for (var entry in _defaultSettings.entries) {
+      if (entry.key <= oldCode) continue;
+      l.i("SettingsInitializer", "Adding all settings for ${entry.key}");
+      _raw.addAll(entry.value);
+    }
+
+    await _settingsBox.put("version", {"lastUpdated": TgSession.appVersion});
+    await _settingsBox.put("settings", _raw);
+  }
+
+  Future<void> _selfCheck() async {
+    Map prev = _settingsBox.get(
+      "version",
+      defaultValue: {"lastUpdated": "0.0.0"},
+    );
+    if (prev["lastUpdated"] != TgSession.appVersion) {
+      await _initializeBox(prev["lastUpdated"]);
+    }
+  }
 
   Future<void> initialize() async {
     _settingsBox = await Hive.openBox<Map>(
@@ -92,6 +172,8 @@ class SettingsStorage {
       await _settingsBox.clear();
       _raw = Map.from(_settingsBox.get("settings") ?? {});
     }
+
+    await _selfCheck();
   }
 }
 

@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:handygram/src/misc/settings_db.dart';
 import 'package:handygram/src/telegram/loadfile.dart';
+import 'package:handygram/src/telegram/session.dart';
 import 'package:handygram/src/widgets/message_tiles/base.dart';
 import 'package:video_player/video_player.dart';
 import 'package:handygram/src/tdlib/td_api.dart' as tdlib;
@@ -194,9 +195,16 @@ class _MiniVideoPlayerControlsState extends State<_MiniVideoPlayerControls> {
 }
 
 class MiniVideoPlayer extends StatefulWidget {
-  const MiniVideoPlayer({super.key, required this.tgvideo});
+  const MiniVideoPlayer({
+    super.key,
+    required this.video,
+    required this.height,
+    required this.width,
+  });
 
-  final tdlib.Video tgvideo;
+  final tdlib.File video;
+  final int width;
+  final int height;
 
   @override
   State<MiniVideoPlayer> createState() => _MiniVideoPlayerState();
@@ -223,7 +231,7 @@ class _MiniVideoPlayerState extends State<MiniVideoPlayer> {
         });
       },
     );
-    if (f == null) return null;
+    if (f == null) return _loadVideo(id);
     controller = VideoPlayerController.file(
       f,
       videoPlayerOptions: VideoPlayerOptions(
@@ -240,15 +248,18 @@ class _MiniVideoPlayerState extends State<MiniVideoPlayer> {
   @override
   void initState() {
     super.initState();
-    _loadVideo(widget.tgvideo.video.remote.id).then((value) {
-      setState(
-        () => video = value == null ? null : VideoPlayer(value),
-      );
-    });
+    session.natives.requestFastNetwork().then(
+          (_) => _loadVideo(widget.video.remote.id).then((value) {
+            setState(
+              () => video = value == null ? null : VideoPlayer(value),
+            );
+          }),
+        );
   }
 
   @override
   void dispose() {
+    session.natives.stopFastNetwork();
     controller?.dispose();
     super.dispose();
   }
@@ -257,8 +268,8 @@ class _MiniVideoPlayerState extends State<MiniVideoPlayer> {
   Widget build(BuildContext context) {
     size ??= downscaleProperly(
       Size(
-        widget.tgvideo.width.toDouble(),
-        widget.tgvideo.height.toDouble(),
+        widget.width.toDouble(),
+        widget.height.toDouble(),
       ),
       MediaQuery.of(context).size,
       1.1,

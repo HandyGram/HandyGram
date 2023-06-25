@@ -627,4 +627,16 @@ class TelegramFunctions {
     }
     return obj;
   }
+
+  Future<tdlib.ScopeNotificationSettings?> getScopeNotificationSettings(
+      tdlib.NotificationSettingsScope scope) async {
+    tdlib.TdObject? obj = await _invoke(tdlib.GetScopeNotificationSettings(
+      scope: scope,
+    ));
+    if (obj == null) return null;
+    if (obj is! tdlib.ScopeNotificationSettings) {
+      throw TelegramError(obj, "object is not tdlib.ScopeNotificationSettings");
+    }
+    return obj;
+  }
 }
