@@ -1,0 +1,7 @@
+class TelegramAPIKeys {
+  /// App api_id from my.telegram.org
+  static const int apiId = 12345678;
+
+  /// App api_hash from my.telegram.org
+  static const String apiHash = "1234567890abcdef1234567890abcdef";
+}

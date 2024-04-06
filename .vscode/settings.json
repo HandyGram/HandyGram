@@ -1,0 +1,5 @@
+{
+    "kotlin.compiler.jvm.target": "1.8",
+    "kotlin.scripts.enabled": true,
+    "kotlin.scripts.buildScriptsEnabled": true
+}

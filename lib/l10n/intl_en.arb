@@ -1,0 +1,364 @@
+{
+  "@@locale": "en",
+
+  "getStarted": "Get Started",
+  "handygram": "HandyGram",
+
+  "qrScanTitle": "Scan to Login",
+  "whereToScan": "Where to scan?",
+  "qrInstruction": "1. Open Telegram on your phone\n\n2. Go to Settings > Devices > Link Desktop Device\n\n3. Scan this image to Log In",
+
+  "password": "Password",
+  "login": "Login",
+  "enterPassword": "Enter Password",
+  "incorrectPassword": "Incorrect password",
+
+  "selectThemeTitle": "Select Theme",
+  "selectShapeTitle": "Select Watch Shape",
+  "firstSettingsTitle": "Some Settings",
+
+  "removeButton": "Remove",
+  "doneButton": "Done",
+  "createButton": "Create",
+  "closeButton": "Close",
+  "nextButton": "Next",
+
+  "proxySettingsTitle": "Proxy Settings",
+  "proxySettingsButton": "Proxy Settings",
+  "@proxySettingsButton": {
+    "description": "Translate as short as possible, text length shouldn't exceed original one. You can omit \"settings\" part in text if needed, this is shown on a single button, anyway"
+  },
+  "proxySettingsMainToggle": "Proxy",
+  "proxyConnectionDisconnected": "Disconnected",
+  "proxyConnectionLastUsedDate": "Last used: {date}",
+  "@proxyConnectionLastUsedDate": {
+    "description": "Translate as short as possible! Max string length here is 25",
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "MMMd",
+        "isCustomDateFormat": "true"
+      }
+    }
+  },
+
+  "connectionWaitingForNetwork": "Waiting for network...",
+  "connectionConnectingToProxy": "Connecting to proxy...",
+  "connectionConnecting": "Connecting...",
+  "connectionConnected": "Connected",
+
+  "proxyAdd": "Add proxy",
+
+  "createProxy": "New Proxy",
+  "editProxy": "Edit Proxy",
+  "proxyServer": "Proxy server",
+  "proxyPort": "Proxy port",
+  "proxyType": "Proxy type",
+  "proxyTypePickerTitle": "Select Proxy Type",
+  "proxyUser": "Username",
+  "proxyPassword": "Password",
+  "proxySecret": "Secret",
+  "proxyInsecure": "Insecure",
+  "proxyTypeSOCKS5": "SOCKS5",
+  "proxyTypeHTTP": "HTTP",
+  "proxyTypeMTProto": "MTProto",
+
+  "notificationSingleTitleCall": "Call",
+  "notificationSingleTitleScheduledMessage": "Scheduled message",
+  "notificationSingleTitleNewSecretChat": "Secret chat",
+  "notificationTextCall": "{name} is calling you...",
+  "@notificationTextCall": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationTextSecretChat": "{name} has just created a secret chat with you!",
+  "@notificationTextSecretChat": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "gif": "GIF",
+  "audio": "Audio",
+  "groupWasCreated": "Group was created",
+  "botWriteAccessAllowed": "Bot has been allowed to write messages",
+  "callWithTime": "Call ({time})",
+  "@callWithTime": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "videoCallWithTime": "Video call ({time})",
+  "@videoCallWithTime": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "chatMembersWereAdded": "{user} and others were added",
+  "@chatMembersWereAdded": {
+    "description": "Shown in message preview in chat lists, try to translate as short as possible",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "youHaveBoostedChat": "You've boosted chat",
+  "avatarWasChanged": "Avatar was changed",
+  "avatarWasDeleted": "Avatar was deleted",
+  "titleWasChanged": "Title was changed",
+  "userHasLeft": "{user} has left",
+  "@userHasLeft": {
+    "description": "User has left a group. Try to translate as short as possible.",
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
+  "someoneJoinedViaLink": "Someone joined via link",
+  "someoneJoinedByRequest": "Someone was approved to join",
+  "bgWasChanged": "Background was changed",
+  "messageTtlChanged": "Auto-delete timer was changed",
+  "chatWasShared": "Chat was shared",
+  "upgradedToSupergroup": "Upgraded to supergroup",
+  "hasJoinedTelegram": "has joined Telegram!",
+  "document": "Document",
+  "expiredPhoto": "Expired photo",
+  "expiredVideo": "Expired video",
+  "expiredVoiceNote": "Expired voice message",
+  "expiredVideoNote": "Expired video message",
+  "newForumTopic": "New \"{name}\" topic",
+  "@newForumTopic": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "editedForumTopic": "Edited \"{name}\" topic",
+  "@editedForumTopic": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "topicWasClosed": "Topic was closed",
+  "topicWasOpened": "Topic was opened",
+  "topicWasHidden": "Topic was hidden",
+  "topicWasShown": "Topic was shown",
+  "scoredSomeScoreInGame": "Scored {score} in game",
+  "@scoredSomeScoreInGame": {
+    "description": "Shown in message preview in chat lists",
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "premiumWithMonthsCount": "Premium ({count} {count, plural, one{month} other{months}})",
+  "@premiumWithMonthsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "videoChatInvitation": "Video chat invitation",
+  "location": "Location",
+  "@location": {
+    "description": "in context of geography"
+  },
+  "paymentSuccessful": "Payment was successful",
+  "@paymentSuccessful": {
+    "description": "don't worry, it isn't paid handygram moment, it's the message sent after you've paid an invoice in bot"
+  },
+  "photo": "Photo",
+  "video": "Video",
+  "voiceNoteWithTime": "Voice note ({time})",
+  "@voiceNoteWithTime": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "videoNoteWithTime": "Video note ({time})",
+  "@videoNoteWithTime": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "videoChatWithTime": "Video chat ({time})",
+  "@videoChatWithTime": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "messageWasPinned": "Message was pinned",
+  "poll": "Poll",
+  "premiumGiftCode": "Premium gift code",
+  "giveaway": "Giveaway",
+  "giveawayWinners": "Giveaway winners",
+  "giveawayFinished": "Giveaway finished",
+  "proximityAlert": "Proximity alert",
+  "@proximityAlert": {
+    "description": "Message content. TDLib description: A user in the chat came within proximity alert range."
+  },
+  "screenshotWasTaken": "Screenshot was taken",
+  "stickerPlainTexted": "{emoji} Sticker",
+  "@stickerPlainTexted": {
+    "placeholders": {
+      "emoji": {
+        "type": "String"
+      }
+    }
+  },
+  "suggestedAvatar": "Suggested avatar",
+  "story": "Story",
+  "unsupported": "Unsupported",
+  "sharedUsers": "Shared users",
+  "@sharedUsers": {
+    "description": "Message content. TDLib description: The current user shared users, which were requested by the bot."
+  },
+  "newVideoChat": "New video chat",
+  "scheduledVideoChat": "Scheduled video chat",
+  "changedTheme": "Change theme",
+  "tgPassport": "Telegram Passport",
+  "@tgPassport": {
+    "description": "Almost unknown Telegram service which can help you easily share your legal data. I think this is a kind of brand name, so this thing is untranslatable"
+  },
+  "you": "You",
+  "draftPrefix": "Draft: ",
+  "@draftPrefix": {
+    "description": "Don't forget about space at the end of the string"
+  },
+  "chatListHeaderMain": "All chats",
+  "chatListHeaderArchive": "Archive",
+  "chatListHeaderFolder": "Folder",
+  "error": "Error",
+  "@error": {
+    "description": "Placeholder text used in cases when something wrong happened (for example, chat preview loading error) and we need to report that for user"
+  },
+  "secondsCountPlural": "{count, plural, one{second} other{seconds}}",
+  "@secondsCountPlural": {
+    "description": "Used while printing durations",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "contactPrefix": "Contact: {name}",
+  "@contactPrefix": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "audioPrefix": "Audio: {title}",
+  "@audioPrefix": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "videoPrefix": "[Video] {caption}",
+  "@videoPrefix": {
+    "placeholders": {
+      "caption": {
+        "type": "String"
+      }
+    }
+  },
+  "photoPrefix": "[Photo] {caption}",
+  "@photoPrefix": {
+    "placeholders": {
+      "caption": {
+        "type": "String"
+      }
+    }
+  },
+  "documentPrefix": "[Document] {caption}",
+  "@documentPrefix": {
+    "placeholders": {
+      "caption": {
+        "type": "String"
+      }
+    }
+  },
+  "pollPrefix": "[Poll] {caption}",
+  "@pollPrefix": {
+    "placeholders": {
+      "caption": {
+        "type": "String"
+      }
+    }
+  },
+  "contact": "Contact",
+  "@contact": {
+    "description": "In context of phone contact"
+  },
+  "invoice": "Invoice",
+  "voiceNote": "Voice note",
+  "videoNote": "Video note",
+  "hiddenContent": "Hidden content",
+  "forwardedMessagesPlural": "{count} forwarded {count, plural, one{message} other{messages}}",
+  "@forwardedMessagesPlural": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "album": "Album",
+  "calls": "Calls",
+  "messages": "Messages",
+  "secretChats": "Secret chats",
+  "notificationNewSecretChat": "New secret chat has been created",
+  "notificationMentions": "{count} unread {count, plural, one{mention} other{mentions}}",
+  "@notificationMentions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationMessages": "{count} unread {count, plural, one{message} other{messages}}",
+  "@notificationMessages": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationCalls": "{count} incoming {count, plural, one{call} other{calls}}",
+  "@notificationCalls": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationsChannelOther": "Other",
+  "notificationsChannelOtherDesc": "All notifications which do not contain messages or mentions",
+  "notificationsChannelMentions": "Mentions",
+  "notificationsChannelMentionsDesc": "All your mentions from group chats",
+  "notificationsChannelMessages": "Messages",
+  "notificationsChannelMessagesDesc": "All new messages in chats where you've enabled notifications (both group and personal ones)"
+}

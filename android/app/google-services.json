@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "76601898673",
+    "project_id": "handygram-c4e1f",
+    "storage_bucket": "handygram-c4e1f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:76601898673:android:254db11f0d969196ce9490",
+        "android_client_info": {
+          "package_name": "ru.tdrk.handygramnew"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuu0T9cFfw6wZOaQYdC6lwdX9XQQJxxnQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
