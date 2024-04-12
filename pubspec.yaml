@@ -8,38 +8,44 @@ environment:
   flutter: '>=3.19.0'
 
 dependencies:
-  async: ^2.11.0
-  connectivity_plus: ^6.0.1
-  curved_text: ^0.2.0
-  device_info_plus: ^10.0.1
-  dio: ^5.4.1
-  firebase_core: ^2.27.2
-  firebase_messaging: ^14.7.21
   flutter:
     sdk: flutter
-  flutter_bloc: ^8.1.5
-  flutter_local_notifications: ^17.0.0
   flutter_localizations:
     sdk: flutter
+
+  async: ^2.11.0
+  connectivity_plus: ^6.0.2
+  curved_text: ^0.2.0
+  device_info_plus: ^10.1.0
+  dio: ^5.4.2+1
+  firebase_core: ^2.29.0
+  firebase_messaging: ^14.8.1
+  flutter_bloc: ^8.1.5
+  flutter_local_notifications: ^17.0.0
   flutter_svg: ^2.0.10+1
-  go_router: ^13.2.2
-  handy_tdlib:
-    path: /Users/tdrk/Documents/Projects/handy_tdlib
+  go_router: ^13.2.4
+  handy_tdlib: ^2.3.5
   hive: ^2.2.3
-  intl: any
   logging: ^1.2.0
-  meta: ^1.11.0
   mutex: ^3.1.0
   path: ^1.9.0
-  path_provider: ^2.1.2
+  path_provider: ^2.1.3
   pretty_qr_code: ^3.3.0
   vector_graphics: ^1.1.11+1
   vibration: ^1.8.4
 
+  # These packages' versions depend on Flutter SDK version,
+  # so 'any' is acceptable here.
+  intl: any
+  meta: any
+
 dev_dependencies:
-  flutter_lints: ^3.0.1
-  material_color_utilities: ^0.8.0
+  flutter_lints: ^3.0.2
   vector_graphics_compiler: ^1.1.11+1
+
+  # These package's version depends on Flutter SDK version,
+  # so 'any' is acceptable here.
+  material_color_utilities: any
 
 flutter:
   generate: true
