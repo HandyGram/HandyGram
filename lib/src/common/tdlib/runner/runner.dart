@@ -14,7 +14,7 @@ import 'package:handygram/src/common/native/channel.dart';
 import 'package:handygram/src/common/settings/entries.dart';
 import 'package:handygram/src/common/settings/manager.dart';
 import 'package:handygram/src/common/tdlib/client/management/multi_manager.dart';
-import 'package:handygram/src/common/tdlib/client/management/rx_manager.dart';
+import 'package:handygram/src/common/tdlib/client/management/rx/client.dart';
 import 'package:handygram/src/common/tdlib/client/management/user_manager.dart';
 import 'package:handygram/src/common/tdlib/client/td/parameters.dart';
 import 'package:handygram/src/common/tdlib/providers/authorization_state/authorization_states.dart';
@@ -30,8 +30,8 @@ class TdlibRunner {
 
     await _setVerbosityLevel();
 
-    if (!TdlibReceiveManager.running) {
-      await TdlibReceiveManager.startToReceiveUpdates();
+    if (!TdlibReceiveManager.instance.active) {
+      await TdlibReceiveManager.instance.subscribe();
     }
 
     final m = TdlibMultiManager();
@@ -134,7 +134,7 @@ class TdlibRunner {
     await for (final data in rx) {
       if (data is SendPort) {
         tx = data;
-        sub = TdlibReceiveManager.stream.listen(
+        sub = TdlibReceiveManager.instance.objects.listen(
           (d) => tx?.send(d),
         );
       } else if (data == null) {
@@ -205,8 +205,8 @@ class TdlibRunner {
     await _initThings();
     await _setVerbosityLevel();
 
-    if (!TdlibReceiveManager.running) {
-      await TdlibReceiveManager.startToReceiveUpdates();
+    if (!TdlibReceiveManager.instance.active) {
+      await TdlibReceiveManager.instance.subscribe();
     }
 
     final user = await TdlibMultiManager.instance.createLite(

@@ -6,7 +6,7 @@ import 'dart:math';
 import 'package:handy_tdlib/api.dart';
 import 'package:handy_tdlib/client.dart';
 import 'package:handygram/src/common/log/log.dart';
-import 'package:handygram/src/common/tdlib/client/management/rx_manager.dart';
+import 'package:handygram/src/common/tdlib/client/management/rx/client.dart';
 
 /// TDLib invoke function type
 typedef InvokeFunction = Future<TdObject?> Function(TdFunction);
@@ -166,7 +166,7 @@ class TdlibClient {
 
     _pollingRx.listen((e) => _pollingTx.send(1));
 
-    _events = TdlibReceiveManager.filter(clientId);
+    _events = TdlibReceiveManager.instance.filter(clientId);
     _sub = _events.listen(_update);
 
     l.i("$tag-C$clientId", "Started");

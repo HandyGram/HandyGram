@@ -6,7 +6,7 @@ import 'package:handy_tdlib/api.dart' as td;
 import 'package:handygram/src/common/log/log.dart';
 import 'package:handygram/src/common/misc/localizations.dart';
 import 'package:handygram/src/common/tdlib/client/management/multi_manager.dart';
-import 'package:handygram/src/common/tdlib/client/management/rx_manager.dart';
+import 'package:handygram/src/common/tdlib/client/management/rx/client.dart';
 import 'package:handygram/src/common/tdlib/client/management/user_manager.dart';
 import 'package:handygram/src/common/tdlib/client/structures/base_service.dart';
 import 'package:handygram/src/common/tdlib/client/structures/tdlib_toolbox.dart';
@@ -51,7 +51,7 @@ class TdlibFirebaseService extends TdlibService with PersistentStateMixin {
       user = await TdlibRunner.fromFirebase(message);
       if (user == null) {
         l.e(tag, "Couldn't start TDLib", true);
-        await TdlibReceiveManager.dispose();
+        await TdlibReceiveManager.instance.dispose();
         return;
       }
     } catch (e, st) {
