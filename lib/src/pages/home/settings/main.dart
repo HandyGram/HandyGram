@@ -83,12 +83,15 @@ class SettingsMain extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const ElementsPadding(),
-          Text(
-            "TDLib ${CurrentAccount.instance.user.services.defaultOptions.version}",
-            style: TextStyles.active.bodyMedium!.copyWith(
-              color: ColorStyles.active.onSurfaceVariant,
+          FutureBuilder(
+            future: CurrentAccount.providers.options.get("version"),
+            builder: (context, sn) => Text(
+              "TDLib ${sn.data ?? "unknown"}",
+              style: TextStyles.active.bodyMedium!.copyWith(
+                color: ColorStyles.active.onSurfaceVariant,
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
           ),
         ],
       ),
