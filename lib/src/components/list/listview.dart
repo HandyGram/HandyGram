@@ -124,6 +124,7 @@ class _HandyListViewState extends State<HandyListView> {
       child: ListView(
         controller: _controller,
         physics: const BouncingScrollPhysics(),
+        cacheExtent: MediaQuery.of(context).size.height * 2,
         children: [
           ...widget.children.map(
             (child) => child is HandyListViewNoPaddingMarker
