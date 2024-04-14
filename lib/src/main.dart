@@ -1,14 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:handygram/src/app.dart';
+import 'package:handygram/src/common/cubits/colors.dart';
 import 'package:handygram/src/common/cubits/current_account.dart';
+import 'package:handygram/src/common/cubits/text.dart';
 import 'package:handygram/src/common/settings/entries.dart';
 import 'package:handygram/src/common/settings/manager.dart';
-import 'package:handygram/src/common/cubits/colors.dart';
-import 'package:handygram/src/common/cubits/text.dart';
+import 'package:handygram/src/common/tdlib/client/management/rx/client.dart';
 
-class HandyGram extends StatelessWidget {
+class HandyGram extends StatefulWidget {
   const HandyGram({super.key});
+
+  @override
+  State<HandyGram> createState() => _HandyGramState();
+}
+
+class _HandyGramState extends State<HandyGram> {
+  final AppLifecycleListener _listener = AppLifecycleListener(
+    binding: WidgetsBinding.instance,
+    onDetach: () => TdlibReceiveManager.instance.dispose(),
+  );
+
+  @override
+  void dispose() {
+    _listener.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
