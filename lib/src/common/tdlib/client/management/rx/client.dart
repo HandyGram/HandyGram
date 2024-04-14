@@ -67,7 +67,6 @@ class TdlibReceiveManager {
     await Isolate.spawn(
       tdlibRxMain,
       tmp.sendPort,
-      errorsAreFatal: false,
       debugName: "TdlibRxWorker",
     );
   }
@@ -80,13 +79,14 @@ class TdlibReceiveManager {
       final response = await TdlibReceiveManagerWorker.sendMessage(
         port,
         "ping",
-        // even 100ms is a very high value for simple ping
-        timeout: const Duration(milliseconds: 100),
+        // 100ms for tdReceive to complete, 100ms for other stuff
+        timeout: const Duration(milliseconds: 200),
       );
       if (response == true) {
         return await _subscribe();
       } else {
         l.i(tag, "Restarting worker...");
+
         IsolateNameServer.removePortNameMapping(
           TdlibReceiveManagerWorker.registrantId,
         );
@@ -132,8 +132,11 @@ class TdlibReceiveManager {
       l.e(tag, "Worker is offline");
       return;
     }
-    await TdlibReceiveManagerWorker.sendMessage(port, "unsubscribe",
-        data: {"token": _token});
+    await TdlibReceiveManagerWorker.sendMessage(
+      port,
+      "unsubscribe",
+      data: {"token": _token},
+    );
   }
 
   static TdlibReceiveManager instance = TdlibReceiveManager._();
