@@ -144,6 +144,18 @@ class TdlibMultiManager {
     return ids;
   }
 
+  /// Closes TDLib multi account manager.
+  Future<void> dispose() async {
+    for (final clientId in clientIds) {
+      try {
+        await destroy(clientId: clientId);
+      } catch (e) {
+        l.e(tag, "Failed to close client $clientId: $e");
+        continue;
+      }
+    }
+  }
+
   static final TdlibMultiManager instance = TdlibMultiManager._();
 
   TdlibMultiManager._();
