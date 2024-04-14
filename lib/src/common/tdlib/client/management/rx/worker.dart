@@ -29,13 +29,33 @@ class _WorkerSubscriber {
   });
 }
 
+class _TdlibRxWorkerReceiver {
+  static void main(SendPort tx) async {
+    await TdPlugin.initialize();
+    while (true) {
+      final raw = TdPlugin.instance.tdReceive(0.1);
+      if (raw == null) continue;
+
+      late final Map json;
+      try {
+        json = jsonDecode(raw);
+      } catch (e, st) {
+        TdlibReceiveManagerWorker._l("Failed to parse TD object: $e\n$st");
+        continue;
+      }
+
+      tx.send(json);
+    }
+  }
+}
+
 class TdlibReceiveManagerWorker {
   /// Registrant SendPort ID
   static String registrantId = "TdlibListenersRegistrantPort";
 
-  final ReceivePort _rx = ReceivePort();
-  bool _closing = false;
-  final Completer _tdListenerExit = Completer(), _firstSub = Completer();
+  final ReceivePort _rx = ReceivePort(), _tdRx = ReceivePort();
+  final Completer _firstSub = Completer();
+  Isolate? _receiver;
 
   final Map<int, _WorkerSubscriber> _subs = {};
 
@@ -100,8 +120,11 @@ class TdlibReceiveManagerWorker {
     return token;
   }
 
-  void _unsubscribe(final Map msg) {
+  Future<void> _unsubscribe(final Map msg) async {
     _subs.remove(msg['token'])?.exitListener.close();
+    if (_subs.isEmpty) {
+      await _dispose();
+    }
   }
 
   void _registrantListener(dynamic raw) async {
@@ -129,47 +152,31 @@ class TdlibReceiveManagerWorker {
           "exit_listener_port": exitPort,
         });
       case 'unsubscribe':
-        _unsubscribe(msg);
+        await _unsubscribe(msg);
         port?.send(true);
       case 'ping':
         port?.send(true);
     }
   }
 
-  Future<void> _tdListenerStart() async {
-    await TdPlugin.initialize();
-    while (true) {
-      if (_closing) return;
-      if (!_firstSub.isCompleted) await _firstSub.future;
-
-      final raw = TdPlugin.instance.tdReceive(0.2);
-      // Repeated check for faster closing
-      if (_closing) return;
-      if (raw == null) continue;
-
-      late final Map json;
-      try {
-        json = jsonDecode(raw);
-      } catch (e, st) {
-        _l("Failed to parse TD object: $e\n$st");
-      }
-
-      for (final sub in _subs.values) {
-        await sendMessage(
-          sub.targetPort,
-          "td",
-          data: {"obj": json},
-          oneWay: true,
-        );
-      }
+  Future<void> _tdListener(dynamic val) async {
+    if (val is! Map) return;
+    if (!_firstSub.isCompleted) await _firstSub.future;
+    for (final sub in _subs.values) {
+      await sendMessage(
+        sub.targetPort,
+        "td",
+        data: {"obj": val},
+        oneWay: true,
+      );
     }
   }
 
   Future<void> _dispose() async {
-    _closing = true;
     IsolateNameServer.removePortNameMapping(registrantId);
+    _receiver?.kill(priority: Isolate.immediate);
     _rx.close();
-    await _tdListenerExit.future;
+    _l("Disposed");
   }
 
   Future<void> work(SendPort response) async {
@@ -195,10 +202,15 @@ class TdlibReceiveManagerWorker {
       return;
     }
 
-    _rx.listen(_registrantListener);
-    response.send(true);
+    _receiver = await Isolate.spawn(
+      _TdlibRxWorkerReceiver.main,
+      _tdRx.sendPort,
+      debugName: "TdlibRxWorkerReceiver",
+    );
 
+    _rx.listen(_registrantListener);
+    _tdRx.listen(_tdListener);
+    response.send(true);
     _l("Running");
-    _tdListenerStart();
   }
 }
