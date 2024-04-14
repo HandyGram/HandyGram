@@ -31,7 +31,10 @@ class TdlibRunner {
     await _setVerbosityLevel();
 
     if (!TdlibReceiveManager.instance.active) {
-      await TdlibReceiveManager.instance.subscribe();
+      final result = await TdlibReceiveManager.instance.subscribe();
+      if (!result) {
+        throw const TdlibCoreException(tag, "Failed to start RxWorker");
+      }
     }
 
     final m = TdlibMultiManager();
@@ -207,7 +210,10 @@ class TdlibRunner {
     await _setVerbosityLevel();
 
     if (!TdlibReceiveManager.instance.active) {
-      await TdlibReceiveManager.instance.subscribe();
+      final result = await TdlibReceiveManager.instance.subscribe();
+      if (!result) {
+        throw const TdlibCoreException(tag, "Failed to start RxWorker");
+      }
     }
 
     final user = await TdlibMultiManager.instance.createLite(
