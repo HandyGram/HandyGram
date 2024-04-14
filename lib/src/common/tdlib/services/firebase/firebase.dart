@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:handy_tdlib/api.dart' as td;
+import 'package:handygram/src/common/cubits/current_account.dart';
 import 'package:handygram/src/common/log/log.dart';
 import 'package:handygram/src/common/misc/localizations.dart';
 import 'package:handygram/src/common/tdlib/client/management/multi_manager.dart';
@@ -59,6 +60,27 @@ class TdlibFirebaseService extends TdlibService with PersistentStateMixin {
       return;
     }
 
+    final groups = await _getGroups(user);
+    await loadLocalizations();
+    try {
+      await _showNotifications(groups, user);
+    } finally {
+      await user.destroy();
+    }
+  }
+
+  Future<void> _foregroundHandler(
+    RemoteMessage message,
+  ) async {
+    final payload = TdlibRunner.getPayload(message);
+    await CurrentAccount.providers.notifications.processPush(payload);
+
+    final groups = await _getGroups(CurrentAccount.instance.user);
+    await _showNotifications(groups, CurrentAccount.instance.user);
+  }
+
+  static Future<List<td.NotificationGroup>> _getGroups(
+      TdlibUserManager user) async {
     List<td.NotificationGroup> groups = user.providers.notifications.groups;
     if (!user.providers.notifications.initialized) {
       updater:
@@ -74,20 +96,13 @@ class TdlibFirebaseService extends TdlibService with PersistentStateMixin {
         }
       }
     }
-
-    try {
-      await _showNotifications(groups, user);
-    } finally {
-      await user.destroy();
-    }
+    return groups;
   }
 
   static Future<void> _showNotifications(
     List<td.NotificationGroup> groups,
     TdlibUserManager user,
   ) async {
-    await loadLocalizations();
-
     FlutterLocalNotificationsPlugin notificationsPlugin =
         FlutterLocalNotificationsPlugin();
     notificationsPlugin.initialize(const InitializationSettings(
@@ -96,29 +111,48 @@ class TdlibFirebaseService extends TdlibService with PersistentStateMixin {
 
     await notificationsPlugin.cancelAll();
     final active = await notificationsPlugin.getActiveNotifications();
-    final groupIds = groups.map((e) => e.id);
-    active.removeWhere(
-      (e) =>
-          e.id != null &&
-          (groupIds.contains(e.id) || groupIds.contains(e.id! * 1000)),
-    );
-    for (final id in active.map((e) => e.id)) {
-      if (id != null) await notificationsPlugin.cancel(id);
+
+    final activeIds = active.where((e) => e.id != null).map((e) => e.id!);
+    final expectedIds = [
+      for (final group in groups) ...[group.id, group.id * 1000]
+    ];
+
+    // Remove no longer needed notifications
+    final removedIds = activeIds.where((id) => !expectedIds.contains(id));
+    for (final id in removedIds) {
+      notificationsPlugin.cancel(id);
     }
 
     for (final group in groups) {
       final chat = await user.providers.chats.getChat(group.chatId);
+      final mainId = group.id, summaryId = group.id * 1000;
+      final mainDetails = await group.details,
+          summaryDetails = await group.summaryDetails;
+      final body = group.shortDescription;
+      final title = chat.title;
+
+      if (activeIds.contains(mainId) && activeIds.contains(summaryId)) {
+        final previous = active.firstWhere((n) => n.id == mainId);
+
+        // this is barely enough to check if notifications are the same
+        if (previous.title == title &&
+            previous.body == body &&
+            previous.channelId == mainDetails.channelId) {
+          continue;
+        }
+      }
+
       await notificationsPlugin.show(
         group.id,
-        chat.title,
-        group.shortDescription,
-        NotificationDetails(android: await group.details),
+        title,
+        body,
+        NotificationDetails(android: mainDetails),
       );
       await notificationsPlugin.show(
         group.id * 1000,
-        chat.title,
-        group.shortDescription,
-        NotificationDetails(android: await group.summaryDetails),
+        title,
+        body,
+        NotificationDetails(android: summaryDetails),
       );
     }
   }
@@ -229,6 +263,8 @@ class TdlibFirebaseService extends TdlibService with PersistentStateMixin {
     await save({
       'receivers': receivers,
     });
+
+    FirebaseMessaging.onMessage.listen(_foregroundHandler);
 
     status = FirebaseStatus.running;
     l.d(
