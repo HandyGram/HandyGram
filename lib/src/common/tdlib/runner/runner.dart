@@ -183,7 +183,8 @@ class TdlibRunner {
     _initialized = true;
   }
 
-  static String _getPayload(RemoteMessage message) {
+  /// Get payload from Firebase notification
+  static String getPayload(RemoteMessage message) {
     final payload = <String, dynamic>{
       "google.sent_time": message.sentTime?.millisecondsSinceEpoch,
     };
@@ -233,7 +234,7 @@ class TdlibRunner {
     // HandyGram things initialized.
     await _initThings();
 
-    final payload = _getPayload(message);
+    final payload = getPayload(message);
     late final td.TdObject? pushReceiverId;
     try {
       pushReceiverId = td.convertJsonToObject(
