@@ -136,7 +136,6 @@ class TdlibReceiveManagerWorker {
     switch (msg['type']) {
       // Unmap this worker
       case 'unmap':
-        // TODO: error handling
         try {
           await _dispose();
         } catch (_) {
