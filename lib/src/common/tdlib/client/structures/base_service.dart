@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'dart:async';
 
 import 'package:handy_tdlib/api.dart' as td;
@@ -21,5 +29,6 @@ abstract class TdlibService implements TdlibDataProvider {
   FutureOr<void> onTdlibReady() {}
 
   /// This function is run when TDLib has authorized successfully
+  @override
   FutureOr<void> onAuthorized() {}
 }

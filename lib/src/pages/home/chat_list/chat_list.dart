@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:handy_tdlib/api.dart' as td;
 import 'package:handygram/src/common/cubits/current_account.dart';
@@ -5,7 +13,7 @@ import 'package:handygram/src/common/exceptions/tdlib_core_exception.dart';
 import 'package:handygram/src/common/misc/localizations.dart';
 import 'package:handygram/src/common/tdlib/providers/chat_lists/chat_list.dart';
 import 'package:handygram/src/components/list/listview.dart';
-import 'package:handygram/src/components/paddings.dart';
+import 'package:handygram/src/components/scaled_sizes.dart';
 import 'package:handygram/src/components/text/header.dart';
 import 'package:handygram/src/pages/home/chat_list/chat_preview.dart';
 
@@ -61,9 +69,11 @@ class _ChatListPageState extends State<ChatListPage>
       for (final chat in widget.list.chats) ...[
         ChatPreview(
           briefChatInfo: chat,
+          useTemplateInfoIfNeeded: true,
           key: ValueKey<String>("chat-preview_${chat.chatId}"),
         ),
-        ElementsPadding(
+        SizedBox(
+          height: Paddings.betweenSimilarElements,
           key: ValueKey<String>("chat-padding-${i++}"),
         ),
       ]

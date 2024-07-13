@@ -1,7 +1,16 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:handygram/src/common/cubits/colors.dart';
+import 'package:handygram/src/common/cubits/scaling.dart';
 import 'package:handygram/src/common/settings/entries.dart';
 import 'package:handygram/src/common/settings/manager.dart';
 
@@ -73,9 +82,9 @@ class _PageIndicatorState extends State<PageIndicator>
 }
 
 class _PageIndicatorPainter extends CustomPainter {
-  static const dotRadius = 4.0;
-  static const padding = 15.0;
-  static const paddingLinear = 10.0;
+  static double dotRadius = 4.0 * Scaling.factor;
+  static double padding = 15.0 * Scaling.factor;
+  static double paddingLinear = 10.0 * Scaling.factor;
 
   late final Color unselectedColor = selectedColor.withOpacity(0.3);
   final Color selectedColor = ColorStyles.active.onSurface;
@@ -185,7 +194,7 @@ class _PageIndicatorPainter extends CustomPainter {
         );
       }
     } else {
-      const dotH = paddingLinear + dotRadius;
+      final dotH = paddingLinear + dotRadius;
       final dotStartW = size.width / 2 - (mPageCount * dotRadius * 3) / 2;
       for (int i = 0; i < mPageCount; i++) {
         final offset = Offset(

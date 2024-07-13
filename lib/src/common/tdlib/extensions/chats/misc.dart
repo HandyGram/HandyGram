@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:handy_tdlib/api.dart' as td;
 
 extension ChatUtils on td.Chat {
@@ -8,7 +16,11 @@ extension ChatUtils on td.Chat {
         td.ChatTypeBasicGroup() || td.ChatTypeSupergroup() => false,
       };
 
-  bool get isGroup => !isPrivate;
+  bool get isGroup => switch (type) {
+        td.ChatTypePrivate() || td.ChatTypeSecret() => false,
+        td.ChatTypeBasicGroup() => true,
+        td.ChatTypeSupergroup(isChannel: final isChannel) => !isChannel,
+      };
 
   bool get isChannel => switch (type) {
         td.ChatTypeSupergroup(isChannel: final isChannel) => isChannel,

@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:handygram/src/common/settings/setting.dart';
 
 abstract final class SettingsEntries {
@@ -10,6 +18,12 @@ abstract final class SettingsEntries {
   /// Current font scale.
   static const textScale = Setting<double>(
     id: "textScale",
+    defaultValue: 1.0,
+  );
+
+  /// Current UI scale.
+  static const uiScale = Setting<double>(
+    id: "uiScale",
     defaultValue: 1.0,
   );
 

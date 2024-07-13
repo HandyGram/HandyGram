@@ -1,9 +1,18 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:handygram/src/common/cubits/colors.dart';
+import 'package:handygram/src/common/cubits/scaling.dart';
 import 'package:handygram/src/common/misc/localizations.dart';
 import 'package:handygram/src/components/controls/tile_button.dart';
-import 'package:handygram/src/components/paddings.dart';
+import 'package:handygram/src/components/scaled_sizes.dart';
 import 'package:handygram/src/components/text/header.dart';
 import 'package:handygram/src/pages/setup/bloc.dart';
 
@@ -15,7 +24,7 @@ class SetupStageScreenShapeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final iconsSize = size.shortestSide * 0.27;
+    final iconsSize = size.shortestSide * 0.27 * Scaling.userFactor;
     final l10n = AppLocalizations.of(context);
     return Scaffold(
       body: Column(
@@ -51,7 +60,7 @@ class SetupStageScreenShapeView extends StatelessWidget {
                       : null,
                 ),
               ),
-              const SizedBox(width: 10),
+              SizedBox(width: 10 * Scaling.factor),
               InkWell(
                 borderRadius: BorderRadius.circular(999),
                 splashColor: Theme.of(context).splashColor,
@@ -81,7 +90,7 @@ class SetupStageScreenShapeView extends StatelessWidget {
               ),
             ],
           ),
-          const SmallButtonPadding(),
+          SizedBox(height: Paddings.beforeSmallButton),
           Expanded(
             child: Center(
               child: TileButton(
@@ -93,7 +102,7 @@ class SetupStageScreenShapeView extends StatelessWidget {
               ),
             ),
           ),
-          const SmallButtonPadding(),
+          SizedBox(height: Paddings.beforeSmallButton),
         ],
       ),
     );

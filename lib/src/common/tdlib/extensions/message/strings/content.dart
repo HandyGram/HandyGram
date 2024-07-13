@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:handy_tdlib/api.dart' as td;
 import 'package:handygram/src/common/misc/localizations.dart';
 import 'package:handygram/src/common/misc/strings.dart';
@@ -52,14 +60,14 @@ extension StringMessageContent on td.MessageContent {
       td.MessageGiftedPremium(monthCount: final count) =>
         l.premiumWithMonthsCount(count),
       td.MessageInviteVideoChatParticipants() => l.videoChatInvitation,
-      td.MessageInvoice(title: final title) => title,
+      td.MessageInvoice(productInfo: final pi) => pi.title,
       td.MessageLocation() => l.location,
       td.MessagePassportDataSent() => l.tgPassport,
       td.MessagePaymentSuccessful() => l.paymentSuccessful,
       td.MessagePhoto(caption: final caption) =>
         caption.text.isNotEmpty ? l.photoPrefix(caption.text) : l.photo,
       td.MessagePinMessage() => l.messageWasPinned,
-      td.MessagePoll(poll: final poll) => l.pollPrefix(poll.question),
+      td.MessagePoll(poll: final poll) => l.pollPrefix(poll.question.text),
       td.MessagePremiumGiftCode() => l.premiumGiftCode,
       td.MessagePremiumGiveaway() => l.giveaway,
       td.MessagePremiumGiveawayCompleted() => l.giveawayFinished,

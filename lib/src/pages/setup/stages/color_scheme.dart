@@ -1,9 +1,18 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:handygram/src/common/cubits/colors.dart';
+import 'package:handygram/src/common/cubits/scaling.dart';
 import 'package:handygram/src/common/misc/localizations.dart';
 import 'package:handygram/src/components/controls/tile_button.dart';
-import 'package:handygram/src/components/paddings.dart';
+import 'package:handygram/src/components/scaled_sizes.dart';
 import 'package:handygram/src/components/text/header.dart';
 import 'package:handygram/src/pages/setup/bloc.dart';
 
@@ -15,7 +24,7 @@ class SetupStageColorSchemeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final itemSize = size.shortestSide * 0.27;
+    final itemSize = size.shortestSide * 0.27 * Scaling.userFactor;
     final l10n = AppLocalizations.of(context);
     final state = context.watch<SetupBloc>().state;
     return Scaffold(
@@ -60,13 +69,13 @@ class SetupStageColorSchemeView extends StatelessWidget {
                     ),
                     if (ColorStyles.accentColors.indexOf(color) !=
                         ColorStyles.accentColors.length - 1)
-                      const SizedBox(width: 5)
+                      SizedBox(width: 5 * Scaling.factor)
                   ]
                 ],
               ),
             ),
           ),
-          const SmallButtonPadding(),
+          SizedBox(height: Paddings.beforeSmallButton),
           Expanded(
             child: Center(
               child: TileButton(
@@ -78,7 +87,7 @@ class SetupStageColorSchemeView extends StatelessWidget {
               ),
             ),
           ),
-          const SmallButtonPadding(),
+          SizedBox(height: Paddings.beforeSmallButton),
         ],
       ),
     );

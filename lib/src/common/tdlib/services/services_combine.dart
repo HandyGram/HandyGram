@@ -1,3 +1,12 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
+import 'package:handygram/src/common/log/log.dart';
 import 'package:handygram/src/common/tdlib/client/structures/base_service.dart';
 import 'package:handygram/src/common/tdlib/client/structures/tdlib_toolbox.dart';
 import 'package:handygram/src/common/tdlib/services/firebase/firebase.dart';
@@ -26,25 +35,41 @@ class TdlibServicesCombine {
 
   Future<void> attach(TdlibToolbox box) async {
     for (final s in _services) {
-      await s.attach(box);
+      try {
+        await s.attach(box);
+      } catch (e, st) {
+        l.e(tag, "Failed to attach ${s.runtimeType}: $e\n$st");
+      }
     }
   }
 
   Future<void> detach(TdlibToolbox box) async {
     for (final s in _services) {
-      await s.detach(box);
+      try {
+        await s.detach(box);
+      } catch (e, st) {
+        l.e(tag, "Failed to detach ${s.runtimeType}: $e\n$st");
+      }
     }
   }
 
   Future<void> onTdlibReady() async {
     for (final s in _services) {
-      await s.onTdlibReady();
+      try {
+        await s.onTdlibReady();
+      } catch (e, st) {
+        l.e(tag, "Exception on ${s.runtimeType}.onTdlibReady(): $e\n$st");
+      }
     }
   }
 
   Future<void> onAuthorized() async {
     for (final s in _services) {
-      await s.onAuthorized();
+      try {
+        await s.onAuthorized();
+      } catch (e, st) {
+        l.e(tag, "Exception on ${s.runtimeType}.onAuthorized(): $e\n$st");
+      }
     }
   }
 

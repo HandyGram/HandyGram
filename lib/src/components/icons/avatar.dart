@@ -1,18 +1,28 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:handy_tdlib/api.dart' as td;
 import 'package:handygram/src/common/cubits/colors.dart';
 import 'package:handygram/src/common/cubits/current_account.dart';
-import 'package:handy_tdlib/api.dart' as td;
 import 'package:handygram/src/common/cubits/text.dart';
 
 class ProfileAvatar extends StatelessWidget {
   const ProfileAvatar({
     super.key,
     required this.chatId,
+    this.useTemplateInfoIfNeeded = false,
   });
 
   final int chatId;
+  final bool useTemplateInfoIfNeeded;
 
   int _getSmallestPhotoId(List<td.PhotoSize> sizes) => sizes
       .fold(
@@ -26,6 +36,36 @@ class ProfileAvatar extends StatelessWidget {
   Future<Widget> _getChatImage() async {
     final stuff = CurrentAccount.providers;
     final chat = await stuff.chats.getChat(chatId);
+    final me = await CurrentAccount.providers.users.getMe();
+    final isMe = switch (chat.type) {
+      td.ChatTypePrivate(userId: final uid) => me.id == uid,
+      _ => false,
+    };
+    final repliesBotId = await CurrentAccount.providers.options.get(
+      "replies_bot_chat_id",
+    );
+
+    IconData? templateIcon;
+    if (isMe) {
+      templateIcon = Icons.bookmark;
+    } else if (chatId == repliesBotId) {
+      templateIcon = Icons.reply;
+    }
+    if (templateIcon != null && useTemplateInfoIfNeeded) {
+      return Container(
+        decoration: BoxDecoration(
+          color: ColorStyles.active.primary,
+          shape: BoxShape.circle,
+        ),
+        child: Center(
+          child: Icon(
+            templateIcon,
+            color: ColorStyles.active.surface,
+          ),
+        ),
+      );
+    }
+
     int? photoId;
     if (chat.photo == null) {
       late final td.ChatPhoto? photo;

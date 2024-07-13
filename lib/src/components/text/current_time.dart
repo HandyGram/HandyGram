@@ -1,5 +1,14 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:curved_text/curved_text.dart';
 import 'package:flutter/material.dart';
+import 'package:handygram/src/common/cubits/scaling.dart';
 import 'package:handygram/src/common/cubits/text.dart';
 import 'package:handygram/src/common/settings/entries.dart';
 import 'package:handygram/src/common/settings/manager.dart';
@@ -29,7 +38,7 @@ class _CurrentTimeNotifier with ChangeNotifier {
 }
 
 class CurrentTime extends StatelessWidget {
-  static const kPadding = 20;
+  static double kPadding = 20 * Scaling.factor;
 
   const CurrentTime({
     super.key,

@@ -1,6 +1,16 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:handygram/src/common/cubits/colors.dart';
+import 'package:handygram/src/common/cubits/scaling.dart';
 import 'package:handygram/src/common/cubits/text.dart';
+import 'package:handygram/src/components/scaled_sizes.dart';
 
 class TileButton extends StatelessWidget {
   const TileButton({
@@ -43,64 +53,80 @@ class TileButton extends StatelessWidget {
       overflow: TextOverflow.fade,
     );
 
+    final onlyIcon = icon != null && text == null;
+
     return ConstrainedBox(
       constraints: BoxConstraints(
-        minHeight: big ? 61.5 : 0,
+        minHeight: big ? Sizes.tilesHeight : 0,
       ),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(31),
-        onTap: onTap,
-        onLongPress: onLongPress,
-        onDoubleTap: onDoubleTap,
-        splashColor: (colorful
-                ? ColorStyles.active.onPrimary
-                : ColorStyles.active.onSurface)
-            .withOpacity(0.1),
-        highlightColor: (colorful
-                ? ColorStyles.active.onPrimary
-                : ColorStyles.active.onSurface)
-            .withOpacity(0.1),
-        child: Ink(
-          width: big ? MediaQuery.of(context).size.width * 0.89 : null,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(31),
-            color: gradient
-                ? null
-                : (colorful && onTap != null)
-                    ? ColorStyles.active.primary
-                    : ColorStyles.active.surface,
-            gradient: gradient
-                ? LinearGradient(
-                    colors: [
-                      ColorStyles.active.surface,
-                      ColorStyles.active.onSurfaceVariant,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadii.tilesRadius,
+          onTap: onTap,
+          onLongPress: onLongPress,
+          onDoubleTap: onDoubleTap,
+          splashColor: (colorful
+                  ? ColorStyles.active.onPrimary
+                  : ColorStyles.active.onSurface)
+              .withOpacity(0.1),
+          highlightColor: (colorful
+                  ? ColorStyles.active.onPrimary
+                  : ColorStyles.active.onSurface)
+              .withOpacity(0.1),
+          child: Ink(
+            height: onlyIcon ? Sizes.tilesHeight : null,
+            width: big
+                ? Sizes.tilesWidth
+                : onlyIcon
+                    ? Sizes.tilesHeight
+                    : null,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadii.tilesRadius,
+              color: gradient
+                  ? null
+                  : (colorful && onTap != null)
+                      ? ColorStyles.active.primary
+                      : ColorStyles.active.surface,
+              gradient: gradient
+                  ? LinearGradient(
+                      colors: [
+                        ColorStyles.active.surface,
+                        ColorStyles.active.onSurfaceVariant,
+                      ],
+                    )
+                  : null,
+            ),
+            padding: onlyIcon
+                ? EdgeInsets.zero
+                : EdgeInsets.symmetric(
+                    horizontal: big
+                        ? Paddings.tilesHorizontalPadding
+                        : 22 * Scaling.factor,
+                    vertical: Paddings.tilesVerticalPadding,
+                  ),
+            child: onlyIcon
+                ? Center(child: icon)
+                : Row(
+                    mainAxisSize: big ? MainAxisSize.max : MainAxisSize.min,
+                    children: [
+                      if (icon != null) ...[
+                        IconTheme(
+                          data: Theme.of(context).iconTheme.copyWith(
+                                color: onTap != null
+                                    ? colorful
+                                        ? ColorStyles.active.onPrimary
+                                        : ColorStyles.active.onSurface
+                                    : ColorStyles.active.onSurfaceVariant,
+                              ),
+                          child: icon!,
+                        ),
+                        if (text != null) SizedBox(width: 8 * Scaling.factor),
+                      ],
+                      if (text != null)
+                        if (big) Expanded(child: textW) else textW,
                     ],
-                  )
-                : null,
-          ),
-          padding: EdgeInsets.symmetric(
-            horizontal: big ? 16 : 22,
-            vertical: 10,
-          ),
-          child: Row(
-            mainAxisSize: big ? MainAxisSize.max : MainAxisSize.min,
-            children: [
-              if (icon != null) ...[
-                IconTheme(
-                  data: Theme.of(context).iconTheme.copyWith(
-                        color: onTap != null
-                            ? colorful
-                                ? ColorStyles.active.onPrimary
-                                : ColorStyles.active.onSurface
-                            : ColorStyles.active.onSurfaceVariant,
-                      ),
-                  child: icon!,
-                ),
-                if (text != null) const SizedBox(width: 8),
-              ],
-              if (text != null)
-                if (big) Expanded(child: textW) else textW,
-            ],
+                  ),
           ),
         ),
       ),

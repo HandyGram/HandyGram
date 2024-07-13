@@ -1,12 +1,22 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:handy_tdlib/api.dart' as td;
 import 'package:handygram/src/common/cubits/colors.dart';
 import 'package:handygram/src/common/cubits/current_account.dart';
+import 'package:handygram/src/common/cubits/scaling.dart';
 import 'package:handygram/src/common/cubits/text.dart';
 import 'package:handygram/src/common/misc/localizations.dart';
 import 'package:handygram/src/common/misc/strings.dart';
 import 'package:handygram/src/components/icons/avatar.dart';
+import 'package:handygram/src/components/scaled_sizes.dart';
 
 class _UserInfo {
   final String title;
@@ -39,16 +49,16 @@ class SettingsUserButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      borderRadius: BorderRadius.circular(31),
+      borderRadius: BorderRadii.tilesRadius,
       onTap: () => GoRouter.of(context).push("/settings/account"),
       splashColor: ColorStyles.active.onSurface.withOpacity(0.1),
       highlightColor: ColorStyles.active.onSurface.withOpacity(0.1),
       child: Ink(
-        padding: const EdgeInsets.all(10),
-        height: 61.5,
-        width: MediaQuery.of(context).size.width * 0.89,
+        padding: EdgeInsets.all(10 * Scaling.factor),
+        height: Sizes.tilesHeight,
+        width: Sizes.tilesWidth,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(31),
+          borderRadius: BorderRadius.circular(31 * Scaling.factor),
           color: ColorStyles.active.surface,
         ),
         child: FutureBuilder<_UserInfo>(
@@ -72,11 +82,11 @@ class SettingsUserButton extends StatelessWidget {
               builder: (context, snapshot) => Row(
                 children: [
                   SizedBox(
-                    height: 38,
-                    width: 38,
+                    height: 38 * Scaling.factor,
+                    width: 38 * Scaling.factor,
                     child: ProfileAvatar(chatId: snapshot.data!.id),
                   ),
-                  const SizedBox(width: 7),
+                  SizedBox(width: 7 * Scaling.factor),
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

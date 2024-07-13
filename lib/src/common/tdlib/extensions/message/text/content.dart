@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:handy_tdlib/api.dart';
 import 'package:handy_tdlib/handy_tdlib.dart';
@@ -46,14 +54,14 @@ extension MessageContentPreview on MessageContent {
           Icons.gif,
           its,
           authorSpan: authorSpan,
-          iconSpan: anim.minithumbnail?.getSpan(size),
+          iconSpan: anim.minithumbnail?.asSpan(size),
         ),
       MessageAudio(audio: final audio) => iconWithTextSpan(
           audio.displayTitle,
           Icons.audio_file,
           its,
           authorSpan: authorSpan,
-          iconSpan: audio.albumCoverMinithumbnail?.getSpan(size),
+          iconSpan: audio.albumCoverMinithumbnail?.asSpan(size),
         ),
       MessageBasicGroupChatCreate() ||
       MessageSupergroupChatCreate() =>
@@ -87,7 +95,7 @@ extension MessageContentPreview on MessageContent {
           l.avatarWasChanged,
           Icons.edit,
           its,
-          iconSpan: photo.minithumbnail?.getSpan(size),
+          iconSpan: photo.minithumbnail?.asSpan(size),
         ),
       MessageChatChangeTitle() => iconWithTextSpan(
           l.titleWasChanged,
@@ -235,8 +243,8 @@ extension MessageContentPreview on MessageContent {
             ),
           ],
         ),
-      MessageInvoice(title: final title) => iconWithTextSpan(
-          title,
+      MessageInvoice(productInfo: final pi) => iconWithTextSpan(
+          pi.title,
           Icons.attach_money,
           its,
         ),
@@ -254,7 +262,7 @@ extension MessageContentPreview on MessageContent {
           caption.text.isEmpty ? l.photo : caption.text,
           Icons.photo,
           its,
-          iconSpan: photo.minithumbnail?.getSpan(size),
+          iconSpan: photo.minithumbnail?.asSpan(size),
           authorSpan: authorSpan,
         ),
       MessagePinMessage() => TextSpan(
@@ -262,7 +270,7 @@ extension MessageContentPreview on MessageContent {
           style: style,
         ),
       MessagePoll(poll: final poll) => iconWithTextSpan(
-          poll.question,
+          poll.question.text,
           Icons.poll,
           its,
           authorSpan: authorSpan,
@@ -323,7 +331,7 @@ extension MessageContentPreview on MessageContent {
           l.suggestedAvatar,
           Icons.photo,
           its,
-          iconSpan: photo.minithumbnail?.getSpan(size),
+          iconSpan: photo.minithumbnail?.asSpan(size),
         ),
       MessageText(text: final text) => TextSpan(children: [
           authorSpan,
@@ -348,7 +356,7 @@ extension MessageContentPreview on MessageContent {
           Icons.play_arrow,
           its,
           authorSpan: authorSpan,
-          iconSpan: video.minithumbnail?.getSpan(size),
+          iconSpan: video.minithumbnail?.asSpan(size),
         ),
       MessageVideoChatEnded(duration: final seconds) => TextSpan(
           text: l.videoChatWithTime(
@@ -372,7 +380,7 @@ extension MessageContentPreview on MessageContent {
           Icons.play_arrow,
           its,
           authorSpan: authorSpan,
-          iconSpan: videoNote.minithumbnail?.getSpan(size, 99),
+          iconSpan: videoNote.minithumbnail?.asSpan(size, 99),
         ),
       MessageVoiceNote(
         voiceNote: final voiceNote,

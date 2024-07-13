@@ -1,9 +1,19 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:handygram/src/common/cubits/colors.dart';
+import 'package:handygram/src/common/cubits/scaling.dart';
+import 'package:handygram/src/common/cubits/text.dart';
 import 'package:handygram/src/components/controls/tile_button.dart';
 import 'package:handygram/src/components/list/listview.dart';
-import 'package:handygram/src/common/cubits/text.dart';
+import 'package:handygram/src/components/scaled_sizes.dart';
 import 'package:handygram/src/components/text/header.dart';
 
 class ValuePickable<T> {
@@ -36,11 +46,11 @@ class ValuePicker<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: const BoxConstraints(
-        minHeight: 61.5,
+      constraints: BoxConstraints(
+        minHeight: Sizes.tilesHeight,
       ),
       child: InkWell(
-        borderRadius: BorderRadius.circular(31),
+        borderRadius: BorderRadii.tilesRadius,
         onTap: () {
           showDialog(
             context: context,
@@ -56,10 +66,10 @@ class ValuePicker<T> extends StatelessWidget {
                     if (pickerHint != null)
                       PageHeader(title: pickerHint!)
                     else
-                      const SizedBox(height: 90),
+                      SizedBox(height: Paddings.afterPage),
                     ...values.map(
                       (e) => Padding(
-                        padding: const EdgeInsets.only(bottom: 5),
+                        padding: EdgeInsets.only(bottom: 5 * Scaling.factor),
                         child: TileButton(
                           text: e.title,
                           gradient: e.value == currentValue,
@@ -78,17 +88,18 @@ class ValuePicker<T> extends StatelessWidget {
           );
         },
         child: Ink(
-          width: MediaQuery.of(context).size.width * 0.89,
+          width: Sizes.tilesWidth,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(31),
+            borderRadius: BorderRadii.tilesRadius,
             color: Theme.of(context).colorScheme.surface,
           ),
           padding: const EdgeInsets.only(
-            left: 16,
-            right: 12,
-            top: 5,
-            bottom: 5,
-          ),
+                left: 16,
+                right: 12,
+                top: 5,
+                bottom: 5,
+              ) *
+              Scaling.factor,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,

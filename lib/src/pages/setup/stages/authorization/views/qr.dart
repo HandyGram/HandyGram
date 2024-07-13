@@ -1,6 +1,15 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:handygram/src/common/cubits/scaling.dart';
 import 'package:handygram/src/common/misc/localizations.dart';
 import 'package:handygram/src/components/controls/text_button.dart';
 import 'package:handygram/src/components/list/listview.dart';
@@ -16,15 +25,15 @@ class AuthorizationQrView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final qrSize = MediaQuery.of(context).size.longestSide * 0.7;
+    final qrSize = MediaQuery.of(context).size.shortestSide * 0.7;
     return Scaffold(
       body: HandyListView(
         bottomPadding: false,
         children: [
           PageHeader(
             title: l10n.qrScanTitle,
-            topPadding: 10,
-            boxSize: 25,
+            topPadding: 10 * Scaling.factor,
+            boxSize: 25 * Scaling.factor,
           ),
           GestureDetector(
             onLongPress: () {
@@ -34,15 +43,15 @@ class AuthorizationQrView extends StatelessWidget {
               height: qrSize,
               width: qrSize,
               child: qrLink == null
-                  ? const Center(
+                  ? Center(
                       child: SizedBox(
-                        height: 50,
-                        width: 50,
-                        child: CircularProgressIndicator(),
+                        height: 50 * Scaling.factor,
+                        width: 50 * Scaling.factor,
+                        child: const CircularProgressIndicator(),
                       ),
                     )
                   : Padding(
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.all(10 * Scaling.factor),
                       child: PrettyQrView.data(
                         data: qrLink!,
                         errorCorrectLevel: QrErrorCorrectLevel.L,

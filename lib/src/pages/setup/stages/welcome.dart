@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,9 +16,11 @@ import 'package:handygram/src/common/misc/localizations.dart';
 import 'package:handygram/src/common/misc/vectors.dart';
 import 'package:handygram/src/components/controls/text_button.dart';
 import 'package:handygram/src/components/controls/tile_button.dart';
-import 'package:handygram/src/components/paddings.dart';
+import 'package:handygram/src/components/scaled_sizes.dart';
 import 'package:handygram/src/pages/setup/bloc.dart';
 import 'package:vector_graphics/vector_graphics_compat.dart';
+
+import '../../../common/cubits/scaling.dart';
 
 class SetupWelcomeStageView extends StatelessWidget {
   const SetupWelcomeStageView({super.key, this.state});
@@ -32,8 +42,8 @@ class SetupWelcomeStageView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: sz.height * 0.3125,
-                      width: sz.width * 0.3125,
+                      height: sz.height * 0.3125 * Scaling.userFactor,
+                      width: sz.width * 0.3125 * Scaling.userFactor,
                       child: switch (state) {
                         SetupStateConnecting(state: final state) => switch (
                               state) {
@@ -60,7 +70,7 @@ class SetupWelcomeStageView extends StatelessWidget {
                           ),
                       },
                     ),
-                    const ElementsPadding(),
+                    SizedBox(height: Paddings.betweenSimilarElements),
                     Text(
                       switch (state) {
                         SetupStateConnecting(state: final state) => switch (
@@ -123,7 +133,7 @@ class SetupWelcomeStageView extends StatelessWidget {
               text: l10n.proxySettingsButton,
               onTap: () => GoRouter.of(context).push("/proxy_list"),
             ),
-            const ElementsPadding(),
+            SizedBox(height: Paddings.betweenSimilarElements),
           ],
         ),
       ),

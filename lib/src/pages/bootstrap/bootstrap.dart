@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -7,6 +15,8 @@ import 'package:handygram/src/common/misc/localizations.dart';
 import 'package:handygram/src/common/misc/vectors.dart';
 import 'package:handygram/src/common/settings/entries.dart';
 import 'package:handygram/src/common/settings/manager.dart';
+import 'package:handygram/src/common/tdlib/client/management/multi_manager.dart';
+import 'package:handygram/src/common/tdlib/client/management/user_manager.dart';
 import 'package:handygram/src/common/tdlib/providers/authorization_state/authorization_states.dart';
 import 'package:handygram/src/common/tdlib/runner/runner.dart';
 import 'package:vector_graphics/vector_graphics_compat.dart';
@@ -31,6 +41,18 @@ class _BootstrapPageState extends State<BootstrapPage>
     await TdlibRunner.fromUIThread();
     if (mounted) {
       await loadLocalizations(Localizations.localeOf(context));
+    }
+    final authStates = CurrentAccount.providers.authorizationState;
+    if (authStates.isLoggedIn == null) {
+      statesLoop:
+      await for (final state in authStates.states) {
+        switch (state) {
+          case AuthorizationStateLoading():
+            continue;
+          default:
+            break statesLoop;
+        }
+      }
     }
   }
 

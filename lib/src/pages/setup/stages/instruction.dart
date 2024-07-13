@@ -1,9 +1,18 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:handygram/src/common/cubits/scaling.dart';
 import 'package:handygram/src/common/misc/localizations.dart';
 import 'package:handygram/src/components/controls/tile_button.dart';
 import 'package:handygram/src/components/list/listview.dart';
-import 'package:handygram/src/components/paddings.dart';
+import 'package:handygram/src/components/scaled_sizes.dart';
 
 class QrInstructionPage extends StatelessWidget {
   const QrInstructionPage({super.key});
@@ -15,15 +24,16 @@ class QrInstructionPage extends StatelessWidget {
       body: HandyListView(
         bottomPadding: false,
         children: [
-          const SizedBox(height: 40),
+          SizedBox(height: 40 * Scaling.factor),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 22),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 22) * Scaling.factor,
             child: Text(
               l10n.qrInstruction,
               textAlign: TextAlign.center,
             ),
           ),
-          const SmallButtonPadding(),
+          SizedBox(height: Paddings.beforeSmallButton),
           TileButton(
             big: false,
             text: l10n.closeButton,

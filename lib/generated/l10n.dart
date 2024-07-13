@@ -304,6 +304,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Updating...`
+  String get connectionUpdating {
+    return Intl.message(
+      'Updating...',
+      name: 'connectionUpdating',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Connected`
   String get connectionConnected {
     return Intl.message(
@@ -1409,6 +1419,86 @@ class AppLocalizations {
       name: 'notificationsChannelMessagesDesc',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Channels`
+  String get notificationsChannelChannels {
+    return Intl.message(
+      'Channels',
+      name: 'notificationsChannelChannels',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Groups`
+  String get notificationsChannelGroups {
+    return Intl.message(
+      'Groups',
+      name: 'notificationsChannelGroups',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Private chats`
+  String get notificationsChannelPrivateChats {
+    return Intl.message(
+      'Private chats',
+      name: 'notificationsChannelPrivateChats',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Saved Messages`
+  String get templateTitleSavedMessages {
+    return Intl.message(
+      'Saved Messages',
+      name: 'templateTitleSavedMessages',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Replies`
+  String get templateTitleRepliesBot {
+    return Intl.message(
+      'Replies',
+      name: 'templateTitleRepliesBot',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unsupported message {type}. Please update your HandyGram.`
+  String messageContentUnsupported(Object type) {
+    return Intl.message(
+      'Unsupported message $type. Please update your HandyGram.',
+      name: 'messageContentUnsupported',
+      desc: '',
+      args: [type],
+    );
+  }
+
+  /// `Failed to load chat: {error}`
+  String chatBlocLoadingError(String error) {
+    return Intl.message(
+      'Failed to load chat: $error',
+      name: 'chatBlocLoadingError',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Message {id} was not found`
+  String chatViewMessageNotFoundError(int id) {
+    return Intl.message(
+      'Message $id was not found',
+      name: 'chatViewMessageNotFoundError',
+      desc: '',
+      args: [id],
     );
   }
 }

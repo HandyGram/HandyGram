@@ -1,5 +1,14 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:handygram/src/common/cubits/scaling.dart';
 import 'package:handygram/src/common/native/channel.dart';
 import 'package:handygram/src/components/list/page_indicator.dart';
 import 'package:handygram/src/pages/setup/bloc.dart';
@@ -77,8 +86,22 @@ class SetupView extends StatelessWidget {
                   _ => Container(),
                 },
               ),
-            SetupStateFinished() => Container(
-                key: const ValueKey<String>("setup_placeholder"),
+            SetupStateFinished() => Scaffold(
+                body: Container(
+                  key: const ValueKey<String>("setup_placeholder"),
+                  child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(Scaling.screenSize.width / 8),
+                      child: const Text(
+                        "Error\n"
+                        "Setup had been finished, but BL still tries to run it.\n"
+                        "\nPossible fix\n"
+                        "Clean app's data.",
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ),
               ),
           },
         );

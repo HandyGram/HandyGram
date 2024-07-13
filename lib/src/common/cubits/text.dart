@@ -1,10 +1,23 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:handygram/src/common/cubits/scaling.dart';
 import 'package:handygram/src/common/settings/entries.dart';
 import 'package:handygram/src/common/settings/manager.dart';
 
 class TextStyles extends Cubit<TextTheme> {
-  TextStyles._() : super(_calculate(1));
+  TextStyles._() : super(_calculate(1)) {
+    Scaling.instance.stream.listen((_) {
+      emit(_calculate(scale));
+    });
+  }
 
   double _scale = 1;
 
@@ -14,7 +27,7 @@ class TextStyles extends Cubit<TextTheme> {
     emit(_calculate(scale));
   }
 
-  double get scale => _scale;
+  double get scale => _scale * Scaling.factor;
   static TextTheme get active => instance.state;
 
   static const double _letterSpacing = 0;

@@ -1,11 +1,19 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:handy_tdlib/api.dart' as td;
 import 'package:handygram/src/common/log/log.dart';
 import 'package:handygram/src/common/native/channel.dart';
 import 'package:handygram/src/common/tdlib/client/structures/base_service.dart';
 import 'package:handygram/src/common/tdlib/client/structures/tdlib_toolbox.dart';
-import 'package:handy_tdlib/api.dart' as td;
 
 class TdlibNetworkTypeService extends TdlibService {
   static const String tag = "TdlibNetworkTypeService";

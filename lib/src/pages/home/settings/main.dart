@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:handygram/src/common/cubits/colors.dart';
@@ -8,7 +16,7 @@ import 'package:handygram/src/common/settings/manager.dart';
 import 'package:handygram/src/components/controls/tile_button.dart';
 import 'package:handygram/src/components/icons/svg.dart';
 import 'package:handygram/src/components/list/listview.dart';
-import 'package:handygram/src/components/paddings.dart';
+import 'package:handygram/src/components/scaled_sizes.dart';
 import 'package:handygram/src/components/text/header.dart';
 import 'package:handygram/src/pages/home/settings/user.dart';
 
@@ -24,49 +32,49 @@ class SettingsMain extends StatelessWidget {
         children: [
           const PageHeader(title: "Settings"),
           const SettingsUserButton(),
-          const ElementsPadding(),
+          SizedBox(height: Paddings.betweenSimilarElements),
           TileButton(
             icon: const SvgIcon("theme"),
             text: "Interface",
             colorful: false,
             onTap: () => router.push("/settings/ui"),
           ),
-          const ElementsPadding(),
+          SizedBox(height: Paddings.betweenSimilarElements),
           TileButton(
             icon: const SvgIcon("chat"),
             text: "Messaging",
             colorful: false,
             onTap: () => router.push("/settings/chat"),
           ),
-          const ElementsPadding(),
+          SizedBox(height: Paddings.betweenSimilarElements),
           TileButton(
             icon: const SvgIcon("notification"),
             text: "Notifications",
             colorful: false,
             onTap: () => router.push("/settings/notifications"),
           ),
-          const ElementsPadding(),
+          SizedBox(height: Paddings.betweenSimilarElements),
           TileButton(
             icon: const SvgIcon("storage"),
             text: "Storage",
             colorful: false,
             onTap: () => router.push("/settings/storage"),
           ),
-          const ElementsPadding(),
+          SizedBox(height: Paddings.betweenSimilarElements),
           TileButton(
             icon: const SvgIcon("proxy"),
             text: "Proxy",
             colorful: false,
             onTap: () => router.push("/proxy_list"),
           ),
-          const ElementsPadding(),
+          SizedBox(height: Paddings.betweenSimilarElements),
           TileButton(
             icon: const SvgIcon("info"),
             text: "About app",
             colorful: false,
             onTap: () => router.push("/settings/about"),
           ),
-          const SmallButtonPadding(),
+          SizedBox(height: Paddings.beforeSmallButton),
           Text(
             "HandyGram ${Settings().currentVersion} (${Settings().currentCodename})",
             style: TextStyles.active.bodyMedium!.copyWith(
@@ -74,7 +82,7 @@ class SettingsMain extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          const ElementsPadding(),
+          SizedBox(height: Paddings.betweenSimilarElements),
           Text(
             "${HandyNatives().gitInfo.$1}@${HandyNatives().gitInfo.$2.substring(0, 7)}",
             style: TextStyles.active.bodyMedium!.copyWith(
@@ -82,7 +90,7 @@ class SettingsMain extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          const ElementsPadding(),
+          SizedBox(height: Paddings.betweenSimilarElements),
           FutureBuilder(
             future: CurrentAccount.providers.options.get("version"),
             builder: (context, sn) => Text(

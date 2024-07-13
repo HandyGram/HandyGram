@@ -45,6 +45,7 @@
   "connectionWaitingForNetwork": "Waiting for network...",
   "connectionConnectingToProxy": "Connecting to proxy...",
   "connectionConnecting": "Connecting...",
+  "connectionUpdating": "Updating...",
   "connectionConnected": "Connected",
 
   "proxyAdd": "Add proxy",
@@ -360,5 +361,30 @@
   "notificationsChannelMentions": "Mentions",
   "notificationsChannelMentionsDesc": "All your mentions from group chats",
   "notificationsChannelMessages": "Messages",
-  "notificationsChannelMessagesDesc": "All new messages in chats where you've enabled notifications (both group and personal ones)"
+  "notificationsChannelMessagesDesc": "All new messages in chats where you've enabled notifications (both group and personal ones)",
+  "notificationsChannelChannels": "Channels",
+  "notificationsChannelGroups": "Groups",
+  "notificationsChannelPrivateChats": "Private chats",
+
+  "templateTitleSavedMessages": "Saved Messages",
+  "templateTitleRepliesBot": "Replies",
+
+  "messageContentUnsupported": "Unsupported message {type}. Please update your HandyGram.",
+
+  "chatBlocLoadingError": "Failed to load chat: {error}",
+  "@chatBlocLoadingError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "chatViewMessageNotFoundError": "Message {id} was not found",
+  "@chatViewMessageNotFoundError": {
+    "placeholders": {
+      "id": {
+        "type": "int"
+      }
+    }
+  }
 }

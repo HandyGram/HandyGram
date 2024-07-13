@@ -1,13 +1,22 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:handygram/src/common/cubits/colors.dart';
+import 'package:handygram/src/common/cubits/scaling.dart';
 import 'package:handygram/src/common/cubits/text.dart';
 import 'package:handygram/src/common/misc/localizations.dart';
 import 'package:handygram/src/components/controls/checkbox.dart';
 import 'package:handygram/src/components/controls/tile_button.dart';
 import 'package:handygram/src/components/list/listview.dart';
-import 'package:handygram/src/components/paddings.dart';
+import 'package:handygram/src/components/scaled_sizes.dart';
 import 'package:handygram/src/components/text/header.dart';
 import 'package:handygram/src/pages/proxy/list/bloc.dart';
 
@@ -23,11 +32,11 @@ class ProxyListView extends StatelessWidget {
         builder: (context, state) => AnimatedSwitcher(
           duration: const Duration(milliseconds: 300),
           child: switch (state) {
-            ProxyListLoading() => const Center(
+            ProxyListLoading() => Center(
                 child: SizedBox(
-                  height: 50,
-                  width: 50,
-                  child: CircularProgressIndicator(),
+                  height: 50 * Scaling.factor,
+                  width: 50 * Scaling.factor,
+                  child: const CircularProgressIndicator(),
                 ),
               ),
             ProxyListUpdated(proxies: final proxies) => HandyListView(
@@ -53,7 +62,7 @@ class ProxyListView extends StatelessWidget {
                             : null,
                     useSwitch: true,
                   ),
-                  const ElementsPadding(),
+                  SizedBox(height: Paddings.betweenSimilarElements),
                   for (final proxy in proxies) ...[
                     HandyCheckbox(
                       value: proxy.status is ProxyStatusEnabled,
@@ -105,7 +114,7 @@ class ProxyListView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const ElementsPadding(),
+                    SizedBox(height: Paddings.betweenSimilarElements),
                   ],
                   TileButton(
                     text: l10n.proxyAdd,
@@ -113,7 +122,7 @@ class ProxyListView extends StatelessWidget {
                     colorful: false,
                     onTap: () => GoRouter.of(context).push("/proxy"),
                   ),
-                  const SmallButtonPadding(),
+                  SizedBox(height: Paddings.beforeSmallButton),
                   TileButton(
                     text: l10n.doneButton,
                     big: false,

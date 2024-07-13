@@ -1,14 +1,23 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:handy_tdlib/api.dart' as td;
+import 'package:handygram/src/common/cubits/scaling.dart';
 import 'package:handygram/src/common/cubits/text.dart';
 import 'package:handygram/src/common/misc/localizations.dart';
 import 'package:handygram/src/components/controls/checkbox.dart';
 import 'package:handygram/src/components/controls/tile_button.dart';
 import 'package:handygram/src/components/fields/text_field.dart';
 import 'package:handygram/src/components/list/listview.dart';
-import 'package:handygram/src/components/paddings.dart';
 import 'package:handygram/src/components/picker/picker.dart';
+import 'package:handygram/src/components/scaled_sizes.dart';
 import 'package:handygram/src/components/text/header.dart';
 import 'package:handygram/src/pages/proxy/single/bloc.dart';
 
@@ -128,11 +137,11 @@ class _ProxyViewState extends State<ProxyView> {
     }
     return Scaffold(
       body: state is ProxyLoading
-          ? const Center(
+          ? Center(
               child: SizedBox(
-                height: 50,
-                width: 50,
-                child: CircularProgressIndicator(),
+                height: 50 * Scaling.factor,
+                width: 50 * Scaling.factor,
+                child: const CircularProgressIndicator(),
               ),
             )
           : HandyListView(
@@ -148,13 +157,13 @@ class _ProxyViewState extends State<ProxyView> {
                   title: l10n.proxyServer,
                   autocorrect: false,
                 ),
-                const ElementsPadding(),
+                SizedBox(height: Paddings.betweenSimilarElements),
                 HandyTextField(
                   controller: portController,
                   title: l10n.proxyPort,
                   autocorrect: false,
                 ),
-                const ElementsPadding(),
+                SizedBox(height: Paddings.betweenSimilarElements),
                 ValuePicker<_ProxyType>(
                   values: [
                     ValuePickable(
@@ -179,7 +188,7 @@ class _ProxyViewState extends State<ProxyView> {
                   }),
                 ),
                 if (type == _ProxyType.http) ...[
-                  const ElementsPadding(),
+                  SizedBox(height: Paddings.betweenSimilarElements),
                   HandyCheckbox(
                     text: Text(
                       l10n.proxyInsecure,
@@ -190,7 +199,7 @@ class _ProxyViewState extends State<ProxyView> {
                     onChanged: (v) => setState(() => insecure = v),
                   ),
                 ],
-                const ElementsPadding(),
+                SizedBox(height: Paddings.betweenSimilarElements),
                 if (type == _ProxyType.mtproto) ...[
                   HandyTextField(
                     controller: secretController,
@@ -204,7 +213,7 @@ class _ProxyViewState extends State<ProxyView> {
                     title: l10n.proxyUser,
                     autocorrect: false,
                   ),
-                  const ElementsPadding(),
+                  SizedBox(height: Paddings.betweenSimilarElements),
                   HandyTextField(
                     controller: passwordController,
                     title: l10n.proxyPassword,
@@ -212,7 +221,7 @@ class _ProxyViewState extends State<ProxyView> {
                     obscureText: true,
                   ),
                 ],
-                const SmallButtonPadding(),
+                SizedBox(height: Paddings.beforeSmallButton),
                 if (state is ProxyEditing) ...[
                   TileButton(
                     big: false,
@@ -221,7 +230,7 @@ class _ProxyViewState extends State<ProxyView> {
                     onTap: () =>
                         context.read<ProxyBloc>().add(const ProxyDelete()),
                   ),
-                  const ElementsPadding(),
+                  SizedBox(height: Paddings.betweenSimilarElements),
                 ],
                 TileButton(
                   big: false,

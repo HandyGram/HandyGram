@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'dart:async';
 
 import 'package:handygram/src/common/tdlib/client/structures/base_service.dart';
@@ -10,8 +18,8 @@ class TdlibDefaultOptionsService extends TdlibService {
 
   final Map<String, dynamic> _options = {
     // For Firebase
-    "notification_group_count_max": 5,
-    "notification_group_size_max": 3,
+    "notification_group_count_max": 8,
+    "notification_group_size_max": 8,
 
     // I'm too lazy to implement Markdown parser
     "always_parse_markdown": true,

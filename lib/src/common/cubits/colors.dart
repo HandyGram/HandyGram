@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:handygram/src/common/exceptions/ui_exception.dart';
@@ -15,8 +23,6 @@ class ColorStyles extends Cubit<ColorScheme> {
     required final Color secondary,
   }) =>
       ColorScheme.dark(
-        background: Colors.black,
-        onBackground: Colors.white,
         primary: primary,
         onPrimary: onPrimary,
         surface: const Color(0xFF202124),

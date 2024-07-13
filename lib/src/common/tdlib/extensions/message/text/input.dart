@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:handy_tdlib/api.dart';
 import 'package:handygram/generated/l10n.dart';
@@ -88,7 +96,7 @@ extension InputMessageContentPreview on InputMessageContent {
           its,
         ),
       InputMessagePoll(question: final question) => iconWithTextSpan(
-          question,
+          question.text,
           Icons.poll,
           its,
         ),

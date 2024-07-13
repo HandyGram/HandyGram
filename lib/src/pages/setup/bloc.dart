@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:handy_tdlib/api.dart' as td;
 import 'package:handygram/src/common/cubits/colors.dart';
@@ -239,14 +247,17 @@ class SetupBloc extends Bloc<SetupEvent, SetupState> {
   }
 
   static SetupState get _stateBySettingsAndAuth {
-    final state = CurrentAccount.providers.authorizationState.state;
-    if (state is AuthorizationStateWaitingPassword) {
-      return const SetupStateAuthorizing();
-    } else if (state is AuthorizationStateReady) {
-      router.pushReplacement('/home');
-      return const SetupStateFinished();
+    switch (CurrentAccount.providers.authorizationState.state) {
+      case AuthorizationStateRequestingQr():
+      case AuthorizationStateReadyToScanQr():
+        return const SetupStateWelcome();
+      case AuthorizationStateWaitingPassword():
+        return const SetupStateAuthorizing();
+      case AuthorizationStateReady():
+        return const SetupStateFinished();
+      default:
+        return _stateBySettings;
     }
-    return _stateBySettings;
   }
 
   static SetupState get _stateBySettings =>

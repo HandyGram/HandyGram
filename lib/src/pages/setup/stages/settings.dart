@@ -1,10 +1,18 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:handygram/src/common/cubits/text.dart';
 import 'package:handygram/src/components/controls/checkbox.dart';
 import 'package:handygram/src/components/controls/tile_button.dart';
 import 'package:handygram/src/components/list/listview.dart';
-import 'package:handygram/src/common/cubits/text.dart';
-import 'package:handygram/src/components/paddings.dart';
+import 'package:handygram/src/components/scaled_sizes.dart';
 import 'package:handygram/src/components/text/header.dart';
 import 'package:handygram/src/pages/setup/bloc.dart';
 
@@ -49,7 +57,7 @@ class SetupStageSettingsView extends StatelessWidget {
               style: TextStyles.active.titleMedium,
             ),
           ),
-          const ElementsPadding(),
+          SizedBox(height: Paddings.betweenSimilarElements),
           HandyCheckbox(
             value: !disablePfps,
             useSwitch: true,
@@ -59,7 +67,7 @@ class SetupStageSettingsView extends StatelessWidget {
               style: TextStyles.active.titleMedium,
             ),
           ),
-          const SmallButtonPadding(),
+          SizedBox(height: Paddings.beforeSmallButton),
           TileButton(
             text: "Done",
             big: false,

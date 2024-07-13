@@ -1,14 +1,21 @@
-import 'package:flutter/material.dart';
+/*
+ * Copyright (C) Gil Nobrega, 2022
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * 
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See BSD 3-Clause License for more details.
+ * Original repository: https://github.com/hyperfluid-tech/rotary_scrollbar
+ */
+
 import 'dart:math' as math;
 
+import 'package:flutter/material.dart';
 import 'package:handygram/src/common/cubits/colors.dart';
+import 'package:handygram/src/common/cubits/scaling.dart';
 import 'package:handygram/src/common/settings/entries.dart';
 import 'package:handygram/src/common/settings/manager.dart';
-
-//
-// Original widget code:
-// https://github.com/hyperfluid-tech/rotary_scrollbar
-//
 
 const _kProgressBarStartingPoint = -math.pi / 12;
 const _kProgressBarLength = math.pi / 6;
@@ -32,8 +39,8 @@ class HandyScrollbar extends StatelessWidget {
       );
     } else {
       return Scrollbar(
-        thickness: 5,
-        radius: const Radius.circular(2.5),
+        thickness: 5 * Scaling.factor,
+        radius: Radius.circular(2.5 * Scaling.factor),
         interactive: false,
         scrollbarOrientation: ScrollbarOrientation.right,
         controller: controller,
@@ -78,6 +85,7 @@ class _HandyScrollbarState extends State<_HandyScrollbar> {
   int _currentHideUpdate = 0;
   void _onScroll() {
     if (!mounted) return;
+    if (!widget.controller.hasClients) return;
 
     setState(() {
       _isScrollBarVisible = true;

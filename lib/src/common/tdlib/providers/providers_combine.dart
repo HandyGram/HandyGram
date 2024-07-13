@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:handygram/src/common/log/log.dart';
 import 'package:handygram/src/common/tdlib/client/structures/base_provider.dart';
 import 'package:handygram/src/common/tdlib/client/structures/tdlib_toolbox.dart';
@@ -17,8 +25,12 @@ import 'package:handygram/src/common/tdlib/providers/messages/messages.dart';
 import 'package:handygram/src/common/tdlib/providers/notifications/notifications.dart';
 import 'package:handygram/src/common/tdlib/providers/options/options.dart';
 import 'package:handygram/src/common/tdlib/providers/proxy/proxy.dart';
+import 'package:handygram/src/common/tdlib/providers/scope_notification_settings/scope_notification_settings.dart';
+import 'package:handygram/src/common/tdlib/providers/stickers/stickers.dart';
 
 class TdlibProvidersCombine {
+  static const String tag = "TdlibProvidersCombine";
+
   final AuthorizationStateProvider authorizationState =
       AuthorizationStateProvider();
   final ConnectionStateProvider connectionState = ConnectionStateProvider();
@@ -43,6 +55,10 @@ class TdlibProvidersCombine {
   final UsersFullInfoProvider usersFullInfo = UsersFullInfoProvider();
 
   final NotificationsProvider notifications = NotificationsProvider();
+  final ScopeNotificationSettingsProvider scopeNotificationSettings =
+      ScopeNotificationSettingsProvider();
+
+  final StickersProvider stickers = StickersProvider();
 
   final bool isLite;
 
@@ -64,6 +80,8 @@ class TdlibProvidersCombine {
           supergroupsFullInfo,
           usersFullInfo,
           notifications,
+          scopeNotificationSettings,
+          stickers,
         ]
       : [
           users,
@@ -76,21 +94,41 @@ class TdlibProvidersCombine {
 
   Future<void> attach(TdlibToolbox box) async {
     for (final p in _providers) {
-      await p.attach(box);
+      try {
+        await p.attach(box);
+      } catch (e, st) {
+        l.e(tag, "Failed to attach ${p.runtimeType}: $e\n$st");
+      }
     }
   }
 
   Future<void> detach(TdlibToolbox box) async {
     for (final p in _providers) {
-      await p.detach(box);
+      try {
+        await p.detach(box);
+      } catch (e, st) {
+        l.e(tag, "Failed to detach ${p.runtimeType}: $e\n$st");
+      }
     }
   }
 
   Future<void> onTdlibReady() async {
-    l.d("TdlibProvidersCombine",
-        "Notifying providers about TDLib being running");
     for (final p in _providers) {
-      await p.onTdlibReady();
+      try {
+        await p.onTdlibReady();
+      } catch (e, st) {
+        l.e(tag, "Exception on ${p.runtimeType}.onTdlibReady(): $e\n$st");
+      }
+    }
+  }
+
+  Future<void> onAuthorized() async {
+    for (final p in _providers) {
+      try {
+        await p.onAuthorized();
+      } catch (e, st) {
+        l.e(tag, "Exception on ${p.runtimeType}.onAuthorized(): $e\n$st");
+      }
     }
   }
 

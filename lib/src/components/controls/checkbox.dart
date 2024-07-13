@@ -1,5 +1,15 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:handygram/src/common/cubits/colors.dart';
+import 'package:handygram/src/common/cubits/scaling.dart';
+import 'package:handygram/src/components/scaled_sizes.dart';
 
 class HandyCheckbox extends StatelessWidget {
   const HandyCheckbox({
@@ -23,19 +33,19 @@ class HandyCheckbox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: const BoxConstraints(
-        minHeight: 61.5,
+      constraints: BoxConstraints(
+        minHeight: Sizes.tilesHeight,
       ),
       child: AnimatedContainer(
-        width: MediaQuery.of(context).size.width * 0.89,
+        width: Sizes.tilesWidth,
         duration: const Duration(milliseconds: 150),
         curve: Curves.easeInOut,
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 5,
+        padding: EdgeInsets.symmetric(
+          horizontal: Paddings.tilesHorizontalPadding,
+          vertical: 5 * Scaling.factor,
         ),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(31),
+          borderRadius: BorderRadii.tilesRadius,
           gradient: LinearGradient(
             colors: [
               ColorStyles.active.surface,
@@ -64,27 +74,27 @@ class HandyCheckbox extends StatelessWidget {
                 behavior: HitTestBehavior.opaque,
                 child: Row(
                   children: [
-                    Container(width: 8),
+                    Container(width: 8 * Scaling.factor),
                     Center(
                       child: (!useSwitch)
                           ? AnimatedContainer(
-                              width: 24,
-                              height: 24,
+                              width: 24 * Scaling.factor,
+                              height: 24 * Scaling.factor,
                               duration: const Duration(milliseconds: 200),
                               curve: Curves.easeInOut,
                               decoration: BoxDecoration(
                                 borderRadius: circle
-                                    ? BorderRadius.circular(12)
-                                    : BorderRadius.circular(6),
+                                    ? BorderRadius.circular(12 * Scaling.factor)
+                                    : BorderRadius.circular(6 * Scaling.factor),
                                 color: value
                                     ? ColorStyles.active.primary
                                     : ColorStyles.active.onSurfaceVariant,
                               ),
                               child: Checkbox(
                                 side: BorderSide.none,
-                                fillColor: const MaterialStatePropertyAll(
+                                fillColor: const WidgetStatePropertyAll(
                                     Colors.transparent),
-                                overlayColor: const MaterialStatePropertyAll(
+                                overlayColor: const WidgetStatePropertyAll(
                                     Colors.transparent),
                                 value: value,
                                 materialTapTargetSize:
@@ -93,7 +103,7 @@ class HandyCheckbox extends StatelessWidget {
                               ),
                             )
                           : Transform.scale(
-                              scale: 0.8,
+                              scale: 0.8 * Scaling.factor,
                               child: SizedBox(
                                 width: 44,
                                 height: 20,

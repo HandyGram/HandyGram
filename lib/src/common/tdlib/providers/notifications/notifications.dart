@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:handy_tdlib/api.dart' as td;
 import 'package:handygram/src/common/exceptions/tdlib_core_exception.dart';
 import 'package:handygram/src/common/log/log.dart';
@@ -125,7 +133,8 @@ class NotificationsProvider
       if (obj.code == 406) {
         return false;
       } else {
-        throw TdlibCoreException.fromTd(tag, obj);
+        // TODO: loc_key error handling
+        return false;
       }
     }
     return obj != null;

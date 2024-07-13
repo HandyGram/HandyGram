@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:handygram/src/common/cubits/text.dart';
 import 'package:handygram/src/components/controls/checkbox.dart';
@@ -5,8 +13,8 @@ import 'package:handygram/src/components/controls/text_button.dart';
 import 'package:handygram/src/components/controls/tile_button.dart';
 import 'package:handygram/src/components/fields/text_field.dart';
 import 'package:handygram/src/components/list/listview.dart';
-import 'package:handygram/src/components/paddings.dart';
 import 'package:handygram/src/components/picker/picker.dart';
+import 'package:handygram/src/components/scaled_sizes.dart';
 import 'package:handygram/src/components/text/current_time.dart';
 import 'package:handygram/src/components/text/header.dart';
 
@@ -50,7 +58,7 @@ class _UiTestPageState extends State<UiTestPage> {
                 ),
               ],
             ),
-            const ElementsPadding(),
+            SizedBox(height: Paddings.beforeSmallButton),
             const TileButton(
               text: "Disabled",
               big: false,

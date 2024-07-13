@@ -1,6 +1,15 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:handygram/src/common/cubits/colors.dart';
 import 'package:handygram/src/common/cubits/text.dart';
+import 'package:handygram/src/components/scaled_sizes.dart';
 
 class HandyTextField extends StatelessWidget {
   const HandyTextField({
@@ -23,18 +32,18 @@ class HandyTextField extends StatelessWidget {
     return AnimatedBuilder(
       animation: controller,
       builder: (context, _) => ConstrainedBox(
-        constraints: const BoxConstraints(
-          minHeight: 61.5,
+        constraints: BoxConstraints(
+          minHeight: Sizes.tilesHeight,
         ),
         child: Container(
-          width: MediaQuery.of(context).size.width * 0.89,
+          width: Sizes.tilesWidth,
           decoration: BoxDecoration(
             color: ColorStyles.active.surface,
-            borderRadius: BorderRadius.circular(31),
+            borderRadius: BorderRadii.tilesRadius,
           ),
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 10,
+          padding: EdgeInsets.symmetric(
+            horizontal: Paddings.tilesHorizontalPadding,
+            vertical: Paddings.tilesVerticalPadding,
           ),
           child: AnimatedBuilder(
             animation: controller,

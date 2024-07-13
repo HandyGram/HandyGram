@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -5,12 +13,14 @@ import 'package:go_router/go_router.dart';
 import 'package:handy_tdlib/api.dart' as td;
 import 'package:handygram/src/common/cubits/colors.dart';
 import 'package:handygram/src/common/cubits/current_account.dart';
+import 'package:handygram/src/common/cubits/scaling.dart';
 import 'package:handygram/src/common/cubits/text.dart';
 import 'package:handygram/src/common/misc/localizations.dart';
 import 'package:handygram/src/common/tdlib/extensions/message/text/content.dart';
 import 'package:handygram/src/common/tdlib/extensions/message/text/input.dart';
 import 'package:handygram/src/common/tdlib/providers/chat_lists/brief_chat_info.dart';
 import 'package:handygram/src/components/icons/avatar.dart';
+import 'package:handygram/src/components/scaled_sizes.dart';
 
 const int _kAuthorNameLength = 5;
 
@@ -21,6 +31,25 @@ class _ChatInfo {
   final bool notifiable;
   final int unreadCount;
   final int unreadMentionCount;
+
+  _ChatInfo copyWith({
+    InlineSpan? draft,
+    InlineSpan? lastMessage,
+    String? title,
+    bool? notifiable,
+    int? unreadCount,
+    int? unreadMentionCount,
+    bool? isMe,
+  }) {
+    return _ChatInfo(
+      draft: draft ?? this.draft,
+      lastMessage: lastMessage ?? this.lastMessage,
+      title: title ?? this.title,
+      notifiable: notifiable ?? this.notifiable,
+      unreadCount: unreadCount ?? this.unreadCount,
+      unreadMentionCount: unreadMentionCount ?? this.unreadMentionCount,
+    );
+  }
 
   const _ChatInfo({
     required this.draft,
@@ -35,10 +64,32 @@ class _ChatInfo {
 class ChatPreview extends StatelessWidget {
   const ChatPreview({
     super.key,
+    this.useTemplateInfoIfNeeded = false,
     required this.briefChatInfo,
   });
 
+  final bool useTemplateInfoIfNeeded;
   final BriefChatInfo briefChatInfo;
+
+  Future<_ChatInfo> _correctInfo(_ChatInfo info, td.Chat chat) async {
+    final me = await CurrentAccount.providers.users.getMe();
+    final isMe = switch (chat.type) {
+      td.ChatTypePrivate(userId: final uid) => me.id == uid,
+      _ => false,
+    };
+    final repliesBotId =
+        await CurrentAccount.providers.options.get("replies_bot_chat_id");
+
+    String? title;
+    if (isMe) {
+      title = AppLocalizations.current.templateTitleSavedMessages;
+    } else if (briefChatInfo.chatId == repliesBotId) {
+      title = AppLocalizations.current.templateTitleRepliesBot;
+    }
+    return info.copyWith(
+      title: title,
+    );
+  }
 
   Future<_ChatInfo> _loadInfo() async {
     final chat = await CurrentAccount.providers.chats.getChat(
@@ -73,7 +124,10 @@ class ChatPreview extends StatelessWidget {
       }
     }
 
-    return _ChatInfo(
+    final settings = await CurrentAccount.providers.scopeNotificationSettings
+        .getForChat(chatObj: chat);
+
+    var ci = _ChatInfo(
       draft: await chat.draftMessage?.inputMessageText.getPreview(
         color: ColorStyles.active.secondary,
       ),
@@ -83,40 +137,43 @@ class ChatPreview extends StatelessWidget {
         author: noAuthor ? null : author,
       ),
       title: chat.title,
-      notifiable: false,
+      notifiable: settings.muteFor <= 0 || chat.unreadMentionCount > 0,
       unreadCount: chat.unreadCount,
       unreadMentionCount: chat.unreadMentionCount,
     );
+    if (useTemplateInfoIfNeeded) ci = await _correctInfo(ci, chat);
+    return ci;
   }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      borderRadius: BorderRadius.circular(31),
+      borderRadius: BorderRadii.tilesRadius,
       onTap: () => GoRouter.of(context).push(
         "/chat?id=${briefChatInfo.chatId}",
       ),
       splashColor: ColorStyles.active.onSurface.withOpacity(0.1),
       highlightColor: ColorStyles.active.onSurface.withOpacity(0.1),
       child: Ink(
-        padding: const EdgeInsets.all(10),
-        height: 61.5,
-        width: MediaQuery.of(context).size.width * 0.89,
+        padding: EdgeInsets.all(10 * Scaling.factor),
+        height: Sizes.tilesHeight,
+        width: Sizes.tilesWidth,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(31),
+          borderRadius: BorderRadii.tilesRadius,
           color: ColorStyles.active.surface,
         ),
         child: Row(
           children: [
             SizedBox(
-              height: 38,
-              width: 38,
+              height: 38 * Scaling.factor,
+              width: 38 * Scaling.factor,
               child: ProfileAvatar(
                 chatId: briefChatInfo.chatId,
+                useTemplateInfoIfNeeded: useTemplateInfoIfNeeded,
                 key: ValueKey<String>("avatar_${briefChatInfo.chatId}"),
               ),
             ),
-            const SizedBox(width: 7),
+            SizedBox(width: 7 * Scaling.factor),
             Expanded(
               key: ValueKey<String>("info_${briefChatInfo.chatId}"),
               child: FutureBuilder<_ChatInfo>(
@@ -172,11 +229,11 @@ class ChatPreview extends StatelessWidget {
                         ),
                         if (snapshot.data!.unreadCount > 0 ||
                             snapshot.data!.unreadMentionCount > 0) ...[
-                          const SizedBox(width: 5),
+                          SizedBox(width: 5 * Scaling.factor),
                           Center(
                             child: Container(
-                              height: 21,
-                              width: 21,
+                              height: 21 * Scaling.factor,
+                              width: 21 * Scaling.factor,
                               decoration: BoxDecoration(
                                 color: snapshot.data!.notifiable
                                     ? ColorStyles.active.primary

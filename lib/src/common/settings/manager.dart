@@ -1,11 +1,19 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:handygram/src/common/exceptions/settings_exception.dart';
 import 'package:handygram/src/common/log/log.dart';
 import 'package:handygram/src/common/settings/setting.dart';
 import 'package:handygram/src/common/settings/version.dart';
 import 'package:handygram/src/common/settings/versions/v1.dart';
 import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
 
 /// How to use Settings?
 ///

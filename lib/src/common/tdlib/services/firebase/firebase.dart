@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'dart:async';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -64,6 +72,8 @@ class TdlibFirebaseService extends TdlibService with PersistentStateMixin {
     await loadLocalizations();
     try {
       await _showNotifications(groups, user);
+    } catch (e, st) {
+      l.e(tag, "Failed to show notifications: $e\n$st");
     } finally {
       await user.destroy();
     }
@@ -76,7 +86,11 @@ class TdlibFirebaseService extends TdlibService with PersistentStateMixin {
     await CurrentAccount.providers.notifications.processPush(payload);
 
     final groups = await _getGroups(CurrentAccount.instance.user);
-    await _showNotifications(groups, CurrentAccount.instance.user);
+    try {
+      await _showNotifications(groups, CurrentAccount.instance.user);
+    } catch (e, st) {
+      l.e(tag, "Failed to show notifications: $e\n$st");
+    }
   }
 
   static Future<List<td.NotificationGroup>> _getGroups(
@@ -89,13 +103,15 @@ class TdlibFirebaseService extends TdlibService with PersistentStateMixin {
         onTimeout: (sink) => sink.close(),
       )) {
         switch (update) {
-          case NotificationsProviderStateUpdate(canCloseTdlib: final canClose):
-            if (canClose) break updater;
           case NotificationsProviderGroupsUpdate(groups: final groupsUpdated):
             groups = groupsUpdated;
+            break updater;
+          default:
+            break;
         }
       }
     }
+    l.d(tag, "Groups count: ${groups.length}");
     return groups;
   }
 
@@ -124,6 +140,8 @@ class TdlibFirebaseService extends TdlibService with PersistentStateMixin {
     }
 
     for (final group in groups) {
+      if (await group.isHidden) continue;
+
       final chat = await user.providers.chats.getChat(group.chatId);
       final mainId = group.id, summaryId = group.id * 1000;
       final mainDetails = await group.details,

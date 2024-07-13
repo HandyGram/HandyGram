@@ -1,12 +1,21 @@
+/*
+ * Copyright (C) Roman Rikhter <teledurak@gmail.com>, 2024
+ * This program comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome to redistribute it under certain conditions;
+ *
+ * See /LICENSE for more details.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:handygram/src/common/cubits/colors.dart';
+import 'package:handygram/src/common/cubits/scaling.dart';
 import 'package:handygram/src/common/cubits/text.dart';
 import 'package:handygram/src/common/misc/localizations.dart';
 import 'package:handygram/src/components/controls/tile_button.dart';
 import 'package:handygram/src/components/fields/text_field.dart';
 import 'package:handygram/src/components/list/listview.dart';
-import 'package:handygram/src/components/paddings.dart';
+import 'package:handygram/src/components/scaled_sizes.dart';
 import 'package:handygram/src/components/text/header.dart';
 import 'package:handygram/src/pages/setup/stages/authorization/bloc.dart';
 
@@ -65,11 +74,11 @@ class _AuthorizationPasswordViewState extends State<AuthorizationPasswordView> {
                 SizedBox(
                   height: size.height,
                   width: size.width,
-                  child: const Center(
+                  child: Center(
                     child: SizedBox(
-                      height: 50,
-                      width: 50,
-                      child: CircularProgressIndicator(),
+                      height: 50 * Scaling.factor,
+                      width: 50 * Scaling.factor,
+                      child: const CircularProgressIndicator(),
                     ),
                   ),
                 ),
@@ -82,11 +91,14 @@ class _AuthorizationPasswordViewState extends State<AuthorizationPasswordView> {
                   obscureText: true,
                   controller: controller,
                   focusNode: focus,
+                  key: const ValueKey<String>("setup-auth-password-field"),
                 ),
-                if (widget.hint.isNotEmpty) const ElementsPadding(),
+                if (widget.hint.isNotEmpty)
+                  SizedBox(height: Paddings.betweenSimilarElements),
                 if (widget.hint.isNotEmpty)
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 22),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 22 * Scaling.factor),
                     child: Text(
                       widget.hint,
                       style: TextStyles.active.labelLarge!.copyWith(
@@ -96,10 +108,11 @@ class _AuthorizationPasswordViewState extends State<AuthorizationPasswordView> {
                     ),
                   ),
                 if (widget.previousAttemptWasIncorrect || widget.error != null)
-                  const ElementsPadding(),
+                  SizedBox(height: Paddings.betweenSimilarElements),
                 if (widget.previousAttemptWasIncorrect || widget.error != null)
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 22),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 22 * Scaling.factor),
                     child: Text(
                       widget.error ?? l10n.incorrectPassword,
                       style: TextStyles.active.labelLarge!.copyWith(
@@ -108,7 +121,7 @@ class _AuthorizationPasswordViewState extends State<AuthorizationPasswordView> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                const ElementsPadding(),
+                SizedBox(height: Paddings.betweenSimilarElements),
                 TileButton(
                   big: false,
                   text: l10n.login,
