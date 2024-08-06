@@ -53,4 +53,13 @@ extension ChatUtils on td.Chat {
         td.ChatTypeSupergroup(supergroupId: final supergroupId) => supergroupId,
         _ => null,
       };
+
+  td.MessageSender get typeAsSender => switch (type) {
+        td.ChatTypeBasicGroup() ||
+        td.ChatTypeSupergroup() =>
+          td.MessageSenderChat(chatId: id),
+        td.ChatTypeSecret(userId: final userId) ||
+        td.ChatTypePrivate(userId: final userId) =>
+          td.MessageSenderUser(userId: userId),
+      };
 }

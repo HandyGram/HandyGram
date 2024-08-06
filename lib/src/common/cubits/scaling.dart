@@ -21,6 +21,7 @@ class Scaling extends Cubit<double> {
   static const double _kBaseSize = _kFigmaFrameSize * _kFigmaFrameScalingFactor;
 
   Size _screenSize = const Size.square(_kBaseSize);
+  double _devicePixelRatio = 1;
   double _userScale = 1;
 
   double get userScale => _userScale;
@@ -39,8 +40,12 @@ class Scaling extends Cubit<double> {
     _recalculateScale();
   }
 
-  set systemScreenResolution(Size screenSize) {
+  void setSystemScreenResolution(
+    Size screenSize,
+    double devicePixelRatio,
+  ) {
     _screenSize = screenSize;
+    _devicePixelRatio = devicePixelRatio;
     _recalculateScale();
   }
 
@@ -51,13 +56,12 @@ class Scaling extends Cubit<double> {
   /// is being calculated using the values from [MediaQuery.size]
   static double get userFactor => instance.userScale;
 
-  /// For internal usage in [Sizes] and [Paddings]
+  /// Screen size in logical pixels
   static Size get screenSize => instance._screenSize;
 
-  static double scaleFactorCallback(Size screenSize) {
-    instance.systemScreenResolution = screenSize;
-    return factor;
-  }
+  /// Screen size in physical pixels
+  static Size get physicalScreenSize =>
+      instance._screenSize * instance._devicePixelRatio;
 
   Scaling._() : super(1);
   static Scaling instance = Scaling._();

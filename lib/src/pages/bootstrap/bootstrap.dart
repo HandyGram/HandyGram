@@ -15,8 +15,6 @@ import 'package:handygram/src/common/misc/localizations.dart';
 import 'package:handygram/src/common/misc/vectors.dart';
 import 'package:handygram/src/common/settings/entries.dart';
 import 'package:handygram/src/common/settings/manager.dart';
-import 'package:handygram/src/common/tdlib/client/management/multi_manager.dart';
-import 'package:handygram/src/common/tdlib/client/management/user_manager.dart';
 import 'package:handygram/src/common/tdlib/providers/authorization_state/authorization_states.dart';
 import 'package:handygram/src/common/tdlib/runner/runner.dart';
 import 'package:vector_graphics/vector_graphics_compat.dart';

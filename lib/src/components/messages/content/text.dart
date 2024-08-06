@@ -1,27 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:handy_tdlib/api.dart' as td;
-import 'package:handygram/src/components/text/formatted_text.dart';
+import 'package:handygram/src/components/messages/content.dart';
+import 'package:handygram/src/components/messages/parts/caption/widget.dart';
+import 'package:handygram/src/components/scaled_sizes.dart';
 
-class TextMessageContent extends StatelessWidget {
-  const TextMessageContent(
-    this.content, {
+class TextMessageContent extends MessageStatelessWidget<td.MessageText> {
+  const TextMessageContent({
     super.key,
-    required this.isOutgoing,
+    required super.data,
   });
-
-  final td.MessageText content;
-  final bool isOutgoing;
 
   @override
   Widget build(BuildContext context) {
-    return FormattedTextWidget(
+    return MessageCaptionWidget(
       content.text,
-      // TODO: figure out why is it needed
-      maxLines: 999999,
-      textAlign: isOutgoing ? TextAlign.right : TextAlign.left,
-      baseColor: isOutgoing
-          ? FormattedTextBaseColor.surface
-          : FormattedTextBaseColor.onSurface,
+      isOutgoing: isOutgoing,
+      attributesWidget: attributesWidget,
+      attributesPadding: Paddings.betweenSimilarElements,
     );
   }
 }

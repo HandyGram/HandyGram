@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:handygram/src/common/cubits/current_account.dart';
 import 'package:handygram/src/common/cubits/scaling.dart';
 import 'package:handygram/src/common/native/channel.dart';
 import 'package:handygram/src/components/list/page_indicator.dart';
@@ -46,8 +47,9 @@ class SetupView extends StatelessWidget {
                 state: state,
                 key: const ValueKey<String>("setup_welcome"),
               ),
-            SetupStateAuthorizing() => const AuthorizationPage(
-                key: ValueKey<String>("setup_auth_root"),
+            SetupStateAuthorizing() => AuthorizationPage(
+                user: CurrentAccount.instance.user,
+                key: const ValueKey<String>("setup_auth_root"),
               ),
             SetupStateColorScheme() ||
             SetupStateSettings() ||

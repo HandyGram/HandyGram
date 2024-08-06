@@ -10,8 +10,8 @@ import 'dart:async';
 
 import 'package:async/async.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:handygram/src/common/cubits/current_account.dart';
 import 'package:handygram/src/common/exceptions/tdlib_core_exception.dart';
+import 'package:handygram/src/common/tdlib/client/management/user_manager.dart';
 import 'package:handygram/src/common/tdlib/providers/authorization_state/authorization_state.dart';
 import 'package:handygram/src/common/tdlib/providers/authorization_state/authorization_states.dart';
 
@@ -70,10 +70,13 @@ class AuthorizationBloc
     extends Bloc<AuthorizationBlocEvent, AuthorizationBlocState> {
   static const String tag = "AuthorizationBloc";
 
-  AuthorizationBloc() : super(const AuthorizationBlocStateRequestingQr()) {
+  AuthorizationBloc(this.manager)
+      : super(const AuthorizationBlocStateRequestingQr()) {
     on<RequestQrCode>(_requestQrCode);
     on<SetPassword>(_setPassword);
   }
+
+  final TdlibUserManager manager;
 
   String hint = "";
 
@@ -148,6 +151,6 @@ class AuthorizationBloc
     }
   }
 
-  final AuthorizationStateProvider _auth =
-      CurrentAccount.providers.authorizationState;
+  late final AuthorizationStateProvider _auth =
+      manager.providers.authorizationState;
 }

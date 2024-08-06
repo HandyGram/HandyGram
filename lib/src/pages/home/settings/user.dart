@@ -6,15 +6,15 @@
  * See /LICENSE for more details.
  */
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:handy_tdlib/api.dart' as td;
 import 'package:handygram/src/common/cubits/colors.dart';
 import 'package:handygram/src/common/cubits/current_account.dart';
 import 'package:handygram/src/common/cubits/scaling.dart';
 import 'package:handygram/src/common/cubits/text.dart';
-import 'package:handygram/src/common/misc/localizations.dart';
-import 'package:handygram/src/common/misc/strings.dart';
+import 'package:handygram/src/common/tdlib/extensions/misc/display.dart';
 import 'package:handygram/src/components/icons/avatar.dart';
 import 'package:handygram/src/components/scaled_sizes.dart';
 
@@ -22,35 +22,81 @@ class _UserInfo {
   final String title;
   final String phoneNumber;
   final int id;
+  final bool isMe;
 
   const _UserInfo({
     required this.title,
     required this.phoneNumber,
     required this.id,
+    required this.isMe,
   });
 }
 
-class SettingsUserButton extends StatelessWidget {
+class SettingsUserButton extends StatefulWidget {
   const SettingsUserButton({
     super.key,
+    required this.userId,
+    this.onTap,
   });
 
-  _UserInfo _infoFromUser(td.User user) => _UserInfo(
-        title: squashName(user.firstName, user.lastName),
+  final int? userId;
+  final Function()? onTap;
+
+  @override
+  State<SettingsUserButton> createState() => _SettingsUserButtonState();
+}
+
+class _SettingsUserButtonState extends State<SettingsUserButton> {
+  StreamSubscription? _sub;
+  _UserInfo? _info;
+
+  _UserInfo _getUserInfo(td.User user, int myUserId) => _UserInfo(
+        title: user.displayName,
         phoneNumber: "+${user.phoneNumber}",
         id: user.id,
+        isMe: widget.userId == myUserId,
       );
 
-  Future<_UserInfo> _loadInfo(AppLocalizations l10n) async {
-    final user = await CurrentAccount.providers.users.getMe();
-    return _infoFromUser(user);
+  Future<void> _loadInfo() async {
+    final user = widget.userId == null
+        ? await CurrentAccount.providers.users.getMe()
+        : await CurrentAccount.providers.users.getUser(widget.userId!);
+    final myUserId =
+        await CurrentAccount.providers.options.getMaybeCached('my_id');
+    _info = _getUserInfo(user, myUserId);
+
+    if (!mounted || !context.mounted) return;
+
+    setState(() {});
+    _sub ??= CurrentAccount.providers.users.filter(user.id).listen((user) {
+      if (!mounted || !context.mounted) {
+        _sub?.cancel();
+        return;
+      }
+
+      setState(() {
+        _info = _getUserInfo(user, myUserId);
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadInfo();
+  }
+
+  @override
+  void dispose() {
+    _sub?.cancel();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadii.tilesRadius,
-      onTap: () => GoRouter.of(context).push("/settings/account"),
+      onTap: widget.onTap,
       splashColor: ColorStyles.active.onSurface.withOpacity(0.1),
       highlightColor: ColorStyles.active.onSurface.withOpacity(0.1),
       child: Ink(
@@ -59,33 +105,25 @@ class SettingsUserButton extends StatelessWidget {
         width: Sizes.tilesWidth,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(31 * Scaling.factor),
-          color: ColorStyles.active.surface,
+          gradient: LinearGradient(
+            colors: [
+              _info?.isMe ?? false
+                  ? ColorStyles.active.onSurfaceVariant
+                  : ColorStyles.active.surface,
+              ColorStyles.active.surface,
+            ],
+          ),
         ),
-        child: FutureBuilder<_UserInfo>(
-          future: _loadInfo(AppLocalizations.of(context)),
-          builder: (context, snapshot) {
-            if (!snapshot.hasData || snapshot.data == null) {
-              return Center(
+        child: _info == null
+            ? Center(
                 child: Text(
-                  snapshot.hasError ? "Error" : "Loading...",
+                  "Loading...",
                   style: TextStyles.active.bodyMedium,
                 ),
-              );
-            }
-            return StreamBuilder(
-              initialData: snapshot.data,
-              stream: CurrentAccount.providers.users
-                  .filter(snapshot.data!.id)
-                  .map((e) => _infoFromUser(
-                        e,
-                      )),
-              builder: (context, snapshot) => Row(
+              )
+            : Row(
                 children: [
-                  SizedBox(
-                    height: 38 * Scaling.factor,
-                    width: 38 * Scaling.factor,
-                    child: ProfileAvatar(chatId: snapshot.data!.id),
-                  ),
+                  ProfileAvatar(chatId: _info!.id),
                   SizedBox(width: 7 * Scaling.factor),
                   Expanded(
                     child: Column(
@@ -94,14 +132,14 @@ class SettingsUserButton extends StatelessWidget {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Text(
-                          snapshot.data!.title,
+                          _info!.title,
                           maxLines: 1,
                           style: TextStyles.active.titleMedium,
                           overflow: TextOverflow.ellipsis,
                           softWrap: false,
                         ),
                         Text(
-                          snapshot.data!.phoneNumber,
+                          _info!.phoneNumber,
                           maxLines: 1,
                           style: TextStyles.active.bodyMedium!.copyWith(
                             color: ColorStyles.active.secondary,
@@ -114,9 +152,6 @@ class SettingsUserButton extends StatelessWidget {
                   ),
                 ],
               ),
-            );
-          },
-        ),
       ),
     );
   }

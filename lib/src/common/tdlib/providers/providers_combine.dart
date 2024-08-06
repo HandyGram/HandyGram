@@ -9,6 +9,8 @@
 import 'package:handygram/src/common/log/log.dart';
 import 'package:handygram/src/common/tdlib/client/structures/base_provider.dart';
 import 'package:handygram/src/common/tdlib/client/structures/tdlib_toolbox.dart';
+
+import 'package:handygram/src/common/tdlib/providers/accent_colors/accent_colors.dart';
 import 'package:handygram/src/common/tdlib/providers/authorization_state/authorization_state.dart';
 import 'package:handygram/src/common/tdlib/providers/chat_lists/chat_lists.dart';
 import 'package:handygram/src/common/tdlib/providers/chats/basic_group.dart';
@@ -27,6 +29,7 @@ import 'package:handygram/src/common/tdlib/providers/options/options.dart';
 import 'package:handygram/src/common/tdlib/providers/proxy/proxy.dart';
 import 'package:handygram/src/common/tdlib/providers/scope_notification_settings/scope_notification_settings.dart';
 import 'package:handygram/src/common/tdlib/providers/stickers/stickers.dart';
+import 'package:handygram/src/common/tdlib/providers/stories/stories.dart';
 
 class TdlibProvidersCombine {
   static const String tag = "TdlibProvidersCombine";
@@ -39,6 +42,7 @@ class TdlibProvidersCombine {
 
   final OptionsProvider options = OptionsProvider();
   final FilesProvider files = FilesProvider();
+  final AccentColorsProvider accentColors = AccentColorsProvider();
 
   final MessagesProvider messages = MessagesProvider();
   final ChatsProvider chats = ChatsProvider();
@@ -59,6 +63,8 @@ class TdlibProvidersCombine {
       ScopeNotificationSettingsProvider();
 
   final StickersProvider stickers = StickersProvider();
+
+  final StoriesProvider stories = StoriesProvider();
 
   final bool isLite;
 
@@ -82,6 +88,8 @@ class TdlibProvidersCombine {
           notifications,
           scopeNotificationSettings,
           stickers,
+          stories,
+          accentColors,
         ]
       : [
           users,

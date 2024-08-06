@@ -226,7 +226,7 @@ class _ProxyViewState extends State<ProxyView> {
                   TileButton(
                     big: false,
                     text: l10n.removeButton,
-                    colorful: false,
+                    style: TileButtonStyles.basic,
                     onTap: () =>
                         context.read<ProxyBloc>().add(const ProxyDelete()),
                   ),

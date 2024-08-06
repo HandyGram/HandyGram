@@ -174,7 +174,27 @@ class TdlibRunner {
     late final TdlibUserManager user;
     if (lastDb != null) {
       l.d(tag, "Loading last database: $lastDb");
-      user = TdlibMultiManager().fromDatabaseId(lastDb)!;
+      try {
+        user = TdlibMultiManager().fromDatabaseId(lastDb)!;
+      } catch (e) {
+        l.e(tag, "Error while loading DB: $e");
+        Settings().put(SettingsEntries.lastDatabaseId, 0);
+
+        // TODO: rework. this is dangerous.
+        l.d(tag, "Cleaning up databases...");
+        await Directory(await TdlibParameters.getDatabasesRoot()).delete(
+          recursive: true,
+        );
+        await Directory(await TdlibParameters.getDatabasesRoot()).create(
+          recursive: true,
+        );
+
+        l.d(tag, "Creating DB 0...");
+
+        /// First start or logout with single account.
+        await TdlibMultiManager.instance.create(0);
+        user = TdlibMultiManager().fromDatabaseId(0)!;
+      }
     } else {
       l.d(tag, "Loading brand new database: 0");
       user = TdlibMultiManager().fromDatabaseId(0)!;

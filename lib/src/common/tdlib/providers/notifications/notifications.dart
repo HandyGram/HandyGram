@@ -7,7 +7,6 @@
  */
 
 import 'package:handy_tdlib/api.dart' as td;
-import 'package:handygram/src/common/exceptions/tdlib_core_exception.dart';
 import 'package:handygram/src/common/log/log.dart';
 import 'package:handygram/src/common/tdlib/providers/templates/updates_provider.dart';
 

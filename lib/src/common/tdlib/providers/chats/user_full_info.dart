@@ -7,8 +7,7 @@
  */
 
 import 'package:handy_tdlib/api.dart' as td;
-import 'package:handygram/src/common/exceptions/tdlib_core_exception.dart';
-import 'package:handygram/src/common/log/log.dart';
+import 'package:handygram/src/common/tdlib/misc/updaters_wrappers.dart';
 import 'package:handygram/src/common/tdlib/providers/templates/updates_provider.dart';
 
 class UserFullInfoUpdate {
@@ -20,31 +19,15 @@ class UserFullInfoUpdate {
   });
 }
 
-class UsersFullInfoProvider
-    extends TdlibDataUpdatesProvider<UserFullInfoUpdate> {
+class UsersFullInfoProvider extends TdlibDataUpdatesProvider<UserFullInfoUpdate>
+    with TdlibUpdatesProviderTypicalWrappers {
   static const String tag = "UsersFullInfoProvider";
 
   Stream<UserFullInfoUpdate> filter(final int userId) =>
       updates.where((update) => update.userId == userId);
 
-  Future<td.UserFullInfo> getUserFullInfo(int userId) async {
-    final obj = await box.invoke(td.GetUserFullInfo(
-      userId: userId,
-    ));
-    if (obj is! td.UserFullInfo) {
-      if (obj is td.TdError) {
-        l.e(tag,
-            "Failed to get user full info $userId [${obj.code}]: ${obj.message}");
-        throw TdlibCoreException.fromTd(tag, obj);
-      } else {
-        l.e(tag,
-            "Failed to get user full info $userId: got ${obj.runtimeType}");
-        throw TdlibCoreException(
-            tag, "Got ${obj.runtimeType} instead of td.UserFullInfo");
-      }
-    }
-    return obj;
-  }
+  Future<td.UserFullInfo> getUserFullInfo(int userId) =>
+      tdlibGetAnySingleBasicWrapper(td.GetUserFullInfo(userId: userId));
 
   @override
   void updatesListener(td.TdObject obj) {

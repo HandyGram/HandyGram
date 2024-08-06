@@ -14,9 +14,9 @@ import 'package:handygram/src/common/cubits/text.dart';
 import 'package:handygram/src/common/misc/localizations.dart';
 import 'package:handygram/src/common/misc/strings.dart';
 import 'package:handygram/src/common/tdlib/extensions/message/text/spans.dart';
-import 'package:handygram/src/common/tdlib/extensions/misc/animated_emoji.dart';
 import 'package:handygram/src/common/tdlib/extensions/misc/display.dart';
 import 'package:handygram/src/common/tdlib/extensions/misc/minithumbnail.dart';
+import 'package:handygram/src/common/tdlib/misc/thumbnails.dart';
 
 extension MessageContentPreview on MessageContent {
   Future<InlineSpan> getPreview({
@@ -24,10 +24,11 @@ extension MessageContentPreview on MessageContent {
     TextStyle? style,
     Color? authorColor,
     String? author,
+    TextQuote? quote,
   }) async {
     color ??= style?.color ?? ColorStyles.active.onSurfaceVariant;
     style ??= TextStyles.active.bodyMedium!.copyWith(color: color);
-    final size = style.fontSize ?? 14;
+    final size = style.fontSize!;
 
     final authorSpan = TextSpan(
       text: author == null ? "" : "$author: ",
@@ -45,19 +46,33 @@ extension MessageContentPreview on MessageContent {
       MessageAnimatedEmoji(animatedEmoji: final animated, emoji: final emoji) =>
         spanOrTextSpan(
           emoji,
-          await animated.previewSpan,
+          await getStickerThumbnailSpan(
+            animated.sticker,
+            size: size,
+            repaintColor: color,
+          ),
           its,
           authorSpan,
         ),
-      MessageAnimation(animation: final anim) => iconWithTextSpan(
-          l.gif,
+      MessageAnimation(
+        animation: final anim,
+        caption: final caption,
+      ) =>
+        iconWithTextSpan(
+          caption.text.isEmpty ? l.gif : quote?.text.text ?? caption.text,
           Icons.gif,
           its,
           authorSpan: authorSpan,
           iconSpan: anim.minithumbnail?.asSpan(size),
         ),
-      MessageAudio(audio: final audio) => iconWithTextSpan(
-          audio.displayTitle,
+      MessageAudio(
+        audio: final audio,
+        caption: final caption,
+      ) =>
+        iconWithTextSpan(
+          caption.text.isEmpty
+              ? audio.displayTitle
+              : quote?.text.text ?? caption.text,
           Icons.audio_file,
           its,
           authorSpan: authorSpan,
@@ -164,7 +179,7 @@ extension MessageContentPreview on MessageContent {
           ],
         ),
       MessageDocument(caption: final caption) => iconWithTextSpan(
-          caption.text.isEmpty ? l.document : caption.text,
+          caption.text.isEmpty ? l.document : quote?.text.text ?? caption.text,
           Icons.file_present,
           its,
           authorSpan: authorSpan,
@@ -259,7 +274,7 @@ extension MessageContentPreview on MessageContent {
         ),
       MessagePhoto(caption: final caption, photo: final photo) =>
         iconWithTextSpan(
-          caption.text.isEmpty ? l.photo : caption.text,
+          caption.text.isEmpty ? l.photo : quote?.text.text ?? caption.text,
           Icons.photo,
           its,
           iconSpan: photo.minithumbnail?.asSpan(size),
@@ -336,7 +351,7 @@ extension MessageContentPreview on MessageContent {
       MessageText(text: final text) => TextSpan(children: [
           authorSpan,
           TextSpan(
-            text: text.text,
+            text: quote?.text.text ?? text.text,
             style: style,
           ),
         ]),
@@ -352,7 +367,7 @@ extension MessageContentPreview on MessageContent {
         ),
       MessageVideo(caption: final caption, video: final video) =>
         iconWithTextSpan(
-          caption.text.isEmpty ? l.video : caption.text,
+          caption.text.isEmpty ? l.video : quote?.text.text ?? caption.text,
           Icons.play_arrow,
           its,
           authorSpan: authorSpan,
@@ -384,9 +399,12 @@ extension MessageContentPreview on MessageContent {
         ),
       MessageVoiceNote(
         voiceNote: final voiceNote,
+        caption: final caption,
       ) =>
         iconWithTextSpan(
-          l.voiceNoteWithTime(voiceNote.duration.durationFromSeconds),
+          caption.text.isEmpty
+              ? l.voiceNoteWithTime(voiceNote.duration.durationFromSeconds)
+              : quote?.text.text ?? caption.text,
           Icons.mic,
           its,
           authorSpan: authorSpan,

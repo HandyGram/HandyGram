@@ -68,4 +68,19 @@ abstract final class SettingsEntries {
     id: "disablePFPs",
     defaultValue: false,
   );
+
+  /// Use infinite cacheExtent in ChatView's ListView
+  /// SIGNIFICANTLY DECREASES PERFORMANCE
+  static const useInfiniteCacheExtent = Setting<bool>(
+    id: "useInfiniteCacheExtent",
+    defaultValue: false,
+  );
+
+  /// Do not periodically cleanup messages in ChatView according to currently
+  /// focused position in messages list
+  /// SIGNIFICANTLY DECREASES PERFORMANCE WITH HIGH MESSAGE COUNT
+  static const doNotCleanupMessages = Setting<bool>(
+    id: "doNotCleanupMessages",
+    defaultValue: false,
+  );
 }

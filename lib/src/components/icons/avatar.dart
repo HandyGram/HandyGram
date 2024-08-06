@@ -12,9 +12,11 @@ import 'package:flutter/material.dart';
 import 'package:handy_tdlib/api.dart' as td;
 import 'package:handygram/src/common/cubits/colors.dart';
 import 'package:handygram/src/common/cubits/current_account.dart';
+import 'package:handygram/src/common/cubits/scaling.dart';
 import 'package:handygram/src/common/cubits/text.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
-class ProfileAvatar extends StatelessWidget {
+class ProfileAvatar extends StatefulWidget {
   const ProfileAvatar({
     super.key,
     required this.chatId,
@@ -23,6 +25,13 @@ class ProfileAvatar extends StatelessWidget {
 
   final int chatId;
   final bool useTemplateInfoIfNeeded;
+
+  @override
+  State<ProfileAvatar> createState() => _ProfileAvatarState();
+}
+
+class _ProfileAvatarState extends State<ProfileAvatar> {
+  bool _startLoading = false;
 
   int _getSmallestPhotoId(List<td.PhotoSize> sizes) => sizes
       .fold(
@@ -35,7 +44,7 @@ class ProfileAvatar extends StatelessWidget {
 
   Future<Widget> _getChatImage() async {
     final stuff = CurrentAccount.providers;
-    final chat = await stuff.chats.getChat(chatId);
+    final chat = await stuff.chats.getChat(widget.chatId);
     final me = await CurrentAccount.providers.users.getMe();
     final isMe = switch (chat.type) {
       td.ChatTypePrivate(userId: final uid) => me.id == uid,
@@ -48,11 +57,12 @@ class ProfileAvatar extends StatelessWidget {
     IconData? templateIcon;
     if (isMe) {
       templateIcon = Icons.bookmark;
-    } else if (chatId == repliesBotId) {
+    } else if (widget.chatId == repliesBotId) {
       templateIcon = Icons.reply;
     }
-    if (templateIcon != null && useTemplateInfoIfNeeded) {
+    if (templateIcon != null && widget.useTemplateInfoIfNeeded) {
       return Container(
+        key: ValueKey("pfav,img,${widget.chatId}"),
         decoration: BoxDecoration(
           color: ColorStyles.active.primary,
           shape: BoxShape.circle,
@@ -96,6 +106,7 @@ class ProfileAvatar extends StatelessWidget {
           color: ColorStyles.active.primary,
           shape: BoxShape.circle,
         ),
+        key: ValueKey("pfav,ph,${widget.chatId}"),
         child: Center(
           child: Text(
             (chat.title.characters.firstOrNull ?? "?").toUpperCase(),
@@ -116,29 +127,53 @@ class ProfileAvatar extends StatelessWidget {
       );
       return Image.file(
         File(file.local.path),
+        key: ValueKey("pfav,img,${widget.chatId}"),
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Widget>(
-      future: _getChatImage(),
-      builder: (context, snapshot) {
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(999),
-          child: Container(
-            decoration: BoxDecoration(
-              color: ColorStyles.active.onSurfaceVariant,
-              shape: BoxShape.circle,
-            ),
-            child: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 250),
-              child: snapshot.data,
-            ),
+    return SizedBox(
+      height: 38 * Scaling.factor,
+      width: 38 * Scaling.factor,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(999),
+        child: Container(
+          decoration: BoxDecoration(
+            color: ColorStyles.active.onSurfaceVariant,
+            shape: BoxShape.circle,
           ),
-        );
-      },
+          child: VisibilityDetector(
+            key: ValueKey("pfav,vd,${widget.chatId}"),
+            onVisibilityChanged: (info) {
+              if (_startLoading) return;
+              final startLoading = info.visibleFraction > 0;
+              if (startLoading) {
+                setState(() {
+                  _startLoading = true;
+                });
+              }
+            },
+            child: _startLoading
+                ? FutureBuilder<Widget>(
+                    key: ValueKey("pfav,img,${widget.chatId}"),
+                    future: _getChatImage(),
+                    builder: (context, snapshot) => AnimatedSwitcher(
+                      key: ValueKey("pfav,as,${widget.chatId}"),
+                      duration: const Duration(milliseconds: 250),
+                      child: snapshot.data ??
+                          Container(
+                            key: ValueKey("pfav,ph,${widget.chatId}"),
+                          ),
+                    ),
+                  )
+                : Container(
+                    key: ValueKey("pfav,ph,${widget.chatId}"),
+                  ),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -9,9 +9,11 @@ class MessageFocusData extends InheritedWidget {
 
   final StreamController<List<int>> _controller = StreamController();
   final StreamController<int> _controllerNew = StreamController();
+  final StreamController<int> _controllerReq = StreamController();
 
   Stream<List<int>> get focusedMessages => _controller.stream;
   Stream<int> get newFocusedMessages => _controllerNew.stream;
+  Stream<int> get focusRequestedMessages => _controllerReq.stream;
 
   void addMessage(int id) {
     if (!_messages.contains(id)) _messages.add(id);
@@ -22,6 +24,10 @@ class MessageFocusData extends InheritedWidget {
   void removeMessage(int id) {
     _messages.remove(id);
     _controller.add(_messages);
+  }
+
+  void requestFocus(int id) {
+    _controllerReq.add(id);
   }
 
   static MessageFocusData? of(BuildContext context) {

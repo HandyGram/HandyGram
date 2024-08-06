@@ -12,6 +12,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:handy_tdlib/api.dart' as td;
 import 'package:handygram/src/common/cubits/current_account.dart';
+import 'package:handygram/src/common/exceptions/tdlib_core_exception.dart';
 import 'package:handygram/src/common/log/log.dart';
 import 'package:handygram/src/common/misc/localizations.dart';
 import 'package:handygram/src/common/tdlib/client/management/multi_manager.dart';
@@ -234,7 +235,13 @@ class TdlibFirebaseService extends TdlibService with PersistentStateMixin {
       if (clientId == _box.clientId) continue;
       final user = TdlibMultiManager.instance.fromClientId(clientId);
       if (user == null) continue;
-      final me = await user.providers.users.getMe();
+      final td.User me;
+      try {
+        me = await user.providers.users.getMe();
+      } on TdlibCoreException {
+        // may be uninitialized yet
+        return;
+      }
       ids.add(me.id);
     }
 

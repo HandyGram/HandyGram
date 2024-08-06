@@ -17,6 +17,7 @@ import 'package:handygram/src/common/exceptions/ui_exception.dart';
 import 'package:handygram/src/common/log/log.dart';
 import 'package:handygram/src/common/misc/localizations.dart';
 import 'package:handygram/src/common/tdlib/providers/messages/messages.dart';
+import 'package:handygram/src/common/tdlib/misc/service_chat_type.dart';
 import 'package:handygram/src/pages/chat/bloc/data.dart';
 import 'package:handy_tdlib/api.dart' as td;
 import 'package:mutex/mutex.dart';
@@ -34,6 +35,7 @@ enum _ContainerInsertStatus {
 
 class ChatBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
   static const String tag = "ChatBloc";
+  static bool debugCleanupDisabled = false;
 
   final Map<int, td.Message> _messagesData = {};
   final List<ChatBlocContainer> _containers = [];
@@ -126,10 +128,17 @@ class ChatBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
           }
         });
 
+        final serviceChatType = await getServiceChatType(_chat);
+        int fromMessageId =
+            event.focusOnMessageId ?? _chat.lastReadInboxMessageId;
+        if (serviceChatType == ServiceChatType.savedMessages) {
+          fromMessageId = _chat.lastMessage!.id;
+        }
+
         // Load chunk of latest read messages
         final messages = await CurrentAccount.providers.messages.getHistory(
           _chat.id,
-          fromMessageId: _chat.lastReadInboxMessageId,
+          fromMessageId: fromMessageId,
           offset: -5,
           limit: 11,
         );
@@ -160,7 +169,7 @@ class ChatBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
         _streamController.add(ChatBlocMessagesListData(
           _containers,
           focusData: ChatBlocFocusData(
-            focusOnMessageId: _chat.lastReadInboxMessageId,
+            focusOnMessageId: fromMessageId,
             mustFocusInstantly: true,
           ),
         ));
@@ -182,7 +191,7 @@ class ChatBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
         await _uiReady?.future;
         await CurrentAccount.providers.chats.openChat(_chat.id);
 
-        emit(ChatBlocReady(_streamController.stream));
+        emit(ChatBlocReady(_streamController.stream, serviceChatType));
       }));
 
   Future<void> _setUiReady(
@@ -219,10 +228,8 @@ class ChatBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
           );
         }
 
-        final nextIndex = min(
-          _containers.length - 1,
-          targetMessageIndex + (older ? 1 : -1),
-        );
+        final nextIndex =
+            min(_containers.length - 1, targetMessageIndex + (older ? 1 : 0));
         if (_containers[nextIndex] == newContainer) {
           return _ContainerInsertStatus.alreadyExists;
         }
@@ -237,7 +244,7 @@ class ChatBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
         }
 
         _containers.insert(
-          targetMessageIndex + (older ? 1 : -1),
+          targetMessageIndex + (older ? 1 : 0),
           newContainer,
         );
       case ChatBlocMessageId(id: final objId):
@@ -289,7 +296,6 @@ class ChatBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
               );
             }
           }
-
           _containers.insert(closestMessageId, newContainer);
         }
     }
@@ -355,8 +361,15 @@ class ChatBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
         );
 
         bool conflict = false;
+        int delta = messages.length;
 
+        final indexBefore =
+            _containers.indexOf(event.data) - (event.data.older ? 1 : -1);
         _containers.remove(event.data);
+        int indexAfter = indexBefore;
+        if (!event.data.older) {
+          indexAfter += messages.length;
+        }
 
         // Insert messages
         for (final msg in messages) {
@@ -365,8 +378,14 @@ class ChatBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
 
           if (status == _ContainerInsertStatus.alreadyExists) {
             _streamController.add(ChatBlocMessageContentUpdated(msg));
-            if (msg.id == messages.last.id) {
-              conflict = true;
+            if (event.data.older) {
+              conflict = msg.id == messages.last.id;
+            } else {
+              conflict = msg.id == messages.first.id;
+            }
+            if (!event.data.older) {
+              indexAfter--;
+              delta--;
             }
           }
         }
@@ -382,9 +401,22 @@ class ChatBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
               older: event.data.older,
             ));
           }
+          indexAfter++;
+          delta++;
         }
 
-        _streamController.add(ChatBlocMessagesListData(_containers));
+        event.setCooldownExpirationDate?.call(DateTime.now().add(
+          const Duration(seconds: 3),
+        ));
+        _streamController.add(ChatBlocMessagesListData(
+          _containers,
+          whatsChanged: MessageListChange(
+            refIndexAfter: indexAfter,
+            refIndexBefore: indexBefore,
+            delta: delta,
+            preservationUnneeded: event.data.older,
+          ),
+        ));
       });
 
   static const int _kLoadLatestCount = 10;
@@ -415,6 +447,7 @@ class ChatBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
         );
 
         bool conflict = false;
+        int indexAfter = messages.length;
 
         // Insert messages
         for (final msg in messages) {
@@ -423,6 +456,7 @@ class ChatBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
 
           // We've ran into a conflict! Skip updating service containers.
           if (status == _ContainerInsertStatus.alreadyExists) {
+            indexAfter--;
             _streamController.add(ChatBlocMessageContentUpdated(msg));
             if (msg == messages.last) {
               conflict = true;
@@ -434,6 +468,7 @@ class ChatBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
         if (!conflict) {
           if (_containers.first is ChatBlocLoadMore) {
             _containers.remove(_containers.first);
+            indexAfter--;
           }
 
           if (messages.length != _kLoadMoreCount) {
@@ -444,20 +479,34 @@ class ChatBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
               older: false,
             ));
           }
+
+          indexAfter++;
         }
 
-        _streamController.add(ChatBlocMessagesListData(_containers));
+        _streamController.add(ChatBlocMessagesListData(
+          _containers,
+          whatsChanged: MessageListChange(
+            refIndexBefore: 0,
+            refIndexAfter: indexAfter,
+            delta: indexAfter,
+          ),
+        ));
       });
 
   Future<void> _viewMessage(
     ChatBlocNewFocusedMessageEvent event,
     Emitter<ChatBlocState> emit,
   ) async {
-    await CurrentAccount.providers.messages
-        .viewMessage(_chat.id, event.messageId);
-    if (event.isContentRead) {
+    try {
       await CurrentAccount.providers.messages
-          .readMessageContent(_chat.id, event.messageId);
+          .viewMessage(_chat.id, event.messageId);
+      if (event.isContentRead) {
+        await CurrentAccount.providers.messages
+            .readMessageContent(_chat.id, event.messageId);
+      }
+    } catch (e, st) {
+      // that's not critical exception, log it and do nothing
+      l.e(tag, "$e\n$st");
     }
   }
 
@@ -480,16 +529,110 @@ class ChatBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
 
         if (focusedRange.first == -1 || focusedRange.last == -1) return;
 
-        // TODO: finish cleanup
-        final cleaningNeeded = (distance.first > 20 || distance.last > 20) &&
-            _containers.length > 50;
-        l.i(
-            tag,
-            "Cleanup info: focused range "
-            "${focusedRange.first} -> ${focusedRange.last}, "
-            "distance from both ends "
-            "${distance.first} -> | ... | <- ${distance.last}. "
-            "Cleanup is ${cleaningNeeded ? 'NEEDED' : 'not needed'}.");
+        final cleaningNeeded = distance.first > 15 || distance.last > 15;
+        if (debugCleanupDisabled) {
+          l.i(
+              tag,
+              "Cleanup info: focused range "
+              "${focusedRange.first} -> ${focusedRange.last}, "
+              "distance from both ends "
+              "${distance.first} -> | ... | <- ${distance.last}. "
+              "Cleanup is ${cleaningNeeded ? 'NEEDED' : 'not needed'}.");
+          return;
+        }
+
+        if (!cleaningNeeded) return;
+
+        int indexBefore, indexAfter, delta;
+        if (distance.first > 15) {
+          indexBefore = 10;
+          indexAfter = 0;
+          delta = -10;
+
+          for (int i = 0; i < 10; i++) {
+            _messagesData.remove(switch (_containers[i]) {
+              ChatBlocMessageId(id: final id) => id,
+              _ => -1,
+            });
+            _containers.removeAt(i);
+          }
+
+          switch (_containers.first) {
+            case ChatBlocMessageId(id: final id):
+              _containers.insert(
+                0,
+                ChatBlocLoadMore(
+                  fromMessageId: id,
+                  older: false,
+                ),
+              );
+              indexAfter++;
+              delta++;
+            case ChatBlocLoadMore(
+                older: final older,
+                fromMessageId: final messageId,
+              ):
+              if (!older) break;
+              _containers.first = ChatBlocLoadMore(
+                fromMessageId: messageId,
+                older: false,
+              );
+            case ChatBlocNoMoreMessages():
+              throw const HandyUiException(
+                tag,
+                "NoMoreMessages block should've been removed, but it's not",
+              );
+          }
+        } else if (distance.last > 15) {
+          indexBefore = _containers.length - 11;
+          indexAfter = _containers.length - 11;
+          delta = -10;
+
+          for (int i = _containers.length - 10; i < _containers.length; i++) {
+            _messagesData.remove(switch (_containers[i]) {
+              ChatBlocMessageId(id: final id) => id,
+              _ => -1,
+            });
+            _containers.removeAt(i);
+          }
+
+          switch (_containers.last) {
+            case ChatBlocMessageId(id: final id):
+              _containers.add(
+                ChatBlocLoadMore(
+                  fromMessageId: id,
+                  older: true,
+                ),
+              );
+              delta++;
+            case ChatBlocLoadMore(
+                older: final older,
+                fromMessageId: final messageId,
+              ):
+              if (older) break;
+              _containers.last = ChatBlocLoadMore(
+                fromMessageId: messageId,
+                older: true,
+              );
+            case ChatBlocNoMoreMessages():
+              throw const HandyUiException(
+                tag,
+                "NoMoreMessages block should've been removed, but it's not",
+              );
+          }
+        } else {
+          throw const HandyUiException(tag, "reached unreachable code");
+        }
+
+        _streamController.add(ChatBlocMessagesListData(
+          _containers,
+          whatsChanged: MessageListChange(
+            refIndexBefore: indexBefore,
+            refIndexAfter: indexAfter,
+            preservationUnneeded: distance.last > 15,
+            delta: delta,
+          ),
+        ));
       });
 
   Future<void> _handleNewMessage(final td.UpdateNewMessage update) =>
@@ -503,17 +646,37 @@ class ChatBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
         if (status == _ContainerInsertStatus.alreadyExists) {
           _streamController.add(ChatBlocMessageContentUpdated(update.message));
         } else {
-          _streamController.add(ChatBlocMessagesListData(_containers));
+          _streamController.add(ChatBlocMessagesListData(
+            _containers,
+            whatsChanged: const MessageListChange(
+              refIndexBefore: 0,
+              refIndexAfter: 1,
+              delta: 1,
+            ),
+          ));
         }
       });
 
   Future<void> _handleMessageDelete(final td.UpdateDeleteMessages update) =>
       _lock.protect(() async {
         // Remove messages
-        _containers.removeWhere((e) => switch (e) {
-              ChatBlocMessageId(id: final id) => update.messageIds.contains(id),
-              _ => false,
-            });
+        int indexBefore = 0;
+        final messageIds = update.messageIds;
+        for (int i = 0; messageIds.isEmpty || i < _containers.length; i++) {
+          final mid = switch (_containers) {
+            ChatBlocMessageId(id: final id) => id,
+            _ => null,
+          };
+          if (!messageIds.contains(mid)) return;
+          if (indexBefore == 0) indexBefore = i + messageIds.length;
+          messageIds.removeAt(i);
+        }
+
+        indexBefore -= messageIds.length;
+        int delta = messageIds.length - update.messageIds.length;
+        int indexAfter =
+            indexBefore - messageIds.length + update.messageIds.length;
+
         for (final id in update.messageIds) {
           _messagesData.remove(id);
         }
@@ -540,7 +703,14 @@ class ChatBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
           );
         }
 
-        _streamController.add(ChatBlocMessagesListData(_containers));
+        _streamController.add(ChatBlocMessagesListData(
+          _containers,
+          whatsChanged: MessageListChange(
+            refIndexBefore: indexBefore,
+            refIndexAfter: indexAfter,
+            delta: delta,
+          ),
+        ));
       });
 
   Future<void> _replaceTemporaryMessage(
@@ -562,11 +732,8 @@ class ChatBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
       });
 
   Future<void> _onMessagesUpdate(final MessageUpdate data) async {
-    l.e(tag, data.update.currentObjectId);
-
     // If message is new - handle it
     if (data.isNew) {
-      l.e(tag, "new msg");
       await _handleNewMessage(data.update as td.UpdateNewMessage);
       return;
     }

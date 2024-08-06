@@ -9,9 +9,7 @@
 import 'dart:async';
 
 import 'package:handy_tdlib/api.dart' as td;
-import 'package:handygram/src/common/exceptions/tdlib_core_exception.dart';
-import 'package:handygram/src/common/log/log.dart';
-import 'package:handygram/src/common/tdlib/extensions/message/strings/content.dart';
+import 'package:handygram/src/common/tdlib/misc/updaters_wrappers.dart';
 import 'package:handygram/src/common/tdlib/providers/templates/updates_provider.dart';
 
 class MessageUpdate {
@@ -27,7 +25,8 @@ class MessageUpdate {
   });
 }
 
-class MessagesProvider extends TdlibDataUpdatesProvider<MessageUpdate> {
+class MessagesProvider extends TdlibDataUpdatesProvider<MessageUpdate>
+    with TdlibUpdatesProviderTypicalWrappers {
   static const String tag = "MessagesProvider";
 
   /// Filter message updates by chatId and messageId (optional)
@@ -39,100 +38,54 @@ class MessagesProvider extends TdlibDataUpdatesProvider<MessageUpdate> {
       updates.where(
         (update) {
           if (update.chatId != chatId) return false;
-          if (messageId != null && messageId != update.messageId) return false;
+
+          if (messageId != null && !update.messageId.contains(messageId)) {
+            return false;
+          }
+
           if (tdUpdateTypes != null &&
-              !tdUpdateTypes.contains(update.runtimeType)) return false;
-          return false;
+              !tdUpdateTypes.contains(update.update.runtimeType)) return false;
+
+          return true;
         },
       );
 
-  Future<td.Message> getMessage(int chatId, int messageId) async {
-    final message = await box.invoke(td.GetMessage(
-      chatId: chatId,
-      messageId: messageId,
-    ));
-    if (message is! td.Message) {
-      if (message is td.TdError) {
-        l.e(tag,
-            "Failed to get message $chatId/$messageId [${message.code}]: ${message.message}");
-        throw TdlibCoreException.fromTd(tag, message);
-      } else {
-        l.e(tag,
-            "Failed to get message $chatId/$messageId: got ${message.runtimeType}");
-        throw TdlibCoreException(
-            tag, "Got ${message.runtimeType} instead of td.Message");
-      }
-    }
-    return message;
-  }
+  Future<td.Message> getMessage(int chatId, int messageId) =>
+      tdlibGetAnySingleBasicWrapper(td.GetMessage(
+        chatId: chatId,
+        messageId: messageId,
+      ));
 
   Future<List<td.Message>> getHistory(
     int chatId, {
     required int fromMessageId,
     int offset = 0,
     int limit = 10,
-  }) async {
-    final messages = await box.invoke(td.GetChatHistory(
-      chatId: chatId,
-      fromMessageId: fromMessageId,
-      offset: offset,
-      limit: limit,
-      onlyLocal: false,
-    ));
-    if (messages is! td.Messages) {
-      if (messages is td.TdError) {
-        l.e(tag,
-            "Failed to get chat $chatId history ($fromMessageId (-> $offset), max $limit) [${messages.code}]: ${messages.message}");
-        throw TdlibCoreException.fromTd(tag, messages);
-      } else {
-        l.e(tag,
-            "Failed to get chat $chatId history ($fromMessageId (-> $offset), max $limit): got ${messages.runtimeType}");
-        throw TdlibCoreException(
-            tag, "Got ${messages.runtimeType} instead of td.Message");
-      }
-    }
-    return messages.messages;
-  }
+  }) =>
+      tdlibGetAnySingleWrapper<td.Messages, List<td.Message>>(
+        td.GetChatHistory(
+          chatId: chatId,
+          fromMessageId: fromMessageId,
+          offset: offset,
+          limit: limit,
+          onlyLocal: false,
+        ),
+        transform: (source) => source.messages,
+      );
 
-  Future<void> viewMessage(int chatId, int messageId) async {
-    final message = await box.invoke(td.ViewMessages(
-      chatId: chatId,
-      messageIds: [messageId],
-      source: null,
-      forceRead: false,
-    ));
-    if (message is! td.Ok) {
-      if (message is td.TdError) {
-        l.e(tag,
-            "Failed to view message $chatId/$messageId [${message.code}]: ${message.message}");
-        throw TdlibCoreException.fromTd(tag, message);
-      } else {
-        l.e(tag,
-            "Failed to view message $chatId/$messageId: got ${message.runtimeType}");
-        throw TdlibCoreException(
-            tag, "Got ${message.runtimeType} instead of td.Ok");
-      }
-    }
-  }
+  Future<void> viewMessage(int chatId, int messageId) =>
+      tdlibOkActionWrapper(td.ViewMessages(
+        chatId: chatId,
+        messageIds: [messageId],
+        source: null,
+        forceRead: false,
+      ));
 
-  Future<void> readMessageContent(int chatId, int messageId) async {
-    final message = await box.invoke(td.OpenMessageContent(
-      chatId: chatId,
-      messageId: messageId,
-    ));
-    if (message is! td.Ok) {
-      if (message is td.TdError) {
-        l.e(tag,
-            "Failed to read message content $chatId/$messageId [${message.code}]: ${message.message}");
-        throw TdlibCoreException.fromTd(tag, message);
-      } else {
-        l.e(tag,
-            "Failed to read message content $chatId/$messageId: got ${message.runtimeType}");
-        throw TdlibCoreException(
-            tag, "Got ${message.runtimeType} instead of td.Ok");
-      }
-    }
-  }
+  Future<void> readMessageContent(int chatId, int messageId) =>
+      tdlibOkActionWrapper(td.OpenMessageContent(
+        chatId: chatId,
+        messageId: messageId,
+      ));
 
   @override
   void updatesListener(td.TdObject obj) async {

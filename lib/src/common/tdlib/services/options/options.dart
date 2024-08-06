@@ -9,9 +9,10 @@
 import 'dart:async';
 
 import 'package:handygram/src/common/tdlib/client/structures/base_service.dart';
-import 'package:handygram/src/common/tdlib/client/structures/tdlib_toolbox.dart';
+import 'package:handygram/src/common/tdlib/services/templates/attachable_box.dart';
 
-class TdlibDefaultOptionsService extends TdlibService {
+class TdlibDefaultOptionsService extends TdlibService
+    with ServiceWithAttachableBox {
   static const String tag = "TdlibDefaultOptionsService";
 
   late final String version;
@@ -37,23 +38,11 @@ class TdlibDefaultOptionsService extends TdlibService {
     "use_storage_optimizer": true,
   };
 
-  TdlibToolbox? _box;
-
   @override
-  Future<void> attach(TdlibToolbox toolbox) async {
-    _box = toolbox;
-  }
-
-  @override
-  void detach(TdlibToolbox toolbox) {
-    _box = null;
-  }
-
-  @override
-  FutureOr<void> onTdlibReady() async {
-    version = await _box?.user.providers.options.get("version");
+  Future<void> onTdlibReady() async {
+    version = await box?.user.providers.options.get("version");
     for (final option in _options.entries) {
-      await _box?.user.providers.options.set(option.key, option.value);
+      await box?.user.providers.options.set(option.key, option.value);
     }
   }
 }

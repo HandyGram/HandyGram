@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:handygram/src/common/cubits/colors.dart';
+import 'package:handygram/src/common/cubits/current_account.dart';
 import 'package:handygram/src/common/cubits/scaling.dart';
 import 'package:handygram/src/common/cubits/text.dart';
 import 'package:handygram/src/common/misc/localizations.dart';
@@ -23,6 +24,7 @@ class HandyGramApp extends StatelessWidget {
     final scheme = context.watch<ColorStyles>().state;
     final theme = context.watch<TextStyles>().state;
     context.watch<Scaling>();
+    context.watch<CurrentAccount>();
 
     return MaterialApp.router(
       routerConfig: router,

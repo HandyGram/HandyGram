@@ -7,11 +7,13 @@
  */
 
 import 'package:handygram/src/common/exceptions/settings_exception.dart';
+import 'package:handygram/src/common/exceptions/ui_exception.dart';
 import 'package:handygram/src/common/log/log.dart';
 import 'package:handygram/src/common/settings/setting.dart';
 import 'package:handygram/src/common/settings/version.dart';
 import 'package:handygram/src/common/settings/versions/v1.dart';
 import 'package:hive/hive.dart';
+import 'package:mutex/mutex.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
@@ -22,12 +24,16 @@ import 'package:path_provider/path_provider.dart';
 /// 3) Get entry with Settings().get(entry)
 /// 4) Put entry with Settings().put(entry, value)
 class Settings {
+  static const String tag = "Settings";
+
   late final Box _box;
   static const List<SettingsVersion> _dbVersions = [
     V1Settings(),
   ];
   late final String currentCodename = _dbVersions.last.codename;
   late final int currentVersion = _dbVersions.last.version;
+
+  final Mutex _writeLock = Mutex();
 
   void put<T>(Setting? s, T? value) {
     if (s is! Setting<T>) {
@@ -38,7 +44,7 @@ class Settings {
       throw SettingsException("${s.id} is not nullable");
     }
 
-    _box.put(s.id, value);
+    _writeLock.protect(() => _box.put(s.id, value));
   }
 
   T get<T>(Setting? s) {
@@ -48,10 +54,31 @@ class Settings {
 
     var val = _box.get(s.id, defaultValue: s.defaultValue);
     if (val is! T || (!s.nullable && val == null)) {
-      l.e("Settings", "${s.id} is not a $T. Returning default value");
+      l.e(tag, "${s.id} is not a $T. Returning default value");
       val = s.defaultValue;
     }
     return val;
+  }
+
+  Future<void> _checkVersion() async {
+    final savedVersion =
+        _box.get("version", defaultValue: currentVersion) as int;
+
+    if (savedVersion < currentVersion) {
+      for (int i = savedVersion; i <= currentVersion; i++) {
+        await _dbVersions[i].migrate(i - 1);
+      }
+    } else if (currentVersion < savedVersion) {
+      // User has forcefully installed old version over the new one.
+      // Prevent the app from initializing cause of possible DB versions
+      // conflicts.
+      throw HandyUiException(
+        tag,
+        "Current version $currentVersion < saved version $savedVersion",
+      );
+    }
+
+    await _box.put("version", currentVersion);
   }
 
   Future<void> _start() async {
@@ -60,6 +87,7 @@ class Settings {
       "HandyGramSettings",
       path: p.join(asd.path, "settings.db"),
     );
+    await _checkVersion();
   }
 
   static Future<Settings> start() async {

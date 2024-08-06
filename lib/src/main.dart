@@ -29,6 +29,8 @@ class _HandyGramState extends State<HandyGram> {
   final AppLifecycleListener _listener = AppLifecycleListener(
     binding: WidgetsBinding.instance,
     onDetach: () => TdlibReceiveManager.instance.dispose(),
+    onInactive: () => CurrentAccount.providers.options.set("online", false),
+    onResume: () => CurrentAccount.providers.options.set("online", true),
   );
 
   @override
@@ -46,8 +48,11 @@ class _HandyGramState extends State<HandyGram> {
         ),
         BlocProvider<Scaling>(create: (context) {
           SchedulerBinding.instance.addPostFrameCallback((_) {
-            Scaling.instance.systemScreenResolution =
-                MediaQuery.of(context).size;
+            final mq = MediaQuery.of(context);
+            Scaling.instance.setSystemScreenResolution(
+              mq.size,
+              mq.devicePixelRatio,
+            );
           });
           Scaling.instance.userScale = Settings().get(SettingsEntries.uiScale);
           return Scaling.instance;

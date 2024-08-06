@@ -7,8 +7,7 @@
  */
 
 import 'package:handy_tdlib/api.dart' as td;
-import 'package:handygram/src/common/exceptions/tdlib_core_exception.dart';
-import 'package:handygram/src/common/log/log.dart';
+import 'package:handygram/src/common/tdlib/misc/updaters_wrappers.dart';
 import 'package:handygram/src/common/tdlib/providers/templates/updates_provider.dart';
 
 class ChatUpdate {
@@ -23,7 +22,8 @@ class ChatUpdate {
   });
 }
 
-class ChatsProvider extends TdlibDataUpdatesProvider<ChatUpdate> {
+class ChatsProvider extends TdlibDataUpdatesProvider<ChatUpdate>
+    with TdlibUpdatesProviderTypicalWrappers {
   static const String tag = "ChatsProvider";
 
   /// Filter chat updates by chatId, messageThreadId and update type
@@ -38,60 +38,19 @@ class ChatsProvider extends TdlibDataUpdatesProvider<ChatUpdate> {
           if (messageThreadId != null &&
               messageThreadId != update.messageThreadId) return false;
           if (tdUpdateTypes != null &&
-              !tdUpdateTypes.contains(update.runtimeType)) return false;
+              !tdUpdateTypes.contains(update.update.runtimeType)) return false;
           return true;
         },
       );
 
-  Future<td.Chat> getChat(int chatId) async {
-    final chat = await box.invoke(td.GetChat(
-      chatId: chatId,
-    ));
-    if (chat is! td.Chat) {
-      if (chat is td.TdError) {
-        l.e(tag, "Failed to get chat $chatId [${chat.code}]: ${chat.message}");
-        throw TdlibCoreException.fromTd(tag, chat);
-      } else {
-        l.e(tag, "Failed to get chat $chatId: got ${chat.runtimeType}");
-        throw TdlibCoreException(
-            tag, "Got ${chat.runtimeType} instead of td.Chat");
-      }
-    }
-    return chat;
-  }
+  Future<td.Chat> getChat(int chatId) =>
+      tdlibGetAnySingleBasicWrapper<td.Chat>(td.GetChat(chatId: chatId));
 
-  Future<void> openChat(int chatId) async {
-    final chat = await box.invoke(td.OpenChat(
-      chatId: chatId,
-    ));
-    if (chat is! td.Ok) {
-      if (chat is td.TdError) {
-        l.e(tag, "Failed to open chat $chatId [${chat.code}]: ${chat.message}");
-        throw TdlibCoreException.fromTd(tag, chat);
-      } else {
-        l.e(tag, "Failed to open chat $chatId: got ${chat.runtimeType}");
-        throw TdlibCoreException(
-            tag, "Got ${chat.runtimeType} instead of td.Ok");
-      }
-    }
-  }
+  Future<void> openChat(int chatId) =>
+      tdlibOkActionWrapper(td.OpenChat(chatId: chatId));
 
-  Future<void> closeChat(int chatId) async {
-    final chat = await box.invoke(td.CloseChat(
-      chatId: chatId,
-    ));
-    if (chat is! td.Ok) {
-      if (chat is td.TdError) {
-        l.e(tag,
-            "Failed to close chat $chatId [${chat.code}]: ${chat.message}");
-        throw TdlibCoreException.fromTd(tag, chat);
-      } else {
-        l.e(tag, "Failed to close chat $chatId: got ${chat.runtimeType}");
-        throw TdlibCoreException(
-            tag, "Got ${chat.runtimeType} instead of td.Ok");
-      }
-    }
-  }
+  Future<void> closeChat(int chatId) =>
+      tdlibOkActionWrapper(td.CloseChat(chatId: chatId));
 
   @override
   void updatesListener(td.TdObject obj) {

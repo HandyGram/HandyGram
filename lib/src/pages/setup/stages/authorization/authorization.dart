@@ -8,16 +8,24 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:handygram/src/common/tdlib/client/management/user_manager.dart';
 import 'package:handygram/src/pages/setup/stages/authorization/bloc.dart';
 import 'package:handygram/src/pages/setup/stages/authorization/view.dart';
 
 class AuthorizationPage extends StatelessWidget {
-  const AuthorizationPage({super.key});
+  const AuthorizationPage({
+    super.key,
+    required this.user,
+    this.destinationRoute,
+  });
+
+  final TdlibUserManager user;
+  final String? destinationRoute;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => AuthorizationBloc()..add(const RequestQrCode()),
+      create: (_) => AuthorizationBloc(user)..add(const RequestQrCode()),
       child: const AuthorizationView(),
     );
   }

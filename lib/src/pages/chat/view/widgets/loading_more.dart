@@ -18,6 +18,7 @@ class LoadMoreWidget extends StatefulWidget {
 }
 
 class _LoadMoreWidgetState extends State<LoadMoreWidget> {
+  static DateTime cooldownExpiration = DateTime.now();
   bool _loadingRequested = false;
 
   @override
@@ -26,10 +27,14 @@ class _LoadMoreWidgetState extends State<LoadMoreWidget> {
       key: UniqueKey(),
       onVisibilityChanged: (info) {
         if (_loadingRequested) return;
-        if (info.visibleFraction < 0.25) return;
+        if (info.visibleFraction < 0.01) return;
+        if (cooldownExpiration.isAfter(DateTime.now())) return;
 
         _loadingRequested = true;
-        context.read<ChatBloc>().add(ChatBlocLoadMoreEvent(widget.data));
+        context.read<ChatBloc>().add(ChatBlocLoadMoreEvent(
+              widget.data,
+              setCooldownExpirationDate: (date) => cooldownExpiration = date,
+            ));
       },
       child: SizedBox(
         height: Scaling.screenSize.height / 2,

@@ -14,14 +14,23 @@ import 'package:handygram/src/pages/chat/view/view.dart';
 import 'package:handygram/src/pages/chat/view/widgets/focus_data.dart';
 
 class ChatPage extends StatelessWidget {
-  const ChatPage({super.key, required this.id});
+  const ChatPage({
+    super.key,
+    required this.id,
+    this.focusOnMessageId,
+  });
 
   final int id;
+  final int? focusOnMessageId;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => ChatBloc()..add(ChatBlocStartPreloadingEvent(chatId: id)),
+      create: (_) => ChatBloc()
+        ..add(ChatBlocStartPreloadingEvent(
+          chatId: id,
+          focusOnMessageId: focusOnMessageId,
+        )),
       child: MessageFocusData(child: const ChatView()),
     );
   }

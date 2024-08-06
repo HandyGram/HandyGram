@@ -1,4 +1,5 @@
 import 'package:handy_tdlib/api.dart' as td;
+import 'package:handygram/src/common/tdlib/misc/service_chat_type.dart';
 
 //
 // Internal data types
@@ -31,6 +32,19 @@ class ChatBlocNoMoreMessages extends ChatBlocContainer {
   const ChatBlocNoMoreMessages({required this.older});
 }
 
+final class MessageListChange {
+  final int refIndexBefore;
+  final int refIndexAfter;
+  final int delta;
+  final bool preservationUnneeded;
+  const MessageListChange({
+    required this.refIndexAfter,
+    required this.refIndexBefore,
+    required this.delta,
+    this.preservationUnneeded = false,
+  });
+}
+
 //
 // Miscellaneous
 //
@@ -58,7 +72,11 @@ sealed class ChatBlocEvent {
 /// Start preloading messages, UI is loading now.
 class ChatBlocStartPreloadingEvent extends ChatBlocEvent {
   final int chatId;
-  const ChatBlocStartPreloadingEvent({required this.chatId});
+  final int? focusOnMessageId;
+  const ChatBlocStartPreloadingEvent({
+    required this.chatId,
+    this.focusOnMessageId,
+  });
 }
 
 /// UI tells that it's ready to show messages.
@@ -69,7 +87,8 @@ class ChatBlocReadyToShowEvent extends ChatBlocEvent {
 /// UI has rendered "load more" block.
 class ChatBlocLoadMoreEvent extends ChatBlocEvent {
   final ChatBlocLoadMore data;
-  const ChatBlocLoadMoreEvent(this.data);
+  final Function(DateTime)? setCooldownExpirationDate;
+  const ChatBlocLoadMoreEvent(this.data, {this.setCooldownExpirationDate});
 }
 
 /// UI has advertised message IDs, which're currently shown on screen.
@@ -126,7 +145,8 @@ class ChatBlocError extends ChatBlocState {
 /// After this stage, BLoC states aren't being used (events are still used).
 class ChatBlocReady extends ChatBlocState {
   final Stream<ChatBlocStreamedData> dataStream;
-  const ChatBlocReady(this.dataStream);
+  final ServiceChatType? chatType;
+  const ChatBlocReady(this.dataStream, this.chatType);
 }
 
 //
@@ -141,7 +161,13 @@ sealed class ChatBlocStreamedData {
 class ChatBlocMessagesListData extends ChatBlocStreamedData {
   final List<ChatBlocContainer> containers;
   final ChatBlocFocusData? focusData;
-  const ChatBlocMessagesListData(this.containers, {this.focusData});
+  final MessageListChange? whatsChanged;
+
+  const ChatBlocMessagesListData(
+    this.containers, {
+    this.focusData,
+    this.whatsChanged,
+  });
 }
 
 /// Message content was updated - ask UI to reload it.

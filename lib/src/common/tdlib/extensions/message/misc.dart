@@ -11,7 +11,7 @@ import 'package:handygram/src/common/cubits/current_account.dart';
 import 'package:handygram/src/common/misc/strings.dart';
 import 'package:handygram/src/common/tdlib/extensions/chats/misc.dart';
 
-extension MessageEasySender on Message {
+extension MessageEasy on Message {
   Future<String> get senderName async {
     switch (senderId) {
       case MessageSenderChat(chatId: final chatId):
@@ -31,4 +31,6 @@ extension MessageEasySender on Message {
     final chat = await CurrentAccount.providers.chats.getChat(chatId);
     return chat.isPrivate;
   }
+
+  bool get isReallyOutgoing => isOutgoing && !isChannelPost;
 }

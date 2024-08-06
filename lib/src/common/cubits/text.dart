@@ -28,6 +28,7 @@ class TextStyles extends Cubit<TextTheme> {
   }
 
   double get scale => _scale * Scaling.factor;
+  double get rawScale => _scale;
   static TextTheme get active => instance.state;
 
   static const double _letterSpacing = 0;

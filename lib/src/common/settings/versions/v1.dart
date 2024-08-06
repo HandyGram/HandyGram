@@ -22,6 +22,8 @@ class V1Settings implements SettingsVersion {
     SettingsEntries.enableNotifications,
     SettingsEntries.runInBackground,
     SettingsEntries.lastDatabaseId,
+    SettingsEntries.doNotCleanupMessages,
+    SettingsEntries.useInfiniteCacheExtent,
   ];
 
   @override
@@ -29,6 +31,11 @@ class V1Settings implements SettingsVersion {
 
   @override
   final int version = 1;
+
+  @override
+  void migrate(int fromVersion) {
+    // Unneeded, that's the first version of database.
+  }
 
   const V1Settings();
 }

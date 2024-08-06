@@ -15,7 +15,12 @@ import 'package:handygram/src/pages/setup/stages/authorization/views/password.da
 import 'package:handygram/src/pages/setup/stages/authorization/views/qr.dart';
 
 class AuthorizationView extends StatelessWidget {
-  const AuthorizationView({super.key});
+  const AuthorizationView({
+    super.key,
+    this.destinationRoute,
+  });
+
+  final String? destinationRoute;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +30,7 @@ class AuthorizationView extends StatelessWidget {
           try {
             context.read<SetupBloc>().add(const SetupEventAuthorized());
           } catch (_) {
-            GoRouter.of(context).pushReplacement("/home");
+            GoRouter.of(context).pushReplacement(destinationRoute ?? "/home");
           }
         }
       },

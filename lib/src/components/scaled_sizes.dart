@@ -57,7 +57,7 @@ class Sizes {
   static double get microAvatarDiameter => _s(19.4);
 
   /// Maximum width of message bubble
-  static double get maxMessageBubbleWidth => _s(150);
+  static double get maxMessageBubbleWidth => Scaling.screenSize.width * 0.65;
 }
 
 /// A set of scaled UI elements BorderRadii

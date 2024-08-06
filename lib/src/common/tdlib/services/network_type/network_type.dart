@@ -14,12 +14,11 @@ import 'package:handygram/src/common/log/log.dart';
 import 'package:handygram/src/common/native/channel.dart';
 import 'package:handygram/src/common/tdlib/client/structures/base_service.dart';
 import 'package:handygram/src/common/tdlib/client/structures/tdlib_toolbox.dart';
+import 'package:handygram/src/common/tdlib/services/templates/attachable_box.dart';
 
-class TdlibNetworkTypeService extends TdlibService {
+class TdlibNetworkTypeService extends TdlibService
+    with ServiceWithAttachableBox {
   static const String tag = "TdlibNetworkTypeService";
-
-  StreamSubscription? _sub;
-  late final TdlibToolbox _box;
 
   void _notifyAboutNetworkChange(List<ConnectivityResult> cr) async {
     late final td.NetworkType nt;
@@ -37,19 +36,22 @@ class TdlibNetworkTypeService extends TdlibService {
     } else {
       nt = const td.NetworkTypeOther();
     }
-    await _box.invoke(td.SetNetworkType(type: nt));
+    await box?.invoke(td.SetNetworkType(type: nt));
     l.d(tag, "Type has changed: $nt");
   }
 
+  StreamSubscription? _sub;
+
   @override
   void attach(TdlibToolbox toolbox) {
-    _box = toolbox;
+    super.attach(toolbox);
     _sub =
         Connectivity().onConnectivityChanged.listen(_notifyAboutNetworkChange);
   }
 
   @override
   void detach(TdlibToolbox toolbox) {
+    super.detach(toolbox);
     _sub?.cancel();
   }
 }

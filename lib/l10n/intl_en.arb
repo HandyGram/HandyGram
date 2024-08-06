@@ -369,7 +369,7 @@
   "templateTitleSavedMessages": "Saved Messages",
   "templateTitleRepliesBot": "Replies",
 
-  "messageContentUnsupported": "Unsupported message {type}. Please update your HandyGram.",
+  "messageContentUnsupported": "Unsupported message type:\n",
 
   "chatBlocLoadingError": "Failed to load chat: {error}",
   "@chatBlocLoadingError": {
@@ -386,5 +386,27 @@
         "type": "int"
       }
     }
-  }
+  },
+  "loadingMessage": "Loading message...",
+
+  "storyWithDuration": "Story ({time})",
+  "@storyWithDuration": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+
+  "someone": "Someone",
+  "something": "Something",
+
+  "accounts": "Accounts",
+  "addAccount": "Add account",
+  "logout": "Log out",
+
+  "interface": "Interface",
+  "colorScheme": "Appearance",
+  "watchShape": "Watch screen shape",
+  "uiScale": "Inteface scale"
 }

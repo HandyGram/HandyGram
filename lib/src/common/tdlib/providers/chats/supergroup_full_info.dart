@@ -7,8 +7,7 @@
  */
 
 import 'package:handy_tdlib/api.dart' as td;
-import 'package:handygram/src/common/exceptions/tdlib_core_exception.dart';
-import 'package:handygram/src/common/log/log.dart';
+import 'package:handygram/src/common/tdlib/misc/updaters_wrappers.dart';
 import 'package:handygram/src/common/tdlib/providers/templates/updates_provider.dart';
 
 class SupergroupFullInfoUpdate {
@@ -21,30 +20,17 @@ class SupergroupFullInfoUpdate {
 }
 
 class SupergroupsFullInfoProvider
-    extends TdlibDataUpdatesProvider<SupergroupFullInfoUpdate> {
+    extends TdlibDataUpdatesProvider<SupergroupFullInfoUpdate>
+    with TdlibUpdatesProviderTypicalWrappers {
   static const String tag = "SupergroupsFullInfoProvider";
 
   Stream<SupergroupFullInfoUpdate> filter(final int supergroupId) =>
       updates.where((update) => update.supergroupId == supergroupId);
 
-  Future<td.SupergroupFullInfo> getSupergroupFullInfo(int supergroupId) async {
-    final obj = await box.invoke(td.GetSupergroupFullInfo(
-      supergroupId: supergroupId,
-    ));
-    if (obj is! td.SupergroupFullInfo) {
-      if (obj is td.TdError) {
-        l.e(tag,
-            "Failed to get supergroup full info $supergroupId [${obj.code}]: ${obj.message}");
-        throw TdlibCoreException.fromTd(tag, obj);
-      } else {
-        l.e(tag,
-            "Failed to get supergroup full info $supergroupId: got ${obj.runtimeType}");
-        throw TdlibCoreException(
-            tag, "Got ${obj.runtimeType} instead of td.SupergroupFullInfo");
-      }
-    }
-    return obj;
-  }
+  Future<td.SupergroupFullInfo> getSupergroupFullInfo(int supergroupId) =>
+      tdlibGetAnySingleBasicWrapper<td.SupergroupFullInfo>(
+        td.GetSupergroupFullInfo(supergroupId: supergroupId),
+      );
 
   @override
   void updatesListener(td.TdObject obj) {

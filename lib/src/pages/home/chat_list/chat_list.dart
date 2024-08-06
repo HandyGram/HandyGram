@@ -12,7 +12,8 @@ import 'package:handygram/src/common/cubits/current_account.dart';
 import 'package:handygram/src/common/exceptions/tdlib_core_exception.dart';
 import 'package:handygram/src/common/misc/localizations.dart';
 import 'package:handygram/src/common/tdlib/providers/chat_lists/chat_list.dart';
-import 'package:handygram/src/components/list/listview.dart';
+import 'package:handygram/src/components/list/scrollbar.dart';
+import 'package:handygram/src/components/list/scrollwrapper.dart';
 import 'package:handygram/src/components/scaled_sizes.dart';
 import 'package:handygram/src/components/text/header.dart';
 import 'package:handygram/src/pages/home/chat_list/chat_preview.dart';
@@ -33,7 +34,6 @@ class _ChatListPageState extends State<ChatListPage>
     with AutomaticKeepAliveClientMixin<ChatListPage> {
   final ScrollController _controller = ScrollController();
   bool noMoreChats = false, loading = false;
-  List<Widget> _chats = [];
 
   // chat previews are flashing on switching pages if not keeping alive them
   @override
@@ -63,37 +63,18 @@ class _ChatListPageState extends State<ChatListPage>
     }
   }
 
-  void _onListUpdate([bool setStat = true]) {
-    int i = 0;
-    _chats = [
-      for (final chat in widget.list.chats) ...[
-        ChatPreview(
-          briefChatInfo: chat,
-          useTemplateInfoIfNeeded: true,
-          key: ValueKey<String>("chat-preview_${chat.chatId}"),
-        ),
-        SizedBox(
-          height: Paddings.betweenSimilarElements,
-          key: ValueKey<String>("chat-padding-${i++}"),
-        ),
-      ]
-    ];
-    if (setStat) setState(() {});
-  }
-
   @override
   void initState() {
     super.initState();
     _controller.addListener(_onScroll);
-    widget.list.addListener(_onListUpdate);
-    _onListUpdate(false);
+    widget.list.addListener(() => setState(() {}));
     _loadChats();
   }
 
   @override
   void dispose() {
     _controller.removeListener(_onScroll);
-    widget.list.removeListener(_onListUpdate);
+    widget.list.removeListener(() => setState(() {}));
     super.dispose();
   }
 
@@ -111,15 +92,41 @@ class _ChatListPageState extends State<ChatListPage>
     return AnimatedBuilder(
       animation: widget.list,
       builder: (context, _) => Scaffold(
-        body: HandyListView(
+        body: HandyScrollWrapper(
           controller: _controller,
-          children: [
-            PageHeader(
-              title: name,
-              key: ValueKey<String>("chats-header_${widget.list}"),
+          child: HandyScrollbar(
+            controller: _controller,
+            child: ListView.builder(
+              controller: _controller,
+              key: ValueKey<String>("chats-screen $name"),
+              addAutomaticKeepAlives: true,
+              padding: EdgeInsets.symmetric(
+                horizontal: Paddings.tilesHorizontalPadding,
+              ),
+              itemCount: widget.list.chats.length,
+              itemBuilder: (context, index) {
+                if (index == 0) {
+                  return PageHeader(
+                    title: name,
+                    key: ValueKey<String>("chats-header_${widget.list}"),
+                  );
+                }
+                index -= 1;
+
+                final chat = widget.list.chats[index];
+                return Padding(
+                  key: ValueKey<String>("chat,$name,preview_${chat.chatId}"),
+                  padding: EdgeInsets.only(
+                    bottom: Paddings.betweenSimilarElements,
+                  ),
+                  child: ChatPreview(
+                    briefChatInfo: chat,
+                    useTemplateInfoIfNeeded: true,
+                  ),
+                );
+              },
             ),
-            ..._chats,
-          ],
+          ),
         ),
       ),
     );

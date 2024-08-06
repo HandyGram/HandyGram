@@ -19,27 +19,27 @@ class ChatHeader extends StatelessWidget {
               TileButton(
                 icon: const Icon(Icons.emoji_emotions),
                 onTap: () {},
-                colorful: false,
+                style: TileButtonStyles.basic,
                 big: false,
               ),
               TileButton(
                 icon: const Icon(Icons.keyboard),
                 onTap: () {},
-                colorful: false,
+                style: TileButtonStyles.basic,
                 big: false,
               ),
               TileButton(
                 icon: const Icon(Icons.mic),
                 onTap: () {},
-                colorful: false,
+                style: TileButtonStyles.basic,
                 big: false,
               ),
             ],
           ),
           SizedBox(height: Paddings.betweenSimilarElements),
-          const TileButton(
+          TileButton(
             big: true,
-            colorful: false,
+            style: TileButtonStyles.basic,
             text: "Test",
           ),
           SizedBox(height: Paddings.afterPage),

@@ -12,24 +12,70 @@ import 'package:handygram/src/common/cubits/scaling.dart';
 import 'package:handygram/src/common/cubits/text.dart';
 import 'package:handygram/src/components/scaled_sizes.dart';
 
+class TileButtonStyle {
+  final Color contentColor;
+  final Color tileColor;
+  final Color disabledContentColor;
+  final Color disabledTileColor;
+  final Color? gradientSecondColor;
+
+  const TileButtonStyle({
+    required this.contentColor,
+    required this.tileColor,
+    required this.disabledContentColor,
+    required this.disabledTileColor,
+    this.gradientSecondColor,
+  });
+}
+
+abstract final class TileButtonStyles {
+  static TileButtonStyle get colorful => TileButtonStyle(
+        contentColor: ColorStyles.active.onPrimary,
+        tileColor: ColorStyles.active.primary,
+        disabledContentColor: Colors.grey,
+        disabledTileColor: ColorStyles.active.surface,
+      );
+
+  static TileButtonStyle get error => TileButtonStyle(
+        contentColor: ColorStyles.active.onError,
+        tileColor: ColorStyles.active.error,
+        disabledContentColor: Colors.grey,
+        disabledTileColor: ColorStyles.active.surface,
+      );
+
+  static TileButtonStyle get basic => TileButtonStyle(
+        contentColor: ColorStyles.active.onSurface,
+        tileColor: ColorStyles.active.surface,
+        disabledContentColor: Colors.grey,
+        disabledTileColor: ColorStyles.active.surface,
+      );
+
+  static TileButtonStyle get gradient => TileButtonStyle(
+        contentColor: ColorStyles.active.onSurface,
+        tileColor: ColorStyles.active.surface,
+        disabledContentColor: Colors.grey,
+        disabledTileColor: ColorStyles.active.surface,
+        gradientSecondColor: ColorStyles.active.onSurfaceVariant,
+      );
+}
+
 class TileButton extends StatelessWidget {
   const TileButton({
     super.key,
     this.text,
     this.icon,
-    this.big = true,
-    this.colorful = true,
-    this.gradient = false,
+    this.style,
     this.onTap,
+    this.big = true,
     this.onDoubleTap,
     this.onLongPress,
   }) : assert(icon != null || text != null);
 
   final String? text;
   final Widget? icon;
+
   final bool big;
-  final bool colorful;
-  final bool gradient;
+  final TileButtonStyle? style;
 
   final void Function()? onTap;
   final void Function()? onLongPress;
@@ -37,16 +83,14 @@ class TileButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final style = this.style ?? TileButtonStyles.colorful;
+
     final textW = Text(
       text ?? "",
       style:
           (big ? TextStyles.active.titleMedium : TextStyles.active.titleSmall)!
               .copyWith(
-        color: (colorful && onTap != null)
-            ? ColorStyles.active.onPrimary
-            : onTap != null
-                ? Colors.white
-                : Colors.grey,
+        color: onTap == null ? style.disabledContentColor : style.contentColor,
       ),
       textAlign: icon == null ? TextAlign.center : TextAlign.left,
       maxLines: 2,
@@ -62,18 +106,12 @@ class TileButton extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          borderRadius: BorderRadii.tilesRadius,
           onTap: onTap,
           onLongPress: onLongPress,
           onDoubleTap: onDoubleTap,
-          splashColor: (colorful
-                  ? ColorStyles.active.onPrimary
-                  : ColorStyles.active.onSurface)
-              .withOpacity(0.1),
-          highlightColor: (colorful
-                  ? ColorStyles.active.onPrimary
-                  : ColorStyles.active.onSurface)
-              .withOpacity(0.1),
+          borderRadius: BorderRadii.tilesRadius,
+          splashColor: style.contentColor.withOpacity(0.1),
+          highlightColor: style.contentColor.withOpacity(0.1),
           child: Ink(
             height: onlyIcon ? Sizes.tilesHeight : null,
             width: big
@@ -83,16 +121,21 @@ class TileButton extends StatelessWidget {
                     : null,
             decoration: BoxDecoration(
               borderRadius: BorderRadii.tilesRadius,
-              color: gradient
-                  ? null
-                  : (colorful && onTap != null)
-                      ? ColorStyles.active.primary
-                      : ColorStyles.active.surface,
-              gradient: gradient
+              color: style.gradientSecondColor == null
+                  ? onTap != null
+                      ? style.tileColor
+                      : style.disabledTileColor
+                  : null,
+              gradient: style.gradientSecondColor != null
                   ? LinearGradient(
                       colors: [
-                        ColorStyles.active.surface,
-                        ColorStyles.active.onSurfaceVariant,
+                        onTap != null
+                            ? style.tileColor
+                            : style.disabledTileColor,
+                        if (onTap != null)
+                          style.gradientSecondColor!
+                        else
+                          style.disabledTileColor,
                       ],
                     )
                   : null,
@@ -114,10 +157,8 @@ class TileButton extends StatelessWidget {
                         IconTheme(
                           data: Theme.of(context).iconTheme.copyWith(
                                 color: onTap != null
-                                    ? colorful
-                                        ? ColorStyles.active.onPrimary
-                                        : ColorStyles.active.onSurface
-                                    : ColorStyles.active.onSurfaceVariant,
+                                    ? style.contentColor
+                                    : style.disabledContentColor,
                               ),
                           child: icon!,
                         ),

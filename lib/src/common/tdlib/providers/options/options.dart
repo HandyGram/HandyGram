@@ -6,6 +6,8 @@
  * See /LICENSE for more details.
  */
 
+import 'dart:async';
+
 import 'package:handy_tdlib/api.dart' as td;
 import 'package:handygram/src/common/log/log.dart';
 import 'package:handygram/src/common/tdlib/providers/templates/events_provider.dart';
@@ -15,6 +17,9 @@ class OptionsProvider extends TdlibDataEventsProvider {
 
   final Map<String, dynamic> _options = {};
   Map<String, dynamic> get cached => _options;
+
+  Future<dynamic> getMaybeCached(String name) async =>
+      cached[name] ?? get(name);
 
   Future<dynamic> get(String name) async {
     final value = await box.invoke(td.GetOption(name: name));

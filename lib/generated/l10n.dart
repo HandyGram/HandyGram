@@ -1472,13 +1472,13 @@ class AppLocalizations {
     );
   }
 
-  /// `Unsupported message {type}. Please update your HandyGram.`
-  String messageContentUnsupported(Object type) {
+  /// `Unsupported message type:\n`
+  String get messageContentUnsupported {
     return Intl.message(
-      'Unsupported message $type. Please update your HandyGram.',
+      'Unsupported message type:\n',
       name: 'messageContentUnsupported',
       desc: '',
-      args: [type],
+      args: [],
     );
   }
 
@@ -1499,6 +1499,116 @@ class AppLocalizations {
       name: 'chatViewMessageNotFoundError',
       desc: '',
       args: [id],
+    );
+  }
+
+  /// `Loading message...`
+  String get loadingMessage {
+    return Intl.message(
+      'Loading message...',
+      name: 'loadingMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Story ({time})`
+  String storyWithDuration(String time) {
+    return Intl.message(
+      'Story ($time)',
+      name: 'storyWithDuration',
+      desc: '',
+      args: [time],
+    );
+  }
+
+  /// `Someone`
+  String get someone {
+    return Intl.message(
+      'Someone',
+      name: 'someone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Something`
+  String get something {
+    return Intl.message(
+      'Something',
+      name: 'something',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Accounts`
+  String get accounts {
+    return Intl.message(
+      'Accounts',
+      name: 'accounts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add account`
+  String get addAccount {
+    return Intl.message(
+      'Add account',
+      name: 'addAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log out`
+  String get logout {
+    return Intl.message(
+      'Log out',
+      name: 'logout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Interface`
+  String get interface {
+    return Intl.message(
+      'Interface',
+      name: 'interface',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Appearance`
+  String get colorScheme {
+    return Intl.message(
+      'Appearance',
+      name: 'colorScheme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Watch screen shape`
+  String get watchShape {
+    return Intl.message(
+      'Watch screen shape',
+      name: 'watchShape',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Inteface scale`
+  String get uiScale {
+    return Intl.message(
+      'Inteface scale',
+      name: 'uiScale',
+      desc: '',
+      args: [],
     );
   }
 }

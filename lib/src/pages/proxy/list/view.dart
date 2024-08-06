@@ -119,7 +119,7 @@ class ProxyListView extends StatelessWidget {
                   TileButton(
                     text: l10n.proxyAdd,
                     icon: const Icon(Icons.add),
-                    colorful: false,
+                    style: TileButtonStyles.basic,
                     onTap: () => GoRouter.of(context).push("/proxy"),
                   ),
                   SizedBox(height: Paddings.beforeSmallButton),

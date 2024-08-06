@@ -16,9 +16,10 @@ import 'package:handygram/src/common/cubits/text.dart';
 import 'package:handygram/src/common/tdlib/extensions/misc/display.dart';
 import 'package:handygram/src/common/tdlib/extensions/misc/int.dart';
 import 'package:handygram/src/common/tdlib/extensions/misc/minithumbnail.dart';
+import 'package:handygram/src/common/tdlib/extensions/misc/photosize.dart';
 import 'package:handygram/src/components/scaled_sizes.dart';
 
-class MicroAvatar extends StatelessWidget {
+class MicroAvatar extends StatefulWidget {
   const MicroAvatar({
     super.key,
     required this.sender,
@@ -26,14 +27,12 @@ class MicroAvatar extends StatelessWidget {
 
   final td.MessageSender sender;
 
-  int _getSmallestPhotoId(List<td.PhotoSize> sizes) => sizes
-      .fold(
-        sizes.first,
-        (initial, current) =>
-            (current.width < initial.width) ? current : initial,
-      )
-      .photo
-      .id;
+  @override
+  State<MicroAvatar> createState() => _MicroAvatarState();
+}
+
+class _MicroAvatarState extends State<MicroAvatar> {
+  Widget? _image;
 
   Future<(int, dynamic)> _getByChatId(int chatId) async {
     final chat = await chatId.asChat;
@@ -59,7 +58,7 @@ class MicroAvatar extends StatelessWidget {
         return (
           priority,
           //photo.minithumbnail ?? _getSmallestPhotoId(photo.sizes),
-          _getSmallestPhotoId(photo.sizes),
+          photo.sizes.smallest.photo.id,
         );
       }
     } else {
@@ -80,13 +79,13 @@ class MicroAvatar extends StatelessWidget {
     return user.displayName;
   }
 
-  Future<Widget> _getChatImage() async {
+  Future<void> _getChatImage() async {
     final stuff = CurrentAccount.providers;
 
     dynamic photoObj;
     int? priority;
     try {
-      switch (sender) {
+      switch (widget.sender) {
         case td.MessageSenderChat(chatId: final chatId):
           (priority, photoObj) = await _getByChatId(chatId);
         case td.MessageSenderUser(userId: final userId):
@@ -99,7 +98,7 @@ class MicroAvatar extends StatelessWidget {
     switch (photoObj) {
       // No photo, chat title has been returned
       case String():
-        return Container(
+        _image = Container(
           decoration: BoxDecoration(
             color: ColorStyles.active.primary,
             shape: BoxShape.circle,
@@ -115,7 +114,7 @@ class MicroAvatar extends StatelessWidget {
           ),
         );
       case td.Minithumbnail():
-        return photoObj.asWidget(
+        _image = photoObj.asWidget(
           Sizes.microAvatarDiameter,
           Sizes.microAvatarDiameter / 2,
         );
@@ -125,13 +124,13 @@ class MicroAvatar extends StatelessWidget {
           synchronous: true,
           priority: priority ?? 2,
         );
-        return Image.file(
+        _image = Image.file(
           File(file.local.path),
           width: Sizes.microAvatarDiameter,
           height: Sizes.microAvatarDiameter,
         );
       default:
-        return Container(
+        _image = Container(
           decoration: BoxDecoration(
             color: ColorStyles.active.error,
             shape: BoxShape.circle,
@@ -143,29 +142,37 @@ class MicroAvatar extends StatelessWidget {
           ),
         );
     }
+
+    if (mounted && context.mounted) setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getChatImage();
+  }
+
+  @override
+  void didUpdateWidget(covariant MicroAvatar oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.sender != widget.sender) {
+      _getChatImage();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Widget>(
-      future: _getChatImage(),
-      builder: (context, snapshot) {
-        return SizedBox.square(
-          dimension: Sizes.microAvatarDiameter,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(999),
-            child: Container(
-              decoration: BoxDecoration(
-                color: ColorStyles.active.onSurfaceVariant,
-              ),
-              child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 250),
-                child: snapshot.data,
-              ),
-            ),
+    return SizedBox.square(
+      dimension: Sizes.microAvatarDiameter,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(999),
+        child: Container(
+          decoration: BoxDecoration(
+            color: ColorStyles.active.onSurfaceVariant,
           ),
-        );
-      },
+          child: _image,
+        ),
+      ),
     );
   }
 }

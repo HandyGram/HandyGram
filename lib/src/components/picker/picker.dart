@@ -72,8 +72,9 @@ class ValuePicker<T> extends StatelessWidget {
                         padding: EdgeInsets.only(bottom: 5 * Scaling.factor),
                         child: TileButton(
                           text: e.title,
-                          gradient: e.value == currentValue,
-                          colorful: false,
+                          style: e.value == currentValue
+                              ? TileButtonStyles.gradient
+                              : TileButtonStyles.basic,
                           onTap: () {
                             GoRouter.of(context).pop();
                             onSelected(e.value);

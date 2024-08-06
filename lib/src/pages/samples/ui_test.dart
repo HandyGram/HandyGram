@@ -67,7 +67,7 @@ class _UiTestPageState extends State<UiTestPage> {
             TileButton(
               text: "Grey",
               onTap: () {},
-              colorful: false,
+              style: TileButtonStyles.basic,
               big: false,
             ),
             const SizedBox(height: 10),
@@ -85,7 +85,7 @@ class _UiTestPageState extends State<UiTestPage> {
             TileButton(
               text: "Huge grey",
               onTap: () {},
-              colorful: false,
+              style: TileButtonStyles.basic,
             ),
             const SizedBox(height: 5),
             TileButton(

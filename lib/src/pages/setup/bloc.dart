@@ -169,7 +169,7 @@ class SetupBloc extends Bloc<SetupEvent, SetupState> {
 
     CurrentAccount.providers.authorizationState
         .waitForState<AuthorizationStateReady>()
-        .then((_) => add(const _ExitSetup()));
+        .then((_) => isClosed ? null : add(const _ExitSetup()));
   }
 
   void _exit(final Emitter<SetupState> emit) {

@@ -5,127 +5,97 @@ import 'package:flutter/material.dart';
 import 'package:handy_tdlib/api.dart' as td;
 import 'package:handygram/src/common/cubits/colors.dart';
 import 'package:handygram/src/common/cubits/current_account.dart';
+import 'package:handygram/src/common/log/log.dart';
+import 'package:handygram/src/components/media/micro_player.dart';
+import 'package:handygram/src/components/messages/content.dart';
 import 'package:handygram/src/components/scaled_sizes.dart';
-import 'package:handygram/src/components/text/formatted_text.dart';
 import 'package:lottie/lottie.dart';
-import 'package:video_player/video_player.dart';
-import 'package:visibility_detector/visibility_detector.dart';
 
-// TODO: implement micro player for video stickers and GIFs
-class _VideoSticker extends StatefulWidget {
-  const _VideoSticker({required this.file});
-
-  final File file;
-
-  @override
-  State<_VideoSticker> createState() => __VideoStickerState();
-}
-
-class __VideoStickerState extends State<_VideoSticker> {
-  late final controller = VideoPlayerController.file(
-    widget.file,
-    videoPlayerOptions: VideoPlayerOptions(
-      allowBackgroundPlayback: false,
-      mixWithOthers: true,
-    ),
-  );
-
-  void _initializePlayback() async {
-    try {
-      await controller.initialize();
-      await controller.setLooping(true);
-      await controller.setVolume(0);
-      await controller.play();
-    } catch (_) {}
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _initializePlayback();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return VisibilityDetector(
-      key: UniqueKey(),
-      onVisibilityChanged: (info) {
-        if (!mounted) return;
-        if (info.visibleFraction > 0.5 && !controller.value.isPlaying) {
-          controller.setLooping(true);
-          controller.setVolume(0);
-          controller.play();
-        } else if (controller.value.isPlaying) {
-          controller.pause();
-        }
-      },
-      child: VideoPlayer(controller),
-    );
-  }
-}
-
-class StickerMessageContent extends StatelessWidget {
-  const StickerMessageContent(
-    this.content, {
+class StickerMessageContent extends MessageStatefulWidget<td.MessageSticker> {
+  const StickerMessageContent({
     super.key,
+    required super.data,
   });
 
-  final td.MessageSticker content;
+  @override
+  State<StickerMessageContent> createState() => _StickerMessageContentState();
+}
 
-  Future<Widget> _loadSticker() async {
-    final sticker = content.sticker;
-    final tdFile = await CurrentAccount.providers.files.download(
-      fileId: sticker.sticker.id,
-      priority: 5,
-      synchronous: true,
-    );
+class _StickerMessageContentState extends State<StickerMessageContent> {
+  static const String tag = "StickerMessageContent";
+  Widget? _sticker;
+
+  Future<void> _loadSticker() async {
+    final sticker = widget.content.sticker;
+    final td.File tdFile;
+    try {
+      tdFile = await CurrentAccount.providers.files.download(
+        fileId: sticker.sticker.id,
+        priority: 5,
+        synchronous: true,
+      );
+    } catch (e) {
+      l.e(tag, "$e");
+      return Future.delayed(const Duration(seconds: 2))
+          .then((_) => _loadSticker());
+    }
     final file = File(tdFile.local.path);
-    switch (sticker.format) {
-      case td.StickerFormatTgs():
-        return LottieBuilder.memory(
+    _sticker = switch (sticker.format) {
+      td.StickerFormatTgs() => LottieBuilder.memory(
           Uint8List.fromList(
             gzip.decode(await file.readAsBytes()),
           ),
           fit: BoxFit.cover,
           repeat: true,
-        );
-      case td.StickerFormatWebp():
-        return Image.file(
+        ),
+      td.StickerFormatWebp() => Image.file(
           file,
           fit: BoxFit.cover,
-        );
-      case td.StickerFormatWebm():
-        return _VideoSticker(file: file);
+        ),
+      td.StickerFormatWebm() => MicroPlayer(file: file),
+    };
+    if (mounted && context.mounted) setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSticker();
+  }
+
+  @override
+  void didUpdateWidget(covariant StickerMessageContent oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.content != widget.content) {
+      _loadSticker();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final ratio = content.sticker.width / content.sticker.height;
-    return AspectRatio(
-      aspectRatio: ratio > 0 ? ratio : 1,
-      child: ClipRRect(
-        borderRadius: BorderRadii.messageBubbleContentRadius,
-        child: FutureBuilder(
-          future: _loadSticker(),
-          builder: (context, snapshot) {
-            return snapshot.data ??
+    final ratio = widget.content.sticker.width / widget.content.sticker.height;
+    return Column(
+      // for time sent alignment
+      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        AspectRatio(
+          aspectRatio: ratio > 0 ? ratio : 1,
+          child: ClipRRect(
+            borderRadius: BorderRadii.messageBubbleContentRadius,
+            child: _sticker ??
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadii.messageBubbleContentRadius,
                     color: ColorStyles.active.onSurfaceVariant,
                   ),
                   child: const SizedBox.expand(),
-                );
-          },
+                ),
+          ),
         ),
-      ),
+        SizedBox(height: Paddings.messageBubblesPadding),
+        widget.attributesWidget,
+      ],
     );
   }
 }

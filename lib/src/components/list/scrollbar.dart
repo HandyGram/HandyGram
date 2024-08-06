@@ -175,6 +175,10 @@ class _HandyScrollbarThumb extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final angleLength = _kProgressBarLength * fraction;
+    if (angleLength.isNaN) {
+      return Container();
+    }
+
     return Transform.rotate(
       angle: index * angleLength,
       child: CustomPaint(
