@@ -29,8 +29,8 @@ dependencies:
   flutter_local_notifications: ^17.0.0
   flutter_svg: ^2.0.10+1
   go_router: ^14.2.0
-  handy_tdlib:
-    path: ../handy_tdlib
+  # safe to use any here cause that's our own package
+  handy_tdlib: any
   hive: ^2.2.3
   logging: ^1.2.0
   mutex: ^3.1.0
@@ -59,6 +59,7 @@ flutter:
 
   assets:
     - assets/vectors/compiled/
+    - assets/images/
     - .git/HEAD
     - .git/refs/heads/
   
