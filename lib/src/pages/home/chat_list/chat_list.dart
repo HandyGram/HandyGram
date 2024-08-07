@@ -6,6 +6,8 @@
  * See /LICENSE for more details.
  */
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:handy_tdlib/api.dart' as td;
 import 'package:handygram/src/common/cubits/current_account.dart';
@@ -89,9 +91,9 @@ class _ChatListPageState extends State<ChatListPage>
   Widget build(BuildContext context) {
     super.build(context);
 
-    return AnimatedBuilder(
-      animation: widget.list,
-      builder: (context, _) => Scaffold(
+    return ValueListenableBuilder(
+      valueListenable: widget.list,
+      builder: (context, value, _) => Scaffold(
         body: HandyScrollWrapper(
           controller: _controller,
           child: HandyScrollbar(
@@ -103,17 +105,25 @@ class _ChatListPageState extends State<ChatListPage>
               padding: EdgeInsets.symmetric(
                 horizontal: Paddings.tilesHorizontalPadding,
               ),
-              itemCount: widget.list.chats.length,
+              itemCount: max(3, value.length + 2),
               itemBuilder: (context, index) {
                 if (index == 0) {
                   return PageHeader(
                     title: name,
                     key: ValueKey<String>("chats-header_${widget.list}"),
                   );
+                } else if (index == 1 && value.isEmpty) {
+                  return Center(
+                    child: Text(
+                      AppLocalizations.current.folderIsEmpty,
+                    ),
+                  );
+                } else if (index == value.length + 1) {
+                  return SizedBox(height: Paddings.afterPage);
                 }
                 index -= 1;
 
-                final chat = widget.list.chats[index];
+                final chat = value[index];
                 return Padding(
                   key: ValueKey<String>("chat,$name,preview_${chat.chatId}"),
                   padding: EdgeInsets.only(
