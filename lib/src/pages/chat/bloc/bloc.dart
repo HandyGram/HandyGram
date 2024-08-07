@@ -16,6 +16,8 @@ import 'package:handygram/src/common/exceptions/tdlib_core_exception.dart';
 import 'package:handygram/src/common/exceptions/ui_exception.dart';
 import 'package:handygram/src/common/log/log.dart';
 import 'package:handygram/src/common/misc/localizations.dart';
+import 'package:handygram/src/common/settings/entries.dart';
+import 'package:handygram/src/common/settings/manager.dart';
 import 'package:handygram/src/common/tdlib/providers/messages/messages.dart';
 import 'package:handygram/src/common/tdlib/misc/service_chat_type.dart';
 import 'package:handygram/src/pages/chat/bloc/data.dart';
@@ -530,10 +532,11 @@ class ChatBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
         if (focusedRange.first == -1 || focusedRange.last == -1) return;
 
         final cleaningNeeded = distance.first > 15 || distance.last > 15;
-        if (debugCleanupDisabled) {
+        if (debugCleanupDisabled ||
+            Settings().get(SettingsEntries.doNotCleanupMessages)) {
           l.i(
               tag,
-              "Cleanup info: focused range "
+              "Cleanup disabled! | focused range "
               "${focusedRange.first} -> ${focusedRange.last}, "
               "distance from both ends "
               "${distance.first} -> | ... | <- ${distance.last}. "

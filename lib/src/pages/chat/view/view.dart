@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:handygram/src/common/cubits/scaling.dart';
+import 'package:handygram/src/common/settings/entries.dart';
+import 'package:handygram/src/common/settings/manager.dart';
 import 'package:mutex/mutex.dart';
 import 'package:scrollview_observer/scrollview_observer.dart';
 
@@ -217,8 +219,9 @@ class _ChatViewState extends State<ChatView> with WidgetsBindingObserver {
       //
       // We cannot just make double.infinity cacheExtent cause we'll see 0 FPS
       // on potatoish WearOS devices CPUs
-      cacheExtent:
-          (bloc.chat.isChannel ? 3 : 0.8) * Scaling.screenSize.height * 34,
+      cacheExtent: Settings().get(SettingsEntries.useInfiniteCacheExtent)
+          ? double.infinity
+          : (bloc.chat.isChannel ? 3 : 0.8) * Scaling.screenSize.height * 34,
       itemBuilder: (context, i) {
         if (i == 0) {
           return const ChatHeader(
