@@ -154,7 +154,7 @@ class SetupBloc extends Bloc<SetupEvent, SetupState> {
     });
     on<SetupEventSetSettings>((event, emit) {
       Settings().put(SettingsEntries.enableNotifications, event.showNotif);
-      Settings().put(SettingsEntries.disablePFPs, event.disablePfps);
+      Settings().put(SettingsEntries.disableMicroAvatars, event.disablePfps);
       Settings().put(SettingsEntries.runInBackground, event.runInBg);
       if (event.noTransition) {
         emit(SetupStateSettings(
@@ -271,7 +271,7 @@ class SetupBloc extends Bloc<SetupEvent, SetupState> {
           ),
         0 => SetupStateSettings(
             runInBg: Settings().get(SettingsEntries.runInBackground),
-            disablePfps: Settings().get(SettingsEntries.disablePFPs),
+            disablePfps: Settings().get(SettingsEntries.disableMicroAvatars),
             enableNotif: Settings().get(SettingsEntries.enableNotifications),
           ),
         -1 => const SetupStateFinished(),
