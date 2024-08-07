@@ -38,10 +38,9 @@ mixin TdlibUpdatesProviderTypicalWrappers on TdlibDataProvider, AttachableBox {
   }
 
   @protected
-  Future<void> tdlibOkActionWrapper<A extends td.TdObject>(
-      td.TdFunction function) async {
+  Future<void> tdlibOkActionWrapper(td.TdFunction function) async {
     final obj = await box?.invoke(function);
-    if (obj is! A && obj is! td.Ok) {
+    if (obj is! td.Ok) {
       if (obj is td.TdError) {
         l.e(tag, "Failed to perform $function [${obj.code}]: ${obj.message}");
         throw TdlibCoreException.fromTd(tag, obj);
