@@ -129,6 +129,15 @@ class HandyNatives {
     _ready = true;
   }
 
+  Future<({int free, int total})?> getStorageStats() async {
+    final data = await _channel.invokeMethod<Map>("getStorageStats");
+    if (data == null) return null;
+    return (
+      free: data['free'] as int,
+      total: data['total'] as int,
+    );
+  }
+
   HandyNatives._();
 
   static final HandyNatives _instance = HandyNatives._();

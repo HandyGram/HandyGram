@@ -3,6 +3,8 @@ package ru.tdrk.handygram
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.usage.StorageStats
+import android.app.usage.StorageStatsManager
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
@@ -13,11 +15,13 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
 import android.net.NetworkCapabilities
+import android.os.storage.StorageManager
 import android.view.ViewConfiguration
 import androidx.core.view.ViewConfigurationCompat
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
+import java.io.File
 
 class HandyNativesChannel(
     binaryMessenger: BinaryMessenger,
@@ -70,6 +74,9 @@ class HandyNativesChannel(
         isWearable = wearableVersion != null
         if (isWearable) {
             this.wearableVersion = when (Build.VERSION.SDK_INT) {
+                // Wear OS 5.0
+                Build.VERSION_CODES.UPSIDE_DOWN_CAKE -> "5.0"
+
                 // Wear OS 4.0
                 Build.VERSION_CODES.TIRAMISU -> "4.0"
 
@@ -117,6 +124,22 @@ class HandyNativesChannel(
 
     private fun getIsRound(result: MethodChannel.Result) {
         result.success(isRoundWatch)
+    }
+
+    private fun getStorageStats(result: MethodChannel.Result) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            val stats = activity.getSystemService(Context.STORAGE_STATS_SERVICE) as StorageStatsManager
+            result.success(mapOf(
+                Pair("free", stats.getFreeBytes(StorageManager.UUID_DEFAULT)),
+                Pair("total", stats.getTotalBytes(StorageManager.UUID_DEFAULT))
+            ))
+        } else {
+            val data = File("/data")
+            result.success(mapOf(
+                Pair("free", data.freeSpace),
+                Pair("total", data.totalSpace)
+            ))
+        }
     }
 
     private fun log(call: MethodCall, result: MethodChannel.Result) {
@@ -192,6 +215,7 @@ class HandyNativesChannel(
             "isRoamingEnabled" -> isRoamingEnabled(result)
             "requestHighBandwidth" -> requestHighBandwidth(result)
             "releaseHighBandwidth" -> releaseHighBandwidth(result)
+            "getStorageStats" -> getStorageStats(result)
             else -> {}
         }
     }
