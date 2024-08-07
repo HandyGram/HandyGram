@@ -13,6 +13,8 @@ import 'package:handy_tdlib/api.dart' as td;
 import 'package:handygram/src/common/cubits/colors.dart';
 import 'package:handygram/src/common/cubits/current_account.dart';
 import 'package:handygram/src/common/cubits/text.dart';
+import 'package:handygram/src/common/settings/entries.dart';
+import 'package:handygram/src/common/settings/manager.dart';
 import 'package:handygram/src/common/tdlib/extensions/misc/display.dart';
 import 'package:handygram/src/common/tdlib/extensions/misc/int.dart';
 import 'package:handygram/src/common/tdlib/extensions/misc/minithumbnail.dart';
@@ -162,6 +164,10 @@ class _MicroAvatarState extends State<MicroAvatar> {
 
   @override
   Widget build(BuildContext context) {
+    if (Settings().get(SettingsEntries.disableMicroAvatars)) {
+      return Container();
+    }
+
     return SizedBox.square(
       dimension: Sizes.microAvatarDiameter,
       child: ClipRRect(

@@ -14,6 +14,8 @@ import 'package:handygram/src/common/cubits/colors.dart';
 import 'package:handygram/src/common/cubits/current_account.dart';
 import 'package:handygram/src/common/cubits/scaling.dart';
 import 'package:handygram/src/common/cubits/text.dart';
+import 'package:handygram/src/common/settings/entries.dart';
+import 'package:handygram/src/common/settings/manager.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 class ProfileAvatar extends StatefulWidget {
@@ -134,6 +136,10 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
 
   @override
   Widget build(BuildContext context) {
+    if (Settings().get(SettingsEntries.disableProfileAvatars)) {
+      return Container();
+    }
+
     return SizedBox(
       height: 38 * Scaling.factor,
       width: 38 * Scaling.factor,
