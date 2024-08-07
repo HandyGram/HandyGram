@@ -408,5 +408,64 @@
   "interface": "Interface",
   "colorScheme": "Appearance",
   "watchShape": "Watch screen shape",
-  "uiScale": "Inteface scale"
+  "uiScale": "Inteface scale",
+  "aboutApp": "About app",
+  "storage": "Storage",
+  "notifications": "Notifications",
+  "messaging": "Messaging",
+  "settings": "Settings",
+
+  "roleDesigner": "UX/UI designer",
+  "roleFounder": "Founder & developer",
+
+  "appVersion": "Version {version} ({codename})",
+  "@appVersion": {
+    "placeholders": {
+      "version": {
+        "type": "int"
+      },
+      "codename": {
+        "type": "String"
+      }
+    }
+  },
+
+  "poweredByTdlib": "Powered by TDLib {version}",
+  "@poweredByTdlib": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+
+  "officialChannel": "Official channel",
+  "channelDescription": "News and updates",
+
+  "sectionPerformance": "Performance",
+  "sectionAppearance": "Appearance",
+
+  "disableChatOptimizations": "Disable chat cleanup",
+  "disableChatOptimizationsDesc": "Do not cleanup invisible messages in chats",
+
+  "prerenderAllMessages": "Pre-render all messages",
+  "prerenderAllMessagesDesc": "May help with jumping messages list issue",
+
+  "disableMicroAvatars": "Disable small avatars",
+  "disableMicroAvatarsDesc": "The ones nearby user names",
+
+  "disableProfileAvatars": "Disable avatars",
+  "disableProfileAvatarsDesc": "Shown in chat lists",
+
+  "storageNonHandyGram": "Other apps",
+  "storageFreeSpace": "Free space",
+  "storageHandyGramData": "HandyGram data",
+
+  "optimizeStorageUsage": "Optimize storage",
+  "optmizing": "Optimizing...",
+
+  "folderIsEmpty": "Folder is empty", 
+
+  "runInBackground": "Notifications",
+  "runInBackgroundDesc": "Enable Firebase service"
 }

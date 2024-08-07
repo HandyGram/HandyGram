@@ -20,77 +20,83 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(title) => "Audio: ${title}";
+  static String m0(version, codename) => "Version ${version} (${codename})";
 
-  static String m1(time) => "Call (${time})";
+  static String m1(title) => "Audio: ${title}";
 
-  static String m2(error) => "Failed to load chat: ${error}";
+  static String m2(time) => "Call (${time})";
 
-  static String m3(user) => "${user} and others were added";
+  static String m3(error) => "Failed to load chat: ${error}";
 
-  static String m4(id) => "Message ${id} was not found";
+  static String m4(user) => "${user} and others were added";
 
-  static String m5(name) => "Contact: ${name}";
+  static String m5(id) => "Message ${id} was not found";
 
-  static String m6(caption) => "[Document] ${caption}";
+  static String m6(name) => "Contact: ${name}";
 
-  static String m7(name) => "Edited \"${name}\" topic";
+  static String m7(caption) => "[Document] ${caption}";
 
-  static String m8(count) =>
+  static String m8(name) => "Edited \"${name}\" topic";
+
+  static String m9(count) =>
       "${count} forwarded ${Intl.plural(count, one: 'message', other: 'messages')}";
 
-  static String m9(name) => "New \"${name}\" topic";
-
-  static String m10(count) =>
-      "${count} incoming ${Intl.plural(count, one: 'call', other: 'calls')}";
+  static String m10(name) => "New \"${name}\" topic";
 
   static String m11(count) =>
-      "${count} unread ${Intl.plural(count, one: 'mention', other: 'mentions')}";
+      "${count} incoming ${Intl.plural(count, one: 'call', other: 'calls')}";
 
   static String m12(count) =>
+      "${count} unread ${Intl.plural(count, one: 'mention', other: 'mentions')}";
+
+  static String m13(count) =>
       "${count} unread ${Intl.plural(count, one: 'message', other: 'messages')}";
 
-  static String m13(name) => "${name} is calling you...";
+  static String m14(name) => "${name} is calling you...";
 
-  static String m14(name) => "${name} has just created a secret chat with you!";
+  static String m15(name) => "${name} has just created a secret chat with you!";
 
-  static String m15(caption) => "[Photo] ${caption}";
+  static String m16(caption) => "[Photo] ${caption}";
 
-  static String m16(caption) => "[Poll] ${caption}";
+  static String m17(caption) => "[Poll] ${caption}";
 
-  static String m17(count) =>
+  static String m18(version) => "Powered by TDLib ${version}";
+
+  static String m19(count) =>
       "Premium (${count} ${Intl.plural(count, one: 'month', other: 'months')})";
 
-  static String m18(date) => "Last used: ${date}";
+  static String m20(date) => "Last used: ${date}";
 
-  static String m19(score) => "Scored ${score} in game";
+  static String m21(score) => "Scored ${score} in game";
 
-  static String m20(count) =>
+  static String m22(count) =>
       "${Intl.plural(count, one: 'second', other: 'seconds')}";
 
-  static String m21(emoji) => "${emoji} Sticker";
+  static String m23(emoji) => "${emoji} Sticker";
 
-  static String m22(time) => "Story (${time})";
+  static String m24(time) => "Story (${time})";
 
-  static String m23(user) => "${user} has left";
+  static String m25(user) => "${user} has left";
 
-  static String m24(time) => "Video call (${time})";
+  static String m26(time) => "Video call (${time})";
 
-  static String m25(time) => "Video chat (${time})";
+  static String m27(time) => "Video chat (${time})";
 
-  static String m26(time) => "Video note (${time})";
+  static String m28(time) => "Video note (${time})";
 
-  static String m27(caption) => "[Video] ${caption}";
+  static String m29(caption) => "[Video] ${caption}";
 
-  static String m28(time) => "Voice note (${time})";
+  static String m30(time) => "Voice note (${time})";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "aboutApp": MessageLookupByLibrary.simpleMessage("About app"),
         "accounts": MessageLookupByLibrary.simpleMessage("Accounts"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Add account"),
         "album": MessageLookupByLibrary.simpleMessage("Album"),
+        "appVersion": m0,
         "audio": MessageLookupByLibrary.simpleMessage("Audio"),
-        "audioPrefix": m0,
+        "audioPrefix": m1,
         "avatarWasChanged":
             MessageLookupByLibrary.simpleMessage("Avatar was changed"),
         "avatarWasDeleted":
@@ -99,16 +105,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Background was changed"),
         "botWriteAccessAllowed": MessageLookupByLibrary.simpleMessage(
             "Bot has been allowed to write messages"),
-        "callWithTime": m1,
+        "callWithTime": m2,
         "calls": MessageLookupByLibrary.simpleMessage("Calls"),
         "changedTheme": MessageLookupByLibrary.simpleMessage("Change theme"),
-        "chatBlocLoadingError": m2,
+        "channelDescription":
+            MessageLookupByLibrary.simpleMessage("News and updates"),
+        "chatBlocLoadingError": m3,
         "chatListHeaderArchive":
             MessageLookupByLibrary.simpleMessage("Archive"),
         "chatListHeaderFolder": MessageLookupByLibrary.simpleMessage("Folder"),
         "chatListHeaderMain": MessageLookupByLibrary.simpleMessage("All chats"),
-        "chatMembersWereAdded": m3,
-        "chatViewMessageNotFoundError": m4,
+        "chatMembersWereAdded": m4,
+        "chatViewMessageNotFoundError": m5,
         "chatWasShared":
             MessageLookupByLibrary.simpleMessage("Chat was shared"),
         "closeButton": MessageLookupByLibrary.simpleMessage("Close"),
@@ -124,15 +132,27 @@ class MessageLookup extends MessageLookupByLibrary {
         "connectionWaitingForNetwork":
             MessageLookupByLibrary.simpleMessage("Waiting for network..."),
         "contact": MessageLookupByLibrary.simpleMessage("Contact"),
-        "contactPrefix": m5,
+        "contactPrefix": m6,
         "createButton": MessageLookupByLibrary.simpleMessage("Create"),
         "createProxy": MessageLookupByLibrary.simpleMessage("New Proxy"),
+        "disableChatOptimizations":
+            MessageLookupByLibrary.simpleMessage("Disable chat cleanup"),
+        "disableChatOptimizationsDesc": MessageLookupByLibrary.simpleMessage(
+            "Do not cleanup invisible messages in chats"),
+        "disableMicroAvatars":
+            MessageLookupByLibrary.simpleMessage("Disable small avatars"),
+        "disableMicroAvatarsDesc":
+            MessageLookupByLibrary.simpleMessage("The ones nearby user names"),
+        "disableProfileAvatars":
+            MessageLookupByLibrary.simpleMessage("Disable avatars"),
+        "disableProfileAvatarsDesc":
+            MessageLookupByLibrary.simpleMessage("Shown in chat lists"),
         "document": MessageLookupByLibrary.simpleMessage("Document"),
-        "documentPrefix": m6,
+        "documentPrefix": m7,
         "doneButton": MessageLookupByLibrary.simpleMessage("Done"),
         "draftPrefix": MessageLookupByLibrary.simpleMessage("Draft: "),
         "editProxy": MessageLookupByLibrary.simpleMessage("Edit Proxy"),
-        "editedForumTopic": m7,
+        "editedForumTopic": m8,
         "enterPassword": MessageLookupByLibrary.simpleMessage("Enter Password"),
         "error": MessageLookupByLibrary.simpleMessage("Error"),
         "expiredPhoto": MessageLookupByLibrary.simpleMessage("Expired photo"),
@@ -143,7 +163,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Expired voice message"),
         "firstSettingsTitle":
             MessageLookupByLibrary.simpleMessage("Some Settings"),
-        "forwardedMessagesPlural": m8,
+        "folderIsEmpty":
+            MessageLookupByLibrary.simpleMessage("Folder is empty"),
+        "forwardedMessagesPlural": m9,
         "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
         "gif": MessageLookupByLibrary.simpleMessage("GIF"),
         "giveaway": MessageLookupByLibrary.simpleMessage("Giveaway"),
@@ -173,12 +195,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "messageWasPinned":
             MessageLookupByLibrary.simpleMessage("Message was pinned"),
         "messages": MessageLookupByLibrary.simpleMessage("Messages"),
-        "newForumTopic": m9,
+        "messaging": MessageLookupByLibrary.simpleMessage("Messaging"),
+        "newForumTopic": m10,
         "newVideoChat": MessageLookupByLibrary.simpleMessage("New video chat"),
         "nextButton": MessageLookupByLibrary.simpleMessage("Next"),
-        "notificationCalls": m10,
-        "notificationMentions": m11,
-        "notificationMessages": m12,
+        "notificationCalls": m11,
+        "notificationMentions": m12,
+        "notificationMessages": m13,
         "notificationNewSecretChat": MessageLookupByLibrary.simpleMessage(
             "New secret chat has been created"),
         "notificationSingleTitleCall":
@@ -187,8 +210,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Secret chat"),
         "notificationSingleTitleScheduledMessage":
             MessageLookupByLibrary.simpleMessage("Scheduled message"),
-        "notificationTextCall": m13,
-        "notificationTextSecretChat": m14,
+        "notificationTextCall": m14,
+        "notificationTextSecretChat": m15,
+        "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
         "notificationsChannelChannels":
             MessageLookupByLibrary.simpleMessage("Channels"),
         "notificationsChannelGroups":
@@ -208,22 +232,32 @@ class MessageLookup extends MessageLookupByLibrary {
             "All notifications which do not contain messages or mentions"),
         "notificationsChannelPrivateChats":
             MessageLookupByLibrary.simpleMessage("Private chats"),
+        "officialChannel":
+            MessageLookupByLibrary.simpleMessage("Official channel"),
+        "optimizeStorageUsage":
+            MessageLookupByLibrary.simpleMessage("Optimize storage"),
+        "optmizing": MessageLookupByLibrary.simpleMessage("Optimizing..."),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "paymentSuccessful":
             MessageLookupByLibrary.simpleMessage("Payment was successful"),
         "photo": MessageLookupByLibrary.simpleMessage("Photo"),
-        "photoPrefix": m15,
+        "photoPrefix": m16,
         "poll": MessageLookupByLibrary.simpleMessage("Poll"),
-        "pollPrefix": m16,
+        "pollPrefix": m17,
+        "poweredByTdlib": m18,
         "premiumGiftCode":
             MessageLookupByLibrary.simpleMessage("Premium gift code"),
-        "premiumWithMonthsCount": m17,
+        "premiumWithMonthsCount": m19,
+        "prerenderAllMessages":
+            MessageLookupByLibrary.simpleMessage("Pre-render all messages"),
+        "prerenderAllMessagesDesc": MessageLookupByLibrary.simpleMessage(
+            "May help with jumping messages list issue"),
         "proximityAlert":
             MessageLookupByLibrary.simpleMessage("Proximity alert"),
         "proxyAdd": MessageLookupByLibrary.simpleMessage("Add proxy"),
         "proxyConnectionDisconnected":
             MessageLookupByLibrary.simpleMessage("Disconnected"),
-        "proxyConnectionLastUsedDate": m18,
+        "proxyConnectionLastUsedDate": m20,
         "proxyInsecure": MessageLookupByLibrary.simpleMessage("Insecure"),
         "proxyPassword": MessageLookupByLibrary.simpleMessage("Password"),
         "proxyPort": MessageLookupByLibrary.simpleMessage("Proxy port"),
@@ -246,17 +280,28 @@ class MessageLookup extends MessageLookupByLibrary {
             "1. Open Telegram on your phone\n\n2. Go to Settings > Devices > Link Desktop Device\n\n3. Scan this image to Log In"),
         "qrScanTitle": MessageLookupByLibrary.simpleMessage("Scan to Login"),
         "removeButton": MessageLookupByLibrary.simpleMessage("Remove"),
+        "roleDesigner": MessageLookupByLibrary.simpleMessage("UX/UI designer"),
+        "roleFounder":
+            MessageLookupByLibrary.simpleMessage("Founder & developer"),
+        "runInBackground":
+            MessageLookupByLibrary.simpleMessage("Notifications"),
+        "runInBackgroundDesc":
+            MessageLookupByLibrary.simpleMessage("Enable Firebase service"),
         "scheduledVideoChat":
             MessageLookupByLibrary.simpleMessage("Scheduled video chat"),
-        "scoredSomeScoreInGame": m19,
+        "scoredSomeScoreInGame": m21,
         "screenshotWasTaken":
             MessageLookupByLibrary.simpleMessage("Screenshot was taken"),
-        "secondsCountPlural": m20,
+        "secondsCountPlural": m22,
         "secretChats": MessageLookupByLibrary.simpleMessage("Secret chats"),
+        "sectionAppearance": MessageLookupByLibrary.simpleMessage("Appearance"),
+        "sectionPerformance":
+            MessageLookupByLibrary.simpleMessage("Performance"),
         "selectShapeTitle":
             MessageLookupByLibrary.simpleMessage("Select Watch Shape"),
         "selectThemeTitle":
             MessageLookupByLibrary.simpleMessage("Select Theme"),
+        "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "sharedUsers": MessageLookupByLibrary.simpleMessage("Shared users"),
         "someone": MessageLookupByLibrary.simpleMessage("Someone"),
         "someoneJoinedByRequest": MessageLookupByLibrary.simpleMessage(
@@ -264,9 +309,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "someoneJoinedViaLink":
             MessageLookupByLibrary.simpleMessage("Someone joined via link"),
         "something": MessageLookupByLibrary.simpleMessage("Something"),
-        "stickerPlainTexted": m21,
+        "stickerPlainTexted": m23,
+        "storage": MessageLookupByLibrary.simpleMessage("Storage"),
+        "storageFreeSpace": MessageLookupByLibrary.simpleMessage("Free space"),
+        "storageHandyGramData":
+            MessageLookupByLibrary.simpleMessage("HandyGram data"),
+        "storageNonHandyGram":
+            MessageLookupByLibrary.simpleMessage("Other apps"),
         "story": MessageLookupByLibrary.simpleMessage("Story"),
-        "storyWithDuration": m22,
+        "storyWithDuration": m24,
         "suggestedAvatar":
             MessageLookupByLibrary.simpleMessage("Suggested avatar"),
         "templateTitleRepliesBot":
@@ -288,17 +339,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "unsupported": MessageLookupByLibrary.simpleMessage("Unsupported"),
         "upgradedToSupergroup":
             MessageLookupByLibrary.simpleMessage("Upgraded to supergroup"),
-        "userHasLeft": m23,
+        "userHasLeft": m25,
         "video": MessageLookupByLibrary.simpleMessage("Video"),
-        "videoCallWithTime": m24,
+        "videoCallWithTime": m26,
         "videoChatInvitation":
             MessageLookupByLibrary.simpleMessage("Video chat invitation"),
-        "videoChatWithTime": m25,
+        "videoChatWithTime": m27,
         "videoNote": MessageLookupByLibrary.simpleMessage("Video note"),
-        "videoNoteWithTime": m26,
-        "videoPrefix": m27,
+        "videoNoteWithTime": m28,
+        "videoPrefix": m29,
         "voiceNote": MessageLookupByLibrary.simpleMessage("Voice note"),
-        "voiceNoteWithTime": m28,
+        "voiceNoteWithTime": m30,
         "watchShape":
             MessageLookupByLibrary.simpleMessage("Watch screen shape"),
         "whereToScan": MessageLookupByLibrary.simpleMessage("Where to scan?"),

@@ -1611,6 +1611,296 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `About app`
+  String get aboutApp {
+    return Intl.message(
+      'About app',
+      name: 'aboutApp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Storage`
+  String get storage {
+    return Intl.message(
+      'Storage',
+      name: 'storage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notifications`
+  String get notifications {
+    return Intl.message(
+      'Notifications',
+      name: 'notifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Messaging`
+  String get messaging {
+    return Intl.message(
+      'Messaging',
+      name: 'messaging',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get settings {
+    return Intl.message(
+      'Settings',
+      name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `UX/UI designer`
+  String get roleDesigner {
+    return Intl.message(
+      'UX/UI designer',
+      name: 'roleDesigner',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Founder & developer`
+  String get roleFounder {
+    return Intl.message(
+      'Founder & developer',
+      name: 'roleFounder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Version {version} ({codename})`
+  String appVersion(int version, String codename) {
+    return Intl.message(
+      'Version $version ($codename)',
+      name: 'appVersion',
+      desc: '',
+      args: [version, codename],
+    );
+  }
+
+  /// `Powered by TDLib {version}`
+  String poweredByTdlib(String version) {
+    return Intl.message(
+      'Powered by TDLib $version',
+      name: 'poweredByTdlib',
+      desc: '',
+      args: [version],
+    );
+  }
+
+  /// `Official channel`
+  String get officialChannel {
+    return Intl.message(
+      'Official channel',
+      name: 'officialChannel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `News and updates`
+  String get channelDescription {
+    return Intl.message(
+      'News and updates',
+      name: 'channelDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Performance`
+  String get sectionPerformance {
+    return Intl.message(
+      'Performance',
+      name: 'sectionPerformance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Appearance`
+  String get sectionAppearance {
+    return Intl.message(
+      'Appearance',
+      name: 'sectionAppearance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Disable chat cleanup`
+  String get disableChatOptimizations {
+    return Intl.message(
+      'Disable chat cleanup',
+      name: 'disableChatOptimizations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do not cleanup invisible messages in chats`
+  String get disableChatOptimizationsDesc {
+    return Intl.message(
+      'Do not cleanup invisible messages in chats',
+      name: 'disableChatOptimizationsDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pre-render all messages`
+  String get prerenderAllMessages {
+    return Intl.message(
+      'Pre-render all messages',
+      name: 'prerenderAllMessages',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `May help with jumping messages list issue`
+  String get prerenderAllMessagesDesc {
+    return Intl.message(
+      'May help with jumping messages list issue',
+      name: 'prerenderAllMessagesDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Disable small avatars`
+  String get disableMicroAvatars {
+    return Intl.message(
+      'Disable small avatars',
+      name: 'disableMicroAvatars',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The ones nearby user names`
+  String get disableMicroAvatarsDesc {
+    return Intl.message(
+      'The ones nearby user names',
+      name: 'disableMicroAvatarsDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Disable avatars`
+  String get disableProfileAvatars {
+    return Intl.message(
+      'Disable avatars',
+      name: 'disableProfileAvatars',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shown in chat lists`
+  String get disableProfileAvatarsDesc {
+    return Intl.message(
+      'Shown in chat lists',
+      name: 'disableProfileAvatarsDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Other apps`
+  String get storageNonHandyGram {
+    return Intl.message(
+      'Other apps',
+      name: 'storageNonHandyGram',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Free space`
+  String get storageFreeSpace {
+    return Intl.message(
+      'Free space',
+      name: 'storageFreeSpace',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `HandyGram data`
+  String get storageHandyGramData {
+    return Intl.message(
+      'HandyGram data',
+      name: 'storageHandyGramData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Optimize storage`
+  String get optimizeStorageUsage {
+    return Intl.message(
+      'Optimize storage',
+      name: 'optimizeStorageUsage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Optimizing...`
+  String get optmizing {
+    return Intl.message(
+      'Optimizing...',
+      name: 'optmizing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Folder is empty`
+  String get folderIsEmpty {
+    return Intl.message(
+      'Folder is empty',
+      name: 'folderIsEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notifications`
+  String get runInBackground {
+    return Intl.message(
+      'Notifications',
+      name: 'runInBackground',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enable Firebase service`
+  String get runInBackgroundDesc {
+    return Intl.message(
+      'Enable Firebase service',
+      name: 'runInBackgroundDesc',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
