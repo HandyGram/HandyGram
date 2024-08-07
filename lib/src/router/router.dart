@@ -15,8 +15,12 @@ import 'package:handygram/src/pages/bootstrap/bootstrap.dart';
 import 'package:handygram/src/pages/chat/chat.dart';
 import 'package:handygram/src/pages/home/home.dart';
 import 'package:handygram/src/pages/home/settings/main.dart';
+import 'package:handygram/src/pages/home/settings/pages/about.dart';
 import 'package:handygram/src/pages/home/settings/pages/account.dart';
 import 'package:handygram/src/pages/home/settings/pages/interface.dart';
+import 'package:handygram/src/pages/home/settings/pages/messaging.dart';
+import 'package:handygram/src/pages/home/settings/pages/notifications.dart';
+import 'package:handygram/src/pages/home/settings/pages/storage.dart';
 import 'package:handygram/src/pages/proxy/list/proxy_list.dart';
 import 'package:handygram/src/pages/proxy/single/proxy.dart';
 import 'package:handygram/src/pages/setup/setup.dart';
@@ -72,6 +76,11 @@ final router = GoRouter(
               _addSwipeToBack(state, const SettingsMain()),
           routes: [
             GoRoute(
+              path: "about",
+              pageBuilder: (context, state) =>
+                  _addSwipeToBack(state, const SettingsAboutView()),
+            ),
+            GoRoute(
               path: "account",
               pageBuilder: (context, state) =>
                   _addSwipeToBack(state, const SettingsAccountView()),
@@ -80,6 +89,21 @@ final router = GoRouter(
               path: "interface",
               pageBuilder: (context, state) =>
                   _addSwipeToBack(state, const SettingsInterfaceView()),
+            ),
+            GoRoute(
+              path: "messaging",
+              pageBuilder: (context, state) =>
+                  _addSwipeToBack(state, const SettingsMessagingView()),
+            ),
+            GoRoute(
+              path: "notifications",
+              pageBuilder: (context, state) =>
+                  _addSwipeToBack(state, const SettingsNotificationsView()),
+            ),
+            GoRoute(
+              path: "storage",
+              pageBuilder: (context, state) =>
+                  _addSwipeToBack(state, const SettingsStorageView()),
             ),
           ],
         ),
