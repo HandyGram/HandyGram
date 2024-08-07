@@ -51,7 +51,7 @@ class FilesProvider extends TdlibDataUpdatesProvider<td.File> {
         );
         final token = _downloadCancelTokens.remove(task.generationId)!;
         if (token.isCancelled) return;
-        await box.invoke(td.FinishFileGeneration(
+        await box?.invoke(td.FinishFileGeneration(
           generationId: task.generationId,
           error: result,
         ));
@@ -69,7 +69,7 @@ class FilesProvider extends TdlibDataUpdatesProvider<td.File> {
     int limit = 0,
     bool synchronous = false,
   }) async {
-    final obj = await box.invoke(
+    final obj = await box?.invoke(
       td.DownloadFile(
         fileId: fileId,
         priority: priority,

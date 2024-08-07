@@ -6,20 +6,42 @@
  * See /LICENSE for more details.
  */
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:handy_tdlib/api.dart' as td;
 import 'package:handygram/src/common/log/log.dart';
 import 'package:handygram/src/common/tdlib/providers/chat_lists/brief_chat_info.dart';
 
-class ChatList<T extends td.ChatList> with ChangeNotifier {
+class ChatList<T extends td.ChatList>
+    extends ValueListenable<List<BriefChatInfo>> {
   static const String tag = "ChatList";
 
-  final List<BriefChatInfo> chats = [];
+  final List<BriefChatInfo> _chats = [];
+  final List<VoidCallback> _listeners = [];
+
+  @override
+  void addListener(VoidCallback listener) {
+    _listeners.add(listener);
+  }
+
+  @override
+  void removeListener(VoidCallback listener) {
+    _listeners.remove(listener);
+  }
+
+  void _update() {
+    for (final listener in _listeners) {
+      listener();
+    }
+  }
+
+  @override
+  List<BriefChatInfo> get value => _chats;
 
   Iterable<BriefChatInfo> get pinnedChats =>
-      chats.where((chat) => chat.isPinned);
+      _chats.where((chat) => chat.isPinned);
   Iterable<BriefChatInfo> get unpinnedChats =>
-      chats.where((chat) => !chat.isPinned);
+      _chats.where((chat) => !chat.isPinned);
 
   td.ChatFolderInfo? _folderInfo;
 
@@ -32,10 +54,10 @@ class ChatList<T extends td.ChatList> with ChangeNotifier {
     final td.ChatPosition pos,
   ) {
     late final BriefChatInfo? lastInfo;
-    final lastIndex = chats.indexWhere((e) => e.chatId == chatId);
+    final lastIndex = _chats.indexWhere((e) => e.chatId == chatId);
     if (lastIndex != -1) {
-      lastInfo = chats[lastIndex];
-      chats.removeAt(lastIndex);
+      lastInfo = _chats[lastIndex];
+      _chats.removeAt(lastIndex);
     } else {
       lastInfo = null;
     }
@@ -53,14 +75,14 @@ class ChatList<T extends td.ChatList> with ChangeNotifier {
     );
 
     // Find position higher that this chat one's
-    final nextIndex = chats.indexWhere((e) => e.order < pos.order);
+    final nextIndex = _chats.indexWhere((e) => e.order < pos.order);
     if (nextIndex != -1) {
-      chats.insert(nextIndex, bci);
+      _chats.insert(nextIndex, bci);
     } else {
       // There are no chats higher than this one. Place chat as the highest one.
-      chats.add(bci);
+      _chats.add(bci);
     }
-    notifyListeners();
+    _update();
   }
 
   void _updateChatFolders(final List<td.ChatFolderInfo> chatFolders) {
@@ -68,7 +90,7 @@ class ChatList<T extends td.ChatList> with ChangeNotifier {
     try {
       _folderInfo =
           chatFolders.firstWhere((e) => e.id == chatList.chatFolderId);
-      notifyListeners();
+      _update();
     } on StateError {
       l.e(
         tag,
@@ -80,11 +102,11 @@ class ChatList<T extends td.ChatList> with ChangeNotifier {
   }
 
   void _updateLastMessage(final int chatId, final td.Message? message) {
-    final index = chats.indexWhere((e) => e.chatId == chatId);
+    final index = _chats.indexWhere((e) => e.chatId == chatId);
     if (index == -1) return;
 
-    final chat = chats[index];
-    chats[index] = BriefChatInfo(
+    final chat = _chats[index];
+    _chats[index] = BriefChatInfo(
       chatId: chatId,
       order: chat.order,
       isPinned: chat.isPinned,
@@ -93,15 +115,15 @@ class ChatList<T extends td.ChatList> with ChangeNotifier {
       lastDraftMessage: chat.lastDraftMessage,
     );
 
-    notifyListeners();
+    _update();
   }
 
   void _updateDraftMessage(final int chatId, final td.DraftMessage? message) {
-    final index = chats.indexWhere((e) => e.chatId == chatId);
+    final index = _chats.indexWhere((e) => e.chatId == chatId);
     if (index == -1) return;
 
-    final chat = chats[index];
-    chats[index] = BriefChatInfo(
+    final chat = _chats[index];
+    _chats[index] = BriefChatInfo(
       chatId: chatId,
       order: chat.order,
       isPinned: chat.isPinned,
@@ -110,7 +132,7 @@ class ChatList<T extends td.ChatList> with ChangeNotifier {
       lastDraftMessage: message,
     );
 
-    notifyListeners();
+    _update();
   }
 
   bool _compareLists(td.ChatList list) {

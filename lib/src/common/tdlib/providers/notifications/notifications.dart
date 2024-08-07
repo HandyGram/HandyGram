@@ -98,7 +98,7 @@ class NotificationsProvider
   Future<void> removeNotificationGroup(int groupId) async {
     final group = _groups.where((e) => e.id == groupId).firstOrNull;
     if (group == null) return;
-    await box.invoke(
+    await box?.invoke(
       td.RemoveNotificationGroup(
         notificationGroupId: group.id,
         maxNotificationId: group.notifications.fold(
@@ -110,7 +110,7 @@ class NotificationsProvider
   }
 
   Future<void> removeNotification(int groupId, int id) async {
-    final obj = await box.invoke(
+    final obj = await box?.invoke(
       td.RemoveNotification(
         notificationGroupId: groupId,
         notificationId: id,
@@ -122,7 +122,7 @@ class NotificationsProvider
   }
 
   Future<bool> processPush(String payload) async {
-    final obj = await box.invoke(
+    final obj = await box?.invoke(
       td.ProcessPushNotification(
         payload: payload,
       ),

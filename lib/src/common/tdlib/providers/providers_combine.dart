@@ -29,6 +29,7 @@ import 'package:handygram/src/common/tdlib/providers/options/options.dart';
 import 'package:handygram/src/common/tdlib/providers/proxy/proxy.dart';
 import 'package:handygram/src/common/tdlib/providers/scope_notification_settings/scope_notification_settings.dart';
 import 'package:handygram/src/common/tdlib/providers/stickers/stickers.dart';
+import 'package:handygram/src/common/tdlib/providers/storage/storage.dart';
 import 'package:handygram/src/common/tdlib/providers/stories/stories.dart';
 
 class TdlibProvidersCombine {
@@ -66,6 +67,8 @@ class TdlibProvidersCombine {
 
   final StoriesProvider stories = StoriesProvider();
 
+  final StorageProvider storage = StorageProvider();
+
   final bool isLite;
 
   late final List<TdlibDataProvider> _providers = !isLite
@@ -90,6 +93,7 @@ class TdlibProvidersCombine {
           stickers,
           stories,
           accentColors,
+          storage,
         ]
       : [
           users,

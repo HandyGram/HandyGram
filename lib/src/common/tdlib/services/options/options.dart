@@ -9,10 +9,9 @@
 import 'dart:async';
 
 import 'package:handygram/src/common/tdlib/client/structures/base_service.dart';
-import 'package:handygram/src/common/tdlib/services/templates/attachable_box.dart';
+import 'package:handygram/src/common/tdlib/providers/templates/attachable_box.dart';
 
-class TdlibDefaultOptionsService extends TdlibService
-    with ServiceWithAttachableBox {
+class TdlibDefaultOptionsService extends TdlibService with AttachableBox {
   static const String tag = "TdlibDefaultOptionsService";
 
   late final String version;

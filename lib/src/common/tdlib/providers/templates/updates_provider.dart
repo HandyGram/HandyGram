@@ -11,9 +11,11 @@ import 'dart:async';
 import 'package:handy_tdlib/api.dart';
 import 'package:handygram/src/common/tdlib/client/structures/base_provider.dart';
 import 'package:handygram/src/common/tdlib/client/structures/tdlib_toolbox.dart';
+import 'package:handygram/src/common/tdlib/providers/templates/attachable_box.dart';
 import 'package:meta/meta.dart';
 
-abstract class TdlibDataUpdatesProvider<T> extends TdlibDataProvider {
+abstract class TdlibDataUpdatesProvider<T> extends TdlibDataProvider
+    with AttachableBox {
   static const String tag = "TdlibDataUpdatesProvider";
 
   late final StreamController<T> _updatesController =
@@ -26,10 +28,6 @@ abstract class TdlibDataUpdatesProvider<T> extends TdlibDataProvider {
 
   /// Broadcast stream with updates of this provider
   late final Stream<T> updates = _updatesController.stream;
-
-  /// Attached TDLib toolbox
-  @protected
-  late final TdlibToolbox box;
 
   /// TDLib updates stream subcription
   @protected
@@ -44,15 +42,16 @@ abstract class TdlibDataUpdatesProvider<T> extends TdlibDataProvider {
   /// Attach TdlibToolbox to this provider. Child must call super.attach();
   @mustCallSuper
   @override
-  FutureOr<void> attach(final TdlibToolbox toolbox) {
-    box = toolbox;
-    subscription = box.updatesStream.listen(updatesListener);
+  FutureOr<void> attach(final TdlibToolbox toolbox) async {
+    await super.attach(toolbox);
+    subscription = box!.updatesStream.listen(updatesListener);
   }
 
   /// Detach TdlibToolbox from this provider. Child must call super.attach();
   @mustCallSuper
   @override
-  FutureOr<void> detach(final TdlibToolbox toolbox) {
+  FutureOr<void> detach(final TdlibToolbox toolbox) async {
+    await super.detach(toolbox);
     subscription.cancel();
     _updatesController.close();
   }

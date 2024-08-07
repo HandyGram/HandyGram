@@ -14,10 +14,9 @@ import 'package:handygram/src/common/log/log.dart';
 import 'package:handygram/src/common/native/channel.dart';
 import 'package:handygram/src/common/tdlib/client/structures/base_service.dart';
 import 'package:handygram/src/common/tdlib/client/structures/tdlib_toolbox.dart';
-import 'package:handygram/src/common/tdlib/services/templates/attachable_box.dart';
+import 'package:handygram/src/common/tdlib/providers/templates/attachable_box.dart';
 
-class TdlibNetworkTypeService extends TdlibService
-    with ServiceWithAttachableBox {
+class TdlibNetworkTypeService extends TdlibService with AttachableBox {
   static const String tag = "TdlibNetworkTypeService";
 
   void _notifyAboutNetworkChange(List<ConnectivityResult> cr) async {
