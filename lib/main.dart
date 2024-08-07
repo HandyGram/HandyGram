@@ -12,6 +12,7 @@ import 'package:flutter/widgets.dart';
 import 'package:handygram/firebase_options.dart';
 import 'package:handygram/src/common/misc/localizations.dart';
 import 'package:handygram/src/common/native/channel.dart';
+import 'package:handygram/src/common/settings/entries.dart';
 import 'package:handygram/src/common/settings/manager.dart';
 import 'package:handygram/src/common/tdlib/services/firebase/firebase.dart';
 import 'package:handygram/src/main.dart';
@@ -19,20 +20,21 @@ import 'package:intl/date_symbol_data_local.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  initializeDateFormatting();
 
   await loadLocalizations();
+  await Settings.start();
+  await HandyNatives().init();
 
-  FirebaseMessaging.onBackgroundMessage(
-    TdlibFirebaseService.backgroundHandler,
-  );
+  if (Settings().get(SettingsEntries.runInBackground)) {
+    FirebaseMessaging.onBackgroundMessage(
+      TdlibFirebaseService.backgroundHandler,
+    );
+  }
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
-  initializeDateFormatting();
-
-  await Settings.start();
-  await HandyNatives().init();
 
   runApp(const HandyGram());
 }
