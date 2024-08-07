@@ -110,6 +110,7 @@ class MessageCaptionRenderObject extends RenderBox
       ..setPlaceholderDimensions(layoutInlineChildren(
         constraints.maxWidth,
         dry ? ChildLayoutHelper.dryLayoutChild : ChildLayoutHelper.layoutChild,
+        dry ? ChildLayoutHelper.getDryBaseline : ChildLayoutHelper.getBaseline,
       ))
       ..layout(
         maxWidth: constraints.maxWidth,
