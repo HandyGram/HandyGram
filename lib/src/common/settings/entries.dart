@@ -63,9 +63,15 @@ abstract final class SettingsEntries {
     defaultValue: true,
   );
 
-  /// Disable profile pictures in chats
-  static const disablePFPs = Setting<bool>(
-    id: "disablePFPs",
+  /// Disable mini profile pictures in chats
+  static const disableMicroAvatars = Setting<bool>(
+    id: "disableMicroAvatars",
+    defaultValue: false,
+  );
+
+  /// Disable profile pictures in chat lists
+  static const disableProfileAvatars = Setting<bool>(
+    id: "disableProfileAvatars",
     defaultValue: false,
   );
 

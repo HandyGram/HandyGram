@@ -17,13 +17,14 @@ class V1Settings implements SettingsVersion {
     SettingsEntries.uiScale,
     SettingsEntries.colorSchemeId,
     SettingsEntries.currentSetupStep,
-    SettingsEntries.disablePFPs,
     SettingsEntries.isRoundScreen,
     SettingsEntries.enableNotifications,
     SettingsEntries.runInBackground,
     SettingsEntries.lastDatabaseId,
     SettingsEntries.doNotCleanupMessages,
     SettingsEntries.useInfiniteCacheExtent,
+    SettingsEntries.disableMicroAvatars,
+    SettingsEntries.disableProfileAvatars,
   ];
 
   @override
