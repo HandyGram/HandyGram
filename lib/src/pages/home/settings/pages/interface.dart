@@ -12,6 +12,7 @@ import 'package:handygram/src/components/controls/tile_button.dart';
 import 'package:handygram/src/components/list/listview.dart';
 import 'package:handygram/src/components/scaled_sizes.dart';
 import 'package:handygram/src/components/text/header.dart';
+import 'package:handygram/src/pages/home/settings/components/section.dart';
 
 class SettingsInterfaceView extends StatefulWidget {
   const SettingsInterfaceView({super.key});
@@ -26,19 +27,6 @@ class _SettingsInterfaceViewState extends State<SettingsInterfaceView> {
     Settings().put(SettingsEntries.colorSchemeId, id);
   }
 
-  Widget _section(String name) => HandyListViewNoWrap(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: Paddings.tilesHorizontalPadding,
-          ),
-          child: Text(
-            name,
-            style: TextStyles.active.labelLarge,
-            textAlign: TextAlign.left,
-          ),
-        ),
-      );
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -48,7 +36,9 @@ class _SettingsInterfaceViewState extends State<SettingsInterfaceView> {
       body: HandyListView(
         children: [
           PageHeader(title: AppLocalizations.current.interface),
-          _section(AppLocalizations.current.colorScheme),
+          HandyListViewNoWrap(
+            child: SettingsSection(AppLocalizations.current.colorScheme),
+          ),
           SizedBox(height: Paddings.betweenSimilarElements),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -88,7 +78,9 @@ class _SettingsInterfaceViewState extends State<SettingsInterfaceView> {
             ),
           ),
           SizedBox(height: Paddings.beforeSmallButton),
-          _section(AppLocalizations.current.watchShape),
+          HandyListViewNoWrap(
+            child: SettingsSection(AppLocalizations.current.watchShape),
+          ),
           SizedBox(height: Paddings.betweenSimilarElements),
           Padding(
             padding: EdgeInsets.symmetric(
@@ -157,7 +149,9 @@ class _SettingsInterfaceViewState extends State<SettingsInterfaceView> {
             ),
           ),
           SizedBox(height: Paddings.beforeSmallButton),
-          _section(AppLocalizations.current.uiScale),
+          HandyListViewNoWrap(
+            child: SettingsSection(AppLocalizations.current.uiScale),
+          ),
           SizedBox(height: Paddings.betweenSimilarElements),
           Padding(
               padding: EdgeInsets.symmetric(

@@ -117,12 +117,6 @@ class _SettingsAccountViewState extends State<SettingsAccountView> {
               text: AppLocalizations.current.logout,
               onTap: _logOut,
             ),
-            SizedBox(height: Paddings.beforeSmallButton),
-            TileButton(
-              text: AppLocalizations.current.doneButton,
-              big: false,
-              onTap: () => GoRouter.of(context).pop(),
-            ),
           ],
         ),
       ),

@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:handygram/generated/l10n.dart';
 import 'package:handygram/src/common/cubits/colors.dart';
 import 'package:handygram/src/common/cubits/current_account.dart';
 import 'package:handygram/src/common/cubits/text.dart';
@@ -51,7 +52,7 @@ class _SettingsMainState extends State<SettingsMain>
             ),
             controller: _controller,
             children: [
-              const PageHeader(title: "Settings"),
+              PageHeader(title: AppLocalizations.current.settings),
               SettingsUserButton(
                 userId: null,
                 onTap: () => GoRouter.of(context).push("/settings/account"),
@@ -59,42 +60,42 @@ class _SettingsMainState extends State<SettingsMain>
               SizedBox(height: Paddings.betweenSimilarElements),
               TileButton(
                 icon: const SvgIcon("theme"),
-                text: "Interface",
+                text: AppLocalizations.current.interface,
                 style: TileButtonStyles.basic,
                 onTap: () => router.push("/settings/interface"),
               ),
               SizedBox(height: Paddings.betweenSimilarElements),
               TileButton(
                 icon: const SvgIcon("chat"),
-                text: "Messaging",
+                text: AppLocalizations.current.messaging,
                 style: TileButtonStyles.basic,
-                onTap: () => router.push("/settings/chat"),
+                onTap: () => router.push("/settings/messaging"),
               ),
               SizedBox(height: Paddings.betweenSimilarElements),
               TileButton(
                 icon: const SvgIcon("notification"),
-                text: "Notifications",
+                text: AppLocalizations.current.notifications,
                 style: TileButtonStyles.basic,
                 onTap: () => router.push("/settings/notifications"),
               ),
               SizedBox(height: Paddings.betweenSimilarElements),
               TileButton(
                 icon: const SvgIcon("storage"),
-                text: "Storage",
+                text: AppLocalizations.current.storage,
                 style: TileButtonStyles.basic,
                 onTap: () => router.push("/settings/storage"),
               ),
               SizedBox(height: Paddings.betweenSimilarElements),
               TileButton(
                 icon: const SvgIcon("proxy"),
-                text: "Proxy",
+                text: AppLocalizations.current.proxySettingsMainToggle,
                 style: TileButtonStyles.basic,
                 onTap: () => router.push("/proxy_list"),
               ),
               SizedBox(height: Paddings.betweenSimilarElements),
               TileButton(
                 icon: const SvgIcon("info"),
-                text: "About app",
+                text: AppLocalizations.current.aboutApp,
                 style: TileButtonStyles.basic,
                 onTap: () => router.push("/settings/about"),
               ),
