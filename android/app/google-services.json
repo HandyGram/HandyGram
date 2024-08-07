@@ -7,6 +7,28 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:76601898673:android:f47a1af9cf0addedce9490",
+        "android_client_info": {
+          "package_name": "ru.tdrk.handygram"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkle_co1OOXT6jSsdfu486j78iik__NVI"
+        },
+        {
+          "current_key": "AIzaSyCuu0T9cFfw6wZOaQYdC6lwdX9XQQJxxnQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:76601898673:android:254db11f0d969196ce9490",
         "android_client_info": {
           "package_name": "ru.tdrk.handygramnew"
@@ -14,6 +36,9 @@
       },
       "oauth_client": [],
       "api_key": [
+        {
+          "current_key": "AIzaSyDkle_co1OOXT6jSsdfu486j78iik__NVI"
+        },
         {
           "current_key": "AIzaSyCuu0T9cFfw6wZOaQYdC6lwdX9XQQJxxnQ"
         }
