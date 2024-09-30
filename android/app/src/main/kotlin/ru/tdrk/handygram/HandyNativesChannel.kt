@@ -3,10 +3,11 @@ package ru.tdrk.handygram
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.usage.StorageStats
 import android.app.usage.StorageStatsManager
+import android.content.ContentUris
 import android.content.Context
 import android.content.pm.PackageManager
+import android.media.AudioRecord
 import android.os.Build
 import android.util.Log
 import android.telephony.TelephonyManager
@@ -16,11 +17,14 @@ import android.net.Network
 import android.net.NetworkRequest
 import android.net.NetworkCapabilities
 import android.os.storage.StorageManager
+import android.provider.MediaStore
 import android.view.ViewConfiguration
 import androidx.core.view.ViewConfigurationCompat
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
+import org.json.JSONArray
+import org.json.JSONObject
 import java.io.File
 
 class HandyNativesChannel(
@@ -38,7 +42,8 @@ class HandyNativesChannel(
     private val connectivityManager: ConnectivityManager
     private var connCallback: ConnectivityManager.NetworkCallback? = null
     private val scaleFactor: Float
-    private var pendingResult: MethodChannel.Result? = null
+    private val pendingResults: MutableMap<Int, MethodChannel.Result> = mutableMapOf()
+    private var opusEncoder: OpusEncoder? = null
 
     init {
         channel = MethodChannel(binaryMessenger, channelName)
@@ -151,19 +156,54 @@ class HandyNativesChannel(
         result.success(null)
     }
 
+    private fun requestPermissions(permissions: Array<String>, code: Int, result: MethodChannel.Result) {
+        if (pendingResults.containsKey(code))
+            return
+
+        var granted = true
+        for (permission in permissions) {
+            if (!granted) break
+            if (activity.checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED) continue
+            granted = false
+        }
+        if (granted) return result.success(true)
+
+        activity.requestPermissions(permissions, code)
+        pendingResults[code] = result
+    }
+
+    fun onRequestPermissionsResult(requestCode: Int, grantResults: IntArray) {
+        val hasPermission = grantResults.fold(true) {
+            value, result ->
+            if (result != PackageManager.PERMISSION_GRANTED)
+                false
+            else
+                value
+        }
+
+        val result = pendingResults[requestCode]
+        try {
+            when (requestCode) {
+                1 -> checkRoamingResult(hasPermission, result)
+                2, 3, 4 -> result?.success(hasPermission)
+            }
+        } finally {
+            pendingResults.remove(requestCode)
+        }
+    }
+
     @SuppressLint("MissingPermission")
-    fun checkRoamingResult(hasPermission: Boolean)  {
+    fun checkRoamingResult(hasPermission: Boolean, result: MethodChannel.Result?)  {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
             error("WTF")
         }
 
         if (!hasPermission) {
-            pendingResult?.success(false)
+            result?.success(false)
         } else {
             val tm = activity.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-            pendingResult?.success(tm.isDataRoamingEnabled)
+            result?.success(tm.isDataRoamingEnabled)
         }
-        pendingResult = null
     }
 
     private fun isRoamingEnabled(result: MethodChannel.Result) {
@@ -175,8 +215,7 @@ class HandyNativesChannel(
                 val tm = activity.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
                 return result.success(tm.isDataRoamingEnabled)
             }
-            pendingResult = result
-            activity.requestPermissions(arrayOf(Manifest.permission.READ_PHONE_STATE), 1)
+            requestPermissions(arrayOf(Manifest.permission.READ_PHONE_STATE), 1, result)
         } else {
             return result.success(Settings.Global.getInt(activity.contentResolver, Settings.Global.DATA_ROAMING, 0) != 0)
         }
@@ -205,6 +244,131 @@ class HandyNativesChannel(
         result.success(null)
     }
 
+    private fun preparePhotoPicker(result: MethodChannel.Result) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requestPermissions(
+                arrayOf(Manifest.permission.READ_MEDIA_IMAGES),
+                2, result)
+        } else {
+            requestPermissions(
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                3, result)
+        }
+    }
+
+    private fun getLatestPhotos(call: MethodCall, result: MethodChannel.Result) {
+        val contentUri =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
+                MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_INTERNAL)
+            else
+                MediaStore.Images.Media.INTERNAL_CONTENT_URI
+
+        val projection = arrayOf(
+            MediaStore.Images.Media._ID,
+            MediaStore.Images.Media.WIDTH,
+            MediaStore.Images.Media.HEIGHT,
+            MediaStore.Images.Media.DATE_ADDED,
+        )
+        val sort = "${MediaStore.Images.Media.DATE_ADDED} ASC"
+
+        val query = activity.contentResolver.query(
+            contentUri,
+            projection,
+            null, null,
+            sort,
+        );
+
+        val startPos = call.argument<Int>("start_pos") ?: -1
+
+        val photos = JSONArray()
+        try {
+            query?.use { cursor ->
+                val colId = cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID);
+                val widthId = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.WIDTH);
+                val heightId = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.HEIGHT);
+
+                cursor.moveToPosition(startPos ?: -1)
+                while (cursor.moveToNext()) {
+                    val id = cursor.getLong(colId)
+                    val width = cursor.getInt(widthId)
+                    val height = cursor.getInt(heightId)
+                    val position = cursor.position
+
+                    photos.put(mapOf(
+                        "uri" to ContentUris.withAppendedId(contentUri, id),
+                        "width" to width,
+                        "height" to height,
+                        "pos" to position,
+                    ))
+
+                    if (position >= startPos + 31) break;
+                }
+            }
+        } catch (_ : Exception) {
+            return result.error(
+                "failedToQuery",
+                "Failed to query photos",
+                null)
+        }
+
+        return result.success(photos.toString())
+    }
+
+    private fun prepareRecording(result: MethodChannel.Result) {
+        requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), 4, result)
+    }
+
+    private fun startRecording(call: MethodCall, result: MethodChannel.Result) {
+        if (call.argument<Boolean>("resume") != true) {
+            try {
+                opusEncoder = OpusEncoder(
+                    call.argument("output_file")
+                        ?: return result.error("no_output_file",
+                            "No output file was given",
+                            null),
+                    activity
+                )
+            } catch (e : Exception) {
+                return result.error("failed_to_init_opusenc",
+                    "Failed to init Opus encoder",
+                    e.toString())
+            }
+        }
+
+        try {
+            opusEncoder?.start() ?: throw IllegalStateException()
+        } catch (e : Exception) {
+            return result.error("failed_to_start_opusenc",
+                "Failed to start Opus encoder",
+                e.toString())
+        }
+
+        result.success(null)
+    }
+
+    private fun stopRecording(result: MethodChannel.Result) {
+        opusEncoder?.let { enc ->
+            enc.stop()
+            opusEncoder = null
+            return result.success(null)
+        }
+
+        result.error("no_encoder_found",
+            "There was no active recording",
+            null)
+    }
+
+    private fun pauseRecording(result: MethodChannel.Result) {
+        opusEncoder?.let { enc ->
+            enc.pause()
+            return result.success(null)
+        }
+
+        result.error("no_encoder_found",
+            "There was no active recording",
+            null)
+    }
+
     private fun onCall(call: MethodCall, result: MethodChannel.Result) {
         when (call.method) {
             "isWearOS" -> checkWearOS(result)
@@ -216,6 +380,12 @@ class HandyNativesChannel(
             "requestHighBandwidth" -> requestHighBandwidth(result)
             "releaseHighBandwidth" -> releaseHighBandwidth(result)
             "getStorageStats" -> getStorageStats(result)
+            "preparePhotoPicker" -> preparePhotoPicker(result)
+            "getLatestPhotosForPicker" -> getLatestPhotos(call, result)
+            "prepareRecording" -> prepareRecording(result)
+            "startRecording" -> startRecording(call, result)
+            "stopRecording" -> stopRecording(result)
+            "pauseRecording" -> pauseRecording(result)
             else -> {}
         }
     }

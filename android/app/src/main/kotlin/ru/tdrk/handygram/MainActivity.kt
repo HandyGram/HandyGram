@@ -1,6 +1,5 @@
 package ru.tdrk.handygram
 
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.MotionEvent
@@ -8,8 +7,6 @@ import androidx.core.view.InputDeviceCompat
 import androidx.core.view.MotionEventCompat
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
-import io.flutter.plugins.pathprovider.PathProviderPlugin
-import io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingPlugin
 
 class MainActivity: FlutterActivity() {
   private var channel: HandyNativesChannel? = null
@@ -37,9 +34,9 @@ class MainActivity: FlutterActivity() {
   override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
     when (requestCode) {
       1 -> {
-        channel?.checkRoamingResult(
-                grantResults.isNotEmpty() &&
-                        grantResults[0] == PackageManager.PERMISSION_GRANTED)
+        channel?.onRequestPermissionsResult(
+          requestCode, grantResults
+        )
       }
     }
     return super.onRequestPermissionsResult(requestCode, permissions, grantResults)
