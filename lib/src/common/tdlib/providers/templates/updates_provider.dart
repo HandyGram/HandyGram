@@ -36,6 +36,7 @@ abstract class TdlibDataUpdatesProvider<T> extends TdlibDataProvider
   /// Report an update of this provider's data. To be used only by members of class.
   @protected
   void update(final T st) {
+    if (hasNoListeners) return;
     _updatesController.add(st);
   }
 
@@ -55,6 +56,10 @@ abstract class TdlibDataUpdatesProvider<T> extends TdlibDataProvider
     subscription.cancel();
     _updatesController.close();
   }
+
+  /// Has no stream listeners?
+  @protected
+  bool get hasNoListeners => !_updatesController.hasListener;
 
   /// TDLib updates listener
   @mustBeOverridden

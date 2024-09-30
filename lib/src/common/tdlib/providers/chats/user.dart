@@ -24,6 +24,7 @@ class UsersProvider extends TdlibDataUpdatesProvider<td.User>
 
   @override
   void updatesListener(td.TdObject obj) {
+    if (hasNoListeners) return;
     if (obj is! td.UpdateUser) return;
     update(obj.user);
   }

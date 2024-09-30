@@ -54,6 +54,7 @@ class ChatsProvider extends TdlibDataUpdatesProvider<ChatUpdate>
 
   @override
   void updatesListener(td.TdObject obj) {
+    if (hasNoListeners) return;
     switch (obj) {
       case td.UpdateChatAction(
           chatId: final chatId,

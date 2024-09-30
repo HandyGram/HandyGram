@@ -42,7 +42,7 @@ extension StringPushMessageContent on td.PushMessageContent {
       td.PushMessageContentPoll(question: final question) =>
         l.pollPrefix(question),
       td.PushMessageContentPremiumGiftCode() => l.premiumGiftCode,
-      td.PushMessageContentPremiumGiveaway() => l.giveaway,
+      td.PushMessageContentGiveaway() => l.giveaway,
       td.PushMessageContentScreenshotTaken() => l.screenshotWasTaken,
       td.PushMessageContentSticker(emoji: final emoji) =>
         l.stickerPlainTexted(emoji),
@@ -62,6 +62,7 @@ extension StringPushMessageContent on td.PushMessageContent {
       td.PushMessageContentMessageForwards(totalCount: final count) =>
         l.forwardedMessagesPlural(count),
       td.PushMessageContentMediaAlbum() => l.album,
+      td.PushMessageContentPaidMedia() => l.paidMedia,
     };
   }
 }

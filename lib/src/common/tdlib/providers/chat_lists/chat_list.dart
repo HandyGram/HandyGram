@@ -7,7 +7,6 @@
  */
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:handy_tdlib/api.dart' as td;
 import 'package:handygram/src/common/log/log.dart';
 import 'package:handygram/src/common/tdlib/providers/chat_lists/brief_chat_info.dart';

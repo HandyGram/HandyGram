@@ -10,8 +10,6 @@ import 'package:handy_tdlib/api.dart' as td;
 import 'package:handygram/src/common/log/log.dart';
 import 'package:handygram/src/common/tdlib/providers/templates/updates_provider.dart';
 
-class NotificationGroupFilled {}
-
 sealed class NotificationsProviderUpdate {
   const NotificationsProviderUpdate();
 }
@@ -63,20 +61,28 @@ class NotificationsProvider
   ) async {
     final groupIndex =
         _groups.indexWhere((e) => e.id == update.notificationGroupId);
-    if (groupIndex == -1) return;
 
-    _groups[groupIndex] = td.NotificationGroup(
+    final group = td.NotificationGroup(
       chatId: update.chatId,
       id: update.notificationGroupId,
       type: update.type,
       totalCount: update.totalCount,
-      notifications: _groups[groupIndex].notifications
-        ..addAll(update.addedNotifications)
+      notifications: (groupIndex == -1
+          ? update.addedNotifications
+          : (_groups[groupIndex].notifications
+            ..addAll(update.addedNotifications)))
         ..removeWhere(
           (e) => update.removedNotificationIds.contains(e.id),
         )
         ..sort((p, n) => p.id.compareTo(n.id)),
     );
+
+    if (groupIndex == -1) {
+      _groups.add(group);
+    } else {
+      _groups[groupIndex] = group;
+    }
+
     this.update(NotificationsProviderGroupsUpdate(_groups));
   }
 
@@ -89,7 +95,9 @@ class NotificationsProvider
   }
 
   Future<void> _updateActiveNotifications(
-      List<td.NotificationGroup> groups) async {
+    List<td.NotificationGroup> groups,
+  ) async {
+    // Guaranteed to come before any other notifications-related updates
     _groups.clear();
     _groups.addAll(groups);
     update(NotificationsProviderGroupsUpdate(groups));
@@ -146,15 +154,21 @@ class NotificationsProvider
           notificationGroupId: final groupId,
           notification: final notification,
         ):
+        l.d(tag, "Updating N in NG $groupId");
         return _updateNotificationInGroup(groupId, notification);
-      case td.UpdateNotificationGroup():
+      case td.UpdateNotificationGroup(
+          notificationGroupId: final groupId,
+        ):
+        l.d(tag, "Updating NG $groupId");
         return _updateNotificationGroup(obj);
       case td.UpdateHavePendingNotifications(
           haveDelayedNotifications: final haveDelayed,
           haveUnreceivedNotifications: final haveUnreceived,
         ):
+        l.d(tag, "Updating pending NG $haveDelayed / $haveUnreceived");
         return _updatePendingNotifications(haveDelayed, haveUnreceived);
       case td.UpdateActiveNotifications(groups: final groups):
+        l.d(tag, "Updating active NG ${groups.map((e) => e.id)}");
         return _updateActiveNotifications(groups);
       default:
         break;

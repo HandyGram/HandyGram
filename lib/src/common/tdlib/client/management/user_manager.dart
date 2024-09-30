@@ -8,7 +8,6 @@
 
 import 'dart:async';
 
-import 'package:handy_tdlib/api.dart' as td;
 import 'package:handygram/src/common/tdlib/client/structures/tdlib_toolbox.dart';
 import 'package:handygram/src/common/tdlib/client/td/parameters.dart';
 import 'package:handygram/src/common/tdlib/client/td/tdlib_client.dart';
@@ -19,7 +18,7 @@ import 'package:handygram/src/common/tdlib/services/services_combine.dart';
 class TdlibUserManager {
   static const String tag = "TdlibUserManager";
 
-  final bool isLite;
+  final bool isLite, isFromPush;
   late final TdlibProvidersCombine providers = TdlibProvidersCombine(isLite);
   late final TdlibServicesCombine services = TdlibServicesCombine(isLite);
 
@@ -48,27 +47,23 @@ class TdlibUserManager {
     _client.providersReady();
     await services.attach(_box);
 
-    if (!isLite) {
-      _sub = providers.authorizationState.states.listen(_listenToAuthState);
-    } else {
-      _sub = _box.updatesStream.listen(_listenToNotifications);
-    }
-  }
-
-  void _listenToNotifications(td.TdObject obj) async {
-    if (obj is td.UpdateActiveNotifications) {
-      await providers.onTdlibReady();
-      await services.onTdlibReady();
-    }
+    _sub = providers.authorizationState.states.listen(_listenToAuthState);
   }
 
   void _listenToAuthState(AuthorizationState state) async {
     switch (state) {
       case AuthorizationStateLoading(sentTdlibParameters: final ready):
+        // td.ProcessPush automatically authorizes this client
+        if (isFromPush) break;
+
         if (!ready) break;
         await providers.onTdlibReady();
         await services.onTdlibReady();
       case AuthorizationStateReady():
+        if (isFromPush) {
+          await providers.onTdlibReady();
+          await services.onTdlibReady();
+        }
         await providers.onAuthorized();
         await services.onAuthorized();
       default:
@@ -84,7 +79,7 @@ class TdlibUserManager {
   }
 
   static Future<TdlibUserManager> start(int databaseId) async {
-    TdlibUserManager m = TdlibUserManager._(databaseId, false);
+    TdlibUserManager m = TdlibUserManager._(databaseId, false, false);
     await m._start();
     return m;
   }
@@ -92,11 +87,12 @@ class TdlibUserManager {
   static Future<TdlibUserManager> startLite({
     required int databaseId,
     required int clientId,
+    required bool isFromPush,
   }) async {
-    TdlibUserManager m = TdlibUserManager._(databaseId, true);
+    TdlibUserManager m = TdlibUserManager._(databaseId, true, isFromPush);
     await m._start(clientId);
     return m;
   }
 
-  TdlibUserManager._(this.databaseId, this.isLite);
+  TdlibUserManager._(this.databaseId, this.isLite, this.isFromPush);
 }

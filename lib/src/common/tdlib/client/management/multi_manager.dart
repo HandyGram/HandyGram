@@ -22,10 +22,15 @@ class TdlibMultiManager {
 
   Iterable<int> get clientIds => _users.keys;
   Iterable<int> get databaseIds => _runningDatabases;
+  Iterable<TdlibUserManager> get users => _users.values;
 
   TdlibUserManager? fromClientId(int clid) => _users[clid];
   TdlibUserManager? fromDatabaseId(int dbid) =>
       _users.values.firstWhere((u) => u.databaseId == dbid);
+
+  /// WARNING: May be unreliable before authorizationStateReady.
+  TdlibUserManager? fromUserId(int uid) => _users.values
+      .firstWhere((u) => u.providers.options.cached['my_id'] == uid);
 
   Future<void> destroy({
     int? databaseId,
@@ -115,10 +120,15 @@ class TdlibMultiManager {
     return m.clientId;
   }
 
-  Future<int> createLite(int dbId, int clientId) async {
+  Future<int> createLite(
+    int dbId,
+    int clientId, {
+    required bool isFromPush,
+  }) async {
     final m = await TdlibUserManager.startLite(
       databaseId: dbId,
       clientId: clientId,
+      isFromPush: isFromPush,
     );
     _users[m.clientId] = m;
     _runningDatabases.add(dbId);

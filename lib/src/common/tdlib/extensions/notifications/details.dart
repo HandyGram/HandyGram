@@ -72,133 +72,125 @@ extension SimpleNotificationGroupDetails on td.NotificationGroup {
           ),
       };
 
-  Future<AndroidNotificationDetails> get _secretChatDetails async {
-    final notification = notifications.first;
+  Future<AndroidNotificationDetails> getDetails({
+    required bool playSound,
+  }) async {
     final chat = await chatId.asChat;
     final photo = await chat.photo?.small.download(1);
-    return AndroidNotificationDetails(
-      kNotificationChannelPrivateChats,
-      AppLocalizations.current.notificationsChannelPrivateChats,
-      largeIcon: photo == null ? null : FilePathAndroidBitmap(photo),
-      icon: kChatIcon,
-      when: notification.date * 1000,
-    );
-  }
-
-  Future<AndroidNotificationDetails> get _pinnedMessageDetails async {
-    final notification = notifications.first;
-    final chat = await chatId.asChat;
-    final photo = await chat.photo?.small.download(1);
-    return AndroidNotificationDetails(
-      kNotificationChannelGroups,
-      AppLocalizations.current.notificationsChannelGroups,
-      largeIcon: photo == null ? null : FilePathAndroidBitmap(photo),
-      icon: kChatIcon,
-      when: notification.date * 1000,
-    );
-  }
-
-  Future<AndroidNotificationDetails> get _callsGroupDetails async {
-    final chat = await chatId.asChat;
-    final photo = await chat.photo?.small.download(1);
-    return AndroidNotificationDetails(
-      kNotificationChannelPrivateChats,
-      AppLocalizations.current.notificationsChannelPrivateChats,
-      largeIcon: photo == null ? null : FilePathAndroidBitmap(photo),
-      icon: kChatIcon,
-    );
-  }
-
-  Future<AndroidNotificationDetails> get _messagesGroupDetails async {
-    final chat = await chatId.asChat;
-    final photo = await chat.photo?.small.download(1);
-    final person = Person(
-      icon: _maybeIcon(photo),
-      name: chat.title,
-      key: "$chatId",
-    );
     final settings = await CurrentAccount.providers.scopeNotificationSettings
         .getForChat(chatObj: chat);
-    return AndroidNotificationDetails(
-      switch (chat.type) {
-        td.ChatTypePrivate() ||
-        td.ChatTypeSecret() =>
-          kNotificationChannelPrivateChats,
-        td.ChatTypeSupergroup(isChannel: final isChannel) =>
-          isChannel ? kNotificationChannelChannels : kNotificationChannelGroups,
-        td.ChatTypeBasicGroup() => kNotificationChannelGroups,
-      },
-      switch (chat.type) {
-        td.ChatTypePrivate() ||
-        td.ChatTypeSecret() =>
-          AppLocalizations.current.notificationsChannelPrivateChats,
-        td.ChatTypeSupergroup(isChannel: final isChannel) => isChannel
-            ? AppLocalizations.current.notificationsChannelChannels
-            : AppLocalizations.current.notificationsChannelGroups,
-        td.ChatTypeBasicGroup() =>
-          AppLocalizations.current.notificationsChannelGroups,
-      },
-      groupKey: "ru.tdrk.handygramnew.MESSAGES_$chatId",
-      largeIcon: photo == null ? null : FilePathAndroidBitmap(photo),
-      icon: kChatIcon,
-      playSound: settings.soundId != 0,
-      enableVibration: settings.soundId != 0,
-      enableLights: settings.soundId != 0,
-      styleInformation: settings.showPreview
-          ? MessagingStyleInformation(
-              person,
-              groupConversation: chat.isGroup,
-              conversationTitle: chat.title,
-              messages: [
-                for (final notification in notifications)
-                  Message(
-                    await notification.text,
-                    notification.date.asDate,
-                    await notification.person,
-                  ),
-              ],
-            )
-          : null,
-    );
-  }
 
-  Future<AndroidNotificationDetails> get _mentionsGroupDetails async {
-    final chat = await chatId.asChat;
-    final photo = await chat.photo?.small.download(1);
     final person = Person(
       icon: _maybeIcon(photo),
       name: chat.title,
       key: "$chatId",
     );
-    return AndroidNotificationDetails(
-      kNotificationChannelGroups,
-      AppLocalizations.current.notificationsChannelGroups,
-      groupKey: "ru.tdrk.handygramnew.MENTIONS_$chatId",
-      icon: kMentionIcon,
-      largeIcon: photo == null ? null : FilePathAndroidBitmap(photo),
-      styleInformation: MessagingStyleInformation(
-        person,
-        groupConversation: chat.isGroup,
-        conversationTitle: chat.title,
-        messages: [
-          for (final notification in notifications)
-            Message(
-              await notification.text,
-              notification.date.asDate,
-              await notification.person,
-            ),
-        ],
-      ),
-    );
-  }
 
-  Future<AndroidNotificationDetails> get details => switch (type) {
-        td.NotificationGroupTypeSecretChat() => _secretChatDetails,
-        td.NotificationGroupTypeMentions() => _mentionsGroupDetails,
-        td.NotificationGroupTypeMessages() =>
-          isPinnedMessageGroup ? _pinnedMessageDetails : _messagesGroupDetails,
-        td.NotificationGroupTypeCalls() => _callsGroupDetails,
-      };
+    final when = (notifications.lastOrNull?.date ??
+            DateTime.now().millisecondsSinceEpoch ~/ 1000) *
+        1000;
+    final largeIcon = photo == null ? null : FilePathAndroidBitmap(photo);
+
+    final channelByType = switch (chat.type) {
+      td.ChatTypePrivate() ||
+      td.ChatTypeSecret() =>
+        kNotificationChannelPrivateChats,
+      td.ChatTypeSupergroup(isChannel: final isChannel) =>
+        isChannel ? kNotificationChannelChannels : kNotificationChannelGroups,
+      td.ChatTypeBasicGroup() => kNotificationChannelGroups,
+    };
+    final channelDescByType = switch (chat.type) {
+      td.ChatTypePrivate() ||
+      td.ChatTypeSecret() =>
+        AppLocalizations.current.notificationsChannelPrivateChats,
+      td.ChatTypeSupergroup(isChannel: final isChannel) => isChannel
+          ? AppLocalizations.current.notificationsChannelChannels
+          : AppLocalizations.current.notificationsChannelGroups,
+      td.ChatTypeBasicGroup() =>
+        AppLocalizations.current.notificationsChannelGroups,
+    };
+
+    final playSoundByType = playSound && settings.muteFor > 0;
+
+    return switch (type) {
+      td.NotificationGroupTypeSecretChat() => AndroidNotificationDetails(
+          channelByType,
+          channelDescByType,
+          groupKey: "ru.tdrk.handygramnew.SECRET_CHATS_$chatId",
+          icon: kChatIcon,
+          largeIcon: largeIcon,
+          when: when,
+          playSound: playSound,
+          enableVibration: playSound,
+          enableLights: playSound,
+          category: AndroidNotificationCategory.message,
+        ),
+      td.NotificationGroupTypeCalls() => AndroidNotificationDetails(
+          channelByType,
+          channelDescByType,
+          groupKey: "ru.tdrk.handygramnew.CALLS_$chatId",
+          icon: kChatIcon,
+          largeIcon: largeIcon,
+          when: when,
+          playSound: playSound,
+          enableVibration: playSound,
+          enableLights: playSound,
+          category: AndroidNotificationCategory.call,
+        ),
+      td.NotificationGroupTypeMentions() => AndroidNotificationDetails(
+          channelByType,
+          channelDescByType,
+          groupKey: "ru.tdrk.handygramnew.MENTIONS_$chatId",
+          icon: kMentionIcon,
+          largeIcon: largeIcon,
+          when: when,
+          playSound: playSound,
+          enableVibration: playSound,
+          enableLights: playSound,
+          category: AndroidNotificationCategory.message,
+          styleInformation: MessagingStyleInformation(
+            person,
+            groupConversation: chat.isGroup,
+            conversationTitle: chat.title,
+            messages: [
+              for (final notification in notifications)
+                Message(
+                  await notification.text,
+                  notification.date.asDate,
+                  await notification.person,
+                ),
+            ],
+          ),
+        ),
+      td.NotificationGroupTypeMessages() => AndroidNotificationDetails(
+          channelByType,
+          channelDescByType,
+          groupKey: "ru.tdrk.handygramnew.MESSAGES_$chatId",
+          icon: kChatIcon,
+          largeIcon: largeIcon,
+          when: when,
+          playSound: playSoundByType,
+          enableVibration: playSoundByType,
+          enableLights: playSoundByType,
+          category: AndroidNotificationCategory.message,
+          styleInformation: settings.showPreview
+              ? MessagingStyleInformation(
+                  person,
+                  groupConversation: chat.isGroup,
+                  conversationTitle: chat.title,
+                  messages: [
+                    for (final notification in notifications)
+                      Message(
+                        await notification.text,
+                        notification.date.asDate,
+                        await notification.person,
+                      ),
+                  ],
+                )
+              : null,
+        ),
+    };
+  }
 
   Future<AndroidNotificationDetails?> get summaryDetails async {
     final chat = await chatId.asChat;
@@ -228,8 +220,10 @@ extension SimpleNotificationGroupDetails on td.NotificationGroup {
           largeIcon: _maybeBitmap(
             await chat.photo?.small.download(1),
           ),
+          when: notifications.last.date * 1000,
           icon: kChatIcon,
           groupKey: "ru.tdrk.handygramnew.MESSAGES_$chatId",
+          playSound: false,
           setAsGroupSummary: true,
         ),
       td.NotificationGroupTypeMentions() => AndroidNotificationDetails(
@@ -238,8 +232,10 @@ extension SimpleNotificationGroupDetails on td.NotificationGroup {
           largeIcon: _maybeBitmap(
             await chat.photo?.small.download(1),
           ),
+          when: notifications.last.date * 1000,
           icon: kMentionIcon,
           groupKey: "ru.tdrk.handygramnew.MENTIONS_$chatId",
+          playSound: false,
           setAsGroupSummary: true,
         ),
       _ => null,

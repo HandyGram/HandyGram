@@ -24,6 +24,7 @@ class SecretChatsProvider extends TdlibDataUpdatesProvider<td.SecretChat>
 
   @override
   void updatesListener(td.TdObject obj) {
+    if (hasNoListeners) return;
     if (obj is! td.UpdateSecretChat) return;
     update(obj.secretChat);
   }

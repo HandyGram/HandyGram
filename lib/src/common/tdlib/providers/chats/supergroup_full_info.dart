@@ -34,6 +34,7 @@ class SupergroupsFullInfoProvider
 
   @override
   void updatesListener(td.TdObject obj) {
+    if (hasNoListeners) return;
     if (obj is! td.UpdateSupergroupFullInfo) return;
     update(SupergroupFullInfoUpdate(
       supergroupId: obj.supergroupId,

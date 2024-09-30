@@ -14,6 +14,7 @@ class StoriesProvider extends TdlibDataUpdatesProvider<StoryUpdate>
 
   @override
   void updatesListener(td.TdObject obj) {
+    if (hasNoListeners) return;
     switch (obj) {
       case td.UpdateStory(story: final story):
         update(StoryUpdate(

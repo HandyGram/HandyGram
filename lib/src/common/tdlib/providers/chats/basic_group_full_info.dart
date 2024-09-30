@@ -34,6 +34,7 @@ class BasicGroupsFullInfoProvider
 
   @override
   void updatesListener(td.TdObject obj) {
+    if (hasNoListeners) return;
     if (obj is! td.UpdateBasicGroupFullInfo) return;
     update(BasicGroupFullInfoUpdate(
       basicGroupId: obj.basicGroupId,

@@ -39,6 +39,7 @@ class SupergroupsProvider extends TdlibDataUpdatesProvider<td.Supergroup>
 
   @override
   void updatesListener(td.TdObject obj) {
+    if (hasNoListeners) return;
     if (obj is! td.UpdateSupergroup) return;
     update(obj.supergroup);
   }

@@ -11,6 +11,7 @@ import 'package:handygram/src/common/tdlib/client/structures/base_provider.dart'
 import 'package:handygram/src/common/tdlib/client/structures/tdlib_toolbox.dart';
 
 import 'package:handygram/src/common/tdlib/providers/accent_colors/accent_colors.dart';
+import 'package:handygram/src/common/tdlib/providers/animations/animations.dart';
 import 'package:handygram/src/common/tdlib/providers/authorization_state/authorization_state.dart';
 import 'package:handygram/src/common/tdlib/providers/chat_lists/chat_lists.dart';
 import 'package:handygram/src/common/tdlib/providers/chats/basic_group.dart';
@@ -64,6 +65,7 @@ class TdlibProvidersCombine {
       ScopeNotificationSettingsProvider();
 
   final StickersProvider stickers = StickersProvider();
+  final AnimationsProvider animations = AnimationsProvider();
 
   final StoriesProvider stories = StoriesProvider();
 
@@ -91,6 +93,7 @@ class TdlibProvidersCombine {
           notifications,
           scopeNotificationSettings,
           stickers,
+          animations,
           stories,
           accentColors,
           storage,
@@ -102,6 +105,7 @@ class TdlibProvidersCombine {
           options,
           notifications,
           authorizationState,
+          scopeNotificationSettings,
         ];
 
   Future<void> attach(TdlibToolbox box) async {

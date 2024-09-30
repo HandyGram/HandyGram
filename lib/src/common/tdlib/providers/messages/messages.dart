@@ -87,8 +87,22 @@ class MessagesProvider extends TdlibDataUpdatesProvider<MessageUpdate>
         messageId: messageId,
       ));
 
+  Future<void> sendMessage(
+    int chatId,
+    td.InputMessageContent content, {
+    td.InputMessageReplyTo? replyTo,
+    int? messageThreadId,
+  }) =>
+      tdlibGetAnySingleBasicWrapper<td.Message>(td.SendMessage(
+        chatId: chatId,
+        inputMessageContent: content,
+        replyTo: replyTo,
+        messageThreadId: messageThreadId ?? 0,
+      ));
+
   @override
   void updatesListener(td.TdObject obj) async {
+    if (hasNoListeners) return;
     switch (obj) {
       case td.UpdateMessageContent(
           chatId: final chatId,

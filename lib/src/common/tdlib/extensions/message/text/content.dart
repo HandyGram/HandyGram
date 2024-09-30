@@ -268,6 +268,10 @@ extension MessageContentPreview on MessageContent {
           Icons.place,
           its,
         ),
+      MessagePaymentRefunded() => TextSpan(
+          text: l.paymentRefunded,
+          style: style,
+        ),
       MessagePaymentSuccessful() => TextSpan(
           text: l.paymentSuccessful,
           style: style,
@@ -296,25 +300,31 @@ extension MessageContentPreview on MessageContent {
           its,
           authorSpan: authorSpan,
         ),
-      MessagePremiumGiveaway() => iconWithTextSpan(
+      MessageGiveaway() => iconWithTextSpan(
           l.giveaway,
           Icons.star,
           its,
           authorSpan: authorSpan,
         ),
-      MessagePremiumGiveawayCompleted() => iconWithTextSpan(
+      MessageGiveawayPrizeStars() => iconWithTextSpan(
+          l.giveaway,
+          Icons.star,
+          its,
+          authorSpan: authorSpan,
+        ),
+      MessageGiveawayCompleted() => iconWithTextSpan(
           l.giveawayFinished,
           Icons.star,
           its,
           authorSpan: authorSpan,
         ),
-      MessagePremiumGiveawayCreated() => iconWithTextSpan(
+      MessageGiveawayCreated() => iconWithTextSpan(
           l.giveaway,
           Icons.star,
           its,
           authorSpan: authorSpan,
         ),
-      MessagePremiumGiveawayWinners() => iconWithTextSpan(
+      MessageGiveawayWinners() => iconWithTextSpan(
           l.giveawayWinners,
           Icons.star,
           its,
@@ -413,9 +423,21 @@ extension MessageContentPreview on MessageContent {
           text: l.changedTheme,
           style: style,
         ),
+      MessagePaidMedia() => iconWithTextSpan(
+          l.paidMedia,
+          Icons.paid,
+          its,
+          authorSpan: authorSpan,
+        ),
       MessagePassportDataSent() => TextSpan(
           text: l.tgPassport,
           style: style,
+        ),
+      MessageGiftedStars(starCount: final starCount) => iconWithTextSpan(
+          l.starsWithCount(starCount),
+          Icons.star,
+          its,
+          authorSpan: authorSpan,
         ),
       MessageWebAppDataReceived() ||
       MessageWebAppDataSent() ||

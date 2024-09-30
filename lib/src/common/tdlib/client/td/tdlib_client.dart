@@ -139,7 +139,7 @@ class TdlibClient {
     // Polling made to ensure that connected UI thread is alive
     pollingTx.send(null);
     await for (final event in pollingRx.timeout(
-      const Duration(milliseconds: 1200),
+      const Duration(milliseconds: 5000),
       onTimeout: (s) => s.add(-1),
     )) {
       if (event == -1 && providersReady) break;

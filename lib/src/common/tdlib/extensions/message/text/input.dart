@@ -133,6 +133,11 @@ extension InputMessageContentPreview on InputMessageContent {
           Icons.mic,
           its,
         ),
+      InputMessagePaidMedia() => iconWithTextSpan(
+          l.paidMedia,
+          Icons.paid,
+          its,
+        ),
     };
   }
 }

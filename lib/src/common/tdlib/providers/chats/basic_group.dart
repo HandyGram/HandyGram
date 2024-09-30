@@ -24,6 +24,7 @@ class BasicGroupsProvider extends TdlibDataUpdatesProvider<td.BasicGroup>
 
   @override
   void updatesListener(td.TdObject obj) {
+    if (hasNoListeners) return;
     if (obj is! td.UpdateBasicGroup) return;
     update(obj.basicGroup);
   }

@@ -42,6 +42,8 @@ abstract class TdlibStreamedDataProvider<T> extends TdlibDataProvider {
   @protected
   void reportState(final T st) {
     _state = st;
+
+    if (hasNoListeners) return;
     _statesController.add(st);
   }
 
@@ -66,6 +68,10 @@ abstract class TdlibStreamedDataProvider<T> extends TdlibDataProvider {
   @mustBeOverridden
   @visibleForOverriding
   FutureOr<void> updatesListener(final TdObject update);
+
+  /// Has no stream listeners?
+  @protected
+  bool get hasNoListeners => !_statesController.hasListener;
 
   /// Listen to provider's states
   StreamSubscription<T> listen(

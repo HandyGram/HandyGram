@@ -53,4 +53,13 @@ mixin PersistentStateMixin on TdlibDataProvider {
     if (data is! Map) return defaultValue ?? {};
     return data;
   }
+
+  static Future<void> saveStatic(
+    String databaseEntry,
+    Map data,
+  ) async {
+    final hiveBox = await _openBox();
+    await hiveBox.put(databaseEntry, data);
+    return hiveBox.flush();
+  }
 }

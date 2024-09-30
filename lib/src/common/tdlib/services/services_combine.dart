@@ -11,6 +11,7 @@ import 'package:handygram/src/common/tdlib/client/structures/base_service.dart';
 import 'package:handygram/src/common/tdlib/client/structures/tdlib_toolbox.dart';
 import 'package:handygram/src/common/tdlib/services/firebase/firebase.dart';
 import 'package:handygram/src/common/tdlib/services/network_type/network_type.dart';
+import 'package:handygram/src/common/tdlib/services/notifications/notifications.dart';
 import 'package:handygram/src/common/tdlib/services/options/options.dart';
 
 class TdlibServicesCombine {
@@ -20,15 +21,18 @@ class TdlibServicesCombine {
   final TdlibDefaultOptionsService defaultOptions =
       TdlibDefaultOptionsService();
   final TdlibFirebaseService firebase = TdlibFirebaseService();
+  final TdlibNotificationsService notifications = TdlibNotificationsService();
 
   late final List<TdlibService> _services = !isLite
       ? [
           networkType,
           defaultOptions,
+          notifications,
           firebase,
         ]
       : [
           defaultOptions,
+          notifications,
         ];
 
   final bool isLite;

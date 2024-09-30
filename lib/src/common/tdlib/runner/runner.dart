@@ -27,6 +27,7 @@ import 'package:handygram/src/common/tdlib/client/management/user_manager.dart';
 import 'package:handygram/src/common/tdlib/client/td/parameters.dart';
 import 'package:handygram/src/common/tdlib/providers/authorization_state/authorization_states.dart';
 import 'package:handygram/src/common/tdlib/services/firebase/firebase.dart';
+import 'package:handygram/src/common/tdlib/services/notifications/notifications.dart';
 
 class TdlibRunner {
   static const String tag = "TdlibRunner";
@@ -70,7 +71,7 @@ class TdlibRunner {
       TdPlugin.instance.tdExecute(
         jsonEncode(
           const td.SetLogVerbosityLevel(
-            newVerbosityLevel: debug ? 8 : 1,
+            newVerbosityLevel: debug ? 4 : 1,
           ).toJson(),
         ),
       );
@@ -172,7 +173,7 @@ class TdlibRunner {
     l.d(tag, "Setting up TDLib...");
     final lastDb = Settings().get(SettingsEntries.lastDatabaseId);
     late final TdlibUserManager user;
-    if (lastDb != null) {
+    if (lastDb != -1) {
       l.d(tag, "Loading last database: $lastDb");
       try {
         user = TdlibMultiManager().fromDatabaseId(lastDb)!;
@@ -182,16 +183,11 @@ class TdlibRunner {
 
         // TODO: rework. this is dangerous.
         l.d(tag, "Cleaning up databases...");
-        await Directory(await TdlibParameters.getDatabasesRoot()).delete(
-          recursive: true,
-        );
-        await Directory(await TdlibParameters.getDatabasesRoot()).create(
-          recursive: true,
-        );
+        final db = Directory(await TdlibParameters.getDatabasesRoot());
+        await db.delete(recursive: true);
+        await db.create(recursive: true);
 
-        l.d(tag, "Creating DB 0...");
-
-        /// First start or logout with single account.
+        l.i(tag, "Creating DB 0...");
         await TdlibMultiManager.instance.create(0);
         user = TdlibMultiManager().fromDatabaseId(0)!;
       }
@@ -214,23 +210,11 @@ class TdlibRunner {
     _initialized = true;
   }
 
-  /// Get payload from Firebase notification
-  static String getPayload(RemoteMessage message) {
-    final payload = <String, dynamic>{
-      "google.sent_time": message.sentTime?.millisecondsSinceEpoch,
-    };
-    final sound = message.notification?.android?.sound;
-    if (sound != null) {
-      payload["google.notification.sound"] = sound;
-    }
-    payload.addAll(message.data);
-    return jsonEncode(payload);
-  }
-
   /// Lite TDLib runner. Requires clientId and databaseId.
   static Future<TdlibUserManager> fromBackground({
     required int clientId,
     required int databaseId,
+    required bool isFromPush,
   }) async {
     // This runner should be ran from BG thread, which doesn't have any
     // HandyGram things initialized.
@@ -247,6 +231,7 @@ class TdlibRunner {
     final user = await TdlibMultiManager.instance.createLite(
       databaseId,
       clientId,
+      isFromPush: isFromPush,
     );
     CurrentAccount.instance.clientId = user;
     try {
@@ -260,15 +245,12 @@ class TdlibRunner {
     return CurrentAccount.instance.user;
   }
 
-  /// Lite TDLib runner. Runs only one client, retrieved from push
-  static Future<TdlibUserManager?> fromFirebase(
-    RemoteMessage message,
-  ) async {
+  /// Common lite TDLib runner from pushes. Runs only one client
+  static Future<TdlibUserManager?> fromPushPayload(String payload) async {
     // This runner should be ran from BG thread, which doesn't have any
     // HandyGram things initialized.
     await _initThings();
 
-    final payload = getPayload(message);
     late final td.TdObject? pushReceiverId;
     try {
       pushReceiverId = td.convertJsonToObject(
@@ -298,7 +280,8 @@ class TdlibRunner {
       return null;
     }
 
-    final databaseId = await TdlibFirebaseService.getDatabaseId(pushReceiverId);
+    final databaseId =
+        await TdlibNotificationsService.getDatabaseId(pushReceiverId);
     if (databaseId == null) {
       l.e(tag, "No receiverId ${pushReceiverId.id}", true);
       return null;
@@ -308,6 +291,7 @@ class TdlibRunner {
     TdlibUserManager? user = await fromBackground(
       databaseId: databaseId,
       clientId: clientId,
+      isFromPush: true,
     );
 
     // ProcessPushNotification requires initialized TDLib instance
@@ -336,4 +320,8 @@ class TdlibRunner {
     l.i(tag, "Running from push");
     return user;
   }
+
+  /// Lite TDLib runner. Runs only one client, retrieved from [RemoteMessage]
+  static Future<TdlibUserManager?> fromFirebase(RemoteMessage message) =>
+      fromPushPayload(TdlibFirebaseService.getPayload(message));
 }

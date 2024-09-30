@@ -31,6 +31,7 @@ class UsersFullInfoProvider extends TdlibDataUpdatesProvider<UserFullInfoUpdate>
 
   @override
   void updatesListener(td.TdObject obj) {
+    if (hasNoListeners) return;
     if (obj is! td.UpdateUserFullInfo) return;
     update(UserFullInfoUpdate(
       userId: obj.userId,
