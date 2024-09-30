@@ -11,6 +11,7 @@ import 'package:handygram/src/common/tdlib/client/management/multi_manager.dart'
 import 'package:handygram/src/common/tdlib/client/management/user_manager.dart';
 import 'package:handygram/src/common/tdlib/providers/authorization_state/authorization_states.dart';
 import 'package:handygram/src/common/tdlib/providers/providers_combine.dart';
+import 'package:handygram/src/common/tdlib/services/services_combine.dart';
 
 /// Current account's IDs.
 class CurrentAccount extends Cubit<int> {
@@ -37,5 +38,6 @@ class CurrentAccount extends Cubit<int> {
 
   static final CurrentAccount instance = CurrentAccount._();
   static TdlibProvidersCombine get providers => instance.user.providers;
+  static TdlibServicesCombine get services => instance.user.services;
   static int get currentClientId => instance.clientId;
 }
