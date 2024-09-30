@@ -72,21 +72,24 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m22(count) =>
       "${Intl.plural(count, one: 'second', other: 'seconds')}";
 
-  static String m23(emoji) => "${emoji} Sticker";
+  static String m23(count) =>
+      "${count} Telegram ${Intl.plural(count, one: 'Star', other: 'Stars')}";
 
-  static String m24(time) => "Story (${time})";
+  static String m24(emoji) => "${emoji} Sticker";
 
-  static String m25(user) => "${user} has left";
+  static String m25(time) => "Story (${time})";
 
-  static String m26(time) => "Video call (${time})";
+  static String m26(user) => "${user} has left";
 
-  static String m27(time) => "Video chat (${time})";
+  static String m27(time) => "Video call (${time})";
 
-  static String m28(time) => "Video note (${time})";
+  static String m28(time) => "Video chat (${time})";
 
-  static String m29(caption) => "[Video] ${caption}";
+  static String m29(time) => "Video note (${time})";
 
-  static String m30(time) => "Voice note (${time})";
+  static String m30(caption) => "[Video] ${caption}";
+
+  static String m31(time) => "Voice note (${time})";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -111,6 +114,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "channelDescription":
             MessageLookupByLibrary.simpleMessage("News and updates"),
         "chatBlocLoadingError": m3,
+        "chatInfoBot": MessageLookupByLibrary.simpleMessage("Bot info"),
+        "chatInfoChannel": MessageLookupByLibrary.simpleMessage("Channel info"),
+        "chatInfoGroup": MessageLookupByLibrary.simpleMessage("Group info"),
+        "chatInfoPersonal":
+            MessageLookupByLibrary.simpleMessage("Profile info"),
         "chatListHeaderArchive":
             MessageLookupByLibrary.simpleMessage("Archive"),
         "chatListHeaderFolder": MessageLookupByLibrary.simpleMessage("Folder"),
@@ -173,6 +181,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Giveaway finished"),
         "giveawayWinners":
             MessageLookupByLibrary.simpleMessage("Giveaway winners"),
+        "groupStickers": MessageLookupByLibrary.simpleMessage("Group stickers"),
         "groupWasCreated":
             MessageLookupByLibrary.simpleMessage("Group was created"),
         "handygram": MessageLookupByLibrary.simpleMessage("HandyGram"),
@@ -199,6 +208,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "newForumTopic": m10,
         "newVideoChat": MessageLookupByLibrary.simpleMessage("New video chat"),
         "nextButton": MessageLookupByLibrary.simpleMessage("Next"),
+        "notificationActionMarkAsRead":
+            MessageLookupByLibrary.simpleMessage("Mark as read"),
+        "notificationActionReplyHint":
+            MessageLookupByLibrary.simpleMessage("Message"),
         "notificationCalls": m11,
         "notificationMentions": m12,
         "notificationMessages": m13,
@@ -237,7 +250,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "optimizeStorageUsage":
             MessageLookupByLibrary.simpleMessage("Optimize storage"),
         "optmizing": MessageLookupByLibrary.simpleMessage("Optimizing..."),
+        "paidMedia": MessageLookupByLibrary.simpleMessage("Paid media"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "paymentRefunded":
+            MessageLookupByLibrary.simpleMessage("Payment was refunded"),
         "paymentSuccessful":
             MessageLookupByLibrary.simpleMessage("Payment was successful"),
         "photo": MessageLookupByLibrary.simpleMessage("Photo"),
@@ -279,6 +295,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "qrInstruction": MessageLookupByLibrary.simpleMessage(
             "1. Open Telegram on your phone\n\n2. Go to Settings > Devices > Link Desktop Device\n\n3. Scan this image to Log In"),
         "qrScanTitle": MessageLookupByLibrary.simpleMessage("Scan to Login"),
+        "recentStickers":
+            MessageLookupByLibrary.simpleMessage("Recent stickers"),
         "removeButton": MessageLookupByLibrary.simpleMessage("Remove"),
         "roleDesigner": MessageLookupByLibrary.simpleMessage("UX/UI designer"),
         "roleFounder":
@@ -301,6 +319,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Select Watch Shape"),
         "selectThemeTitle":
             MessageLookupByLibrary.simpleMessage("Select Theme"),
+        "send": MessageLookupByLibrary.simpleMessage("Send"),
+        "sendFile": MessageLookupByLibrary.simpleMessage("Send file"),
+        "sendMediaGIFTitle": MessageLookupByLibrary.simpleMessage("Pick a GIF"),
+        "sendMediaPhotoTitle":
+            MessageLookupByLibrary.simpleMessage("Pick a photo"),
+        "sendMediaStickerTitle":
+            MessageLookupByLibrary.simpleMessage("Pick a sticker"),
+        "sendTextMessageTitle":
+            MessageLookupByLibrary.simpleMessage("Type a message"),
+        "sendVoiceMessageTitle":
+            MessageLookupByLibrary.simpleMessage("Record voice note"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "sharedUsers": MessageLookupByLibrary.simpleMessage("Shared users"),
         "someone": MessageLookupByLibrary.simpleMessage("Someone"),
@@ -309,7 +338,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "someoneJoinedViaLink":
             MessageLookupByLibrary.simpleMessage("Someone joined via link"),
         "something": MessageLookupByLibrary.simpleMessage("Something"),
-        "stickerPlainTexted": m23,
+        "starsWithCount": m23,
+        "stickerPlainTexted": m24,
+        "stickersCountInRow":
+            MessageLookupByLibrary.simpleMessage("Media count per row"),
+        "stickersCountInRowDesc":
+            MessageLookupByLibrary.simpleMessage("Used in media pickers"),
         "storage": MessageLookupByLibrary.simpleMessage("Storage"),
         "storageFreeSpace": MessageLookupByLibrary.simpleMessage("Free space"),
         "storageHandyGramData":
@@ -317,7 +351,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "storageNonHandyGram":
             MessageLookupByLibrary.simpleMessage("Other apps"),
         "story": MessageLookupByLibrary.simpleMessage("Story"),
-        "storyWithDuration": m24,
+        "storyWithDuration": m25,
         "suggestedAvatar":
             MessageLookupByLibrary.simpleMessage("Suggested avatar"),
         "templateTitleRepliesBot":
@@ -339,17 +373,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "unsupported": MessageLookupByLibrary.simpleMessage("Unsupported"),
         "upgradedToSupergroup":
             MessageLookupByLibrary.simpleMessage("Upgraded to supergroup"),
-        "userHasLeft": m25,
+        "userHasLeft": m26,
         "video": MessageLookupByLibrary.simpleMessage("Video"),
-        "videoCallWithTime": m26,
+        "videoCallWithTime": m27,
         "videoChatInvitation":
             MessageLookupByLibrary.simpleMessage("Video chat invitation"),
-        "videoChatWithTime": m27,
+        "videoChatWithTime": m28,
         "videoNote": MessageLookupByLibrary.simpleMessage("Video note"),
-        "videoNoteWithTime": m28,
-        "videoPrefix": m29,
+        "videoNoteWithTime": m29,
+        "videoPrefix": m30,
         "voiceNote": MessageLookupByLibrary.simpleMessage("Voice note"),
-        "voiceNoteWithTime": m30,
+        "voiceNoteWithTime": m31,
         "watchShape":
             MessageLookupByLibrary.simpleMessage("Watch screen shape"),
         "whereToScan": MessageLookupByLibrary.simpleMessage("Where to scan?"),

@@ -3,6 +3,9 @@
 
   "getStarted": "Get Started",
   "handygram": "HandyGram",
+  "@handygram": {
+    "type": "not_text"
+  },
 
   "qrScanTitle": "Scan to Login",
   "whereToScan": "Where to scan?",
@@ -174,6 +177,16 @@
       }
     }
   },
+
+  "starsWithCount": "{count} Telegram {count, plural, one{Star} other{Stars}}",
+  "@starsWithCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+
   "videoChatInvitation": "Video chat invitation",
   "location": "Location",
   "@location": {
@@ -183,6 +196,10 @@
   "@paymentSuccessful": {
     "description": "don't worry, it isn't paid handygram moment, it's the message sent after you've paid an invoice in bot"
   },
+  "send": "Send",
+  "paidMedia": "Paid media",
+  "paymentRefunded": "Payment was refunded",
+
   "photo": "Photo",
   "video": "Video",
   "voiceNoteWithTime": "Voice note ({time})",
@@ -467,5 +484,27 @@
   "folderIsEmpty": "Folder is empty", 
 
   "runInBackground": "Notifications",
-  "runInBackgroundDesc": "Enable Firebase service"
+  "runInBackgroundDesc": "Enable Firebase service",
+
+  "sendFile": "Send file",
+
+  "sendMediaStickerTitle": "Pick a sticker",
+  "sendMediaGIFTitle": "Pick a GIF",
+  "sendMediaPhotoTitle": "Pick a photo",
+  "sendVoiceMessageTitle": "Record voice note",
+  "sendTextMessageTitle": "Type a message",
+
+  "chatInfoGroup": "Group info",
+  "chatInfoBot": "Bot info",
+  "chatInfoChannel": "Channel info",
+  "chatInfoPersonal": "Profile info",
+
+  "recentStickers": "Recent stickers",
+  "groupStickers": "Group stickers",
+
+  "stickersCountInRow": "Media count per row",
+  "stickersCountInRowDesc": "Used in media pickers",
+
+  "notificationActionReplyHint": "Message",
+  "notificationActionMarkAsRead": "Mark as read"
 }

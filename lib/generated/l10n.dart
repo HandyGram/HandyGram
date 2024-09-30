@@ -835,6 +835,16 @@ class AppLocalizations {
     );
   }
 
+  /// `{count} Telegram {count, plural, one{Star} other{Stars}}`
+  String starsWithCount(int count) {
+    return Intl.message(
+      '$count Telegram ${Intl.plural(count, one: 'Star', other: 'Stars')}',
+      name: 'starsWithCount',
+      desc: '',
+      args: [count],
+    );
+  }
+
   /// `Video chat invitation`
   String get videoChatInvitation {
     return Intl.message(
@@ -862,6 +872,36 @@ class AppLocalizations {
       name: 'paymentSuccessful',
       desc:
           'don\'t worry, it isn\'t paid handygram moment, it\'s the message sent after you\'ve paid an invoice in bot',
+      args: [],
+    );
+  }
+
+  /// `Send`
+  String get send {
+    return Intl.message(
+      'Send',
+      name: 'send',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Paid media`
+  String get paidMedia {
+    return Intl.message(
+      'Paid media',
+      name: 'paidMedia',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Payment was refunded`
+  String get paymentRefunded {
+    return Intl.message(
+      'Payment was refunded',
+      name: 'paymentRefunded',
+      desc: '',
       args: [],
     );
   }
@@ -1897,6 +1937,166 @@ class AppLocalizations {
     return Intl.message(
       'Enable Firebase service',
       name: 'runInBackgroundDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send file`
+  String get sendFile {
+    return Intl.message(
+      'Send file',
+      name: 'sendFile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick a sticker`
+  String get sendMediaStickerTitle {
+    return Intl.message(
+      'Pick a sticker',
+      name: 'sendMediaStickerTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick a GIF`
+  String get sendMediaGIFTitle {
+    return Intl.message(
+      'Pick a GIF',
+      name: 'sendMediaGIFTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick a photo`
+  String get sendMediaPhotoTitle {
+    return Intl.message(
+      'Pick a photo',
+      name: 'sendMediaPhotoTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Record voice note`
+  String get sendVoiceMessageTitle {
+    return Intl.message(
+      'Record voice note',
+      name: 'sendVoiceMessageTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type a message`
+  String get sendTextMessageTitle {
+    return Intl.message(
+      'Type a message',
+      name: 'sendTextMessageTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Group info`
+  String get chatInfoGroup {
+    return Intl.message(
+      'Group info',
+      name: 'chatInfoGroup',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bot info`
+  String get chatInfoBot {
+    return Intl.message(
+      'Bot info',
+      name: 'chatInfoBot',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Channel info`
+  String get chatInfoChannel {
+    return Intl.message(
+      'Channel info',
+      name: 'chatInfoChannel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile info`
+  String get chatInfoPersonal {
+    return Intl.message(
+      'Profile info',
+      name: 'chatInfoPersonal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recent stickers`
+  String get recentStickers {
+    return Intl.message(
+      'Recent stickers',
+      name: 'recentStickers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Group stickers`
+  String get groupStickers {
+    return Intl.message(
+      'Group stickers',
+      name: 'groupStickers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Media count per row`
+  String get stickersCountInRow {
+    return Intl.message(
+      'Media count per row',
+      name: 'stickersCountInRow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Used in media pickers`
+  String get stickersCountInRowDesc {
+    return Intl.message(
+      'Used in media pickers',
+      name: 'stickersCountInRowDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Message`
+  String get notificationActionReplyHint {
+    return Intl.message(
+      'Message',
+      name: 'notificationActionReplyHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mark as read`
+  String get notificationActionMarkAsRead {
+    return Intl.message(
+      'Mark as read',
+      name: 'notificationActionMarkAsRead',
       desc: '',
       args: [],
     );
