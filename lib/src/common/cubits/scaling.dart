@@ -27,7 +27,7 @@ class Scaling extends Cubit<double> {
   double get userScale => _userScale;
 
   void _recalculateScale() {
-    final factor = _screenSize.shortestSide / _kBaseSize * _userScale;
+    final factor = _screenSize.shortestSide / (_kBaseSize * _userScale);
     if (factor != 1) {
       l.d(tag,
           "Scale factor: $factor (${_screenSize.shortestSide} / $_kBaseSize * $_userScale)");
