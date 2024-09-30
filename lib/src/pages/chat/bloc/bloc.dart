@@ -133,6 +133,7 @@ class ChatBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
         final serviceChatType = await getServiceChatType(_chat);
         int fromMessageId =
             event.focusOnMessageId ?? _chat.lastReadInboxMessageId;
+        int focusOnMessageId = fromMessageId;
         if (serviceChatType == ServiceChatType.savedMessages) {
           fromMessageId = _chat.lastMessage!.id;
         }
@@ -144,6 +145,10 @@ class ChatBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
           offset: -5,
           limit: 11,
         );
+
+        if (serviceChatType == ServiceChatType.savedMessages) {
+          focusOnMessageId = messages.first.id;
+        }
 
         // Construct initial containers list
         if (messages.first.id == _chat.lastMessage?.id) {
@@ -171,7 +176,7 @@ class ChatBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
         _streamController.add(ChatBlocMessagesListData(
           _containers,
           focusData: ChatBlocFocusData(
-            focusOnMessageId: fromMessageId,
+            focusOnMessageId: focusOnMessageId,
             mustFocusInstantly: true,
           ),
         ));
@@ -736,7 +741,7 @@ class ChatBloc extends Bloc<ChatBlocEvent, ChatBlocState> {
 
   Future<void> _onMessagesUpdate(final MessageUpdate data) async {
     // If message is new - handle it
-    if (data.isNew) {
+    if (data.update is td.UpdateNewMessage) {
       await _handleNewMessage(data.update as td.UpdateNewMessage);
       return;
     }

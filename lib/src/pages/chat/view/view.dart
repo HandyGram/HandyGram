@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:handygram/src/common/cubits/scaling.dart';
 import 'package:handygram/src/common/settings/entries.dart';
 import 'package:handygram/src/common/settings/manager.dart';
+import 'package:handygram/src/common/tdlib/misc/service_chat_type.dart';
 import 'package:mutex/mutex.dart';
 import 'package:scrollview_observer/scrollview_observer.dart';
 
@@ -191,7 +192,11 @@ class _ChatViewState extends State<ChatView> with WidgetsBindingObserver {
     );
   }
 
-  Widget _build(BuildContext context, Stream<ChatBlocStreamedData> stream) {
+  Widget _build(
+    BuildContext context,
+    Stream<ChatBlocStreamedData> stream,
+    ServiceChatType? type,
+  ) {
     _msgSubcription ??= stream.listen(_onBlocUpdate);
 
     final listView = ListView.builder(
@@ -201,6 +206,7 @@ class _ChatViewState extends State<ChatView> with WidgetsBindingObserver {
       physics: ChatObserverClampingScrollPhysics(
         observer: _chatObserver,
       ),
+      hitTestBehavior: HitTestBehavior.translucent,
       shrinkWrap: _chatObserver.isShrinkWrap,
       itemCount: _containers.length + 1,
       // We have max of 32-34 messages in buffer before cleanup happens
@@ -223,15 +229,17 @@ class _ChatViewState extends State<ChatView> with WidgetsBindingObserver {
           ? double.infinity
           : (bloc.chat.isChannel ? 3 : 0.8) * Scaling.screenSize.height * 34,
       itemBuilder: (context, i) {
+        final bloc = context.read<ChatBloc>();
+
         if (i == 0) {
-          return const ChatHeader(
-            key: GlobalObjectKey("chathdr"),
+          return ChatHeader(
+            key: const GlobalObjectKey("chathdr"),
+            chat: bloc.chat,
           );
         }
 
         i -= 1;
         final container = _containers[i];
-        final bloc = context.read<ChatBloc>();
 
         return switch (container) {
           ChatBlocMessageId(id: final id) => Padding(
@@ -241,6 +249,7 @@ class _ChatViewState extends State<ChatView> with WidgetsBindingObserver {
               key: GlobalObjectKey("msg-$id"),
               child: FocusableMessageBubble(
                 chat: bloc.chat,
+                type: type,
                 message: bloc.messagesData[id] ??
                     (throw HandyUiException(tag, "No such message $id")),
               ),
@@ -335,9 +344,10 @@ class _ChatViewState extends State<ChatView> with WidgetsBindingObserver {
                 )),
           ),
         ),
-      ChatBlocReady(dataStream: final stream) => NoticeOverlay(
+      ChatBlocReady(dataStream: final stream, chatType: final type) =>
+        NoticeOverlay(
           noticeUpdates: _errors,
-          child: _build(context, stream),
+          child: _build(context, stream, type),
         ),
     };
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:handy_tdlib/api.dart' as td;
+import 'package:handygram/src/common/tdlib/misc/service_chat_type.dart';
 import 'package:handygram/src/components/messages/bubble.dart';
 import 'package:handygram/src/pages/chat/view/widgets/focus_data.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -9,9 +10,11 @@ class FocusableMessageBubble extends StatefulWidget {
     super.key,
     required this.chat,
     required this.message,
+    required this.type,
   });
 
   final td.Chat chat;
+  final ServiceChatType? type;
   final td.Message message;
 
   @override
@@ -63,6 +66,7 @@ class _FocusableMessageBubbleState extends State<FocusableMessageBubble>
         key: ValueKey("mm,${widget.chat.id},${widget.message.id}"),
         message: message,
         chat: widget.chat,
+        chatType: widget.type,
       ),
     );
   }
