@@ -1722,6 +1722,26 @@ class AppLocalizations {
     );
   }
 
+  /// `Crowdin translators`
+  String get roleTranslatorsTitle {
+    return Intl.message(
+      'Crowdin translators',
+      name: 'roleTranslatorsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All of our translators!`
+  String get roleTranslators {
+    return Intl.message(
+      'All of our translators!',
+      name: 'roleTranslators',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Version {version} ({codename})`
   String appVersion(int version, String codename) {
     return Intl.message(

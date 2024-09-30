@@ -434,6 +434,8 @@
 
   "roleDesigner": "UX/UI designer",
   "roleFounder": "Founder & developer",
+  "roleTranslatorsTitle": "Crowdin translators",
+  "roleTranslators": "All of our translators!",
 
   "appVersion": "Version {version} ({codename})",
   "@appVersion": {

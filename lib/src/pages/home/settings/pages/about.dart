@@ -72,6 +72,12 @@ class SettingsAboutView extends StatelessWidget {
             role: AppLocalizations.current.channelDescription,
             chatId: _handygramChannelId,
           ),
+          SizedBox(height: Paddings.betweenSimilarElements),
+          SettingsContributorTile(
+            image: Image.asset("assets/images/crowdin.png"),
+            name: AppLocalizations.current.roleTranslatorsTitle,
+            role: AppLocalizations.current.roleTranslators,
+          ),
           SizedBox(height: Paddings.afterPageEndingWithSmallButton),
           FutureBuilder(
             future: CurrentAccount.providers.options.getMaybeCached('version'),

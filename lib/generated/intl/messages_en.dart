@@ -301,6 +301,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "roleDesigner": MessageLookupByLibrary.simpleMessage("UX/UI designer"),
         "roleFounder":
             MessageLookupByLibrary.simpleMessage("Founder & developer"),
+        "roleTranslators":
+            MessageLookupByLibrary.simpleMessage("All of our translators!"),
+        "roleTranslatorsTitle":
+            MessageLookupByLibrary.simpleMessage("Crowdin translators"),
         "runInBackground":
             MessageLookupByLibrary.simpleMessage("Notifications"),
         "runInBackgroundDesc":
