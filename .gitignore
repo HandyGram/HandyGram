@@ -48,3 +48,5 @@ lib/src/common/tdlib/client/configuration/keys.dart
 
 # Signing keys
 android/signing.properties
+
+/android/app/.cxx
