@@ -1,0 +1,158 @@
+{
+  "@@locale": "pl-PL",
+  "getStarted": "Rozpocznij",
+  "qrScanTitle": "Zeskanuj aby się zalogować",
+  "qrInstruction": "1. Otwórz Telegrama na swoim telefonie\n\n2. Otwórz Ustawienia > Urządzenia > Połącz z komputerem stacjonarnym\n\n3. Zeskanuj ten kod, aby się zalogować",
+  "password": "Hasło",
+  "enterPassword": "Wprowadź hasło",
+  "incorrectPassword": "Nieprawidłowe hasło",
+  "selectThemeTitle": "Wybierz motyw",
+  "selectShapeTitle": "Wybierz kształt zegarka",
+  "removeButton": "Usuń",
+  "closeButton": "Zamknij",
+  "proxySettingsTitle": "Ustawienia proxy",
+  "proxySettingsButton": "Ustawienia proxy",
+  "proxySettingsMainToggle": "Proxy",
+  "connectionWaitingForNetwork": "Oczekiwanie na sieć...",
+  "connectionConnectingToProxy": "Łączenie z proxy...",
+  "connectionConnecting": "Łączenie...",
+  "connectionUpdating": "Aktualizowanie...",
+  "connectionConnected": "Połączono",
+  "proxyAdd": "Dodaj proxy",
+  "createProxy": "Nowe proxy",
+  "editProxy": "Edytuj proxy",
+  "proxyServer": "Serwer proxy",
+  "proxyPort": "Port proxy",
+  "proxyType": "Rodzaj proxy",
+  "proxyTypePickerTitle": "Wybierz rodzaj proxy",
+  "proxyUser": "Nazwa użytkownika",
+  "proxyPassword": "Hasło",
+  "proxyTypeSOCKS5": "SOCKS5",
+  "proxyTypeHTTP": "HTTP",
+  "proxyTypeMTProto": "MTProto",
+  "notificationSingleTitleNewSecretChat": "Sekretny czat",
+  "notificationTextCall": "{name} dzwoni do ciebie...",
+  "@notificationTextCall": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "notificationTextSecretChat": "{name} właśnie utworzył z tobą sekretny czat!",
+  "@notificationTextSecretChat": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "gif": "GIF",
+  "groupWasCreated": "Grupa została stworzona",
+  "avatarWasChanged": "Awatar został zmieniony",
+  "avatarWasDeleted": "Awatar został usunięty",
+  "titleWasChanged": "Tytuł został zmieniony",
+  "userHasLeft": "{user} opuścił czat",
+  "@userHasLeft": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "bgWasChanged": "Tło zostało zmienione",
+  "chatWasShared": "Czat został udostępniony",
+  "hasJoinedTelegram": "dołączył do Telegrama!",
+  "document": "Dokument",
+  "location": "Lokalizacja",
+  "paymentSuccessful": "Płatność wykonana pomyślnie",
+  "send": "Wyślij",
+  "stickerPlainTexted": "{emoji} Naklejka",
+  "@stickerPlainTexted": {
+    "placeholders": {
+      "emoji": {}
+    }
+  },
+  "you": "Ty",
+  "chatListHeaderArchive": "Archiwum",
+  "error": "Błąd",
+  "secondsCountPlural": "{count, plural, one{sekunda} other{sekundy}}",
+  "@secondsCountPlural": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "contactPrefix": "Kontakt: {name}",
+  "@contactPrefix": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "forwardedMessagesPlural": "{count} {count, plural, one{przekazana wiadomość} other{przekazane wiadomości}}",
+  "@forwardedMessagesPlural": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "album": "Album",
+  "calls": "Połączenia",
+  "messages": "Wiadomości",
+  "secretChats": "Sekretne czaty",
+  "notificationNewSecretChat": "Nowy sekretny czat został stworzony",
+  "notificationsChannelMessages": "Wiadomości",
+  "notificationsChannelChannels": "Kanały",
+  "notificationsChannelGroups": "Grupy",
+  "templateTitleSavedMessages": "Zapisane wiadomości",
+  "templateTitleRepliesBot": "Odpowiedzi",
+  "messageContentUnsupported": "Nieobsługiwany typ wiadomości:\n",
+  "chatBlocLoadingError": "Nie udało się załadować czatu: {error}",
+  "@chatBlocLoadingError": {
+    "placeholders": {
+      "error": {}
+    }
+  },
+  "chatViewMessageNotFoundError": "Wiadomość {id} nie została odnaleziona",
+  "@chatViewMessageNotFoundError": {
+    "placeholders": {
+      "id": {}
+    }
+  },
+  "loadingMessage": "Ładowanie wiadomości...",
+  "someone": "Ktoś",
+  "something": "Coś",
+  "accounts": "Konta",
+  "addAccount": "Dodaj konto",
+  "logout": "Wyloguj",
+  "interface": "Interfejs",
+  "colorScheme": "Wygląd",
+  "watchShape": "Kształt ekranu zegarka",
+  "uiScale": "Skala interfejsu",
+  "aboutApp": "O aplikacji",
+  "storage": "Pamięć",
+  "notifications": "Powiadomienia",
+  "settings": "Ustawienia",
+  "appVersion": "Wersja {version} ({codename})",
+  "@appVersion": {
+    "placeholders": {
+      "version": {},
+      "codename": {}
+    }
+  },
+  "officialChannel": "Oficjalny kanał",
+  "channelDescription": "Nowości i aktualizacje",
+  "sectionPerformance": "Wydajność",
+  "sectionAppearance": "Wygląd",
+  "disableChatOptimizations": "Wyłącz czyszczenie czatów",
+  "disableMicroAvatars": "Wyłącz małe awatary",
+  "disableProfileAvatars": "Wyłącz awatary",
+  "disableProfileAvatarsDesc": "Pokaż w listach czatów",
+  "storageNonHandyGram": "Pozostałe aplikacje",
+  "storageFreeSpace": "Wolne miejsce",
+  "storageHandyGramData": "Dane HandyGrama",
+  "optimizeStorageUsage": "Optymalizuj pamięć",
+  "optmizing": "Optymalizowanie...",
+  "folderIsEmpty": "Folder jest pusty",
+  "runInBackground": "Powiadomienia",
+  "sendFile": "Wyślij plik",
+  "sendMediaStickerTitle": "Wybierz naklejkę",
+  "sendMediaGIFTitle": "Wybierz GIF",
+  "sendMediaPhotoTitle": "Wybierz zdjęcie",
+  "sendVoiceMessageTitle": "Nagraj notatkę głosową",
+  "chatInfoGroup": "Informacje o grupie",
+  "chatInfoChannel": "Informacje o kanale",
+  "chatInfoPersonal": "Informacje o profilu"
+}
