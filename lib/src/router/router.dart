@@ -118,6 +118,23 @@ final router = GoRouter(
               ),
             ),
           ),
+          routes: [
+            GoRoute(
+              path: "send",
+              pageBuilder: (context, state) => _addSwipeToBack(
+                state,
+                ChatSendPage(
+                  chatId: int.parse(
+                    state.uri.queryParameters["chatId"] ?? '',
+                  ),
+                  viewId: state.uri.queryParameters["viewId"],
+                  replyToMessageId: int.tryParse(
+                    state.uri.queryParameters["replyToMessageId"] ?? '',
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
         GoRoute(
           path: "setup",
