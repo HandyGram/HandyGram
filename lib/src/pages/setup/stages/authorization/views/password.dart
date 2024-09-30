@@ -43,6 +43,10 @@ class _AuthorizationPasswordViewState extends State<AuthorizationPasswordView> {
   bool active = false;
   final FocusNode focus = FocusNode();
 
+  final _passwordFieldKey =
+      const GlobalObjectKey<State<AuthorizationPasswordView>>(
+          "setup-auth-password-field");
+
   @override
   void initState() {
     super.initState();
@@ -91,7 +95,7 @@ class _AuthorizationPasswordViewState extends State<AuthorizationPasswordView> {
                   obscureText: true,
                   controller: controller,
                   focusNode: focus,
-                  key: const ValueKey<String>("setup-auth-password-field"),
+                  key: _passwordFieldKey,
                 ),
                 if (widget.hint.isNotEmpty)
                   SizedBox(height: Paddings.betweenSimilarElements),
@@ -102,7 +106,7 @@ class _AuthorizationPasswordViewState extends State<AuthorizationPasswordView> {
                     child: Text(
                       widget.hint,
                       style: TextStyles.active.labelLarge!.copyWith(
-                        color: ColorStyles.active.onError,
+                        color: ColorStyles.active.secondary,
                       ),
                       textAlign: TextAlign.center,
                     ),

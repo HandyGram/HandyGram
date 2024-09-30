@@ -226,10 +226,11 @@ class SetupBloc extends Bloc<SetupEvent, SetupState> {
   bool _compareStates(Emitter<SetupState> emit, td.ConnectionState state) {
     switch (state) {
       case td.ConnectionStateReady():
+        // If connected and already authenticated
         if (CurrentAccount.providers.authorizationState.state
             is AuthorizationStateReady) {
-          // Can be a case on setup restart
-          add(const _ExitSetup());
+          // Can be a case of incomplete / restarted setup
+          emit(_stateBySettingsAndAuth);
         } else {
           emit(const SetupStateAuthorizing());
         }
@@ -254,7 +255,14 @@ class SetupBloc extends Bloc<SetupEvent, SetupState> {
       case AuthorizationStateWaitingPassword():
         return const SetupStateAuthorizing();
       case AuthorizationStateReady():
-        return const SetupStateFinished();
+        if (_stateBySettings is SetupStateWelcome) {
+          Settings().put(
+            SettingsEntries.currentSetupStep,
+            // The max step is welcome one
+            Settings().get(SettingsEntries.currentSetupStep) - 1,
+          );
+        }
+        return _stateBySettings;
       default:
         return _stateBySettings;
     }
@@ -264,7 +272,7 @@ class SetupBloc extends Bloc<SetupEvent, SetupState> {
       switch (Settings().get(SettingsEntries.currentSetupStep)) {
         3 => const SetupStateWelcome(),
         2 => SetupStateScreenShape(
-            Settings().get(SettingsEntries.isRoundScreen),
+            Settings().get(SettingsEntries.isRoundScreen)!,
           ),
         1 => SetupStateColorScheme(
             Settings().get(SettingsEntries.colorSchemeId),
