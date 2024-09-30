@@ -1,0 +1,290 @@
+{
+  "@@locale": "ru-RU",
+  "getStarted": "Начать",
+  "handygram": "HandyGram",
+  "qrScanTitle": "Сканируйте чтобы войти",
+  "whereToScan": "Где сканировать?",
+  "qrInstruction": "1. Откройте Telegram на вашем телефоне\n2. Перейдите в настройки > Устройства > Подключить устройство\n3. Отсканируйте это изображение для входа",
+  "password": "Пароль",
+  "login": "Вход",
+  "enterPassword": "Введите пароль",
+  "incorrectPassword": "Неверный пароль",
+  "selectThemeTitle": "Выберите тему",
+  "selectShapeTitle": "Выберите форму часов",
+  "firstSettingsTitle": "Некоторые настройки",
+  "removeButton": "Удалить",
+  "doneButton": "Готово",
+  "createButton": "Создать",
+  "closeButton": "Закрыть",
+  "nextButton": "Далее",
+  "proxySettingsTitle": "Настройки прокси",
+  "proxySettingsButton": "Настройки прокси",
+  "proxySettingsMainToggle": "Прокси",
+  "proxyConnectionDisconnected": "Отключен",
+  "proxyConnectionLastUsedDate": "Последнее использование: {date}",
+  "@proxyConnectionLastUsedDate": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "connectionWaitingForNetwork": "Ожидание сети...",
+  "connectionConnectingToProxy": "Подключение к прокси...",
+  "connectionConnecting": "Подключение...",
+  "connectionUpdating": "Обновление...",
+  "connectionConnected": "Подключено",
+  "proxyAdd": "Добавить прокси",
+  "createProxy": "Новый прокси",
+  "editProxy": "Изменение прокси",
+  "proxyServer": "Прокси-сервер",
+  "proxyPort": "Порт прокси",
+  "proxyType": "Тип прокси",
+  "proxyTypePickerTitle": "Выберите тип прокси",
+  "proxyUser": "Логин",
+  "proxyPassword": "Пароль",
+  "proxySecret": "Секрет",
+  "proxyInsecure": "Небезопасный",
+  "proxyTypeSOCKS5": "SOCKS5",
+  "proxyTypeHTTP": "HTTP",
+  "proxyTypeMTProto": "MTProto",
+  "notificationSingleTitleCall": "Позвонить",
+  "notificationSingleTitleScheduledMessage": "Отложенное сообщение",
+  "notificationSingleTitleNewSecretChat": "Секретный чат",
+  "notificationTextCall": "{name} звонит вам...",
+  "@notificationTextCall": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "notificationTextSecretChat": "{name} только что создал секретный чат с вами!",
+  "@notificationTextSecretChat": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "gif": "GIF",
+  "audio": "Аудио",
+  "groupWasCreated": "Группа была создана",
+  "botWriteAccessAllowed": "Бот может писать сообщения",
+  "callWithTime": "Звонок ({time})",
+  "@callWithTime": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "videoCallWithTime": "Видеовызов ({time})",
+  "@videoCallWithTime": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "chatMembersWereAdded": "{user} и другие были добавлены",
+  "@chatMembersWereAdded": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "youHaveBoostedChat": "Вы забустили чат",
+  "avatarWasChanged": "Аватар был изменен",
+  "avatarWasDeleted": "Аватар удален",
+  "titleWasChanged": "Название было изменено",
+  "userHasLeft": "{user} вышел",
+  "@userHasLeft": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "someoneJoinedViaLink": "Кто-то присоединился по ссылке",
+  "someoneJoinedByRequest": "Кто-то был одобрен для присоединения",
+  "bgWasChanged": "Обои изменены",
+  "messageTtlChanged": "Таймер автоудаления был изменен",
+  "upgradedToSupergroup": "Обновлено до супергруппы",
+  "hasJoinedTelegram": "присоединился к Telegram!",
+  "document": "Документ",
+  "expiredPhoto": "Фото просрочено",
+  "expiredVideo": "Истекшее видео",
+  "expiredVoiceNote": "Истёкшее голосовое сообщение",
+  "expiredVideoNote": "Истёкшее видеосообщение",
+  "newForumTopic": "Новая тема \"{name}\"",
+  "@newForumTopic": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "topicWasClosed": "Тема закрыта",
+  "topicWasOpened": "Тема открыта",
+  "topicWasHidden": "Тема скрыта",
+  "scoredSomeScoreInGame": "Счёт {score} в игре",
+  "@scoredSomeScoreInGame": {
+    "placeholders": {
+      "score": {}
+    }
+  },
+  "premiumWithMonthsCount": "Премиум ({count} {count, plural, one{месяц} few {месяцев} many {месяцев} other{месяцев}})",
+  "@premiumWithMonthsCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "videoChatInvitation": "Приглашение в видеочат",
+  "location": "Локация",
+  "paymentSuccessful": "Оплата прошла успешно",
+  "send": "Отправлено",
+  "paymentRefunded": "Платёж возвращен",
+  "photo": "Фото",
+  "video": "Видео",
+  "voiceNoteWithTime": "Голосовое сообщение ({time})",
+  "@voiceNoteWithTime": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "videoNoteWithTime": "Видеосообщение ({time})",
+  "@videoNoteWithTime": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "videoChatWithTime": "Видео чат ({time})",
+  "@videoChatWithTime": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "messageWasPinned": "Сообщение закреплено",
+  "poll": "Голосование",
+  "premiumGiftCode": "Подарочный код Премиум",
+  "giveaway": "Конкурс",
+  "screenshotWasTaken": "Скриншот сделан",
+  "stickerPlainTexted": "Стикер {emoji}",
+  "@stickerPlainTexted": {
+    "placeholders": {
+      "emoji": {}
+    }
+  },
+  "suggestedAvatar": "Предложенный аватар",
+  "story": "История",
+  "unsupported": "Не поддерживается",
+  "sharedUsers": "Общие Пользователи",
+  "newVideoChat": "Новый видео чат",
+  "scheduledVideoChat": "Запланированный видео чат",
+  "changedTheme": "Сменить тему",
+  "tgPassport": "Telegram Passport",
+  "you": "Вы",
+  "draftPrefix": "Черновик: ",
+  "chatListHeaderMain": "Все чаты",
+  "chatListHeaderArchive": "Архив",
+  "chatListHeaderFolder": "Папка",
+  "error": "Ошибка",
+  "contactPrefix": "Контакт: {name}",
+  "@contactPrefix": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "audioPrefix": "Аудио: {title}",
+  "@audioPrefix": {
+    "placeholders": {
+      "title": {}
+    }
+  },
+  "contact": "Контакт",
+  "invoice": "Счет",
+  "voiceNote": "Голосовое сообщение",
+  "videoNote": "Видеосообщение",
+  "hiddenContent": "Скрытый контент",
+  "album": "Альбом",
+  "calls": "Звонки",
+  "messages": "Сообщения",
+  "secretChats": "Секретные чаты",
+  "notificationNewSecretChat": "Создан новый секретный чат",
+  "notificationMessages": "{count} непрочитанное {count, plural, one{сообщение} few {сообщения} many {сообщения} other{сообщения}}",
+  "@notificationMessages": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "notificationsChannelOther": "Другое",
+  "notificationsChannelOtherDesc": "Все уведомления, которые не содержат сообщений или упоминаний",
+  "notificationsChannelMentions": "Ответы",
+  "notificationsChannelMentionsDesc": "Все ваши упоминания из групповых чатов",
+  "notificationsChannelMessages": "Сообщения",
+  "notificationsChannelMessagesDesc": "Все новые сообщения в чатах, где вы включили уведомления (как групповые, так и персональные)",
+  "notificationsChannelChannels": "Каналы",
+  "notificationsChannelGroups": "Группы",
+  "notificationsChannelPrivateChats": "Диалоги",
+  "templateTitleSavedMessages": "Избранное",
+  "templateTitleRepliesBot": "Ответы",
+  "messageContentUnsupported": "Неподдерживаемый тип сообщения:",
+  "chatBlocLoadingError": "Ошибка загрузки чата: {error}",
+  "@chatBlocLoadingError": {
+    "placeholders": {
+      "error": {}
+    }
+  },
+  "chatViewMessageNotFoundError": "Сообщение {id} не найдено",
+  "@chatViewMessageNotFoundError": {
+    "placeholders": {
+      "id": {}
+    }
+  },
+  "loadingMessage": "Загрузка сообщения...",
+  "storyWithDuration": "История ({time})",
+  "@storyWithDuration": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "accounts": "Аккаунты",
+  "addAccount": "Добавить аккаунт",
+  "logout": "Выход",
+  "interface": "Интерфейс",
+  "colorScheme": "Внешний вид",
+  "watchShape": "Форма экрана часов",
+  "uiScale": "Масштаб",
+  "aboutApp": "О приложении",
+  "storage": "Хранилище",
+  "notifications": "Уведомления",
+  "messaging": "Общение",
+  "settings": "Настройки",
+  "roleDesigner": "UX/UI дизайнер",
+  "roleFounder": "Основатель и разработчик",
+  "appVersion": "Версия {version} ({codename})",
+  "@appVersion": {
+    "placeholders": {
+      "version": {},
+      "codename": {}
+    }
+  },
+  "poweredByTdlib": "Работает на TDLib {version}",
+  "@poweredByTdlib": {
+    "placeholders": {
+      "version": {}
+    }
+  },
+  "officialChannel": "Официальный канал",
+  "channelDescription": "Новости и обновления",
+  "sectionPerformance": "Производительность",
+  "sectionAppearance": "Внешний вид",
+  "prerenderAllMessagesDesc": "Может помочь с прыжком из списка сообщений",
+  "disableMicroAvatars": "Отключить аватары",
+  "disableProfileAvatars": "Отключить аватары",
+  "storageNonHandyGram": "Другие приложения",
+  "storageFreeSpace": "Свободное место",
+  "storageHandyGramData": "Данные HandyGram",
+  "optimizeStorageUsage": "Оптимизировать хранилище",
+  "optmizing": "Оптимизация...",
+  "folderIsEmpty": "Папка пустая",
+  "runInBackground": "Уведомления",
+  "sendFile": "Отправить файл",
+  "sendMediaStickerTitle": "Выбрать стикер",
+  "sendMediaGIFTitle": "Выбрать GIF",
+  "sendMediaPhotoTitle": "Выбрать фото",
+  "sendVoiceMessageTitle": "Записать голосовое сообщение",
+  "sendTextMessageTitle": "Написать сообщение",
+  "chatInfoGroup": "Информация о группе",
+  "chatInfoBot": "Информация о боте",
+  "chatInfoChannel": "Информация о канале",
+  "chatInfoPersonal": "Данные профиля",
+  "recentStickers": "Недавние стикеры",
+  "groupStickers": "Стикеры группы"
+}
