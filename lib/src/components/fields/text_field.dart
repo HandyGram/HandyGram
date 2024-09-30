@@ -20,12 +20,19 @@ class HandyTextField extends StatelessWidget {
     this.focusNode,
     this.enabled = true,
     this.title,
+    this.maxLines = 1,
+    this.hint,
+    this.keyboardType,
+    this.keyboardAction,
   });
 
   final TextEditingController controller;
   final bool autocorrect, obscureText, enabled;
   final FocusNode? focusNode;
-  final String? title;
+  final int? maxLines;
+  final String? title, hint;
+  final TextInputType? keyboardType;
+  final TextInputAction? keyboardAction;
 
   @override
   Widget build(BuildContext context) {
@@ -69,16 +76,19 @@ class HandyTextField extends StatelessWidget {
                   obscureText: obscureText,
                   focusNode: focusNode,
                   enabled: enabled,
+                  maxLines: maxLines,
                   cursorRadius: const Radius.circular(1),
                   scrollPadding: EdgeInsets.zero,
                   decoration: InputDecoration(
                     isCollapsed: true,
                     border: InputBorder.none,
-                    hintText: title,
+                    hintText: title ?? hint,
                     hintStyle: TextStyles.active.titleSmall!.copyWith(
                       color: ColorStyles.active.onSurfaceVariant,
                     ),
                   ),
+                  keyboardType: keyboardType,
+                  textInputAction: keyboardAction,
                   textAlignVertical: TextAlignVertical.bottom,
                   key: ValueKey<String>("${title ?? "null"} field"),
                 ),

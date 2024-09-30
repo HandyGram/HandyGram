@@ -88,12 +88,14 @@ class TileButton extends StatelessWidget {
     final textW = Text(
       text ?? "",
       style:
-          (big ? TextStyles.active.titleMedium : TextStyles.active.titleSmall)!
+          (big ? TextStyles.active.titleLarge : TextStyles.active.titleSmall)!
               .copyWith(
+        fontWeight: FontWeight.bold,
         color: onTap == null ? style.disabledContentColor : style.contentColor,
       ),
       textAlign: icon == null ? TextAlign.center : TextAlign.left,
-      maxLines: 2,
+      maxLines: big ? 2 : 1,
+      textWidthBasis: TextWidthBasis.longestLine,
       overflow: TextOverflow.fade,
     );
 

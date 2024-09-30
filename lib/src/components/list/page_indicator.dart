@@ -171,7 +171,7 @@ class _PageIndicatorPainter extends CustomPainter {
     final paint = Paint()
       ..color = selectedColor
       ..style = PaintingStyle.fill;
-    final isRound = Settings().get(SettingsEntries.isRoundScreen);
+    final isRound = Settings().get(SettingsEntries.isRoundScreen) ?? false;
     final mPageCount = math.min(pageCount, 6);
 
     if (isRound) {

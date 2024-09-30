@@ -41,6 +41,9 @@ class Paddings {
 
   /// Message bubbles padding from screen corners
   static double get messageBubblesPadding => _s(11.35);
+
+  /// Padding between chat footer elements
+  static double get chatFooterElementsPadding => _s(9.46);
 }
 
 /// A set of scaled UI elements sizes

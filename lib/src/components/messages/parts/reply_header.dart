@@ -98,7 +98,7 @@ class _MessageReplyHeaderState extends State<MessageReplyHeader> {
 
   Color get containerColor {
     if (isOutgoing) {
-      return const Color(0xFFDFCBFF);
+      return ColorStyles.active.onPrimary.withOpacity(0.15);
     } else {
       return (chatColor ?? ColorStyles.instance.defaultChatColor).boxColor;
     }

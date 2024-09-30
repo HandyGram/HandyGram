@@ -32,7 +32,7 @@ class HandyScrollbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (Settings().get(SettingsEntries.isRoundScreen)) {
+    if (Settings().get(SettingsEntries.isRoundScreen) ?? false) {
       return _HandyScrollbar(
         controller: controller,
         child: child,

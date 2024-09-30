@@ -51,7 +51,7 @@ class CurrentTime extends StatelessWidget {
   Widget build(BuildContext context) {
     final style =
         TextStyles.active.titleSmall!.copyWith(fontWeight: FontWeight.w400);
-    final isRound = Settings().get(SettingsEntries.isRoundScreen);
+    final isRound = Settings().get(SettingsEntries.isRoundScreen) ?? false;
     final size = MediaQuery.of(context).size;
     final radius = (size.width / 2 - kPadding);
     return Stack(

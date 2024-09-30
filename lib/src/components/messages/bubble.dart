@@ -12,10 +12,13 @@ import 'package:handygram/src/common/cubits/colors.dart';
 import 'package:handygram/src/common/cubits/current_account.dart';
 import 'package:handygram/src/common/tdlib/extensions/chats/misc.dart';
 import 'package:handygram/src/common/tdlib/extensions/message/misc.dart';
+import 'package:handygram/src/common/tdlib/extensions/message/strings/content.dart';
 import 'package:handygram/src/common/tdlib/misc/service_chat_type.dart';
 import 'package:handygram/src/components/layout/flexible_constraints_column/widget.dart';
 import 'package:handygram/src/components/messages/content/animated_emoji.dart';
+import 'package:handygram/src/components/messages/content/animation.dart';
 import 'package:handygram/src/components/messages/content/photo/photo_content.dart';
+import 'package:handygram/src/components/messages/content/voice_note/voice_note.dart';
 import 'package:handygram/src/components/messages/data.dart';
 import 'package:handygram/src/components/messages/parts/attributes.dart';
 import 'package:handygram/src/components/messages/content/sticker.dart';
@@ -73,6 +76,14 @@ class MessageBubble extends StatelessWidget {
           data: data.cast(),
           key: contentKey,
         ),
+      td.MessageVoiceNote() => VoiceNoteMessageContent(
+          data: data.cast(),
+          key: contentKey,
+        ),
+      td.MessageAnimation() => AnimationMessageContent(
+          data: data.cast(),
+          key: contentKey,
+        ),
       _ => UnsupportedMessageContent(
           data: data.cast(),
           key: contentKey,
@@ -107,6 +118,7 @@ class MessageBubble extends StatelessWidget {
                 Constrained(
                   isTarget: true,
                   constrainMaxWidth: false,
+                  debugMarker: "header ${message.content.plainTextSync}",
                   child: Padding(
                     padding: EdgeInsets.only(
                       bottom: Paddings.betweenSimilarElements,
@@ -118,6 +130,7 @@ class MessageBubble extends StatelessWidget {
                 Constrained(
                   isTarget: true,
                   constrainMinWidth: true,
+                  debugMarker: "reply block ${message.content.plainTextSync}",
                   child: Padding(
                     padding: EdgeInsets.only(
                       bottom: Paddings.betweenSimilarElements,
@@ -131,6 +144,7 @@ class MessageBubble extends StatelessWidget {
               Constrained(
                 isTarget: true,
                 constrainMinWidth: true,
+                debugMarker: "content ${message.content.plainTextSync}",
                 child: StreamBuilder<td.MessageContent>(
                   initialData: message.content,
                   stream: CurrentAccount.providers.messages.filter(

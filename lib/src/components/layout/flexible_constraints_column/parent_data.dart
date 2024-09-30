@@ -20,12 +20,15 @@ class FlexibleConstraintsColumnParentData
   /// Use intrinsic width
   bool useIntrinsicWidth;
 
+  String? debugMarker;
+
   FlexibleConstraintsColumnParentData({
     this.isTarget = false,
     this.constrainMaxWidth = true,
     this.constrainMinWidth = false,
     this.useIntrinsicWidth = false,
     this.alignment,
+    this.debugMarker,
   });
 }
 
@@ -40,6 +43,7 @@ class Constrained
     this.constrainMinWidth = false,
     this.useIntrinsicWidth = false,
     this.alignment,
+    this.debugMarker,
   });
 
   /// Is target child?
@@ -57,6 +61,8 @@ class Constrained
   /// Use intrinsic width
   final bool useIntrinsicWidth;
 
+  final String? debugMarker;
+
   @override
   void applyParentData(RenderObject renderObject) {
     (renderObject.parentData as FlexibleConstraintsColumnParentData).isTarget =
@@ -67,6 +73,8 @@ class Constrained
         .constrainMinWidth = constrainMinWidth;
     (renderObject.parentData as FlexibleConstraintsColumnParentData).alignment =
         alignment;
+    (renderObject.parentData as FlexibleConstraintsColumnParentData)
+        .debugMarker = debugMarker;
   }
 
   @override

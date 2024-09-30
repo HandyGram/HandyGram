@@ -153,7 +153,7 @@ class MessageCaptionRenderObject extends RenderBox
       if (metrics.first.width + childWidthPadded > constraints.maxWidth) {
         // draw child below text
         childOffset = Offset(
-          _painter.width - childSize.width,
+          maxTextWidth - childSize.width,
           _painter.height,
         );
         size += Offset(0, childSize.height);

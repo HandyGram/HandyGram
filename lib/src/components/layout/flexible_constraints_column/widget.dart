@@ -38,6 +38,8 @@ class FlexibleConstraintsColumnRenderObject extends RenderBox
     required this.mainAxisAlignment,
   });
 
+  final List<Rect> _childrenLayout = [];
+
   @override
   void setupParentData(RenderBox child) {
     if (child.parentData is! FlexibleConstraintsColumnParentData) {
@@ -48,6 +50,7 @@ class FlexibleConstraintsColumnRenderObject extends RenderBox
   Size _computeSize(bool dry, [BoxConstraints? dryConstraints]) {
     final constraints = dryConstraints ?? this.constraints;
     double? targetWidth;
+    //print("debug -------------------");
 
     // Get target child's width
     for (RenderBox? child = firstChild;
@@ -63,7 +66,12 @@ class FlexibleConstraintsColumnRenderObject extends RenderBox
             ? child.getMinIntrinsicWidth(double.infinity)
             : drySize.width;
         targetWidth = max(targetWidth ?? 0, childWidth);
-      }
+        // print(
+        //     "debug | $targetWidth | $childWidth | ${parentData.debugMarker}");
+      } // else {
+      // print(
+      //     "debug | $targetWidth | not target | ${parentData.debugMarker}");
+      // }
     }
 
     assert(
@@ -73,6 +81,10 @@ class FlexibleConstraintsColumnRenderObject extends RenderBox
     );
 
     final constrainedTargetWidth = constraints.constrainWidth(targetWidth!);
+
+    if (!dry) {
+      _childrenLayout.clear();
+    }
 
     // Layout children again with new constraint
     double totalChildrenHeight = 0;
@@ -87,6 +99,7 @@ class FlexibleConstraintsColumnRenderObject extends RenderBox
         minHeight: 0,
       );
       final Size childSize;
+
       if (dry) {
         childSize = child.getDryLayout(childConstraints);
       } else {
@@ -95,7 +108,30 @@ class FlexibleConstraintsColumnRenderObject extends RenderBox
           parentUsesSize: true,
         );
         childSize = child.size;
+
+        final childWidth = parentData.useIntrinsicWidth
+            ? child.getMinIntrinsicWidth(constraints.maxHeight)
+            : childSize.width;
+        switch (parentData.alignment ?? mainAxisAlignment) {
+          case MainAxisAlignment.end:
+            parentData.offset = Offset(
+              constrainedTargetWidth - childWidth,
+              totalChildrenHeight,
+            );
+          case MainAxisAlignment.center:
+            parentData.offset = Offset(
+              (constrainedTargetWidth - childWidth) / 2,
+              totalChildrenHeight,
+            );
+          default:
+            parentData.offset = Offset(
+              0,
+              totalChildrenHeight,
+            );
+            break;
+        }
       }
+
       totalChildrenHeight += childSize.height;
     }
 
@@ -116,36 +152,14 @@ class FlexibleConstraintsColumnRenderObject extends RenderBox
   }
 
   @override
-  void paint(PaintingContext context, Offset offset) {
-    for (RenderBox? child = firstChild;
-        child != null;
-        child = childAfter(child)) {
-      final parentData =
-          child.parentData as FlexibleConstraintsColumnParentData;
-      final childWidth = parentData.useIntrinsicWidth
-          ? child.getMinIntrinsicWidth(constraints.maxHeight)
-          : child.size.width;
-      var localOffset = Offset.zero;
-      switch (parentData.alignment ?? mainAxisAlignment) {
-        case MainAxisAlignment.end:
-          localOffset += Offset(size.width - childWidth, 0);
-        case MainAxisAlignment.center:
-          localOffset += Offset((size.width - childWidth) / 2, 0);
-        default:
-          break;
-      }
-      context.paintChild(child, offset + localOffset);
-      offset += Offset(0, child.size.height);
-    }
-  }
+  void paint(PaintingContext context, Offset offset) =>
+      defaultPaint(context, offset);
 
   @override
-  bool hitTestChildren(BoxHitTestResult result, {required Offset position}) {
-    return defaultHitTestChildren(result, position: position);
-  }
+  bool hitTestChildren(BoxHitTestResult result, {required Offset position}) =>
+      defaultHitTestChildren(result, position: position);
 
   @override
-  double? computeDistanceToActualBaseline(TextBaseline baseline) {
-    return defaultComputeDistanceToFirstActualBaseline(baseline);
-  }
+  double? computeDistanceToActualBaseline(TextBaseline baseline) =>
+      defaultComputeDistanceToFirstActualBaseline(baseline);
 }
