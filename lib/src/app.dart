@@ -39,6 +39,10 @@ class HandyGramApp extends StatelessWidget {
         textTheme: theme,
         useMaterial3: true,
       ).copyWith(
+        pageTransitionsTheme: const PageTransitionsTheme(builders: {
+          // Matches WearOS animations
+          TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+        }),
         // Use black background to save battery.
         scaffoldBackgroundColor: Colors.black,
       ),
