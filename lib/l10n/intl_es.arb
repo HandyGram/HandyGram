@@ -1,0 +1,366 @@
+{
+  "@@locale": "es-ES",
+  "getStarted": "Comenzar",
+  "handygram": "HandyGram",
+  "qrScanTitle": "Escanee para Entrar",
+  "whereToScan": "¿Dónde escanear?",
+  "qrInstruction": "1. Abra Telegram en su teléfono\n\n2. Vaya a Ajustes > Dispositivos > Link Desktop Device\n\n3. Escanee esta imagen para iniciar sesión",
+  "password": "Contraseña",
+  "login": "Iniciar sesión",
+  "enterPassword": "Introducir Contraseña",
+  "incorrectPassword": "Contraseña incorrecta",
+  "selectThemeTitle": "Seleccionar tema",
+  "selectShapeTitle": "Seleccione la Forma del Reloj",
+  "firstSettingsTitle": "Algunos ajustes",
+  "removeButton": "Eliminar",
+  "doneButton": "Hecho",
+  "createButton": "Crear",
+  "closeButton": "Cerrar",
+  "nextButton": "Siguiente",
+  "proxySettingsTitle": "Ajustes de Proxy",
+  "proxySettingsButton": "Ajustes de Proxy",
+  "proxySettingsMainToggle": "Proxy",
+  "proxyConnectionDisconnected": "Desconectado",
+  "proxyConnectionLastUsedDate": "Último uso: {date}",
+  "@proxyConnectionLastUsedDate": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "connectionWaitingForNetwork": "Esperando conexión...",
+  "connectionConnectingToProxy": "Conectando al proxy...",
+  "connectionConnecting": "Conectando...",
+  "connectionUpdating": "Actualizando...",
+  "connectionConnected": "Conectado",
+  "proxyAdd": "Añadir proxy",
+  "createProxy": "Nuevo Proxy",
+  "editProxy": "Editar proxy",
+  "proxyServer": "Servidor proxy",
+  "proxyPort": "Puerto proxy",
+  "proxyType": "Tipo proxy",
+  "proxyTypePickerTitle": "Seleccionar tipo proxy",
+  "proxyUser": "Usuario",
+  "proxyPassword": "Contraseña",
+  "proxySecret": "Secreto",
+  "proxyInsecure": "Inseguro",
+  "proxyTypeSOCKS5": "SOCKS5",
+  "proxyTypeHTTP": "HTTP",
+  "proxyTypeMTProto": "MTProto",
+  "notificationSingleTitleCall": "Llamada",
+  "notificationSingleTitleScheduledMessage": "Mensajes programados",
+  "notificationSingleTitleNewSecretChat": "Chat secreto",
+  "notificationTextCall": "{name} te está llamando...",
+  "@notificationTextCall": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "notificationTextSecretChat": "¡{name} acaba de crear un chat secreto contigo!",
+  "@notificationTextSecretChat": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "gif": "GIF",
+  "audio": "Audio",
+  "groupWasCreated": "Grupo creado",
+  "botWriteAccessAllowed": "Se ha permitido al bot escribir mensajes",
+  "callWithTime": "Llamar ({time})",
+  "@callWithTime": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "videoCallWithTime": "Videollamada ({time})",
+  "@videoCallWithTime": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "chatMembersWereAdded": "{user} y otros fueron añadidos",
+  "@chatMembersWereAdded": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "youHaveBoostedChat": "Has impulsado el chat",
+  "avatarWasChanged": "Avatar cambiado",
+  "avatarWasDeleted": "Avatar eliminado",
+  "titleWasChanged": "Título cambiado",
+  "userHasLeft": "{user} salió",
+  "@userHasLeft": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "someoneJoinedViaLink": "Alguien se unió a través del enlace",
+  "someoneJoinedByRequest": "Alguien ha sido aprobado para unirse",
+  "bgWasChanged": "Fondo cambiado",
+  "messageTtlChanged": "Temporizador de auto-eliminación cambiado",
+  "chatWasShared": "Chat compartido",
+  "upgradedToSupergroup": "Actualizado a supergrupo",
+  "hasJoinedTelegram": "se ha unido a Telegram!",
+  "document": "Documento",
+  "expiredPhoto": "Foto expirada",
+  "expiredVideo": "Vídeo expirado",
+  "expiredVoiceNote": "Mensaje de voz expirado",
+  "expiredVideoNote": "Mensaje de vídeo expirado",
+  "newForumTopic": "Nuevo tema \"{name}\"",
+  "@newForumTopic": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "editedForumTopic": "Tema \"{name}\" editado",
+  "@editedForumTopic": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "topicWasClosed": "Tema cerrado",
+  "topicWasOpened": "Tema abierto",
+  "topicWasHidden": "Tema ocultado",
+  "topicWasShown": "Tema mostrado",
+  "scoredSomeScoreInGame": "Anotó {score} en la partida",
+  "@scoredSomeScoreInGame": {
+    "placeholders": {
+      "score": {}
+    }
+  },
+  "premiumWithMonthsCount": "Premium ({count} {count, plural, one{mes} other{meses}})",
+  "@premiumWithMonthsCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "starsWithCount": "{count} Telegram {count, plural, one{Estrella} other{Estrellas}}",
+  "@starsWithCount": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "videoChatInvitation": "Invitación a vídeo chat",
+  "location": "Ubicación",
+  "paymentSuccessful": "Pago exitoso",
+  "send": "Enviar",
+  "paidMedia": "Medio de pago",
+  "paymentRefunded": "Pago reembolsado",
+  "photo": "Foto",
+  "video": "Video",
+  "voiceNoteWithTime": "Nota de voz ({time})",
+  "@voiceNoteWithTime": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "videoNoteWithTime": "Nota de vídeo ({time})",
+  "@videoNoteWithTime": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "videoChatWithTime": "Videollamada ({time})",
+  "@videoChatWithTime": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "messageWasPinned": "Mensaje fijado",
+  "poll": "Encuesta",
+  "premiumGiftCode": "Código de regalo Premium",
+  "giveaway": "Sorteo",
+  "giveawayWinners": "Ganadores del sorteo",
+  "giveawayFinished": "Sorteo terminado",
+  "proximityAlert": "Alerta de proximidad",
+  "screenshotWasTaken": "Captura tomada",
+  "stickerPlainTexted": "Pegatina {emoji}",
+  "@stickerPlainTexted": {
+    "placeholders": {
+      "emoji": {}
+    }
+  },
+  "suggestedAvatar": "Avatar sugerido",
+  "story": "Historia",
+  "unsupported": "No admitido",
+  "sharedUsers": "Usuarios compartidos",
+  "newVideoChat": "Nuevo video chat",
+  "scheduledVideoChat": "Videochat programado",
+  "changedTheme": "Cambiar tema",
+  "tgPassport": "Pasaporte de Telegram",
+  "you": "Tu",
+  "draftPrefix": "Borrador: ",
+  "chatListHeaderMain": "Todos los chats",
+  "chatListHeaderArchive": "Archivo",
+  "chatListHeaderFolder": "Carpeta",
+  "error": "Error",
+  "secondsCountPlural": "{count, plural, one {# segundo} other {# segundos}}",
+  "@secondsCountPlural": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "contactPrefix": "Contacto: {name}",
+  "@contactPrefix": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "audioPrefix": "Audio: {title}",
+  "@audioPrefix": {
+    "placeholders": {
+      "title": {}
+    }
+  },
+  "videoPrefix": "[Vídeo] {caption}",
+  "@videoPrefix": {
+    "placeholders": {
+      "caption": {}
+    }
+  },
+  "photoPrefix": "[Foto] {caption}",
+  "@photoPrefix": {
+    "placeholders": {
+      "caption": {}
+    }
+  },
+  "documentPrefix": "[Documento] {caption}",
+  "@documentPrefix": {
+    "placeholders": {
+      "caption": {}
+    }
+  },
+  "pollPrefix": "[Encuesta] {caption}",
+  "@pollPrefix": {
+    "placeholders": {
+      "caption": {}
+    }
+  },
+  "contact": "Contacto",
+  "invoice": "Factura",
+  "voiceNote": "Nota de voz",
+  "videoNote": "Nota de vídeo",
+  "hiddenContent": "Contenido oculto",
+  "forwardedMessagesPlural": "¡¡{count} ha reenviado {count, plural, one{mensaje} other{¡mensajes}}",
+  "@forwardedMessagesPlural": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "album": "Álbum",
+  "calls": "Llamadas",
+  "messages": "Mensajes",
+  "secretChats": "Chats secretos",
+  "notificationNewSecretChat": "Se ha creado un nuevo chat secreto",
+  "notificationMentions": "{count} {count, plural, one{mencion} other{menciones}} sin leer",
+  "@notificationMentions": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "notificationMessages": "{count} {count, plural, one{mensaje} other{mensajes}} sin leer",
+  "@notificationMessages": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "notificationCalls": "{count} {count, plural, one{llamada} other{llamadas}} entrante",
+  "@notificationCalls": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "notificationsChannelOther": "Otro",
+  "notificationsChannelOtherDesc": "Todas las notificaciones que no contienen mensajes o menciones",
+  "notificationsChannelMentions": "Menciones",
+  "notificationsChannelMentionsDesc": "Todas tus menciones de chats de grupo",
+  "notificationsChannelMessages": "Mensajes",
+  "notificationsChannelMessagesDesc": "Todos los mensajes nuevos en los chats donde has activado las notificaciones (tanto de grupo como personal)",
+  "notificationsChannelChannels": "Canales",
+  "notificationsChannelGroups": "Grupos",
+  "notificationsChannelPrivateChats": "Chats privados",
+  "templateTitleSavedMessages": "Mensajes guardados",
+  "templateTitleRepliesBot": "Respuestas",
+  "messageContentUnsupported": "Tipo mensaje no soportado:\n",
+  "chatBlocLoadingError": "Error al cargar chat: {error}",
+  "@chatBlocLoadingError": {
+    "placeholders": {
+      "error": {}
+    }
+  },
+  "chatViewMessageNotFoundError": "Mensaje {id} no encontrado",
+  "@chatViewMessageNotFoundError": {
+    "placeholders": {
+      "id": {}
+    }
+  },
+  "loadingMessage": "Cargando mensaje...",
+  "storyWithDuration": "Historia ({time})",
+  "@storyWithDuration": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "someone": "Alguien",
+  "something": "Algo",
+  "accounts": "Cuentas",
+  "addAccount": "Añadir cuenta",
+  "logout": "Cerrar sesión",
+  "interface": "Interfaz",
+  "colorScheme": "Apariencia",
+  "watchShape": "Forma pantalla reloj",
+  "uiScale": "Escala de interfaz",
+  "aboutApp": "Acerca de app",
+  "storage": "Almacenamiento",
+  "notifications": "Notificaciones",
+  "messaging": "Mensajería",
+  "settings": "Ajustes",
+  "roleDesigner": "Diseño UX/UI",
+  "roleFounder": "Fundador y desarrollador",
+  "appVersion": "Versión {version} ({codename})",
+  "@appVersion": {
+    "placeholders": {
+      "version": {},
+      "codename": {}
+    }
+  },
+  "poweredByTdlib": "Powered by TDLib {version}",
+  "@poweredByTdlib": {
+    "placeholders": {
+      "version": {}
+    }
+  },
+  "officialChannel": "Canal oficial",
+  "channelDescription": "Noticias y actualizaciones",
+  "sectionPerformance": "Rendimiento",
+  "sectionAppearance": "Apariencia",
+  "disableChatOptimizations": "Deshabilitar limpieza de chat",
+  "disableChatOptimizationsDesc": "No limpiar mensajes invisibles en chats",
+  "prerenderAllMessages": "Pre-renderizar todos los mensajes",
+  "prerenderAllMessagesDesc": "Puede contrarrestar desplazamiento de mensajes",
+  "disableMicroAvatars": "Deshabilitar avatares pequeños",
+  "disableMicroAvatarsDesc": "Aquellos al lado del usuario",
+  "disableProfileAvatars": "Deshabilitar avatares",
+  "disableProfileAvatarsDesc": "Mostrados en lista de chats",
+  "storageNonHandyGram": "Otras apps",
+  "storageFreeSpace": "Espacio libre",
+  "storageHandyGramData": "Datos de HandyGram",
+  "optimizeStorageUsage": "Optimizar almacenamiento",
+  "optmizing": "Optimizando...",
+  "folderIsEmpty": "Carpeta vacía",
+  "runInBackground": "Notificaciones",
+  "runInBackgroundDesc": "Habilitar servicio Firebase",
+  "sendFile": "Enviar archivo",
+  "sendMediaStickerTitle": "Elegir pegatina",
+  "sendMediaGIFTitle": "Elegir GIF",
+  "sendMediaPhotoTitle": "Elegir foto",
+  "sendVoiceMessageTitle": "Grabar nota de voz",
+  "sendTextMessageTitle": "Escribir mensaje",
+  "chatInfoGroup": "Info. del grupo",
+  "chatInfoBot": "Info. del bot",
+  "chatInfoChannel": "Info. del canal",
+  "chatInfoPersonal": "Info. del perfil",
+  "recentStickers": "Pegatinas recientes",
+  "groupStickers": "Pegatinas del grupo",
+  "stickersCountInRow": "Num. medios por fila",
+  "stickersCountInRowDesc": "Usado en el selector de medios"
+}
