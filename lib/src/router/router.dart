@@ -13,6 +13,7 @@ import 'package:handygram/src/common/tdlib/client/management/user_manager.dart';
 import 'package:handygram/src/components/messages/content/photo/photo_viewer.dart';
 import 'package:handygram/src/pages/bootstrap/bootstrap.dart';
 import 'package:handygram/src/pages/chat/chat.dart';
+import 'package:handygram/src/pages/chat_send/chat_send.dart';
 import 'package:handygram/src/pages/home/home.dart';
 import 'package:handygram/src/pages/home/settings/main.dart';
 import 'package:handygram/src/pages/home/settings/pages/about.dart';
@@ -67,8 +68,17 @@ final router = GoRouter(
         ),
         GoRoute(
           path: "home",
-          pageBuilder: (context, state) =>
-              _addSwipeToBack(state, const HomePage()),
+          pageBuilder: (context, state) => _addSwipeToBack(
+            state,
+            HomePage(
+              openChatId: int.tryParse(
+                state.uri.queryParameters["openChatId"] ?? '',
+              ),
+              openUserId: int.tryParse(
+                state.uri.queryParameters["openUserId"] ?? '',
+              ),
+            ),
+          ),
         ),
         GoRoute(
           path: "settings",

@@ -7,13 +7,16 @@
  */
 
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:handygram/src/common/log/entry.dart';
 import 'package:handygram/src/common/log/log.dart';
 import 'package:handygram/src/common/native/events.dart';
 import 'package:handygram/src/common/settings/entries.dart';
 import 'package:handygram/src/common/settings/manager.dart';
+import 'package:handygram/src/common/tdlib/services/notifications/notification_payload.dart';
 
 class HandyNatives {
   static const String tag = "HandyNatives";
@@ -44,6 +47,7 @@ class HandyNatives {
   late final String _wearOSVersion;
   late final String _appVersion;
   late final (String, String) _gitInfo;
+  NotificationPayload? _launchPayload;
 
   bool get isRound => _isRoundWatchShape;
   bool get isSquare => !_isRoundWatchShape;
@@ -51,6 +55,7 @@ class HandyNatives {
   String? get wearOSVersion => _wearOSVersion;
   String get appVersion => _appVersion;
   (String, String) get gitInfo => _gitInfo;
+  NotificationPayload? get launchPayload => _launchPayload;
 
   Future<bool> get isRoamingEnabled {
     return _channel
@@ -126,6 +131,20 @@ class HandyNatives {
       Settings().put(SettingsEntries.isRoundScreen, _isRoundWatchShape);
     }
 
+    final launchDetails = await FlutterLocalNotificationsPlugin()
+        .getNotificationAppLaunchDetails();
+    final response = launchDetails?.notificationResponse;
+    if (launchDetails != null &&
+        launchDetails.didNotificationLaunchApp &&
+        response != null) {
+      final json = jsonDecode(response.payload!);
+      _launchPayload = NotificationPayload.fromJson(json).copyWith(
+        input: response.payload,
+      );
+    } else {
+      _launchPayload = null;
+    }
+
     _ready = true;
   }
 
@@ -136,6 +155,10 @@ class HandyNatives {
       free: data['free'] as int,
       total: data['total'] as int,
     );
+  }
+
+  void disposeLaunchPayload() {
+    _launchPayload = null;
   }
 
   HandyNatives._();
