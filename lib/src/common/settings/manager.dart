@@ -6,6 +6,7 @@
  * See /LICENSE for more details.
  */
 
+import 'package:flutter/foundation.dart';
 import 'package:handygram/src/common/exceptions/settings_exception.dart';
 import 'package:handygram/src/common/exceptions/ui_exception.dart';
 import 'package:handygram/src/common/log/log.dart';
@@ -23,7 +24,7 @@ import 'package:path_provider/path_provider.dart';
 /// 2) All available entries are located in Settings().entries
 /// 3) Get entry with Settings().get(entry)
 /// 4) Put entry with Settings().put(entry, value)
-class Settings {
+class Settings with ChangeNotifier {
   static const String tag = "Settings";
 
   late final Box _box;
@@ -35,23 +36,17 @@ class Settings {
 
   final Mutex _writeLock = Mutex();
 
-  void put<T>(Setting? s, T? value) {
-    if (s is! Setting<T>) {
-      throw SettingsException("${s.runtimeType} != Setting<$T>");
-    }
-
+  void put<T>(Setting<T> s, T? value) {
     if (value == null && !s.nullable) {
       throw SettingsException("${s.id} is not nullable");
     }
 
-    _writeLock.protect(() => _box.put(s.id, value));
+    _writeLock
+        .protect(() => _box.put(s.id, value))
+        .then((_) => notifyListeners());
   }
 
-  T get<T>(Setting? s) {
-    if (s is! Setting<T>) {
-      throw SettingsException("${s.runtimeType} != Setting<$T>");
-    }
-
+  T get<T>(Setting<T> s) {
     var val = _box.get(s.id, defaultValue: s.defaultValue);
     if (val is! T || (!s.nullable && val == null)) {
       l.e(tag, "${s.id} is not a $T. Returning default value");
@@ -91,9 +86,12 @@ class Settings {
   }
 
   static Future<Settings> start() async {
+    if (_instance != null) return _instance!;
+
     final s = Settings._();
     await s._start();
     _instance = s;
+
     return s;
   }
 
