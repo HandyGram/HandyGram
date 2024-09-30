@@ -1,0 +1,99 @@
+{
+  "@@locale": "be-BY",
+  "getStarted": "Пачаць",
+  "handygram": "HandyGram",
+  "qrScanTitle": "Адскануйце для ўваходу",
+  "whereToScan": "Дзе сканаваць?",
+  "qrInstruction": "1. Адкрыйце Telegram на сваім тэлефоне\n2. Перайдзіце ў \"Настройкі\" > \"Прылады\" > \"Прывязаць камп'ютар\"\n3. Адскануйце гэты малюнак, каб увайсці ў сістэму",
+  "password": "Пароль",
+  "login": "Аўтарызавацца",
+  "enterPassword": "Увядзіце пароль",
+  "incorrectPassword": "Няправільны пароль",
+  "selectThemeTitle": "Выбраць тэму",
+  "selectShapeTitle": "Выберыце форму гадзін",
+  "firstSettingsTitle": "Некаторыя налады",
+  "removeButton": "Выдаліць",
+  "doneButton": "Гатова",
+  "createButton": "Зрабіць",
+  "closeButton": "Закрыць",
+  "nextButton": "Далей",
+  "proxySettingsTitle": "Налады проксі",
+  "proxySettingsButton": "Налады проксі",
+  "proxySettingsMainToggle": "Проксі",
+  "proxyConnectionDisconnected": "Адключана",
+  "proxyConnectionLastUsedDate": "Апошні раз выкарыстоўваўся: {date}",
+  "@proxyConnectionLastUsedDate": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "connectionWaitingForNetwork": "Чаканне сеткі...",
+  "connectionConnectingToProxy": "Злучэнне з проксі-серверам...",
+  "connectionConnecting": "Злучэнне...",
+  "connectionConnected": "Падлучана",
+  "proxyAdd": "Дадаць проксі",
+  "createProxy": "Новы проксі",
+  "editProxy": "Рэдагаваць проксі",
+  "proxyServer": "Проксі-сервер",
+  "proxyPort": "Порт для проксі",
+  "proxyType": "Тып проксі",
+  "proxyTypePickerTitle": "Выберыце тып проксі-сервера",
+  "proxyUser": "Імя карыстальніка",
+  "proxyPassword": "Пароль",
+  "proxySecret": "Сакрэт",
+  "proxyInsecure": "Небяспечны",
+  "proxyTypeSOCKS5": "SOCKS5",
+  "proxyTypeHTTP": "HTTP",
+  "proxyTypeMTProto": "MTProto",
+  "notificationSingleTitleCall": "Выклік",
+  "notificationSingleTitleScheduledMessage": "Запланаванае паведамленне",
+  "notificationSingleTitleNewSecretChat": "Сакрэтны чат",
+  "notificationTextCall": "Табе тэлефануе {name}...",
+  "@notificationTextCall": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "notificationTextSecretChat": "{name} толькі што стварыў з вамі сакрэтны чат!",
+  "@notificationTextSecretChat": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "gif": "Анімацыя",
+  "audio": "Аўдыё",
+  "groupWasCreated": "Група была створана",
+  "botWriteAccessAllowed": "Боту было дазволена пісаць паведамленні",
+  "callWithTime": "Выклік ({time})",
+  "@callWithTime": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "videoCallWithTime": "Відэазванок ({time})",
+  "@videoCallWithTime": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "chatMembersWereAdded": "Былі дададзеныя {user} і іншыя",
+  "@chatMembersWereAdded": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "youHaveBoostedChat": "Вы павысілі ўзровень зносін у чаце",
+  "avatarWasChanged": "Аватар быў зменены",
+  "avatarWasDeleted": "Аватар быў выдалены",
+  "titleWasChanged": "Назва была зменена",
+  "userHasLeft": "{user} выйшаў",
+  "@userHasLeft": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "someoneJoinedViaLink": "Хтосьці далучыўся па спасылцы",
+  "someoneJoinedByRequest": "Камусьці было дазволена далучыцца",
+  "bgWasChanged": "Фон быў зменены",
+  "messageTtlChanged": "Зменены таймер аўтаматычнага выдалення"
+}

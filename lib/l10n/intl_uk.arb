@@ -1,0 +1,142 @@
+{
+  "@@locale": "uk-UA",
+  "getStarted": "Почати роботу",
+  "handygram": "HandyGram",
+  "qrScanTitle": "Сканувати для входу",
+  "whereToScan": "Де сканувати?",
+  "qrInstruction": "1. Відкрийте Telegram на вашому телефоні\n2. Перейдіть у налаштування > Пристрої > З'єднати з комп'ютером\n3. Відскануйте це зображення щоб увійти",
+  "password": "Пароль",
+  "login": "Вхід",
+  "enterPassword": "Введіть пароль",
+  "incorrectPassword": "Невірний пароль",
+  "selectThemeTitle": "Виберіть тему",
+  "selectShapeTitle": "Виберіть форму годинника",
+  "firstSettingsTitle": "Деякі налаштування",
+  "removeButton": "Прибрати",
+  "doneButton": "Готово",
+  "createButton": "Створити",
+  "closeButton": "Закрити",
+  "nextButton": "Далі",
+  "proxySettingsTitle": "Налаштування проксі",
+  "proxySettingsButton": "Налаштування проксі",
+  "proxySettingsMainToggle": "Проксі",
+  "proxyConnectionDisconnected": "Відключено",
+  "proxyConnectionLastUsedDate": "Останнє використання: {date}",
+  "@proxyConnectionLastUsedDate": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "connectionWaitingForNetwork": "Очікування мережі...",
+  "connectionConnectingToProxy": "Підключення до Проксі...",
+  "connectionConnecting": "Підключення...",
+  "connectionConnected": "Підключено",
+  "proxyAdd": "Додати проксі",
+  "createProxy": "Новий проксі",
+  "editProxy": "Редагувати проксі",
+  "proxyServer": "Проксі-сервер",
+  "proxyPort": "Порт проксі",
+  "proxyType": "Тип проксі",
+  "proxyTypePickerTitle": "Вибрати тип проксі",
+  "proxyUser": "Ім'я користувача",
+  "proxyPassword": "Пароль",
+  "proxySecret": "Секрет",
+  "proxyInsecure": "Ненадійний",
+  "proxyTypeSOCKS5": "SOCKS5",
+  "proxyTypeHTTP": "HTTP",
+  "proxyTypeMTProto": "MTProto",
+  "notificationSingleTitleCall": "Дзвінок",
+  "notificationSingleTitleScheduledMessage": "Запл. меседж",
+  "notificationSingleTitleNewSecretChat": "Скритий чат",
+  "notificationTextCall": "{name} дзвонить вам...",
+  "@notificationTextCall": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "notificationTextSecretChat": "{name} створив скритий чат з вами!",
+  "@notificationTextSecretChat": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "gif": "GIF",
+  "audio": "Звук",
+  "groupWasCreated": "Групу створено",
+  "botWriteAccessAllowed": "Боту було дозволено розмовляти",
+  "callWithTime": "Виклик ({time})",
+  "@callWithTime": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "videoCallWithTime": "Відеодзвінок ({time})",
+  "@videoCallWithTime": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "chatMembersWereAdded": "{user} та інші були додані",
+  "@chatMembersWereAdded": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "youHaveBoostedChat": "Ви забустили чат",
+  "avatarWasChanged": "Аватар був змінений",
+  "avatarWasDeleted": "Аватар був видалений",
+  "titleWasChanged": "Заголовок було змінено",
+  "userHasLeft": "{user} вийшов",
+  "@userHasLeft": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "someoneJoinedViaLink": "Хтось приєднався за посиланням",
+  "someoneJoinedByRequest": "Хтось був схвалений для приєднання",
+  "bgWasChanged": "Фон змінено",
+  "messageTtlChanged": "Таймер авто-видалення змінено",
+  "chatWasShared": "Чат було поширено",
+  "upgradedToSupergroup": "Підвищено до супергрупи",
+  "hasJoinedTelegram": "приєднався до Telegram!",
+  "document": "Документ",
+  "expiredPhoto": "Застаріле фото",
+  "expiredVideo": "Застаріле відео",
+  "expiredVoiceNote": "Застаріле голосове повідомлення",
+  "expiredVideoNote": "Застаріле відеоповідомлення",
+  "newForumTopic": "Нова гілка \"{name}\"",
+  "@newForumTopic": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "editedForumTopic": "Змінено гілку \"{name}\"",
+  "@editedForumTopic": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "topicWasClosed": "Гілку закрито",
+  "topicWasOpened": "Гілку відкрито",
+  "topicWasHidden": "Гілку приховано",
+  "topicWasShown": "Гілку показано",
+  "scoredSomeScoreInGame": "Набрано {score} у грі",
+  "@scoredSomeScoreInGame": {
+    "placeholders": {
+      "score": {}
+    }
+  },
+  "videoChatInvitation": "Запрошення на відеочат",
+  "location": "Місцезнаходження",
+  "paymentSuccessful": "Оплата пройшла успішно",
+  "photo": "Фото",
+  "video": "Відео",
+  "videoChatWithTime": "Відео чат ({time})",
+  "@videoChatWithTime": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "messageWasPinned": "Повідомлення закріплено",
+  "poll": "Опитування"
+}
