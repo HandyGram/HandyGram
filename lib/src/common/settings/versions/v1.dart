@@ -25,6 +25,7 @@ class V1Settings implements SettingsVersion {
     SettingsEntries.useInfiniteCacheExtent,
     SettingsEntries.disableMicroAvatars,
     SettingsEntries.disableProfileAvatars,
+    SettingsEntries.stickersCountInRow,
   ];
 
   @override

@@ -45,7 +45,7 @@ abstract final class SettingsEntries {
   );
 
   /// User selected screen shape
-  static const isRoundScreen = Setting<bool>(
+  static const isRoundScreen = Setting<bool?>(
     id: "isRoundScreen",
     defaultValue: null,
     nullable: true,
@@ -88,5 +88,11 @@ abstract final class SettingsEntries {
   static const doNotCleanupMessages = Setting<bool>(
     id: "doNotCleanupMessages",
     defaultValue: false,
+  );
+
+  /// How many stickers would be shown in stickers picker in a row
+  static const stickersCountInRow = Setting<int>(
+    id: "stickersCountInRow",
+    defaultValue: 3,
   );
 }
