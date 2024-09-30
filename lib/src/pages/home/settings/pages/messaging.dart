@@ -7,6 +7,7 @@ import 'package:handygram/src/components/list/listview.dart';
 import 'package:handygram/src/components/scaled_sizes.dart';
 import 'package:handygram/src/components/text/header.dart';
 import 'package:handygram/src/pages/home/settings/components/bool_entry_switch.dart';
+import 'package:handygram/src/pages/home/settings/components/int_picker.dart';
 import 'package:handygram/src/pages/home/settings/components/section.dart';
 
 class SettingsMessagingView extends StatelessWidget {
@@ -32,6 +33,15 @@ class SettingsMessagingView extends StatelessWidget {
             SettingsEntries.disableProfileAvatars,
             title: AppLocalizations.current.disableProfileAvatars,
             description: AppLocalizations.current.disableProfileAvatarsDesc,
+          ),
+          SizedBox(height: Paddings.betweenSimilarElements),
+          SettingsIntPicker(
+            SettingsEntries.stickersCountInRow,
+            title: AppLocalizations.current.stickersCountInRow,
+            description: AppLocalizations.current.stickersCountInRowDesc,
+            step: 1,
+            maxValue: 4,
+            minValue: 1,
           ),
           SizedBox(height: Paddings.afterPageEndingWithSmallButton),
           HandyListViewNoWrap(

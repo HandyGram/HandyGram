@@ -47,6 +47,8 @@ class _SettingsMainState extends State<SettingsMain>
         child: HandyScrollbar(
           controller: _controller,
           child: ListView(
+            addAutomaticKeepAlives: true,
+            key: const ValueKey<String>("lw,settings,main"),
             padding: EdgeInsets.symmetric(
               horizontal: Paddings.tilesHorizontalPadding,
             ),
@@ -54,6 +56,7 @@ class _SettingsMainState extends State<SettingsMain>
             children: [
               PageHeader(title: AppLocalizations.current.settings),
               SettingsUserButton(
+                key: const ValueKey<String>("user-profile"),
                 userId: null,
                 onTap: () => GoRouter.of(context).push("/settings/account"),
               ),

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:handygram/generated/l10n.dart';
@@ -12,6 +10,7 @@ import 'package:handygram/src/components/controls/tile_button.dart';
 import 'package:handygram/src/components/list/listview.dart';
 import 'package:handygram/src/components/scaled_sizes.dart';
 import 'package:handygram/src/components/text/header.dart';
+import 'package:handygram/src/pages/home/settings/components/int_picker.dart';
 import 'package:handygram/src/pages/home/settings/components/section.dart';
 
 class SettingsInterfaceView extends StatefulWidget {
@@ -102,11 +101,11 @@ class _SettingsInterfaceViewState extends State<SettingsInterfaceView> {
                     height: itemSize,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Settings().get(SettingsEntries.isRoundScreen)
+                      color: Settings().get(SettingsEntries.isRoundScreen)!
                           ? ColorStyles.active.primary
                           : ColorStyles.active.surface,
                     ),
-                    child: Settings().get(SettingsEntries.isRoundScreen)
+                    child: Settings().get(SettingsEntries.isRoundScreen)!
                         ? Center(
                             child: Icon(
                               Icons.done,
@@ -130,11 +129,11 @@ class _SettingsInterfaceViewState extends State<SettingsInterfaceView> {
                     decoration: BoxDecoration(
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.circular(17),
-                      color: !Settings().get(SettingsEntries.isRoundScreen)
+                      color: !Settings().get(SettingsEntries.isRoundScreen)!
                           ? ColorStyles.active.primary
                           : ColorStyles.active.surface,
                     ),
-                    child: !Settings().get(SettingsEntries.isRoundScreen)
+                    child: !Settings().get(SettingsEntries.isRoundScreen)!
                         ? Center(
                             child: Icon(
                               Icons.done,
@@ -149,45 +148,14 @@ class _SettingsInterfaceViewState extends State<SettingsInterfaceView> {
             ),
           ),
           SizedBox(height: Paddings.beforeSmallButton),
-          HandyListViewNoWrap(
-            child: SettingsSection(AppLocalizations.current.uiScale),
+          SettingsIntPicker(
+            SettingsEntries.textScale,
+            title: AppLocalizations.current.uiScale,
+            step: 0.1,
+            maxValue: 1.2,
+            minValue: 0.8,
+            onChanged: (scale) => TextStyles.instance.scale = scale,
           ),
-          SizedBox(height: Paddings.betweenSimilarElements),
-          Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: Paddings.tilesHorizontalPadding,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TileButton(
-                    big: false,
-                    style: TileButtonStyles.basic,
-                    icon: const Icon(Icons.remove),
-                    onTap: TextStyles.instance.rawScale <= 0.7
-                        ? null
-                        : () {
-                            TextStyles.instance.scale =
-                                max(0.7, TextStyles.instance.rawScale - 0.05);
-                          },
-                  ),
-                  Text(
-                    "${(TextStyles.instance.rawScale * 100).toStringAsFixed(0)}%",
-                    style: TextStyles.active.titleLarge,
-                  ),
-                  TileButton(
-                    big: false,
-                    icon: const Icon(Icons.add),
-                    style: TileButtonStyles.basic,
-                    onTap: TextStyles.instance.rawScale >= 1.2
-                        ? null
-                        : () {
-                            TextStyles.instance.scale =
-                                min(1.2, TextStyles.instance.rawScale + 0.05);
-                          },
-                  ),
-                ],
-              )),
           SizedBox(height: Paddings.beforeSmallButton),
           TileButton(
             text: AppLocalizations.current.doneButton,

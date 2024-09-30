@@ -197,7 +197,9 @@ class _StorageStatsState extends State<StorageStats> {
                 SizedBox(
                   width: commonHeight,
                   height: commonHeight,
-                  child: const CircularProgressIndicator(),
+                  child: CircularProgressIndicator(
+                    strokeWidth: commonHeight / 4,
+                  ),
                 ),
                 SizedBox(width: Paddings.betweenSimilarElements),
                 Text("Loading...", style: style),

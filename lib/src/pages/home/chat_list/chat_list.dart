@@ -65,18 +65,22 @@ class _ChatListPageState extends State<ChatListPage>
     }
   }
 
+  void _onUpdate() {
+    if (mounted && context.mounted) setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
     _controller.addListener(_onScroll);
-    widget.list.addListener(() => setState(() {}));
+    widget.list.addListener(_onUpdate);
     _loadChats();
   }
 
   @override
   void dispose() {
     _controller.removeListener(_onScroll);
-    widget.list.removeListener(() => setState(() {}));
+    widget.list.removeListener(_onUpdate);
     super.dispose();
   }
 
@@ -93,52 +97,55 @@ class _ChatListPageState extends State<ChatListPage>
 
     return ValueListenableBuilder(
       valueListenable: widget.list,
-      builder: (context, value, _) => Scaffold(
-        body: HandyScrollWrapper(
-          controller: _controller,
-          child: HandyScrollbar(
+      builder: (context, value, _) {
+        final itemCount = max(3, value.length + 2);
+        return Scaffold(
+          body: HandyScrollWrapper(
             controller: _controller,
-            child: ListView.builder(
+            child: HandyScrollbar(
               controller: _controller,
-              key: ValueKey<String>("chats-screen $name"),
-              addAutomaticKeepAlives: true,
-              padding: EdgeInsets.symmetric(
-                horizontal: Paddings.tilesHorizontalPadding,
-              ),
-              itemCount: max(3, value.length + 2),
-              itemBuilder: (context, index) {
-                if (index == 0) {
-                  return PageHeader(
-                    title: name,
-                    key: ValueKey<String>("chats-header_${widget.list}"),
-                  );
-                } else if (index == 1 && value.isEmpty) {
-                  return Center(
-                    child: Text(
-                      AppLocalizations.current.folderIsEmpty,
+              child: ListView.builder(
+                controller: _controller,
+                key: ValueKey<String>("chats-screen $name"),
+                addAutomaticKeepAlives: true,
+                padding: EdgeInsets.symmetric(
+                  horizontal: Paddings.tilesHorizontalPadding,
+                ),
+                itemCount: itemCount,
+                itemBuilder: (context, index) {
+                  if (index == 0) {
+                    return PageHeader(
+                      title: name,
+                      key: ValueKey<String>("chats-header_${widget.list}"),
+                    );
+                  } else if (index == 1 && value.isEmpty) {
+                    return Center(
+                      child: Text(
+                        AppLocalizations.current.folderIsEmpty,
+                      ),
+                    );
+                  } else if (index == itemCount - 1) {
+                    return SizedBox(height: Paddings.afterPage);
+                  }
+                  index -= 1;
+
+                  final chat = value[index];
+                  return Padding(
+                    key: ValueKey<String>("chat,$name,preview_${chat.chatId}"),
+                    padding: EdgeInsets.only(
+                      bottom: Paddings.betweenSimilarElements,
+                    ),
+                    child: ChatPreview(
+                      briefChatInfo: chat,
+                      useTemplateInfoIfNeeded: true,
                     ),
                   );
-                } else if (index == value.length + 1) {
-                  return SizedBox(height: Paddings.afterPage);
-                }
-                index -= 1;
-
-                final chat = value[index];
-                return Padding(
-                  key: ValueKey<String>("chat,$name,preview_${chat.chatId}"),
-                  padding: EdgeInsets.only(
-                    bottom: Paddings.betweenSimilarElements,
-                  ),
-                  child: ChatPreview(
-                    briefChatInfo: chat,
-                    useTemplateInfoIfNeeded: true,
-                  ),
-                );
-              },
+                },
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
