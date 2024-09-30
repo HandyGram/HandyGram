@@ -13,6 +13,7 @@ import 'package:handygram/src/common/cubits/colors.dart';
 import 'package:handygram/src/common/cubits/current_account.dart';
 import 'package:handygram/src/common/misc/localizations.dart';
 import 'package:handygram/src/common/misc/vectors.dart';
+import 'package:handygram/src/common/native/channel.dart';
 import 'package:handygram/src/common/settings/entries.dart';
 import 'package:handygram/src/common/settings/manager.dart';
 import 'package:handygram/src/common/tdlib/providers/authorization_state/authorization_states.dart';
@@ -92,10 +93,16 @@ class _BootstrapPageState extends State<BootstrapPage>
       curve: Curves.easeInOut,
     );
     if (mounted) {
+      final payload = HandyNatives().launchPayload;
       if (CurrentAccount.providers.authorizationState.state
               is! AuthorizationStateReady ||
           Settings().get(SettingsEntries.currentSetupStep) != -1) {
         GoRouter.of(context).pushReplacement("/setup");
+      } else if (payload != null) {
+        GoRouter.of(context).pushReplacement(
+          "/home?openChatId=${payload.chatId}&openUserId=${payload.userId}",
+        );
+        HandyNatives().disposeLaunchPayload();
       } else {
         GoRouter.of(context).pushReplacement("/home");
       }
